@@ -1,0 +1,15 @@
+class FeeGradeBucketsController < ApplicationController
+  def index
+     @feegradebuckets = FeeGradeBucket.all
+  end
+
+  def show
+  end
+
+  def edit
+  end
+
+  def new
+    @feegradebuckets = FeeGradeBucket.new 
+  end
+end

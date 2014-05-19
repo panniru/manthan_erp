@@ -1,0 +1,24 @@
+class BucketsController < ApplicationController
+  def index
+  end
+
+  def show
+  end
+
+  def edit
+  end
+
+  def create
+     if @feegradebucket.save
+      flash.now[:success] = I18n.t :success, :scope => [:feegradebucket, :create]
+      redirect_to buckets_index
+     
+    else
+      render "buckets_index"
+    end
+  end
+
+  def new
+    @buckets = Bucket.new
+  end
+end

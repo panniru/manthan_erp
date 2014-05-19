@@ -1,0 +1,8 @@
+= form_for @feegradebuckets , :html => { :class => "form-horizontal", :role => "form"} do |f|
+  %br
+  .row
+    .col-sm-2
+      = f.label "bucket",:class => ' control-label'
+      = f.text_field "bucket_name",:class => 'form-control'
+      = f.submit "Submit", :class => 'btn btn-primary'
+   

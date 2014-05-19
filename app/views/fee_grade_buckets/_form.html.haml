@@ -1,0 +1,13 @@
+= form_for FeeGradeBucket.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
+  .row
+    .col-sm-2
+      = f.label "Types of Buckets", :class => 'form-control'
+      - FeeGradeBucket.all.each do |feegradebucket |
+        = f.label "bucket_name", "#{feegradebucket.bucket_name}", :class => 'form-control'
+        
+      
+%center
+
+  = link_to 'add new',fee_grade_buckets_addnew_path ,:class => 'btn btn-primary'
+  = link_to 'submit', fee_grade_buckets_index_path, :class => 'btn btn-primary'
+   

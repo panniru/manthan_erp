@@ -1,0 +1,2 @@
+module FeeGradeBucketsHelper
+end

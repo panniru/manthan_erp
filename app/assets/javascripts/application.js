@@ -1,3 +1,5 @@
+
+
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -14,3 +16,13 @@
 //= require jquery_ujs
 //= require angular
 //= require_tree .
+
+  
+function changeIt()
+{
+var i = 1;
+my_div.innerHTML = my_div.innerHTML +"
+%br
+  <input type='text' name='mytext'+ i>"
+  
+  }
