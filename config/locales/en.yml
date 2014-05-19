@@ -21,3 +21,13 @@
 
 en:
   hello: "Hello world"
+  fee_type:
+    create_bulk:
+      success: "Feetypes has been saved"
+      fail: "Feetypes not been saved"
+    destroy:
+      success: "Feetype has been deleted"
+      fail: "Feetype has not been deleted"
+    update:
+      success: "Feetype has been updated"
+      fail: "Feetype not been updated"

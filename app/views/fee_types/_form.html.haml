@@ -1,0 +1,8 @@
+= form_for @fee_type, :class => "form-horizntal" do |f|
+  = render "shared/error_messages", :object => f.object
+  .form-group
+    = f.label :fee_type, :class => "form-label col-md-2"
+    .col-md-5
+      = f.text_field :fee_type, :class => "form-control"
+    .col-md-3
+      = f.submit "Save", :class=> "btn btn-primary"

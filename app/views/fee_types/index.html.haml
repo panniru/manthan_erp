@@ -1,0 +1,19 @@
+%h3 
+  = "FeeTypes"
+  = link_to "Define FeeType", new_fee_type_path, :class => "btn btn-primary"
+
+
+%table.table.table-bordered
+  %thead
+    %th FeeType
+    %th
+  %tbody
+    - @fee_types.each do |fee_type|
+      %tr
+        %td= fee_type.fee_type
+        %td
+          = link_to "Edit", edit_fee_type_path(fee_type), :class => "btn btn-warning"
+          = link_to "Delete", fee_type_path(fee_type), :class => "btn btn-danger", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete #{fee_type.fee_type}?"}
+          
+= will_paginate @fee_types, param_name: "page", previous_label: h("<"), next_label: h(">")          
+        

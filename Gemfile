@@ -9,12 +9,12 @@ gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 gem 'bootstrap-sass', '~> 3.0.3.0'
-
+gem 'coffee-rails', '~> 4.0.0'
+gem 'angularjs-rails', '~> 1.2.16'
+  
 group :assets do
   gem 'uglifier', '>= 1.3.0'
-  gem 'coffee-rails', '~> 4.0.0'
   gem 'compass-rails'
-
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -25,7 +25,10 @@ gem 'jquery-rails'
 
 gem 'draper'
 gem 'haml-rails'        
-
+gem 'virtus'
+gem 'will_paginate', '~> 3.0'
+gem 'cancan'
+gem 'devise'  
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
