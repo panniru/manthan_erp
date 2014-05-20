@@ -6,13 +6,8 @@ ManthanErp::Application.routes.draw do
       post "create_bulk"
     end
   end
-
-  get "fee_grade_buckets/index"
-  get "fee_grade_buckets/show"
-  get "fee_grade_buckets/edit"
-  get "fee_grade_buckets/new"
-  get "fee_grade_buckets/addnew"
-  resources :fee_grade_buckets 
+  resources :fee_grade_buckets
+    
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

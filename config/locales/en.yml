@@ -31,3 +31,13 @@ en:
     update:
       success: "Feetype has been updated"
       fail: "Feetype not been updated"
+  fee_grade_bucket:
+    create:
+      success: "bucket has been saved"
+      fail: "bucket not been saved"
+    destroy:
+      success: "bucket has been deleted"
+      fail: "bucket has not been deleted"
+    update:
+      success: "bucket has been updated"
+      fail: "bucket not been updated"

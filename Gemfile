@@ -14,9 +14,6 @@ group :assets do
   gem 'compass-rails'
 end
 
-gem 'roo'
-gem 'virtus'
-
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -34,37 +31,6 @@ gem 'devise'
 gem 'turbolinks'
 
 gem 'pg'
-
-gem 'jquery-ui-rails', '4.1.0'
-gem 'best_in_place', github: 'aaronchi/best_in_place'
-
-
-gem 'cancan', '1.6.7'
-gem 'devise'
-gem 'draper'
-gem 'haml-rails'
-gem 'rails3-jquery-autocomplete'
-
-gem 'fog'
-gem 'carrierwave'
-
-gem 'will_paginate', '~> 3.0'
-gem 'bootstrap-will_paginate'
-
-gem 'gon'
-gem 'remotipart', '~> 1.2'    
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
-
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
-
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
 # gem 'unicorn'

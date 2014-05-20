@@ -11,19 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140516045243) do
+ActiveRecord::Schema.define(version: 20140516125102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "fee_grade_buckets", force: true do |t|
+    t.string   "bucket_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "fee_types", force: true do |t|
     t.string   "fee_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-  
-  create_table "fee_grade_buckets", force: true do |t|
+
+  create_table "feegradebuckets", force: true do |t|
     t.string   "bucket_name"
     t.datetime "created_at"
     t.datetime "updated_at"

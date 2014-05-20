@@ -1,16 +1,21 @@
-%table.table.table.striped
+%table.table.table-bordered
   %thead
     %tr
-      %th types of bucket
-
+      %th Types Of Bucket
+      %th
   %tbody
-    %tr
-    - FeeGradeBucket.all.each do |feegradebucket |
-      %td= feegradebucket.bucket_name
+    - @fee_grade_buckets.each do |fee_grade_bucket |
+      %tr
+        %td= fee_grade_bucket.bucket_name
+        %td
+          = link_to "Edit", edit_fee_grade_bucket_path(fee_grade_bucket), :class => "btn btn-warning"
+          = link_to "Delete", fee_grade_bucket_path(:id => fee_grade_bucket.id), :class => "btn btn-danger", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}
+         
+= will_paginate @fee_grade_buckets, param_name: "page", previous_label: h("<"), next_label: h(">")          
 
-     
+   
 %center
-  = link_to 'add new',fee_grade_buckets_addnew_path ,:class => 'btn btn-primary'
-  = link_to 'back', fee_grade_buckets_new_path, :class => 'btn btn-primary'
+  = link_to 'add new', new_fee_grade_bucket_path ,:class => 'btn btn-primary'
+  = link_to 'back',  new_fee_grade_bucket_path, :class => 'btn btn-primary'
    
    
