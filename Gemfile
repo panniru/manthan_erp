@@ -23,7 +23,10 @@ gem 'jquery-rails'
 gem 'draper'
 gem 'haml-rails'        
 gem 'virtus'
+
 gem 'will_paginate', '~> 3.0'
+gem 'bootstrap-will_paginate'
+
 gem 'cancan'
 gem 'devise'  
 
