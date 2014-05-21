@@ -1,0 +1,16 @@
+= form_for @term_definition, :class => "form-horizntal" do |f|
+  = render "shared/error_messages", :object => f.object
+  .form-group
+    = f.label :term_definition, :class => "form-label col-md-2"
+    .col-md-5
+      = f.text_field :term_definition, :class => "form-control"
+   
+  .form-group
+    %br
+    %br
+    .col-md-1
+    = f.label :amount_per, :class => "form-label col-md-2"
+    .col-md-2
+      = f.text_field :amount_per, :class => "form-control"
+    .col-md-2
+      = f.submit "Save", :class=> "btn btn-primary"

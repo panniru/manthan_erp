@@ -1,4 +1,5 @@
 ManthanErp::Application.routes.draw do
+ 
   root to: "home#index"
   
   resources :fee_types do
@@ -7,7 +8,11 @@ ManthanErp::Application.routes.draw do
     end
   end
   resources :fee_grade_buckets
-    
+  resources :term_definitions do
+    collection do
+      post "create_term"
+    end
+  end
 
   resources :grade_wise_fees do
     collection do
