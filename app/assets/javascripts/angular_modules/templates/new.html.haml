@@ -1,0 +1,25 @@
+= render "grade_wise_fees/grade_wise_fee_grid"
+
+.col-md-8{ "ng-controller" => "TermWiseFeesController", "ng-init" => "getGridView()"}
+  %table.table
+    %thead
+      %th
+      %th{"ng-repeat" => "colHead in columnHeaders"}  
+        %label{:class => "form-label"}
+          {{colHead}}
+      %th
+        %label{:class => "form-label"}
+          Total
+    %tbody
+      %tr{"ng-repeat" => "trm_wise_fee in termWiseFees"}
+        %td
+          %label{:class => "form-label"}
+            {{rowHeaders[$index]}}
+        %td{"ng-repeat" => "unit in trm_wise_fee"}
+          %input{:type => "text", :class=> "form-control", "ng-model" => "termWiseFees[$parent.$index][$index]['amount_in_rupees']"}
+        %td
+          %input{:type => "text", :class=> "form-control", :readonly => true, :value => "{{sumTotals[$index]}}"}
+  .row    
+    .col-md-4.col-md-offset-10
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveTermWiseFee()", :value => "Save"} 
+        = link_to "Back", term_wise_grade_fees_path, :class => "btn btn-primary"

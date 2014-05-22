@@ -1,0 +1,24 @@
+.row
+  .col-md-8
+    %h4 Term Wise Grade Fee
+    %hr
+
+.col-md-8{ "ng-controller" => "TermWiseFeesController", "ng-init" => "getGridView()"}
+  %table.table.table-bordered
+    %thead
+      %th
+      %th{"ng-repeat" => "colHead in columnHeaders"}  
+        %label{:class => "form-label"}
+          {{colHead}}
+      %th
+        %label{:class => "form-label"}
+          Total
+    %tbody
+      %tr{"ng-repeat" => "trm_wise_fee in termWiseFees"}
+        %td
+          %label{:class => "form-label"}
+            {{rowHeaders[$index]}}
+        %td{"ng-repeat" => "unit in trm_wise_fee"}
+          {{unit.amount_in_rupees}}
+        %td
+          {{sumTotals[$index]}}

@@ -23,5 +23,6 @@ class GradeWiseFeesController < ApplicationController
       end
     end
   end
+
   
 end

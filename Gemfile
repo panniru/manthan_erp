@@ -8,10 +8,12 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 
 gem 'coffee-rails', '~> 4.0.0'
 gem 'angularjs-rails', '~> 1.2.16'
-  
+gem 'font-awesome-rails'                
+
 group :assets do
   gem 'uglifier', '>= 1.3.0'
   gem 'compass-rails'
+
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes

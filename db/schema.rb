@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520133602) do
+ActiveRecord::Schema.define(version: 20140521073755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,8 +39,16 @@ ActiveRecord::Schema.define(version: 20140520133602) do
 
   create_table "term_definitions", force: true do |t|
     t.string   "term_definition"
-    t.string   "amount"
-    t.string   "percent"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "amount_per"
+  end
+
+  create_table "term_wise_grade_fees", force: true do |t|
+    t.integer  "fee_grade_bucket_id"
+    t.integer  "term_definition_id"
+    t.integer  "amount_in_rupees"
+    t.string   "academic_year"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

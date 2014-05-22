@@ -37,7 +37,6 @@
         $scope.saveBucketWiseFee = function(){
             gradeWiseFeeService.saveBucketWiseFee($scope.gradeWiseFees)
                 .then(function(result) {
-                    alert(result);
                 });
         }
     }]);

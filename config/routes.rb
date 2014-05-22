@@ -17,6 +17,14 @@ ManthanErp::Application.routes.draw do
   end
 
 
+  resources :term_wise_grade_fees do
+    collection do
+      get "term_wise_grade_fee"
+      post "save_term_wise_fee_grid"
+    end
+  end
+  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
