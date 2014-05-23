@@ -61,7 +61,7 @@ class PostDatedChequesController < ApplicationController
     params.require(:bulk_post_dated_cheques).select{|post_dated_cheque| post_dated_cheque["date"].present? and  post_dated_cheque["amount_per"].present?}.map do |post_dated_cheque|
       pd = PostDatedCheque.new(post_dated_cheque)
       pd.month = Date::MONTHNAMES[Date.parse(post_dated_cheque["date"]).month]
-     
+      pd
     end
   end
 end

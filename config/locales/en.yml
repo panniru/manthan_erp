@@ -33,21 +33,21 @@ en:
       fail: "Feetype not been updated"
   fee_grade_bucket:
     create:
-      success: "bucket has been saved"
-      fail: "bucket not been saved"
+      success: "Bucket has been saved"
+      fail: "Bucket not been saved"
     destroy:
-      success: "bucket has been deleted"
-      fail: "bucket has not been deleted"
+      success: "Bucket has been deleted"
+      fail: "Bucket has not been deleted"
     update:
-      success: "bucket has been updated"
-      fail: "bucket not been updated"
+      success: "Bucket has been updated"
+      fail: "Bucket not been updated"
   term_definition:
-    create:
-      success: "term has been saved"
-      fail: "term not been saved"
+    create_bulk:
+      success: "Term has been saved"
+      fail: "Term not been saved"
     destroy:
-      success: "term has been deleted"
-      fail: "term has not been deleted"
+      success: "Term has been deleted"
+      fail: "Term has not been deleted"
     update:
-      success: "term has been updated"
-      fail: "term not been updated"
+      success: "Term has been updated"
+      fail: "Term not been updated"

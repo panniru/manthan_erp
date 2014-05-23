@@ -1,0 +1,15 @@
+= form_tag create_bulk_post_dated_cheques_path, :method => "POST", :class=> "form-horizantal" do 
+  .row{"ng-repeat" => "date in post_dated_cheques"}
+    .form-group
+      = label_tag " Cheque {{$index+1}} ", nil, :class => 'col-sm-2 control-label'
+      .col-sm-2
+        = text_field_tag "bulk_post_dated_cheques[date][]",nil, :class => 'datepicker form-control', :placeholder => "date"
+      .col-sm-3
+        .input-group 
+          = text_field_tag "bulk_post_dated_cheques[][amount_per]",nil , :class => 'form-control', :placeholder => "amount_percent"
+          %span.input-group-addon %
+   
+  .row
+    .col-md-5.col-md-offset-3
+      %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"
+  
