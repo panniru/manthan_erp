@@ -41,3 +41,13 @@ en:
     update:
       success: "bucket has been updated"
       fail: "bucket not been updated"
+  term_definition:
+    create:
+      success: "term has been saved"
+      fail: "term not been saved"
+    destroy:
+      success: "term has been deleted"
+      fail: "term has not been deleted"
+    update:
+      success: "term has been updated"
+      fail: "term not been updated"

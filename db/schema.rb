@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20140522123535) do
 
   # These are extensions that must be enabled in order to support this database
@@ -114,3 +113,13 @@ ActiveRecord::Schema.define(version: 20140522123535) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "term_definitions", force: true do |t|
+    t.string   "term_definition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "amount_per"
+  end
+
+end
+
