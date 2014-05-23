@@ -1,0 +1,168 @@
+%center
+  = render 'shared/logo'
+  %h3 Details 
+.row
+  %center
+    - Student.all.each do |student|
+      .col-sm-6
+        %label{for: "form_no"} Form no
+      .col-sm-4
+        %label
+          = student.form_no
+          %br
+      .col-sm-6
+        %label{for: "name"} Name
+      .col-sm-4
+        %label
+          = student.name
+          %br
+      .col-sm-6
+        %label{for: "klass"} Class
+      .col-sm-4
+        %label
+          = student.klass
+          %br
+      .col-sm-6
+        %label{for: "gender"} Male/Female
+      .col-sm-4
+        %label
+          = student.gender
+          %br
+      .col-sm-6
+        %label{for: "language"} Language spoken at home
+      .col-sm-4
+        %label
+          = student.language
+          %br
+      .col-sm-6
+        %label{for: "dob"} Date of Birth
+      .col-sm-4
+        %label
+          = student.dob
+          %br
+      .col-sm-6
+        %label{for: "nationality"} Nationality
+      .col-sm-4
+        %label
+          = student.nationality
+          %br
+      .col-sm-6
+        %label{for: "father_name"} Father's Name
+      .col-sm-4
+        %label
+          = student.father_name
+          %br
+      .col-sm-6
+        %label{for: "mother_name"} Mother's Name
+      .col-sm-4
+        %label
+          = student.mother_name
+          %br
+      .col-sm-6
+        %label{for: "father_occupation"} Father's Occupation
+      .col-sm-4
+        %label
+          = student.father_occupation
+          %br
+      .col-sm-6
+        %label{for: "mother_occupation"} Mother's Occupation
+      .col-sm-4
+        %label
+          = student.mother_occupation
+          %br
+      .col-sm-6
+        %label{for: "father_education"} Father's Education
+      .col-sm-4
+        %label
+          = student.father_education
+          %br
+      .col-sm-6
+        %label{for: "mother_education"} Mother's Education
+      .col-sm-4
+        %label
+          = student.mother_education
+          %br
+      .col-sm-6
+        %label{for: "income"} Family Income
+      .col-sm-4
+        %label
+          = student.income
+          %br
+      .col-sm-6
+        %label{for: "address"} Residential Address
+      .col-sm-4
+        %label
+          = student.address
+          %br
+      .col-sm-6
+        %label{for: "landline"} Landline
+      .col-sm-4
+        %label
+          = student.landline
+          %br
+      .col-sm-6
+        %label{for: "mobile"} Mobile
+      .col-sm-4
+        %label
+          = student.mobile
+          %br
+      .col-sm-6
+        %label{for: "email"} Email
+      .col-sm-4
+        %label
+          = student.email
+          %br
+      .col-sm-6
+        %label{for: "transport"} Choice of Transport
+      .col-sm-4
+        %label
+          = student.transport
+          %br
+      .col-sm-6
+        %label{for: "busstop"} Busstop
+      .col-sm-4
+        %label
+          = student.busstop
+          %br
+      .col-sm-6
+        %label{for: "last_school"} School in which last Studied
+      .col-sm-4
+        %label
+          = student.last_school
+          %br
+      .col-sm-6
+        %label{for: "city"} City
+      .col-sm-4
+        %label
+          = student.city
+          %br
+      .col-sm-6
+        %label{for: "Reasons for Changing"} Reasons for Changing
+      .col-sm-4
+        %label
+          = student.changing_reason
+          %br
+
+      .col-sm-6
+        %label{for: "You came to know about our school through"} You came to know about our school through
+      .col-sm-4
+        %label
+          = student.know_school
+          %br
+      .col-sm-6
+        %label{for: "person"} Name
+      .col-sm-4
+        %label
+          = student.person
+          %br
+      .col-sm-6
+        %label{for: "class"} Class
+      .col-sm-4
+        %label
+          = student.pp
+          %br
+
+%center
+  = link_to "Back", students_path , :class => 'btn btn-primary'
+      
+  

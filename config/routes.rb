@@ -1,6 +1,21 @@
 ManthanErp::Application.routes.draw do
-  root to: "home#index"
   
+  get 'auto_search/autocomplete_student_name'
+  get "students/app"
+  get "students/app_students"
+  get "students/get_selected"
+  get "students/enquiry"
+  get "students/more"
+  get "students/index"
+  get "students/new"
+  get "students/show"
+  get "students/edit"
+  get "home/aboutus"
+
+  root to: "home#index"
+
+  resources :students
+
   resources :fee_types do
     collection do
       post "create_bulk"

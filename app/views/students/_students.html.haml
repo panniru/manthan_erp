@@ -1,0 +1,37 @@
+%h4
+  %center
+    Enquiry Form
+
+%table.table.table.striped
+  %thead
+    %tr
+      %th Form no
+      %th Name
+      %th Class
+      %th Gender
+      %th Father's name
+      %th Date of Birth
+      %th Mobile
+      %th E-mail
+      %th
+      %th
+      %th
+        
+  %tbody
+    - students.each do |student|
+      %tr
+        %td= student.form_no
+        %td= student.name
+        %td= student.klass
+        %td= student.gender
+        %td= student.father_name
+        %td= student.dob
+        %td= student.mobile
+        %td= student.email
+        %td= link_to "<See More>" , students_more_path
+        %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"),edit_student_path(student), :class => "btn btn-warning btn-sm", :title => "Edit"
+        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"),student, :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+        
+%center
+  = link_to 'Add', new_student_path, :class => 'btn btn-primary'
+  = link_to 'back', root_path, :class => 'btn btn-primary'

@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140521073755) do
+
+ActiveRecord::Schema.define(version: 20140522123535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,5 +53,46 @@ ActiveRecord::Schema.define(version: 20140521073755) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  
+  create_table "pg_search_documents", force: true do |t|
+    t.text     "content"
+    t.integer  "searchable_id"
+    t.string   "searchable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
-end
+  create_table "students", force: true do |t|
+    t.string   "form_no"
+    t.string   "name"
+    t.string   "klass"
+    t.string   "dob"
+    t.string   "gender"
+    t.string   "nationality"
+    t.string   "language"
+    t.string   "father_name"
+    t.string   "mother_name"
+    t.string   "father_occupation"
+    t.string   "mother_occupation"
+    t.string   "father_company"
+    t.string   "mother_company"
+    t.string   "father_education"
+    t.string   "mother_education"
+    t.string   "income"
+    t.text     "address"
+    t.string   "landline"
+    t.string   "mobile"
+    t.string   "email"
+    t.string   "transport"
+    t.string   "busstop"
+    t.string   "last_school"
+    t.string   "city"
+    t.string   "changing_reason"
+    t.string   "know_school"
+    t.string   "person"
+    t.string   "pp"
+    t.string   "appno"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end

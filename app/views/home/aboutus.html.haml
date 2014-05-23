@@ -1,0 +1,32 @@
+#form-right.part
+  #carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
+    / Wrapper for slides
+    .carousel-inner
+      .item.active
+        .holder.col-sm-8
+          = image_tag("1.png", size: "400x250", :class =>"img-rounded")
+      .item
+        .holder.col-sm-8
+          = image_tag("2.png", size: "400x250", :class =>"img-rounded")
+      .item
+        .holder.col-sm-8
+          = image_tag("3.png", size: "400x250", :class =>"img-rounded")
+      .item
+        .holder.col-sm-8
+          = image_tag("1.png", size: "400x250", :class =>"img-rounded")
+      .item
+        .holder.col-sm-8
+          = image_tag("2.png", size: "400x250", :class =>"img-rounded")
+    .controllers.col-sm-8.col-xs-12
+      / Controls
+      %a.left.carousel-control{"data-slide" => "prev", href: "#carousel-example-generic"}
+        %span.glyphicon.glyphicon-chevron-left
+      %a.right.carousel-control{"data-slide" => "next", href: "#carousel-example-generic"}
+        %span.glyphicon.glyphicon-chevron-right
+      / Indicators
+      %ol.carousel-indicators
+        %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
+        %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
+        %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
+        %li{"data-slide-to" => "3", "data-target" => "#carousel-example-generic"}
+        %li{"data-slide-to" => "4", "data-target" => "#carousel-example-generic"}

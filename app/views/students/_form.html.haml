@@ -1,0 +1,256 @@
+.row
+  = form_for @student, :html => { :class => "form-horizontal", :role => "form" } do |f|
+    = render "shared/error_messages", :object => f.object
+    .col-sm-12
+      .form-group
+        .pull-right
+          = f.label "Form no:", :class => 'control-label'
+          = f.text_field :form_no, :class => 'form-control'
+              
+      .form-group
+        .col-sm-9
+          .form-group
+            = f.label "Name of the Student:", :class => 'col-sm-3 control-label'
+            .col-sm-9
+              = f.autocomplete_field :name, auto_search_autocomplete_student_name_path,:placeholder => "Name",:class => 'form-control'
+            
+      .form-group
+        .col-sm-6
+          .form-group
+            = f.label "Admission sought into Class:", :class => 'col-sm-3 control-label'
+            .col-sm-9
+              = f.text_field :klass, :class => 'form-control'
+        .col-sm-6
+          .form-group
+            = f.label "Date of Birth: ", :class => 'col-sm-3 control-label'
+            .col-sm-9
+              = f.text_field :dob, :class => 'form-control'
+      .form-group
+        .col-sm-6
+          .form-group
+            = f.label "Male/Female: ", :class => 'col-sm-3 control-label'
+            .col-sm-9
+              = f.text_field :gender, :class => 'form-control'
+        .col-sm-6
+          .form-group
+            = f.label "Nationality: ", :class => 'col-sm-3 control-label'
+            .col-sm-9
+              = f.text_field :nationality, :class => 'form-control'
+      .form-group
+        .col-sm-3
+          = f.label "Language spoken at home: ", :class => 'control-label'
+        .col-sm-6
+          = f.text_field :language, :class => 'form-control'
+      .form-group
+        .col-sm-6
+          .form-group
+            = f.label "Father's Name:", :class => 'col-sm-3 control-label'
+            .col-sm-9
+              = f.text_field :father_name, :class => 'form-control'
+        .col-sm-6
+          .form-group
+            = f.label "Mother's Name: ", :class => 'col-sm-3 control-label'
+            .col-sm-9
+              = f.text_field :mother_name, :class => 'form-control'
+      .form-group
+        .col-sm-6
+          .form-group
+            = f.label "Father's Occupation ", :class => 'col-sm-3 control-label'
+            .col-sm-9
+              = f.text_field :father_occupation, :class => 'form-control'
+        .col-sm-6
+          .form-group
+            = f.label "Mother's Occupation ", :class => 'col-sm-3 control-label'
+            .col-sm-9
+              = f.text_field :mother_occupation, :class => 'form-control'
+      .form-group
+        .col-sm-6
+          .form-group
+            = f.label "Company's Name: ", :class => 'col-sm-3 control-label'
+            .col-sm-9
+              = f.text_field :father_company, :class => 'form-control'
+        .col-sm-6
+          .form-group
+            = f.label "Company's Name: ", :class => 'col-sm-3 control-label'
+            .col-sm-9
+              = f.text_field :mother_company, :class => 'form-control'
+      .form-group
+        .col-sm-6
+          .form-group
+            = f.label "Education: ", :class => 'col-sm-3 control-label'
+            .col-sm-9
+              .btn-group{"data-toggle" => "buttons-radio"}
+                .row
+                  .col-sm-2
+                    = f.radio_button :father_education, "Upto SSC"
+                  .col-sm-2
+                    %label{for: "upto SSC", :id=>"first"} Upto SSC
+                  .col-sm-2
+                    = f.radio_button :father_education, "Graduate"
+                  .col-sm-2
+                    %label{for: "Graduate",:id=>"second"} Graduate
+                .row
+                  .col-sm-2
+                    = f.radio_button :father_education, "Graduate"
+                  .col-sm-2
+                    %label{for: " Post Graduate",:id=>"third"} Post Graduate
+                  .col-sm-2
+                    = f.radio_button :father_education, "Professional(Lawyer, Doctor, MBA, etc.,)"
+                  .col-sm-2
+                    %label{for: "Professional(Lawyer, Doctor, MBA, etc.,)",:id=>"four"} Professional(Lawyer, Doctor, MBA, etc.,)
+                
+        .col-sm-6
+          .form-group
+            = f.label "Education: ", :class => 'col-sm-3 control-label'
+            .col-sm-9
+              .btn-group{"data-toggle" => "buttons-radio"}
+                .row
+                  .col-sm-2
+                    = f.radio_button :mother_education, "Upto SSC"
+                  .col-sm-2
+                    %label{for: "upto SSC", :id=>"first"} Upto SSC
+                  .col-sm-2
+                    = f.radio_button :mother_education, "Graduate"
+                  .col-sm-2
+                    %label{for: "Graduate",:id=>"second"} Graduate
+                .row
+                  .col-sm-2
+                    = f.radio_button :mother_education, "Graduate"
+                  .col-sm-2
+                    %label{for: " Post Graduate",:id=>"third"} Post Graduate
+                  .col-sm-2
+                    = f.radio_button :mother_education, "Professional(Lawyer, Doctor, MBA, etc.,)"
+                  .col-sm-2
+                    %label{for: "Professional(Lawyer, Doctor, MBA, etc.,)",:id=>"four"} Professional(Lawyer, Doctor, MBA, etc.,)
+      .form-group
+        .col-sm-8
+          = f.label "Family Income: ", :class => 'col-sm-3 control-label'
+          .col-sm-4
+            .row
+              .btn-group{"data-toggle" => "buttons-radio"}
+                .row
+                  .col-sm-12
+                    = f.radio_button :income, "less than Rs.20,000 p.m."
+                    %label{for: "less than Rs.20,000 p.m.", :id=>"first"} less than Rs.20,000 p.m.
+                    %br
+                .row
+                  .col-sm-12
+                    = f.radio_button :income, "Rs.20,000 to Rs.50,000 p.m."
+                    %label{for: "Rs.20,000 to Rs.50,000 p.m.",:id=>"second"} Rs.20,000 to Rs.50,000 p.m.
+                    %br
+                .row
+                  .col-sm-12
+                    = f.radio_button :income, "Rs.50,000 to Rs.1,00,000 p.m."
+                    %label{for: "Rs.50,000 to Rs.1,00,000 p.m.",:id=>"third"} Rs.50,000 to Rs.1,00,000 p.m.
+                    %br
+                .row
+                  .col-sm-12
+                    = f.radio_button :income, "more than Rs. 1,00,000 p.m."
+                    %label{for: "more than Rs. 1,00,000 p.m.",:id=>"four"} more than Rs. 1,00,000 p.m.
+      .form-group
+        .col-sm-3
+          = f.label "Residential Address:", :class => 'control-label'
+        .col-sm-6
+          = f.text_field :address, :class => 'form-control'
+      .form-group
+        .col-sm-2
+          = f.label "Telephone:", :class => 'control-label'
+        .col-sm-1
+          = f.label "Landline: ", :class => 'control-label'
+        .col-sm-3
+          = f.text_field :landline, :class => 'form-control'
+        .col-sm-2
+          = f.label "Mobile: ", :class => 'control-label'
+        .col-sm-3
+          = f.text_field :mobile, :class => 'form-control'
+      .form-group
+        .col-sm-3
+          = f.label "Email: ", :class => 'control-label'
+        .col-sm-6
+          = f.text_field :email, :class => 'form-control'
+      .form-group
+        .col-sm-3
+          = f.label "Choice of Transport ", :class => 'control-label'
+        .col-sm-4
+          .btn-group{"data-toggle" => "buttons-radio"}
+            .row
+              .col-sm-3
+                = f.radio_button :transport, "Private"
+              .col-sm-3
+                %label{for: "Private", :id=>"first"} Private
+              .col-sm-3
+                = f.radio_button :transport, "School"
+              .col-sm-3
+                %label{for: "School",:id=>"second"} School
+          
+      .form-group
+        .col-sm-3
+          = f.label "If yes, stage / required bus stop ", :class => 'control-label'
+        .col-sm-6
+          = f.text_field :busstop, :class => 'form-control'
+      .form-group
+        .col-sm-12
+          .col-sm-3
+            = f.label "School in Which Last Studied:", :class => 'control-label'
+          .col-sm-3
+            = f.text_field :last_school, :class => 'col-sm-3 form-control'
+          .col-sm-2
+            = f.label "City: ", :class => 'control-label'
+          .col-sm-3
+            = f.text_field :city, :class => 'form-control'
+      .form-group
+        .col-sm-3
+          = f.label "Reasons for Changing:  ", :class => 'control-label'
+        .col-sm-6
+          = f.text_field :changing_reason, :class => 'form-control'
+      .form-group
+        .col-sm-3
+          = f.label "You came to know about our school through:", :class => 'control-label'
+        .col-sm-6
+          .btn-group{"data-toggle" => "buttons-radio"}
+            .row
+              .col-sm-3
+                = f.radio_button :know_school, "Friends"
+              .col-sm-3
+                %label{for: "Friends", :id=>"first"} Friends
+              .col-sm-3
+                = f.radio_button :know_school, "Advertisements"
+              .col-sm-3
+                %label{for: "Advertisements",:id=>"second"} Advertisements
+            .row
+              .col-sm-3
+                = f.radio_button :know_school, "Internet"
+              .col-sm-3
+                %label{for: "Internet",:id=>"third"} Internet
+              .col-sm-3
+                = f.radio_button :know_school, "Word of Mouth"
+              .col-sm-3
+                %label{for: "Word of Mouth",:id=>"four"} Word of Mouth
+            .row
+              .col-sm-3
+                = f.radio_button :know_school, "Parents whose children are studying here"
+              .col-sm-9
+                %label{for: "Parents whose children are studying here", :id => "five"} Parents whose children are studying here
+      
+             
+            
+      .form-group
+        .col-sm-2
+          = f.label "If yes,mention their details ", :class => 'control-label'
+        .col-sm-3
+          = f.label "Name", :class => 'control-label'
+        .col-sm-6
+          = f.text_field :person, :class => 'form-control'
+      .form-group
+        .col-sm-2
+        .col-sm-3
+          = f.label "Class", :class => 'control-label'
+        .col-sm-6
+          = f.text_field :pp, :class => 'form-control'
+
+      
+      %br
+      %center
+        = f.submit "Create", :class => 'btn btn-primary'
+        = link_to 'Back', students_path, :class => 'btn btn-primary'
+

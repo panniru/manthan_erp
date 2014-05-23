@@ -1,0 +1,33 @@
+= render 'students/process_link'
+%table.table.table.striped
+  %thead
+    %tr
+      %th Name
+      %th Class
+      %th Gender
+      %th Father's Name
+      %th Date of Birth
+      %th Mobile
+      %th Email
+      %th
+     
+      %th Status
+  
+        
+  %tbody
+    - Student.all.each do |student|
+      %tr
+        %td= student.name
+        %td= student.klass
+        %td= student.gender
+        %td= student.father_name
+        %td= student.dob
+        %td= student.mobile
+        %td= student.email
+        %td= link_to "<See More>" , students_more_path
+        
+        %td= student.status
+%center
+  
+  = link_to 'back', students_enquiry_path, :class => 'btn btn-primary'
+  = link_to 'Submit', students_app_path, :class => 'btn btn-primary'
