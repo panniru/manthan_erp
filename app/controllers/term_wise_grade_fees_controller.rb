@@ -3,8 +3,6 @@ class TermWiseGradeFeesController < ApplicationController
   def term_wise_grade_fee
     respond_to do |format|
       format.json do
-        p "=============>>"
-        p TermFeeGrid.new.get_grid[0]
         render :json => TermFeeGrid.new.get_grid
       end
     end

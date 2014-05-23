@@ -15,9 +15,10 @@
                         buckets.forEach(function(bctWiseFee){
                             colHeads.add(bctWiseFee.fee_type_name);
                             rowHeads.add(bctWiseFee.fee_grade_bucket_name);
-                            total_amount += isNaN(parseInt(bctWiseFee.amount_in_rupees)) ? 0 : parseInt(bctWiseFee.amount_in_rupees) ;
+                            // on doing sum of the parseFloat giving long precessions so i am increasing the value by multiplying 1000 and devinding finally with 1000 
+                            total_amount += isNaN(parseFloat(bctWiseFee.amount_in_rupees)) ? 0 : parseFloat(bctWiseFee.amount_in_rupees*1000) ;
                         });
-                        $scope.sumTotals.push(total_amount)
+                        $scope.sumTotals.push(total_amount/1000)
                     });
                     $scope.columnHeaders = [c for (c of colHeads)]
                     $scope.rowHeaders = [r for (r of rowHeads)]
@@ -28,7 +29,7 @@
         $scope.sumTotal = function(index){
             var totalAmount = 0;
             $scope.gradeWiseFees[index].forEach(function(bctWiseFee){
-                totalAmount += isNaN(parseInt(bctWiseFee.amount_in_rupees)) ? 0 : parseInt(bctWiseFee.amount_in_rupees);
+                totalAmount += isNaN(parseFloat(bctWiseFee.amount_in_rupees)) ? 0 : parseFloat(bctWiseFee.amount_in_rupees);
             });
             
             $scope.sumTotals[index] = totalAmount;

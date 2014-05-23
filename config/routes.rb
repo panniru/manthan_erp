@@ -38,8 +38,14 @@ ManthanErp::Application.routes.draw do
       post "save_term_wise_fee_grid"
     end
   end
-  
 
+  
+  resources :monthly_pdc_amounts  do
+    collection do
+      get "monthly_pdc_amounts"
+      post "save_monthly_pdc_amounts"
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

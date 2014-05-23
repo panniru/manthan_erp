@@ -1,5 +1,4 @@
-
-.col-md-8{ "ng-controller" => "TermWiseFeesController", "ng-init" => "getGridView()"}
+.col-md-12{ "ng-controller" => "MonthlyPdcsController", "ng-init" => "getGridView()"}
   .col-md-2.col-md-offset-8
     .checkbox
       %input{ :type => "checkbox", "ng-change" => "toggleAmounts()", "ng-model" => "defaultAmounts", "ng-true-value" => "true",  "ng-false-value" => "false" }
@@ -14,18 +13,17 @@
         %label{:class => "form-label"}
           Total
     %tbody
-      %tr{"ng-repeat" => "trm_wise_fee in termWiseFees"}
+      %tr{"ng-repeat" => "pdc_amount in monthlyPdcs"}
         %td
           %label{:class => "form-label"}
             {{rowHeaders[$index]}}
-        %td{"ng-repeat" => "unit in trm_wise_fee"}
-          %input{:type => "text", :class=> "form-control", "ng-model" => "termWiseFees[$parent.$index][$index]['amount_in_rupees']"}
+        %td{"ng-repeat" => "unit in pdc_amount"}
+          %input{:type => "text", :class=> "form-control", "ng-model" => "monthlyPdcs[$parent.$index][$index]['amount_in_rupees']"}
         %td
           %input{:type => "text", :class=> "form-control", :readonly => true, :value => "{{sumTotals[$index]}}"}
           %span{"ng-show" => "showError($index)", :class => "alert" } *Sum Mismatch 
   = render "shared/amount_units"  
-
   .row    
     .col-md-4.col-md-offset-10
-      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveTermWiseFee()", :value => "Save"} 
-      = link_to "Back", term_wise_grade_fees_path, :class => "btn btn-primary"
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveMonthlyPdc()", :value => "Save"} 
+      = link_to "Back", monthly_pdc_amounts_path, :class => "btn btn-primary"

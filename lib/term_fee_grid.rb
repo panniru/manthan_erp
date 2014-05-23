@@ -1,6 +1,7 @@
 class TermFeeGrid
   
   def get_grid
+    amount_conversion = AmountConversion.new 
     FeeGradeBucket.all.map do |bucket|
       total = bucket.grade_wise_fees.inject(0){|tot, fee| tot+fee.amount_in_rupees}
       TermDefinition.all.map do |term|
@@ -8,16 +9,11 @@ class TermFeeGrid
         if term_wise_grd_fee.present?
           TermFeeUnit.new(:id => term_wise_grd_fee.id, :fee_grade_bucket_id => bucket.id, :fee_type_id => term.id, :fee_grade_bucket_name => bucket.bucket_name, :term_definition_name => term.term_definition, :amount_in_rupees => term_wise_grd_fee.amount_in_rupees)
         else
-          TermFeeUnit.new(:fee_grade_bucket_id => bucket.id, :term_definition_id => term.id, :fee_grade_bucket_name => bucket.bucket_name, :term_definition_name => term.term_definition, :amount_in_rupees => term_amount_in_rupees(total, term.amount_per))
+          TermFeeUnit.new(:fee_grade_bucket_id => bucket.id, :term_definition_id => term.id, :fee_grade_bucket_name => bucket.bucket_name, :term_definition_name => term.term_definition, :amount_in_rupees => amount_conversion.part_percentage_from_total_percentage(total, term.amount_per))
         end
       end
     end
   end
-
-  def term_amount_in_rupees(total, amount_per)
-    ((amount_per/100) * total).round
-  end
-
 
   def self.get_object_list_from_grid(params, academic_year)
     params.map do |param|

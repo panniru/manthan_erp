@@ -38,6 +38,24 @@ ActiveRecord::Schema.define(version: 20140522123535) do
     t.datetime "updated_at"
   end
 
+  create_table "monthly_pdc_amounts", force: true do |t|
+    t.integer  "fee_grade_bucket_id"
+    t.integer  "post_dated_cheque_id"
+    t.integer  "amount_in_rupees"
+    t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "post_dated_cheques", force: true do |t|
+    t.date     "date"
+    t.string   "month"
+    t.integer  "academic_year"
+    t.float    "amount_per"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "term_definitions", force: true do |t|
     t.string   "term_definition"
     t.datetime "created_at"
