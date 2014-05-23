@@ -28,8 +28,15 @@
                         $scope.isErrorsAt.push(false)
                         $scope.sumTotals.push(total_amount/1000)
                     });
-                    $scope.columnHeaders = [c for (c of colHeads)]
-                    $scope.rowHeaders = [r for (r of rowHeads)]
+
+                    colHeads.forEach(function(val){
+                        $scope.columnHeaders.push(val);
+                    });
+                    
+                    rowHeads.forEach(function(val){
+                        $scope.rowHeaders.push(val);
+                    })
+
                     $scope.termWiseFees = result.data;
                 });
         }
