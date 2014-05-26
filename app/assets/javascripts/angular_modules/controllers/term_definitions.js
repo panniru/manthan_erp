@@ -1,5 +1,6 @@
-angular.module('myApp', [])
-    .controller('TermDefinitionsController', function($scope) {
+(function(angular, app) {
+    "use strict";
+    app.controller('TermDefinitionsController', function($scope) {
         $scope.term_definitions = []
         for(var i=0; i<3; i++){
             $scope.term_definitions.push({"term_definition":"", "amount_per" :"" });
@@ -15,3 +16,4 @@ angular.module('myApp', [])
         }
         
     });  
+})(angular, myApp);
