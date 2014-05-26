@@ -51,3 +51,13 @@ en:
     update:
       success: "Term has been updated"
       fail: "Term not been updated"
+  post_dated_cheque:
+    create_bulk:
+      success: "cheque has been saved"
+      fail: "cheque not been saved"
+    destroy:
+      success: "cheque has been deleted"
+      fail: "cheque has not been deleted"
+    update:
+      success: "cheque has been updated"
+      fail: "cheque not been updated"
