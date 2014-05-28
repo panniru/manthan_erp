@@ -8,9 +8,9 @@
 
 
 def seed_user
-  @user_admin = User.find_by_role("admin")
+  @user_admin = User.find_by_role_id("1")
   unless @user_admin.present?
-    User.create(:email => "admin@manthan.com", :password => "welcome", :user_name => "admin", :role => "admin")
+    User.create(:email => "admin@manthan.com", :password => "welcome", :user_id => "admin")
   end
 end
 

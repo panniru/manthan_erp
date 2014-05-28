@@ -1,0 +1,20 @@
+= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form-horizontal sign-in-padding" }) do |f|
+  .form-group
+    .input-group
+      %span.input-group-addon
+        = fa_icon "user lg"
+      = f.text_field :user_id, :class => 'form-control', :autofocus => true, :placeholder => "Please Enter User Id"
+  .form-group
+    .input-group
+      %span.input-group-addon
+        = fa_icon "key lg"
+      = f.password_field :password, :class => 'form-control', :placeholder => "Please Enter Password"
+    
+  .form-group
+    .col-md-offset-8.col-md-4
+      = button_tag(type: 'submit', class: "btn btn-danger") do
+        = fa_icon "sign-in lg"
+        = "Login"
+    .col-md-offset-5
+      = link_to "Forgot your password?", new_password_path(resource_name)
+      

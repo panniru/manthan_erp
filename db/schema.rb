@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140522123535) do
+ActiveRecord::Schema.define(version: 20140528085423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 20140522123535) do
     t.datetime "updated_at"
   end
 
+  create_table "pg_search_documents", force: true do |t|
+    t.text     "content"
+    t.integer  "searchable_id"
+    t.string   "searchable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "post_dated_cheques", force: true do |t|
     t.date     "date"
     t.string   "month"
@@ -55,26 +63,10 @@ ActiveRecord::Schema.define(version: 20140522123535) do
     t.datetime "updated_at"
   end
 
-  create_table "term_definitions", force: true do |t|
-    t.string   "term_definition"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.float    "amount_per"
-  end
-
-  create_table "term_wise_grade_fees", force: true do |t|
-    t.integer  "fee_grade_bucket_id"
-    t.integer  "term_definition_id"
-    t.integer  "amount_in_rupees"
-    t.string   "academic_year"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-  
-  create_table "pg_search_documents", force: true do |t|
-    t.text     "content"
-    t.integer  "searchable_id"
-    t.string   "searchable_type"
+  create_table "roles", force: true do |t|
+    t.string   "role"
+    t.string   "code"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -121,5 +113,33 @@ ActiveRecord::Schema.define(version: 20140522123535) do
     t.float    "amount_per"
   end
 
-end
+  create_table "term_wise_grade_fees", force: true do |t|
+    t.integer  "fee_grade_bucket_id"
+    t.integer  "term_definition_id"
+    t.integer  "amount_in_rupees"
+    t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
+  create_table "users", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.integer  "role_id"
+    t.string   "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+end
