@@ -222,10 +222,20 @@ ActiveRecord::Schema.define(version: 20140616051538) do
     t.date     "cheque_date"
     t.string   "status"
     t.integer  "post_dated_cheque_id"
+
+  create_table "pg_search_documents", force: true do |t|
+    t.text     "content"
+    t.integer  "searchable_id"
+    t.string   "searchable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "bank_name"
-    t.string   "ifsc_code"
+  end
+
+  create_table "post_dated_cheques", force: true do |t|
+    t.date     "date"
+    t.string   "month"
+    t.integer  "academic_year"
+    t.float    "amount_per"
     t.integer  "term_definition_id"
   end
 
