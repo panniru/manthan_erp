@@ -1,21 +1,47 @@
 %h3 
   = "Terms"
-  = link_to "Define Term", new_term_definition_path, :class => "btn btn-primary"
+  = link_to "bulk Term", new_term_definition_path, :class => "btn btn-primary"
 
-
+  %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Term "
+  #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4#myModalLabel.modal-title New Term
+          = form_for TermDefinition.new , :html => { :class => "form-horizontal", :role => "form"} do |f| 
+            .modal-body
+              .col-sm-3
+                = f.label "Term", :class => 'form-control'
+              .col-sm-3
+                = f.text_field "term_definition", :class => 'form-control'
+              .col-sm-3
+                = f.text_field "termdate", :class => 'datepicker form-control', :placeholder => "date"
+              .col-sm-3
+                .input-group 
+                  = f.text_field "amount_per" , :class => 'form-control', :placeholder => "per"
+                  %span.input-group-addon %
+            .modal-footer
+              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+              = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+   
 %table.table.table-bordered
   %thead
     %th Terms
+    %th Date
     %th Percent of Amount
     %th
   %tbody
     - @term_definitions.each do |term_definition|
       %tr
         %td= term_definition.term_definition
+        %td= term_definition.termdate
         %td= term_definition.amount_per
         %td
-          = link_to "Edit", edit_term_definition_path(term_definition), :class => "btn btn-warning"
-          = link_to "Delete", term_definition_path(term_definition), :class => "btn btn-danger", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete "}
+          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_term_definition_path(term_definition), :class => "btn btn-warning btn-sm", :title => "Edit"
+          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),term_definition_path(term_definition), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+  
+
           
 = will_paginate @term_definitions, param_name: "page", previous_label: h("<"), next_label: h(">")          
         

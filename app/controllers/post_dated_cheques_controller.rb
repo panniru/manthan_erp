@@ -6,6 +6,16 @@ class PostDatedChequesController < ApplicationController
 
   def edit
   end
+ 
+  def create
+    @post_dated_cheque = PostDatedCheque.new(cheque_params)
+    if @post_dated_cheque.save
+      flash[:success] = I18n.t :success, :scope => [:post_dated_cheque, :create]
+       redirect_to post_dated_cheques_path
+    else
+      render "index"
+    end
+  end
   
   def create_bulk
     @post_dated_cheque_bulk = build_post_dated_cheque_from_bulk
@@ -24,7 +34,7 @@ class PostDatedChequesController < ApplicationController
   end
 
   def update
-    if @post_dated_cheque.update(date_params)
+    if @post_dated_cheque.update(cheque_params)
       flash[:success] = I18n.t :success, :scope => [:post_dated_cheque, :update]
       redirect_to post_dated_cheques_path
     else
@@ -44,19 +54,17 @@ class PostDatedChequesController < ApplicationController
  
   
   def new
+     @post_dated_cheques = PostDatedCheque.new
   end
 
   def show
   end
 
-  private 
-
-  def date_params
-    params.require(:post_dated_cheque).permit(:date, :amount_per)
+  def cheque_params
+    params.require(:post_dated_cheque).permit( :date, :amount_per )
   end
-
   def build_post_dated_cheque_from_bulk
-    params.require(:bulk_post_dated_cheques).select{|post_dated_cheque| post_dated_cheque["date"].present? and  post_dated_cheque["amount_per"].present?}.map do |post_dated_cheque|
+    params.require(:bulk_post_dated_cheques).select{|post_dated_cheque| post_dated_cheque["date"].present? and post_dated_cheque["amount_per"].present?}.map do |post_dated_cheque|
       pd = PostDatedCheque.new(post_dated_cheque)
       pd.month = Date::MONTHNAMES[Date.parse(post_dated_cheque["date"]).month]
       pd

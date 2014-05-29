@@ -32,6 +32,9 @@ en:
       success: "Feetype has been updated"
       fail: "Feetype not been updated"
   fee_grade_bucket:
+    create_bulk:
+      success: "Bucket has been saved"
+      fail: "Bucket not been saved"
     create:
       success: "Bucket has been saved"
       fail: "Bucket not been saved"
@@ -42,6 +45,9 @@ en:
       success: "Bucket has been updated"
       fail: "Bucket not been updated"
   term_definition:
+    create:
+      success: "Term has been saved"
+      fail: "Term not been saved"
     create_bulk:
       success: "Term has been saved"
       fail: "Term not been saved"
@@ -52,6 +58,9 @@ en:
       success: "Term has been updated"
       fail: "Term not been updated"
   post_dated_cheque:
+    create:
+      success: "cheque has been saved"
+      fail: "cheque not been saved"
     create_bulk:
       success: "cheque has been saved"
       fail: "cheque not been saved"

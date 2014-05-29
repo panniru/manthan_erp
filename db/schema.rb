@@ -11,7 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528085423) do
+
+
+ActiveRecord::Schema.define(version: 20140527091259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +26,12 @@ ActiveRecord::Schema.define(version: 20140528085423) do
 
   create_table "fee_types", force: true do |t|
     t.string   "fee_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feegradebuckets", force: true do |t|
+    t.string   "bucket_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -111,6 +119,7 @@ ActiveRecord::Schema.define(version: 20140528085423) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "amount_per"
+    t.string   "termdate"
   end
 
   create_table "term_wise_grade_fees", force: true do |t|

@@ -22,7 +22,11 @@ ManthanErp::Application.routes.draw do
       post "create_bulk"
     end
   end
-  resources :fee_grade_buckets
+  resources :fee_grade_buckets do
+    collection do
+      post "create_bulk"
+    end
+  end
   resources :term_definitions do
     collection do
       post "create_term"
