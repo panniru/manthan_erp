@@ -1,0 +1,15 @@
+= form_for @post_dated_cheque, :class => "form-horizntal" do |f|
+  = render "shared/error_messages", :object => f.object
+  .form-group
+    = f.label :date, :class => "form-label col-md-2"
+    .col-md-5
+      = f.text_field :date, :class => "datepicker"
+  .form-group
+    %br
+    %br
+    .col-md-2
+      = f.label :amount_percent, :class => "form-label col-md-2"
+    .col-md-3
+      = f.text_field :amount_per, :class => "form-control"
+    .col-md-2
+      = f.submit "Save", :class=> "btn btn-primary"

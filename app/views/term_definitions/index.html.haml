@@ -1,0 +1,21 @@
+%h3 
+  = "Terms"
+  = link_to "Define Term", new_term_definition_path, :class => "btn btn-primary"
+
+
+%table.table.table-bordered
+  %thead
+    %th Terms
+    %th Percent of Amount
+    %th
+  %tbody
+    - @term_definitions.each do |term_definition|
+      %tr
+        %td= term_definition.term_definition
+        %td= term_definition.amount_per
+        %td
+          = link_to "Edit", edit_term_definition_path(term_definition), :class => "btn btn-warning"
+          = link_to "Delete", term_definition_path(term_definition), :class => "btn btn-danger", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete "}
+          
+= will_paginate @term_definitions, param_name: "page", previous_label: h("<"), next_label: h(">")          
+        
