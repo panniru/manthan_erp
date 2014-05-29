@@ -7,7 +7,7 @@
 .row
   .col-md-3.col-md-offset-6
     = link_to "Edit", new_grade_wise_fee_path, :class => "btn btn-primary"
-
+    %i{:class => "icon-shopping-cart icon-large" }
 
 = render "term_wise_grade_fees/term_wise_grade_fee_grid"
 = render "shared/amount_units"
