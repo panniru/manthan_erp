@@ -58,6 +58,8 @@ ManthanErp::Application.routes.draw do
       post "create_bulk"
     end
   end
+
+  get "fee_alerts/fee_struct_mail_to_parents" 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

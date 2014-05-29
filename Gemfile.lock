@@ -75,6 +75,11 @@ GEM
       compass (>= 0.12.2)
       sprockets (<= 2.11.0)
     database_cleaner (1.2.0)
+    delayed_job (4.0.1)
+      activesupport (>= 3.0, < 4.2)
+    delayed_job_active_record (4.0.1)
+      activerecord (>= 3.0, < 4.2)
+      delayed_job (>= 3.0, < 4.1)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (3.2.4)
@@ -92,6 +97,11 @@ GEM
     equalizer (0.0.9)
     erubis (2.7.0)
     execjs (2.0.2)
+    factory_girl (4.4.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.4.1)
+      factory_girl (~> 4.4.0)
+      railties (>= 3.0.0)
     ffi (1.9.3)
     font-awesome-rails (4.1.0.0)
       railties (>= 3.2, < 5.0)
@@ -226,8 +236,10 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   compass-rails
   database_cleaner
+  delayed_job_active_record
   devise
   draper
+  factory_girl_rails
   font-awesome-rails
   haml-rails
   jquery-rails
