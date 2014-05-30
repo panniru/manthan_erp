@@ -1,0 +1,50 @@
+#wrapper
+  
+  transition: all 0.4s ease 0s
+
+#sidebar-wrapper
+  @extend .col-md-2
+  background: $navbar-default-bg
+  position: fixed
+  paddin-left: 0px
+  
+  height: 100%
+  overflow-y: auto
+  z-index: 1000
+  transition: all 0.4s ease 0s
+  border-right: 2px solid $navbar-default-bg
+
+.sidebar-nav
+  position: absolute
+  top: 0
+  width: 100%
+  list-style: none
+  margin: 0
+  padding: 0
+  margin-left: -7%
+  li
+    line-height: 40px
+    text-indent: 10px
+    border-top: 1px solid $navabar-link-devider-color
+    border-bottom: 1px solid $navabar-link-devider-color
+    a
+      color: #ffffff
+      display: block
+      text-decoration: none
+      &:hover
+        color: #fff
+        background: rgba(255, 255, 255, 0.2)
+        text-decoration: none
+      &.active, &:focus
+        text-decoration: none
+        color: $navbar-default-bg
+        background: white
+  > .sidebar-brand
+    height: 65px
+    line-height: 60px
+    font-size: 18px
+    a
+      color: #999999
+      &:hover
+        color: #fff
+        background: none
