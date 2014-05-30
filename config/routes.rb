@@ -15,10 +15,8 @@ ManthanErp::Application.routes.draw do
   get "staffs/gradeserviceview"
   root to: "home#index"
 
+  resources :time_tables  
 
-
-  resources :time_tables 
-  
 
   resources :fee_types do
     collection do
@@ -114,6 +112,4 @@ ManthanErp::Application.routes.draw do
   end
 
   resources :parent_cheques
-
-
 end

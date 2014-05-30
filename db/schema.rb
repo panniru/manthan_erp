@@ -346,6 +346,12 @@ ActiveRecord::Schema.define(version: 20140616051538) do
     t.datetime "updated_at"
   end
 
+  create_table "subjects", force: true do |t|
+    t.string   "subject"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "term_definitions", force: true do |t|
     t.string   "term_definition"
     t.datetime "created_at"

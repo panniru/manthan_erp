@@ -1,4 +1,5 @@
 class TimeTablesController < ApplicationController
+
   def index
   end
 
@@ -34,5 +35,6 @@ class TimeTablesController < ApplicationController
       end
     end  
   end
+
 
 end
