@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140522123535) do
+ActiveRecord::Schema.define(version: 20140529112929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,12 @@ ActiveRecord::Schema.define(version: 20140522123535) do
     t.integer  "fee_type_id"
     t.integer  "amount_in_rupees"
     t.string   "acedemic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "grades", force: true do |t|
+    t.string   "grade"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -59,6 +65,12 @@ ActiveRecord::Schema.define(version: 20140522123535) do
     t.string   "month"
     t.integer  "academic_year"
     t.float    "amount_per"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sections", force: true do |t|
+    t.string   "section"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -94,6 +106,12 @@ ActiveRecord::Schema.define(version: 20140522123535) do
     t.string   "pp"
     t.string   "appno"
     t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subjects", force: true do |t|
+    t.string   "subject"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,25 @@
+.container
+  .row
+    %input{name: "count", type: "hidden", value: "1"}/
+    #fields.control-group
+      %label.control-label{for: "field1"} Nice Multiple Form Fields
+      #profs.controls
+        %form.input-append
+          #field
+            %input#field1.input{autocomplete: "off", "data-items" => "8", name: "prof1", placeholder: "Type something", type: "text"}/
+            %button#b1.btn.add-more{type: "button"} +
+        %br/
+        %small Press + to add another form field :)
+  .row
+    %form.span6
+      %h2 Get In Touch
+      %br/
+      %input.span6{placeholder: "Your first name", required: "", type: "text"}/
+      %input.span6{placeholder: "Your last name", required: "", type: "text"}/
+      %input.span6{placeholder: "Your email", required: "", type: "email"}/
+      %input.span6{placeholder: "Your phone number", type: "text"}/
+      %input.span6{placeholder: "What's up?", required: "", rows: "3", type: "text"}/
+      %br/
+      %button.btn.btn-primary{type: "submit"} Submit
+      %button.btn{type: "clear"} Clear
+      / /.span6

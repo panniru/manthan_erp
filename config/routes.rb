@@ -15,7 +15,8 @@ ManthanErp::Application.routes.draw do
   root to: "home#index"
 
   resources :students
-
+  resources :time_tables 
+  
   resources :fee_types do
     collection do
       post "create_bulk"
