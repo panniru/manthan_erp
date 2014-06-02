@@ -3,29 +3,9 @@
     #wrapper
       #sidebar-wrapper
         %ul.sidebar-nav
-          %li
-            %a{:href => "#"}
-              = fa_icon "camera-retro lg", :class => "menu-icon"
-              %span
-                Menu Item 1
-
-          %li.active
-            %a{:href => "#"}
-              = fa_icon "camera-retro lg", :class => "menu-icon"
-              %span
-                Menu Item 1
-          %li
-            %a{:href => "#"}
-              = fa_icon "camera-retro lg", :class => "menu-icon"
-              %span
-                Menu Item 1
-          %li
-            %a{:href => "#"}
-              = fa_icon "camera-retro lg", :class => "menu-icon"
-              %span
-                Menu Item 1
-          %li
-            %a{:href => "#"}
-              = fa_icon "camera-retro lg", :class => "menu-icon"
-              %span
-                Menu Item 1
+          - sub_menu.each do |sub_menu_item|
+            %li{:class => sub_menu_item.is_active ? "active" : "" }
+              %a{:href => sub_menu_item.href}
+                = fa_icon sub_menu_item.icon
+                %span
+                  = sub_menu_item.label
