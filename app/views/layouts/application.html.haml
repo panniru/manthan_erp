@@ -8,10 +8,28 @@
     
     = csrf_meta_tags
   %body
-    .container
-      .row
-        .col-md-6
-          - flash.each do |key, value|
-            = content_tag(:div,value,:class => "#{flash_alert_class(key)}")
-            
-      = yield
+    .navbar-fixed-top
+      = render "shared/banner"
+      - if current_user.present?
+        .less-margin-bottom.row
+          = render "shared/nav_bar"
+    .row
+      - if current_user.present?
+        .col-md-2
+          = render "shared/nav_bar_left"
+        .col-md-10
+          .col-md-12
+            - flash.each do |key, value|
+              = content_tag(:div,value,:class => "#{flash_alert_class(key)}")
+          .col-md-12
+            = yield
+      - else
+        .col-md-12
+          .container
+            .row
+              .col-md-10
+                - flash.each do |key, value|
+                  = content_tag(:div,value,:class => "#{flash_alert_class(key)}")
+          
+              = yield
+      

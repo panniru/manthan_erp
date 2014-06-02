@@ -1,18 +1,29 @@
 class TermFeeGrid
   
+  def initialize 
+    @term_fee_grid = nil
+  end
+  
   def get_grid
-    amount_conversion = AmountConversion.new 
-    FeeGradeBucket.all.map do |bucket|
-      total = bucket.grade_wise_fees.inject(0){|tot, fee| tot+fee.amount_in_rupees}
-      TermDefinition.all.map do |term|
-        term_wise_grd_fee = TermWiseGradeFee.belongs_to_fee_grade_bucket(bucket).belongs_to_term_difinition(term).first
-        if term_wise_grd_fee.present?
-          TermFeeUnit.new(:id => term_wise_grd_fee.id, :fee_grade_bucket_id => bucket.id, :fee_type_id => term.id, :fee_grade_bucket_name => bucket.bucket_name, :term_definition_name => term.term_definition, :amount_in_rupees => term_wise_grd_fee.amount_in_rupees)
-        else
-          TermFeeUnit.new(:fee_grade_bucket_id => bucket.id, :term_definition_id => term.id, :fee_grade_bucket_name => bucket.bucket_name, :term_definition_name => term.term_definition, :amount_in_rupees => amount_conversion.part_percentage_from_total_percentage(total, term.amount_per))
-        end
-      end
+    @term_fee_grid ||= prepare_grid
+  end
+
+  def grid_headers
+    terms = Set.new
+    @applied_grade_fee ||= get_grid
+    @applied_grade_fee.each do |term_fees|
+      term_fees.each{|fee| terms.add(fee.term_definition_name)}
     end
+    terms.to_a
+  end
+
+  def grid_belongs_to_grades(grades)
+    applied_grade_fee =  []
+    get_grid.each do |fee_grade|
+      list = fee_grade.select{|bucket| grades.include? bucket.fee_grade_bucket_id.to_i }
+      applied_grade_fee << list unless list.empty?
+    end
+    applied_grade_fee
   end
 
   def self.get_object_list_from_grid(params, academic_year)
@@ -29,8 +40,22 @@ class TermFeeGrid
     end.flatten
   end
 
-
   private
+  
+  def prepare_grid
+    amount_conversion = AmountConversion.new 
+    FeeGradeBucket.all.map do |bucket|
+      total = bucket.grade_wise_fees.inject(0){|tot, fee| tot+fee.amount_in_rupees}
+      TermDefinition.all.map do |term|
+        term_wise_grd_fee = TermWiseGradeFee.belongs_to_fee_grade_bucket(bucket).belongs_to_term_difinition(term).first
+        if term_wise_grd_fee.present?
+          TermFeeUnit.new(:id => term_wise_grd_fee.id, :fee_grade_bucket_id => bucket.id, :fee_type_id => term.id, :fee_grade_bucket_name => bucket.bucket_name, :term_definition_name => term.term_definition, :amount_in_rupees => term_wise_grd_fee.amount_in_rupees)
+        else
+          TermFeeUnit.new(:fee_grade_bucket_id => bucket.id, :term_definition_id => term.id, :fee_grade_bucket_name => bucket.bucket_name, :term_definition_name => term.term_definition, :amount_in_rupees => amount_conversion.part_percentage_from_total_percentage(total, term.amount_per))
+        end
+      end
+    end
+  end
   
   class TermFeeUnit
     include Virtus.model

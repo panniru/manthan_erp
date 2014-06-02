@@ -1,0 +1,69 @@
+.navbar-nav > li.active
+  > a:after
+    content: ""
+    border-color: transparent
+    left: 0
+    right: 0
+    top: auto
+    bottom: -11%
+    position: absolute
+    border-bottom: 7px solid #FFF
+  border-color: rgb(121, 176, 206)
+
+.navbar-nav > li:hover
+  > a:after
+    content: ""
+    border-color: transparent
+    left: 0
+    right: 0
+    top: auto
+    bottom: -11%
+    position: absolute
+    border-bottom: 2px solid $navbar-default-bg
+
+  border-color: rgb(121, 176, 206)
+
+.navbar-default
+  box-shadow: 1px 1px 2px #1f3a4d
+
+.navabar-nav > li.active > a:after
+  display: block
+  content: ""
+  right: 0
+  top: 4px
+  border: 8px solid transparent
+  border-width: 14px 10px
+
+.navabar-nav > li.active > a
+  color: #ffffff
+  background-color: white
+  font-weight: bold
+  font-size: 13px
+
+.navabar-nav > li:hover
+  background-color: white
+
+.navbar-nav > li 
+  border-left: 1px solid $navabar-link-devider-color
+  border-right: 1px solid $navabar-link-devider-color
+
+.navbar-nav > li > a > .menu-icon
+  vertical-align: sub
+  text-align: center
+  font-weight: normal
+  display: block !important
+
+.navbar-nav > li > a > .menu-text
+  display: block !important
+  margin: auto !important
+  padding: 0px !important
+  position: static !important
+/* .navbar-nav > li:hover
+/*   border-top: 2px solid
+/*   backgound: #FFF
+/*   color: #FFF
+/*   font-weight: bold
+
+  
+.less-margin-bottom
+  margin-bottom: -1.45%

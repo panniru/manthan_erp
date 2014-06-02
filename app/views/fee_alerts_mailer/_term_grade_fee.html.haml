@@ -1,0 +1,26 @@
+.row
+  .col-md-8
+    %h4 Term Wise Fee
+    %hr
+      
+.col-md-8
+  %table.table.table-bordered
+    %thead
+      %th
+      - @terms.each do |term|
+        %th= term
+      %th
+        %label{:class => "form-label"}
+          Total
+    %tbody
+      - @term_grade_fees.each_with_index do |term_fee, index|
+        %tr
+          %th
+            = @grades[index]
+          - sum_total = 0.0
+          - term_fee.each do |term|
+            %td
+              = term.amount_in_rupees
+              - sum_total = sum_total + term.amount_in_rupees.to_f
+          %th
+            = '%.2f' % sum_total

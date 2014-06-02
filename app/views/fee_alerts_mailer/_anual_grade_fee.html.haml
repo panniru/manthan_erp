@@ -1,0 +1,25 @@
+.row
+  .col-md-8
+    %h4 Grade Wise Fee
+    %hr
+      
+.col-md-8
+  %table.table.table-bordered
+    %thead
+      %th
+      - @fee_types.each do |fee_type|
+        %th= fee_type
+      %th
+        Total
+    %tbody
+      - @anual_grade_fees.each_with_index do |fee_grade, index|
+        %tr
+          %th
+            = @grades[index]
+          - sum_total = 0.0
+          - fee_grade.each do |fee_type|
+            %td
+              = fee_type.amount_in_rupees
+              - sum_total = sum_total + fee_type.amount_in_rupees.to_f
+          %th
+            = '%.2f' % sum_total
