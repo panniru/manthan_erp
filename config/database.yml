@@ -8,8 +8,7 @@ development:
   database: manthan_development
   pool: 5
   timeout: 5000
-  username: manthan
-  password: welcome
+ 
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -19,16 +18,12 @@ test:
   database: manthan_test
   pool: 5
   timeout: 5000
-  username: manthan
-  password: welcome
 
 production:
   adapter: postgresql
   database: manthan_production
   pool: 5
   timeout: 5000
-  username: manthan
-  password: welcome
 
 
 
