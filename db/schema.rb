@@ -12,28 +12,21 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
+ActiveRecord::Schema.define(version: 20140529104332) do
 
-ActiveRecord::Schema.define(version: 20140527091259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "fee_grade_buckets", force: true do |t|
-    t.string   "bucket_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "fee_types", force: true do |t|
     t.string   "fee_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "feegradebuckets", force: true do |t|
-    t.string   "bucket_name"
+  create_table "fee_grade_buckets", force: true do |t|
+    t.string   "grade_from"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "grade_to"
   end
 
   create_table "grade_wise_fees", force: true do |t|

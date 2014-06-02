@@ -1,5 +1,6 @@
 %h3 
   = "Post Dated Cheques"
+  = link_to "Define bulk", new_post_dated_cheque_path, :class => "btn btn-primary"
   %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New"
   #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
     .modal-dialog

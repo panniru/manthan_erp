@@ -1,7 +1,7 @@
 class FeeGradeBucketsController < ApplicationController
   load_resource :only => [:show, :update, :edit, :destroy]
   def index
-     @fee_grade_buckets = FeeGradeBucket.paginate(:page => params[:page].present? ? params[:page] : 1, :per_page =>10)
+     @fee_grade_buckets = FeeGradeBucket.paginate(:page => params[:page].present? ? params[:page] : 1)
   end
 
   def update
@@ -37,7 +37,7 @@ class FeeGradeBucketsController < ApplicationController
     end
   end
   def create_bulk
-    @fee_grade_bucket_bulk = build_fee_grade_bucket_from_bulk
+    @fee_grade_bucket_bulk = build_fee_grade_bucket_bulk
     if !@fee_grade_bucket_bulk.empty? and @fee_grade_bucket_bulk.map(&:valid?).all?
       @fee_grade_bucket_bulk.each(&:save!)
       flash[:success] = I18n.t :success, :scope => [:fee_grade_bucket, :create_bulk]
@@ -59,13 +59,14 @@ class FeeGradeBucketsController < ApplicationController
   private
 
   def bucket_params
-    params.require(:fee_grade_bucket).permit( :bucket_name)
+    params.require(:fee_grade_bucket).permit( :grade_from ,:grade_to)
   end
   
-   def build_fee_grade_bucket_from_bulk
-    params.require(:bulk_fee_grade_buckets).select{|fee_grade_bucket| fee_grade_bucket["bucket_name"].present?}.map do |fee_grade_bucket|
+   def build_fee_grade_bucket_bulk
+    params.require(:bulk_fee_grade_buckets).select{|fee_grade_bucket| fee_grade_bucket["grade_from"].present?  and fee_grade_bucket["grade_to"].present?}.map do |fee_grade_bucket|
       FeeGradeBucket.new(fee_grade_bucket)
     end
+
   end
 end
 

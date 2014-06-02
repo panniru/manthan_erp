@@ -14,7 +14,9 @@
               .col-sm-3
                 = f.label "Bucket", :class => 'form-control'
               .col-sm-3
-                = f.text_field "bucket_name", :class => 'form-control'
+                = f.text_field "grade_from", :class => 'form-control' , :placeholder => "From"
+              .col-sm-3
+                = f.text_field "grade_to", :class => 'form-control' , :placeholder => "To"
             .modal-footer
               %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
               = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
@@ -22,12 +24,14 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th Types Of Bucket
+      %th From
+      %th To
       %th
   %tbody
     - @fee_grade_buckets.each do |fee_grade_bucket |
       %tr
-        %td= fee_grade_bucket.bucket_name
+        %td= fee_grade_bucket.grade_from
+        %td= fee_grade_bucket.grade_to
         %td
           = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_fee_grade_bucket_path(fee_grade_bucket), :class => "btn btn-warning btn-sm", :title => "Edit"
           = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),fee_grade_bucket_path(:id => fee_grade_bucket.id), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
