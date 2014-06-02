@@ -8,7 +8,7 @@
     
     = csrf_meta_tags
   %body
-    .row
+    .navbar-fixed-top
       = render "shared/banner"
       - if current_user.present?
         .less-margin-bottom.row
@@ -18,9 +18,13 @@
         .col-md-2
           = render "shared/nav_bar_left"
         .col-md-10
+          .col-md-12
+            - flash.each do |key, value|
+              = content_tag(:div,value,:class => "#{flash_alert_class(key)}")
+          .col-md-12
+            = yield
       - else
         .col-md-12
-          
           .container
             .row
               .col-md-10
