@@ -6,7 +6,22 @@ class FeeStructMailingJob
   end
 
   def perform
-    puts "Excecuting Delayed job........"
+    grade_fee_grid = GradeFeeGrid.new
+    term_fee_grid = TermFeeGrid.new
+    monthly_pdc_grid = MonthlyPdcGrid.new
+    
+    Parent.all.each do |parent|
+      applied_grade_bucket_ids = []
+      emails = []
+      parent.students.each do |student|
+        applied_grade_bucket_ids << FeeGradeBucket.find_grade_bucket_by_grade(student.grade).id
+        emails << parent.father_email if parent.father_email.present?
+        emails << parent.mother_email if parent.mother_email.present?
+        emails << parent.guardian_email if parent.guardian_email.present?
+      end
+      FeeAlertsMailer.fee_structure_mail(grade_fee_grid, term_fee_grid, monthly_pdc_grid, applied_grade_bucket_ids, parent, emails).deliver
+      puts "Excecuting Delayed job........"
+    end
   end
   
   def success(job)

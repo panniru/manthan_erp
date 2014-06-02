@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528123929) do
+ActiveRecord::Schema.define(version: 20140529105755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,24 @@ ActiveRecord::Schema.define(version: 20140528123929) do
     t.datetime "updated_at"
   end
 
+  create_table "parents", force: true do |t|
+    t.string   "father_name"
+    t.string   "mother_name"
+    t.string   "guardian_name"
+    t.string   "father_occupation"
+    t.string   "mother_occupation"
+    t.string   "guardian_occupation"
+    t.string   "father_phone"
+    t.string   "mother_phone"
+    t.string   "guardian_phone"
+    t.string   "father_email"
+    t.string   "mother_email"
+    t.string   "guardian_email"
+    t.string   "address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pg_search_documents", force: true do |t|
     t.text     "content"
     t.integer  "searchable_id"
@@ -102,6 +120,18 @@ ActiveRecord::Schema.define(version: 20140528123929) do
     t.string   "role"
     t.string   "code"
     t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "student_hrs", force: true do |t|
+    t.string   "name"
+    t.date     "dob"
+    t.date     "joining_date"
+    t.string   "grade"
+    t.string   "section"
+    t.string   "academic_year"
+    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -44,6 +44,7 @@ gem 'factory_girl_rails'
 gem 'turbolinks'
 
 gem 'pg'
+gem 'roadie'
 
 # Use unicorn as the app server
 # gem 'unicorn'

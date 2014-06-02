@@ -1,0 +1,25 @@
+.row
+  .col-md-8
+    %h4 Month Wise Fee
+    %hr
+      
+.col-md-8
+  %table.table.table-bordered
+    %thead
+      %th
+      - @months.each do |month|
+        %th= month
+      %th
+        Total
+    %tbody
+      - @month_grade_fees.each_with_index do |month_fee, index|
+        %tr
+          %th
+            = @grades[index]
+          - sum_total = 0.0
+          - month_fee.each do |fee|
+            %td
+              = fee.amount_in_rupees
+              - sum_total = sum_total + fee.amount_in_rupees.to_f
+          %th
+            = '%.2f' % sum_total

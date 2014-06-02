@@ -3,7 +3,7 @@ class GradeWiseFeesController < ApplicationController
   def grade_wise_fee_view
     respond_to do |format|
       format.json do
-        render :json => GradeFeeGrid.get_grid
+        render :json => GradeFeeGrid.new.get_grid
       end
     end
   end
@@ -23,6 +23,4 @@ class GradeWiseFeesController < ApplicationController
       end
     end
   end
-
-  
 end
