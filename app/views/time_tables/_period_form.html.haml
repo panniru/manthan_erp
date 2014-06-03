@@ -1,7 +1,62 @@
 .row
-  .col-xs-6.col-md-4 
-    h1
-  .col-xs-6.col-md-4
-    h2
-  .col-xs-6.col-md-4
-    h3
+  .col-xs-3.col-md-2 
+  .col-xs-6.col-md-8 
+    = form_tag("/term_definitions", method: "get") do
+      .col-xs-9.col-md-4 
+        = label_tag(:q, "Enter Grade")
+        %input#request.special_input{name: "request", type: "text", placeholder: "Enter Grade"}/
+        = text_field_tag(:q,{placeholder: "GRADE"})
+      .col-xs-9.col-md-4
+        = label_tag(:q, "Enter Section")
+        = text_field_tag(:q,{placeholder: "SECTION"})
+      .col-xs-9.col-md-4
+        = submit_tag("GO",{class: "btn btn-primary"})
+        = submit_tag("ADD TIME TABLE",{class: "btn btn-primary"})
+  .col-xs-6.col-md-2
+%br
+.row
+  .col-xs-3.col-md-2 
+  .col-xs-6.col-md-8
+    .Container{"ng-init" => "names=['A','B','C',]"}
+      %h3 looping with the ng-repeat Directive
+      %ul
+        %li{"ng-repeat" => "name in names"} 
+          {{ name}}
+      %input{"type" => "text", "ng-model" =>"name"}
+      {{name}}
+    .Container{"ng-controller" => "NamesController"}
+      %h3 looping with the ng-repeat Directive
+      %ul
+        %li{"ng-repeat" => "cust in customers | filter:name"} 
+          {{ cust.name}}  {{ cust.city}} 
+    .Container{"ng-controller" => "NamesController"}
+      %h3 looping with the ng-repeat Directive
+      %ul
+        %li{"ng-repeat" => "ame in names"} 
+          {{ ame}}
+    .Container{"ng-controller" => "GradeController"}
+      %h3 looping with the ng-repeat Directive
+      %ul
+        %li{"ng-repeat" => "grade in grades"} 
+          {{grade}}
+          %input{"type" => "text", "ng-model" =>"grade"}
+          {{grade}}
+    .Container{"ng-controller" => "GradeController"}
+      .form-group
+        = label_tag  "Grade", nil, :class => "form-label col-md-2"
+        .col-md-3
+          %ul
+            %li{"ng-repeat" => "grade in grades"} 
+              = text_field_tag  "grade",nil, :class => "form-control",:ng_model => "grade",:placeholder => "grade"
+              {{grade}}
+    .Container{"ng-controller" => "GetGradeController"}
+      .form-group
+        = label_tag  "Grade", nil, :class => "form-label col-md-2"
+        .col-md-3
+          %ul
+            %li{"ng-repeat" => "grade in grades"} 
+              = text_field_tag  "grade",nil, :class => "form-control",:ng_model => "grade",:placeholder => "grade"
+              {{grade}}
+
+%br
+%br
