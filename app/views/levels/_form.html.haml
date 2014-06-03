@@ -1,0 +1,44 @@
+= form_for @level, :html => { :class => "form-horizontal", :role => "form" } do |f|
+  .row
+    .col-sm-9
+      = f.label "Enquiry Submission:", :class => 'col-sm-3 control-label'
+      .col-sm-3
+        = f.text_field :enquiry_submission,:class => 'form-control'
+        %br
+     
+    .col-sm-9
+      = f.label "Application issued:", :class => 'col-sm-3 control-label'
+      .col-sm-3
+        = f.text_field :application_issued, :class => 'form-control'
+        %br
+ 
+    .col-sm-9
+      = f.label "Application submission: ", :class => 'col-sm-3 control-label'
+      .col-sm-3
+        = f.text_field :application_submission, :class => 'form-control'
+        %br
+ 
+    .col-sm-9
+      = f.label "Assessment scheduled: ", :class => 'col-sm-3 control-label'
+      .col-sm-3
+        = f.text_field :assessment_scheduled, :class => 'form-control'
+        %br
+ 
+    .col-sm-9
+      = f.label "Assessment completed: ", :class => 'col-sm-3 control-label'
+      .col-sm-3
+        = f.text_field :assessment_completed, :class => 'form-control'
+        %br
+ 
+    .col-sm-9
+      = f.label "management review: ", :class => 'col-sm-3 control-label'
+      .col-sm-3
+        = f.text_field :management_review, :class => 'form-control'
+        %br
+ 
+    .col-sm-9
+      = f.label "Declaration:", :class => 'col-sm-3 control-label'
+      .col-sm-3
+        = f.text_field :declaration, :class => 'form-control'
+        %br
+        = f.submit "submit", :class => "btn btn-primary"

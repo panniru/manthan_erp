@@ -1,0 +1,28 @@
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+      ['Task', 'Admissions  per Day'],
+      ['Enquiry Submission',1],
+      ['Application Issued',2],
+      ['Application Submission',3],
+      ['Assessment scheduled',3],
+      ['Assessment Completed',3],
+      ['Management Review',3],
+      ['Declaration' ,2]
+      ]);
+        var options = {
+          title: 'Student Admission Stages'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+  </body>

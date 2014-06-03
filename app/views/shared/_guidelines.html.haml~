@@ -1,0 +1,32 @@
+%br
+  .container
+    %center
+      %h3 GuideLines
+      %br
+    .row
+      .col-md-9.col-md-offset-1
+        .panel.panel-primary
+          .panel-heading
+            %h3.panel-title steps           
+            %span.pull-right
+              %ul.nav.panel-tabs
+                %li.active
+                  %a{"data-toggle" => "tab", :href => "#tab1"} School
+                %li
+                  %a{"data-toggle" => "tab", :href => "#tab2"} Application form
+                %li
+                  %a{"data-toggle" => "tab", :href => "#tab3"} Fitment Interaction
+                %li
+                  %a{"data-toggle" => "tab", :href => "#tab4"} Admission
+                %li
+                  %a{"data-toggle" => "tab", :href => "#tab5"} Age
+                %li
+                  %a{"data-toggle" => "tab", :href => "#tab6"} Free Trial
+          .panel-body
+            .tab-content
+              #tab1.tab-pane.active Admission process starts with the parents and child visiting the school and liking the school after a detailed discussion with the admissions counselor, a guided tour of the school and an informal meeting with teachers and the leadership team. Parent needs to give some basic information in the enquiry form at this stage so that the counselor can assist him / her better. It is advisable to visit the school during school hours (8.30 am to 3.30 pm monday to friday) to get a better sense of how well the school functions, how the learning happens and how happy the children look and how committed the teachers are. One could also chat with the parents of children studying in the school informally to get a parents perspective, we encourage you to do so and we would love to make the introductions. In fact these are some of the things every parent should do at any school before deciding to admit their child.
+              #tab2.tab-pane Once a child and parent decide to join the school an application needs to be filled up giving all the particulars of previous education, medical history, etc. The form can be obtained from school office by paying Rs 500.
+              #tab3.tab-pane Fitment Interaction: Respective class teacher will assess the child for fitment (oral and activity based) and assess if the child can attend the class as desired by parents. The likely outcomes of the fitment interactions are admission to the class as desired by parents, or admission to the desired class with a joint action plan between the teacher and parents to work on certain areas of improvement, or advise to the parents to admit the child in a lower class if the child does not match any of the learning outcomes required for the given class or refer the child to the special needs teacher if it is felt that the child is a special needs child. 
+              #tab4.tab-pane Admission: Once the parent and the school agrees on the class the child will join and a joint action plan for furthering the child's education a formal meeting will be held between the parents and the Head of the Institution to admit the child. No child is rejected on the basis of their parents education or standing. The admission and refundable deposit along with first term fee need to be paid at this stage, for the parents who opt to pay the fee monthly they need to pay the admission and refundable deposit and give post dated cheques for monthly payments. For more details pl refer to the Fee Structure.No requirement of TCs till class 1, only birth certificates will be checked. For class 1 upwards you should ideally carry the certificates and mark sheets issued by previous school along with the birth certificate. Photographs of child and parents will be required too.
+              #tab5.tab-pane Age Criteria: Age required for admission is looked at more closely in the pre-primary years, in higher classes the previous class studied and fitment is given more importance. In the pre-primary broadly the age requried for Jr KG is between 3.5 and 4.5 years and for Sr KG it is between 4.5 and 5.5 years. For class 1 a child need to be above 5.5 years in June. For example for admissions for June 2014 a child born in calendar year 2010 will be admitted to Jr KG, a child born in calendar year 2009 to Sr KG and a child born in the calendar year 2008 to Class 1.
+              #tab6.tab-pane Free Trial: The whole admission process from school visit to payment of fee could take a couple of hours, however we will not rush you and encourage you to spend as much time at school as possible as it is a very critical decision. There have been instances where parents visited several times before deciding to admit. We are even open to the idea of child spending a couple of days at the school on trial basis with no financial commitment just to get a good feel for the school, if admissions are open for the class.

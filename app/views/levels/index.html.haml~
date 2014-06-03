@@ -1,0 +1,28 @@
+%h1 Stages#index
+%table.table.table.table-striped.table-bordered.table-condensed.table-hover
+  %thead
+    %tr
+      %th enquiry submission
+      %th Application issued
+      %th Application submission
+      %th Assessment Scheduled
+      %th Assessment Completed
+      %th Management Review
+      %th Declaration
+     
+  %tbody
+    %tr
+    - Level.all.each do |level|
+      %td= level.enquiry_submission
+      %td= level.application_issued
+      %td= level.application_submission
+      %td= level.assessment_scheduled
+      %td= level.assessment_completed
+      %td= level.management_review
+      %td= level.declaration
+      
+       
+%center
+  
+  
+  = link_to 'back', root_path, :class => 'btn btn-primary'

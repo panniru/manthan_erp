@@ -18,7 +18,7 @@ gem 'numbers_and_words'
 group :assets do
   gem 'uglifier', '>= 1.3.0'
   gem 'compass-rails'
-  gem 'gon', '~> 5.0.4'
+
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes

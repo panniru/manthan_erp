@@ -1,0 +1,7 @@
+= form_for @calendar, :html => { :class => "form-horizontal", :role => "form" } do |f|
+  .row
+    .col-sm-9
+      = f.label "Event", :class => 'col-sm-3 control-label'
+    .col-sm-3
+      = f.text_field :event,:class => 'form-control'
+  = f.submit "submit", :class => "btn btn-primary"

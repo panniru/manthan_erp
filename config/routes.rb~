@@ -1,8 +1,4 @@
 ManthanErp::Application.routes.draw do
-  get "schedules/index"
-  get "schedules/new"
-  get "schedules/show"
-  get "schedules/edit"
   get "stages/show"
   post "stages/index"
   get "stages/new"
@@ -25,7 +21,7 @@ ManthanErp::Application.routes.draw do
   get "students/show"
   get "students/edit"
   get "home/aboutus"
-  get "schedules/modal"
+
   root to: "home#index"
   resources :levels
   resources :students

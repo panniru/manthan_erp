@@ -1,0 +1,33 @@
+%table.table.table.striped.table-bordered.table-condensed.table-hover
+  %thead
+    %tr
+      %th Enquiry Submission
+      %th Application Issued
+      %th Application submission
+      %th Assessment Scheduled
+      %th Assessment Completed
+      %th Management Review
+      %th Declaration
+      %th
+      %th
+     
+  %tbody
+    - @level.each do |level|
+      %tr
+        %td= level.enquiry_submission
+        %td= level.application_issued
+        %td= level.application_submission
+        %td= level.assessment_scheduled
+        
+        %td= level.assessment_completed
+        %td= level.management_review
+        %td= level.declaration
+        %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_level_path(level), :class => "btn btn-warning btn-sm", :title => "Edit"
+        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), level_path(level), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+       
+        
+%center
+  
+  
+  = link_to 'back', new_level_path, :class => 'btn btn-primary'
+

@@ -1,0 +1,38 @@
+%table.table.table.striped.table-bordered.table-condensed.table-hover
+  %thead
+    %tr
+      %th
+      %th event
+      %th teacher
+      %th date
+      %th from
+      %th to
+  %tbody
+    - Calendar.all.each do |calendar|
+      %tr
+        %td= calendar.event
+        %td= calendar.teacher
+        %td= calendar.date
+        %td= calendar.from
+        %td= calendar.to
+%button.btn.btn-primary.btn-lg{"data-target" => "#myModal", "data-toggle" => "modal"}
+  create event
+/ Modal
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title event
+      .modal-body
+        = form_for @calendar, :html => { :class => "form-horizontal", :role => "form" } do |f|
+          .control-group
+            = f.label "teacher:", :class => 'col-sm-3 control-label'
+            = f.text_field :teacher, :class => 'form-control'
+           
+          .control-group
+            %label.control-label{:for => "when"} When:
+            #when.controls.controls-row{:style => "margin-top:5px;"}
+    .modal-footer
+      %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+      = button_tag "Save" , :type => "submit" , :class => "btn btn-primary"

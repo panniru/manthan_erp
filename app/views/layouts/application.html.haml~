@@ -13,5 +13,5 @@
         .col-md-6
           - flash.each do |key, value|
             = content_tag(:div,value,:class => "#{flash_alert_class(key)}")
-       
+            = render 'shared/home'
       = yield

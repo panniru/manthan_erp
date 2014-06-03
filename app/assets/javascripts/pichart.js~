@@ -1,0 +1,16 @@
+function drawVisualization() {
+  // Create and populate the data table.
+  var data = google.visualization.arrayToDataTable([
+    ['enquiry submission', 3],
+    ['Application issued', 3],
+    ['Application Subnission', 2],
+    ['Assessment Scheduled', 2],
+    ['Assessment completed', 2],
+    ['Mangement Review', 3],
+    ['Declaration',2]
+  ]);
+
+  // Create and draw the visualization.
+  new google.visualization.PieChart(document.getElementById('visualization')).
+      draw(data, {title:"So, how was your day?"});
+}

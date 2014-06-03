@@ -1,0 +1,62 @@
+.container-fluid
+  #custom_carousel.carousel.slide{"data-interval" => "2500", "data-ride" => "carousel"}
+    .carousel-inner
+      .item.active
+        .container-fluid
+          .row
+            .col-md-3
+              = image_tag "images.jpeg", :width => "200", :height => "200" 
+            .col-md-9
+              %h2 Logo:
+              %p The logo of Manthan International School depicts a couple of birds flying around the glowing sun. The suggestion, without any doubt, is birds learn to fly, soar high and utilize the light of the sun to acquire a distinctive panoramic view of things, a unique perspective. Manthan desires that all its students learn how to learn and use their abilities to learn creatively to bring in “a light that never was on land and sea” and thereby add special worth to things.
+
+      .item
+        .container-fluid
+          .row
+            .col-md-3
+              = image_tag "index.png", :width => "200", :height => "200" 
+            .col-md-9
+              %h2 Manthan Means:
+              %p The term ‘manthan’ (derived from manthanam in Sanskrit) means ‘to churn.’ The process of churning is associated most readily with production of butter. Butter is essentially the smooth substance obtained by churning cream. Milk which is rich in various nutrients and has a myriad health benefits associated with it has been accepted in all cultures since time immemorial as one of the most important foods that sustain life. Cream is the fat that milk contains. Butter can therefore be considered to be the cream of the cream or crème de la crème which means the very best or something superlative.
+
+
+      .item
+        .container-fluid
+          .row
+            .col-md-3
+              = image_tag "5.jpg", :width => "200", :height => "200" 
+            .col-md-9
+              %h2 School Description:
+              %p Manthan Madhapur runs classes from Jr KG to Class 8. Manthan Gachiblowli - a second campus is planned with in 5 minute drive from Gachibowli Wipro junction over 5 acres in Tellapur Village that will eventually have classes from Jr KG to Class 12. Gachibowli campus will be operational in June 2014 for classess Jr Kg to Class 9.Admissions for the Madhapur School are in progress for classes Jr KG to Class 3. Admissions for Tellapur Campus are in progress for classes Jr KG to Class 9 for the academic year starting June 2014.
+              %p Manthan is promoted and run by a group of professionals with a passion for education. It is set up with a mission to build socially aware and responsible citizens. 
+      .item
+        .container-fluid
+          .row
+            .col-md-3
+              = image_tag "4.jpg", :width => "200", :height => "200"
+            .col-md-9
+              %h2 About Us:
+              %p The vision of the school is to provide all round education and nurture a child’s innate curiosity and help the child achieve excellence.  The leadership team of Manthan is involved full time with the school and takes personal responsibility for delivery of quality education.
+              %p The philosophy of Manthan as articulated by its Head of the Institution Ramakrishna Reddy at the School's Annual Day Celebrations 2012   
+              %p As the core objective of Manthan is to make sure that by the end of the schooling years every student is groomed in to a well- rounded personality with the right human values and his/her heart at the right place, performs to the best of his/her abilities in every chosen sphere of activity and can excel in any preferred career, it becomes obvious that given its philosophical basis and educational commitment – no name could have been better suited to this institution, Also.
+      
+    .controls
+      %ul.nav
+        %li.active{"data-slide-to" => "0", "data-target" => "#custom_carousel"}
+          %a{:href => "#"}
+            = image_tag "images.jpeg", :width => "50", :height => "50"
+            %small Slide One
+        %li{"data-slide-to" => "1", "data-target" => "#custom_carousel"}
+          %a{:href => "#"}
+            = image_tag "index.png", :width => "50", :height => "50" 
+            %small Slide Two
+        %li{"data-slide-to" => "2", "data-target" => "#custom_carousel"}
+          %a{:href => "#"}
+            = image_tag "5.jpg", :width => "50", :height => "50"
+            %small Slide Three
+        %li{"data-slide-to" => "3", "data-target" => "#custom_carousel"}
+          %a{:href => "#"}
+            = image_tag "4.jpg", :width => "50", :height => "50"
+            %small Slide Four
+ 
+

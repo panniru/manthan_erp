@@ -1,0 +1,26 @@
+
+%div{"ng-init" => "students = [{form_no: '1', name:'John', father_name:'ravi', mobile_no:'555-1276', email:'ravi@gmail.com',status:'Accepted'}, 
+{form_no: '2', name:'uma', father_name:'ravi', mobile_no:'555-1276', email:'ravi@gmail.com',status:'pending'},
+{form_no: '3', name:'rani', father_name:'ravi', mobile_no:'9502151292', email:'ravi@gmail.com',status:'Rejected'},
+]"}
+Search:
+
+%input{"ng-model" => "searchText"}
+%br
+%br
+  %table.table.table-striped.table-bordered.table-condensed.table-hover
+    %tr
+      %th form_no
+      %th name
+      %th father_name
+      %th mobile_no
+      %th email
+      %th status
+    %tr{"ng-repeat" => "student in students | filter:searchText"}
+      %td {{student.form_no}}
+      %td {{student.name}}
+      %td {{student.father_name}}
+      %td {{student.mobile_no}}
+      %td {{student.email}}
+      %td {{student.status}}
+ 
