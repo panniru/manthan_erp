@@ -1,5 +1,4 @@
 class TimeTablesController < ApplicationController
-
   def index
   end
 
@@ -24,6 +23,7 @@ class TimeTablesController < ApplicationController
       end
     end  
   end
+
   
   def subjectserviceview
     respond_to do |format|
@@ -35,6 +35,5 @@ class TimeTablesController < ApplicationController
       end
     end  
   end
-
 
 end
