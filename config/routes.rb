@@ -11,6 +11,8 @@ ManthanErp::Application.routes.draw do
   get "students/show"
   get "students/edit"
   get "home/aboutus"
+  get "time_tables/gradeserviceview"
+  get "time_tables/sectionserviceview"
 
   root to: "home#index"
 

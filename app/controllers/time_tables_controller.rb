@@ -1,10 +1,27 @@
 class TimeTablesController < ApplicationController
-	def index
-	end
-	def gradeServiceView
-    	respond_to do |format|
-      		format.json do
-        	render :json => Grade.all
-      	end
+  def index
+  end
+
+  def gradeserviceview
+    respond_to do |format|
+      format.json do
+        grades = Grade.all.map do |grade|
+          {grade: grade.grade, id: grade.id}
+        end
+        render :json => grades
+      end
     end  
+  end
+
+  def sectionserviceview
+    respond_to do |format|
+      format.json do
+        sections = Section.all.map do |section|
+          {section: section.section, id: section.id}
+        end
+        render :json => sections
+      end
+    end  
+  end
+
 end
