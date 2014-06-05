@@ -16,6 +16,22 @@ ActiveRecord::Schema.define(version: 20140529112929) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
   create_table "fee_grade_buckets", force: true do |t|
     t.string   "bucket_name"
     t.datetime "created_at"
@@ -43,11 +59,48 @@ ActiveRecord::Schema.define(version: 20140529112929) do
     t.datetime "updated_at"
   end
 
+  create_table "job_runs", force: true do |t|
+    t.integer  "job_id"
+    t.datetime "started_on"
+    t.datetime "finished_on"
+    t.string   "status"
+    t.string   "scrolled_by"
+    t.date     "job_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "jobs", force: true do |t|
+    t.string   "code"
+    t.string   "description"
+    t.string   "job_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "monthly_pdc_amounts", force: true do |t|
     t.integer  "fee_grade_bucket_id"
     t.integer  "post_dated_cheque_id"
     t.integer  "amount_in_rupees"
     t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "parents", force: true do |t|
+    t.string   "father_name"
+    t.string   "mother_name"
+    t.string   "guardian_name"
+    t.string   "father_occupation"
+    t.string   "mother_occupation"
+    t.string   "guardian_occupation"
+    t.string   "father_phone"
+    t.string   "mother_phone"
+    t.string   "guardian_phone"
+    t.string   "father_email"
+    t.string   "mother_email"
+    t.string   "guardian_email"
+    t.string   "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -69,8 +122,28 @@ ActiveRecord::Schema.define(version: 20140529112929) do
     t.datetime "updated_at"
   end
 
+  create_table "roles", force: true do |t|
+    t.string   "role"
+    t.string   "code"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sections", force: true do |t|
     t.string   "section"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "student_hrs", force: true do |t|
+    t.string   "name"
+    t.date     "dob"
+    t.date     "joining_date"
+    t.string   "grade"
+    t.string   "section"
+    t.string   "academic_year"
+    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -131,5 +204,25 @@ ActiveRecord::Schema.define(version: 20140529112929) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "users", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.integer  "role_id"
+    t.string   "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

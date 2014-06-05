@@ -5,7 +5,6 @@ class PostDatedChequesController < ApplicationController
   end
 
   def edit
-  
   end
   
   def create_bulk
@@ -45,7 +44,6 @@ class PostDatedChequesController < ApplicationController
  
   
   def new
-    @post_dated_cheques = PostDatedCheque.new
   end
 
   def show

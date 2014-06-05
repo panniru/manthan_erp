@@ -1,21 +1,22 @@
+= link_to "Send Mail", fee_alerts_fee_struct_mail_to_parents_path, :class => "btn btn-primary"
+.col-md-12
+  = render "grade_wise_fee_grid"
+  = render "shared/amount_units"
 
-= render "grade_wise_fee_grid"
-= render "shared/amount_units"
+  .row
+    .col-md-3.col-md-offset-6
+      = link_to "Edit", new_grade_wise_fee_path, :class => "btn btn-primary"
+      %i{:class => "icon-shopping-cart icon-large" }
 
-.row
-  .col-md-3.col-md-offset-6
-    = link_to "Edit", new_grade_wise_fee_path, :class => "btn btn-primary"
+  = render "term_wise_grade_fees/term_wise_grade_fee_grid"
+  = render "shared/amount_units"
 
+  .row
+    .col-md-3.col-md-offset-6
+      = link_to "Edit Term Fee", new_term_wise_grade_fee_path, :class => "btn btn-primary"
 
-= render "term_wise_grade_fees/term_wise_grade_fee_grid"
-= render "shared/amount_units"
-
-.row
-  .col-md-3.col-md-offset-6
-    = link_to "Edit Term Fee", new_term_wise_grade_fee_path, :class => "btn btn-primary"
-
-= render "monthly_pdc_amounts/monthly_pdc_amounts_grid"
-= render "shared/amount_units"
+    = render "monthly_pdc_amounts/monthly_pdc_amounts_grid"
+    = render "shared/amount_units"
 .row
   .col-md-3.col-md-offset-8
     = link_to "Edit PDC Amounts", new_monthly_pdc_amount_path, :class => "btn btn-primary"

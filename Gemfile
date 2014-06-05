@@ -5,6 +5,7 @@ gem 'rails', '4.0.2'
 
 gem 'rails3-jquery-autocomplete'
 gem 'pg_search'
+gem 'jquery-ui-rails', '4.1.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -36,11 +37,14 @@ gem 'bootstrap-will_paginate'
 
 gem 'cancan'
 gem 'devise'  
+gem 'delayed_job_active_record'
+gem 'factory_girl_rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
 gem 'pg'
+gem 'roadie'
 
 # Use unicorn as the app server
 # gem 'unicorn'

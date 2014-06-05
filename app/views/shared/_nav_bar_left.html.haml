@@ -1,0 +1,11 @@
+.row
+  .col-md-12
+    #wrapper
+      #sidebar-wrapper
+        %ul.sidebar-nav
+          - sub_menu.each do |sub_menu_item|
+            %li{:class => sub_menu_item.is_active ? "active" : "" }
+              %a{:href => sub_menu_item.href}
+                = fa_icon sub_menu_item.icon
+                %span
+                  = sub_menu_item.label

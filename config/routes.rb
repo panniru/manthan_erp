@@ -1,5 +1,6 @@
 ManthanErp::Application.routes.draw do
   
+  devise_for :users, :controllers => { :sessions => 'sessions'}
   get 'auto_search/autocomplete_student_name'
   get "students/app"
   get "students/app_students"
@@ -53,6 +54,15 @@ ManthanErp::Application.routes.draw do
       post "save_monthly_pdc_amounts"
     end
   end
+
+
+  resources :post_dated_cheques do
+    collection do
+      post "create_bulk"
+    end
+  end
+
+  get "fee_alerts/fee_struct_mail_to_parents" 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

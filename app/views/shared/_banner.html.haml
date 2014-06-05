@@ -1,0 +1,17 @@
+.banner
+  .logo
+    = image_tag "logo.png", :align => 'left', :class => "img-rounded", :style => "margin-left:33px;" 
+  .pull-right
+    %ul.nav.navbar-nav
+      - if current_user.present?
+        %li.droupdown
+          %a{:href => "#", :class => "dropdown-toggle", :data => {:toggle => "dropdown"}}
+            = image_tag "test_thumb.jpg", :align => 'left', :class => "img-circle", :height => "30px", :width => "30px"
+            User
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              %a{:href => destroy_user_session_path, :data => {:method => :delete}}
+                = fa_icon "sign-out"
+                Log Out
+              

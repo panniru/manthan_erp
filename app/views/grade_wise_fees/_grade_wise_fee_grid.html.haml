@@ -1,10 +1,10 @@
 .row
-  .col-md-8
+  .col-md-12
     %h4 Grade Wise Fee
     %hr
       
-.col-md-8{ "ng-controller" => "GradeWiseFeesController", "ng-init" => "getGridView()"}
-  %table.table.table-bordered
+.col-md-12{ "ng-controller" => "GradeWiseFeesController", "ng-init" => "getGridView()"}
+  %table.table.table-bordered.table-striped.table-hover
     %thead
       %th
       %th{"ng-repeat" => "colHead in columnHeaders"}  

@@ -1,0 +1,10 @@
+.navbar.navbar-default
+  .container-fluid
+    .col-md-offset-2.col-md-10
+      %ul.nav.navbar-nav
+        - main_menu_list.each do |menu_item|
+          %li{:class => menu_item.is_active ? "active" : "" }
+            %a{:href => menu_item.href}
+              = fa_icon menu_item.icon, :class => "menu-icon"
+              %span.menu-text
+                = menu_item.label
