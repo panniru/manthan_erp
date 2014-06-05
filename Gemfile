@@ -13,6 +13,8 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 
 gem 'coffee-rails', '~> 4.0.0'
 gem 'angularjs-rails', '~> 1.2.16'
+gem 'angular-rails-templates'
+
 gem 'font-awesome-rails'                
 gem 'numbers_and_words'
 

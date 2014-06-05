@@ -1,0 +1,22 @@
+.colmd-12{:ng_controller => "StudentSearchController"}
+  = form_tag new_parent_payment_master_path, :method => 'get' , :class => "form-inline" do
+    .form-group.col-md-3
+      %label{:class=> "form-label col-md-4"} Grade
+      .col-md-6
+        %select{:ng_model => "grade", :ng_options => "gr.grade for gr in grades", :class=>"form-control"}
+    .form-group.col-md-3
+      %label{:class=> "form-label col-md-4"} Section
+      .col-md-6
+        %select{:ng_model => "section", :ng_options => "sc.section for sc in sections", :class=>"form-control"}
+    .form-group.col-md-5
+      .col-md-3
+        %label{:class=> "form-label col-md-4"} Student
+      .col-md-6
+        = autocomplete_field_tag :student,
+        '',
+        "/auto_search/student_name_by_grade_and_section?grade={{grade.id}}&section= {{section.id}}",
+        :placeholder => "Student Name", :class => 'form-control',
+          :id_element => "#student_id"
+      .col-md-3
+        = hidden_field_tag :student_id, :id => "student_id"
+        = submit_tag "Go", :name => nil, :class => "btn-primary btn"

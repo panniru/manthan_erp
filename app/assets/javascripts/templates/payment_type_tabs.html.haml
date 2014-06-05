@@ -1,0 +1,54 @@
+.panel.panel-default
+  .panel-body
+    %ul.nav.nav-tabs{:id => "feeTab"}
+      %li.active
+        %a{ :href => "#anual", :data => { :toggle => "tab"}, :ng_click => "anual_fee_structure()"}
+          Annual
+      %li
+        %a{ :href => "#term_wise", :data => { :toggle => "tab"}, :ng_click => "term_wise_fee_structure()"}
+          Term Wise
+      %li
+        %a{ :href => "#monthly", :data => { :toggle => "tab"}, :ng_click => "monthly_fee_structure()"}
+          Monthly
+    .tab-content
+      #anual.tab-pane.fade.in.active
+        .row
+          .col-md-3
+            %label Discount
+          .col-md-4
+            %input{:type => "text", :class => "form-control", :value => "{{discount}}", :readonly => true}
+        .row
+          .col-md-3
+            %label Total 
+          .col-md-4
+            %input{:type => "text", :class => "form-control", :value => "{{total_after_discount}}", :readonly => true}
+      #term_wise.tab-pane.fade
+        .row{"ng-repeat" => "term in terms"}
+          .col-md-4
+            %label {{term.term}}
+          .col-md-6
+            %input{:type => "text", :class => "form-control", :value => "{{term.amount_in_rupees}}", :readonly => true}
+        .row
+          .col-md-4
+            %label Total
+          .col-md-6
+            %input{:type => "text", :class => "form-control", :value => "{{term_totals}}", :readonly => true}
+      #monthly.tab-pane.fade
+        .col-md-6
+          .row{"ng-repeat" => "month in months | limitTo:5"}
+            .col-md-4
+              %label {{month.month}}
+            .col-md-6
+              %input{:type => "text", :class => "form-control", :value => "{{month.amount_in_rupees}}", :readonly => true}
+        .col-md-6
+          .row{"ng-repeat" => "month in months | limitTo: months.length | limitTo: -5"}
+            .col-md-4
+              %label {{month.month}}
+            .col-md-6
+              %input{:type => "text", :class => "form-control", :value => "{{month.amount_in_rupees}}", :readonly => true}
+          .row
+            .col-md-4
+              %label Total
+            .col-md-6
+              %input{:type => "text", :class => "form-control", :value => "{{month_totals}}", :readonly => true}
+    

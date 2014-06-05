@@ -1,10 +1,13 @@
 class StudentsController < ApplicationController
+
   def get_selected
     redirect_to students_index_path  
   end
+  
   def get_students
     render "app_students"
   end
+  
   def app_students
   
   end

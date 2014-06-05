@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606111903) do
+ActiveRecord::Schema.define(version: 20140605072619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,38 @@ ActiveRecord::Schema.define(version: 20140606111903) do
     t.datetime "updated_at"
   end
 
+  create_table "parent_payment_masters", force: true do |t|
+    t.integer  "parent_id"
+    t.integer  "student_id"
+    t.integer  "payment_type_id"
+    t.date     "next_payment_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "parent_payment_transactions", force: true do |t|
+    t.integer  "parent_payment_master_id"
+    t.date     "transaction_date"
+    t.integer  "amount_in_rupees"
+    t.string   "transaction_type"
+    t.string   "particulars"
+    t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "parent_pdcs", force: true do |t|
+    t.integer  "parent_payment_master_id"
+    t.integer  "parent_payment_transaction_id"
+    t.integer  "amount_in_rupees"
+    t.string   "cheque_number"
+    t.date     "clearence_date"
+    t.string   "status"
+    t.integer  "post_dated_cheque_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "parents", force: true do |t|
     t.string   "father_name"
     t.string   "mother_name"
@@ -134,6 +166,13 @@ ActiveRecord::Schema.define(version: 20140606111903) do
     t.string   "mother_email"
     t.string   "guardian_email"
     t.string   "address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  create_table "payment_types", force: true do |t|
+    t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -167,12 +206,12 @@ ActiveRecord::Schema.define(version: 20140606111903) do
     t.string   "name"
     t.date     "dob"
     t.date     "joining_date"
-    t.string   "grade"
-    t.string   "section"
     t.string   "academic_year"
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "grade"
+    t.integer  "section"
   end
 
   create_table "students", force: true do |t|

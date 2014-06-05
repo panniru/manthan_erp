@@ -17,6 +17,16 @@ class GradeFeeGrid
     @applied_grade_fee
   end
 
+  def grid_belongs_to_grade(grade)
+    @applied_grade_fee =  []
+    get_grid.each do |fee_grade|
+      list = fee_grade.select{|bucket| grade == bucket.fee_grade_bucket_id.to_i }
+      @applied_grade_fee << list unless list.empty?
+    end
+    @applied_grade_fee
+  end
+
+
   def grid_headers
     fee_types = Set.new
     @applied_grade_fee ||= get_grid
