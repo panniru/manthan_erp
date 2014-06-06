@@ -1,5 +1,8 @@
 ManthanErp::Application.routes.draw do
   
+  resources :fee_structure_approvals 
+   
+
   devise_for :users, :controllers => { :sessions => 'sessions'}
   get 'auto_search/autocomplete_student_name'
   get "students/app"

@@ -12,7 +12,10 @@ module FeeManagementHelper
     sub_menu << MenuItem.new(:label => "Monthly PDCs", :klass => "", :icon => "calendar-o", :href => "#")
     
     sub_menu << MenuItem.new(:label => "Fee Structure", :klass => "", :icon => "th", :href => "grade_wise_fees_path")
+    
+    sub_menu << MenuItem.new(:label => "Approvals", :klass => "", :icon => "square" , :href => "grade_wise_fees_path")
 
+  
   end
 
 end

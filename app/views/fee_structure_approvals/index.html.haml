@@ -1,0 +1,27 @@
+%h3 
+  = "Approvals"
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Approved by
+      %th Defined by
+      %th Type of fee
+      %th Status
+      %th Academic Year
+      %th 
+  %tbody.add-app
+    %tr
+    - @fee_structure_approval.each do |fee_structure_approval|
+      %tr
+        %td= "#{fee_structure_approval. approved_by}"
+        %td= "#{fee_structure_approval. defined_by}"
+        %td= "#{fee_structure_approval.fee_type}"
+        %td= "#{fee_structure_approval. status}" 
+        %td= "#{fee_structure_approval. academic_year}"
+        %td 
+          - if("#{fee_structure_approval. status}" == 'pending')
+            = link_to "Approve", "#", :class => "change label label-danger",:data=> {:id => "#{fee_structure_approval.id}"}
+          - else 
+            = link_to "Approved", "#", :class => "label label-success",:data=> {:id => "#{fee_structure_approval.id}"}
+       
+//:status_id => @status.id
