@@ -1,0 +1,13 @@
+= form_for @discount , :html => { :class => "form-horizontal", :role => "form"} do |f| 
+  = render "shared/error_messages", :object => f.object
+  %br
+  .form-group
+    = f.label :discount_percent, :class => "form-label col-md-2"
+    .col-md-3
+      = f.text_field :discount_percent, :class => "form-control"
+  .form-group
+    = f.label :academic_year, :class => "form-label col-md-2"
+    .col-md-3
+      = f.text_field :academic_year, :class => "form-control"
+    .col-md-3
+      = f.submit "Save", :class=> "btn btn-primary"

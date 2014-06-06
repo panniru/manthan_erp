@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529105755) do
+ActiveRecord::Schema.define(version: 20140606111903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "approvals", force: true do |t|
+    t.string   "approved"
+    t.string   "def_by"
+    t.string   "status"
+    t.string   "year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -32,14 +41,38 @@ ActiveRecord::Schema.define(version: 20140529105755) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "fee_grade_buckets", force: true do |t|
-    t.string   "bucket_name"
+  create_table "discounts", force: true do |t|
+    t.float    "discount_percent"
+    t.string   "academic_year"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  create_table "fee_grade_buckets", force: true do |t|
+    t.string   "grade_from"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "grade_to"
+  end
+
+  create_table "fee_structure_approvals", force: true do |t|
+    t.string   "approved_by"
+    t.string   "defined_by"
+    t.string   "status"
+    t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "fee_type"
+  end
+
   create_table "fee_types", force: true do |t|
     t.string   "fee_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feegradebuckets", force: true do |t|
+    t.string   "bucket_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -176,6 +209,7 @@ ActiveRecord::Schema.define(version: 20140529105755) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "amount_per"
+    t.string   "termdate"
   end
 
   create_table "term_wise_grade_fees", force: true do |t|
