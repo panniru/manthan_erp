@@ -1,27 +1,7 @@
 %h3 
   = "Post Dated Cheques"
   = link_to "Define bulk", new_post_dated_cheque_path, :class => "btn btn-primary"
-  %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New"
-  #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-          %h4#myModalLabel.modal-title New cheque
-          = form_for PostDatedCheque.new , :html => { :class => "form-horizontal", :role => "form"} do |f| 
-            .modal-body
-              .col-sm-3
-                = f.label "Cheque", :class => 'form-control'
-              .col-sm-3
-                = f.text_field "date", :class => 'datepicker form-control', :placeholder => "date"
-              .col-sm-3
-                .input-group 
-                  = f.text_field "amount_per" , :class => 'form-control', :placeholder => "per"
-                  %span.input-group-addon %
-            .modal-footer
-              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-              = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
-   
+  = render "form_modal"
 %table.table.table-bordered
   %thead
     %tr
