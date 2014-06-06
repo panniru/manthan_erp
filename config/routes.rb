@@ -1,19 +1,6 @@
 ManthanErp::Application.routes.draw do
-  get "schedules/index"
-  get "schedules/new"
-  get "schedules/show"
-  get "schedules/edit"
-  get "stages/show"
-  post "stages/index"
-  get "stages/new"
-  get "admissions/chat"
-  get "admissions/pichart"
-  get "reports/index"
-  get "reports/new"
-  get "reports/show"
-  get "admissions/new"
-  get "admissions/index"
-  get "admissions/show"
+  resources :schedules
+  resources :reports
   get 'auto_search/autocomplete_student_name'
   get "students/app"
   get "students/app_students"
@@ -25,11 +12,10 @@ ManthanErp::Application.routes.draw do
   get "students/show"
   get "students/edit"
   get "home/aboutus"
-  get "schedules/modal"
+  
   root to: "home#index"
   resources :levels
   resources :students
-  resources :calendars
   resources :fee_types do
     collection do
       post "create_bulk"
