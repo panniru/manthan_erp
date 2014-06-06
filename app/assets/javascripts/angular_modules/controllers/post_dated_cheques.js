@@ -16,4 +16,4 @@
     	}  
     }]);
 })(angular, myApp);
->>>>>>> Stashed changes
+
