@@ -17,7 +17,7 @@
       - if current_user.present?
         .col-md-2
           = render "shared/nav_bar_left"
-        .col-md-10
+        #content.col-md-10
           .col-md-12
             - flash.each do |key, value|
               #div{:class => flash_alert_class(key) }
@@ -26,7 +26,8 @@
                 = value
 
           .col-md-12
-            = yield
+            .container
+              = yield
       - else
         .col-md-12
           .container

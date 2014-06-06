@@ -1,0 +1,16 @@
+.col-md-12
+  .panel.panel-default
+    .panel-heading
+      Cleared PDCs
+    %table.table.table-bordered.table-striped.table-hover
+      %thead
+        %th Month
+        %th Amount
+        %th Cheque Number
+        %th Cleared Date
+      %tbody
+        %tr{"ng-repeat" => "pdc in monthly_pdcs"}
+          %td {{pdc.month}}
+          %td {{pdc.amount_in_rupees}}
+          %td {{pdc.cheque_number}}
+          %td {{pdc.cleared_date}}

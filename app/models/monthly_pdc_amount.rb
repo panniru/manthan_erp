@@ -2,8 +2,10 @@ class MonthlyPdcAmount < ActiveRecord::Base
   belongs_to :fee_grade_bucket
   belongs_to :post_dated_cheque
   
-  scope :belongs_to_fee_grade_bucket, lambda{|bucket| where("fee_grade_bucket_id = ?", bucket.id)}
-  scope :belongs_to_post_dated_cheque, lambda{|pdc| where("post_dated_cheque_id = ?", pdc.id)}
+  scope :belongs_to_fee_grade_bucket, lambda{|bucket| where("fee_grade_bucket_id = ?", bucket)}
+  scope :belongs_to_post_dated_cheque, lambda{|pdc| where("post_dated_cheque_id = ?", pdc)}
+  scope :pending_pdc_submissions, lambda{|student| where("post_dated_cheque_id NOT IN(?)", ParentPdc.bolongs_to_student(student).map(&:post_dated_cheque_id))}
+  
 
 
   def amount_in_rupees

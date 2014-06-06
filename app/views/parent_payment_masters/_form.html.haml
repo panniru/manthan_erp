@@ -1,4 +1,3 @@
-
 = form_for @parent_payment_master, :html => { :class => "form-inline", :role => "form" } do |f|
   = render "shared/error_messages", :object => f.object
   - PaymentType.all.order("code").each do |type|
@@ -9,5 +8,5 @@
   .col-md-6
     %div{"ng-view" => true }
 
-  -# .col-md-8.pull-right
-  -#   = f.submit "Continue For Payment", :class => 'btn btn-primary'
+  .col-md-8.pull-right
+    = f.submit "Do Payment", :class => 'btn btn-primary'

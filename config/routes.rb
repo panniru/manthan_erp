@@ -71,8 +71,23 @@ ManthanErp::Application.routes.draw do
 
   get "fee_alerts/fee_struct_mail_to_parents" 
 
-  resources :student_hrs
+  resources :student_hrs do
+    member do
+      get 'monthly_pdcs'
+      get 'next_term_fee'
+    end
+  end
 
-  resources :parent_payment_masters
+  resources :parent_payment_masters do
+    collection do
+      get "pay"
+      
+    end
+    member do
+      get "submitted_pdcs"
+      get "cleared_pdcs"
+      get "payment_transactions"
+    end
+  end
 
 end
