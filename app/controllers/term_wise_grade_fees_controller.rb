@@ -1,5 +1,21 @@
 class TermWiseGradeFeesController < ApplicationController
 
+  def term_wise_fee_of_student
+    student_id = params[:student_id]
+    student = StudentHr.find(params[:student_id]);
+    respond_to do |format|
+      format.json do
+        total = 0.0
+        term_wise_fees = TermWiseGradeFee.belongs_to_fee_grade_bucket(FeeGradeBucket.find_grade_bucket_by_grade(student.grade)).map do |term_fee|
+          total = total + term_fee.amount_in_rupees
+          {:term => term_fee.term_definition.term_definition, :amount_in_rupees => term_fee.amount_in_rupees}
+        end
+        render :json => Struct.new(:term_fee_details, :total).new(term_wise_fees, Formatter.two_decimal(total))
+      end
+    end
+  end
+  
+
   def term_wise_grade_fee
     respond_to do |format|
       format.json do

@@ -1,0 +1,20 @@
+%h4.panel-title 
+  = "Transactions History"
+  = link_to (fa_icon "angle-double-up lg", :id => "collapse-icon"),"#" ,:class => "collapse-link pull-right", :data => {:toggle => "collapse", :target => "#collapse-div0"}
+%hr
+#collapse-div0{:ng_controller => "PaymentTransactionsController", :ng_init => "getParentPaymentTransactions('#{@parent_payment_master.id}')"}
+  .col-md-12
+    .panel.panel-default
+      %table.table.table-bordered.table-striped.table-hover
+        %thead
+          %th Transaction Date
+          %th Amount
+          %th Type
+          %th particulars
+        %tbody
+          %tr{"ng-repeat" => "transaction in parent_payment_transactions"}
+            %td {{transaction.transaction_date}}
+            %td {{transaction.amount_in_rupees}}
+            %td {{transaction.transaction_type}}
+            %td {{transaction.particulars}}
+            

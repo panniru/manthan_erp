@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529105755) do
+ActiveRecord::Schema.define(version: 20140606111903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "approvals", force: true do |t|
+    t.string   "approved"
+    t.string   "def_by"
+    t.string   "status"
+    t.string   "year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -32,10 +41,28 @@ ActiveRecord::Schema.define(version: 20140529105755) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "fee_grade_buckets", force: true do |t|
-    t.string   "bucket_name"
+  create_table "discounts", force: true do |t|
+    t.float    "discount_percent"
+    t.string   "academic_year"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "fee_grade_buckets", force: true do |t|
+    t.string   "grade_from"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "grade_to"
+  end
+
+  create_table "fee_structure_approvals", force: true do |t|
+    t.string   "approved_by"
+    t.string   "defined_by"
+    t.string   "status"
+    t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "fee_type"
   end
 
   create_table "fee_types", force: true do |t|
@@ -81,6 +108,41 @@ ActiveRecord::Schema.define(version: 20140529105755) do
     t.datetime "updated_at"
   end
 
+  create_table "parent_payment_masters", force: true do |t|
+    t.integer  "parent_id"
+    t.integer  "student_id"
+    t.integer  "payment_type_id"
+    t.date     "next_payment_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "parent_payment_transactions", force: true do |t|
+    t.integer  "parent_payment_master_id"
+    t.date     "transaction_date"
+    t.integer  "amount_in_rupees"
+    t.string   "transaction_type"
+    t.string   "particulars"
+    t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "payment_detail_id"
+  end
+
+  create_table "parent_pdcs", force: true do |t|
+    t.integer  "parent_id"
+    t.integer  "student_id"
+    t.integer  "parent_payment_master_id"
+    t.integer  "parent_payment_transaction_id"
+    t.integer  "amount_in_rupees"
+    t.string   "cheque_number"
+    t.date     "clearence_date"
+    t.string   "status"
+    t.integer  "post_dated_cheque_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "parents", force: true do |t|
     t.string   "father_name"
     t.string   "mother_name"
@@ -95,6 +157,13 @@ ActiveRecord::Schema.define(version: 20140529105755) do
     t.string   "mother_email"
     t.string   "guardian_email"
     t.string   "address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  create_table "payment_types", force: true do |t|
+    t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -128,12 +197,12 @@ ActiveRecord::Schema.define(version: 20140529105755) do
     t.string   "name"
     t.date     "dob"
     t.date     "joining_date"
-    t.string   "grade"
-    t.string   "section"
     t.string   "academic_year"
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "grade"
+    t.integer  "section"
   end
 
   create_table "students", force: true do |t|
@@ -176,6 +245,7 @@ ActiveRecord::Schema.define(version: 20140529105755) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "amount_per"
+    t.string   "termdate"
   end
 
   create_table "term_wise_grade_fees", force: true do |t|

@@ -1,0 +1,11 @@
+.col-md-12{:ng_init => "term_fee_payment_details()"}
+  .col-md-4
+    %label{:class => "form-label"} Term
+  .col-md-6
+    %input{:type => "text", :class => "form-control", :ng_model => "term.term", :readonly => true}
+    %input{:type => "hidden", :ng_value => "term.term_definition_id" , :name => "[parent_payment_master][parent_payment_transaction][payment_detail_id]"}
+.col-md-12
+  .col-md-4
+    %label{:class => "form-label"} Term Amount  
+  .col-md-6
+    %input{:type => "text", :class => "form-control", :ng_model => "term.amount_in_rupees", :readonly => true, :name => "[parent_payment_master][parent_payment_transaction][amount_in_rupees]"}

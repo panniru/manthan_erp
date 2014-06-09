@@ -4,11 +4,13 @@
       = label_tag  "Term {{$index+1}}", nil, :class => "form-label col-md-2"
       .col-md-3   
         = text_field_tag  "bulk_term[][term_definition]",nil, :class => "form-control"
+      .col-sm-3
+        = text_field_tag "bulk_term[][termdate]",nil, :class => 'datepicker form-control', :placeholder => "date", :id => "date-{{$index}}"
       .col-md-3
         .input-group
-          = text_field_tag "bulk_term[][amount_per]",nil, :class => "form-control" , :placeholder => "amt_per", :ng_model => "term_definition['amount_per']"
+          = text_field_tag "bulk_term[][amount_per]",nil, :class => "form-control" , :placeholder => "Amount Percent", :ng_model => "term_definition['amount_per']"
           %span.input-group-addon %
-  
+     
   .row
     .col-md-5.col-md-offset-3    
   %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMoreterms()"}=  "More terms"

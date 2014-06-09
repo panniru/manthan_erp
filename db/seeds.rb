@@ -7,11 +7,47 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'factory_girl_rails'
 
-def seed_user
-  @user_admin = User.find_by_role_id("1")
-  unless @user_admin.present?
-    User.create(:email => "admin@manthan.com", :password => "welcome", :user_id => "admin")
+
+def seed_role
+  @admin_role = Role.find_by_code("admin")
+  @parent_role = Role.find_by_code("parent")
+  @accountant_role = Role.find_by_code("accountant")
+
+  unless @admin_role.present?
+    Role.create(:role => "admin", :code => "admin", :description => "admin")
   end
+
+  unless @parent_role.present?
+    Role.create(:role => "parent", :code => "parent", :description => "parent")
+  end
+
+  unless @accountant_role.present?
+    Role.create(:role => "accountant", :code => "accountant", :description => "accountant")
+  end
+
+end
+
+
+def seed_user
+  admin_role = Role.find_by_code("admin")
+  parent_role = Role.find_by_code("parent")
+  accountant_role = Role.find_by_code("accountant")
+  
+  @user_admin = User.find_by_role_id(admin_role)
+  @user_parent = User.find_by_role_id(parent_role)
+  @user_accountant = User.find_by_role_id(accountant_role)
+  unless @user_admin.present?
+    User.create(:email => "admin@manthan.com", :password => "welcome", :user_id => "admin", :role_id => admin_role.id)
+  end
+
+  unless @user_parent.present?
+    User.create(:email => "parent@manthan.com", :password => "welcome", :user_id => "parent", :role_id => parent_role.id)
+  end
+
+  unless @user_accountant.present?
+    User.create(:email => "accountant@manthan.com", :password => "welcome", :user_id => "accountant", :role_id => accountant_role.id)
+  end
+
 end
 
 
@@ -20,9 +56,18 @@ def seed_jobs
   Job.where(code: job_attributes[:code]).first_or_create!(job_attributes.delete_if { |k,v| k == :code })
 end
 
+
+def seed_payment_types
+  PaymentType.where(code: "anually").first_or_create!(:code => "anually")
+  PaymentType.where(code: "term_wise").first_or_create!(:code => "term_wise")
+  PaymentType.where(code: "monthly").first_or_create!(:code => "monthly")
+end
+
 def seed_all
+  seed_role
   seed_user
   seed_jobs
+  seed_payment_types
 end
 
 seed_all

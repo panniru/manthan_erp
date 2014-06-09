@@ -1,0 +1,14 @@
+.panel.panel-default
+  .panel-heading
+    {{grade}}
+  .panel-body
+    .col-md-12{:ng_repeat => "fee_type in fee_types"}
+      .col-md-4
+        %label {{fee_type.fee_type}}
+      .col-md-8
+        %input{:type => "text", :readonly => true, :value => "{{fee_type.amount_in_rupees}}", :class => "form-control"}
+    .col-md-12
+      .col-md-4
+        %label Total
+      .col-md-8
+        %input{:type => "text", :readonly => true, :value => "{{total}}", :class => "form-control"}

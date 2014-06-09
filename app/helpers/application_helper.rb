@@ -2,10 +2,11 @@ module ApplicationHelper
   def flash_alert_class(key)
     key = 'danger' if key == :error or key == :alert
     alert_class = ["alert"]
+    alert_class << "alert-dismissable"
     if key.to_s == "fail"
-      alert_class << "alert-danger"
+      alert_class << "alert-danger "
     elsif key == :notice
-      alert_class << "alert-info"
+      alert_class << "alert-info "
     else
       alert_class << "alert-#{key}"
     end
@@ -22,7 +23,9 @@ module ApplicationHelper
   end
 
   def sub_menu
-    FeeManagementHelper.sub_menu_list
+    context = "fee_management".classify.constantize.new
+    user_menu = UserMenu.new(current_user, context)
+    user_menu.sub_menu
   end
   
 end
