@@ -1,0 +1,20 @@
+%h3 
+  = "Discounts"
+  
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Discount Percent
+      %th Academic year
+      %th
+  %tbody
+    - @discount.each do |discount|
+      %tr
+        %td= "#{discount.discount_percent}"
+        %td= "#{discount.academic_year}"
+        %td 
+          = link_to "Edit", edit_discount_path(discount), :class => "btn btn-warning"
+
+= will_paginate @discount, param_name: "page", previous_label: h("<"), next_label: h(">")          
+
+         

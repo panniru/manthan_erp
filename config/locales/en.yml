@@ -70,3 +70,7 @@ en:
     update:
       success: "cheque has been updated"
       fail: "cheque not been updated"
+  discount:
+    update:
+      success: "Discount has been updated"
+      fail: "Discount not been updated"
