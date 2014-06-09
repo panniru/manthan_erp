@@ -1,5 +1,5 @@
 ManthanErp::Application.routes.draw do
-  resources :discounts 
+
   devise_for :users, :controllers => { :sessions => 'sessions'}
 
   get 'auto_search/autocomplete_student_name'
@@ -89,5 +89,9 @@ ManthanErp::Application.routes.draw do
       get "payment_transactions"
     end
   end
+
+  resources :discounts 
+  resources :fee_structure_approvals 
+
 
 end

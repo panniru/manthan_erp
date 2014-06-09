@@ -1,4 +1,6 @@
 = link_to "Send Mail", fee_alerts_fee_struct_mail_to_parents_path, :class => "btn btn-primary"
+= link_to "Send Approval", fee_structure_approvals_path, :class => "send"
+
 .col-md-12
   = render "grade_wise_fee_grid"
   = render "shared/amount_units"
