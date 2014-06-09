@@ -16,6 +16,5 @@
         %td
           = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_post_dated_cheque_path(post_dated_cheque), :class => "btn btn-warning btn-sm", :title => "Edit"
           = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),post_dated_cheque_path(post_dated_cheque), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
-  
 
 = will_paginate @post_dated_cheques, param_name: "page", previous_label: h("<"), next_label: h(">")          
