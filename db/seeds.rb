@@ -29,19 +29,23 @@ end
 
 
 def seed_user
-  @user_admin = User.find_by_role_id(Role.find_by_code("admin"))
-  @user_parent = User.find_by_role_id(Role.find_by_code("parent"))
-  @user_accountant = User.find_by_role_id(Role.find_by_code("accountant"))
+  admin_role = Role.find_by_code("admin")
+  parent_role = Role.find_by_code("parent")
+  accountant_role = Role.find_by_code("accountant")
+  
+  @user_admin = User.find_by_role_id(admin_role)
+  @user_parent = User.find_by_role_id(parent_role)
+  @user_accountant = User.find_by_role_id(accountant_role)
   unless @user_admin.present?
-    User.create(:email => "admin@manthan.com", :password => "welcome", :user_id => "admin")
+    User.create(:email => "admin@manthan.com", :password => "welcome", :user_id => "admin", :role_id => admin_role.id)
   end
 
   unless @user_parent.present?
-    User.create(:email => "parent@manthan.com", :password => "welcome", :user_id => "parent")
+    User.create(:email => "parent@manthan.com", :password => "welcome", :user_id => "parent", :role_id => parent_role.id)
   end
 
   unless @user_accountant.present?
-    User.create(:email => "accountant@manthan.com", :password => "welcome", :user_id => "accountant")
+    User.create(:email => "accountant@manthan.com", :password => "welcome", :user_id => "accountant", :role_id => accountant_role.id)
   end
 
 end

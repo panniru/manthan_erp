@@ -1,6 +1,9 @@
 .row
   .col-md-12
-    %h4 Monthly Post Dated Cheque Amounts
+    %h4 
+      Monthly Post Dated Cheque Amounts
+      .pull-right
+        = link_to fa_icon("edit"), new_monthly_pdc_amount_path, :title => "Edit"      
     %hr
 
 .col-md-12{ "ng-controller" => "MonthlyPdcsGridController", "ng-init" => "getGridView()"}

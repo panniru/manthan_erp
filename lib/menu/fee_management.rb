@@ -39,7 +39,7 @@ class FeeManagement
   end
 
   def monthly_pdcs
-    MenuItem.new(:label => "Monthly PDCs", :klass => "", :icon => "calendar-o", :href => "#")
+    MenuItem.new(:label => "Monthly PDCs", :klass => "", :icon => "calendar-o", :href => "/post_dated_cheques")
   end
 
   def fee_structure
