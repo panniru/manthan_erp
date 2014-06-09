@@ -12,5 +12,13 @@
     = f.label :amount_per, :class => "form-label col-md-2"
     .col-md-2
       = f.text_field :amount_per, :class => "form-control"
+   
+  .form-group
+    %br
+    %br
+    .col-md-1
+    = f.label :Date, :class => "form-label col-md-2"
+    .col-md-2
+      = f.text_field :termdate, :class => "datepicker form-control"
     .col-md-2
       = f.submit "Save", :class=> "btn btn-primary"

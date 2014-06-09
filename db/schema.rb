@@ -38,10 +38,16 @@ ActiveRecord::Schema.define(version: 20140529105755) do
     t.datetime "updated_at"
   end
 
+
   create_table "fee_types", force: true do |t|
     t.string   "fee_type"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "fee_grade_buckets", force: true do |t|
+    t.string   "grade_from"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "grade_to"
   end
 
   create_table "grade_wise_fees", force: true do |t|
@@ -176,6 +182,7 @@ ActiveRecord::Schema.define(version: 20140529105755) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "amount_per"
+    t.string   "termdate"
   end
 
   create_table "term_wise_grade_fees", force: true do |t|

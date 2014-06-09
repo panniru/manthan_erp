@@ -1,0 +1,19 @@
+%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New Bucket"
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title New cheque
+        = form_for FeeGradeBucket.new , :html => { :class => "form-horizontal", :role => "form"} do |f| 
+          .modal-body
+            .col-sm-3
+              = f.label "Bucket", :class => 'form-control'
+            .col-sm-3
+              = f.text_field "grade_from", :class => 'form-control' , :placeholder => "From"
+            .col-sm-3
+              = f.text_field "grade_to", :class => 'form-control' , :placeholder => "To"
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+            = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+          
