@@ -5,24 +5,49 @@
       %ul
         - @event.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :staff
-    = f.text_field :staff
-  .field
-    = f.label :grade
-    = f.text_field :grade
-  .field
-    = f.label :start_time
-    = f.datetime_select :start_time
-  .field
-    = f.label :end_time
-    = f.datetime_select :end_time
-  .actions
-    = f.submit 'Save',:class => 'btn btn-primary'
+  .row
+    .field
+      .col-sm-3
+        = f.label :title, :class => 'control-label'
+      .col-sm-3
+        = f.text_field :title, :class => 'form-control'
+  %br
+  .row   
+    .field
+      .col-sm-3
+        = f.label :description, :class => 'control-label'
+      .col-sm-3
+        = f.text_area :description, :class => 'form-control'
+  %br
+  .row
+    .field
+      .col-sm-3
+        = f.label :staff, :class => 'control-label'
+      .col-sm-3
+        = f.text_field :staff, :class => 'form-control'
+  %br
+  .row
+    .field
+      .col-sm-3
+        = f.label :grade, :class => 'control-label'
+      .col-sm-3
+        = f.text_field :grade, :class => 'form-control'
+  %br
+  .row
+    .field
+      .col-sm-3
+        = f.label :start_time, :class => 'control-label'
+      .col-sm-3
+        = f.datetime_select :start_time, :class => 'form-control'
+  %br
+  .row
+    .field
+      .col-sm-3
+        = f.label :end_time, :class => 'control-label'
+      .col-sm-3
+        = f.datetime_select :end_time, :class => 'form-control'
+  %br
+  .row
+    .actions
+      = f.submit 'Save',:class => 'btn btn-primary'
+      
