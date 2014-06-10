@@ -42,6 +42,10 @@ gem 'devise'
 gem 'delayed_job_active_record'
 gem 'factory_girl_rails'
 
+gem 'fullcalendar-rails'
+gem 'jbuilder', '~> 1.2'
+gem 'carmen-rails', '~> 1.0.0'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 

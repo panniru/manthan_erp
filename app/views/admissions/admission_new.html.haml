@@ -1,0 +1,8 @@
+= image_tag "add.png" ,:width => "100",:height => "100"
+.pull-right
+  = link_to button_tag('Back', :class => 'btn btn-warning'), admissions_path
+ 
+%br
+%span.label.label-primary STEP:2 Admission Details
+= label_tag "(All fields are mandatory)"
+= render :partial => "form", :locals => {:admissions => @admissions}

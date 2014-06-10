@@ -1,0 +1,36 @@
+%h4
+  %center
+    Admission Form
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Admission no
+      %th Branch
+      %th Grade
+      %th Father's Mail
+      %th Father's Mobile
+      %th Sibling Name
+      %th Sibling Grade
+      %th Bus 
+      %th
+      %th
+        
+  %tbody
+    - Admission.all.each do |admission|
+      %tr
+        %td= admission.admission_no
+        %td= admission.branch
+        %td= admission.grade
+        %td= admission.father_email
+        %td= admission.father_mobile
+        %td= admission.sib_name
+        %td= admission.sib_grade
+        %td= admission.bus
+        %td= link_to "<See More>" , admission
+        %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"),edit_admission_path(admission), :class => "btn btn-warning btn-sm", :title => "Edit"
+        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"),admission, :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+        
+%center
+  = link_to 'Add', new_admission_path, :class => 'btn btn-primary'
+  = link_to 'back', root_path, :class => 'btn btn-primary'

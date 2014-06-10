@@ -1,0 +1,406 @@
+= form_for @admission, :html => { :class => "form-horizontal", :role => "form", :method => "put"} do |f|
+  = render "shared/error_messages", :object => f.object
+  .row
+    .col-sm-3
+      .pull-left
+        = f.label "Form no:", :class => 'control-label'
+        = @admission.form_no
+    .col-sm-6
+      .form-group
+        %center
+          .col-sm-5
+            %h5 APPLICATION FORM FOR        
+          .col-sm-3
+            = f.text_field :from, :class => 'datepicker form-control' 
+          .col-sm-1
+            to
+          .col-sm-3
+            = f.text_field :to, :class => 'datepicker form-control'
+    .col-sm-3
+      .pull-right
+        .col-sm-8
+          = f.text_field :branch, :class => 'form-control'
+        .col-sm-4
+          = f.label "branch", :class => 'control-label'
+  .row
+    .col-sm-4
+      .pull-left
+        = label_tag "for Office use only"
+        %table.table.table.bordered
+          %thead
+            %tr
+              %th Admission no:
+              %th= f.text_field :admission_no, :class => 'form-control'
+          %tbody
+            %tr
+              %th Class:
+              %td= f.text_field :grade, :class => 'form-control'
+    .col-sm-8
+      .pull-right
+        
+  .row
+    .col-sm-12
+      %h5 
+        %b
+          Guidelines for filling in Admission Form:
+        %br
+        1) Single form to be filled in per student
+        %br
+        2) Submission of Admission form does not guarantee admission to the School
+        %br
+        3) Completed admission form along with the supporting documents must be submitted to the school office
+        %br
+        4) Thereafter an interview will be scheduled and conducted
+        %br
+        5) Admission will be confirmed on successful interview and payment of fees will be done at the school office
+  .row
+    .col-sm-12
+      %h5 
+        %b
+          Checklist of Documents should be submitted
+        %br
+        1) Completed admission form
+        %br
+        2) Original Birth Certificate (signed by MCH/MRO/Municipal Board)
+        %br
+        3) Transfer Certificate(if applicable)
+        %br
+        4) Mark Sheet(if applicable)
+        %br
+        5) Color Passport Size Photographs.Student-4, Father-1, Mother-1(recently taken)
+
+  .row
+    .col-sm-12
+      %h4
+        %b
+          TO BE FILLED IN BY THE PARENT / GUARDIAN (IN BLOCK LETTERS)
+  .row
+    .col-sm-12
+      %h5
+        %b
+          PERSONAL DETAILS
+          %br 
+  .row    
+    .col-sm-12
+      .col-sm-4
+        %b
+          Student Name:(As it should appear in Official School Certificates)
+      .col-sm-4
+        = @admission.name
+  %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        %b
+          Middle Name:
+      .col-sm-4
+        = f.text_field :middle_name
+  %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        %b
+          Last Name:
+      .col-sm-4
+        = f.text_field :surname
+  %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        %b
+          Date of Birth:
+      .col-sm-4
+        = @admission.dob
+  %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        %b
+          Gender
+      .col-sm-4
+        = @admission.gender
+  %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        %b
+          Nationality:
+      .col-sm-4
+        = @admission.nationality
+  %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        %b
+          Languages spoken at home
+      .col-sm-4
+        = @admission.language
+ 
+  %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        %b
+          Second Language:
+      .col-sm-4
+        = f.select :second_lang, options_for_select([['Hindi'],['English'],['Tamil'],['Telugu'],['Malayalam'],['Urdu'],['Punjabi'],['Marati'],['Kannada'],['Bengali']]),:class => 'form-control' 
+  %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        %b
+          Blood Group
+      .col-sm-8
+        = f.select :blood_group, options_for_select([['AB+'],['AB-'],['A1B+'],['A1B-'],['O+'],['O-'],['A+'],['A-'],['B+'],['B-'],['A1+'],['A1-'],['B1+'],['B1-']]),:class => 'form-control' 
+  %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        %b
+          Whether the student will avail Bus Facility?
+      .col-sm-4
+        = f.select :bus, options_for_select([['Yes'],['No']])  
+  %br
+  .row
+    .col-sm-12
+      %b
+        DETAILS OF PREVIOUS STUDY(IF APPLICABLE)
+  %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        = label_tag "Name of the School"
+      .col-sm-4
+        = @admission.last_school
+        %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        = label_tag "Board"
+      .col-sm-4
+        = f.text_field :board, :class => 'form-control'
+        %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        = label_tag "Grade/Standard"
+      .col-sm-4
+        = f.text_field :grade, :class => 'form-control'
+        %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        = label_tag "Medium"
+      .col-sm-4
+        = f.text_field :medium, :class => 'form-control'
+        %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        = label_tag "Year"
+      .col-sm-4
+        = f.text_field :year, :class => 'datepicker form-control'
+        %br
+  .row
+    .col-sm-12
+      .col-sm-4
+        = label_tag "Reason for leaving"
+      .col-sm-4
+        = @admission.changing_reason
+  
+    
+   
+  .row
+    .col-sm-12
+      = f.label "Proficiency in English Please tick the appropriate ", :class => 'control-label'
+  .row
+    .col-sm-12
+      %table.table.table.bordered
+        %thead
+          %tr
+            %th{style: "width:20%"} 
+              = label_tag "Skills"
+            %th{style: "width:20%"} 
+              %label{for: "Very Good", :id=>"first"} Very Good
+            %th{style: "width:20%"} 
+              %label{for: "Good",:id=>"second"} Good
+            %th{style: "width:20%"} 
+              %label{for: "Fair",:id=>"third"} Fair
+            %th{style: "width:20%"} 
+              %label{for: "None",:id=>"four"} None
+        %tbody
+          %tr
+            %td= f.label "Written",:class => 'control-label'
+            .btn-group{"data-toggle" => "buttons-radio"}
+            %td= f.radio_button :written, "Very Good"
+            %td= f.radio_button :written, "Good"
+            %td= f.radio_button :written, "Fair"
+            %td= f.radio_button :written, "None"
+          %tr
+            %td= f.label "Spoken",:class => 'control-label'
+            .btn-group{"data-toggle" => "buttons-radio"}
+            %td= f.radio_button :spoken, "Very Good"
+            %td= f.radio_button :spoken, "Good"
+            %td= f.radio_button :spoken, "Fair"
+            %td= f.radio_button :spoken, "None"
+          %tr
+            %td= f.label "Reading",:class => 'control-label'
+            .btn-group{"data-toggle" => "buttons-radio"}
+            %td= f.radio_button :reading, "Very Good"
+            %td= f.radio_button :reading, "Good"
+            %td= f.radio_button :reading, "Fair"
+            %td= f.radio_button :reading, "None"
+  .row
+    .col-sm-3
+      %h5
+        %b
+          Blood Group
+    .col-sm-3
+      = f.select :blood_group, options_for_select([['A+'],['A-'],['B+'],['B-'],['AB+'],['AB-'],['O+'],['O-'],['A1+'],['B1+'],['A1-'],['B1-'],['A1b+'],['A1b-']]),:class => 'form-control' 
+              
+  .row
+    .col-sm-4
+      %h5
+        %b
+          Any major ailment/allergy that the school should know about:
+    .col-sm-4
+      = f.text_field :allergy, :class => 'form-control'
+  .row
+    .col-sm-12
+      %h5
+        %b
+          Family Doctor details(TO BE CONTACTED IN CASE OF AN EMERGENCY)
+    .col-sm-2
+      = label_tag "Name"
+    .col-sm-2
+      = f.text_field :doctor_name, :class => 'form-control'
+    .col-sm-2
+      = label_tag "Mobile"
+    .col-sm-2
+      = f.text_field :doctor_mobile, :class => 'form-control'
+  .row
+    .col-sm-12
+      %h5
+        %b
+          PARENT'S DETAILS
+    %br
+  .row
+    .col-sm-12
+      %table.table.table.striped
+        %thead
+          %tr
+            %th{style: "width:20%"} 
+            %th{style: "width:20%"} 
+              = label_tag "FATHER / GUARDIAN"
+            %th{style: "width:20%"} 
+              = label_tag "MOTHER"
+        %tbody
+          %tr
+            %th= label_tag "Name"
+            %th= @admission.father_name
+            %th= @admission.mother_name
+          %tr
+            %th= label_tag "Occupation"
+            %th= @admission.father_occupation
+            %th= @admission.mother_occupation
+          %tr
+            %th= label_tag "Education:SSC/Graduate/Post Graduate/Professional(Lawyer,Doctor,MBA,etc.,))"
+            %th= @admission.father_education
+            %th= @admission.mother_education
+          %tr
+            %th= label_tag "Nationality"
+            %th= @admission.nationality
+            %th= @admission.nationality
+          %tr
+            %th= label_tag "Religion"
+            %th= f.text_field :father_religion
+            %th= f.text_field :mother_religion
+          %tr
+            %th= label_tag "Home Address"
+            %th= @admission.address
+            %th= @admission.address
+          %tr
+            %th= label_tag "HomeLandline"
+            %th= @admission.landline
+            %th= @admission.mobile
+          %tr
+            %th= label_tag "Office Address"
+            %th= f.text_field :father_office_address
+            %th= f.text_field :mother_office_address
+          %tr
+            %th= label_tag "Office Telephone"
+            %th= f.text_field :father_office_telephone
+            %th= f.text_field :mother_office_telephone
+          %tr
+            %th= label_tag "Mobile"
+            %th= f.text_field :father_mobile
+            %th= f.text_field :mother_mobile
+          %tr
+            %th= label_tag "Email"
+            %th= f.text_field :father_email
+            %th= f.text_field :mother_email
+          %tr
+            %th= label_tag "Employer's Name"
+            %th= f.text_field :father_employer
+            %th= f.text_field :mother_employer
+          %tr
+            %th= label_tag "Family Income"
+            %th
+            %th= @admission.income
+              
+  .row
+    .col-sm-12
+      %h5
+        %b
+          SIBLING DETAILS 
+  %br
+  .row
+    .col-sm-12
+      %table.table.table.bordered
+        %thead
+          %tr
+            %th{style: "width:20%"} 
+              = label_tag "Name of the Student"
+            %th{style: "width:10%"} 
+              = label_tag "Age"
+            %th{style: "width:20%"} 
+              = label_tag "Sex"
+            %th{style: "width:20%"} 
+              = label_tag "Studying in Grade"
+            %th{style: "width:20%"} 
+              = label_tag "Name of the School"
+        %tbody
+          %tr
+            %td= f.text_field :sib_name, :class => 'form-control'
+            %td= f.text_field :sib_age, :class => 'form-control'
+            %td= f.select :sib_sex, options_for_select([['Male'],['Female']]), :class => 'form-control'
+            %td= f.text_field :sib_grade, :class => 'form-control'
+            %td= f.text_field :sib_school, :class => 'form-control'
+          
+          
+  .row
+    .col-sm-12
+      %h5
+        %b
+          Name of a relative or a local guardian to be contacted in case of an emergency:
+      %br
+  .row
+    .col-sm-2
+      = label_tag "Name"
+    .col-sm-2
+      = f.text_field :guardian_name, :class => 'form-control'
+    .col-sm-2
+      = label_tag "Mobile"
+    .col-sm-2
+      = f.text_field :guardian_mobile, :class => 'form-control'
+    .col-sm-2
+      = label_tag "Relationship with the Student"
+    .col-sm-2
+      = f.text_field :guardian_relationship, :class => 'form-control'
+      
+                    
+  .row
+    %center
+      = f.submit "Create", :class => 'btn btn-primary'
+      = link_to 'Back', admissions_path, :class => 'btn btn-primary'
+    

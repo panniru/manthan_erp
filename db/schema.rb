@@ -11,10 +11,83 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606111903) do
+ActiveRecord::Schema.define(version: 20140610045045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admissions", force: true do |t|
+    t.string   "admission_no"
+    t.string   "branch"
+    t.string   "surname"
+    t.string   "second_lang"
+    t.string   "board"
+    t.string   "grade"
+    t.string   "medium"
+    t.integer  "year"
+    t.string   "written"
+    t.string   "reading"
+    t.string   "spoken"
+    t.string   "blood_group"
+    t.string   "allergy"
+    t.string   "doctor_name"
+    t.string   "doctor_mobile"
+    t.string   "guardian_name"
+    t.string   "guardian_mobile"
+    t.string   "guardian_relationship"
+    t.string   "from"
+    t.string   "to"
+    t.string   "middle_name"
+    t.string   "name"
+    t.string   "klass"
+    t.string   "dob"
+    t.string   "gender"
+    t.string   "nationality"
+    t.string   "language"
+    t.string   "father_name"
+    t.string   "mother_name"
+    t.string   "father_occupation"
+    t.string   "mother_occupation"
+    t.string   "father_company"
+    t.string   "mother_company"
+    t.string   "father_education"
+    t.string   "mother_education"
+    t.string   "income"
+    t.text     "address"
+    t.string   "landline"
+    t.string   "mobile"
+    t.string   "email"
+    t.string   "transport"
+    t.string   "busstop"
+    t.string   "last_school"
+    t.string   "city"
+    t.string   "changing_reason"
+    t.string   "know_school"
+    t.string   "person"
+    t.string   "pp"
+    t.string   "status"
+    t.string   "father_office_address"
+    t.string   "mother_office_address"
+    t.string   "father_office_telephone"
+    t.string   "mother_office_telephone"
+    t.string   "father_mobile"
+    t.string   "mother_mobile"
+    t.string   "mother_religion"
+    t.string   "father_religion"
+    t.string   "father_employer"
+    t.string   "mother_employer"
+    t.string   "father_email"
+    t.string   "mother_email"
+    t.string   "sib_name"
+    t.string   "sib_age"
+    t.string   "sib_sex"
+    t.string   "sib_grade"
+    t.string   "sib_school"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "bus"
+    t.string   "form_no"
+  end
 
   create_table "approvals", force: true do |t|
     t.string   "approved"
@@ -48,6 +121,17 @@ ActiveRecord::Schema.define(version: 20140606111903) do
     t.datetime "updated_at"
   end
 
+  create_table "events", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "staff"
+    t.string   "grade"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "fee_grade_buckets", force: true do |t|
     t.string   "grade_from"
     t.datetime "created_at"
@@ -67,6 +151,12 @@ ActiveRecord::Schema.define(version: 20140606111903) do
 
   create_table "fee_types", force: true do |t|
     t.string   "fee_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "grade_masters", force: true do |t|
+    t.string   "grade_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -177,8 +267,8 @@ ActiveRecord::Schema.define(version: 20140606111903) do
   end
 
   create_table "post_dated_cheques", force: true do |t|
-    t.date     "date"
-    t.string   "month"
+    t.integer  "date"
+    t.integer  "month"
     t.integer  "academic_year"
     t.float    "amount_per"
     t.datetime "created_at"
@@ -253,6 +343,11 @@ ActiveRecord::Schema.define(version: 20140606111903) do
     t.integer  "term_definition_id"
     t.integer  "amount_in_rupees"
     t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tests", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end

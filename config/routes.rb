@@ -5,20 +5,9 @@ ManthanErp::Application.routes.draw do
   get 'auto_search/autocomplete_student_name'
   get 'auto_search/student_name_by_grade_and_section'
 
-  get "students/app"
-  get "students/app_students"
-  get "students/get_selected"
-  get "students/enquiry"
-  get "students/more"
-  get "students/index"
-  get "students/new"
-  get "students/show"
-  get "students/edit"
   get "home/aboutus"
 
   root to: "home#index"
-
-  resources :students
 
   resources :fee_types do
     collection do
@@ -93,5 +82,20 @@ ManthanErp::Application.routes.draw do
   resources :discounts 
   resources :fee_structure_approvals 
 
+  resources :events
+  
+  resources :admissions do
+    member do
+      get 'enquiry_show'
+      get 'admission_show'
+      get 'admission_new'
+    end
+
+    collection do
+      get "enquiry_index"
+      get "admission_index"
+      get "enquiry_new"
+    end
+  end
 
 end

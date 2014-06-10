@@ -12,5 +12,5 @@
 //= require jquery.ui.autocomplete
 //= require autocomplete-rails
 //= require bootstrap
-
+//= require fullcalendar
 //= require_tree .

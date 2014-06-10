@@ -1,0 +1,40 @@
+%h4
+  %center
+    Enquiry Form
+
+%table.table.table.striped
+  %thead
+    %tr
+      %th
+      %th Form no
+      %th Name
+      %th Class
+      %th Gender
+      %th Father's name
+      %th Date of Birth
+      %th Mobile
+      %th E-mail
+      %th
+      %th
+      
+        
+  %tbody
+    - @admissions.each do |admission|
+      %tr
+        %td= check_box_tag "admission_ids[]", admission.id 
+        
+        %td= admission.form_no
+        %td= admission.name
+        %td= admission.klass
+        %td= admission.gender
+        %td= admission.father_name
+        %td= admission.dob
+        %td= admission.mobile
+        %td= admission.email
+        %td= link_to "<See More>", enquiry_show_admission_path(admission)
+        %td= link_to "<App Form>",admission_new_admission_path(admission)
+        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"),admission, :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+        
+%center
+  = link_to 'Add', enquiry_new_admissions_path, :class => 'btn btn-primary'
+  = link_to 'Back', root_path, :class => 'btn btn-primary'

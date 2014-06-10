@@ -15,8 +15,8 @@ module ApplicationHelper
   
   def main_menu_list
     main_menu = []
-    main_menu << MenuItem.new(:label => "Fee Management", :klass => "", :icon => "bank 2x", :href => "#", :is_active => true)
-    main_menu << MenuItem.new(:label => "Admissions", :klass => "", :icon => "book 2x", :href => "#", :is_active => false)
+    main_menu << MenuItem.new(:label => "Fee Management", :klass => "", :icon => "bank 2x", :href => root_path, :is_active => controller.controller_name == "home")
+    main_menu << MenuItem.new(:label => "Admissions", :klass => "", :icon => "book 2x", :href => "/admissions", :is_active => controller.controller_name == "admissions")
     main_menu << MenuItem.new(:label => "Time Tables", :klass => "", :icon => "calendar 2x", :href => "#", :is_active => false)
     main_menu << MenuItem.new(:label => "Results", :klass => "", :icon => "bullhorn 2x", :href => "#", :is_active => false)
     main_menu << MenuItem.new(:label => "HRM", :klass => " ", :icon => "group 2x", :href => "#", :is_active => false)

@@ -1,0 +1,32 @@
+.pull-right
+  = link_to button_tag('New Event',:class => 'btn btn-primary'), new_event_path
+#calendar
+  %h1 Listing events
+
+  %table.table.table-striped
+    %tr
+      %th Title
+      %th Description
+      %th Staff
+      %th Grade
+      %th Start time
+      %th End time
+      %th
+      %th
+      %th
+        
+        - @events.each do |event|
+          %tr
+            %td= event.title
+            %td= event.description
+            %td= event.staff
+            %td= event.grade
+            %td= event.start_time
+            %td= event.end_time
+            %td= link_to raw("<span class='glyphicon glyphicon-hand-right'></span>"), event, :class => "btn btn-success btn-sm", :title => "Show"
+            %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_event_path(event), :class => "btn btn-warning btn-sm", :title => "Edit"
+            %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), event, :class => "btn btn-danger btn-sm",:method => :delete, :data => { :confirm => 'Are you sure?' }, :title => "Delete"
+            
+%br
+
+            

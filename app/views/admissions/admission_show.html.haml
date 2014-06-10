@@ -1,0 +1,200 @@
+%center
+  %h4 ADMISSION
+.row
+  .pull-right
+    = link_to "Back", admission_index_admissions_path , :class => 'btn btn-primary'
+.row
+  .col-sm-6
+    .row
+      %table
+        %thead
+          %tr
+            %b
+              %span.label.label-danger Parent's Details
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "father_office_address"} Father's Office Address:
+            %th{style: "width:20%"}
+              = @admission.father_office_address
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "mother_office_address"} Mother's Office Address:
+            %th= @admission.mother_office_address
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "father_office_telephone"} Father's Office Telephone:
+            %th= @admission.father_office_telephone
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "mother_office_telephone"} Mother's Office Telephone:
+            %th= @admission.mother_office_telephone
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "father_office_address"} Father's Mobile:
+            %th= @admission.father_mobile
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "mother_office_address"} Mother's Mobile:
+            %th= @admission.mother_mobile
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "father_office_address"} Father's Religion:
+            %th= @admission.father_religion
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "mother_office_address"} Mother's Religion:
+            %th= @admission.mother_religion
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "father_email"} Father's Email
+            %th= @admission.father_email
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "mother_email"} Mother's Email
+            %th= @admission.mother_email
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "father_employer"} Father's Office
+            %th= @admission.father_employer
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "mother_employer"} Mother's Office 
+            %th= @admission.mother_employer
+
+    
+
+  .col-sm-6
+    .row
+      
+      %table
+        %thead
+          %tr
+            %b
+              %span.label.label-success Student's Details
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "admission_no"} Admission no
+            %th= @admission.admission_no
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "branch"} Branch
+            %th
+              = @admission.branch
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "surname"} Surname
+            %th{style: "width:20%"}
+              = @admission.surname
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "second_lang"} Second Lang
+            %th
+              = @admission.second_lang
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "board"} Board
+            %th
+              = @admission.board
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "grade"} Grade
+            %th
+              = @admission.grade
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "medium"} Medium
+            %th
+              = @admission.medium
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "year"} Year
+              
+            %th
+              = @admission.year
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "Written"} Written
+    
+            %th
+              = @admission.written
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "Reading"} Reading
+            
+            %th
+              = @admission.reading
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "spoken"} Spoken
+            %th
+              = @admission.spoken
+         
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "middle_name"} Middle name
+            %th
+              = @admission.middle_name
+.row
+  .col-sm-6
+    .row
+      %table
+        %thead
+          %tr
+            %b
+              %span.label.label-primary Medical's Details
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "Blood Group"} Blood Group
+            %th{style: "width:21%"}
+              = @admission.blood_group
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "allergy"} Allergy
+            %th
+              = @admission.allergy
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "Name of the Doctor"} Name of the Doctor
+            %th
+              = @admission.doctor_name
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "mobile"} Doctor's Mobile
+            %th
+              = @admission.doctor_mobile
+           
+
+  .col-sm-6
+    .row
+      %table
+        %thead
+          %tr
+            %b
+              %span.label.label-warning Other Details              
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "guardian_name"} Guardian's name
+            %th{style: "width:20%"}
+              = @admission.guardian_name
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "guardian_mobile"} Guardian's Mobile
+            %th
+              = @admission.guardian_mobile
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "guardian_relationship"} Guardian's Relationship
+              
+            %th
+              = @admission.guardian_relationship
+          %tr
+            %th{style: "width: 50%"}
+              %label{for: "from"} Application From
+            %th
+              = @admission.from
+          %tr
+            %th{style: "width:50%"}
+              %label{for: "to"} Application To
+            %th
+              = @admission.to
+  
