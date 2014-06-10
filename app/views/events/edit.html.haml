@@ -1,6 +1,10 @@
 %h1 Editing event
+.pull-right
+  = link_to button_tag('Show',:class => 'btn btn-primary'), @event
+  = link_to button_tag('Back',:class => 'btn btn-primary'), events_path 
+  %br
+%center
+  = render 'form'
 
-= render 'form'
 
-= link_to button_tag('Show',:class => 'btn btn-primary'), @event
-= link_to button_tag('Back',:class => 'btn btn-primary'), events_path
+

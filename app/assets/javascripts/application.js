@@ -1,5 +1,3 @@
-
-
 //= require angular
 //= require angular-resource
 //= require angular-route.min
