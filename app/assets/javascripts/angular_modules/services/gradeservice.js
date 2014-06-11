@@ -23,4 +23,16 @@
         };
         
     }]);
+
+    app.service("getSubjectService",["$http", function($http) {
+        var getSubjectnServiceView = function(){
+            var url = "/time_tables/subjectserviceview.json"
+            return $http.get(url);
+        };
+        
+        return {
+            getSubjectnServiceView : getSubjectnServiceView
+        };
+        
+    }]);
 })(angular, myApp);

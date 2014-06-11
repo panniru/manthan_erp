@@ -1,85 +1,66 @@
-.row
-  .col-xs-4.col-md-2 
-  .col-xs-16.col-md-8
-    = form_tag("/term_definitions", method: "get") do
-      .col-xs-8.col-md-4{"ng-controller" => "GradeController"} 
-        .col-md-24.col-md-12
-          = label_tag(:grade, "Select Grade")         
-        .col-md-24.col-md-12
+.row{"ng-controller" => "GradeController"}
+  .row
+    .col-md-2 
+    .col-md-8
+      .col-md-4 
+        .col-md-12
+          = label_tag(:grade, "Select Grade") 
+        .col-md-12
           %select{"ng-model" => "myGrade", "ng-options" => "grade.grade for grade in grades"}       
-      .col-xs-8.col-md-4{"ng-controller" => "SectionController"} 
-        .col-md-24.col-md-12
-          = label_tag(:grade, "Select Section")         
-        .col-md-24.col-md-12
+      .col-md-4{"ng-controller" => "SectionController"} 
+        .col-md-12
+          = label_tag(:grade, "Select Section")
+        .col-md-12
           %select{"ng-model" => "mySection", "ng-options" =>"section.section for section in sections"}
-      .col-xs-8.col-md-4
+      .col-md-4
         = submit_tag("GO",{class: "btn btn-primary"})
         = submit_tag("ADD TIME TABLE",{class: "btn btn-primary"})
-  .col-xs-4.col-md-2
+    .col-md-2   
 %br
-.row
-  .col-xs-4.col-md-2 
-  .col-xs-16.col-md-8
-    .col-xs-8.col-md-4{"ng-controller" => "GradeController"}
-      %label{:class => "form-label"}
-        Enter no.of periods
-    .col-xs-8.col-md-4
-      = text_field_tag  "period",nil, :class => "form-control",:ng_model => "period",:placeholder => "period"
-      {{period}}
-    .col-xs-8.col-md-4
-      = submit_tag("ADD",{class: "btn btn-primary"})
-%br
-%br
-.row
-  .col-xs-3.col-md-2 
-  .col-xs-6.col-md-8 
-    = form_tag("/term_definitions", method: "get") do
-      .col-xs-9.col-md-4 
-        = label_tag(:q, "Enter Grade")
-        %input#request.special_input{name: "request", type: "text", placeholder: "Enter Grade"}/
-        = text_field_tag(:q,{placeholder: "GRADE"})
-      .col-xs-9.col-md-4
-        = label_tag(:q, "Enter Section")
-        = text_field_tag(:q,{placeholder: "SECTION"})
-      .col-xs-9.col-md-4
-        = submit_tag("GO",{class: "btn btn-primary"})
-        = submit_tag("ADD TIME TABLE",{class: "btn btn-primary"})
-  .col-xs-6.col-md-2
-%br
-.row
-  .col-xs-3.col-md-2 
-  .col-xs-6.col-md-8
-    .row
-      .Container{"ng-controller" => "GradeController"}
-        %h3 looping with the ng-repeat Directive l2
-        .form-group
-          = label_tag  "Grade", nil, :class => "form-label col-md-2"
-          .col-md-3
-            %ul
-              %li{"ng-repeat" => "grade in grades"} 
-                = text_field_tag  "grade",nil, :class => "form-control",:ng_model => "grade",:placeholder => "grade"
-                {{grade}}
-    %br
-    .row
-      .Container{"ng-controller" => "GetGradeController"}
-        %h3 looping with the ng-repeat Directive l1
-        .form-group
-          = label_tag  "Grade", nil, :class => "form-label col-md-2"
-          .col-md-3
-            %ul
-              %li{"ng-repeat" => "grade in grades"} 
-                = text_field_tag  "grade",nil, :class => "form-control",:ng_model => "grade",:placeholder => "grade"
-                {{grade}}
-    .row
-      .Container{"ng-controller" => "GetGradeController"}
-        %h3 looping with the ng-repeat Directive l0
-        .form-group
-          = label_tag  "Enter Grade", nil, :class => "form-label col-md-2"
-          .col-md-8
-            %select{"ng-model" => "myGrade", "ng-options" => "grade.grade for grade in grades"}
-    %br/
-  .col-xs-3.col-md-2 
+  .row{"ng-controller" => "GradeController"}
+    .col-md-2 
+    .col-md-8
+      .col-md-4
+        %label{:class => "form-label"}
+          Enter no.of periods
+      .col-md-4
+        = text_field_tag  "period",nil, :class => "form-control", :ng_model => "period", :placeholder => "period"
+        {{period}}
+      .col-md-4
+        = button_tag("ADD",{class: "btn btn-primary", :ng_click => "addPeriods()"})
+        %div{"ng-show" => "myValue"}
+          %table
+            %tr
+              %th PERIOD
+              %th MON
+              %th TUE
+              %th WED
+              %th THU
+              %th FRI
+              %th SAT
+              %th SUN             
+            %tr{"ng-repeat" => "timeperiod in timeperiods"}
+              %td Period{{" "+($index+1)}}
+              %td 
+                = text_field_tag  "period",nil, :class => "form-control", :ng_model => "period", :placeholder => "period"
+              %td Phy
+              %td Che
+              %td Eng
+              %td Bio
+              %td css
+              %td
+    .col-md-2 
+      :css
+        table, th, td
+        {
+        border-collapse:collapse;
+        border:1px solid #6aa6d6;
+        }
+        th, td
+        {
+        padding:5px;
+        }    
+  .row{"ng-repeat" => "timeperiod in timeperiods"}
+    hI
     
-
-%br
-%br
+    

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529112929) do
+ActiveRecord::Schema.define(version: 20140611060132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -201,6 +201,24 @@ ActiveRecord::Schema.define(version: 20140529112929) do
     t.integer  "term_definition_id"
     t.integer  "amount_in_rupees"
     t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "time_tables", force: true do |t|
+    t.string   "academic_year"
+    t.string   "gradeid"
+    t.string   "section"
+    t.string   "periodid"
+    t.string   "mon_sub"
+    t.string   "tue_sub"
+    t.string   "wed_sub"
+    t.string   "thu_sub"
+    t.string   "fri_sub"
+    t.string   "sat_sub"
+    t.string   "sun_sub"
+    t.time     "st_time"
+    t.time     "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
