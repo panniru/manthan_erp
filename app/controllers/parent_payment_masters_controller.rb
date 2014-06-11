@@ -37,7 +37,7 @@ class ParentPaymentMastersController < ApplicationController
   def submitted_pdcs
     respond_to do |format|
       format.json do
-        submitted_pdcs = @parent_payment_master.parent_pdcs.map do |pdc|
+        submitted_pdcs = @parent_payment_master.parent_cheques.map do |pdc|
           Struct.new(:month, :cheque_number, :clearence_date, :amount_in_rupees).new(pdc.post_dated_cheque.month, pdc.cheque_number, pdc.clearence_date, pdc.amount_in_rupees)
         end
         render :json => submitted_pdcs
@@ -49,7 +49,7 @@ class ParentPaymentMastersController < ApplicationController
     respond_to do |format|
       format.json do
         cleared_pdcs = @parent_payment_master.parent_payment_transactions.map do |ppt|
-          Struct.new(:month, :cheque_number, :cleared_date, :amount_in_rupees).new(ppt.parent_pdc.post_dated_cheque.month, ppt.parent_pdc.cheque_number, ppt.transaction_date, ppt.amount_in_rupees)
+          Struct.new(:month, :cheque_number, :cleared_date, :amount_in_rupees).new(ppt.parent_cheque.post_dated_cheque.month, ppt.parent_cheque.cheque_number, ppt.transaction_date, ppt.amount_in_rupees)
         end
         render :json => cleared_pdcs
       end
@@ -62,8 +62,8 @@ class ParentPaymentMastersController < ApplicationController
         render :json => @parent_payment_master.parent_payment_transactions
       end
     end
-    
   end
+
 
   private
   def parent_payment_master_params

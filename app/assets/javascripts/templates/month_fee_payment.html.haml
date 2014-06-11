@@ -9,11 +9,11 @@
         %tr{"ng-repeat" => "month in monthlyFees | limitTo:5"}
           %td
             %input{:type => "text", :class => "form-control", :ng_model => "month.month", :readonly => true}
-            %input{:type => "hidden", :ng_value => "month.post_dated_cheque_id" , :name => "[parent_payment_master][parent_pdcs][][post_dated_cheque_id]"}
+            %input{:type => "hidden", :ng_value => "month.post_dated_cheque_id" , :name => "[parent_payment_master][parent_cheques][][post_dated_cheque_id]"}
           %td
             %input{:type => "text", :class => "form-control", :ng_model => "month.amount_in_rupees", :readonly => true}
           %td
-            %input{:type => "text", :class => "form-control", :placeholder => "Check Number/Details", :name => "[parent_payment_master][parent_pdcs][][cheque_number]"}
+            %input{:type => "text", :class => "form-control", :placeholder => "Check Number/Details", :name => "[parent_payment_master][parent_cheques][][cheque_number]"}
   .col-md-6
     %table.table.table-bordered
       %thead
@@ -24,8 +24,8 @@
         %tr{"ng-repeat" => "month in monthlyFees | limitTo: monthlyFees.length | limitTo: -5"}
           %td
             %input{:type => "text", :class => "form-control", :ng_model => "month.month", :readonly => true}
-            %input{:type => "hidden", :ng_value => "month.post_dated_cheque_id" , :name => "[parent_payment_master][parent_pdcs][][post_dated_cheque_id]"}
+            %input{:type => "hidden", :ng_value => "month.post_dated_cheque_id" , :name => "[parent_payment_master][parent_cheques][][post_dated_cheque_id]"}
           %td
             %input{:type => "text", :class => "form-control", :ng_model => "month.amount_in_rupees", :readonly => true}
           %td
-            %input{:type => "text", :class => "form-control", :placeholder => "Check Number/Details", :name => "[parent_payment_master][parent_pdcs][][cheque_number]"}
+            %input{:type => "text", :class => "form-control", :placeholder => "Check Number/Details", :name => "[parent_payment_master][parent_cheques][][cheque_number]"}

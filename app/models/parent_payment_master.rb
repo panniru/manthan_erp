@@ -1,11 +1,11 @@
 class ParentPaymentMaster < ActiveRecord::Base
   validates :payment_type_id, :presence => true
   belongs_to :parent 
-  belongs_to :student, :class_name => "StudentHr"
+  belongs_to :student, :class_name => "StudentMaster"
   belongs_to :payment_type
-  has_many :parent_pdcs
+  has_many :parent_cheques
   has_many :parent_payment_transactions
-  accepts_nested_attributes_for :parent_pdcs
+  accepts_nested_attributes_for :parent_cheques
   accepts_nested_attributes_for :parent_payment_transactions
   
   def self.new_student_payment_master(student_id)
@@ -23,16 +23,19 @@ class ParentPaymentMaster < ActiveRecord::Base
   
   def self.prepare_payment_master(params)
     payment_master = ParentPaymentMaster.new
-    student = StudentHr.find(params[:student_id])
+    student = StudentMaster.find(params[:student_id])
     pmnt_type = PaymentType.find(params[:payment_type_id])
     payment_master.parent= student.parent
     payment_master.student = student
     payment_master.payment_type = pmnt_type
-    if pmnt_type.code == "annual"
-    elsif pmnt_type.code == "term_wise"
-      payment_master.add_payment_transaction(params[:parent_payment_transaction])
+    if pmnt_type.code == "annual" or pmnt_type.code == "term_wise"
+      if params[:parent_payment_transaction][:transaction_type] == "cash" 
+        payment_master.add_payment_transaction(params[:parent_payment_transaction])
+      else
+        payment_master.add_parent_cheque_entries(params[:parent_cheques], student)
+      end
     elsif pmnt_type.code == "monthly"
-      payment_master.add_parent_pdc_entries(params[:parent_pdcs], student)
+      payment_master.add_parent_cheque_entries(params[:parent_cheques], student)
     end
     payment_master
   end
@@ -42,7 +45,7 @@ class ParentPaymentMaster < ActiveRecord::Base
     elsif term_wise_payment?
       add_payment_transaction(params[:parent_payment_transaction])
     elsif monthly_payment?
-      add_parent_pdc_entries(params[:parent_pdcs], self.student)
+      add_parent_cheque_entries(params[:parent_cheques], self.student)
     end
   end
 
@@ -50,12 +53,19 @@ class ParentPaymentMaster < ActiveRecord::Base
     self.parent_payment_transactions << ParentPaymentTransaction.new(:transaction_date => DateTime.now, :amount_in_rupees => transaction_params[:amount_in_rupees], :transaction_type => "cash", :payment_detail_id => transaction_params[:payment_detail_id], :particulars => transaction_params[:particulars]);
   end
 
-  def add_parent_pdc_entries(parent_pdc_params, student)
-    parent_pdc_params.each do |pdc|
+  def add_parent_cheque_entries(parent_cheque_params, student)
+    parent_cheque_params.each do |pdc|
       if pdc[:cheque_number].present?
-        self.parent_pdcs << ParentPdc.new(:cheque_number => pdc[:cheque_number], :post_dated_cheque_id => pdc[:post_dated_cheque_id],:parent_id => student.parent.id, :student_id => student.id)
+        self.parent_cheques << generate_parent_cheque(pdc, student)
       end
     end
+  end
+
+  def generate_parent_cheque(cheque_params, student)
+    parent_cheque = ParentCheque.new(cheque_params)
+    # parent_cheque.parent = student.parent
+    # parent_cheque.student = student
+    parent_cheque
   end
   
   def term_wise_payment?

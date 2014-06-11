@@ -4,7 +4,7 @@
         return{
             restrict: 'E',
             controller: function($scope, $attrs, $http) {
-                var url = "/student_hrs/"+$attrs.studentId+".json"
+                var url = "/student_masters/"+$attrs.studentId+".json"
                 $http.get(url)
                     .then(function(response){
                         $scope.student = response.data

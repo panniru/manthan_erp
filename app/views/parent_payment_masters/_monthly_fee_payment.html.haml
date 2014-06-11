@@ -3,17 +3,17 @@
     .row{"ng-repeat" => "month in monthlyFees | limitTo:5"}
       .col-md-4
         %input{:type => "text", :class => "form-control", :ng_model => "month.month", :readonly => true}
-        %input{:type => "hidden", :ng_value => "month.post_dated_cheque_id" , :name => "[parent_payment_master][parent_pdcs][][post_dated_cheque_id]"}
+        %input{:type => "hidden", :ng_value => "month.post_dated_cheque_id" , :name => "[parent_payment_master][parent_cheques][][post_dated_cheque_id]"}
       .col-md-4
         %input{:type => "text", :class => "form-control", :ng_model => "month.amount_in_rupees", :readonly => true}
       .col-md-4
-        %input{:type => "text", :class => "form-control", :placeholder => "Check Number/Details", :name => "[parent_payment_master][parent_pdcs][][cheque_number]"}
+        %input{:type => "text", :class => "form-control", :placeholder => "Check Number/Details", :name => "[parent_payment_master][parent_cheques][][cheque_number]"}
   .col-md-6
     .row{"ng-repeat" => "month in monthlyFees | limitTo: monthlyFees.length | limitTo: (5-monthlyFees.length)"}
       .col-md-4
         %input{:type => "text", :class => "form-control", :ng_model => "month.month", :readonly => true}
-        %input{:type => "hidden", :ng_value => "month.post_dated_cheque_id" , :name => "[parent_payment_master][parent_pdcs][][post_dated_cheque_id]"}
+        %input{:type => "hidden", :ng_value => "month.post_dated_cheque_id" , :name => "[parent_payment_master][parent_cheques][][post_dated_cheque_id]"}
       .col-md-4
         %input{:type => "text", :class => "form-control", :ng_model => "month.amount_in_rupees", :readonly => true}
       .col-md-4
-        %input{:type => "text", :class => "form-control", :placeholder => "Check Number/Details", :name => "[parent_payment_master][parent_pdcs][][cheque_number]"}
+        %input{:type => "text", :class => "form-control", :placeholder => "Check Number/Details", :name => "[parent_payment_master][parent_cheques][][cheque_number]"}

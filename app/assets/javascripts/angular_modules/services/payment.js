@@ -3,16 +3,18 @@
     app.service("paymentService",["$http", function($http) {
         
         var student_current_term_fee = function(student_id){
-            var url = "/student_hrs/"+student_id+"/next_term_fee.json"
+            var url = "/student_masters/"+student_id+"/next_term_fee.json"
             return $http.get(url)
         };
         
         var student_monthly_pdcs = function(student_id){
-            var url = "/student_hrs/"+student_id+"/monthly_pdcs.json"
+            var url = "/student_masters/"+student_id+"/monthly_pdcs.json"
             return $http.get(url)
         };
         
-        var student_annula_payment_discount = function(student_id){
+        var annual_discount_details = function(student_id){
+            var url = "/student_masters/"+student_id+"/annual_discount_details.json"
+            return $http.get(url)
         };
         
         var parent_payment_transactions = function(payment_id){
@@ -20,11 +22,21 @@
             return $http.get(url)
         };
 
+        var transactionTypes = function(){
+            return [{value: "cash", text: "CASH"}, {value: "cheque", text: "CHEQUE"}]
+        }
+        
+        var supportedBanks = function(){
+            return [{value: "sbi", text: "State Bank Of India"}, {value: "icici", text: "ICICI"}, {value: "axis_bank", text: "Axis Bank"}]
+        }
+
         return {
             student_current_term_fee : student_current_term_fee,
             student_monthly_pdcs : student_monthly_pdcs,
-            student_annula_payment_discount : student_annula_payment_discount,
-            parent_payment_transactions : parent_payment_transactions
+            annual_discount_details : annual_discount_details,
+            parent_payment_transactions : parent_payment_transactions,
+            transactionTypes : transactionTypes,
+            supportedBanks : supportedBanks
         };
         
     }]);
