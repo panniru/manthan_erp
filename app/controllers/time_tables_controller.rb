@@ -23,6 +23,17 @@ class TimeTablesController < ApplicationController
       end
     end  
   end
+  
+  def subjectserviceview
+    respond_to do |format|
+      format.json do
+        sections = Subject.all.map do |subject|
+          {subject: subject.subject, id: subject.id}
+        end
+        render :json => sections
+      end
+    end  
+  end
 
   
   def subjectserviceview

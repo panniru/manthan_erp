@@ -14,7 +14,6 @@ ManthanErp::Application.routes.draw do
   get "/time_tables/subjectserviceview"
   get "staffs/gradeserviceview"
 
-
   root to: "home#index"
 
   resources :time_tables  
