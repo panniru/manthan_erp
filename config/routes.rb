@@ -6,8 +6,14 @@ ManthanErp::Application.routes.draw do
   get 'auto_search/student_name_by_grade_and_section'
 
   get "home/aboutus"
+  get "time_tables/gradeserviceview"
+  get "time_tables/sectionserviceview"
+  get "/time_tables/subjectserviceview"
 
   root to: "home#index"
+  resources :students
+  resources :time_tables 
+  
 
   resources :fee_types do
     collection do

@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20140610045045) do
 
   # These are extensions that must be enabled in order to support this database
@@ -170,6 +171,12 @@ ActiveRecord::Schema.define(version: 20140610045045) do
     t.datetime "updated_at"
   end
 
+  create_table "grades", force: true do |t|
+    t.string   "grade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "job_runs", force: true do |t|
     t.integer  "job_id"
     t.datetime "started_on"
@@ -283,6 +290,12 @@ ActiveRecord::Schema.define(version: 20140610045045) do
     t.datetime "updated_at"
   end
 
+  create_table "sections", force: true do |t|
+    t.string   "section"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "student_hrs", force: true do |t|
     t.string   "name"
     t.date     "dob"
@@ -330,6 +343,12 @@ ActiveRecord::Schema.define(version: 20140610045045) do
     t.datetime "updated_at"
   end
 
+  create_table "subjects", force: true do |t|
+    t.string   "subject"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "term_definitions", force: true do |t|
     t.string   "term_definition"
     t.datetime "created_at"
@@ -347,7 +366,20 @@ ActiveRecord::Schema.define(version: 20140610045045) do
     t.datetime "updated_at"
   end
 
-  create_table "tests", force: true do |t|
+  create_table "time_tables", force: true do |t|
+    t.string   "academic_year"
+    t.string   "gradeid"
+    t.string   "section"
+    t.string   "periodid"
+    t.string   "mon_sub"
+    t.string   "tue_sub"
+    t.string   "wed_sub"
+    t.string   "thu_sub"
+    t.string   "fri_sub"
+    t.string   "sat_sub"
+    t.string   "sun_sub"
+    t.time     "st_time"
+    t.time     "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

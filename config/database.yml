@@ -21,6 +21,7 @@ test:
   timeout: 5000
   username: manthan
   password: welcome
+
 production:
   adapter: postgresql
   database: manthan_production
@@ -28,3 +29,7 @@ production:
   timeout: 5000
   username: manthan
   password: welcome
+
+
+
+

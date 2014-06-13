@@ -107,6 +107,10 @@ GEM
       request_store (~> 1.0.3)
     equalizer (0.0.9)
     erubis (2.7.0)
+<<<<<<< HEAD
+=======
+    execjs (2.0.2)
+>>>>>>> origin/manthan_muralee
     execjs (2.1.0)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
