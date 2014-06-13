@@ -4,7 +4,12 @@ class TermWiseGradeFee < ActiveRecord::Base
   
   scope :belongs_to_fee_grade_bucket, lambda{|bucket| where("fee_grade_bucket_id = ?", bucket)}
   scope :belongs_to_term_difinition, lambda{|term| where("term_definition_id = ?", term)}
-  scope :student_unpaid_terms, lambda{|parent_payment_master| where("term_definition_id NOT IN(?)", ParentPaymentTransaction.bolongs_to_parent_payment_master(parent_payment_master).map(&:payment_detail_id))}
+  scope :student_unpaid_terms_in_transactions, lambda{|parent_payment_transactions| where("term_definition_id NOT IN(?)", parent_payment_transactions.map(&:term_definition_id))}
+  scope :student_unpaid_terms_in_parent_cheques, lambda{|parent_cheques| where("term_definition_id NOT IN(?)", parent_cheques.map(&:term_definition_id))}
+
+  def amount_real_value
+    read_attribute(:amount_in_rupees)
+  end
   
   def amount_in_rupees
     (read_attribute(:amount_in_rupees).to_f/RuleEngine.new.value(:amount, :unit))

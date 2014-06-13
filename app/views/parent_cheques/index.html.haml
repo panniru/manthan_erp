@@ -1,0 +1,28 @@
+.col-md-10{:ng_controller => "ParentChequesController"}
+  = render "search"
+  %br
+  .row{:ng_show => "parent_cheques.length > 0"}
+    %h4.panel-title 
+      = "Cheques"
+    %hr
+    %table.table.table-bordered.table-striped.table-hover
+      %thead
+        %th Cheque Number
+        %th Parent Name
+        %th Student Name
+        %th Cheque Date
+        %th Amount 
+        %th Status
+        %th Action
+      %tbody
+        %tr{:ng_repeat => "cheque in parent_cheques"}
+          %td {{cheque.cheque_number}}
+          %td {{cheque.parent_name}}
+          %td {{cheque.student_name}}
+          %td {{cheque.cheque_date}}
+          %td {{cheque.amount_in_rupees}}
+          %td {{cheque.status}}
+          %td
+            %a.label{:href => "#", :ng_class => "{true: 'label-danger', false: 'label-success'}[cheque.status === 'Pending']", :ng_click => "clearCheque(cheque)"}
+              %i{:ng_class => "{true: 'fa fa-thumbs-down fa-lg', false: 'fa fa-thumbs-up fa-lg'}[cheque.status === 'Pending']"}
+              {{cheque.status=== 'Pending' ? "Clear" : "Cleared"}}

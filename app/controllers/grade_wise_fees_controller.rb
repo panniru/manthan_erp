@@ -5,7 +5,7 @@ class GradeWiseFeesController < ApplicationController
     respond_to do |format|
       format.json do
         total = 0.0
-        fee_details = GradeWiseFee.belongs_to_fee_grade_bucket(GradeBucketMapping.find_by_grade_master_id(student.grade_master).fee_grade_bucket_id).map do |fee|
+        fee_details = GradeWiseFee.belongs_to_fee_grade_bucket(student.grade_bucket_id).map do |fee|
           total = total + fee.amount_in_rupees
           {:fee_type => fee.fee_type.fee_type, :amount_in_rupees => fee.amount_in_rupees}
         end

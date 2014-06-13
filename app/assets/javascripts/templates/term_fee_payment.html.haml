@@ -3,7 +3,7 @@
     %label.control-label.col-md-4 Term
     .col-sm-6
       %input{:type => "text", :class => "form-control", :ng_model => "term.term", :readonly => true}
-      %input{:type => "hidden", :ng_value => "term.term_definition_id" , :name => "[parent_payment_master][parent_payment_transaction][payment_detail_id]"}
+      %input{:type => "hidden", :ng_value => "term.term_definition_id" , :name => "[parent_payment_master][parent_payment_transaction][term_definition_id]"}
   .form-group
     %label{:class => "control-label col-md-4"} Term Amount  
     .col-md-6
@@ -17,17 +17,17 @@
     .form-group
       %label{:class => "control-label col-md-4"} Cheque Number
       .col-md-6
-        %input{:type => "text", :class => "form-control", :name => "[parent_payment_master][parent_cheques][][cheque_number]"}
+        %input{:type => "text", :class => "form-control", :name => "[parent_payment_master][parent_cheques][cheque_number]"}
     .form-group
       %label{:class => "control-label col-md-4"} Bank
       .col-md-6
         %select.form-control{ :name => "", :ng_model =>"selected_bank", :ng_options => "bank.value as bank.text for bank in supportedBanks"}
-        %input{:type => "hidden", :ng_value => "selected_bank" , :name => "[parent_payment_master][parent_cheques][][bank_name]"}
+        %input{:type => "hidden", :ng_value => "selected_bank" , :name => "[parent_payment_master][parent_cheques][bank_name]"}
     .form-group
       %label{:class => "control-label col-md-4"} IFSC Code
       .col-md-6
-        %input{:type => "text", :class => "form-control", :name => "[parent_payment_master][parent_cheques][][ifsc_code]"}
+        %input{:type => "text", :class => "form-control", :name => "[parent_payment_master][parent_cheques][ifsc_code]"}
     .form-group
       %label{:class => "control-label col-md-4"} Cheque Date
       .col-md-6
-        %input{:type => "text", :class => "datepicker form-control", :name => "[parent_payment_master][parent_cheques][][cheque_date]"}
+        %input{:type => "text", :class => "datepicker form-control", :name => "[parent_payment_master][parent_cheques][cheque_date]"}

@@ -73,10 +73,10 @@ ManthanErp::Application.routes.draw do
       get "pay"
     end
     member do
-      get "submitted_pdcs"
+      get "pending_pdcs"
       get "cleared_pdcs"
       get "payment_transactions"
-
+      get "submitted_pdcs"
     end
   end
 
@@ -98,5 +98,8 @@ ManthanErp::Application.routes.draw do
       get "enquiry_new"
     end
   end
+
+  resources :parent_cheques
+
 
 end

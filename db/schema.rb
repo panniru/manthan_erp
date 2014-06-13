@@ -11,10 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611042313) do
+ActiveRecord::Schema.define(version: 20140613105413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
+  enable_extension "fuzzystrmatch"
 
   create_table "admissions", force: true do |t|
     t.string   "admission_no"
@@ -227,6 +229,7 @@ ActiveRecord::Schema.define(version: 20140611042313) do
     t.datetime "updated_at"
     t.string   "bank_name"
     t.string   "ifsc_code"
+    t.integer  "term_definition_id"
   end
 
   create_table "parent_payment_masters", force: true do |t|
@@ -247,7 +250,7 @@ ActiveRecord::Schema.define(version: 20140611042313) do
     t.string   "academic_year"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "payment_detail_id"
+    t.integer  "term_definition_id"
   end
 
   create_table "parents", force: true do |t|
