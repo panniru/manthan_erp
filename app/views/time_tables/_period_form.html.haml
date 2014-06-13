@@ -5,19 +5,19 @@
       .col-md-4 
         .col-md-12
           = label_tag(:grade, "Select Grade") 
-        .col-md-12
-          %select{"ng-model" => "myGrade", "ng-options" => "grade.grade for grade in grades"}       
+        .form-group.col-md-12
+          %select{"ng-model" => "myGrade", "ng-options" => "grade.grade for grade in grades",:class => "form-control"} 
+          {{myGrade}}      
       .col-md-4{"ng-controller" => "SectionController"} 
         .col-md-12
           = label_tag(:grade, "Select Section")
-        .col-md-12
-          %select{"ng-model" => "mySection", "ng-options" =>"section.section for section in sections"}
+        .form-group.col-md-12
+          %select{"ng-model" => "mySection", "ng-options" =>"section.section for section in sections",:class => "form-control"}
       .col-md-4
         = submit_tag("GO",{class: "btn btn-primary"})
         = submit_tag("ADD TIME TABLE",{class: "btn btn-primary"})
     .col-md-2   
-%br
-  .row{"ng-controller" => "GradeController"}
+  .row
     .col-md-2 
     .col-md-8
       .col-md-4
@@ -28,37 +28,55 @@
         {{period}}
       .col-md-4
         = button_tag("ADD",{class: "btn btn-primary", :ng_click => "addPeriods()"})
-        %div{"ng-show" => "myValue"}
-          %table
-            %tr
-              %th PERIOD
-              %th MON
-              %th TUE
-              %th WED
-              %th THU
-              %th FRI
-              %th SAT
-              %th SUN             
-            %tr{"ng-repeat" => "timeperiod in timeperiods"}
-              %td Period{{" "+($index+1)}}
-              %td 
-                = text_field_tag  "period",nil, :class => "form-control", :ng_model => "period", :placeholder => "period"
-              %td Phy
-              %td Che
-              %td Eng
-              %td Bio
-              %td css
-              %td
+  %br
+  .row
+    .col-md-1
+    .col-md-8
+      %div{"ng-show" => "myValue"}
+        {{timeperiods}}
+        %table
+          %tr
+            %th PERIOD
+            %th MON
+            %th TUE
+            %th WED
+            %th THU
+            %th FRI
+            %th SAT           
+          %tr{"ng-repeat" => "timeperiod in timeperiods"}
+            %td Period{{" "+($index+1)}}
+            %td 
+              %select{"ng-model" => "timeperiod['mon_sub']", "ng-options" => "subject.id as  subject.subject for subject in subjects",:class => "form-control"} 
+              {{timeperiod['mon_sub']}}
+            %td
+              %select{"ng-model" => "timeperiod['tue_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}
+              {{timeperiod['tue_sub']}}
+            %td
+              %select{"ng-model" => "timeperiod['wed_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects"}
+            %td
+              %select{"ng-model" => "timeperiod['thu_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects"}
+            %td 
+              %select{"ng-model" => "timeperiod['fri_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects"}
+            %td 
+              %select{"ng-model" => "timeperiod['sat_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects"}
     .col-md-2 
       :css
         table, th, td
         {
         border-collapse:collapse;
-        border:1px solid #6aa6d6;
+        border:7px solid #6aa6d6;
         }
         th, td
         {
         padding:5px;
-        }    
-  .row{"ng-repeat" => "timeperiod in timeperiods"}
-    hI
+        }
+  .row
+    .col-md-1
+    .col-md-8
+      Hi
+    .col-md-3
+  .row    
+    .col-md-4.col-md-offset-10
+      -#= button_tag("SAVE",{class: "btn btn-primary", :ng_click => "savePeriods()"})
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "savePeriods()", :value => "Save"} 
+      = link_to "Back", grade_wise_fees_path, :class => "btn btn-primary"

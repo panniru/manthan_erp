@@ -1,14 +1,24 @@
 (function(angular, app) {
     "use strict";
-    app.service("getGradeService",["$http", function($http) {
+    app.service("gradeService",["$http", function($http) {
         var getGradeServiceView = function(){
             var url = "/time_tables/gradeserviceview.json"
             return $http.get(url);
         };
+
+        var savePeriods = function(timeperiods){
+            alert("hello");
+            var url = "/time_tables/saveperiods.json"
+            return $http.post(url, {time_periods: timeperiods});
+            
+        };
+        
         
         return {
-            getGradeServiceView : getGradeServiceView
+            getGradeServiceView : getGradeServiceView,
+            savePeriods : savePeriods
         };
+
         
     }]);
     
@@ -24,15 +34,18 @@
         
     }]);
 
-    app.service("getSubjectService",["$http", function($http) {
-        var getSubjectnServiceView = function(){
+    app.service("subjectService",["$http", function($http) {
+        var getSubjectServiceView = function(){
             var url = "/time_tables/subjectserviceview.json"
             return $http.get(url);
         };
         
         return {
-            getSubjectnServiceView : getSubjectnServiceView
+            getSubjectServiceView : getSubjectServiceView
         };
         
     }]);
+
+   
+
 })(angular, myApp);

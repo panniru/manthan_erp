@@ -35,7 +35,6 @@ class TimeTablesController < ApplicationController
     end  
   end
 
-  
   def subjectserviceview
     respond_to do |format|
       format.json do
@@ -47,4 +46,17 @@ class TimeTablesController < ApplicationController
     end  
   end
 
+  def saveperiods
+    puts(params)
+    timeperiods=params
+    p "================"
+    p params[:time_periods].first
+
+    respond_to do |format|
+      format.json do
+      
+        render :json => grades
+      end
+    end  
+  end
 end
