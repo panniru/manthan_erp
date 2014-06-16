@@ -11,12 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140613105413) do
+ActiveRecord::Schema.define(version: 20140616051538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_trgm"
-  enable_extension "fuzzystrmatch"
 
   create_table "admissions", force: true do |t|
     t.string   "admission_no"
@@ -133,7 +131,7 @@ ActiveRecord::Schema.define(version: 20140613105413) do
     t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
- end
+  end
 
   create_table "fee_grade_buckets", force: true do |t|
     t.string   "grade_from"
@@ -165,13 +163,6 @@ ActiveRecord::Schema.define(version: 20140613105413) do
     t.datetime "updated_at"
   end
 
-  create_table "grade_bucket_maps", force: true do |t|
-    t.integer  "grade_id"
-    t.integer  "grade_bucket_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "grade_masters", force: true do |t|
     t.string   "grade_name"
     t.datetime "created_at"
@@ -186,7 +177,6 @@ ActiveRecord::Schema.define(version: 20140613105413) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
 
   create_table "grades", force: true do |t|
     t.string   "grade"
@@ -285,8 +275,6 @@ ActiveRecord::Schema.define(version: 20140613105413) do
     t.datetime "updated_at"
   end
 
-
-
   create_table "pg_search_documents", force: true do |t|
     t.text     "content"
     t.integer  "searchable_id"
@@ -304,11 +292,28 @@ ActiveRecord::Schema.define(version: 20140613105413) do
     t.datetime "updated_at"
   end
 
-
   create_table "roles", force: true do |t|
     t.string   "role"
     t.string   "code"
     t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sections", force: true do |t|
+    t.string   "section"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "staffs", force: true do |t|
+    t.string   "staff_name"
+    t.string   "staff_exp"
+    t.string   "grade"
+    t.string   "start_time"
+    t.string   "end_time"
+    t.string   "period"
+    t.string   "date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -344,6 +349,11 @@ ActiveRecord::Schema.define(version: 20140613105413) do
     t.integer  "term_definition_id"
     t.integer  "amount_in_rupees"
     t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tests", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
