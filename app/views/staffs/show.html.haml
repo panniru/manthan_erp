@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Staff name:
+  = @staff.staff_name
+%p
+  %b Staff exp:
+  = @staff.staff_exp
+%p
+  %b Grade:
+  = @staff.grade
+%p
+  %b Start time:
+  = @staff.start_time
+%p
+  %b End time:
+  = @staff.end_time
+%p
+  %b Period:
+  = @staff.period
+%p
+  %b Date:
+  = @staff.date
+
+= link_to 'Edit', edit_staff_path(@staff)
+\|
+= link_to 'Back', staffs_path

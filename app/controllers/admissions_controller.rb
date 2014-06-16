@@ -52,7 +52,8 @@ class AdmissionsController < ApplicationController
  def update
    @admission = Admission.find(params[:id])
    respond_to do |format|
-     if @admission.update(:status => "Application Created")
+     if @admission.update(admission_params)
+       @admission.update(:status => "Application Created")
        format.html { redirect_to admissions_path, notice: 'Admission was successfully updated.' }
        format.json { render action: 'index', :status => "success" }
        
@@ -66,7 +67,7 @@ class AdmissionsController < ApplicationController
     @admission = Admission.find(params[:id])
     @admission.destroy
     respond_to do |format|
-      format.html { redirect_to admissions_url }
+      format.html { redirect_to admission_index_admissions_path }
     end
   end
   def admission_params

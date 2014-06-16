@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20140610045045) do
+ActiveRecord::Schema.define(version: 20140616051538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -274,8 +273,8 @@ ActiveRecord::Schema.define(version: 20140610045045) do
   end
 
   create_table "post_dated_cheques", force: true do |t|
-    t.integer  "date"
-    t.integer  "month"
+    t.date     "date"
+    t.string   "month"
     t.integer  "academic_year"
     t.float    "amount_per"
     t.datetime "created_at"
@@ -292,6 +291,18 @@ ActiveRecord::Schema.define(version: 20140610045045) do
 
   create_table "sections", force: true do |t|
     t.string   "section"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "staffs", force: true do |t|
+    t.string   "staff_name"
+    t.string   "staff_exp"
+    t.string   "grade"
+    t.string   "start_time"
+    t.string   "end_time"
+    t.string   "period"
+    t.string   "date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -366,9 +377,15 @@ ActiveRecord::Schema.define(version: 20140610045045) do
     t.datetime "updated_at"
   end
 
+  create_table "tests", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "time_tables", force: true do |t|
     t.string   "academic_year"
     t.string   "gradeid"
+    t.string   "staffid"
     t.string   "section"
     t.string   "periodid"
     t.string   "mon_sub"

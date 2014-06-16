@@ -1,0 +1,31 @@
+= form_for @staff do |f|
+  - if @staff.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@staff.errors.count, "error")} prohibited this staff from being saved:"
+      %ul
+        - @staff.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :staff_name
+    = f.text_field :staff_name
+  .field
+    = f.label :staff_exp
+    = f.text_field :staff_exp
+  .field
+    = f.label :grade
+    = f.text_field :grade
+  .field
+    = f.label :start_time
+    = f.text_field :start_time
+  .field
+    = f.label :end_time
+    = f.text_field :end_time
+  .field
+    = f.label :period
+    = f.text_field :period
+  .field
+    = f.label :date
+    = f.text_field :date
+  .actions
+    = f.submit 'Save'

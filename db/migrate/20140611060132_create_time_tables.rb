@@ -3,6 +3,7 @@ class CreateTimeTables < ActiveRecord::Migration
     create_table :time_tables do |t|
       t.string :academic_year
       t.string :gradeid
+      t.string :staffid
       t.string :section
       t.string :periodid
       t.string :mon_sub

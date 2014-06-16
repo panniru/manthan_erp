@@ -5,7 +5,7 @@
 %table.table.table.striped
   %thead
     %tr
-      
+      %th
       %th Form no
       %th Admission no
       %th Bus Facility
@@ -21,9 +21,11 @@
   %tbody
     - @admissions.each do |admission|
       %tr
+        %td= check_box_tag "admission_ids[]", admission.id 
         %td= admission.form_no
         %td= admission.admission_no
         %td= admission.bus
+        %td= admission.blood_group
         %td= admission.last_school
         %td= admission.medium
         %td= admission.board
