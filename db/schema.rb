@@ -241,7 +241,6 @@ ActiveRecord::Schema.define(version: 20140616051538) do
 
   create_table "grade_bucket_mappings", force: true do |t|
     t.integer  "grade_master_id"
-
     t.integer  "fee_grade_bucket_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -306,20 +305,10 @@ ActiveRecord::Schema.define(version: 20140616051538) do
     t.date     "cheque_date"
     t.string   "status"
     t.integer  "post_dated_cheque_id"
-
-  create_table "pg_search_documents", force: true do |t|
-    t.text     "content"
-    t.integer  "searchable_id"
-    t.string   "searchable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "post_dated_cheques", force: true do |t|
-    t.date     "date"
-    t.string   "month"
-    t.integer  "academic_year"
-    t.float    "amount_per"
+    t.string   "bank_name"
+    t.string   "ifsc_code"
     t.integer  "term_definition_id"
   end
 
@@ -431,12 +420,6 @@ ActiveRecord::Schema.define(version: 20140616051538) do
   end
 
   create_table "subject_masters", force: true do |t|
-    t.string   "subject"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "subjects", force: true do |t|
     t.string   "subject"
     t.datetime "created_at"
     t.datetime "updated_at"

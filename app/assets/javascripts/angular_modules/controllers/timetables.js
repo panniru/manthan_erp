@@ -23,9 +23,9 @@
             });
         
         $scope.addPeriods = function (){ 
-            alert($scope.myGrade);
-            alert($scope.mySection);
-            alert($scope.period);
+            //alert($scope.myGrade);
+            //alert($scope.mySection);
+            //alert($scope.period);
            
             $scope.myValue="true"
            
@@ -51,7 +51,7 @@
         };
         
         $scope.savePeriods = function(){
-            alert("hi");
+            //alert("hi");
             gradeService.savePeriods($scope.timeperiods)
                 .then(function(result) {
                 });
