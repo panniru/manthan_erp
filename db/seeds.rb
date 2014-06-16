@@ -58,7 +58,7 @@ end
 
 
 def seed_payment_types
-  PaymentType.where(code: "anually").first_or_create!(:code => "anually")
+  PaymentType.where(code: "annual").first_or_create!(:code => "annual")
   PaymentType.where(code: "term_wise").first_or_create!(:code => "term_wise")
   PaymentType.where(code: "monthly").first_or_create!(:code => "monthly")
 end

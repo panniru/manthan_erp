@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.2'
 
-
 gem 'rails3-jquery-autocomplete'
 gem 'pg_search'
 gem 'jquery-ui-rails', '4.1.0'
@@ -42,7 +41,7 @@ gem 'devise'
 gem 'delayed_job_active_record'
 gem 'factory_girl_rails'
 
-gem 'fullcalendar-rails'
+gem 'fullcalendar-rails', '1.6.1.0'
 gem 'jbuilder', '~> 1.2'
 gem 'carmen-rails', '~> 1.0.0'
 

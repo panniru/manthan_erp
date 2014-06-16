@@ -1,0 +1,23 @@
+.col-md-12
+  .panel.panel-default
+    .panel-heading
+      Submitted PDCs
+    %table.table.table-bordered.table-striped.table-hover
+      %thead
+        %th Cheque #
+        %th Date
+        %th Bank
+        %th IFSC
+        %th Amount
+        %th Status
+      %tbody
+        %tr{"ng-repeat" => "pdc in submitted_pdcs"}
+          %td {{pdc.cheque_number}}
+          %td {{pdc.cheque_date}}
+          %td {{pdc.bank_name}}
+          %td {{pdc.ifsc_code}}
+          %td {{pdc.amount_in_rupees}}
+          %td 
+            %span.label{:ng_class => "{true: 'label-danger', false: 'label-success'}[cheque.status === 'Pending']"}
+              {{pdc.status}}
+

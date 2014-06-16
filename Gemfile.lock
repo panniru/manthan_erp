@@ -117,7 +117,7 @@ GEM
     font-awesome-rails (4.1.0.0)
       railties (>= 3.2, < 5.0)
     fssm (0.2.10)
-    fullcalendar-rails (1.6.4.0)
+    fullcalendar-rails (1.6.1.0)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -268,7 +268,7 @@ DEPENDENCIES
   draper
   factory_girl_rails
   font-awesome-rails
-  fullcalendar-rails
+  fullcalendar-rails (= 1.6.1.0)
   haml-rails
   jbuilder (~> 1.2)
   jquery-rails

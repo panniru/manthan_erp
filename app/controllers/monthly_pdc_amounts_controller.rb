@@ -3,11 +3,11 @@ class MonthlyPdcAmountsController < ApplicationController
 
   def month_wise_fee_of_student
     student_id = params[:student_id]
-    student = StudentHr.find(params[:student_id]);
+    student = StudentMaster.find(params[:student_id]);
     respond_to do |format|
       format.json do
         total = 0.0
-        month_wise_fees = MonthlyPdcAmount.belongs_to_fee_grade_bucket(FeeGradeBucket.find_grade_bucket_by_grade(student.grade)).map do |month_fee|
+        month_wise_fees = MonthlyPdcAmount.belongs_to_fee_grade_bucket(GradeBucketMapping.find_by_grade_master_id(student.grade_master).fee_grade_bucket_id).map do |month_fee|
           total = total + month_fee.amount_in_rupees
           {:month => month_fee.post_dated_cheque.month, :amount_in_rupees => month_fee.amount_in_rupees}
         end

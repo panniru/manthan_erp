@@ -1,6 +1,6 @@
-class CreateStudentHrs < ActiveRecord::Migration
+class CreateStudentMasters < ActiveRecord::Migration
   def change
-    create_table :student_hrs do |t|
+    create_table :student_masters do |t|
       t.string :name
       t.date :dob
       t.date :joining_date

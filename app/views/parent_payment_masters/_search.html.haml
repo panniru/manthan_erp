@@ -1,5 +1,5 @@
 .colmd-10{:ng_controller => "StudentSearchController"}
-  = form_tag pay_parent_payment_masters_path, :method => 'get' , :class => "form-inline" do
+  = form_tag pay_parent_payment_masters_path, :method => 'get' , :class => "form-inline", :name => "StudentSearchForm" do
     .form-group.col-md-3
       %label{:class=> "form-label col-md-4"} Grade
       .col-md-6
@@ -16,6 +16,7 @@
         '',
         "/auto_search/student_name_by_grade_and_section?grade={{grade.id}}&section= {{section.id}}",
         :placeholder => "Student Name", :class => 'form-control',
+          :required => true,
           :id_element => "#student_id"
       .col-md-3
         = hidden_field_tag :student_id, :id => "student_id"

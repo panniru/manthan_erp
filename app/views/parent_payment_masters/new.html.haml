@@ -9,7 +9,7 @@
     .col-md-5
       %grade_fee_details{ :student_id => "#{@parent_payment_master.student_id}"}
     .col-md-7
-      %payment_type_tabs{ :student_id => "#{@parent_payment_master.student_id}"}
+      %payment_type_tabs{ :student_id => "#{@parent_payment_master.student_id}", :paymentMasterId => "#{@parent_payment_master.id}"}
   
 .col-md-10{:ng_controller => "PaymentsController"}
   %h4.panel-title 

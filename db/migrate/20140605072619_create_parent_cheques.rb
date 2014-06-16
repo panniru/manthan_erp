@@ -1,6 +1,6 @@
-class CreateParentPdcs < ActiveRecord::Migration
+class CreateParentCheques < ActiveRecord::Migration
   def change
-    create_table :parent_pdcs do |t|
+    create_table :parent_cheques do |t|
       t.integer :parent_id
       t.integer :student_id
       t.integer :parent_payment_master_id

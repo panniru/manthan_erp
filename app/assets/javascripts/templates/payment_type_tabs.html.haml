@@ -12,43 +12,52 @@
           Monthly
     .tab-content
       #anual.tab-pane.fade.in.active
-        .row
-          .col-md-3
-            %label Discount
-          .col-md-4
-            %input{:type => "text", :class => "form-control", :value => "{{discount}}", :readonly => true}
-        .row
-          .col-md-3
-            %label Total 
-          .col-md-4
-            %input{:type => "text", :class => "form-control", :value => "{{total_after_discount}}", :readonly => true}
+        %table.table.table-bordered.table-striped.table-hover
+          %tbody
+            %tr 
+              %td Total Amount
+              %td {{discount.total_amount}}
+            %tr 
+              %td Discount %
+              %td {{discount.percentage}}
+            %tr 
+              %td Discount Amount
+              %td {{discount.discount_amount}}
+            %tr 
+              %th Final Amount
+              %th {{discount.amount_to_be_paid}}
       #term_wise.tab-pane.fade
-        .row{"ng-repeat" => "term in terms"}
-          .col-md-4
-            %label {{term.term}}
-          .col-md-6
-            %input{:type => "text", :class => "form-control", :value => "{{term.amount_in_rupees}}", :readonly => true}
-        .row
-          .col-md-4
-            %label Total
-          .col-md-6
-            %input{:type => "text", :class => "form-control", :value => "{{term_totals}}", :readonly => true}
+        %table.table.table-bordered.table-striped.table-hover
+          %thead
+            %th Term
+            %th Amount
+          %tbody
+            %tr{"ng-repeat" => "term in terms"}
+              %td {{term.term}}
+              %td {{term.amount_in_rupees}}
+            %tr
+              %th Total
+              %td {{term_totals}}
       #monthly.tab-pane.fade
         .col-md-6
-          .row{"ng-repeat" => "month in months | limitTo:5"}
-            .col-md-4
-              %label {{month.month}}
-            .col-md-6
-              %input{:type => "text", :class => "form-control", :value => "{{month.amount_in_rupees}}", :readonly => true}
+          %table.table.table-bordered.table-striped.table-hover
+            %thead
+              %th Month
+              %th Amount
+            %tbody
+              %tr{"ng-repeat" => "month in months | limitTo:5"}
+                %td {{month.month}}
+                %td {{month.amount_in_rupees}}
         .col-md-6
-          .row{"ng-repeat" => "month in months | limitTo: months.length | limitTo: -5"}
-            .col-md-4
-              %label {{month.month}}
-            .col-md-6
-              %input{:type => "text", :class => "form-control", :value => "{{month.amount_in_rupees}}", :readonly => true}
-          .row
-            .col-md-4
-              %label Total
-            .col-md-6
-              %input{:type => "text", :class => "form-control", :value => "{{month_totals}}", :readonly => true}
+          %table.table.table-bordered.table-striped.table-hover
+            %thead
+              %th Month
+              %th Amount
+            %tbody
+              %tr{"ng-repeat" => "month in months | limitTo: months.length | limitTo: -5"}
+                %td {{month.month}}
+                %td {{month.amount_in_rupees}}
+              %tr
+                %th Total
+                %th {{month_totals}}
     

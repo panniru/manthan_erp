@@ -2,9 +2,12 @@
   = "Transactions History"
   = link_to (fa_icon "angle-double-up lg", :id => "collapse-icon"),"#" ,:class => "collapse-link pull-right", :data => {:toggle => "collapse", :target => "#collapse-div0"}
 %hr
-#collapse-div0{:ng_controller => "PaymentTransactionsController", :ng_init => "getParentPaymentTransactions('#{@parent_payment_master.id}')"}
-  .col-md-12
+#collapse-div0
+
+  .col-md-6{:ng_controller => "PaymentTransactionsController", :ng_init => "getParentPaymentTransactions('#{@parent_payment_master.id}')"}
     .panel.panel-default
+      .panel-heading
+        Transactions
       %table.table.table-bordered.table-striped.table-hover
         %thead
           %th Transaction Date
@@ -18,3 +21,5 @@
             %td {{transaction.transaction_type}}
             %td {{transaction.particulars}}
             
+  .col-md-6{:ng_controller => "MonthlyPdcsController", :ng_init => "submitted_pdcs('#{@parent_payment_master.id}')"}
+    = render "submitted_pdc"

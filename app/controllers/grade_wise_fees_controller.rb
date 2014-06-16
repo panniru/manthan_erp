@@ -1,15 +1,15 @@
 class GradeWiseFeesController < ApplicationController
 
   def grade_wise_fee_of_student
-    student = StudentHr.find(params[:student_id]);
+    student = StudentMaster.find(params[:student_id]);
     respond_to do |format|
       format.json do
         total = 0.0
-        fee_details = GradeWiseFee.belongs_to_fee_grade_bucket(FeeGradeBucket.find_grade_bucket_by_grade(student.grade)).map do |fee|
+        fee_details = GradeWiseFee.belongs_to_fee_grade_bucket(student.grade_bucket_id).map do |fee|
           total = total + fee.amount_in_rupees
           {:fee_type => fee.fee_type.fee_type, :amount_in_rupees => fee.amount_in_rupees}
         end
-        render :json => Struct.new(:grade, :fee_details, :total).new("Grade-"+student.grade.to_s, fee_details, Formatter.two_decimal(total))
+        render :json => Struct.new(:grade, :fee_details, :total).new("Grade-"+student.grade_master.grade_name.to_s, fee_details, Formatter.two_decimal(total))
       end
     end
   end

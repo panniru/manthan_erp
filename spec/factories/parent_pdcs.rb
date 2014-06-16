@@ -1,7 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :parent_pdc do
+  factory :parent_cheque do
     parent_payment_master_id 1
     parent_payment_transaction_id 1
     amount_in_rupees 1

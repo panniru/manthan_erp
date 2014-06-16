@@ -11,10 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610045045) do
+ActiveRecord::Schema.define(version: 20140613105413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
+  enable_extension "fuzzystrmatch"
 
   create_table "admissions", force: true do |t|
     t.string   "admission_no"
@@ -38,6 +40,34 @@ ActiveRecord::Schema.define(version: 20140610045045) do
     t.string   "from"
     t.string   "to"
     t.string   "middle_name"
+    t.string   "name"
+    t.string   "klass"
+    t.string   "dob"
+    t.string   "gender"
+    t.string   "nationality"
+    t.string   "language"
+    t.string   "father_name"
+    t.string   "mother_name"
+    t.string   "father_occupation"
+    t.string   "mother_occupation"
+    t.string   "father_company"
+    t.string   "mother_company"
+    t.string   "father_education"
+    t.string   "mother_education"
+    t.string   "income"
+    t.text     "address"
+    t.string   "landline"
+    t.string   "mobile"
+    t.string   "email"
+    t.string   "transport"
+    t.string   "busstop"
+    t.string   "last_school"
+    t.string   "city"
+    t.string   "changing_reason"
+    t.string   "know_school"
+    t.string   "person"
+    t.string   "pp"
+    t.string   "status"
     t.string   "father_office_address"
     t.string   "mother_office_address"
     t.string   "father_office_telephone"
@@ -55,10 +85,10 @@ ActiveRecord::Schema.define(version: 20140610045045) do
     t.string   "sib_sex"
     t.string   "sib_grade"
     t.string   "sib_school"
-    t.string   "bus"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "avatar"
+    t.string   "bus"
     t.string   "form_no"
   end
 
@@ -128,6 +158,20 @@ ActiveRecord::Schema.define(version: 20140610045045) do
     t.datetime "updated_at"
   end
 
+  create_table "grade_bucket_mappings", force: true do |t|
+    t.integer  "grade_master_id"
+    t.integer  "fee_grade_bucket_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "grade_bucket_maps", force: true do |t|
+    t.integer  "grade_id"
+    t.integer  "grade_bucket_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "grade_masters", force: true do |t|
     t.string   "grade_name"
     t.datetime "created_at"
@@ -171,6 +215,23 @@ ActiveRecord::Schema.define(version: 20140610045045) do
     t.datetime "updated_at"
   end
 
+  create_table "parent_cheques", force: true do |t|
+    t.integer  "parent_id"
+    t.integer  "student_id"
+    t.integer  "parent_payment_master_id"
+    t.integer  "parent_payment_transaction_id"
+    t.integer  "amount_in_rupees"
+    t.string   "cheque_number"
+    t.date     "cheque_date"
+    t.string   "status"
+    t.integer  "post_dated_cheque_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "bank_name"
+    t.string   "ifsc_code"
+    t.integer  "term_definition_id"
+  end
+
   create_table "parent_payment_masters", force: true do |t|
     t.integer  "parent_id"
     t.integer  "student_id"
@@ -189,21 +250,7 @@ ActiveRecord::Schema.define(version: 20140610045045) do
     t.string   "academic_year"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "payment_detail_id"
-  end
-
-  create_table "parent_pdcs", force: true do |t|
-    t.integer  "parent_id"
-    t.integer  "student_id"
-    t.integer  "parent_payment_master_id"
-    t.integer  "parent_payment_transaction_id"
-    t.integer  "amount_in_rupees"
-    t.string   "cheque_number"
-    t.date     "clearence_date"
-    t.string   "status"
-    t.integer  "post_dated_cheque_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "term_definition_id"
   end
 
   create_table "parents", force: true do |t|
@@ -256,7 +303,7 @@ ActiveRecord::Schema.define(version: 20140610045045) do
     t.datetime "updated_at"
   end
 
-  create_table "student_hrs", force: true do |t|
+  create_table "student_masters", force: true do |t|
     t.string   "name"
     t.date     "dob"
     t.date     "joining_date"
@@ -264,7 +311,7 @@ ActiveRecord::Schema.define(version: 20140610045045) do
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "grade"
+    t.integer  "grade_master_id"
     t.integer  "section"
   end
 
@@ -316,11 +363,6 @@ ActiveRecord::Schema.define(version: 20140610045045) do
     t.integer  "term_definition_id"
     t.integer  "amount_in_rupees"
     t.string   "academic_year"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tests", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
