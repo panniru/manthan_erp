@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.2'
 
+gem 'carrierwave'
+
 gem 'rails3-jquery-autocomplete'
 gem 'pg_search'
 gem 'jquery-ui-rails', '4.1.0'
@@ -16,6 +18,7 @@ gem 'angular-rails-templates'
 
 gem 'font-awesome-rails'                
 gem 'numbers_and_words'
+gem 'carmen-rails', '~> 1.0.0'
 
 group :assets do
   gem 'uglifier', '>= 1.3.0'

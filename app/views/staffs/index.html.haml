@@ -1,0 +1,30 @@
+.row{"ng-controller" => "StaffCtrl"}   
+  .row
+    = label_tag(:staff_name, "Name")
+    %select{"ng-model" => "staff", "ng-options" => "staff.staff_name for staff in staffs" }
+  .row
+    = label_tag(:grade, "Grade")
+    %select{"ng-model" => "staff", "ng-options" => "staff.grade for staff in staffs" }
+%h1 Listing staffs
+%br
+%br
+  %table
+    %tr
+      %th Staff name
+      %th Staff exp
+      %th Grade
+      %th Start time
+      %th End time
+      %th Period
+      %th Date
+    %tr{"ng-repeat" => "staff in StaffView()" }
+      %td {{staff.staff_name}}
+      %td {{staff.staff_exp}}
+      %td {{staff.grade}}
+      %td {{staff.start_time}}
+      %td {{staff.end_time}}
+      %td {{staff.period}}
+      %td {{staff.date}}
+    
+
+= link_to 'New Staff', new_staff_path

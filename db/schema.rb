@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 20140613105413) do
     t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
+ end
 
   create_table "fee_grade_buckets", force: true do |t|
     t.string   "grade_from"
@@ -183,6 +183,13 @@ ActiveRecord::Schema.define(version: 20140613105413) do
     t.integer  "fee_type_id"
     t.integer  "amount_in_rupees"
     t.string   "acedemic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+
+  create_table "grades", force: true do |t|
+    t.string   "grade"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -278,6 +285,8 @@ ActiveRecord::Schema.define(version: 20140613105413) do
     t.datetime "updated_at"
   end
 
+
+
   create_table "pg_search_documents", force: true do |t|
     t.text     "content"
     t.integer  "searchable_id"
@@ -294,6 +303,7 @@ ActiveRecord::Schema.define(version: 20140613105413) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
 
   create_table "roles", force: true do |t|
     t.string   "role"
@@ -315,37 +325,8 @@ ActiveRecord::Schema.define(version: 20140613105413) do
     t.integer  "section"
   end
 
-  create_table "students", force: true do |t|
-    t.string   "form_no"
-    t.string   "name"
-    t.string   "klass"
-    t.string   "dob"
-    t.string   "gender"
-    t.string   "nationality"
-    t.string   "language"
-    t.string   "father_name"
-    t.string   "mother_name"
-    t.string   "father_occupation"
-    t.string   "mother_occupation"
-    t.string   "father_company"
-    t.string   "mother_company"
-    t.string   "father_education"
-    t.string   "mother_education"
-    t.string   "income"
-    t.text     "address"
-    t.string   "landline"
-    t.string   "mobile"
-    t.string   "email"
-    t.string   "transport"
-    t.string   "busstop"
-    t.string   "last_school"
-    t.string   "city"
-    t.string   "changing_reason"
-    t.string   "know_school"
-    t.string   "person"
-    t.string   "pp"
-    t.string   "appno"
-    t.string   "status"
+  create_table "subjects", force: true do |t|
+    t.string   "subject"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -363,6 +344,25 @@ ActiveRecord::Schema.define(version: 20140613105413) do
     t.integer  "term_definition_id"
     t.integer  "amount_in_rupees"
     t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "time_tables", force: true do |t|
+    t.string   "academic_year"
+    t.string   "gradeid"
+    t.string   "staffid"
+    t.string   "section"
+    t.string   "periodid"
+    t.string   "mon_sub"
+    t.string   "tue_sub"
+    t.string   "wed_sub"
+    t.string   "thu_sub"
+    t.string   "fri_sub"
+    t.string   "sat_sub"
+    t.string   "sun_sub"
+    t.time     "st_time"
+    t.time     "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

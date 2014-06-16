@@ -1,0 +1,11 @@
+.row
+  .col-md-12
+    #wrapper
+      #sidebar-wrapper
+        %ul.sidebar-nav
+          - admission_sub_menu.each do |admission_sub_menu_item|
+            %li{:class => admission_sub_menu_item.is_active ? "active" : "" }
+              %a{:href => admission_sub_menu_item.href}
+                = fa_icon admission_sub_menu_item.icon
+                %span
+                  = admission_sub_menu_item.label

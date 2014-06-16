@@ -1,8 +1,12 @@
+.row
+  .pull-left
+    %a.btn.btn-primary.btn-sm{href: '/admissions/admission_index', role: "button"} 
+      %span.glyphicon.glyphicon-circle-arrow-left
+      Back
+  
 %center
   %h4 ADMISSION
-.row
-  .pull-right
-    = link_to "Back", admission_index_admissions_path , :class => 'btn btn-primary'
+
 .row
   .col-sm-6
     .row
@@ -12,53 +16,53 @@
             %b
               %span.label.label-danger Parent's Details
           %tr
-            %th{style: "width:50%"}
+            %th{style: "width:6%"}
               %label{for: "father_office_address"} Father's Office Address:
-            %th{style: "width:20%"}
+            %th{style: "width:6%"}
               = @admission.father_office_address
           %tr
-            %th{style: "width:50%"}
+            %th
               %label{for: "mother_office_address"} Mother's Office Address:
             %th= @admission.mother_office_address
           %tr
-            %th{style: "width:50%"}
+            %th
               %label{for: "father_office_telephone"} Father's Office Telephone:
             %th= @admission.father_office_telephone
           %tr
-            %th{style: "width:50%"}
+            %th
               %label{for: "mother_office_telephone"} Mother's Office Telephone:
             %th= @admission.mother_office_telephone
           %tr
-            %th{style: "width:50%"}
+            %th
               %label{for: "father_office_address"} Father's Mobile:
             %th= @admission.father_mobile
           %tr
-            %th{style: "width:50%"}
+            %th
               %label{for: "mother_office_address"} Mother's Mobile:
             %th= @admission.mother_mobile
           %tr
-            %th{style: "width:50%"}
+            %th
               %label{for: "father_office_address"} Father's Religion:
             %th= @admission.father_religion
           %tr
-            %th{style: "width:50%"}
+            %th
               %label{for: "mother_office_address"} Mother's Religion:
             %th= @admission.mother_religion
           %tr
-            %th{style: "width:50%"}
-              %label{for: "father_email"} Father's Email
+            %th
+              %label{for: "father_email"} Father's Email:
             %th= @admission.father_email
           %tr
-            %th{style: "width:50%"}
-              %label{for: "mother_email"} Mother's Email
+            %th
+              %label{for: "mother_email"} Mother's Email:
             %th= @admission.mother_email
           %tr
-            %th{style: "width:50%"}
-              %label{for: "father_employer"} Father's Office
+            %th
+              %label{for: "father_employer"} Father's Office:
             %th= @admission.father_employer
           %tr
-            %th{style: "width:50%"}
-              %label{for: "mother_employer"} Mother's Office 
+            %th
+              %label{for: "mother_employer"} Mother's Office: 
             %th= @admission.mother_employer
 
     
@@ -74,7 +78,8 @@
           %tr
             %th{style: "width:50%"}
               %label{for: "admission_no"} Admission no
-            %th= @admission.admission_no
+            %th{style: "width:20%"}
+              = @admission.admission_no
           %tr
             %th{style: "width:50%"}
               %label{for: "branch"} Branch
@@ -83,8 +88,7 @@
           %tr
             %th{style: "width:50%"}
               %label{for: "surname"} Surname
-            %th{style: "width:20%"}
-              = @admission.surname
+            %th= @admission.surname
           %tr
             %th{style: "width:50%"}
               %label{for: "second_lang"} Second Lang
@@ -141,29 +145,29 @@
         %thead
           %tr
             %b
-              %span.label.label-primary Medical's Details
+              %span.label.label-danger Medical Details
           %tr
-            %th{style: "width:50%"}
-              %label{for: "Blood Group"} Blood Group
-            %th{style: "width:21%"}
+            %th{style: "width:5%"}
+              %label{for: "blood_group"} Blood Group
+            %th{style: "width:5%"}
               = @admission.blood_group
           %tr
-            %th{style: "width:50%"}
+            %th
               %label{for: "allergy"} Allergy
             %th
               = @admission.allergy
           %tr
-            %th{style: "width:50%"}
-              %label{for: "Name of the Doctor"} Name of the Doctor
+            %th
+              %label{for: "doctor_name"} Doctor's Name
             %th
               = @admission.doctor_name
           %tr
-            %th{style: "width:50%"}
-              %label{for: "mobile"} Doctor's Mobile
+            %th
+              %label{for: "doctor_mobile"} Doctor's Mobile
             %th
               = @admission.doctor_mobile
-           
-
+       
+    
   .col-sm-6
     .row
       %table
@@ -188,7 +192,7 @@
             %th
               = @admission.guardian_relationship
           %tr
-            %th{style: "width: 50%"}
+            %th{style: "width:50%"}
               %label{for: "from"} Application From
             %th
               = @admission.from
@@ -198,3 +202,4 @@
             %th
               = @admission.to
   
+

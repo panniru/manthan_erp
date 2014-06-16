@@ -1,13 +1,24 @@
 ManthanErp::Application.routes.draw do
 
+ 
+  resources :staffs
+  get "staffs/staffview"
   devise_for :users, :controllers => { :sessions => 'sessions'}
 
   get 'auto_search/autocomplete_student_name'
   get 'auto_search/student_name_by_grade_and_section'
 
   get "home/aboutus"
-
+  get "time_tables/gradeserviceview"
+  get "time_tables/sectionserviceview"
+  get "/time_tables/subjectserviceview"
+  get "staffs/gradeserviceview"
   root to: "home#index"
+
+
+
+  resources :time_tables 
+  
 
   resources :fee_types do
     collection do
@@ -90,12 +101,15 @@ ManthanErp::Application.routes.draw do
       get 'enquiry_show'
       get 'admission_show'
       get 'admission_new'
+      get 'event_new'
+      get 'event_show'
     end
 
     collection do
       get "enquiry_index"
       get "admission_index"
       get "enquiry_new"
+      get "event_index"
     end
   end
 
