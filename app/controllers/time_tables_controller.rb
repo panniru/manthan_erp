@@ -5,7 +5,7 @@ class TimeTablesController < ApplicationController
   def gradeserviceview
     respond_to do |format|
       format.json do
-        grades = Grade.all.map do |grade|
+        grades = GradeMaster.all.map do |grade|
           {grade: grade.grade, id: grade.id}
         end
         render :json => grades
@@ -16,7 +16,7 @@ class TimeTablesController < ApplicationController
   def sectionserviceview
     respond_to do |format|
       format.json do
-        sections = Section.all.map do |section|
+        sections = SectionMaster.all.map do |section|
           {section: section.section, id: section.id}
         end
         render :json => sections
@@ -27,7 +27,7 @@ class TimeTablesController < ApplicationController
   def subjectserviceview
     respond_to do |format|
       format.json do
-        sections = Subject.all.map do |subject|
+        sections = SubjectMaster.all.map do |subject|
           {subject: subject.subject, id: subject.id}
         end
         render :json => sections
@@ -47,15 +47,25 @@ class TimeTablesController < ApplicationController
   end
 
   def saveperiods
-    puts(params)
-    timeperiods=params
-    p "================"
-    p params[:time_periods].first
+    #puts(params)
+    #p "================"
+    #p params[:time_periods]   
+    #p "+++++++++++++++++++++"         
+    params[:time_periods].each do |t|
+      @timetable=TimeTable.new(t)
+      if @timetable.save
+        redirect_to time_tables_path
+      else
+        render "index"  
+      end
+    end
+  end
 
+  def timetableserviceview
     respond_to do |format|
       format.json do
-      
-        render :json => grades
+        sections = TimeTable.all
+        render :json => sections
       end
     end  
   end

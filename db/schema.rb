@@ -99,6 +99,89 @@ ActiveRecord::Schema.define(version: 20140616051538) do
     t.datetime "updated_at"
   end
 
+  create_table "admissions", force: true do |t|
+    t.string   "admission_no"
+    t.string   "branch"
+    t.string   "surname"
+    t.string   "second_lang"
+    t.string   "board"
+    t.string   "grade"
+    t.string   "medium"
+    t.integer  "year"
+    t.string   "written"
+    t.string   "reading"
+    t.string   "spoken"
+    t.string   "blood_group"
+    t.string   "allergy"
+    t.string   "doctor_name"
+    t.string   "doctor_mobile"
+    t.string   "guardian_name"
+    t.string   "guardian_mobile"
+    t.string   "guardian_relationship"
+    t.string   "from"
+    t.string   "to"
+    t.string   "middle_name"
+    t.string   "name"
+    t.string   "klass"
+    t.string   "dob"
+    t.string   "gender"
+    t.string   "nationality"
+    t.string   "language"
+    t.string   "father_name"
+    t.string   "mother_name"
+    t.string   "father_occupation"
+    t.string   "mother_occupation"
+    t.string   "father_company"
+    t.string   "mother_company"
+    t.string   "father_education"
+    t.string   "mother_education"
+    t.string   "income"
+    t.text     "address"
+    t.string   "landline"
+    t.string   "mobile"
+    t.string   "email"
+    t.string   "transport"
+    t.string   "busstop"
+    t.string   "last_school"
+    t.string   "city"
+    t.string   "changing_reason"
+    t.string   "know_school"
+    t.string   "person"
+    t.string   "pp"
+    t.string   "status"
+    t.string   "father_office_address"
+    t.string   "mother_office_address"
+    t.string   "father_office_telephone"
+    t.string   "mother_office_telephone"
+    t.string   "father_mobile"
+    t.string   "mother_mobile"
+    t.string   "mother_religion"
+    t.string   "father_religion"
+    t.string   "father_employer"
+    t.string   "mother_employer"
+    t.string   "father_email"
+    t.string   "mother_email"
+    t.string   "sib_name"
+    t.string   "sib_age"
+    t.string   "sib_sex"
+    t.string   "sib_grade"
+    t.string   "sib_school"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "avatar"
+    t.string   "bus"
+    t.string   "form_no"
+  end
+
+  create_table "approvals", force: true do |t|
+    t.string   "approved"
+    t.string   "def_by"
+    t.string   "status"
+    t.string   "year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -158,6 +241,7 @@ ActiveRecord::Schema.define(version: 20140616051538) do
 
   create_table "grade_bucket_mappings", force: true do |t|
     t.integer  "grade_master_id"
+
     t.integer  "fee_grade_bucket_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -310,7 +394,7 @@ ActiveRecord::Schema.define(version: 20140616051538) do
     t.datetime "updated_at"
   end
 
-  create_table "sections", force: true do |t|
+  create_table "section_masters", force: true do |t|
     t.string   "section"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -341,6 +425,12 @@ ActiveRecord::Schema.define(version: 20140616051538) do
   end
 
   create_table "subjects", force: true do |t|
+    t.string   "subject"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subject_masters", force: true do |t|
     t.string   "subject"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -391,6 +481,8 @@ ActiveRecord::Schema.define(version: 20140616051538) do
     t.time     "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "grade_master_id"
+    t.string   "section_master_id"
   end
 
   create_table "users", force: true do |t|

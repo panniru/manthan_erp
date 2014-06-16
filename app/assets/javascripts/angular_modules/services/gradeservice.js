@@ -22,7 +22,7 @@
         
     }]);
     
-    app.service("getSectionService",["$http", function($http) {
+    app.service("sectionService",["$http", function($http) {
         var getSectionServiceView = function(){
             var url = "/time_tables/sectionserviceview.json"
             return $http.get(url);
@@ -42,6 +42,18 @@
         
         return {
             getSubjectServiceView : getSubjectServiceView
+        };
+        
+    }]);
+
+    app.service("timeTableService",["$http", function($http) {
+        var getTimeTableServiceView = function(){
+            var url = "/time_tables/timetableserviceview.json"
+            return $http.get(url);
+        };
+        
+        return {
+            getTimeTableServiceView : getTimeTableServiceView
         };
         
     }]);
