@@ -1,0 +1,36 @@
+/ multistep form
+%form#msform
+  / progressbar
+  %ul#progressbar
+    %li.active Account Setup
+    %li Social Profiles
+    %li Personal Details
+  / fieldsets
+  %fieldset
+    %h2.fs-title Create your account
+    %h3.fs-subtitle This is step 1
+    %input{name: "email", placeholder: "Email", type: "text"}/
+    %input{name: "pass", placeholder: "Password", type: "password"}/
+    %input{name: "cpass", placeholder: "Confirm Password", type: "password"}/
+    %input.next.action-button{name: "next", type: "button", value: "Next"}/
+  %fieldset
+    %h2.fs-title Social Profiles
+    %h3.fs-subtitle Your presence on the social network
+    %input{name: "twitter", placeholder: "Twitter", type: "text"}/
+    %input{name: "facebook", placeholder: "Facebook", type: "text"}/
+    %input{name: "gplus", placeholder: "Google Plus", type: "text"}/
+    %input.previous.action-button{name: "previous", type: "button", value: "Previous"}/
+    %input.next.action-button{name: "next", type: "button", value: "Next"}/
+  %fieldset
+    %h2.fs-title Personal Details
+    %h3.fs-subtitle We will never sell it
+    %input{name: "fname", placeholder: "First Name", type: "text"}/
+    %input{name: "lname", placeholder: "Last Name", type: "text"}/
+    %input{name: "phone", placeholder: "Phone", type: "text"}/
+    %textarea{name: "address", placeholder: "Address"}
+    %input.previous.action-button{name: "previous", type: "button", value: "Previous"}/
+    %input.submit.action-button{name: "submit", type: "submit", value: "Submit"}/
+/ jQuery
+%script{src: "http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js", type: "text/javascript"}
+/ jQuery easing plugin
+%script{src: "http://thecodeplayer.com/uploads/js/jquery.easing.min.js", type: "text/javascript"}

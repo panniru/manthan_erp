@@ -1,0 +1,142 @@
+%center
+  %h3 Details 
+.row
+  %center
+    %table.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr
+          %th{style: "width:50%"}
+            %label{for: "form_no"} Form no
+          %th
+            = @student.form_no
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "name"} Name
+          %th
+            = @student.name
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "klass"} Class
+          %th
+            = @student.klass
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "gender"} Male/Female
+          %th
+            = @student.gender
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "language"} Language spoken at home
+          %th
+            = @student.language
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "dob"} Date of Birth
+          %th
+            = @student.dob
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "nationality"} Nationality
+          %th
+            = @student.nationality
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "father_name"} Father's Name
+          %th
+            = @student.father_name
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "mother_name"} Mother's Name
+          %th
+            = @student.mother_name
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "father_occupation"} Father's Occupation
+          %th
+            = @student.father_occupation
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "mother_occupation"} Mother's Occupation
+          %th
+            = @student.mother_occupation
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "father_education"} Father's Education
+          %th
+            = @student.father_education
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "mother_education"} Mother's Education
+          %th
+            = @student.mother_education
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "income"} Family Income
+          %th
+            = @student.income
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "address"} Residential Address
+          %th
+            = @student.address
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "landline"} Landline
+          %th
+            = @student.landline
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "mobile"} Mobile
+          %th
+            = @student.mobile
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "email"} Email
+          %th
+            = @student.email
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "transport"} Choice of Transport
+          %th
+            = @student.transport
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "busstop"} Busstop
+          %th
+            = @student.busstop
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "last_school"} School in which last Studied
+          %th
+            = @student.last_school
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "city"} City
+          %th
+            = @student.city
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "Reasons for Changing"} Reasons for Changing
+          %th
+            = @student.changing_reason
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "You came to know about our school through"} You came to know about our school through
+          %th
+            = @student.know_school
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "person"} Name
+          %th
+            = @student.person
+        %tr
+          %th{style: "width:20%"}
+            %label{for: "class"} Class
+          %th
+            = @student.pp
+        
+          
+%center
+  = link_to "Back", students_path , :class => 'btn btn-primary'
+      
+  

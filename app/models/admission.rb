@@ -1,3 +1,4 @@
 class Admission < ActiveRecord::Base
-  validates :form_no, presence: true
+  belongs_to :student
+
 end
