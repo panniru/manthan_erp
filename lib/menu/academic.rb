@@ -1,10 +1,10 @@
-class Academics
+class Academic
   
   def admin_sub_menu
     sub_menu = []
     sub_menu << time_tables
     sub_menu << teacher_timetable
-    sub_menu << teachin_gplan
+    sub_menu << teaching_plan
     sub_menu
   end
 
