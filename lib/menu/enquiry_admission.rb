@@ -5,7 +5,7 @@ class EnquiryAdmission
     sub_menu << new_enquiry_admissions
     sub_menu << show_enquiry_admissions
     sub_menu << show_application_admissions    
-    sub_menu
+    sub_menu << assessment
   end
 
   def parent_sub_menu
@@ -31,5 +31,8 @@ class EnquiryAdmission
   end
   def show_application_admissions
     MenuItem.new(:label => "Application Forms", :klass => "", :icon => "file-text", :href => "/admissions/admission_index" )
+  end
+  def assessment
+    MenuItem.new(:label => "Staff Details", :klass => "", :icon => "users", :href => "/staffs")
   end
 end

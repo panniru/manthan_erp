@@ -1,30 +1,38 @@
-.row{"ng-controller" => "StaffCtrl"}   
+
+.pull-right
+  = link_to 'New Staff', new_staff_path , :class => 'btn btn-primary'
+.pull-left
   .row
-    = label_tag(:staff_name, "Name")
-    %select{"ng-model" => "staff", "ng-options" => "staff.staff_name for staff in staffs" }
-  .row
-    = label_tag(:grade, "Grade")
-    %select{"ng-model" => "staff", "ng-options" => "staff.grade for staff in staffs" }
-%h1 Listing staffs
+    = form_tag staffs_path, :method => 'get' do
+      .col-sm-12
+        .col-sm-8
+          = select_tag(:search,options_for_select([['PP1'],['PP2'],['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10'],['11'],['12']],:selected => :grade),{:class => 'col-sm-4 form-control'})
+
+        .col-sm-3
+          = submit_tag "Search", :class => 'btn btn-primary'
 %br
-%br
-  %table
-    %tr
-      %th Staff name
-      %th Staff exp
-      %th Grade
-      %th Start time
-      %th End time
-      %th Period
-      %th Date
-    %tr{"ng-repeat" => "staff in StaffView()" }
-      %td {{staff.staff_name}}
-      %td {{staff.staff_exp}}
-      %td {{staff.grade}}
-      %td {{staff.start_time}}
-      %td {{staff.end_time}}
-      %td {{staff.period}}
-      %td {{staff.date}}
+.row
+  %center
+    %h3
+      Listing staffs
+    %table.table-striped.table-condensed
+      %tr
+        %th Staff name
+        %th Staff exp
+        %th Grade
+        %th Start time
+        %th End time
+        %th Period
+        %th Date
+        - @staffs.each do |staff|
+          %tr
+            %td= staff.staff_name
+            %td= staff.staff_exp
+            %td= staff.grade
+            %td= staff.start_time
+            %td= staff.end_time
+            %td= staff.period
+            %td= staff.date
     
 
-= link_to 'New Staff', new_staff_path
+

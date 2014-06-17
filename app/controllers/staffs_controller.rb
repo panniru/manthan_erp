@@ -4,7 +4,8 @@ class StaffsController < ApplicationController
   # GET /staffs
   # GET /staffs.json
   def index
-    @staffs = Staff.all
+    @staffs = Staff.search(params[:search])
+   
   end
   def staffview
     respond_to do |format|

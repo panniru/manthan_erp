@@ -16,10 +16,11 @@
     .row
       - if current_user.present?
         .col-md-2
-          - unless controller.controller_name == "events"
-            = render "shared/nav_bar_left"
-            - if controller.controller_name == "admissions"
-              = render "shared/admission_nav_bar"
+          - unless controller.controller_name == "staffs"
+            - unless controller.controller_name == "events"
+              = render "shared/nav_bar_left"
+              - if controller.controller_name == "admissions"
+                = render "shared/admission_nav_bar"
         #content.col-md-10
           .col-md-12
             - flash.each do |key, value|

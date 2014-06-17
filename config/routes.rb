@@ -7,7 +7,7 @@ ManthanErp::Application.routes.draw do
 
   get 'auto_search/autocomplete_student_name'
   get 'auto_search/student_name_by_grade_and_section'
-
+  get 'auto_search/autocomplete_staff_grade'
   get "home/aboutus"
   get "time_tables/gradeserviceview"
   get "time_tables/sectionserviceview"

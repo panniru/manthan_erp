@@ -1,5 +1,3 @@
-
-
 //= require angular
 //= require angular-resource
 //= require angular-route.min
@@ -13,5 +11,5 @@
 //= require autocomplete-rails
 //= require bootstrap
 //= require fullcalendar
+//= require jquery.timepicker.js
 //= require_tree .
-

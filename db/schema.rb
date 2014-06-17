@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20140616051538) do
 
   # These are extensions that must be enabled in order to support this database
@@ -86,6 +85,7 @@ ActiveRecord::Schema.define(version: 20140616051538) do
     t.string   "sib_school"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar"
     t.string   "bus"
     t.string   "form_no"
   end
@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(version: 20140616051538) do
     t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
- end
+  end
 
   create_table "fee_grade_buckets", force: true do |t|
     t.string   "grade_from"
@@ -170,7 +170,6 @@ ActiveRecord::Schema.define(version: 20140616051538) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
 
   create_table "grades", force: true do |t|
     t.string   "grade"
@@ -266,8 +265,6 @@ ActiveRecord::Schema.define(version: 20140616051538) do
     t.datetime "updated_at"
   end
 
-
-
   create_table "pg_search_documents", force: true do |t|
     t.text     "content"
     t.integer  "searchable_id"
@@ -277,7 +274,6 @@ ActiveRecord::Schema.define(version: 20140616051538) do
   end
 
   create_table "post_dated_cheques", force: true do |t|
-
     t.date     "date"
     t.string   "month"
     t.integer  "academic_year"
@@ -285,7 +281,6 @@ ActiveRecord::Schema.define(version: 20140616051538) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
 
   create_table "roles", force: true do |t|
     t.string   "role"
@@ -344,11 +339,6 @@ ActiveRecord::Schema.define(version: 20140616051538) do
     t.integer  "term_definition_id"
     t.integer  "amount_in_rupees"
     t.string   "academic_year"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tests", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
