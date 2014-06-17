@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20140616065147) do
 
   # These are extensions that must be enabled in order to support this database
@@ -329,6 +328,7 @@ ActiveRecord::Schema.define(version: 20140616065147) do
     t.datetime "updated_at"
     t.integer  "grade_master_id"
     t.integer  "section"
+    t.boolean  "bus_facility"
   end
 
   create_table "subjects", force: true do |t|

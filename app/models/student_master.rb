@@ -7,4 +7,9 @@ class StudentMaster < ActiveRecord::Base
     GradeBucketMapping.find_by_grade_master_id(self.grade_master).fee_grade_bucket_id
   end
 
+  def fee_type_applicable?(fee_type)
+    return self.bus_facility? if fee_type == "Bus Fee" 
+    true
+  end
+
 end

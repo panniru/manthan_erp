@@ -1,31 +1,13 @@
 class GradeFeeGrid
 
-  def initialize 
+  def initialize(grades = []) 
     @grade_fee_grid = nil
+    @grade_list = grades
   end
   
   def get_grid
     @grade_fee_grid ||= prepare_grid
   end
-
-  def grid_belongs_to_grades(grades)
-    @applied_grade_fee =  []
-    get_grid.each do |fee_grade|
-      list = fee_grade.select{|bucket| grades.include? bucket.fee_grade_bucket_id.to_i }
-      @applied_grade_fee << list unless list.empty?
-    end
-    @applied_grade_fee
-  end
-
-  def grid_belongs_to_grade(grade)
-    @applied_grade_fee =  []
-    get_grid.each do |fee_grade|
-      list = fee_grade.select{|bucket| grade == bucket.fee_grade_bucket_id.to_i }
-      @applied_grade_fee << list unless list.empty?
-    end
-    @applied_grade_fee
-  end
-
 
   def grid_headers
     fee_types = Set.new
@@ -59,11 +41,14 @@ class GradeFeeGrid
     end.flatten
   end
 
-
+  def get_grade_buckets_from_map
+    FeeGradeBucket.where(:id =>GradeBucketMapping.belongs_to_grades(@grade_list).map{|gr_map| gr_map.fee_grade_bucket_id})
+  end
+    
   private
 
   def prepare_grid
-    FeeGradeBucket.all.map do |bucket|
+    get_grade_buckets_from_map.map do |bucket|
       FeeType.all.map do |fee_type|
         grade_wise_fee = GradeWiseFee.find_by_fee_bucket_id_and_fee_type_id(bucket, fee_type).first
         if grade_wise_fee.present?
@@ -74,6 +59,7 @@ class GradeFeeGrid
       end
     end
   end
+
   
   class GradeFeeUnit
     include Virtus.model

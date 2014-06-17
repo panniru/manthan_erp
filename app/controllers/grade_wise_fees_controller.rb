@@ -6,8 +6,9 @@ class GradeWiseFeesController < ApplicationController
       format.json do
         total = 0.0
         fee_details = GradeWiseFee.belongs_to_fee_grade_bucket(student.grade_bucket_id).map do |fee|
-          total = total + fee.amount_in_rupees
-          {:fee_type => fee.fee_type.fee_type, :amount_in_rupees => fee.amount_in_rupees}
+          amount = student.fee_type_applicable?(fee.fee_type.fee_type) ? fee.amount_in_rupees : 0
+          total = total + amount
+          {:fee_type => fee.fee_type.fee_type, :amount_in_rupees => amount}
         end
         render :json => Struct.new(:grade, :fee_details, :total).new("Grade-"+student.grade_master.grade_name.to_s, fee_details, Formatter.two_decimal(total))
       end

@@ -6,9 +6,6 @@ class FeeStructMailingJob
   end
 
   def perform
-    grade_fee_grid = GradeFeeGrid.new
-    term_fee_grid = TermFeeGrid.new
-    monthly_pdc_grid = MonthlyPdcGrid.new
     
     Parent.all.each do |parent|
       applied_grade_bucket_ids = []
@@ -19,7 +16,12 @@ class FeeStructMailingJob
         emails << parent.mother_email if parent.mother_email.present?
         emails << parent.guardian_email if parent.guardian_email.present?
       end
-      FeeAlertsMailer.fee_structure_mail(grade_fee_grid, term_fee_grid, monthly_pdc_grid, applied_grade_bucket_ids, parent, emails).deliver
+      
+      grade_fee_grid = GradeFeeGrid.new(applied_grade_bucket_ids).get_grid
+      term_fee_grid = TermFeeGrid.new(applied_grade_bucket_ids).get_grid
+      monthly_pdc_grid = MonthlyPdcGrid.new(applied_grade_bucket_ids).get_grid
+
+      FeeAlertsMailer.fee_structure_mail(grade_fee_grid, term_fee_grid, monthly_pdc_grid, parent, emails).deliver
       puts "Excecuting Delayed job........"
     end
   end

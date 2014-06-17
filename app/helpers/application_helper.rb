@@ -24,8 +24,7 @@ module ApplicationHelper
   end
 
   def sub_menu
-    context = "fee_management".classify.constantize.new
-    user_menu = UserMenu.new(current_user, context)
+    user_menu = UserMenu.new(current_user, ContextDetector.get_context(controller.controller_name))
     user_menu.sub_menu
   end
   def admission_sub_menu

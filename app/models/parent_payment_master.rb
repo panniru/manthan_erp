@@ -81,11 +81,11 @@ class ParentPaymentMaster < ActiveRecord::Base
     self.payment_type.code
   end
 
-  def next_term_fee(fee_grade_bucket)
+  def next_term_fee(fee_grade_bucket = student.grade_bucket_id)
     term_wise_grade_fee = TermWiseGradeFee.belongs_to_fee_grade_bucket(fee_grade_bucket)
     term_wise_grade_fee = term_wise_grade_fee.student_unpaid_terms_in_transactions(parent_payment_transactions) unless parent_payment_transactions.empty?
     term_wise_grade_fee = term_wise_grade_fee.student_unpaid_terms_in_parent_cheques(parent_cheques) unless parent_cheques.empty?
-    term_wise_grade_fee
+    term_wise_grade_fee.first
   end
   
 end

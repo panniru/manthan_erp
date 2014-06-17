@@ -44,9 +44,9 @@ class StudentMastersController < ApplicationController
       format.json do
         term_wise_amount = nil
         unless payment_master.present?
-          term_wise_amount = TermWiseGradeFee.belongs_to_fee_grade_bucket(GradeBucketMapping.find_by_grade_master_id(@student_master.grade_master).fee_grade_bucket_id).order("term_definition_id").first
+          term_wise_amount = TermWiseGradeFee.belongs_to_fee_grade_bucket(@student_master.grade_bucket_id).order("term_definition_id").first
         else
-          term_wise_amount = TermWiseGradeFee.belongs_to_fee_grade_bucket(GradeBucketMapping.find_by_grade_master_id(@student_master.grade_master).fee_grade_bucket_id).order("term_definition_id").student_unpaid_terms_in_transactions(payment_master.parent_payment_transactions).first
+          term_wise_amount = payment_master.next_term_fee 
         end
         render :json => Struct.new(:term_definition_id, :amount_in_rupees, :term, :term_date).new(term_wise_amount.term_definition_id, term_wise_amount.amount_in_rupees, term_wise_amount.term_definition.term_definition)
       end

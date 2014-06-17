@@ -1,13 +1,13 @@
-.col-md-10
+.col-md-12
   %student_header_details{ :student_id => "#{@parent_payment_master.student_id}"}
-.col-md-10
+.col-md-12
   - if @parent_payment_master.monthly_payment? 
     = render "monthly_pdc_history"
   - else
     = render "transactions_history"
     
     
-.col-md-10{:ng_controller => "PaymentsController", :ng_init => "student_id = '#{@parent_payment_master.student_id}'"}
+.col-md-12{:ng_controller => "PaymentsController", :ng_init => "student_id = '#{@parent_payment_master.student_id}'"}
   %h4.panel-title 
     = "Fee Payment"
   %hr
