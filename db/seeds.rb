@@ -24,7 +24,7 @@ def seed_role
   unless @accountant_role.present?
     Role.create(:role => "accountant", :code => "accountant", :description => "accountant")
   end
-
+  
 end
 
 

@@ -34,8 +34,8 @@
     .col-md-1
     .col-md-8
       %div{"ng-show" => "myValue"}
-        {{timeperiods}}
-        %table
+        -#{{timeperiods}}
+        %table{:class => "table"}
           %tr
             %th PERIOD
             %th MON
@@ -53,28 +53,18 @@
               %select{"ng-model" => "timeperiod['tue_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}
               -#{{timeperiod['tue_sub']}}
             %td
-              %select{"ng-model" => "timeperiod['wed_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects"}
+              %select{"ng-model" => "timeperiod['wed_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}
             %td
-              %select{"ng-model" => "timeperiod['thu_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects"}
+              %select{"ng-model" => "timeperiod['thu_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}
             %td 
-              %select{"ng-model" => "timeperiod['fri_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects"}
+              %select{"ng-model" => "timeperiod['fri_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}
             %td 
-              %select{"ng-model" => "timeperiod['sat_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects"}
+              %select{"ng-model" => "timeperiod['sat_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}
     .col-md-2 
-      :css
-        table, th, td
-        {
-        border-collapse:collapse;
-        border:7px solid #6aa6d6;
-        }
-        th, td
-        {
-        padding:5px;
-        }
+      
   .row
     .col-md-1
     .col-md-8
-      Hi
     .col-md-3
   .row    
     .col-md-4.col-md-offset-10
