@@ -3,13 +3,17 @@
     app.directive('paymentTypeTabs', function(){
         return{
             restrict: 'E',
-            controller: function($scope, $attrs, $http) {
+            controller: function($scope, $attrs, $http, paymentService) {
                 $scope.terms = [];
                 $scope.is_tems_initiated = false;
                 $scope.is_months_initiated = false;
                 $scope.months = [];
-                var student_id = $attrs.studentId;
                 
+                var student_id = $attrs.studentId;
+                paymentService.annual_discount_details(student_id)
+                    .then(function(responce){
+                        $scope.discount = responce.data
+                    });
                 $scope.anual_fee_structure = function(){
                     $('#feeTab a:first').tab('show') 
                 };

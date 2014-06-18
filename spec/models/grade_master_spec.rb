@@ -1,5 +1,5 @@
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe GradeMaster, :type => :model do
+describe GradeMaster do
   pending "add some examples to (or delete) #{__FILE__}"
 end

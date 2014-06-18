@@ -1,12 +1,30 @@
-.form-group
-  .col-md-4
-    %label{:class => "form-label"} Discount  
-  %input{:type => "text", :class => "col-md-6 form-control", :ng_model => "discount", :readonly => true}
-.form-group
-  .col-md-4
-    %label{:class => "form-label"} Total  
-  %input{:type => "text", :class => "col-md-6 form-control", :ng_model => "total", :readonly => true}
-.form-group
-  .col-md-4
-    %label{:class => "form-label"} Amount   
-  %input{:type => "text", :class => "col-md-6 form-control"}
+.col-md-8{:ng_init => "annaul_discount_details()"}
+  .form-group
+    .col-md-4
+      %label{:class => "control-label"} Amount   
+    .col-md-6
+      %input{:type => "text", :class => "col-md-6 form-control", :readonly => true, :ng_model => "discount.amount_to_be_paid"}
+  .form-group
+    %label{:class => "control-label col-md-4"} Transaction Type  
+    .col-md-6
+      %select.form-control{ :name => "", :ng_model =>"selected_transaction_type", :ng_options => "transaction.value as transaction.text for transaction in transactionTypes" , :ng_change => "transactionTypeChange(selected_transaction_type)"}
+      %input{:type => "hidden", :ng_value => "selected_transaction_type" , :name => "[parent_payment_master][parent_payment_transaction][transaction_type]"}
+
+  #chqueDetailDiv{:ng_show => "is_cheque_payment"}
+    .form-group
+      %label{:class => "control-label col-md-4"} Cheque Number
+      .col-md-6
+        %input{:type => "text", :class => "form-control", :name => "[parent_payment_master][parent_cheques][cheque_number]"}
+    .form-group
+      %label{:class => "control-label col-md-4"} Bank
+      .col-md-6
+        %select.form-control{ :name => "", :ng_model =>"selected_bank", :ng_options => "bank.value as bank.text for bank in supportedBanks"}
+        %input{:type => "hidden", :ng_value => "selected_bank" , :name => "[parent_payment_master][parent_cheques][bank_name]"}
+    .form-group
+      %label{:class => "control-label col-md-4"} IFSC Code
+      .col-md-6
+        %input{:type => "text", :class => "form-control", :name => "[parent_payment_master][parent_cheques][ifsc_code]"}
+    .form-group
+      %label{:class => "control-label col-md-4"} Cheque Date
+      .col-md-6
+        %input{:type => "text", :class => "datepicker form-control", :name => "[parent_payment_master][parent_cheques][cheque_date]"}

@@ -1,61 +1,68 @@
 class ParentPaymentMaster < ActiveRecord::Base
   validates :payment_type_id, :presence => true
   belongs_to :parent 
-  belongs_to :student, :class_name => "StudentHr"
+  belongs_to :student, :class_name => "StudentMaster"
   belongs_to :payment_type
-  has_many :parent_pdcs
+  has_many :parent_cheques
   has_many :parent_payment_transactions
-  accepts_nested_attributes_for :parent_pdcs
+  accepts_nested_attributes_for :parent_cheques
   accepts_nested_attributes_for :parent_payment_transactions
-  
+
   def self.new_student_payment_master(student_id)
     payment_master = ParentPaymentMaster.new
     payment_master.student_id = student_id
     payment_master
   end
-
-  def set_next_payment_date
-    if self.payement_type.code == "term_wise"
-      
-    elsif self.payement_type.code == "monthly"
-    end
-  end
   
-  def self.prepare_payment_master(params)
+  def self.new_payment_master(params)
     payment_master = ParentPaymentMaster.new
-    student = StudentHr.find(params[:student_id])
+    student = StudentMaster.find(params[:student_id])
     pmnt_type = PaymentType.find(params[:payment_type_id])
     payment_master.parent= student.parent
     payment_master.student = student
     payment_master.payment_type = pmnt_type
-    if pmnt_type.code == "annual"
-    elsif pmnt_type.code == "term_wise"
-      payment_master.add_payment_transaction(params[:parent_payment_transaction])
-    elsif pmnt_type.code == "monthly"
-      payment_master.add_parent_pdc_entries(params[:parent_pdcs], student)
-    end
+    payment_master.prepare_payment(params)
     payment_master
   end
 
-  def update_parent_payment_master(params)
-    if annual_payment?
-    elsif term_wise_payment?
-      add_payment_transaction(params[:parent_payment_transaction])
-    elsif monthly_payment?
-      add_parent_pdc_entries(params[:parent_pdcs], self.student)
+  def prepare_payment(params)
+    if annual_payment? or term_wise_payment?
+      if params[:parent_payment_transaction][:transaction_type] == "cash" 
+        add_payment_transaction(params[:parent_payment_transaction])
+      else
+        parent_cheques << generate_parent_cheque(ParentCheque.parent_cheque_params(params[:parent_cheques]), student)do |cheque|
+          term_def_id = params[:parent_payment_transaction][:term_definition_id]
+          cheque.amount_in_rupees = TermWiseGradeFee.belongs_to_term_difinition(term_def_id).belongs_to_fee_grade_bucket(student.grade_bucket_id).first.amount_real_value
+          cheque.term_definition_id = term_def_id
+        end
+      end
+    elsif pmnt_type.code == "monthly"
+      new_parent_cheque_entries(params[:parent_cheques], student)
     end
   end
 
   def add_payment_transaction(transaction_params)
-    self.parent_payment_transactions << ParentPaymentTransaction.new(:transaction_date => DateTime.now, :amount_in_rupees => transaction_params[:amount_in_rupees], :transaction_type => "cash", :payment_detail_id => transaction_params[:payment_detail_id], :particulars => transaction_params[:particulars]);
+    self.parent_payment_transactions << ParentPaymentTransaction.new(:transaction_date => DateTime.now, :amount_in_rupees => transaction_params[:amount_in_rupees], :transaction_type => "cash", :term_definition_id => transaction_params[:term_definition_id], :particulars => transaction_params[:particulars]);
   end
 
-  def add_parent_pdc_entries(parent_pdc_params, student)
-    parent_pdc_params.each do |pdc|
+  def new_parent_cheque_entries(parent_cheque_params, student)
+    parent_cheque_params.each do |pdc|
       if pdc[:cheque_number].present?
-        self.parent_pdcs << ParentPdc.new(:cheque_number => pdc[:cheque_number], :post_dated_cheque_id => pdc[:post_dated_cheque_id],:parent_id => student.parent.id, :student_id => student.id)
+        self.parent_cheques << generate_parent_cheque(pdc, student) do |cheque|
+          cheque.cheque_date = cheque.post_dated_cheque.date
+          cheque.amount_in_rupees = MonthlyPdcAmount.belongs_to_post_dated_cheque(cheque.post_dated_cheque).belongs_to_fee_grade_bucket(student.grade_bucket_id).first.amount_real_value
+        end
       end
     end
+  end
+
+  def generate_parent_cheque(cheque_params, student)
+    parent_cheque = ParentCheque.new(cheque_params)
+    parent_cheque.status = "pending"
+    yield(parent_cheque) if block_given?
+    # parent_cheque.parent = student.parent
+    # parent_cheque.student = student
+    parent_cheque
   end
   
   def term_wise_payment?
@@ -72,6 +79,13 @@ class ParentPaymentMaster < ActiveRecord::Base
   
   def payment_code
     self.payment_type.code
+  end
+
+  def next_term_fee(fee_grade_bucket = student.grade_bucket_id)
+    term_wise_grade_fee = TermWiseGradeFee.belongs_to_fee_grade_bucket(fee_grade_bucket)
+    term_wise_grade_fee = term_wise_grade_fee.student_unpaid_terms_in_transactions(parent_payment_transactions) unless parent_payment_transactions.empty?
+    term_wise_grade_fee = term_wise_grade_fee.student_unpaid_terms_in_parent_cheques(parent_cheques) unless parent_cheques.empty?
+    term_wise_grade_fee.first
   end
   
 end

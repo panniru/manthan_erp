@@ -3,7 +3,7 @@
   = link_to (fa_icon "angle-double-up lg", :id => "collapse-icon"),"#" ,:class => "collapse-link pull-right", :data => {:toggle => "collapse", :target => "#collapse-div0"}
 %hr
   #collapse-div0
-    .col-md-6{:ng_controller => "MonthlyPdcsController", :ng_init => "submitted_pdcs('#{@parent_payment_master.id}')"}
+    .col-md-6{:ng_controller => "MonthlyPdcsController", :ng_init => "pending_pdcs('#{@parent_payment_master.id}')"}
       = render "pending_pdcs"
     .col-md-6{:ng_controller => "MonthlyPdcsController", :ng_init => "cleared_pdcs('#{@parent_payment_master.id}')"}
       = render "cleared_pdcs"

@@ -16,7 +16,7 @@ class AutoSearchController < ApplicationController
     if params[:section].present?
       query = query + " and section = #{params[:section]}"
     end
-    students = StudentHr.where(query).order(:name)
+    students = StudentMaster.where(query).order(:name)
     render :json => students.map { |student| {:id => student.id, :label => student.name, :value => student.name} }
   end
 end

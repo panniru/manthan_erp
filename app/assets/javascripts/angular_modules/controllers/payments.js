@@ -2,6 +2,7 @@
     "use strict";
     app.controller("PaymentsController",["$scope","$location", "paymentService",  function($scope, $location, paymentService) {
         $scope.student_id = ""
+        $scope.selected_transaction_type = ""
         $scope.go = function (code, student_id ) {
             $scope.student_id = student_id
             var path = "/"
@@ -15,7 +16,11 @@
             $location.path( path );
         };
 
-        $scope.annaul_fee_payment_details = function(){
+        $scope.annaul_discount_details = function(){
+            paymentService.annual_discount_details($scope.student_id)
+                .then(function(response){
+                    $scope.discount = response.data
+                });
         };
         
         $scope.term_fee_payment_details = function(){
@@ -31,6 +36,17 @@
                     $scope.monthlyFees = response.data
                 });
         };
+        
+        $scope.transactionTypeChange = function(selected_transaction_type){
+            if(selected_transaction_type.trim() === "cheque"){
+                $scope.is_cheque_payment = true
+            }else{
+                $scope.is_cheque_payment = false
+            }
+        }
+        
+        $scope.transactionTypes = paymentService.transactionTypes();
+        $scope.supportedBanks = paymentService.supportedBanks();
     }]);
     
 })(angular, myApp);

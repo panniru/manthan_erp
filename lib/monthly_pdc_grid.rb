@@ -1,7 +1,8 @@
 class MonthlyPdcGrid
 
-  def initialize 
+  def initialize(grades = []) 
     @monthly_pdc_grid = nil
+    @grade_list = grades
   end
   
   def get_grid
@@ -15,15 +16,6 @@ class MonthlyPdcGrid
       month_fees.each{|fee| months.add(fee.post_dated_month)}
     end
     months.to_a
-  end
-
-  def grid_belongs_to_grades(grades)
-    @applied_grade_fee =  []
-    get_grid.each do |fee_grade|
-      list = fee_grade.select{|bucket| grades.include? bucket.fee_grade_bucket_id.to_i }
-      @applied_grade_fee << list unless list.empty?
-    end
-    @applied_grade_fee
   end
 
   def self.get_object_list_from_grid(params, academic_year)
@@ -43,9 +35,13 @@ class MonthlyPdcGrid
 
   private
 
+  def get_grade_buckets_from_map
+    FeeGradeBucket.where(:id =>GradeBucketMapping.belongs_to_grades(@grade_list).map{|gr_map| gr_map.fee_grade_bucket_id})
+  end
+
   def prepare_grid
     amount_conversion = AmountConversion.new 
-    FeeGradeBucket.all.map do |bucket|
+    get_grade_buckets_from_map.map do |bucket|
       total = bucket.grade_wise_fees.inject(0){|tot, fee| tot+fee.amount_in_rupees}
       PostDatedCheque.all.map do |pdc|
         pdc_amount = MonthlyPdcAmount.belongs_to_fee_grade_bucket(bucket).belongs_to_post_dated_cheque(pdc).first

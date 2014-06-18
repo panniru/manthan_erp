@@ -24,18 +24,6 @@ function imageIsLoaded(e) {
 };
 
 
-$(document ).ready(function() {
-    $('body').on('focus',".datepicker", function(){
-        $(this).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            yearRange: "-100:+0",
-            dateFormat: 'dd/mm/yy'
-        });
-    });
-});
-
-
 $(document).ready(function(){
     $('input.timepicker').timepicker({});
 });

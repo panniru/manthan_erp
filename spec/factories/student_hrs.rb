@@ -1,7 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :student_hr do
+  factory :student_master do
     name "MyString"
     dob "2014-05-29"
     joining_date "2014-05-29"

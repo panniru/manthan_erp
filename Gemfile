@@ -46,7 +46,7 @@ gem 'devise'
 gem 'delayed_job_active_record'
 gem 'factory_girl_rails'
 
-gem 'fullcalendar-rails'
+gem 'fullcalendar-rails', '1.6.1.0'
 gem 'jbuilder', '~> 1.2'
 gem 'carmen-rails', '~> 1.0.0'
 

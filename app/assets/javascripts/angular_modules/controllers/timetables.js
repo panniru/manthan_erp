@@ -1,15 +1,32 @@
 (function(angular, app) {
     "use strict";
-    app.controller('GradeController',["$scope","getGradeService", function($scope,getGradeService) {
+    app.controller('GradeController',["$scope","gradeService","sectionService","subjectService","timeTableService",function($scope,gradeService,sectionService,subjectService,timeTableService) {
         //$scope.grades=['Aa','B','C'];  
-        getGradeService.getGradeServiceView()
+        gradeService.getGradeServiceView()
             .then(function(result) {
-//alert(result.data);
+                //alert(result.data);
                 $scope.grades=result.data
                 
             });
-        $scope.addPeriods = function(period) { 
-            alert($scope.period);
+        sectionService.getSectionServiceView()
+            .then(function(result) {
+                //alert(result.data);
+                $scope.sections=result.data
+                
+            });
+        
+        subjectService.getSubjectServiceView()
+            .then(function(result) {
+                //alert();
+                $scope.subjects=result.data
+                
+            });
+        
+        $scope.addPeriods = function (){ 
+            //alert($scope.myGrade);
+            //alert($scope.mySection);
+            //alert($scope.period);
+           
             $scope.myValue="true"
            
             // Time Period List Array
@@ -17,38 +34,43 @@
             // Add a periodItem to the Time Period List
             for ( var i = 0; i < $scope.period; i++ ) {
                 $scope.timeperiods.push({
-                    periodid: $scope.periodid,
-                    mon_sub: $scope.mon_sub,
-                    tue_sub: $scope.tue_sub,
-                    wed_sub: $scope.wed_sub,
-                    thu_sub: $scope.thu_sub,
-                    fri_sub: $scope.fri_sub,
-                    sat_sub: $scope.sat_sub,
-                    sun_sub: $scope.sun_sub,
+                    //periodid: $scope.periodid,
+                    grade_master_id:$scope.myGrade,
+                    section_master_id:$scope.mySection,
+                    mon_sub: "",
+                    tue_sub: "",
+                    wed_sub: "",
+                    thu_sub: "",
+                    fri_sub: "",
+                    sat_sub: "",
+                    sun_sub: "",
                     });
-                //alert($scope.timeperiods.length);
+               
                 }
-            // Clear input fields after push
-            $scope.periodid = "";
-            $scope.mon_sub = "";
-            $scope.tue_sub = "";
-            $scope.wed_sub = "";
-            $scope.thu_sub = "";
-            $scope.fri_sub = "";
-            $scope.sat_sub = "";
-            $scope.sun_sub = "";
             
-             }; 
+        };
+        
+        $scope.savePeriods = function(){
+            //alert("hi");
+            gradeService.savePeriods($scope.timeperiods)
+                .then(function(result) {
+                });
+        };  
+
+        $scope.showPeriods = function() { 
+            alert($scope.myGrade);
+            alert($scope.mySection);
+            timeTableService.getTimeTableServiceView()
+                .then(function(result) {
+                    //alert(result.data);
+                    $scope.timetables=result.data
+                    
+                });
+            $scope.myValue="true"
+            $scope.timeperiods=$scope.timetables
+        };
+        
+        
     }]);
-    app.controller('SectionController',["$scope","getSectionService", function($scope,getSectionService) {
-        //$scope.grades=['Aa','B','C'];  
-        getSectionService.getSectionServiceView()
-            .then(function(result) {
-                //alert(result.data);
-                $scope.sections=result.data
-                
-            });
-    }]);
-    
-    
+
 })(angular, myApp);

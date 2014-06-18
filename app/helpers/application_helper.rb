@@ -18,14 +18,13 @@ module ApplicationHelper
     main_menu << MenuItem.new(:label => "Fee Management", :klass => "", :icon => "bank 2x", :href => root_path, :is_active => controller.controller_name == "home")
     main_menu << MenuItem.new(:label => "Admissions", :klass => "", :icon => "book 2x", :href => "/admissions", :is_active => controller.controller_name == "admissions")
     main_menu << MenuItem.new(:label => "Scheduler", :klass => "", :icon => "dashboard 2x", :href => "/events", :is_active => controller.controller_name == "events")
-    main_menu << MenuItem.new(:label => "Time Tables", :klass => "", :icon => "calendar 2x", :href => "#", :is_active => false)
+    main_menu << MenuItem.new(:label => "Academics", :klass => "", :icon => "graduation-cap 2x", :href => "/time_tables", :is_active => controller.controller_name == "time_tables")
     main_menu << MenuItem.new(:label => "Results", :klass => "", :icon => "bullhorn 2x", :href => "#", :is_active => false)
     main_menu << MenuItem.new(:label => "HRM", :klass => " ", :icon => "group 2x", :href => "#", :is_active => false)
   end
 
   def sub_menu
-    context = "fee_management".classify.constantize.new
-    user_menu = UserMenu.new(current_user, context)
+    user_menu = UserMenu.new(current_user, ContextDetector.get_context(controller.controller_name))
     user_menu.sub_menu
   end
   def admission_sub_menu

@@ -13,12 +13,13 @@ ManthanErp::Application.routes.draw do
   get "time_tables/sectionserviceview"
   get "/time_tables/subjectserviceview"
   get "staffs/gradeserviceview"
+  post "/time_tables/saveperiods"
+  get "/time_tables/timetableserviceview"
+
   root to: "home#index"
 
+  resources :time_tables  
 
-
-  resources :time_tables 
-  
 
   resources :fee_types do
     collection do
@@ -71,22 +72,23 @@ ManthanErp::Application.routes.draw do
 
   get "fee_alerts/fee_struct_mail_to_parents" 
 
-  resources :student_hrs do
+  resources :student_masters do
     member do
       get 'monthly_pdcs'
       get 'next_term_fee'
+      get "annual_discount_details"
     end
   end
 
   resources :parent_payment_masters do
     collection do
       get "pay"
-      
     end
     member do
-      get "submitted_pdcs"
+      get "pending_pdcs"
       get "cleared_pdcs"
       get "payment_transactions"
+      get "submitted_pdcs"
     end
   end
 
@@ -112,4 +114,5 @@ ManthanErp::Application.routes.draw do
     end
   end
 
+  resources :parent_cheques
 end
