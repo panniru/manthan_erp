@@ -9,8 +9,11 @@ class ContextDetector
     "parent_cheques" => "fee_management",
     "home" => "fee_management",
     "admissions" => "enquiry_admission",
-    "time_tables" => "academic"
-    
+    "time_tables" => "academic",
+    "recruitments" => "recruitment_sub_menu",
+    "adds" => "recruitment_sub_menu",
+    "forms" => "recruitment_sub_menu",
+    "documentuploaders" => "recruitment_sub_menu",
   }
 
   def self.get_context(key)

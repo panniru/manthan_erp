@@ -1,0 +1,11 @@
+= form_for @documentuploader, html: { multipart: true } do |f|
+  = f.label :name
+  = f.text_field :name
+  %br
+  = f.label :Educational_certificate
+  = f.file_field :educational_certificates
+  = f.label :Previous_employment_proof
+  = f.file_field :previous_employment_proof
+  = f.label :Salary_slips_for_previous_months
+  = f.file_field :salary_slips_for_previous_months
+  = f.submit "Save", class: "btn btn-primary"

@@ -1,0 +1,87 @@
+%pull_right
+  = image_tag "logo.gif"
+  %h5
+    APPLICATION FORM:
+    %br
+    %br
+    %center 
+      = form_for @form, :html => { :class => "form-horizontal", :role => "form" } do |f|
+       
+        .row
+          .col-sm-9
+            = f.label "Name Of The Applicant:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.text_field :name,:class => 'form-control'
+              %br
+     
+          .col-sm-9
+            = f.label "Date Of Birth:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.text_field :dob, :class => 'datepicker form-control'
+              %br
+ 
+          .col-sm-9
+            = f.label "Gender:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.radio_button :gender, 'female'
+              = f.label :"female"
+              = f.radio_button :gender, 'male'
+              = f.label :"male"
+              = f.check_box :gender,{},'male'
+              = f.label :male
+              %br
+          .col-sm-9
+            = f.label "Email:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.text_field :email, :class => 'form-control'
+              %br
+ 
+          .col-sm-9
+            = f.label "MObile No:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.text_field :mobile_no, :class => 'form-control'
+              %br
+              
+          .col-sm-9
+            = f.label "Address:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.text_area :address, :class => 'form-control'
+              %br
+              
+          .col-sm-9
+            = f.label "Preffered Class:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.text_field :klass, :class => 'form-control'
+              %br
+          .col-sm-9
+            = f.label "Known Languages:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.text_field :language, :class => 'form-control'
+              %br
+          .col-sm-9
+            = f.label "Preffered Subject:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.text_field :subject, :class => 'form-control'
+              %br
+          .col-sm-9
+            = f.label "Experience in Teaching:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.text_field :experience, :class => 'form-control'
+              %br
+          .col-sm-9
+            = f.label "Expected Salary:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.text_field :expected_salary, :class => 'form-control'
+              %br
+          .col-sm-9
+            = f.label "Education Qualification:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.text_field :education_qualification, :class => 'form-control'
+              %br
+          .col-sm-9
+            = f.label "Nationality:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.text_field :nationality, :class => 'form-control'
+              %br
+              = f.submit "submit", :class => "btn btn-primary"
+     

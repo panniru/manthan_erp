@@ -1,0 +1,13 @@
+%table.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      %th Title:
+      %th Date:
+      %th Description
+  %tbody
+    - @add.each do |add|
+      %tr
+        %td= add.title
+        %td= add.date
+        %td= add.description
+       

@@ -1,0 +1,15 @@
+%table.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      %th Title:
+      %th Education Details:
+      %th Experience
+  %tbody
+    - @recruitment.each do |recruitment|
+      %tr
+        %td= recruitment.title
+        %td= recruitment.education_details
+        %td= recruitment.experience
+       
+
+

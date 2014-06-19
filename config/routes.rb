@@ -1,12 +1,20 @@
 ManthanErp::Application.routes.draw do
-
- 
   resources :staffs
   get "staffs/staffview"
+  
   devise_for :users, :controllers => { :sessions => 'sessions'}
-
   get 'auto_search/autocomplete_student_name'
   get 'auto_search/student_name_by_grade_and_section'
+
+  get "students/app"
+  get "students/app_students"
+  get "students/get_selected"
+  get "students/enquiry"
+  get "students/more"
+  get "students/index"
+  get "students/new"
+  get "students/show"
+  get "students/edit"
 
   get "home/aboutus"
   get "time_tables/gradeserviceview"
@@ -20,6 +28,10 @@ ManthanErp::Application.routes.draw do
 
   resources :time_tables  
 
+  resources :documentuploaders
+  resources :adds
+  resources :forms 
+  resources :recruitments
 
   resources :fee_types do
     collection do
@@ -36,7 +48,7 @@ ManthanErp::Application.routes.draw do
       post "create_term"
     end
   end
-
+  
   resources :grade_wise_fees do
     collection do
       get "grade_wise_fee_view"

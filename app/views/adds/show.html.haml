@@ -1,0 +1,26 @@
+.container
+  .row
+    .col-sm-9
+    .col-sm-3
+      .col-sm-6
+      .col-sm-6
+        = link_to "Back", new_add_path, :class => "btn btn-primary"
+        %br
+        %br
+%table.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      %th Title:
+      %th Date:
+      %th Description:
+      %th
+      %th
+  %tbody
+    - Add.all.each do |add|
+      %tr
+        %td= add.title
+        %td= add.date
+        %td= add.description
+        %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_add_path(add), :class => "btn btn-warning btn-sm", :title => "Edit"
+        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), add_path(add), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+          

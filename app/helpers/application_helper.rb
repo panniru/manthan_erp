@@ -21,6 +21,7 @@ module ApplicationHelper
     main_menu << MenuItem.new(:label => "Academics", :klass => "", :icon => "graduation-cap 2x", :href => "/time_tables", :is_active => controller.controller_name == "time_tables")
     main_menu << MenuItem.new(:label => "Results", :klass => "", :icon => "bullhorn 2x", :href => "#", :is_active => false)
     main_menu << MenuItem.new(:label => "HRM", :klass => " ", :icon => "group 2x", :href => "#", :is_active => false)
+    main_menu << MenuItem.new(:label => "Recruitment", :klass => " ", :icon => " life-ring 2x", :href => "/recruitments", :is_active => true)
   end
 
   def sub_menu
@@ -32,4 +33,9 @@ module ApplicationHelper
     user_menu = UserMenu.new(current_user, context)
     user_menu.admission_sub_menu
   end
+  def recruitment_sub_menu
+    context = "recruitment".classify.constantize.new
+    user_menu = UserMenu.new(current_user,context)
+    user_menu.recruitment_sub_menu
+    end
 end
