@@ -40,6 +40,7 @@ class FeeGradeBucketsController < ApplicationController
     @fee_grade_bucket_bulk = build_fee_grade_bucket_bulk
     if !@fee_grade_bucket_bulk.empty? and @fee_grade_bucket_bulk.map(&:valid?).all?
       @fee_grade_bucket_bulk.each(&:save!)
+      GradeBucketMapping.generate_mapping
       flash[:success] = I18n.t :success, :scope => [:fee_grade_bucket, :create_bulk]
       redirect_to fee_grade_buckets_path
     else

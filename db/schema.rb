@@ -11,12 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617103502) do
+ActiveRecord::Schema.define(version: 20140619074335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_trgm"
-  enable_extension "fuzzystrmatch"
 
   create_table "adds", force: true do |t|
     t.string   "title"
@@ -201,13 +199,6 @@ ActiveRecord::Schema.define(version: 20140617103502) do
     t.datetime "updated_at"
   end
 
-  create_table "grade_bucket_maps", force: true do |t|
-    t.integer  "grade_id"
-    t.integer  "grade_bucket_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "grade_masters", force: true do |t|
     t.string   "grade_name"
     t.datetime "created_at"
@@ -384,41 +375,6 @@ ActiveRecord::Schema.define(version: 20140617103502) do
     t.integer  "grade_master_id"
     t.integer  "section"
     t.boolean  "bus_facility"
-  end
-
-  create_table "students", force: true do |t|
-    t.string   "form_no"
-    t.string   "name"
-    t.string   "klass"
-    t.string   "dob"
-    t.string   "gender"
-    t.string   "nationality"
-    t.string   "language"
-    t.string   "father_name"
-    t.string   "mother_name"
-    t.string   "father_occupation"
-    t.string   "mother_occupation"
-    t.string   "father_company"
-    t.string   "mother_company"
-    t.string   "father_education"
-    t.string   "mother_education"
-    t.string   "income"
-    t.text     "address"
-    t.string   "landline"
-    t.string   "mobile"
-    t.string   "email"
-    t.string   "transport"
-    t.string   "busstop"
-    t.string   "last_school"
-    t.string   "city"
-    t.string   "changing_reason"
-    t.string   "know_school"
-    t.string   "person"
-    t.string   "pp"
-    t.string   "appno"
-    t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "subject_masters", force: true do |t|

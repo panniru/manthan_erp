@@ -47,7 +47,6 @@ def seed_user
   unless @user_accountant.present?
     User.create(:email => "accountant@manthan.com", :password => "welcome", :user_id => "accountant", :role_id => accountant_role.id)
   end
-
 end
 
 
@@ -63,11 +62,44 @@ def seed_payment_types
   PaymentType.where(code: "monthly").first_or_create!(:code => "monthly")
 end
 
+def seed_grades
+  unless GradeMaster.first.present?
+    GradeMaster.create(:grade_name => 'PP1')
+    GradeMaster.create(:grade_name => 'PP2')
+    GradeMaster.create(:grade_name => '1')
+    GradeMaster.create(:grade_name => '2')
+    GradeMaster.create(:grade_name => '3')
+    GradeMaster.create(:grade_name => '4')
+    GradeMaster.create(:grade_name => '5')
+    GradeMaster.create(:grade_name => '6')
+    GradeMaster.create(:grade_name => '7')
+  end
+end
+
+
+def seed_parents
+  Parent.first_or_create(:father_name => "Raghu", :mother_name => "Janaki", :father_email => "srikanth@ostrylabs.com", :mother_email => "srikanth@ostryalabs.com")
+end
+
+def seed_students
+  student = StudentMaster.first
+  unless student.present?
+    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.find("2").id)
+    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.find("4").id)
+  end
+end
+
+
+
+
 def seed_all
   seed_role
   seed_user
   seed_jobs
   seed_payment_types
+  seed_grades
+  seed_parents
+  seed_students
 end
 
 seed_all
