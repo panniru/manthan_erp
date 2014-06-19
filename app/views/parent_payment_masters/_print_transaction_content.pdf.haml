@@ -1,0 +1,71 @@
+.row
+  .col-xs-2
+    = wicked_pdf_image_tag "logo.png"
+  .col-xs-10
+    .row
+      .col-xs-offset-2.col-xs-10
+        %h5
+          %strong 
+            MANTHAN INTERNATIONAL SCHOOL
+    .row
+      %h5
+        %strong
+          %center Tellapur, Hyderabad
+          %center [Reciept]
+        
+.col-xs-12
+  .col-xs-6
+    %label Reciept No : 
+    %label= @payment_receipt.code
+  .col-xs-6
+    %label Date :
+    %label= @parent_payment_transaction.transaction_date
+
+.col-xs-12
+  .col-xs-6
+    %label Student Name :
+    %label= @parent_payment_master.student.name
+  .col-xs-6
+    %label Grade :
+    %label= @parent_payment_master.student.grade_master.grade_name
+.col-xs-12
+  %table.table.table-bordered
+    %thead
+      %th S.No
+      %th Particulars
+      %th Amount
+    %tbody
+      - @parent_payment_transaction.fee_type_contribution_amounts.each_with_index do |fee_amount, index|
+        %tr
+          %td= index
+          %td= fee_amount[:fee_type]
+          %td= fee_amount[:amount]
+      %tr
+        %th
+        %th Total
+        %th= @parent_payment_transaction.amount_in_rupees 
+
+
+.col-md-12
+  .col-xs-6
+    %label Pay Mode :
+    %label= @parent_payment_transaction.transaction_type
+  .col-xs-6
+    .col-md-6
+      %label Bank :
+      %label= @parent_payment_transaction.bank_name
+  .col-xs-6
+    .col-md-6
+      %label Ref No :
+      %label= @parent_payment_transaction.ref_no
+  .col-xs-6
+    .col-md-6
+      %label Fee Mode :
+      %label= @parent_payment_master.payment_code
+
+.col-xs-12
+  .col-xs-6
+    %label Fee for The Academic Year
+  
+
+  

@@ -59,7 +59,6 @@ class GradeFeeGrid
       end
     end
   end
-
   
   class GradeFeeUnit
     include Virtus.model

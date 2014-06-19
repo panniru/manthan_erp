@@ -10,6 +10,9 @@ class ParentPaymentMastersController < ApplicationController
   def create
     @parent_payment_master = ParentPaymentMaster.new_payment_master(params[:parent_payment_master])
     if @parent_payment_master.save!
+      @parent_payment_transaction = @parent_payment_master.parent_payment_transactions.last
+      @parent_payment_transaction = ParentPaymentTransactionsDecorator.decorate(@parent_payment_transaction)
+      render "acknowledgement"
     else
       render "new"
     end
@@ -18,6 +21,9 @@ class ParentPaymentMastersController < ApplicationController
   def update
     @parent_payment_master.prepare_payment(params[:parent_payment_master]) 
     if @parent_payment_master.save!
+      @parent_payment_transaction = @parent_payment_master.parent_payment_transactions.last
+      @parent_payment_transaction = ParentPaymentTransactionsDecorator.decorate(@parent_payment_transaction)
+      render "acknowledgement"
     else
       render "edit"
     end

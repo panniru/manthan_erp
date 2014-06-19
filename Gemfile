@@ -47,6 +47,10 @@ gem 'fullcalendar-rails', '1.6.1.0'
 gem 'jbuilder', '~> 1.2'
 gem 'carmen-rails', '~> 1.0.0'
 
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
+
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 

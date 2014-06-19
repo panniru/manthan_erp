@@ -7,6 +7,8 @@ class ContextDetector
     "grade_wise_fees" => "fee_management",
     "parent_payment_masters" => "fee_management",
     "parent_cheques" => "fee_management",
+    "term_wise_grade_fees" =>"fee_management",
+    "monthly_pdc_amounts" =>"fee_management",
     "home" => "fee_management",
     "admissions" => "enquiry_admission",
     "time_tables" => "academic",

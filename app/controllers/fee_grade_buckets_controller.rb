@@ -55,6 +55,14 @@ class FeeGradeBucketsController < ApplicationController
   def new
      @fee_grade_buckets = FeeGradeBucket.new
   end
+
+  def all_grades
+    respond_to do |format|
+      format.json do
+        render :json => GradeMaster.all
+      end
+    end
+  end
  
   private
 

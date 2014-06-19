@@ -11,12 +11,12 @@ class TermWiseGradeFee < ActiveRecord::Base
     read_attribute(:amount_in_rupees)
   end
   
-  def amount_in_rupees
-    (read_attribute(:amount_in_rupees).to_f/RuleEngine.new.value(:amount, :unit))
-  end
+  # def amount_in_rupees
+  #   (read_attribute(:amount_in_rupees).to_f/RuleEngine.new.value(:amount, :unit))
+  # end
   
-  def amount_in_rupees=(amt)
-    write_attribute(:amount_in_rupees, (amt.to_f * RuleEngine.new.value(:amount, :unit)))
-  end
+  # def amount_in_rupees=(amt)
+  #   write_attribute(:amount_in_rupees, (amt.to_f * RuleEngine.new.value(:amount, :unit)))
+  # end
 
 end

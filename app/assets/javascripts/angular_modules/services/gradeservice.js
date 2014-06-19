@@ -7,16 +7,21 @@
         };
 
         var savePeriods = function(timeperiods){
-            alert("hello");
             var url = "/time_tables/saveperiods.json"
             return $http.post(url, {time_periods: timeperiods});
             
         };
+
+        var allGrades = function(){
+            var url = "/fee_grade_buckets/all_grades.json"
+            return $http.get(url);
+        }
         
         
         return {
             getGradeServiceView : getGradeServiceView,
-            savePeriods : savePeriods
+            savePeriods : savePeriods,
+            allGrades : allGrades
         };
 
         

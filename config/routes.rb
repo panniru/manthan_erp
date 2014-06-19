@@ -41,6 +41,7 @@ ManthanErp::Application.routes.draw do
   resources :fee_grade_buckets do
     collection do
       post "create_bulk"
+      get "all_grades"
     end
   end
   resources :term_definitions do
@@ -101,6 +102,11 @@ ManthanErp::Application.routes.draw do
       get "cleared_pdcs"
       get "payment_transactions"
       get "submitted_pdcs"
+    end
+    resources :parent_payment_transactions do
+      member do
+        get "print"
+      end
     end
   end
 

@@ -20,20 +20,21 @@ class ParentCheque < ActiveRecord::Base
   def clear_cheque
     return false if cleared?
     ActiveRecord::Base.transaction do
-      payment_transaction = new_parent_payment_transaction_from_cheque
-      payment_transaction.save!
+      # payment_transaction = new_parent_payment_transaction_from_cheque
+      # payment_transaction.save!
       
       self.status = "cleared"
-      self.parent_payment_transaction = payment_transaction
+      self.parent_payment_transaction.clear_transaction
+      self.save!
       self.save!
     end
   end
 
-  def new_parent_payment_transaction_from_cheque
-    payment_transaction = ParentPaymentTransaction.new(:transaction_date => DateTime.now, :amount_in_rupees => self.amount_in_rupees, :transaction_type => "cheque");
-    payment_transaction.parent_payment_master = self.parent_payment_master
-    payment_transaction
-  end
+  # def new_parent_payment_transaction_from_cheque
+  #   payment_transaction = ParentPaymentTransaction.new(:transaction_date => DateTime.now, :amount_in_rupees => self.amount_in_rupees, :transaction_type => "cheque");
+  #   payment_transaction.parent_payment_master = self.parent_payment_master
+  #   payment_transaction
+  # end
 
   def self.parent_cheque_params(params)
     params.permit(:cheque_number, :cheque_date, :bank_name, :ifsc_code)

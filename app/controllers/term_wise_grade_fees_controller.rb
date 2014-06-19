@@ -4,10 +4,10 @@ class TermWiseGradeFeesController < ApplicationController
     student = StudentMaster.find(params[:student_id]);
     respond_to do |format|
       format.json do
-        total = 0.0
-        term_wise_fees = TermWiseGradeFee.belongs_to_fee_grade_bucket(GradeBucketMapping.find_by_grade_master_id(student.grade_master).fee_grade_bucket_id).map do |term_fee|
-          total = total + term_fee.amount_in_rupees
-          {:term => term_fee.term_definition.term_definition, :amount_in_rupees => term_fee.amount_in_rupees}
+        s_f_c = StudentFeeCalculator.new(student)
+        total = s_f_c.applicable_total_fee
+        term_wise_fees = TermWiseGradeFee.belongs_to_fee_grade_bucket(student.grade_bucket_id).map do |term_fee|
+          {:term => term_fee.term_definition.term_definition, :amount_in_rupees => s_f_c.applicable_term_fee(term_fee)}
         end
         render :json => Struct.new(:term_fee_details, :total).new(term_wise_fees, Formatter.two_decimal(total))
       end

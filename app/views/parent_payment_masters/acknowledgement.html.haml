@@ -1,0 +1,50 @@
+
+.col-md-12
+  %student_header_details{ :student_id => "#{@parent_payment_master.student_id}"}
+
+.col-md-12
+  %h4.panel-title 
+    = "Payment Details"
+  %hr
+  .col-md-12
+    %table.table.table-bordered.table-striped.table-hover
+      %thead
+        %th S.No
+        %th Particulars
+        %th Amount
+      %tbody
+        - @parent_payment_transaction.fee_type_contribution_amounts.each_with_index do |fee_amount, index|
+          %tr
+            %td= index+1
+            %td= fee_amount[:fee_type]
+            %td= fee_amount[:amount]
+        %tr
+          %th
+          %th Total
+          %th= @parent_payment_transaction.amount_in_rupees 
+  .col-md-8
+    .col-md-6
+      .col-md-6
+        %label Pay Mode
+      .col-md-6
+        = @parent_payment_transaction.transaction_type
+    .col-md-6
+      .col-md-6
+        %label Bank
+      .col-md-6
+        = @parent_payment_transaction.bank_name
+  .col-md-8
+    .col-md-6
+      .col-md-6
+        %label Ref No
+      .col-md-6
+        = @parent_payment_transaction.ref_no
+    .col-md-6
+      .col-md-6
+        %label Fee Mode
+      .col-md-6
+        = @parent_payment_master.payment_code
+  .col-md-12
+    .col-md-offset-4
+      = link_to "Print", print_parent_payment_master_parent_payment_transaction_path(@parent_payment_master, @parent_payment_transaction, :format => :pdf), :target => "_blank", :class => "btn btn-primary"
+      = link_to "Home", parent_payment_masters_path, :class => "btn btn-success"

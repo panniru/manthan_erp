@@ -4,12 +4,14 @@ class MonthlyPdcAmountsController < ApplicationController
   def month_wise_fee_of_student
     student_id = params[:student_id]
     student = StudentMaster.find(params[:student_id]);
+    s_f_c = StudentFeeCalculator.new(student)
     respond_to do |format|
       format.json do
         total = 0.0
         month_wise_fees = MonthlyPdcAmount.belongs_to_fee_grade_bucket(GradeBucketMapping.find_by_grade_master_id(student.grade_master).fee_grade_bucket_id).map do |month_fee|
-          total = total + month_fee.amount_in_rupees
-          {:month => month_fee.post_dated_cheque.month, :amount_in_rupees => month_fee.amount_in_rupees}
+          monthly_amount = s_f_c.applicable_month_fee(month_fee)
+          total = total + monthly_amount
+          {:month => month_fee.post_dated_cheque.month, :amount_in_rupees => monthly_amount}
         end
         render :json => Struct.new(:month_fee_details, :total).new(month_wise_fees, Formatter.two_decimal(total))
       end

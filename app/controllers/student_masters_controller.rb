@@ -24,13 +24,14 @@ class StudentMastersController < ApplicationController
     respond_to do |format|
       format.json do
         monthly_pdcs = []
+        s_f_c = StudentFeeCalculator.new(@student_master)
         if payment_master.present?
-          monthly_pdcs = MonthlyPdcAmount.belongs_to_fee_grade_bucket(GradeBucketMapping.find_by_grade_master_id(@student_master.grade_master).fee_grade_bucket_id).pending_pdc_submissions(@student_master).map do |pdc_amount|
-            Struct.new(:post_dated_cheque_id, :month, :amount_in_rupees, :cheque_number, :clearence_date).new(pdc_amount.post_dated_cheque_id, pdc_amount.post_dated_cheque.month, pdc_amount.amount_in_rupees, nil ,nil)
+          monthly_pdcs = MonthlyPdcAmount.belongs_to_fee_grade_bucket(@student_master.grade_bucket_id).pending_pdc_submissions(@student_master).map do |pdc_amount|
+            Struct.new(:post_dated_cheque_id, :month, :amount_in_rupees, :cheque_number, :clearence_date).new(pdc_amount.post_dated_cheque_id, pdc_amount.post_dated_cheque.month, s_f_c.applicable_month_fee(pdc_amount), nil ,nil)
           end
         else
-          monthly_pdcs = MonthlyPdcAmount.belongs_to_fee_grade_bucket(GradeBucketMapping.find_by_grade_master_id(@student_master.grade_master).fee_grade_bucket_id).map do |pdc_amount|
-            Struct.new(:post_dated_cheque_id, :month, :amount_in_rupees, :cheque_number, :clearence_date).new(pdc_amount.post_dated_cheque_id, pdc_amount.post_dated_cheque.month, pdc_amount.amount_in_rupees, nil ,nil)
+          monthly_pdcs = MonthlyPdcAmount.belongs_to_fee_grade_bucket(@student_master.grade_bucket_id).map do |pdc_amount|
+            Struct.new(:post_dated_cheque_id, :month, :amount_in_rupees, :cheque_number, :clearence_date).new(pdc_amount.post_dated_cheque_id, pdc_amount.post_dated_cheque.month, s_f_c.applicable_month_fee(pdc_amount), nil ,nil)
           end
         end
         render :json => monthly_pdcs
@@ -42,13 +43,15 @@ class StudentMastersController < ApplicationController
     payment_master = @student_master.parent_payment_master
     respond_to do |format|
       format.json do
-        term_wise_amount = nil
+        s_f_c = StudentFeeCalculator.new(@student_master)
+        term = nil
         unless payment_master.present?
-          term_wise_amount = TermWiseGradeFee.belongs_to_fee_grade_bucket(@student_master.grade_bucket_id).order("term_definition_id").first
+          term = TermWiseGradeFee.belongs_to_fee_grade_bucket(@student_master.grade_bucket_id).order("term_definition_id").first
         else
-          term_wise_amount = payment_master.next_term_fee 
+          term = payment_master.next_term_fee 
         end
-        render :json => Struct.new(:term_definition_id, :amount_in_rupees, :term, :term_date).new(term_wise_amount.term_definition_id, term_wise_amount.amount_in_rupees, term_wise_amount.term_definition.term_definition)
+        amount = s_f_c.applicable_term_fee(term)
+        render :json => Struct.new(:term_definition_id, :amount_in_rupees, :term, :term_date).new(term.term_definition_id, amount, term.term_definition.term_definition)
       end
     end  
   end
@@ -56,7 +59,7 @@ class StudentMastersController < ApplicationController
   def annual_discount_details
     respond_to do |format|
       format.json do
-        render :json => DiscountCalculator.new(@student_master.grade_master).get_discount()
+        render :json => DiscountCalculator.new(@student_master).get_discount()
       end
     end
   end
