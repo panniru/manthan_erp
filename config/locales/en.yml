@@ -74,3 +74,43 @@ en:
     update:
       success: "Discount has been updated"
       fail: "Discount not been updated"
+  recruitment:
+    create:
+      success: "guideline has been saved"
+      fail: "guideline not  been saved"
+    update:
+      success: "guideline has been updated"
+      fail: "guideline not been updated"
+    destroy:
+      success: "guideline has been deleted"
+      fail: "guideline not been deleted"
+  add:
+    create:
+      success: "advertisement has been saved"
+      fail: "advertisement not  been saved"
+    update:
+      success: "advertisement has been updated"
+      fail: "advertisement not been updated"
+    destroy:
+      success: "advertisement has been deleted"
+      fail: "advertisement not been deleted"
+  form:
+    create:
+      success: "enquiry has been saved"
+      fail: "enquiry not  been saved"
+    update:
+      success: "enquiry has been updated"
+      fail: "enquiry not been updated"
+    destroy:
+      success: "enquiry has been deleted"
+      fail: "enquiry not been deleted"
+  documentuploader:
+    create:
+      success: "document has been saved"
+      fail: "document not  been saved"
+    update:
+      success: "document has been updated"
+      fail: "document not been updated"
+    destroy:
+      success: "document has been deleted"
+      fail: "document not been deleted"

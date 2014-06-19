@@ -1,4 +1,5 @@
 class FormsController < ApplicationController
+  load_resource :only => [:show, :update, :edit, :destroy]
   def create
     @form = Form.new(form_params)
     if @form.save
@@ -9,7 +10,7 @@ class FormsController < ApplicationController
     end
     end
   def index
-    @form = Form.all
+    @forms = Form.all
   end
 
   def new

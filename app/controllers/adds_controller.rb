@@ -1,4 +1,5 @@
 class AddsController < ApplicationController
+  load_resource :only => [:show, :update, :edit, :destroy]
  def create
    @add = Add.new(add_params)
    if @add.save
@@ -11,7 +12,7 @@ class AddsController < ApplicationController
   def show
     end
   def index
-    @add = Add.all
+    @adds= Add.all
   end
 
   def new

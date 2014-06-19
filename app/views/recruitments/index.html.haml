@@ -5,11 +5,12 @@
       %th Education Details:
       %th Experience
   %tbody
-    - @recruitment.each do |recruitment|
+    - Recruitment.all.each do |recruitment|
       %tr
         %td= recruitment.title
         %td= recruitment.education_details
         %td= recruitment.experience
        
-
+%center
+  = link_to "back", new_recruitment_path, class: "btn btn-primary"
 

@@ -1,4 +1,5 @@
 class DocumentuploadersController < ApplicationController
+  load_resource :only => [:show, :update, :edit, :destroy]
   def create
     @documentuploader = Documentuploader.new(documentuploader_params)
     if @documentuploader.save
@@ -11,7 +12,7 @@ class DocumentuploadersController < ApplicationController
   def show
   end
   def index
-    @documentuploader = Documentuploader.all
+    @documentuploaders = Documentuploader.all
   end
 
   def new

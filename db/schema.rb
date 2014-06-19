@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140616065945) do
+ActiveRecord::Schema.define(version: 20140617103502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "adds", force: true do |t|
+    t.string   "title"
+    t.string   "date"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "admissions", force: true do |t|
     t.string   "admission_no"
@@ -122,6 +130,15 @@ ActiveRecord::Schema.define(version: 20140616065945) do
     t.datetime "updated_at"
   end
 
+  create_table "documentuploaders", force: true do |t|
+    t.string   "name"
+    t.string   "educational_certificates"
+    t.string   "previous_employment_proof"
+    t.string   "salary_slips_for_previous_months"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "events", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -152,6 +169,25 @@ ActiveRecord::Schema.define(version: 20140616065945) do
 
   create_table "fee_types", force: true do |t|
     t.string   "fee_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forms", force: true do |t|
+    t.string   "name"
+    t.string   "dob"
+    t.string   "gender"
+    t.string   "email"
+    t.string   "mobile_no"
+    t.string   "address"
+    t.string   "language"
+    t.string   "experience"
+    t.string   "klass"
+    t.string   "subject"
+    t.string   "education_qualification"
+    t.string   "expected_salary"
+    t.string   "nationality"
+    t.string   "post"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -282,6 +318,14 @@ ActiveRecord::Schema.define(version: 20140616065945) do
     t.string   "month"
     t.integer  "academic_year"
     t.float    "amount_per"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "recruitments", force: true do |t|
+    t.string   "title"
+    t.string   "education_details"
+    t.string   "experience"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

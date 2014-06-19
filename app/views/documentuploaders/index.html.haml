@@ -9,7 +9,7 @@
       %th
       %th
   %tbody
-    - @documentuploader.each do |documentuploader|
+    - Documentuploader.all.each do |documentuploader|
       %tr
         %td= documentuploader.name
         %td= link_to "view", documentuploader.educational_certificates_url

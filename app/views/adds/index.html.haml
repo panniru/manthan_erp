@@ -5,9 +5,11 @@
       %th Date:
       %th Description
   %tbody
-    - @add.each do |add|
+    - Add.all.each do |add|
       %tr
         %td= add.title
         %td= add.date
         %td= add.description
        
+%center
+  = link_to "back", new_add_path, class: "btn btn-primary"

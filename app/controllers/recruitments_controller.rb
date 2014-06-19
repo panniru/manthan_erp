@@ -1,4 +1,5 @@
 class RecruitmentsController < ApplicationController
+  load_resource :only => [:show, :update, :edit, :destroy]
   def create
     @recruitment = Recruitment.new(recruitment_params)
     if @recruitment.save
@@ -11,7 +12,7 @@ class RecruitmentsController < ApplicationController
   def show
     end
   def index
-    @recruitment = Recruitment.all
+    @recruitments = Recruitment.all
   end
 
   def new
