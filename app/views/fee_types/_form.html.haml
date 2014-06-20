@@ -1,8 +1,9 @@
-= form_for @fee_type, :class => "form-horizntal" do |f|
-  = render "shared/error_messages", :object => f.object
-  .form-group
-    = f.label :fee_type, :class => "form-label col-md-2"
+%form{:class=> "form-horizantal", :ng_submit => "update(fee_type)", :id => "updateFeeType"}
+  .col-md-12.form-group
+    = label_tag "Fee Type", nil, :class => "control-label col-md-4"
     .col-md-5
-      = f.text_field :fee_type, :class => "form-control"
-    .col-md-3
-      = f.submit "Save", :class=> "btn btn-primary"
+      = text_field_tag "fee_type", "fee_type.fee_type", :class => "form-control", :ng_model => "fee_type.fee_type"
+  .row
+    .col-md-5.col-md-offset-3
+      %button{:type=>"submit", :class=> "btn btn-primary"}=  "Update"
+

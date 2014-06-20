@@ -3,25 +3,29 @@ class FeeTypesController < ApplicationController
   
   def index
     @fee_types = FeeType.paginate(:page => params[:page].present? ? params[:page] : 1)
+    respond_to do |format|
+      format.json do
+        render :json => @fee_types
+      end
+      format.html do
+      end
+    end
   end
 
   def update
-    if @fee_type.update(fee_type_params)
-      flash[:success] = I18n.t :success, :scope => [:fee_type, :update]
-      redirect_to fee_types_path
-    else
-      flash.now[:fail] = I18n.t :fail, :scope => [:fee_type, :update]
-      render "edit"
+    respond_to do |format|
+      format.json do
+        render :json => @fee_type.update(fee_type_params)
+      end
     end
   end
   
   def destroy
-    if @fee_type.destroy
-      flash.now[:success] = I18n.t :success, :scope => [:fee_type, :destroy]
-    else
-      flash.now[:fail] = I18n.t :fail, :scope => [:fee_type, :destroy]
+    respond_to do |format|
+      format.json do
+        render :json => @fee_type.destroy
+      end
     end
-    redirect_to fee_types_path
   end
   
   def edit
@@ -32,13 +36,18 @@ class FeeTypesController < ApplicationController
   
   def create_bulk
     @fee_type_bulk = build_fee_type_from_bulk
-    if !@fee_type_bulk.empty? and @fee_type_bulk.map(&:valid?).all?
-      @fee_type_bulk.each(&:save!)
-      flash[:success] = I18n.t :success, :scope => [:fee_type, :create_bulk]
-      redirect_to fee_types_path
-    else
-      flash.now[:fail] = I18n.t :fail, :scope => [:fee_type, :create_bulk]
-      render "new"
+    respond_to do |format|
+      format.json do
+        fee_types_created = []
+        if !@fee_type_bulk.empty? and @fee_type_bulk.map(&:valid?).all?
+          @fee_type_bulk.each do |fee_type|
+            if fee_type.save!
+              fee_types_created << fee_type
+            end
+          end
+        end
+        render :json => fee_types_created
+      end
     end
   end
   

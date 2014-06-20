@@ -1,20 +1,33 @@
-%h3 
-  = "FeeTypes"
-  .pull-right
-    = link_to "New FeeType", new_fee_type_path, :class => "btn btn-primary"
-
-
-%table.table.table-bordered
-  %thead
-    %th FeeType
-    %th
-  %tbody
-    - @fee_types.each do |fee_type|
-      %tr
-        %td= fee_type.fee_type
+.col-md-7{"ng-controller" => "FeeTypesController"}
+  %h3 
+    = "FeeTypes"
+    .pull-right
+      = link_to "New Fee Type", "#", :class => "btn btn-primary", :ng_click => "newFeeTypes()"
+  %hr
+  %table.table.table-bordered
+    %tbody
+      %tr{"ng-repeat" => "fee_type in fee_types"}
+        %td {{fee_type.fee_type}}
         %td
-          = link_to fa_icon("edit"), edit_fee_type_path(fee_type), :class => "btn btn-warning"
-          = link_to fa_icon("trash-o"), fee_type_path(fee_type), :class => "btn btn-danger", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete #{fee_type.fee_type}?"}
-          
-= will_paginate @fee_types, param_name: "page", previous_label: h("<"), next_label: h(">")          
+          = link_to fa_icon("edit"), "#", :class => "btn btn-warning", :ng_click => "edit(fee_type)"
+          = link_to fa_icon("trash-o"), "#", :class => "btn btn-danger", :ng_click => "destroy(fee_type)"
+            
+
         
+  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} New Fee Type 
+        .modal-body
+          = render "form_for_bulk_fee_types"
+  .modal.fade{ :id => "editModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "editModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "editModalLabel"} Edit {{fee_type.fee_type}}
+        .modal-body
+          = render "form"
+
