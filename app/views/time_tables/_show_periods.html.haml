@@ -1,0 +1,32 @@
+.row{"ng-controller" => "GradeController"}
+  .col-md-1
+  .col-md-8
+    %div{"ng-show" => "myShowValue"}
+      %table{:class => "table"}
+        %tr
+          %th PERIOD
+          %th MON
+          %th TUE
+          %th WED
+          %th THU
+          %th FRI
+          %th SAT
+        %tr{"ng-repeat" => "timeperiod in timeperiods"}
+          %td Period{{" "+($index+1)}}
+          %td {{timeperiod['mon_sub_name']}}
+          %td {{timeperiod['tue_sub_name']}}          
+          %td {{timeperiod['wed_sub_name']}}          
+          %td {{timeperiod['thu_sub_name']}}           
+          %td {{timeperiod['fri_sub_name']}}          
+          %td {{timeperiod['sat_sub_name']}}           
+.row
+  :css
+    table, th, td
+    {
+    border-collapse:collapse;
+    border:5px solid #6aa6d6;
+    }
+    th, td
+    {
+    padding:5px;
+    }    

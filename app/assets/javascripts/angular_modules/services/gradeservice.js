@@ -7,6 +7,7 @@
         };
 
         var savePeriods = function(timeperiods){
+
             var url = "/time_tables/saveperiods.json"
             return $http.post(url, {time_periods: timeperiods});
             
@@ -15,9 +16,7 @@
         var allGrades = function(){
             var url = "/fee_grade_buckets/all_grades.json"
             return $http.get(url);
-        }
-        
-        
+        }        
         return {
             getGradeServiceView : getGradeServiceView,
             savePeriods : savePeriods,
@@ -56,13 +55,23 @@
             var url = "/time_tables/timetableserviceview.json"
             return $http.get(url);
         };
-        
-        return {
-            getTimeTableServiceView : getTimeTableServiceView
-        };
-        
-    }]);
 
-   
+        var getDefaultPeriodsServiceView = function(){
+            var url = "/time_tables/defaultperiodsserviceview.json"
+            return $http.get(url);
+        };
+
+        var getPeriods = function(myGrade,mySection){
+            //alert("hello");
+            var url = "/time_tables/getperiods.json"
+            return $http.post(url, {my_Grade: myGrade, my_Section: mySection});   
+            return $http.get(url);
+        };        
+        return {
+            getTimeTableServiceView : getTimeTableServiceView,
+            getPeriods : getPeriods,
+            getDefaultPeriodsServiceView : getDefaultPeriodsServiceView          
+        };        
+    }]);   
 
 })(angular, myApp);

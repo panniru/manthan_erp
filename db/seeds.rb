@@ -89,6 +89,29 @@ def seed_students
   end
 end
 
+def seed_sections
+  unless SectionMaster.first.present?
+    SectionMaster.create(:section => 'A')
+    SectionMaster.create(:section => 'B')
+    SectionMaster.create(:section => 'C')
+    SectionMaster.create(:section => 'D')
+    SectionMaster.create(:section => 'E')
+  end
+end
+def seed_subjects
+  unless SubjectMaster.first.present?
+    SubjectMaster.create(:subject => 'PHYSICS')
+    SubjectMaster.create(:subject => 'CHEMISTRY')
+    SubjectMaster.create(:subject => 'MATHEMATICS')
+    SubjectMaster.create(:subject => 'ENGLISH')
+    SubjectMaster.create(:subject => 'TELUGU')    
+  end
+end
+def seed_defaults
+  unless DefaultMaster.first.present?
+    DefaultMaster.create(:default_name => 'no_of_periods',:default_value => '8')
+  end
+end
 
 
 
@@ -100,6 +123,9 @@ def seed_all
   seed_grades
   seed_parents
   seed_students
+  seed_sections
+  seed_subjects
+  seed_defaults
 end
 
 seed_all

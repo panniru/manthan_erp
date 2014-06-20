@@ -76,3 +76,6 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'anticipate'
 end
+
+# 
+gem 'composite_primary_keys'

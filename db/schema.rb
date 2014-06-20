@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140619074335) do
+ActiveRecord::Schema.define(version: 20140620063027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,14 @@ ActiveRecord::Schema.define(version: 20140619074335) do
     t.string   "def_by"
     t.string   "status"
     t.string   "year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "default_masters", force: true do |t|
+    t.string   "default_name"
+    t.string   "default_value"
+    t.string   "default_desc"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -350,6 +358,7 @@ ActiveRecord::Schema.define(version: 20140619074335) do
     t.string   "section"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "grade_master_id"
   end
 
   create_table "staffs", force: true do |t|
@@ -375,6 +384,41 @@ ActiveRecord::Schema.define(version: 20140619074335) do
     t.integer  "grade_master_id"
     t.integer  "section"
     t.boolean  "bus_facility"
+  end
+
+  create_table "students", force: true do |t|
+    t.string   "form_no"
+    t.string   "name"
+    t.string   "klass"
+    t.string   "dob"
+    t.string   "gender"
+    t.string   "nationality"
+    t.string   "language"
+    t.string   "father_name"
+    t.string   "mother_name"
+    t.string   "father_occupation"
+    t.string   "mother_occupation"
+    t.string   "father_company"
+    t.string   "mother_company"
+    t.string   "father_education"
+    t.string   "mother_education"
+    t.string   "income"
+    t.text     "address"
+    t.string   "landline"
+    t.string   "mobile"
+    t.string   "email"
+    t.string   "transport"
+    t.string   "busstop"
+    t.string   "last_school"
+    t.string   "city"
+    t.string   "changing_reason"
+    t.string   "know_school"
+    t.string   "person"
+    t.string   "pp"
+    t.string   "appno"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "subject_masters", force: true do |t|
@@ -407,7 +451,6 @@ ActiveRecord::Schema.define(version: 20140619074335) do
 
   create_table "time_tables", force: true do |t|
     t.string   "academic_year"
-    t.string   "staffid"
     t.string   "mon_sub"
     t.string   "tue_sub"
     t.string   "wed_sub"

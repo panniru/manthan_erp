@@ -1,3 +1,3 @@
 class SectionMaster < ActiveRecord::Base
-	has_one :grade_master
+	belongs_to :grade_master
 end
