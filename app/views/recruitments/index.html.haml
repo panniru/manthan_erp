@@ -1,16 +1,50 @@
+%h4 Guidelines
+%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New"
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title New Guideline
+        = form_for Recruitment.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
+          .modal-body
+            .row
+              .col-sm-3
+                = f.label "Title", :class => 'col-sm-3 control-label'
+              .col-sm-5
+                = f.text_field :title,:class => 'form-control'
+                %br
+            .row
+              .col-sm-3
+                = f.label "Education Details", :class => 'col-sm-3 control-label'
+              .col-sm-5
+                = f.text_area :education_details, :class => 'form-control'
+                %br
+            .row
+              .col-sm-3
+                = f.label "experience", :class => 'col-sm-3 control-label'
+              .col-sm-5
+                = f.text_field :experience, :class => 'form-control'
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+            = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+         
+%br
+%br
 %table.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
-      %th Title:
-      %th Education Details:
+      %th Title
+      %th Education Details
       %th Experience
+      %th
+     
   %tbody
-    - Recruitment.all.each do |recruitment|
+    - @recruitments.each do |recruitment|
       %tr
         %td= recruitment.title
         %td= recruitment.education_details
         %td= recruitment.experience
+        
+        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), recruitment_path(recruitment), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
        
-%center
-  = link_to "back", new_recruitment_path, class: "btn btn-primary"
-

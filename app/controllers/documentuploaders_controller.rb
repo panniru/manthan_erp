@@ -32,7 +32,7 @@ class DocumentuploadersController < ApplicationController
     end
   end
   def destroy
-    @documentuploader = Documentuploader.find(params[:id])    
+    @documentuploader = Documentuploader.find(params[:id])
     if @documentuploader.destroy
       flash[:success] = I18n.t :success, :scope => [:documentuploader, :destroy]
     else

@@ -1,2 +1,27 @@
-%h1 Forms#show
-%p Find me in app/views/forms/show.html.haml
+%table.table.table-striped.table-bordered.table-condensed
+  %thead
+    %tr
+      
+      %th Gender
+      %th Address
+      %th Known Languages
+     
+      %th Expected Salary
+      %th Nationality
+      %th 
+      %th
+  %tbody
+    - Form.all.each do |form|
+      %tr
+       
+        %td= form.gender
+       
+        %td= form.address
+       
+        %td= form.language
+       
+        %td= form.expected_salary
+       
+        %td= form.nationality
+        %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_form_path(form), :class => "btn btn-warning btn-sm", :title => "Edit"
+        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), form_path(form), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"

@@ -1,15 +1,52 @@
+%h4 Advertisements
+%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New"
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title New Advertisement
+        = form_for Add.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
+          .modal-body
+            .row
+              .col-sm-3
+                = f.label "Title:", :class => 'col-sm-3 control-label'
+              .col-sm-5
+                = f.text_field :title,:class => 'form-control'
+                %br
+            .row
+              .col-sm-3
+                = f.label "Date:", :class => 'col-sm-3 control-label'
+              .col-sm-5
+                = f.text_field :date,  :class => 'datepicker form-control'
+                %br
+            .row
+              .col-sm-3
+                = f.label "Description:", :class => 'col-sm-3 control-label'
+              .col-sm-5
+                = f.text_area :description, :class => 'form-control'
+                %br
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+            = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+%br
+%br
 %table.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
-      %th Title:
-      %th Date:
+      %th Title
+      %th Date
       %th Description
+      %th
+      %th
   %tbody
-    - Add.all.each do |add|
+    - @adds.each do |add|
       %tr
         %td= add.title
         %td= add.date
         %td= add.description
+        %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_add_path(add), :class => "btn btn-warning btn-sm", :title => "Edit"
+        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), add_path(add), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+          
+	
        
-%center
-  = link_to "back", new_add_path, class: "btn btn-primary"

@@ -1,0 +1,17 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @interviewscheduler.name
+%p
+  %b Description:
+  = @interviewscheduler.description
+%p
+  %b Start time:
+  = @interviewscheduler.start_time
+%p
+  %b End time:
+  = @interviewscheduler.end_time
+
+= link_to 'Edit', edit_interviewscheduler_path(@interviewscheduler)
+= link_to 'Back', interviewschedulers_path

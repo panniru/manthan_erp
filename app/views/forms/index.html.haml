@@ -1,40 +1,41 @@
+%h4 Enquiry
+= link_to "Add New", new_form_path, :class => "btn btn-primary"
+%br
+%br
 %table.table.table-striped.table-bordered.table-condensed
   %thead
     %tr
-      %th Name:
-      %th Date_Of_Birth:
-      %th Gender:
-      %th Email:
-      %th Mobile_No:
-      %th Address:
-      %th Preffered_Class:
-      %th Known_Languages:
-      %th Preffered_Subject:
-      %th Experience_in_Teaching:
-      %th Expected_Salary:
-      %th Education_Qualification:
-      %th Nationality:
+      %th Name
+      %th DOB
+    
+      %th Email
+      %th Mobile No
+      
+      %th Preferred Class
+      
+      %th Preferred Subject
+      %th Experience in Teaching
+     
+      %th Education Qualification
+     
       %th 
       %th
+      %th
   %tbody
-    - Form.all.each do |form|
+    - @forms.all.each do |form|
       %tr
         %td= form.name
         %td= form.dob
-        %td= form.gender
+       
         %td= form.email
         %td= form.mobile_no
-        %td= form.address
+      
         %td= form.klass
-        %td= form.language
+      
         %td= form.subject
         %td= form.experience
-        %td= form.expected_salary
+        
         %td= form.education_qualification
-        %td= form.nationality
+        %td= link_to "<<seemore>>",  form,  :title => "Show"
         %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_form_path(form), :class => "btn btn-warning btn-sm", :title => "Edit"
         %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), form_path(form), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
-%center
-  .col.sm-12
-    = link_to "Back", new_form_path, :class => "btn btn-primary"
-    %br

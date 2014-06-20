@@ -16,6 +16,7 @@ class ContextDetector
     "adds" => "recruitment_sub_menu",
     "forms" => "recruitment_sub_menu",
     "documentuploaders" => "recruitment_sub_menu",
+    "interviewschedulers" => "recruitment_sub_menu",
   }
 
   def self.get_context(key)

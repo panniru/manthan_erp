@@ -7,7 +7,8 @@ class RecruitmentSubMenu
     sub_menu << advertisements
     sub_menu << enquiry_form
     sub_menu << documentation_verification
-    sub_menu
+    sub_menu << interview_scheduler
+    
   end
 
   private 
@@ -18,11 +19,13 @@ class RecruitmentSubMenu
     MenuItem.new(:label => "Advertisements", :klass => "", :icon => "puzzle-piece ", :href => "/adds")
     end
   def  enquiry_form
-    MenuItem.new(:label => "Enquiry From", :klass => "", :icon => "file-text-o", :href => "/forms/new")
+    MenuItem.new(:label => "Enquiry From", :klass => "", :icon => "file-text-o", :href => "/forms")
     end
   def  documentation_verification
     MenuItem.new(:label => "Documentation verification", :klass => "", :icon => "folder-open", :href => "/documentuploaders")
   end
+  def interview_scheduler
+    MenuItem.new(:label => "Interview Scheduler", :klass => "", :icon => "calendar ", :href => "/interviewschedulers")
+  end
 end
-
 

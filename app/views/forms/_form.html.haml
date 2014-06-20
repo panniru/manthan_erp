@@ -1,86 +1,94 @@
 %pull_right
   = image_tag "logo.gif"
   %h5
-    ENQUIRY FORM:
+    ENQUIRY:
     %br
     %br
     %center 
       = form_for @form, :html => { :class => "form-horizontal", :role => "form" } do |f|
        
         .row
-          .col-sm-9
+          .col-sm-10
             = f.label "Name Of The Applicant:", :class => 'col-sm-3 control-label'
             .col-sm-3
               = f.text_field :name,:class => 'form-control'
               %br
      
-          .col-sm-9
+          .col-sm-10
             = f.label "Date Of Birth:", :class => 'col-sm-3 control-label'
             .col-sm-3
               = f.text_field :dob, :class => 'datepicker form-control'
               %br
  
-          .col-sm-9
+          .col-sm-10
             = f.label "Gender:", :class => 'col-sm-3 control-label'
             .col-sm-3
-              = f.radio_button :gender, 'female'
+              = f.radio_button :gender, 'F'
               = f.label :"female"
-              = f.radio_button :gender, 'male'
+              = f.radio_button :gender, 'M'
               = f.label :"male"
              
               %br
-          .col-sm-9
+          .col-sm-10
             = f.label "Email:", :class => 'col-sm-3 control-label'
             .col-sm-3
               = f.text_field :email, :class => 'form-control'
               %br
  
-          .col-sm-9
+          .col-sm-10
             = f.label "MObile No:", :class => 'col-sm-3 control-label'
             .col-sm-3
               = f.text_field :mobile_no, :class => 'form-control'
               %br
               
-          .col-sm-9
+          .col-sm-10
             = f.label "Address:", :class => 'col-sm-3 control-label'
             .col-sm-3
               = f.text_area :address, :class => 'form-control'
               %br
               
-          .col-sm-9
-            = f.label "Preffered Class:", :class => 'col-sm-3 control-label'
+          .col-sm-10
+            = f.label "Preferred Class:", :class => 'col-sm-3 control-label'
             .col-sm-3
-              = f.text_field :klass, :class => 'form-control'
+              = f.select :klass, options_for_select([['PP1'],['PP2'],['Grade-1'],['Grade-2'],['Grade-3'],['Grade-4'],['Grade-5'],['Grade-6'],['Grade-7'],['Grade-8'],['Grade-9']]), :class => 'form-control'
               %br
-          .col-sm-9
+              %br
+          .col-sm-10
             = f.label "Known Languages:", :class => 'col-sm-3 control-label'
             .col-sm-3
-              = f.text_field :language, :class => 'form-control'
+              = f.select :language, options_for_select([['Hindi'],['English'],['Tamil'],['Telugu'],['Malayalam'],['Punjabi'],['Marati'],['Urdu']]), :class => 'form-control' 
               %br
-          .col-sm-9
-            = f.label "Preffered Subject:", :class => 'col-sm-3 control-label'
+              %br
+          .col-sm-10
+            = f.label "Preferred Subject:", :class => 'col-sm-3 control-label'
             .col-sm-3
-              = f.text_field :subject, :class => 'form-control'
+              = f.select :subject, options_for_select([['English'],['Hindi'],['Hindi'],['Science'],['Social'],['FineArts']]), :class => 'form-control'
               %br
-          .col-sm-9
+              %br
+          .col-sm-10
             = f.label "Experience in Teaching:", :class => 'col-sm-3 control-label'
             .col-sm-3
-              = f.text_field :experience, :class => 'form-control'
+             
+              = f.select :experience, options_for_select([['0-1 year'],['1-2 years'],['2-3 years'],['3-4 years'],['4-5 years'],['5-6 years']]), :class => 'form-control'
               %br
-          .col-sm-9
+              %br
+          .col-sm-10
             = f.label "Expected Salary:", :class => 'col-sm-3 control-label'
             .col-sm-3
-              = f.text_field :expected_salary, :class => 'form-control'
+              = f.select :expected_salary, options_for_select([['10000'],['10000-20000'],['20000-30000'],['30000']]), :class => 'form-control'
               %br
-          .col-sm-9
+              %br
+          .col-sm-10
             = f.label "Education Qualification:", :class => 'col-sm-3 control-label'
             .col-sm-3
-              = f.text_field :education_qualification, :class => 'form-control'
+              = f.select :education_qualification, options_for_select([['M.Sc(B.Ed)'],['M.A'],['M.Sc'],['Graduation'],['MBA'],['MCA']])
               %br
-          .col-sm-9
+              %br
+          .col-sm-10
             = f.label "Nationality:", :class => 'col-sm-3 control-label'
             .col-sm-3
-              = f.text_field :nationality, :class => 'form-control'
+              = f.country_select :nationality, {object: f.object, prompt: 'Country'}
+              %br
               %br
               = f.submit "submit", :class => "btn btn-primary"
      

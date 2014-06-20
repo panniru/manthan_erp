@@ -1,4 +1,6 @@
 ManthanErp::Application.routes.draw do
+  resources :interviewschedulers
+
   resources :staffs
   get "staffs/staffview"
   
@@ -34,9 +36,9 @@ ManthanErp::Application.routes.draw do
 
   resources :documentuploaders
   resources :adds
-  resources :forms 
+  resources :forms
   resources :recruitments
-
+  
   resources :fee_types do
     collection do
       post "create_bulk"

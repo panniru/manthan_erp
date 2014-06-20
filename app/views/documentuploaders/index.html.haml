@@ -1,15 +1,38 @@
-#table
+%h4 Document Uploaders
+%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New"
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title New Document
+        = form_for Documentuploader.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
+          .modal-body
+            = f.label :name
+            = f.text_field :name
+            %br
+            = f.label :Educational_certificate
+            = f.file_field :educational_certificates
+            = f.label :Previous_employment_proof
+            = f.file_field :previous_employment_proof
+            = f.label :Salary_slips_for_previous_months
+            = f.file_field :salary_slips_for_previous_months
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+            = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+%br          
+%br
 %table.table.table-bordered.table-striped 
   %thead
     %tr
-      %th Name:
-      %th Educational Certificates:
-      %th Previous employment proof:
-      %th Salary Slips For Previous Months:
+      %th Name
+      %th Educational Certificates
+      %th Previous employment proof
+      %th Salary Slips For Previous Months
       %th
       %th
   %tbody
-    - Documentuploader.all.each do |documentuploader|
+    - @documentuploaders.each do |documentuploader|
       %tr
         %td= documentuploader.name
         %td= link_to "view", documentuploader.educational_certificates_url
@@ -17,5 +40,4 @@
         %td= link_to "view", documentuploader.salary_slips_for_previous_months_url
         %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_documentuploader_path(documentuploader), :class => "btn btn-warning btn-sm", :title => "Edit"
         %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), documentuploader_path(documentuploader), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
-%center
-  = link_to "New Document", new_documentuploader_path, class: "btn btn-primary"
+ 

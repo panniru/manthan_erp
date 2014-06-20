@@ -1,0 +1,39 @@
+= form_for @interviewscheduler do |f|
+  - if @interviewscheduler.errors.any?
+    #error_explanation
+      %h4= "#{pluralize(@interviewscheduler.errors.count, "error")} prohibited this event from being saved:"
+      %ul
+        - @interviewscheduler.errors.full_messages.each do |msg|
+          %li= msg
+  .row
+    .field
+      .col-sm-3
+        = f.label "Name:", :class => 'control-label'
+      .col-sm-3
+        = f.text_field :name, :class => 'form-control'
+        %br
+  .row   
+    .field
+      .col-sm-3
+        = f.label "Description:", :class => 'control-label'
+      .col-sm-3
+        = f.text_area :description, :class => 'form-control'
+  %br
+  .row
+    .field
+      .col-sm-3
+        = f.label "Start_Time:", :class => 'control-label'
+      .col-sm-3
+        = f.datetime_select :start_time, :class => 'form-control'
+  %br
+  .row
+    .field
+      .col-sm-3
+        = f.label "End_Time:", :class => 'control-label'
+      .col-sm-3
+        = f.datetime_select :end_time, :class => 'form-control'
+  %br
+  .col-sm-3
+    .pull-right
+      = f.submit 'Save',:class => 'btn btn-primary'
+      

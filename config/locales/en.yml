@@ -76,41 +76,51 @@ en:
       fail: "Discount not been updated"
   recruitment:
     create:
-      success: "guideline has been saved"
-      fail: "guideline not  been saved"
+      success: "Guideline has been saved"
+      fail: "Guideline not  been saved"
     update:
-      success: "guideline has been updated"
-      fail: "guideline not been updated"
+      success: "Guideline has been updated"
+      fail: "Guideline not been updated"
     destroy:
-      success: "guideline has been deleted"
-      fail: "guideline not been deleted"
+      success: "Guideline has been deleted"
+      fail: "Guideline not been deleted"
   add:
     create:
-      success: "advertisement has been saved"
-      fail: "advertisement not  been saved"
+      success: "Advertisement has been saved"
+      fail: "Advertisement not  been saved"
     update:
-      success: "advertisement has been updated"
-      fail: "advertisement not been updated"
+      success: "Advertisement has been updated"
+      fail: "Advertisement not been updated"
     destroy:
-      success: "advertisement has been deleted"
-      fail: "advertisement not been deleted"
+      success: "Advertisement has been deleted"
+      fail: "Advertisement not been deleted"
   form:
     create:
-      success: "enquiry has been saved"
-      fail: "enquiry not  been saved"
+      success: "Enquiry has been saved"
+      fail: "Enquiry not  been saved"
     update:
-      success: "enquiry has been updated"
-      fail: "enquiry not been updated"
+      success: "Enquiry has been updated"
+      fail: "Enquiry not been updated"
     destroy:
-      success: "enquiry has been deleted"
-      fail: "enquiry not been deleted"
+      success: "Enquiry has been deleted"
+      fail: "Enquiry not been deleted"
   documentuploader:
     create:
-      success: "document has been saved"
-      fail: "document not  been saved"
+      success: "Document has been saved"
+      fail: "Document not  been saved"
     update:
-      success: "document has been updated"
-      fail: "document not been updated"
+      success: "Document has been updated"
+      fail: "Document not been updated"
     destroy:
-      success: "document has been deleted"
-      fail: "document not been deleted"
+      success: "Document has been deleted"
+      fail: "Document not been deleted"
+  interviewscheduler:
+    create:
+      success: "Schedule has been saved"
+      fail: "Schedule not  been saved"
+    update:
+      success: "Schedule has been updated"
+      fail: "Schedule not been updated"
+    destroy:
+      success: "Schedule has been deleted"
+      fail: "Schedule not been deleted"
