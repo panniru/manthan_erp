@@ -61,16 +61,22 @@
             return $http.get(url);
         };
 
+
         var getPeriods = function(myGrade,mySection){
-            //alert("hello");
             var url = "/time_tables/getperiods.json"
-            return $http.post(url, {my_Grade: myGrade, my_Section: mySection});   
+      return $http.post(url, {my_Grade: myGrade, my_Section: mySection});   
             return $http.get(url);
-        };        
+        }; 
+        var checkTimeTable = function(myGrade,mySection){
+            //alert("hello");
+            var url = "/time_tables/checktimetable.json"             
+            return $http.get(url,{params:{my_Grade: myGrade, my_Section: mySection}});  
+        }; 
         return {
             getTimeTableServiceView : getTimeTableServiceView,
             getPeriods : getPeriods,
-            getDefaultPeriodsServiceView : getDefaultPeriodsServiceView          
+            getDefaultPeriodsServiceView : getDefaultPeriodsServiceView,
+            checkTimeTable: checkTimeTable
         };        
     }]);   
 

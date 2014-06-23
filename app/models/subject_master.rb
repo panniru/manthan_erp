@@ -1,9 +1,9 @@
 class SubjectMaster < ActiveRecord::Base
-  def self.get_sub_name(sub_id)
-    if sub_id == false
-      nil
+  def self.get_sub_name(sub_exists,sub_id)
+    if sub_exists == false
+      nil # explicit nil
     else
-      subject = SubjectMaster.find(sub_id).subject # explicit nil so other developers know exactly what's going on
+      SubjectMaster.find(sub_id).subject 
     end
   end
 end

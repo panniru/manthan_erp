@@ -56,23 +56,33 @@ class TimeTablesController < ApplicationController
   def timetableserviceview
     respond_to do |format|
       format.json do
-        timetables = TimeTable.all
+        timetables = TimeTable.all.map do |t|
+          {grade:t.grade_master_id,section:t.section_master_id}
+        end
         render :json => timetables
+      end
+    end      
+  end
+  def checktimetable
+    respond_to do |format|
+      format.json do
+        timetables = TimeTable.where('grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'").count     
+       
+      render :json => timetables
       end
     end  
   end
 
-  def getperiods
-    getsubjects=SubjectMaster.all   
+  def getperiods     
     timetables = TimeTable.where('grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'")
-    
+       
     timetables = timetables.map do |timetable|
-      {id: timetable.id, mon_sub: timetable.mon_sub.to_i,tue_sub: timetable.tue_sub.to_i, wed_sub: timetable.wed_sub.to_i, thu_sub: timetable.thu_sub.to_i, fri_sub: timetable.fri_sub.to_i, sat_sub: timetable.sat_sub.to_i, mon_sub_name: SubjectMaster.get_sub_name(timetable.mon_sub.present?), tue_sub_name: SubjectMaster.get_sub_name(timetable.tue_sub.present?),wed_sub_name: SubjectMaster.get_sub_name(timetable.wed_sub.present?),thu_sub_name: SubjectMaster.get_sub_name(timetable.thu_sub.present?),fri_sub_name: SubjectMaster.get_sub_name(timetable.fri_sub.present?),sat_sub_name: SubjectMaster.get_sub_name(timetable.sat_sub.present?)}
+      {id: timetable.id, mon_sub: timetable.mon_sub.to_i,tue_sub: timetable.tue_sub.to_i, wed_sub: timetable.wed_sub.to_i, thu_sub: timetable.thu_sub.to_i, fri_sub: timetable.fri_sub.to_i, sat_sub: timetable.sat_sub.to_i, mon_sub_name: SubjectMaster.get_sub_name(timetable.mon_sub.present?,timetable.mon_sub.to_i), tue_sub_name: SubjectMaster.get_sub_name(timetable.tue_sub.present?,timetable.tue_sub.to_i), wed_sub_name: SubjectMaster.get_sub_name(timetable.wed_sub.present?,timetable.wed_sub.to_i), thu_sub_name: SubjectMaster.get_sub_name(timetable.thu_sub.present?,timetable.thu_sub.to_i), fri_sub_name: SubjectMaster.get_sub_name(timetable.fri_sub.present?,timetable.fri_sub.to_i), sat_sub_name: SubjectMaster.get_sub_name(timetable.sat_sub.present?,timetable.sat_sub.to_i)}
       end    
-    render :json => timetables
+    render :json => timetables    
   end
 
-  def defaultperiodsserviceview
+def defaultperiodsserviceview
     defaultperiods = DefaultMaster.all
     defaultperiods = DefaultMaster.where('default_name = '+"'no_of_periods'")
     defaultperiods = defaultperiods[0].default_value

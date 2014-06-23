@@ -28,6 +28,8 @@ ManthanErp::Application.routes.draw do
   post "/time_tables/getperiods"
   get "/time_tables/getperiods"
   get "/time_tables/defaultperiodsserviceview"
+  post "/time_tables/checktimetable"
+  get "/time_tables/checktimetable"
 
 
   root to: "home#index"
