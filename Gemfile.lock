@@ -263,7 +263,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-nulldb-adapter!
   angular-rails-templates
-  angularjs-rails (~> 1.2.16)
+  angularjs-rails (= 1.2.18)
   anticipate
   bootstrap-sass (~> 3.0.3.0)
   bootstrap-will_paginate
