@@ -1,12 +1,13 @@
-= form_tag create_bulk_fee_grade_buckets_path, :method => "POST", :class=> "form-horizantal" do 
-  .col-md-12.form-group{"ng-repeat" => "grade_from in fee_grade_buckets"}
+%form{ :class=> "form-horizantal", :ng_submit => "submitGradeBuckets()", :id => "gradeBucketsForm"}
+  .col-md-12.form-group{"ng-repeat" => "gradeBucket in feeGradeBuckets"}
     = label_tag "Bucket {{$index+1}}", nil, :class => "form-label col-md-2"
     .col-md-3
-      %select{:class => "form-control" , :placeholder => "From" ,"ng-model" => "fee_grade_buckets[$index]['grade_from']", :ng_options => "grade.id as grade.grade_name for grade in grades"}
-      = hidden_field_tag "bulk_fee_grade_buckets[][grade_from]", "{{fee_grade_buckets[$index]['grade_from']}}" 
+      %select{:class => "form-control" , :placeholder => "From" ,"ng-model" => "gradeBucket.gradeFrom", :ng_options => "grade.id as grade.grade_name for grade in gradeBucket.optionsFrom", :grade_options_manager => "" , :index => "{{$index}}", :grade_type => "from"}
+        -#:ng_change => "gradeChangeActionFrom(gradeBucket, this)"} 
+      = hidden_field_tag "bulk_fee_grade_buckets[][grade_from]", "{{gradeBucket.gradeFrom}}" 
     .col-md-3
-      %select{:class => "form-control" , :placeholder => "To" ,"ng-model" =>  "fee_grade_buckets[$index]['grade_to']", :ng_options => "grade.id as grade.grade_name for grade in grades"}
-      = hidden_field_tag "bulk_fee_grade_buckets[][grade_to]", "{{fee_grade_buckets[$index]['grade_to']}}" 
+      %select{:class => "form-control" , :placeholder => "To" ,"ng-model" =>  "gradeBucket.gradeTo", :ng_options => "grade.id as grade.grade_name for grade in gradeBucket.optionsTo", :grade_options_manager => "", :index => "{{$index}}", :grade_type => "to"}}
+      = hidden_field_tag "bulk_fee_grade_buckets[][grade_to]", "{{gradeBucket.gradeTo}}" 
   .row
     .col-md-5.col-md-offset-3
       %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"

@@ -222,6 +222,15 @@ ActiveRecord::Schema.define(version: 20140620063027) do
     t.datetime "updated_at"
   end
 
+  create_table "interviewschedulers", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "job_runs", force: true do |t|
     t.integer  "job_id"
     t.datetime "started_on"
@@ -386,41 +395,6 @@ ActiveRecord::Schema.define(version: 20140620063027) do
     t.boolean  "bus_facility"
   end
 
-  create_table "students", force: true do |t|
-    t.string   "form_no"
-    t.string   "name"
-    t.string   "klass"
-    t.string   "dob"
-    t.string   "gender"
-    t.string   "nationality"
-    t.string   "language"
-    t.string   "father_name"
-    t.string   "mother_name"
-    t.string   "father_occupation"
-    t.string   "mother_occupation"
-    t.string   "father_company"
-    t.string   "mother_company"
-    t.string   "father_education"
-    t.string   "mother_education"
-    t.string   "income"
-    t.text     "address"
-    t.string   "landline"
-    t.string   "mobile"
-    t.string   "email"
-    t.string   "transport"
-    t.string   "busstop"
-    t.string   "last_school"
-    t.string   "city"
-    t.string   "changing_reason"
-    t.string   "know_school"
-    t.string   "person"
-    t.string   "pp"
-    t.string   "appno"
-    t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "subject_masters", force: true do |t|
     t.string   "subject"
     t.datetime "created_at"
@@ -451,6 +425,7 @@ ActiveRecord::Schema.define(version: 20140620063027) do
 
   create_table "time_tables", force: true do |t|
     t.string   "academic_year"
+    t.string   "staffid"
     t.string   "mon_sub"
     t.string   "tue_sub"
     t.string   "wed_sub"
