@@ -47,10 +47,16 @@ class TimeTablesController < ApplicationController
   end
 
   def saveperiods
-    params[:time_periods].each do |t|
-      @timetable=TimeTable.new(t)
-      @timetable.save      
-    end
+    p time_periods.length
+    p "---------------------------"
+    params[:time_periods].each do |t|      
+        if TimeTable.find(t[0].id).present?
+          @timetable.update          
+        else
+          @timetable=TimeTable.new(t)
+          @timetable.save           
+        end
+      end
   end
 
   def timetableserviceview
@@ -66,20 +72,29 @@ class TimeTablesController < ApplicationController
   def checktimetable
     respond_to do |format|
       format.json do
-        timetables = TimeTable.where('grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'").count     
-       
-      render :json => timetables
+        timetables = TimeTable.where('grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'").count 
+        render :json => timetables
       end
     end  
   end
 
-  def getperiods     
+  def getperiods
+    
     timetables = TimeTable.where('grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'")
-       
+    p "---------------------------"
+    p params
+    p "######"
+    p timetables
+    p "---------------------------"       
     timetables = timetables.map do |timetable|
-      {id: timetable.id, mon_sub: timetable.mon_sub.to_i,tue_sub: timetable.tue_sub.to_i, wed_sub: timetable.wed_sub.to_i, thu_sub: timetable.thu_sub.to_i, fri_sub: timetable.fri_sub.to_i, sat_sub: timetable.sat_sub.to_i, mon_sub_name: SubjectMaster.get_sub_name(timetable.mon_sub.present?,timetable.mon_sub.to_i), tue_sub_name: SubjectMaster.get_sub_name(timetable.tue_sub.present?,timetable.tue_sub.to_i), wed_sub_name: SubjectMaster.get_sub_name(timetable.wed_sub.present?,timetable.wed_sub.to_i), thu_sub_name: SubjectMaster.get_sub_name(timetable.thu_sub.present?,timetable.thu_sub.to_i), fri_sub_name: SubjectMaster.get_sub_name(timetable.fri_sub.present?,timetable.fri_sub.to_i), sat_sub_name: SubjectMaster.get_sub_name(timetable.sat_sub.present?,timetable.sat_sub.to_i)}
+      {id: timetable.id, grade_master_id: timetable.grade_master_id, section_master_id: timetable.section_master_id, mon_sub: timetable.mon_sub.to_i,tue_sub: timetable.tue_sub.to_i, wed_sub: timetable.wed_sub.to_i, thu_sub: timetable.thu_sub.to_i, fri_sub: timetable.fri_sub.to_i, sat_sub: timetable.sat_sub.to_i, mon_sub_name: SubjectMaster.get_sub_name(timetable.mon_sub.present?,timetable.mon_sub.to_i), tue_sub_name: SubjectMaster.get_sub_name(timetable.tue_sub.present?,timetable.tue_sub.to_i), wed_sub_name: SubjectMaster.get_sub_name(timetable.wed_sub.present?,timetable.wed_sub.to_i), thu_sub_name: SubjectMaster.get_sub_name(timetable.thu_sub.present?,timetable.thu_sub.to_i), fri_sub_name: SubjectMaster.get_sub_name(timetable.fri_sub.present?,timetable.fri_sub.to_i), sat_sub_name: SubjectMaster.get_sub_name(timetable.sat_sub.present?,timetable.sat_sub.to_i)}
       end    
-    render :json => timetables    
+    render :json => timetables
+    p "---------------------------"
+    p params
+    p "######"
+    p timetables
+    p "---------------------------"  
   end
 
 def defaultperiodsserviceview

@@ -38,19 +38,24 @@
             %td Period{{" "+($index+1)}}
             %td               
               %select{ "ng-hide" => "mySelectedValue","ng-model" => "timeperiod['mon_sub']", "ng-options" => "subject.id as  subject.subject for subject in subjects",:class => "form-control",:placeholder => "first name"} 
+                %option{value: ""}
             %td
-              %select{"ng-model" => "timeperiod['tue_sub']", "ng-options" => "subject.id as  subject.subject for subject in subjects",:class => "form-control"}             
+              %select{"ng-model" => "timeperiod['tue_sub']", "ng-options" => "subject.id as  subject.subject for subject in subjects",:class => "form-control"} 
+                %option{value: ""}
             %td
-              %select{"ng-model" => "timeperiod['wed_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}             
+              %select{"ng-model" => "timeperiod['wed_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}  
+                %option{value: ""}
             %td
               %select{"ng-model" => "timeperiod['thu_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}  
-              {{timeperiod['thu_sub']}}
+                %option{value: ""}
             %td 
               %select{"ng-model" => "timeperiod['fri_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}
+                %option{value: ""}
             %td 
-              %select{"ng-model" => "timeperiod['sat_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}          
+              %select{"ng-model" => "timeperiod['sat_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}  
+                %option{value: ""}
             %td
-              %input{:type => "button", "ng-click" => "clearPeriod()", :class => "btn btn-danger btn-sm", :value => "CLEAR" }             
+              %input{:type => "button", "ng-click" => "clearPeriods($index)", :class => "btn btn-danger btn-sm", :value => "CLEAR" }             
     .col-md-2 
   .row
     = render "show_periods"      

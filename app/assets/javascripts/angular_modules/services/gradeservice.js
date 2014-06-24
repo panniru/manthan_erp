@@ -64,8 +64,7 @@
 
         var getPeriods = function(myGrade,mySection){
             var url = "/time_tables/getperiods.json"
-      return $http.post(url, {my_Grade: myGrade, my_Section: mySection});   
-            return $http.get(url);
+      return $http.post(url, {my_Grade: myGrade, my_Section: mySection}); 
         }; 
         var checkTimeTable = function(myGrade,mySection){
             //alert("hello");

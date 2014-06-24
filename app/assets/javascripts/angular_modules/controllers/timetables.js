@@ -63,7 +63,7 @@
         };
                        
         $scope.savePeriods = function(){
-            alert(JSON.stringify($scope.timeperiods));
+            //alert(JSON.stringify($scope.timeperiods));
             gradeService.savePeriods($scope.timeperiods)
                 .then(function(result) {
                 });
@@ -83,6 +83,15 @@
             $scope.myShowValue="false"
             $scope.myValue="true"
         };
+
+        $scope.clearPeriods = function($index){
+            $scope.timeperiods[$index]['mon_sub']= "";
+            $scope.timeperiods[$index]['tue_sub']= "";
+            $scope.timeperiods[$index]['wed_sub']= "";
+            $scope.timeperiods[$index]['thu_sub']= "";
+            $scope.timeperiods[$index]['fri_sub']= "";
+            $scope.timeperiods[$index]['sat_sub']= "";
+        }; 
         
     }]);
 
