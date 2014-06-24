@@ -19,7 +19,7 @@ class RecruitmentSubMenu
     MenuItem.new(:label => "Advertisements", :klass => "", :icon => "puzzle-piece ", :href => "/adds")
     end
   def  enquiry_form
-    MenuItem.new(:label => "Enquiry From", :klass => "", :icon => "file-text-o", :href => "/forms")
+    MenuItem.new(:label => "Enquiry", :klass => "", :icon => "file-text-o", :href => "/forms")
     end
   def  documentation_verification
     MenuItem.new(:label => "Documentation verification", :klass => "", :icon => "folder-open", :href => "/documentuploaders")

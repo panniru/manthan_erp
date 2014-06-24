@@ -7,35 +7,22 @@
     %tr
       %th Name
       %th DOB
-    
       %th Email
       %th Mobile No
-      
-      %th Preferred Class
-      
-      %th Preferred Subject
-      %th Experience in Teaching
-     
       %th Education Qualification
-     
       %th 
       %th
+    
       %th
   %tbody
     - @forms.all.each do |form|
       %tr
         %td= form.name
         %td= form.dob
-       
         %td= form.email
-        %td= form.mobile_no
-      
-        %td= form.klass
-      
-        %td= form.subject
-        %td= form.experience
-        
+        %td= form.mobile_no        
         %td= form.education_qualification
         %td= link_to "<<seemore>>",  form,  :title => "Show"
+      
         %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_form_path(form), :class => "btn btn-warning btn-sm", :title => "Edit"
         %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), form_path(form), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"

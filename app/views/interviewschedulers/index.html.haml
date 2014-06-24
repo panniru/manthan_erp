@@ -14,7 +14,6 @@
     %th{style: "width:7%"} End time
     %th{style: "width:1%"}
     %th{style: "width:1%"}
-    %th{style: "width:1%"}
 
       - @interviewschedulers.each do |interviewscheduler|
         %tr
@@ -22,7 +21,7 @@
           %td= interviewscheduler.description
           %td= interviewscheduler.start_time
           %td= interviewscheduler.end_time
-          %td= link_to raw("<span class='glyphicon glyphicon-hand-right'></span>"),  interviewscheduler, :class => "btn btn-success btn-sm", :title => "Show"
+         
           %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"),  edit_interviewscheduler_path(interviewscheduler), :class => "btn btn-warning btn-sm", :title => "Edit"
           %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), interviewscheduler, :class => "btn btn-danger btn-sm",:method => :delete, :data => { :confirm => 'Are you sure?' }, :title => "Delete"         
 = link_to button_tag('New ',:class => 'btn btn-primary'), new_interviewscheduler_path
