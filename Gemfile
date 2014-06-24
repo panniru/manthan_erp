@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'jquery-timepicker-rails'
+
 gem 'rails', '4.0.2'
 
 gem 'carrierwave'

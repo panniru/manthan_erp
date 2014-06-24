@@ -1,0 +1,32 @@
+%h4
+  %center
+    Forms
+
+%table.table.table.striped
+  %thead
+    %tr
+      %th Form no
+      %th Admission no
+      %th Bus Facility
+      %th Blood Group
+      %th Previous study
+      %th Medium
+      %th Board
+      %th Year
+      %th Sibling's Name
+      
+
+        
+  %tbody
+    - Admission.all.each do |admission|
+      %tr
+        %td= link_to "#{admission.form_no}",admission_show_admission_path(admission)
+        %td= admission.admission_no
+        %td= admission.bus
+        %td= admission.blood_group
+        %td= admission.last_school
+        %td= admission.medium
+        %td= admission.board
+        %td= admission.year
+        %td= admission.sib_name
+       

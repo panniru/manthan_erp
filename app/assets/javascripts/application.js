@@ -11,5 +11,5 @@
 //= require autocomplete-rails
 //= require bootstrap
 //= require fullcalendar
+//= require jquery.timepicker.js
 //= require_tree .
-

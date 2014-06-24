@@ -5,27 +5,64 @@
       %ul
         - @staff.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :staff_name
-    = f.text_field :staff_name
-  .field
-    = f.label :staff_exp
-    = f.text_field :staff_exp
-  .field
-    = f.label :grade
-    = f.text_field :grade
-  .field
-    = f.label :start_time
-    = f.text_field :start_time
-  .field
-    = f.label :end_time
-    = f.text_field :end_time
-  .field
-    = f.label :period
-    = f.text_field :period
-  .field
-    = f.label :date
-    = f.text_field :date
-  .actions
-    = f.submit 'Save'
+  %table
+    .row
+      .field
+        %tr
+          .col-sm-3
+            = f.label :staff_name,:class => 'control-label'
+        %tr
+          .col-sm-3
+            = f.text_field :staff_name, :class => 'form-control'
+    .row
+      .field
+        %tr
+          .col-sm-3
+            = f.label :staff_exp
+        %tr
+          .col-sm-3
+            = f.text_field :staff_exp, :class => 'form-control'
+    .row
+      .field
+        %tr
+          .col-sm-3
+            = f.label :grade
+        %tr
+          .col-sm-3
+            = f.select :grade,options_for_select([['PP1'],['PP2'],['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10'],['11'],['12']]), {:class => 'col-sm-4 form-control'}
+    .row
+      .field
+        %tr
+          .col-sm-3
+            = f.label :start_time
+        %tr
+          .col-sm-3
+            = f.text_field :start_time, :class => 'timepicker form-control'
+    .row
+      .field
+        %tr
+          .col-sm-3
+            = f.label :end_time
+        %tr
+          .col-sm-3
+            = f.text_field :end_time, :class => 'timepicker form-control'
+    .row
+      .field
+        %tr
+          .col-sm-3
+            = f.label :period
+        %tr
+          .col-sm-3
+            = f.text_field :period, :class => 'form-control'
+    .row
+      .field
+        %tr
+          .col-sm-3
+            = f.label :date
+        %tr
+          .col-sm-3
+            = f.text_field :date, :class => 'datepicker form-control'
+    %br
+    .col-sm-2
+      .pull-right
+        = f.submit 'Save',:class => 'btn btn-primary'

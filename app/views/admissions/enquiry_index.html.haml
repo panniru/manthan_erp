@@ -1,3 +1,5 @@
+.pull-left
+  = link_to 'New Enquiry', enquiry_new_admissions_path, :class => 'btn btn-primary'
 %h4
   %center
     Enquiry Forms
@@ -16,6 +18,7 @@
       %th
       %th
       %th
+      %th
         
   %tbody
     - @admissions.each do |admission|
@@ -30,8 +33,6 @@
         %td= admission.email
         %td= link_to "<See More>", enquiry_show_admission_path(admission)
         %td= link_to "Application",admission_new_admission_path(admission), :class => 'btn btn-primary'
+        %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_admission_path(admission), :class => "btn btn-warning btn-sm", :title => "Edit"
         %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"),admission, :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
-        
-%center
-  = link_to 'Add', enquiry_new_admissions_path, :class => 'btn btn-primary'
-  = link_to 'Back', root_path, :class => 'btn btn-primary'
+

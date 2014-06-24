@@ -143,14 +143,7 @@
           Second Language:
       .col-sm-4
         = f.select :second_lang, options_for_select([['Hindi'],['English'],['Tamil'],['Telugu'],['Malayalam'],['Urdu'],['Punjabi'],['Marati'],['Kannada'],['Bengali']]),:class => 'form-control' 
-  %br
-  .row
-    .col-sm-12
-      .col-sm-4
-        %b
-          Blood Group
-      .col-sm-8
-        = f.select :blood_group, options_for_select([['AB+'],['AB-'],['A1B+'],['A1B-'],['O+'],['O-'],['A+'],['A-'],['B+'],['B-'],['A1+'],['A1-'],['B1+'],['B1-']]),:class => 'form-control' 
+ 
   %br
   .row
     .col-sm-12
@@ -199,7 +192,7 @@
       .col-sm-4
         = label_tag "Year"
       .col-sm-4
-        = f.text_field :year, :class => 'datepicker form-control'
+        = f.text_field :year, :class => 'date-picker-year form-control'
         %br
   .row
     .col-sm-12

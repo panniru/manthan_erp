@@ -11,6 +11,8 @@ class ContextDetector
     "monthly_pdc_amounts" =>"fee_management",
     "home" => "fee_management",
     "admissions" => "enquiry_admission",
+    "events" => "enquiry_admission",
+    "staffs" => "enquiry_admission",
     "time_tables" => "academic",
     "recruitments" => "recruitment_sub_menu",
     "adds" => "recruitment_sub_menu",

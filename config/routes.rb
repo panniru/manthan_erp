@@ -7,7 +7,6 @@ ManthanErp::Application.routes.draw do
   devise_for :users, :controllers => { :sessions => 'sessions'}
   get 'auto_search/autocomplete_student_name'
   get 'auto_search/student_name_by_grade_and_section'
-
   get "students/app"
   get "students/app_students"
   get "students/get_selected"
@@ -17,6 +16,8 @@ ManthanErp::Application.routes.draw do
   get "students/new"
   get "students/show"
   get "students/edit"
+
+  get 'auto_search/autocomplete_staff_grade'
 
   get "home/aboutus"
   get "time_tables/gradeserviceview"
@@ -130,6 +131,7 @@ ManthanErp::Application.routes.draw do
       get 'admission_new'
       get 'event_new'
       get 'event_show'
+     
     end
 
     collection do
@@ -137,6 +139,7 @@ ManthanErp::Application.routes.draw do
       get "admission_index"
       get "enquiry_new"
       get "event_index"
+      get 'admission_home'
     end
   end
 
