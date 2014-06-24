@@ -7,10 +7,18 @@ class ContextDetector
     "grade_wise_fees" => "fee_management",
     "parent_payment_masters" => "fee_management",
     "parent_cheques" => "fee_management",
+    "term_wise_grade_fees" =>"fee_management",
+    "monthly_pdc_amounts" =>"fee_management",
     "home" => "fee_management",
     "admissions" => "enquiry_admission",
-    "time_tables" => "academic"
-    
+    "events" => "enquiry_admission",
+    "staffs" => "enquiry_admission",
+    "time_tables" => "academic",
+    "recruitments" => "recruitment_sub_menu",
+    "adds" => "recruitment_sub_menu",
+    "forms" => "recruitment_sub_menu",
+    "documentuploaders" => "recruitment_sub_menu",
+    "interviewschedulers" => "recruitment_sub_menu",
   }
 
   def self.get_context(key)

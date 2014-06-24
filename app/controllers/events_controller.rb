@@ -4,6 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+    @admissions = Admission.all
     @events = Event.all
   end
 
@@ -24,6 +25,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+        
     @event = Event.new(event_params)
 
     respond_to do |format|
@@ -36,7 +38,10 @@ class EventsController < ApplicationController
       end
     end
   end
-
+  def admission_home
+    @admissions = Admission.all
+    
+  end
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update

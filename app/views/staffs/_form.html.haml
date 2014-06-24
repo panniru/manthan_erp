@@ -62,5 +62,7 @@
         %tr
           .col-sm-3
             = f.text_field :date, :class => 'datepicker form-control'
-      .actions
-        = f.submit 'Save'
+    %br
+    .col-sm-2
+      .pull-right
+        = f.submit 'Save',:class => 'btn btn-primary'

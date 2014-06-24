@@ -20,7 +20,7 @@ gem 'angular-rails-templates'
 
 gem 'font-awesome-rails'                
 gem 'numbers_and_words'
-gem 'carmen-rails', '~> 1.0.0'
+
 
 group :assets do
   gem 'uglifier', '>= 1.3.0'

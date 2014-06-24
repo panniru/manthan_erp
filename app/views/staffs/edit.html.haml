@@ -1,7 +1,7 @@
-%h1 Editing staff
-
-= render 'form'
-
-= link_to 'Show', @staff
-\|
-= link_to 'Back', staffs_path
+%h1 Editing Assessment
+%center
+  = render 'form'
+.col-sm-3
+  .pull-left
+    = link_to button_tag('Back',:class => 'btn btn-primary'), staffs_path
+  %br

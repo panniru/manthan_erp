@@ -22,6 +22,5 @@
   %b Date:
   = @staff.date
 
-= link_to 'Edit', edit_staff_path(@staff)
-\|
-= link_to 'Back', staffs_path
+= link_to button_tag('Edit',:class => 'btn btn-primary'), edit_staff_path(@staff)
+

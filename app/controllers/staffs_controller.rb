@@ -39,8 +39,8 @@ class StaffsController < ApplicationController
 
     respond_to do |format|
       if @staff.save
-        format.html { redirect_to @staff, notice: 'Staff was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @staff }
+        format.html { redirect_to staffs_path, notice: 'Staff was successfully created.' }
+       
       else
         format.html { render action: 'new' }
         format.json { render json: @staff.errors, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class StaffsController < ApplicationController
   def update
     respond_to do |format|
       if @staff.update(staff_params)
-        format.html { redirect_to @staff, notice: 'Staff was successfully updated.' }
+        format.html { redirect_to staffs_path, notice: 'Staff was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
