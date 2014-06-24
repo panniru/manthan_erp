@@ -20,7 +20,7 @@ class Academic
   end
 
   def teaching_plan
-    MenuItem.new(:label => "Teaching Plan", :klass => "", :icon => "cubes", :href => "/time_tables")
+    MenuItem.new(:label => "Teaching Plan", :klass => "", :icon => "cubes", :href => "/teaching_plans")
   end
 
 end

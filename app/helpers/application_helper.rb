@@ -32,4 +32,11 @@ module ApplicationHelper
     user_menu = UserMenu.new(current_user, context)
     user_menu.admission_sub_menu
   end
+
+  def recruitment_sub_menu
+    context = "recruitment".classify.constantize.new
+    user_menu = UserMenu.new(current_user,context)
+    user_menu.recruitment_sub_menu
+  end
+ 
 end

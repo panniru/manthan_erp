@@ -1,0 +1,2 @@
+module TeachingPlansHelper
+end

@@ -6,6 +6,11 @@
             return $http.get(url);
         };
 
+        var getGradeServiceMapView = function(){
+            var url = "/teaching_plans/gradeserviceview.json"
+            return $http.get(url);
+        };
+
         var savePeriods = function(timeperiods){
 
             var url = "/time_tables/saveperiods.json"
@@ -20,7 +25,8 @@
         return {
             getGradeServiceView : getGradeServiceView,
             savePeriods : savePeriods,
-            allGrades : allGrades
+            allGrades : allGrades,
+            getGradeServiceMapView : getGradeServiceMapView
         };
 
         

@@ -5,7 +5,14 @@
         gradeService.getGradeServiceView()
             .then(function(result) {
                 $scope.grades=result.data
+                alert("hey");
                 
+            });
+        gradeService.getGradeServiceMapView()
+            .then(function(result) {
+                $scope.map_grades=result.data
+                alert("helloy");
+                alert(JSON.stringify($scope.map_grades));
             });
         sectionService.getSectionServiceView()
             .then(function(result) {
