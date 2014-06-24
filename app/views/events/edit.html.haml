@@ -1,11 +1,66 @@
-%h1 Editing event
+
 %center
-  = render 'form'
+  .pull-left
+    %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Edit Event"
+    #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+            %h4#myModalLabel.modal-title New Event
+          = form_for @event do |f|
+            .modal-body
+              .row
+                .field
+                  .col-sm-3
+                    = f.label :title, :class => 'control-label'
+                  .col-sm-3
+                    = f.text_field :title, :class => 'form-control'
+                    %br
+              .row   
+                .field
+                  .col-sm-3
+                    = f.label :description, :class => 'control-label'
+                  .col-sm-3
+                    = f.text_area :description, :class => 'form-control'
+                    %br
+              .row
+                .field
+                  .col-sm-3
+                    = f.label :staff, :class => 'control-label'
+                  .col-sm-3
+                    = f.text_field :staff, :class => 'form-control'
+                    %br
+              .row
+                .field
+                  .col-sm-3
+                    = f.label :grade, :class => 'control-label'
+                  .col-sm-3
+                    = f.text_field :grade, :class => 'form-control'
+                    %br
+              .row
+                .field
+                  .col-sm-3
+                    = f.label :start_time, :class => 'control-label'
+                  .col-sm-9
+                    = f.datetime_select :start_time, :class => 'form-control'
+                    %br
+              .row
+                .field
+                  .col-sm-3
+                    = f.label :end_time, :class => 'control-label'
+                  .col-sm-9
+                    = f.datetime_select :end_time, :class => 'form-control'
+                    %br
+              .modal-footer
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                = f.submit "save", :class => 'btn btn-primary'
+                
 
 .col-sm-3
   .pull-left
     = link_to button_tag('Show',:class => 'btn btn-primary'), @event
-    = link_to button_tag('Back',:class => 'btn btn-primary'), events_path 
+  
   %br
 
 
