@@ -1,27 +1,27 @@
-%table.table.table-striped.table-bordered.table-condensed
+%table.table.table-striped
   %thead
     %tr
       
       %th Gender
       %th Address
       %th Known Languages
-     
       %th Expected Salary
+      %th Experience in Teaching
+      %th Preferred Class
+      %th Preferred Subject
       %th Nationality
-      %th 
-      %th
+     
   %tbody
     - Form.all.each do |form|
       %tr
        
         %td= form.gender
-       
         %td= form.address
-       
         %td= form.language
-       
         %td= form.expected_salary
-       
+        %td= form.experience
+        %td= form.klass
+        %td= form.subject
         %td= form.nationality
-        %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_form_path(form), :class => "btn btn-warning btn-sm", :title => "Edit"
-        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), form_path(form), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+%center
+  = link_to "Back", forms_path, :class => "btn btn-primary"

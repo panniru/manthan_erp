@@ -38,6 +38,7 @@
       %th Education Details
       %th Experience
       %th
+      %th
      
   %tbody
     - @recruitments.each do |recruitment|
@@ -45,6 +46,6 @@
         %td= recruitment.title
         %td= recruitment.education_details
         %td= recruitment.experience
-        
+        %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_recruitment_path(recruitment), :class => "btn btn-warning btn-sm", :title => "Edit"
         %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), recruitment_path(recruitment), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
        
