@@ -1,0 +1,2 @@
+module TeacherGradeMappingsHelper
+end

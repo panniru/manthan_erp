@@ -1,0 +1,2 @@
+class TeacherGradeMappingsController < ApplicationController
+end
