@@ -1,4 +1,5 @@
 class Staff < ActiveRecord::Base
+  
   scope :search, lambda { |id| where(:id => id)}
   def self.search(search)
     if search

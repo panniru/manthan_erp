@@ -7,6 +7,9 @@ class StaffsController < ApplicationController
     @staffs = Staff.search(params[:search])
    
   end
+  def event_new
+    @event = Event.new
+  end
   def staffview
     respond_to do |format|
       format.json do
@@ -35,8 +38,8 @@ class StaffsController < ApplicationController
   # POST /staffs
   # POST /staffs.json
   def create
+    
     @staff = Staff.new(staff_params)
-
     respond_to do |format|
       if @staff.save
         format.html { redirect_to staffs_path, notice: 'Staff was successfully created.' }

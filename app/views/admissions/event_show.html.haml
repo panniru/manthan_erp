@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @event.title
+%p
+  %b Description:
+  = @event.description
+%p
+  %b Staff:
+  = @event.staff
+%p
+  %b Grade:
+  = @event.grade
+%p
+  %b Start time:
+  = @event.start_time
+%p
+  %b End time:
+  = @event.end_time
+
+= link_to button_tag('Edit',:class => 'btn btn-primary'), edit_event_path(@event)
+
+

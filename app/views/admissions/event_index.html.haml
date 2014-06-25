@@ -1,0 +1,99 @@
+.row
+  .col-sm-5
+    .well
+      #calendar
+
+  .col-sm-7
+    .row
+      .col-sm-6
+      .col-sm-5
+        .pull-right
+          %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "New Event"
+          #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+                  %h4#myModalLabel.modal-title New Event
+                = form_for Event.new do |f|
+                  .modal-body
+                    .row
+                      .field
+                        .col-sm-3
+                          = f.label :title, :class => 'control-label'
+                        .col-sm-3
+                          = f.text_field :title, :class => 'form-control'
+                          %br
+                    .row   
+                      .field
+                        .col-sm-3
+                          = f.label :description, :class => 'control-label'
+                        .col-sm-3
+                          = f.text_area :description, :class => 'form-control'
+                          %br
+                    .row
+                      .field
+                        .col-sm-3
+                          = f.label :staff, :class => 'control-label'
+                        .col-sm-3
+                          = f.text_field :staff, :class => 'form-control'
+                          %br
+                    .row
+                      .field
+                        .col-sm-3
+                          = f.label :grade, :class => 'control-label'
+                        .col-sm-3
+                          = f.text_field :grade, :class => 'form-control'
+                          %br
+                    .row
+                      .field
+                        .col-sm-3
+                          = f.label :start_time, :class => 'control-label'
+                        .col-sm-9
+                          = f.datetime_select :start_time, :class => 'form-control'
+                          %br
+                    .row
+                      .field
+                        .col-sm-3
+                          = f.label :end_time, :class => 'control-label'
+                        .col-sm-9
+                          = f.datetime_select :end_time, :class => 'form-control'
+                          %br
+                    .modal-footer
+                      %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                      = f.submit "save", :class => 'btn btn-primary'
+                    
+    %br
+    .col-sm-6
+      .table-well
+        %center
+          %h4
+            LISTING EVENTS
+            
+        %table.table.table-striped
+          %tr
+            %th{style: "width:5%"} Title
+            %th{style: "width:5%"} Description
+            %th{style: "width:5%"} Staff
+            %th{style: "width:5%"} Grade
+            %th{style: "width:5%"} Start time
+            %th{style: "width:5%"} End time
+            %th{style: "width:1%"}
+            %th{style: "width:1%"}
+            %th{style: "width:1%"}
+              - @events.each do |event|
+                %tr
+                  %td= event.title
+                  %td= event.description
+                  %td= event.staff
+                  %td= event.grade
+                  %td= event.start_time
+                  %td= event.end_time
+                  %td= link_to raw("<span class='glyphicon glyphicon-hand-right'></span>"), event, :class => "btn btn-success btn-sm", :title => "Show"
+                  %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_event_path(event), :class => "btn btn-warning btn-sm", :title => "Edit"
+                  %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), event, :class => "btn btn-danger btn-sm",:method => :delete, :data => { :confirm => 'Are you sure?' }, :title => "Delete"
+                  
+%br
+                  
+                    
+

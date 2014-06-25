@@ -5,25 +5,15 @@ ManthanErp::Application.routes.draw do
   get "staffs/staffview"
   
   devise_for :users, :controllers => { :sessions => 'sessions'}
-  get 'auto_search/autocomplete_student_name'
+ 
+  devise_for :users, :controllers => { :sessions => 'sessions'}
+
+  
   get 'auto_search/student_name_by_grade_and_section'
-  get "students/app"
-  get "students/app_students"
-  get "students/get_selected"
-  get "students/enquiry"
-  get "students/more"
-  get "students/index"
-  get "students/new"
-  get "students/show"
-  get "students/edit"
-
   get 'auto_search/autocomplete_staff_grade'
-
-  get "home/aboutus"
   get "time_tables/gradeserviceview"
   get "time_tables/sectionserviceview"
   get "/time_tables/subjectserviceview"
-  get "staffs/gradeserviceview"
   post "/time_tables/saveperiods"
   get "/time_tables/timetableserviceview"
   post "/time_tables/getperiods"
@@ -36,12 +26,14 @@ ManthanErp::Application.routes.draw do
   root to: "home#index"
 
   resources :time_tables  
-
   resources :documentuploaders
   resources :adds
   resources :forms
   resources :recruitments
-  
+  resources :discounts 
+  resources :fee_structure_approvals 
+  resources :events
+
   resources :fee_types do
     collection do
       post "create_bulk"
@@ -119,17 +111,13 @@ ManthanErp::Application.routes.draw do
     end
   end
 
-  resources :discounts 
-  resources :fee_structure_approvals 
-
-  resources :events
-  
+ 
   resources :admissions do
     member do
       get 'enquiry_show'
       get 'admission_show'
       get 'admission_new'
-      get 'event_new'
+      get 'event_new'    
       get 'event_show'
      
     end
@@ -142,6 +130,18 @@ ManthanErp::Application.routes.draw do
       get 'admission_home'
     end
   end
+  
+  
+  resources :staffs do
+    member do
+      get 'event_new'
+    end
+    collection do
+      get 'event_index'
+      get 'staffs/staffview'
+    end
+  end
+
 
   resources :parent_cheques
 end

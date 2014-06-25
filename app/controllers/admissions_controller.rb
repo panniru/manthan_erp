@@ -3,6 +3,11 @@ class AdmissionsController < ApplicationController
     @events = Event.all
     @admissions = Admission.all
   end
+  def admission_home
+    @admissions = Admission.all
+    
+  end
+  
 
   def show
     @event = Event.find(params[:id])
@@ -36,9 +41,15 @@ class AdmissionsController < ApplicationController
   def enquiry_show
     @admission = Admission.find(params[:id])
   end
- def admission_show
-   @admission = Admission.find(params[:id])
- end
+  def admission_show
+    @admission = Admission.find(params[:id])
+  end
+  def event_show
+    @event = Event.find(params[:id])
+  end
+  def event_index
+    @events = Event.all
+  end
  def enquiry_index
    @admissions = Admission.all
  end

@@ -38,10 +38,6 @@ class EventsController < ApplicationController
       end
     end
   end
-  def admission_home
-    @admissions = Admission.all
-    
-  end
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
