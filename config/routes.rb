@@ -55,7 +55,7 @@ ManthanErp::Application.routes.draw do
   end
   resources :term_definitions do
     collection do
-      post "create_term"
+      post "create_bulk"
     end
   end
   

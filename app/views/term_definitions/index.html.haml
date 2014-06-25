@@ -1,23 +1,32 @@
-%h3 
-  = "Terms"
-  = link_to "bulk Term", new_term_definition_path, :class => "btn btn-primary"
-  = render "form_modal"
-
-%table.table.table-bordered
-  %thead
-    %th Terms
-    %th Date
-    %th Percent of Amount
-    %th
-  %tbody
-    - @term_definitions.each do |term_definition|
-      %tr
-        %td= term_definition.term_definition
-        %td= term_definition.termdate
-        %td= term_definition.amount_per
+.col-md-7{"ng-controller" => "TermDefinitionsController"}
+  %h3 
+    = "Terms"
+    .pull-right
+      = link_to "bulk Term", "#", :class => "btn btn-primary", :ng_click => "newTermDefinitions()"
+  %hr
+  %table.table.table-bordered
+    %thead
+      %th Terms
+      %th Date
+      %th Percent of Amount
+      %th
+    %tbody
+      %tr{"ng-repeat" => "term_definition in termDefinitions"}
+        %td {{term_definition.term_definition}}
+        %td {{term_definition.termdate}}
+        %td {{term_definition.amount_per}}
         %td
-          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_term_definition_path(term_definition), :class => "btn btn-warning btn-sm", :title => "Edit"
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),term_definition_path(term_definition), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
-           
-= will_paginate @term_definitions, param_name: "page", previous_label: h("<"), next_label: h(">")          
+          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-sm", :title => "Edit"
+          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+          
+  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} New Term Definition
+        .modal-body
+          
+
+
         

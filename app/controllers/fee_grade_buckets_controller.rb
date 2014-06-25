@@ -1,26 +1,52 @@
 class FeeGradeBucketsController < ApplicationController
   load_resource :only => [:show, :update, :edit, :destroy]
-  def index
-     @fee_grade_buckets = FeeGradeBucket.paginate(:page => params[:page].present? ? params[:page] : 1)
-  end
 
-  def update
-    if @fee_grade_bucket.update(bucket_params)
-      flash[:success] = I18n.t :success, :scope => [:fee_grade_bucket, :update]
-      redirect_to fee_grade_buckets_path
-    else
-      flash.now[:fail] = I18n.t :fail, :scope => [:fee_grade_bucket, :update]
-      render "edit"
+  def index
+    respond_to do |format|
+      @fee_grade_buckets = FeeGradeBucket.paginate(:page => params[:page].present? ? params[:page] : 1)
+      format.json do
+        render :json => @fee_grade_buckets
+      end
+      format.html do
+        render "index"
+      end
     end
+    
+  end
+  
+  def update
+    respond_to do |format|
+      format.json do
+        render :json => @fee_grade_bucket.update(bucket_params)
+      end
+      format.html do
+        if @fee_grade_bucket.update(bucket_params)
+          flash[:success] = I18n.t :success, :scope => [:fee_grade_bucket, :update]
+          redirect_to fee_grade_buckets_path
+        else
+          flash.now[:fail] = I18n.t :fail, :scope => [:fee_grade_bucket, :update]
+          render "edit"
+        end
+      end
+    end
+    
   end
 
   def destroy
-    if @fee_grade_bucket.destroy
-      flash[:success] = I18n.t :success, :scope => [:fee_grade_bucket, :destroy]
-    else
-      flash[:fail] = I18n.t :fail, :scope => [:fee_grade_bucket, :destroy]
+    respond_to do |format|
+      format.json do
+        render :json => @fee_grade_bucket.destroy
+      end
+      format.html do
+        if @fee_grade_bucket.destroy
+          flash[:success] = I18n.t :success, :scope => [:fee_grade_bucket, :destroy]
+        else
+          flash[:fail] = I18n.t :fail, :scope => [:fee_grade_bucket, :destroy]
+        end
+        redirect_to fee_grade_buckets_path
+      end
     end
-    redirect_to fee_grade_buckets_path
+    
   end
   
   def show
@@ -28,25 +54,47 @@ class FeeGradeBucketsController < ApplicationController
   end
   
   def create
-    @fee_grade_bucket = FeeGradeBucket.new(bucket_params)
-    if @fee_grade_bucket.save
-      flash[:success] = I18n.t :success, :scope => [:fee_grade_bucket, :create]
-       redirect_to fee_grade_buckets_path
-    else
-      render "index"
+    respond_to do |format|
+      @fee_grade_bucket = FeeGradeBucket.new(bucket_params)
+      format.json do
+        render :json => @fee_grade_bucket.save
+      end
+      format.html do
+        if @fee_grade_bucket.save
+          flash[:success] = I18n.t :success, :scope => [:fee_grade_bucket, :create]
+          redirect_to fee_grade_buckets_path
+        else
+          render "index"
+        end
+      end
     end
+    
   end
   def create_bulk
-    @fee_grade_bucket_bulk = build_fee_grade_bucket_bulk
-    if !@fee_grade_bucket_bulk.empty? and @fee_grade_bucket_bulk.map(&:valid?).all?
-      @fee_grade_bucket_bulk.each(&:save!)
-      GradeBucketMapping.generate_mapping
-      flash[:success] = I18n.t :success, :scope => [:fee_grade_bucket, :create_bulk]
-      redirect_to fee_grade_buckets_path
-    else
-      flash.now[:fail] = I18n.t :fail, :scope => [:fee_grade_bucket, :create_bulk]
-      render "new"
+    respond_to do |format|
+      @fee_grade_bucket_bulk = build_fee_grade_bucket_bulk
+      format.json do
+        status = nil
+        if !@fee_grade_bucket_bulk.empty? and @fee_grade_bucket_bulk.map(&:valid?).all?
+          status = @fee_grade_bucket_bulk.map(&:save!)
+          GradeBucketMapping.generate_mapping
+        end
+        render :json => status
+      end
+      format.html do
+        if !@fee_grade_bucket_bulk.empty? and @fee_grade_bucket_bulk.map(&:valid?).all?
+          @fee_grade_bucket_bulk.each(&:save!)
+          GradeBucketMapping.generate_mapping
+          flash[:success] = I18n.t :success, :scope => [:fee_grade_bucket, :create_bulk]
+          redirect_to fee_grade_buckets_path
+        else
+          flash.now[:fail] = I18n.t :fail, :scope => [:fee_grade_bucket, :create_bulk]
+          render "new"
+        end
+      end
     end
+    
+    
   end
 
   def edit

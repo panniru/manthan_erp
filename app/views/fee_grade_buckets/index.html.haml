@@ -1,25 +1,44 @@
-%h3 
-  = "Types Of Buckets"
-  = link_to "Define bulk", new_fee_grade_bucket_path, :class => "btn btn-primary"
-  = render "form_modal"
-%table.table.table-bordered
-  %thead
-    %tr
-      %th From
-      %th To
-      %th
-  %tbody
-    - @fee_grade_buckets.each do |fee_grade_bucket |
+.col-md-7{"ng-controller" => "FeeGradeBucketsController"}
+  %h3 
+    = "Types Of Buckets"
+    .pull-right
+      = link_to "New Fee Buckets", "#", :class => "btn btn-primary", :ng_click => "newGradeBuckets()"
+  %hr
+
+  %table.table.table-bordered
+    %thead
       %tr
-        %td= fee_grade_bucket.grade_from
-        %td= fee_grade_bucket.grade_to
+        %th From
+        %th To
+        %th
+    %tbody
+      %tr{"ng-repeat" => "feeGradeBucket in feeGradeBuckets"}
+        %td {{feeGradeBucket.grade_from}}
+        %td {{feeGradeBucket.grade_to}}
         %td
-          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_fee_grade_bucket_path(fee_grade_bucket), :class => "btn btn-warning btn-sm", :title => "Edit"
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),fee_grade_bucket_path(:id => fee_grade_bucket.id), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-sm", :title => "Edit", :ng_click => "update(feeGradeBucket)"
+          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(feeGradeBucket)"
+
+
+  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} New Grade Buckets
+        .modal-body
+          = render "form"
+
+
+  .modal.fade{ :id => "editModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "editModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "editModalLabel"} 
+        .modal-body
           
-= will_paginate @fee_grade_buckets, param_name: "page", previous_label: h("<"), next_label: h(">")          
 
-   
-
+            
    
    
