@@ -13,4 +13,10 @@
 //= require fullcalendar
 //= require jquery.timepicker.js
 //= require_tree .
-//= require gcal
+
+
+
+
+
+  
+
