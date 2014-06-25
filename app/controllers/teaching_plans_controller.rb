@@ -14,17 +14,17 @@ class TeachingPlansController < ApplicationController
     respond_to do |format|
       format.json do
         grades = TeacherGradeMapping.all.map do |grade|
-          {grade: grade.grade_master_id.to_i, id: grade.id }
+          {grade: grade.grade_master.grade_name, id: grade.id }
         end
         render :json => grades
       end
     end  
   end
-  def sectionservicview
+  def sectionserviceview
     respond_to do |format|
       format.json do
-        sections = TeacherGrademapping.all.map do |section|
-          {section: section.section_master_id, id: section.id }
+        sections = TeacherGradeMapping.all.map do |section|
+          {section: section.section_master.section, id: section.id }
         end
         render :json => sections
       end

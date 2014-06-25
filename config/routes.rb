@@ -37,13 +37,15 @@ ManthanErp::Application.routes.draw do
   get "/time_tables/checktimetable"
 
   get "/teaching_plans/gradeserviceview"
+  get "/teaching_plans/sectionserviceview"
  
 
   root to: "home#index"
 
+
   resources :time_tables  
   resources :teaching_plans
-  
+
   resources :documentuploaders
   resources :adds
   resources :forms

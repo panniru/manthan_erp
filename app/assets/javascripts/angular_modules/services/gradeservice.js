@@ -27,6 +27,8 @@
             savePeriods : savePeriods,
             allGrades : allGrades,
             getGradeServiceMapView : getGradeServiceMapView
+         
+            
         };
 
         
@@ -37,9 +39,14 @@
             var url = "/time_tables/sectionserviceview.json"
             return $http.get(url);
         };
+        var getSectionServiceMapView = function(){
+            var url = "/teaching_plans/sectionserviceview.json"
+            return $http.get(url);
+            };
         
         return {
-            getSectionServiceView : getSectionServiceView
+            getSectionServiceView : getSectionServiceView,
+            getSectionServiceMapView : getSectionServiceMapView
         };
         
     }]);
