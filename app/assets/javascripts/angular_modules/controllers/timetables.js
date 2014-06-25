@@ -46,9 +46,9 @@
                         $scope.timeperiods = [];
                         // Add a periodItem to the Time Period List
                         for ( var i = 0; i < $scope.no_of_periods; i++ ) {
-                            $scope.timeperiods.push({
-                                grade_master_id:$scope.myGrade,
-                                section_master_id:$scope.mySection,
+                            $scope.timeperiods.push({ 
+                                grade_master_id: $scope.myGrade,
+                                section_master_id: $scope.mySection,
                                 mon_sub: "",
                                 tue_sub: "",
                                 wed_sub: "",
@@ -63,9 +63,25 @@
         };
                        
         $scope.savePeriods = function(){
+            $scope.save_timeperiods = [];
+            for ( var i = 0; i < $scope.no_of_periods; i++ ) {
+                $scope.save_timeperiods.push({
+                    id: $scope.timeperiods[i]['id'],  
+                    grade_master_id: $scope.myGrade,
+                    section_master_id: $scope.mySection,
+                    mon_sub: $scope.timeperiods[i]['mon_sub'] == 0 ? null : $scope.timeperiods[i]['mon_sub'],
+                    tue_sub: $scope.timeperiods[i]['tue_sub'] == 0 ? null : $scope.timeperiods[i]['tue_sub'],
+                    wed_sub: $scope.timeperiods[i]['wed_sub'] == 0 ? null : $scope.timeperiods[i]['wed_sub'],
+                    thu_sub: $scope.timeperiods[i]['thu_sub'] == 0 ? null : $scope.timeperiods[i]['thu_sub'],
+                    fri_sub: $scope.timeperiods[i]['fri_sub'] == 0 ? null : $scope.timeperiods[i]['fri_sub'],
+                    sat_sub: $scope.timeperiods[i]['sat_sub'] == 0 ? null : $scope.timeperiods[i]['sat_sub'],
+                    sun_sub: $scope.timeperiods[i]['sun_sub'] == 0 ? null : $scope.timeperiods[i]['sun_sub'],
+                });              
+            }
             //alert(JSON.stringify($scope.timeperiods));
-            gradeService.savePeriods($scope.timeperiods)
+            gradeService.savePeriods($scope.save_timeperiods)
                 .then(function(result) {
+                   
                 });
         }; 
 

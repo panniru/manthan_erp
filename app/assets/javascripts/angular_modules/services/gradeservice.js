@@ -6,8 +6,7 @@
             return $http.get(url);
         };
 
-        var savePeriods = function(timeperiods){
-
+        var savePeriods = function(timeperiods){         
             var url = "/time_tables/saveperiods.json"
             return $http.post(url, {time_periods: timeperiods});
             

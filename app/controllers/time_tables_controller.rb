@@ -47,16 +47,30 @@ class TimeTablesController < ApplicationController
   end
 
   def saveperiods
-    p time_periods.length
-    p "---------------------------"
-    params[:time_periods].each do |t|      
-        if TimeTable.find(t[0].id).present?
-          @timetable.update          
-        else
-          @timetable=TimeTable.new(t)
-          @timetable.save           
-        end
+
+    p "@@@-------------"
+    p params
+    p "@@---------------------"
+
+    params[:time_periods].each do |t| 
+      if t["id"].present?
+        p t["id"]
+        p t["mon_sub"]
+        temp=TimeTable.find(t["id"])
+        #p temp.mon_sub
+        temp.mon_sub=t["mon_sub"]
+        temp.tue_sub=t["tue_sub"]
+        temp.wed_sub=t["wed_sub"]
+        temp.thu_sub=t["thu_sub"]
+        temp.fri_sub=t["fri_sub"]
+        temp.sat_sub=t["sat_sub"]
+        temp.sun_sub=t["sun_sub"]
+        temp.save
+      else
+        @timetable=TimeTable.new(t)
+        @timetable.save
       end
+    end
   end
 
   def timetableserviceview
@@ -69,6 +83,7 @@ class TimeTablesController < ApplicationController
       end
     end      
   end
+ 
   def checktimetable
     respond_to do |format|
       format.json do

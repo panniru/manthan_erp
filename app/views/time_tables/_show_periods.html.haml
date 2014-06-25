@@ -10,7 +10,7 @@
         %th THU
         %th FRI
         %th SAT
-      %tr{"ng-repeat" => "timeperiod in timeperiods"}
+      %tr{"ng-repeat" => "timeperiod in timeperiods| orderBy:timeperiod['id']"}
         %td Period{{" "+($index+1)}}
         %td {{timeperiod['mon_sub_name']}}
         %td {{timeperiod['tue_sub_name']}}          
