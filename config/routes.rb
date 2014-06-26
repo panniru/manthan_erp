@@ -1,4 +1,8 @@
 ManthanErp::Application.routes.draw do
+  get "teaching_plans/new"
+  get "teaching_plans/edit"
+  get "teaching_plans/index"
+  get "teaching_plans/show"
   resources :interviewschedulers
 
   resources :staffs
@@ -22,10 +26,17 @@ ManthanErp::Application.routes.draw do
   post "/time_tables/checktimetable"
   get "/time_tables/checktimetable"
 
+  get "/teaching_plans/gradeserviceview"
+  get "/teaching_plans/sectionserviceview"
+ 
 
   root to: "home#index"
 
+
   resources :time_tables  
+
+  resources :teaching_plans
+
   resources :documentuploaders
   resources :adds
   resources :forms

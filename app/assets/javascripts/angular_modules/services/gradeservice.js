@@ -6,7 +6,12 @@
             return $http.get(url);
         };
 
-        var savePeriods = function(timeperiods){         
+        var getGradeServiceMapView = function(){
+            var url = "/teaching_plans/gradeserviceview.json"
+            return $http.get(url);
+        };
+
+        var savePeriods = function(timeperiods){
             var url = "/time_tables/saveperiods.json"
             return $http.post(url, {time_periods: timeperiods});
             
@@ -19,7 +24,10 @@
         return {
             getGradeServiceView : getGradeServiceView,
             savePeriods : savePeriods,
-            allGrades : allGrades
+            allGrades : allGrades,
+            getGradeServiceMapView : getGradeServiceMapView
+         
+            
         };
 
         
@@ -30,9 +38,14 @@
             var url = "/time_tables/sectionserviceview.json"
             return $http.get(url);
         };
+        var getSectionServiceMapView = function(){
+            var url = "/teaching_plans/sectionserviceview.json"
+            return $http.get(url);
+            };
         
         return {
-            getSectionServiceView : getSectionServiceView
+            getSectionServiceView : getSectionServiceView,
+            getSectionServiceMapView : getSectionServiceMapView
         };
         
     }]);

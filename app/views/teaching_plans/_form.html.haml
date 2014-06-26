@@ -1,0 +1,13 @@
+.row{"ng-controller" => "TeachingPlansController"}
+  .form-group.col-md-3
+    %label{:class=> "form-label col-md-4"} Grade
+    .col-md-6
+      {{mapGrades}}
+      %select{"ng-model" => "myGrade", :ng_options => "grade.id as grade.grade for grade in map_grades",:class => "form-control"} 
+  .form-group.col-md-3
+    %label{:class=> "form-label col-md-4"} Section
+    .col-md-6
+      %select{"ng-model" => "myGrade", "ng-options" => "section.id as section.section for section in map_sections",:class => "form-control"} 
+  .form-group.col-md-5
+    .col-md-4
+      = submit_tag("Add Plan",{class: "btn btn-primary", :ng_click => "showTeacherPlan()"})    

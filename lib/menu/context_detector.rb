@@ -14,6 +14,7 @@ class ContextDetector
     "events" => "enquiry_admission",
     "staffs" => "enquiry_admission",
     "time_tables" => "academic",
+    "teaching_plans" => "academic",
     "recruitments" => "recruitment_sub_menu",
     "adds" => "recruitment_sub_menu",
     "forms" => "recruitment_sub_menu",
