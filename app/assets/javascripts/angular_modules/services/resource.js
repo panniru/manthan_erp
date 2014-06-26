@@ -15,10 +15,17 @@
                                            "update": { method: "PUT"}
                                        }
                                       );
+        var PostDatedCheque = $resource('/post_dated_cheques/:id.json', {id: '@id'}, 
+                                       {
+                                           "bulk": { url: "/post_dated_cheques/create_bulk", method:'POST'},
+                                           "update": { method: "PUT"}
+                                       }
+                                      );
         
         return {
             FeeGradeBucket : FeeGradeBucket,
-            TermDefinition : TermDefinition
+            TermDefinition : TermDefinition,
+            PostDatedCheque : PostDatedCheque
         };
         
     }]);

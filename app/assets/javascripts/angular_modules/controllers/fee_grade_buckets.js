@@ -24,16 +24,21 @@
                 delete bucket["optionsFrom"]
                 delete bucket["optionsTo"]
             })
-            gradeBucketService.FeeGradeBucket.bulk({bulk_fee_grade_buckets: $scope.newFeeGradeBuckets})
-                .$promise.then(function(responce){
-                    $scope.feeGradeBuckets = gradeBucketService.FeeGradeBucket.query()
-                    $('#createModal').modal('hide')
-                })
+            if (isFormValid()){
+                gradeBucketService.FeeGradeBucket.bulk({bulk_fee_grade_buckets: $scope.newFeeGradeBuckets})
+                    .$promise.then(function(responce){
+                        $scope.feeGradeBuckets = gradeBucketService.FeeGradeBucket.query()
+                        $('#createModal').modal('hide')
+                    })
+            }else{
+                alert("All the grades are not included")
+            }
+            
         };
         
         $scope.destroy = function(feeGradeBucket){
             feeGradeBucket.$delete()
-                .$promise.then(function(responce){
+                .then(function(responce){
                     $scope.feeGradeBuckets.splice($scope.feeGradeBuckets.indexOf(feeGradeBucket), 1)
                 })
         };
@@ -77,15 +82,12 @@
             return options;
         };
 
-        var isFormValid = function(feeGradeBuckets){
-            for(var i = $scope.newFeeGradeBuckets.length-1; i >= 0; i--){
-                var gradeBucket = $scope.newFeeGradeBuckets[i]
-                if(gradeBucket.grade_to != null){
-                    return gradeBucket.grade_to === $scope.grades[$scope.grades.length-1].id
-                }else{
-                    if(gradeBucket.grade_to != null){
-                    }
-                }
+        var isFormValid = function(){
+            var gradeBucket = $scope.newFeeGradeBuckets[$scope.newFeeGradeBuckets.length-1]
+            if(gradeBucket.grade_to != null){
+                return gradeBucket.grade_to === $scope.grades[$scope.grades.length-1].id
+            }else{
+                return gradeBucket.grade_from === $scope.grades[$scope.grades.length-1].id
             }
         }
 

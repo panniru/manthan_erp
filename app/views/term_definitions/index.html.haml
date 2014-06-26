@@ -2,7 +2,7 @@
   %h3 
     = "Terms"
     .pull-right
-      = link_to "bulk Term", "#", :class => "btn btn-primary", :ng_click => "newTermDefinitions()"
+      = link_to "New Term", "#", :class => "btn btn-primary", :ng_click => "newTermDefinitions()"
   %hr
   %table.table.table-bordered
     %thead
@@ -17,7 +17,7 @@
         %td {{term_definition.amount_per}}
         %td
           = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-sm", :title => "Edit"
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(term_definition)"
           
   .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
     .modal-dialog
@@ -26,7 +26,7 @@
           %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
           %h4.modal-title{ :id => "myModalLabel"} New Term Definition
         .modal-body
+          = render "form"
           
-
 
         

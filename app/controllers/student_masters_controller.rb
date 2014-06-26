@@ -11,8 +11,9 @@ class StudentMastersController < ApplicationController
   def show
     respond_to do |format|
       format.json do
-        render :json => @student_master
+        render :json => StudentMastersDecorator.decorate(@student_master)
       end
+
       format.html do
         render "show"
       end

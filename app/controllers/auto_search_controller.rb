@@ -10,7 +10,7 @@ class AutoSearchController < ApplicationController
     query = "lower(name) ILIKE '%#{term}%' "
 
     if params[:grade].present?
-      query = query + " and grade = #{params[:grade]}"
+      query = query + " and grade_master_id = #{params[:grade]}"
     end
     
     if params[:section].present?

@@ -1,20 +1,31 @@
-%h3 
-  = "Post Dated Cheques"
-  = link_to "Define bulk", new_post_dated_cheque_path, :class => "btn btn-primary"
-  = render "form_modal"
-%table.table.table-bordered
-  %thead
-    %tr
-      %th Date
-      %th Amount in Percent
-      %th 
-  %tbody
-    - @post_dated_cheques.each do |post_dated_cheque|
+.col-md-7{"ng-controller" => "PostDatedChequesController"}
+  %h3 
+    = "Post Dated Cheques"
+    .pull-right
+      = link_to "Define bulk", "#", :class => "btn btn-primary", :ng_click => "newPostDatedCheques()"
+  %hr
+  %table.table.table-bordered
+    %thead
       %tr
-        %td= post_dated_cheque.date
-        %td= post_dated_cheque.amount_per
+        %th Date
+        %th Amount in Percent
+        %th 
+    %tbody
+      %tr{"ng-repeat" => "post_dated_cheque in postDatedCheques"}
+        %td {{post_dated_cheque.date}}
+        %td {{post_dated_cheque.amount_per}}
         %td
-          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_post_dated_cheque_path(post_dated_cheque), :class => "btn btn-warning btn-sm", :title => "Edit"
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),post_dated_cheque_path(post_dated_cheque), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-sm", :title => "Edit", :ng_click => "" 
+          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(post_dated_cheque)"
 
-= will_paginate @post_dated_cheques, param_name: "page", previous_label: h("<"), next_label: h(">")          
+  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} New Post Dated Cheques
+        .modal-body
+          = render "form"
+          
+
+        

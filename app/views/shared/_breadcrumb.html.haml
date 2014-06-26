@@ -1,4 +1,4 @@
 %ol.breadcrumb
-  - @breadcrumbs.each do |breadcrumb|
+  - @breadcrumbs.last(5).each do |breadcrumb|
     %li{:class => breadcrumb.klass}
       = link_to breadcrumb.name, breadcrumb.url

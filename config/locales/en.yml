@@ -124,3 +124,19 @@ en:
     destroy:
       success: "Schedule has been deleted"
       fail: "Schedule not been deleted"
+
+  term_wise_grade_fee:
+    create:
+      success: "Term Wise Fees has been saved"
+      fail: "Term Wise Fees not  been saved"
+    update:
+      success: "Term Wise Fee has been updated"
+      fail: "Term Wise Fee not been updated"
+
+  monthly_pdc_amounts:
+    create:
+      success: "Post Dated Cheques has been saved"
+      fail: "Post Dated Cheques not  been saved"
+    update:
+      success: "Post Dated Cheque has been updated"
+      fail: "Post Dated Cheque not been updated"

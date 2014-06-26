@@ -46,7 +46,7 @@
             if(checkSumTotal() ){
                 monthlyPdcService.saveMonthlyPdc($scope.monthlyPdcs)
                     .then(function(result) {
-                        alert(result)
+                        window.location.href = "/grade_wise_fees"
                     });
             }
         };

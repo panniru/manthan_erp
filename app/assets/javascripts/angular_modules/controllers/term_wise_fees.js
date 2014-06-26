@@ -45,7 +45,7 @@
             if(checkSumTotal() ){
                 termWiseFeeService.saveTermWiseFee($scope.termWiseFees)
                     .then(function(result) {
-                        alert(result)
+                        window.location.href = "/grade_wise_fees"
                     });
             }
         };

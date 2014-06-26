@@ -5,7 +5,7 @@ class FeeGradeBucketsController < ApplicationController
     respond_to do |format|
       @fee_grade_buckets = FeeGradeBucket.paginate(:page => params[:page].present? ? params[:page] : 1)
       format.json do
-        render :json => @fee_grade_buckets
+        render :json => @fee_grade_buckets.map{ |bucket| FeeGradeBucketsDecorator.decorate(bucket).docorated_hash }
       end
       format.html do
         render "index"

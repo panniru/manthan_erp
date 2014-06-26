@@ -113,6 +113,12 @@ def seed_defaults
   end
 end
 
+def seed_default_discount
+  unless DefaultMaster.find_by_default_name("discount").present?
+      DefaultMaster.create(:default_name => 'discount',:default_value => '15')
+  end
+end
+
 
 
 def seed_all
@@ -126,6 +132,7 @@ def seed_all
   seed_sections
   seed_subjects
   seed_defaults
+  seed_default_discount
 end
 
 seed_all
