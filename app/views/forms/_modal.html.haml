@@ -1,0 +1,22 @@
+%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add Docs"
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title New Document
+        = form_for Documentuploader.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
+          = render "shared/error_messages", :object => f.object
+          .modal-body
+            = f.label :name
+            = f.text_field :name
+            %br
+            = f.label :Educational_certificate
+            = f.file_field :educational_certificates
+            = f.label :Previous_employment_proof
+            = f.file_field :previous_employment_proof
+            = f.label :Salary_slips_for_previous_months
+            = f.file_field :salary_slips_for_previous_months
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+            = button_tag "Save", :type => "submit", :class => 'btn btn-primary'

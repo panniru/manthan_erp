@@ -7,11 +7,6 @@ $(document).ready(function() {
     })
 
 });
-
-
-
-
-
 $(function () {
     $(":file").change(function () {
         //alert("Display image")
