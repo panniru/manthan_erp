@@ -21,6 +21,7 @@ module ApplicationHelper
     main_menu << MenuItem.new(:label => "Results", :klass => "", :icon => "bullhorn 2x", :href => "#", :is_active => false)
     main_menu << MenuItem.new(:label => "HRM", :klass => " ", :icon => "group 2x", :href => "#", :is_active => false)
     main_menu << MenuItem.new(:label => "Recruitment", :klass => " ", :icon => " database  2x", :href => "/recruitments")
+    main_menu << MenuItem.new(:label => "Defaults", :klass => " ", :icon => " edit  2x", :href => "/default_masters", :is_active => controller.controller_name == "default_masters")
   end
 
   def sub_menu

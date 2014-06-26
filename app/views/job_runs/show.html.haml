@@ -1,0 +1,22 @@
+%h4 
+  = "Mailing Job- #{@job_run.id}"
+%hr
+%table.table.table-bordered.table-hover
+  %thead
+    %th Job Run Id
+    %th Description
+    %th Scheduled By
+    %th Start Time
+    %th End Time
+    %th Status
+    %th Failed Mails
+  %tbody
+    %tr
+      %td= @job_run.id
+      %td= link_to @job_run.job.description, failure_recipients_job_run_path(@job_run)
+      %td= @job_run.scrolled_by
+      %td= @job_run.started_on
+      %td= @job_run.finished_on
+      %td= @job_run.status
+      %td= @job_run.fee_alert_failures.count
+      

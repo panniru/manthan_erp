@@ -6,12 +6,16 @@ class UserMenu
   end
 
   def sub_menu
-    if @user.admin?
-      @context.admin_sub_menu
-    elsif @user.parent?
-      @context.parent_sub_menu
-    elsif @user.accountant?
-      @context.accountant_sub_menu
+    if @context.present?
+      if @user.admin?
+        @context.admin_sub_menu
+      elsif @user.parent?
+        @context.parent_sub_menu
+      elsif @user.accountant?
+        @context.accountant_sub_menu
+      end
+    else
+      []
     end
   end
   def admission_sub_menu

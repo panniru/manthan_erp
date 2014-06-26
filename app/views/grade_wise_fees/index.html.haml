@@ -1,6 +1,7 @@
 .col-md-10
-  = link_to "Send Mail", fee_alerts_fee_struct_mail_to_parents_path, :class => "btn btn-primary"
-  = link_to "Send Approval", fee_structure_approvals_path, :class => "send"
+  .col-md-12{:ng_controller => "MailingController"}
+    = link_to "Send Mail", "#", :class => "btn btn-primary", :ng_hide => "isMailActionFired", :ng_click => "feeStructureMail()"
+    = link_to "Send Approval", fee_structure_approvals_path, :class => "send"
 
   = render "grade_wise_fee_grid"
   = render "shared/amount_units"

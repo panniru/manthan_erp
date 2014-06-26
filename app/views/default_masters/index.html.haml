@@ -1,0 +1,30 @@
+.col-md-7{"ng-controller" => "DefaultMastersController"}
+  %h3 
+    = "Defaults"
+    .pull-right
+      -#= link_to "New Value", "#", :class => "btn btn-primary", :ng_click => "newDefaultMaster()"
+  %hr
+  %table.table.table-bordered
+    %thead
+      %th Name
+      %th Description
+      %th Value
+      %th
+    %tbody
+      %tr{"ng-repeat" => "defaultMaster in defaultMasters"}
+        %td {{defaultMaster.default_name}}
+        %td {{defaultMaster.default_desc}}
+        %td {{defaultMaster.default_value}}
+        %td
+          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-sm", :title => "Edit", :ng_click => "edit(defaultMaster)"
+          -#= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(defaultMaster)" 
+          
+  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} New Default Value
+        .modal-body
+          = render "form"
+          

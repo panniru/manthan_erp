@@ -1,6 +1,7 @@
 class JobRun < ActiveRecord::Base
   belongs_to :job
-  
+  has_many :fee_alert_failures
+
   def self.schedule(job_code, scrolled_by, job_date)
     job = Job.find_by_code(job_code)
     run = JobRun.new(job_id: job.id, scrolled_by: scrolled_by, started_on: DateTime.now, status: "scheduled", job_date: job_date)

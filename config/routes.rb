@@ -150,6 +150,14 @@ ManthanErp::Application.routes.draw do
     end
   end
 
-
   resources :parent_cheques
+
+  resources :job_runs do
+    member do
+      get "failure_recipients"
+    end
+  end
+  
+  resources :default_masters
+  
 end

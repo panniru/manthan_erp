@@ -9,6 +9,7 @@ class FeeManagement
     sub_menu << fee_structure
     sub_menu << payments
     sub_menu << cheques
+    sub_menu << mailings
     sub_menu
   end
 
@@ -52,6 +53,10 @@ class FeeManagement
 
   def cheques
     MenuItem.new(:label => "Cheques", :klass => "", :icon => "money", :href => "/parent_cheques")
+  end
+
+  def mailings
+    MenuItem.new(:label => "Mailing Jobs", :klass => "", :icon => "envelope-o", :href => "/job_runs")
   end
 
 end

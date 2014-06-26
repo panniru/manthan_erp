@@ -21,11 +21,17 @@
                                            "update": { method: "PUT"}
                                        }
                                       );
+        var DefaultMaster = $resource('/default_masters/:id.json', {id: '@id'}, 
+                                       {
+                                           "update": { method: "PUT"}
+                                       }
+                                      );
         
         return {
             FeeGradeBucket : FeeGradeBucket,
             TermDefinition : TermDefinition,
-            PostDatedCheque : PostDatedCheque
+            PostDatedCheque : PostDatedCheque,
+            DefaultMaster : DefaultMaster
         };
         
     }]);

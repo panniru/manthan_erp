@@ -4,9 +4,7 @@ class FeeStructMailingJob
     @scrolled_by = scrolled_by
     @job_run_id = JobRun.schedule("fee_structure_mailing", scrolled_by, date).id
   end
-
   def perform
-    
     Parent.all.each do |parent|
       applied_grade_master_ids = []
       emails = []
@@ -20,8 +18,22 @@ class FeeStructMailingJob
       grade_fee_grid = GradeFeeGrid.new(applied_grade_master_ids)
       term_fee_grid = TermFeeGrid.new(applied_grade_master_ids)
       monthly_pdc_grid = MonthlyPdcGrid.new(applied_grade_master_ids)
-      FeeAlertsMailer.fee_structure_mail(grade_fee_grid, term_fee_grid, monthly_pdc_grid, parent, emails).deliver
+      begin
+        FeeAlertsMailer.fee_structure_mail(grade_fee_grid, term_fee_grid, monthly_pdc_grid, parent, emails).deliver
+      rescue Exception => m
+        emails.each do |mail|
+          begin
+            FeeAlertsMailer.fee_structure_mail(grade_fee_grid, term_fee_grid, monthly_pdc_grid, parent, [mail]).deliver
+          rescue Exception => em
+            make_failure_entry(mail, em.message, parent)
+          end
+        end
+      end
     end
+  end
+
+  def make_failure_entry(email, remarks, parent)
+    FeeAlertFailure.create(:e_mail => email, :job_run_id => @job_run_id, :parent_id => parent.id, :remarks => remarks)
   end
   
   def success(job)

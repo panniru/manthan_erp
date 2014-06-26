@@ -10,6 +10,7 @@ class ContextDetector
     "term_wise_grade_fees" =>"fee_management",
     "monthly_pdc_amounts" =>"fee_management",
     "home" => "fee_management",
+    "job_runs" => "fee_management",
     "admissions" => "enquiry_admission",
     "events" => "enquiry_admission",
     "staffs" => "enquiry_admission",

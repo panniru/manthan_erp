@@ -140,3 +140,22 @@ en:
     update:
       success: "Post Dated Cheque has been updated"
       fail: "Post Dated Cheque not been updated"
+  job:
+    schedule:
+      success: "%{job} has been scheduled. You can view the results %{result_link}."
+      fail: "%{job} has not been scheduled."
+      already_scheduled: "%{job} has already been scheduled. You can view the job details %{job_link}."
+      already_finished: "%{job} has already been run. You can view the job details %{job_link}."
+    terminate:
+      success: "Job has been terminated."
+      automatic: "Job has already finished. You cannot terminate a finished job."
+  default_master:
+    create:
+      success: "Default Value has been saved"
+      fail: "Default Value not been saved"
+    destroy:
+      success: "Default Value has been deleted"
+      fail: "Default Value has not been deleted"
+    update:
+      success: "Default Value has been updated"
+      fail: "Default Value not been updated"

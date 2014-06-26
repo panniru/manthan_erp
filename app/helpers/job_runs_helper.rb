@@ -1,0 +1,2 @@
+module JobRunsHelper
+end

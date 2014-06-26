@@ -1,0 +1,18 @@
+%h4 
+  = "Failed Mails"
+%hr
+%table.table.table-bordered.table-hover
+  %thead
+    %th Mail
+    %th Parent Name
+    %th Student Name(s)
+    %th Grade(s)
+    %th Failure Description
+  %tbody
+    - @fee_alert_failures.each do |alert|
+      %tr
+        %td= alert.e_mail
+        %td= alert.parent.get_name_from_mail(alert.e_mail)
+        %td= alert.parent.student_names.join(",")
+        %td= alert.parent.student_grades.join(",")
+        %td= alert.remarks
