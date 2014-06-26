@@ -17,7 +17,7 @@ module ApplicationHelper
     main_menu = []
     main_menu << MenuItem.new(:label => "Fee Management", :klass => ContextDetector.mapped_module_name(controller.controller_name) == "fee_management"? "active" :"", :icon => "bank", :href => root_path)
     main_menu << MenuItem.new(:label => "Admissions", :klass => ContextDetector.mapped_module_name(controller.controller_name) == "enquiry_admission"? "active" :"", :icon => "book", :href => "/admissions")
-    main_menu << MenuItem.new(:label => "Academics", :klass => ContextDetector.mapped_module_name(controller.controller_name) == "academic"? "active" :"", :icon => "graduation-cap", :href => "/time_tables")
+    main_menu << MenuItem.new(:label => "Academics", :klass => ContextDetector.mapped_module_name(controller.controller_name) == "academic"? "active" :"", :icon => "graduation-cap", :href => "/academics")
     main_menu << MenuItem.new(:label => "Results", :klass => ContextDetector.mapped_module_name(controller.controller_name) == "result"? "active" :"", :icon => "bullhorn", :href => "#")
     main_menu << MenuItem.new(:label => "HRM", :klass => ContextDetector.mapped_module_name(controller.controller_name) == "hrm"? "active" :"", :icon => "group", :href => "#", :is_active => false)
     main_menu << MenuItem.new(:label => "Recruitment", :klass => ContextDetector.mapped_module_name(controller.controller_name) == "recruitment_sub_menu"? "active" :"", :icon => " database", :href => "/recruitments")

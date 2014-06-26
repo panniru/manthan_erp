@@ -4,15 +4,7 @@
         $scope.error_code=0;
         gradeService.getGradeServiceView()
             .then(function(result) {
-                $scope.grades=result.data
-                alert("hey");
-                
-            });
-        gradeService.getGradeServiceMapView()
-            .then(function(result) {
-                $scope.map_grades=result.data
-                alert("helloy");
-                alert(JSON.stringify($scope.map_grades));
+                $scope.grades=result.data                
             });
         sectionService.getSectionServiceView()
             .then(function(result) {
@@ -41,7 +33,7 @@
                     $scope.check_time_table = result.data
                     if ($scope.check_time_table > 0)
                     {                       
-                        $scope.error_code = 2
+                        $scope.error_code = 1
                         $scope.myValue = "false"
                         $scope.myShowValue = "false"
                     }
@@ -92,14 +84,27 @@
                 });
         }; 
 
-        $scope.showPeriods = function(){ 
-            $scope.error_code = 0
-            $scope.myValue="false"
-            $scope.myShowValue="true"           
-            timeTableService.getPeriods($scope.myGrade,$scope.mySection)
-                .then(function(result) {  
-                    $scope.timeperiods=result.data
-                });          
+        $scope.showPeriods = function(){
+            timeTableService.checkTimeTable($scope.myGrade,$scope.mySection)
+                .then(function(result) {
+                    $scope.check_time_table = result.data 
+                    if ($scope.check_time_table == 0)
+                    {
+                        $scope.error_code = 2
+                        $scope.myValue = "false"
+                        $scope.myShowValue = "false"
+                    }
+                    else
+                    {
+                    $scope.error_code = 0
+                    $scope.myValue="false"
+                    $scope.myShowValue="true"           
+                    timeTableService.getPeriods($scope.myGrade,$scope.mySection)
+                        .then(function(result) {  
+                            $scope.timeperiods=result.data
+                        });
+                    }
+                });
         };
 
         $scope.editPeriods = function(){ 

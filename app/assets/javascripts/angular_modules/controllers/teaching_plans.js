@@ -11,7 +11,7 @@
         $scope.map_sections = []
         sectionService.getSectionServiceMapView()
             .then(function(result) {
-                alert(result.data)
+                //alert(result.data)
                 $scope.map_sections=result.data
                 
             });

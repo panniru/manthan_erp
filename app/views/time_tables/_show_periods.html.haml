@@ -35,13 +35,16 @@
     {
     padding:5px;
     } 
-.row
+.row 
   .col-md-2
-  .col-md-8{"ng-show" => "error_code"}
+  .col-md-8
     %h1
-      %p
+      %p{"ng-show" => "error_code_one"}
         Time Table Already Exists!!
         Click Show TimeTable To See/Edit TimeTable 
+      -#%p{"ng-show" => "error_code_two"}
+        Time Table Doesn't Exists!!
+        Click Add TimeTable To Add New TimeTable 
   .col-md-2
 
 
