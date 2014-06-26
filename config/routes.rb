@@ -10,9 +10,6 @@ ManthanErp::Application.routes.draw do
   
   devise_for :users, :controllers => { :sessions => 'sessions'}
  
-  devise_for :users, :controllers => { :sessions => 'sessions'}
-
-  
   get 'auto_search/student_name_by_grade_and_section'
   get 'auto_search/autocomplete_staff_grade'
   get "time_tables/gradeserviceview"
