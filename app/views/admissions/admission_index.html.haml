@@ -4,7 +4,7 @@
   %center
     Application Form
 
-%table.table.table.striped
+%table.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
       %th
@@ -17,10 +17,6 @@
       %th Board
       %th Year
       %th Sibling's Name
-      %th
-      %th
-      %th
-      %th
         
   %tbody
     - @admissions.each do |admission|
@@ -35,8 +31,3 @@
         %td= admission.board
         %td= admission.year
         %td= admission.sib_name
-        %td= link_to "<See More>",admission_show_admission_path(admission)
-        %td= link_to "Assessment", event_new_admission_path(admission), :class => 'btn btn-primary'
-        %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_admission_path(admission), :class => "btn btn-warning btn-sm", :title => "Edit"
-        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"),admission, :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
-        

@@ -1,44 +1,25 @@
-.container
-  .row
-    .panel.panel-primary.filterable
-      .panel-heading
-        %h3.panel-title Forms
-        .pull-right
-          %button.btn.btn-default.btn-xs.btn-filter
-            %span.glyphicon.glyphicon-filter
-            Filter
-      %table.table
-        %thead
-          %tr.filters
-            %th
-              %input.form-control{disabled: "disabled", placeholder: "#", type: "text"}/
-            %th
-              %input.form-control{disabled: "disabled", placeholder: "Admission no", type: "text"}/
-            %th
-              %input.form-control{disabled: "disabled", placeholder: "Bus Facility", type: "text"}/
-            %th
-              %input.form-control{disabled: "disabled", placeholder: "Blood Group", type: "text"}/
-            %th
-              %input.form-control{disabled: "disabled", placeholder: "Previous Study", type: "text"}/
-            %th
-              %input.form-control{disabled: "disabled", placeholder: "Medium", type: "text"}/
-            %th
-              %input.form-control{disabled: "disabled", placeholder: "Board", type: "text"}/
-            %th
-              %input.form-control{disabled: "disabled", placeholder: "Year", type: "text"}/
-            %th
-              %input.form-control{disabled: "disabled", placeholder: "Sibling's Name", type: "text"}/
-       
+.pull-right
+  = link_to 'New Enquiry', enquiry_new_admissions_path, :class => 'btn btn-primary'
 
-        %tbody
-        - Admission.all.each do |admission|
-          %tr
-            %td= link_to "#{admission.form_no}",admission_show_admission_path(admission)
-            %td= admission.admission_no
-            %td= admission.bus
-            %td= admission.blood_group
-            %td= admission.last_school
-            %td= admission.medium
-            %td= admission.board
-            %td= admission.year
-            %td= admission.sib_name
+%table.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      %th Enquiry Form
+      %th Admission Form
+      %th Student's Name
+      %th Grade
+      %th Parent's Name
+      %th Parent's Mobile
+      %th Status
+        
+  %tbody
+    - @admissions.each do |admission|
+      %tr
+        %td= admission.form_no
+        %td= admission.admission_no
+        %td= admission.name
+        %td= admission.klass
+        %td= admission.father_name
+        %td= admission.mobile
+        %td= admission.status
+        

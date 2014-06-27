@@ -70,7 +70,7 @@
           %h4
             LISTING EVENTS
             
-        %table.table.table-striped
+        %table.table-striped.table-condensed.table-bordered
           %tr
             %th{style: "width:7%"} Title
             %th{style: "width:7%"} Description
@@ -78,20 +78,14 @@
             %th{style: "width:7%"} Grade
             %th{style: "width:7%"} Start time
             %th{style: "width:5%"} End time
-            %th{style: "width:1%"}
-            %th{style: "width:1%"}
-            %th{style: "width:1%"}
-              - @events.each do |event|
-                %tr
-                  %td= event.title
-                  %td= event.description
-                  %td= event.staff
-                  %td= event.grade
-                  %td= event.start_time
-                  %td= event.end_time
-                  %td= link_to raw("<span class='glyphicon glyphicon-hand-right'></span>"), event, :class => "btn btn-success btn-sm", :title => "Show"
-                  %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_event_path(event), :class => "btn btn-warning btn-sm", :title => "Edit"
-                  %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), event, :class => "btn btn-danger btn-sm",:method => :delete, :data => { :confirm => 'Are you sure?' }, :title => "Delete"
+            - @events.each do |event|
+              %tr
+                %td= event.title
+                %td= event.description
+                %td= event.staff
+                %td= event.grade
+                %td= event.start_time
+                %td= event.end_time
                   
 %br
                   

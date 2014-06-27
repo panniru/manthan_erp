@@ -6,6 +6,68 @@
         .modal-header
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
           %h4#myModalLabel.modal-title New Assessment
+        = form_for Staff.new do |f|
+          .modal-body
+            %table
+              .row
+                .field
+                  %tr
+                    .col-sm-3
+                      = f.label :staff_name,:class => 'control-label'
+                  %tr
+                    .col-sm-3
+                      = f.text_field :staff_name, :class => 'form-control'
+              .row
+                .field
+                  %tr
+                    .col-sm-3
+                      = f.label :staff_exp
+                  %tr
+                    .col-sm-3
+                      = f.text_field :staff_exp, :class => 'form-control'
+              .row
+                .field
+                  %tr
+                    .col-sm-3
+                      = f.label :grade
+                  %tr
+                    .col-sm-3
+                      = f.select :grade,options_for_select([['PP1'],['PP2'],['Grade-1'],['Grade-2'],['Grade-3'],['Grade-4'],['Grade-5'],['Grade-6'],['Grade-7'],['Grade-8'],['Grade-9'],['Grade-10'],['Grade-11'],['Grade-12']]), {:class => 'col-sm-4 form-control'}
+              .row
+                .field
+                  %tr
+                    .col-sm-3
+                      = f.label :start_time
+                  %tr
+                    .col-sm-3
+                      = f.text_field :start_time, :class => 'timepicker form-control'
+              .row
+                .field
+                  %tr
+                    .col-sm-3
+                      = f.label :end_time
+                  %tr
+                    .col-sm-3
+                      = f.text_field :end_time, :class => 'timepicker form-control'
+              .row
+                .field
+                  %tr
+                    .col-sm-3
+                      = f.label :period
+                  %tr
+                    .col-sm-3
+                      = f.text_field :period, :class => 'form-control'
+              .row
+                .field
+                  %tr
+                    .col-sm-3
+                      = f.label :date
+                  %tr
+                    .col-sm-3
+                      = f.text_field :date, :class => 'datepicker form-control'
+              .modal-footer
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                = f.submit "save", :class => 'btn btn-primary'
           
 
 .pull-left
@@ -22,7 +84,7 @@
   %center
     %h3
       Listing staffs
-    %table.table-striped.table-condensed
+    %table.table.table-striped.table-condensed.table-bordered
       %tr
         %th Staff name
         %th Staff exp
@@ -32,8 +94,7 @@
         %th Period
         %th Date
         
-        %th
-        %th
+ 
         - @staffs.each do |staff|
           %tr
             %td= staff.staff_name
@@ -43,9 +104,6 @@
             %td= staff.end_time
             %td= staff.period
             %td= staff.date
-            %td= link_to "Event", event_new_staff_path(staff), :class => 'btn btn-primary'
-            %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_staff_path(staff), :class => "btn btn-warning btn-sm", :title => "Edit"
-            %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), staff, :class => "btn btn-danger btn-sm",:method => :delete, :data => { :confirm => 'Are you sure?' }, :title => "Delete"
                   
 %br
     

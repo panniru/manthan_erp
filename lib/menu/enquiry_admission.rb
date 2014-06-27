@@ -24,7 +24,7 @@ class EnquiryAdmission < Struct.new(:controller)
 
   private
   def home
-    MenuItem.new(:label => "Home", :klass => "", :icon => "bell", :href => "/admissions/admission_home" )
+    MenuItem.new(:label => "Home", :klass => "", :icon => "home", :href => "/admissions/admission_home" )
   end
  
   def show_enquiry_admissions
