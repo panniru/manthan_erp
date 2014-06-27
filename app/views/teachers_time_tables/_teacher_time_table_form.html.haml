@@ -30,24 +30,42 @@
           %tr{"ng-repeat" => "timeperiod in timeperiods | orderBy:timeperiod['id']"}
             %td Period{{" "+($index+1)}}
             %td               
-              %select{ "ng-hide" => "mySelectedValue","ng-model" => "timeperiod['mon_grade_section']", "ng-options" => "subject.id as  subject.subject for subject in subjects",:class => "form-control",:placeholder => "first name"} 
+              %select{"ng-model" => "timeperiod['mon_grade_section']", "ng-options" => "gradesection.grade_section as  gradesection.grade_section for gradesection in faculty_grade_sections | filter: {id:myTeacher}",:class => "form-control"} 
+                %option{value: ""}
+              //{{timeperiod['mon_grade_section']}}
+            %td
+              %select{"ng-model" => "timeperiod['tue_grade_section']", "ng-options" => "gradesection.grade_section as  gradesection.grade_section for gradesection in faculty_grade_sections | filter: {id:myTeacher}",:class => "form-control"} 
                 %option{value: ""}
             %td
-              %select{"ng-model" => "timeperiod['tue_grade_section']", "ng-options" => "subject.id as  subject.subject for subject in subjects",:class => "form-control"} 
+              %select{"ng-model" => "timeperiod['wed_grade_section']", "ng-options" => "gradesection.grade_section as  gradesection.grade_section for gradesection in faculty_grade_sections | filter: {id:myTeacher}",:class => "form-control"}  
                 %option{value: ""}
             %td
-              %select{"ng-model" => "timeperiod['wed_sub_grade_section']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}  
-                %option{value: ""}
-            %td
-              %select{"ng-model" => "timeperiod['thu_grade_section']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}  
+              %select{"ng-model" => "timeperiod['thu_grade_section']", "ng-options" => "gradesection.grade_section as  gradesection.grade_section for gradesection in faculty_grade_sections | filter: {id:myTeacher}",:class => "form-control"}  
                 %option{value: ""}
             %td 
-              %select{"ng-model" => "timeperiod['fri_grade_sectionb']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}
+              %select{"ng-model" => "timeperiod['fri_grade_section']", "ng-options" => "gradesection.grade_section as  gradesection.grade_section for gradesection in faculty_grade_sections | filter: {id:myTeacher}",:class => "form-control"}
                 %option{value: ""}
             %td 
-              %select{"ng-model" => "timeperiod['sat_grade_section']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}  
+              %select{"ng-model" => "timeperiod['sat_grade_section']", "ng-options" => "gradesection.grade_section as  gradesection.grade_section for gradesection in faculty_grade_sections | filter: {id:myTeacher}",:class => "form-control"}  
                 %option{value: ""}
             %td
-              %input{:type => "button", "ng-click" => "clearPeriods($index)", :class => "btn btn-danger btn-sm", :value => "CLEAR" }             
+              %input{:type => "button", "ng-click" => "clearRowPeriods($index)", :class => "btn btn-danger btn-sm", :value => "CLEAR" }
+          %tr
+            %td
+            %td{"ng-repeat" => "i in [1, 2, 3, 4, 5, 6]"}
+              %input{:type => "button", "ng-click" => "clearColumnPeriods($index)", :class => "btn btn-danger btn-sm", :value => "CLEAR   " }
+            %td
+              %input{:type => "button", "ng-click" => "clearAllPeriods()", :class => "btn btn-danger btn-sm", :value => "CLEAR ALL" } 
     .col-md-2 
       
+.row
+  :css
+    table, th, td
+    {
+    border-collapse:collapse;
+    border:5px solid #6aa6d6;
+    }
+    th, td
+    {
+    padding:5px;
+    } 

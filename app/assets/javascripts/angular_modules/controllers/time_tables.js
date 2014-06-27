@@ -125,7 +125,6 @@
             $scope.timeperiods[$index]['thu_sub']= "";
             $scope.timeperiods[$index]['fri_sub']= "";
             $scope.timeperiods[$index]['sat_sub']= "";
-            
         };
 
         $scope.clearColumnPeriods = function($index){
