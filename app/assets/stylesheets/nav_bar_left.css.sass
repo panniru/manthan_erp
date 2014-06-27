@@ -27,6 +27,11 @@
     text-indent: 10px
     border-top: 1px solid #79B0CE
     border-bottom: 1px solid #79B0CE
+    &.active, &:focus
+      text-decoration: none
+      color: #6AA6D6
+      font-weight: bold
+      font-size: 120%
     a
       color: #ffffff
       display: block
@@ -35,10 +40,9 @@
         color: #fff
         background: rgba(255, 255, 255, 0.2)
         text-decoration: none
-      &.active, &:focus
-        text-decoration: none
-        color: #6AA6D6
-        background: white
+        font-weight: bold
+        font-size: 120%
+
   > .sidebar-brand
     height: 65px
     line-height: 60px

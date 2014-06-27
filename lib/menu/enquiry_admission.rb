@@ -1,4 +1,4 @@
-class EnquiryAdmission
+class EnquiryAdmission < Struct.new(:controller)
   
   def admin_sub_menu
     sub_menu = []

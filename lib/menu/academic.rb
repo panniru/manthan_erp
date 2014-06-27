@@ -1,4 +1,4 @@
-class Academic
+class Academic < Struct.new(:controller)
   
   def admin_sub_menu
     sub_menu = []

@@ -4,7 +4,7 @@
       #sidebar-wrapper
         %ul.sidebar-nav
           - sub_menu.each do |sub_menu_item|
-            %li{:class => sub_menu_item.is_active ? "active" : "" }
+            %li{:class => sub_menu_item.klass}
               %a{:href => sub_menu_item.href}
                 = fa_icon sub_menu_item.icon
                 %span

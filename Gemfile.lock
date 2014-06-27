@@ -160,6 +160,8 @@ GEM
     numbers_and_words (0.10.0)
       activesupport
       i18n
+    oj (2.9.8)
+    oj_mimic_json (1.0.1)
     orm_adapter (0.5.0)
     pg (0.17.1)
     pg_search (0.7.4)
@@ -290,6 +292,8 @@ DEPENDENCIES
   jquery-ui-rails (= 4.1.0)
   launchy
   numbers_and_words
+  oj
+  oj_mimic_json
   pg
   pg_search
   rails (= 4.0.2)
