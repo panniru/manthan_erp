@@ -41,9 +41,9 @@ def edit
     end
     redirect_to forms_path
     end
-  private
+  
 
   def form_params
-    params.require(:form).permit(:name, :dob, :gender, :email, :mobile_no, :address, :klass, :language, :subject, :experience, :expected_salary, :education_qualification, :nationality)
+    params.require(:form).permit(:name, :dob, :gender, :email,:mobile_no, :address, :klass, :language, :subject, :experience, :expected_salary, :education_qualification, :nationality, :enquiry_no,  :status)
   end
 end

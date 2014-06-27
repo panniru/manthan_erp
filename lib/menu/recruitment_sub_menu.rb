@@ -3,6 +3,7 @@ class RecruitmentSubMenu < Struct.new(:controller)
 
   def admin_sub_menu
     sub_menu = []
+    sub_menu << home
     sub_menu << guidelines
     sub_menu << advertisements
     sub_menu << enquiry_form
@@ -12,6 +13,9 @@ class RecruitmentSubMenu < Struct.new(:controller)
   end
 
   private 
+  def home
+    MenuItem.new(:label => "Home", :klass => "", :icon => "home ", :href => "/forms")
+    end
   def  guidelines
     MenuItem.new(:label => "Guidelines", :klass => "", :icon => "pencil-square-o ", :href => "/recruitments")
     end

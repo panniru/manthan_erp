@@ -1,22 +1,19 @@
-= form_for @recruitment,:html => { :class => "form-horizontal", :role => "form" } do |f|
+= form_for Recruitment.new,:html => { :class => "form-horizontal", :role => "form" } do |f|
   .row
-    .col-sm-9
+    .col-sm-3
       = f.label "Title:", :class => 'col-sm-3 control-label'
-      .col-sm-3
-        = f.text_field :title,:class => 'form-control'
-        %br
-    
-    .col-sm-9
-      = f.label "Education Details :", :class => 'col-sm-3 control-label'
-      .col-sm-3
-        = f.text_area :education_details, :class => 'form-control'
-        %br
- 
-    .col-sm-9
+    .col-sm-5
+      = f.text_field :title,:class => 'form-control'
+      %br
+  .row
+    .col-sm-3
+      = f.label "Education Details:", :class => 'col-sm-3 control-label'
+    .col-sm-5
+      = f.text_area :education_details, :class => 'form-control'
+      %br
+  .row
+    .col-sm-3
       = f.label "experience: ", :class => 'col-sm-3 control-label'
-      .col-sm-3
-        = f.text_field :experience, :class => 'form-control'
-        %br
- 
-         
-        %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"
+    .col-sm-5
+      = f.text_field :experience, :class => 'form-control'
+      %br
