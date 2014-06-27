@@ -82,9 +82,12 @@
                 .then(function(result) {
                    
                 });
+            
+            $scope.showPeriods();
         }; 
 
         $scope.showPeriods = function(){
+           
             timeTableService.checkTimeTable($scope.myGrade,$scope.mySection)
                 .then(function(result) {
                     $scope.check_time_table = result.data 
@@ -93,6 +96,7 @@
                         $scope.error_code = 2
                         $scope.myValue = "false"
                         $scope.myShowValue = "false"
+                        $scope.addPeriods();
                     }
                     else
                     {
@@ -110,16 +114,70 @@
         $scope.editPeriods = function(){ 
             $scope.myShowValue="false"
             $scope.myValue="true"
+            $index = 0;
         };
 
-        $scope.clearPeriods = function($index){
+        $scope.clearRowPeriods = function($index){
+
             $scope.timeperiods[$index]['mon_sub']= "";
             $scope.timeperiods[$index]['tue_sub']= "";
             $scope.timeperiods[$index]['wed_sub']= "";
             $scope.timeperiods[$index]['thu_sub']= "";
             $scope.timeperiods[$index]['fri_sub']= "";
             $scope.timeperiods[$index]['sat_sub']= "";
-        }; 
+            
+        };
+
+        $scope.clearColumnPeriods = function($index){
+            
+            if ($index == 0)
+            {
+                for ( var i = 0; i < 8; i++ ) {
+                    $scope.timeperiods[i]['mon_sub']= "";
+                }
+            }
+            else if ($index == 1)
+            {
+                for ( var i = 0; i < $scope.no_of_periods; i++ ) {
+                    $scope.timeperiods[i]['tue_sub']= "";
+                }                
+            }
+            else if ($index == 2)
+            {
+                for ( var i = 0; i < $scope.no_of_periods; i++ ) {
+                    $scope.timeperiods[i]['wed_sub']= "";
+                }                
+            }
+            else if ($index == 3)
+            {
+                for ( var i = 0; i < $scope.no_of_periods; i++ ) {
+                    $scope.timeperiods[i]['thu_sub']= "";
+                }                
+            }
+            else if ($index == 4)
+            {
+                for ( var i = 0; i < $scope.no_of_periods; i++ ) {
+                    $scope.timeperiods[i]['fri_sub']= "";
+                }                
+            }
+            else if ($index == 5)
+            {
+                for ( var i = 0; i < $scope.no_of_periods; i++ ) {
+                    $scope.timeperiods[i]['sat_sub']= "";
+                }                
+            }            
+        };
+        
+        $scope.clearAllPeriods = function(){
+            for ( var i = 0; i < $scope.no_of_periods; i++ ) {
+            $scope.timeperiods[i]['mon_sub']= "";
+            $scope.timeperiods[i]['tue_sub']= "";
+            $scope.timeperiods[i]['wed_sub']= "";
+            $scope.timeperiods[i]['thu_sub']= "";
+            $scope.timeperiods[i]['fri_sub']= "";
+            $scope.timeperiods[i]['sat_sub']= "";            
+            }
+        };
         
     }]);
 
