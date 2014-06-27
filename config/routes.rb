@@ -39,7 +39,14 @@ ManthanErp::Application.routes.draw do
   resources :forms
   resources :recruitments
   resources :discounts 
-  resources :fee_structure_approvals 
+  resources :approval_items do
+    member do
+      put "approve"
+    end
+    collection do
+      get "fee_structure_approval_item"
+    end
+  end
   resources :events
 
   resources :fee_types do

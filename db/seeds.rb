@@ -9,20 +9,30 @@ require 'factory_girl_rails'
 
 
 def seed_role
-  @admin_role = Role.find_by_code("admin")
-  @parent_role = Role.find_by_code("parent")
-  @accountant_role = Role.find_by_code("accountant")
+  @admin = Role.find_by_code("admin")
+  @parent = Role.find_by_code("parent")
+  @accountant = Role.find_by_code("accountant")
+  @principal = Role.find_by_code("principal")
+  @bod = Role.find_by_code("bod")
 
-  unless @admin_role.present?
+  unless @admin.present?
     Role.create(:role => "admin", :code => "admin", :description => "admin")
   end
 
-  unless @parent_role.present?
+  unless @parent.present?
     Role.create(:role => "parent", :code => "parent", :description => "parent")
   end
 
-  unless @accountant_role.present?
+  unless @accountant.present?
     Role.create(:role => "accountant", :code => "accountant", :description => "accountant")
+  end
+  
+  unless @principal.present?
+    Role.create(:role => "principal", :code => "principal", :description => "principal")
+  end
+  
+  unless @bod.present?
+    Role.create(:role => "bod", :code => "bod", :description => "bod")
   end
   
 end
@@ -32,10 +42,24 @@ def seed_user
   admin_role = Role.find_by_code("admin")
   parent_role = Role.find_by_code("parent")
   accountant_role = Role.find_by_code("accountant")
-  
+  principal = Role.find_by_code("principal")
+  bod = Role.find_by_code("bod")
+
   @user_admin = User.find_by_role_id(admin_role)
   @user_parent = User.find_by_role_id(parent_role)
   @user_accountant = User.find_by_role_id(accountant_role)
+  @user_principal = User.find_by_role_id(principal)
+  @user_bod = User.find_by_role_id(bod)
+
+  unless @user_principal.present?
+    User.create(:email => "principal@manthan.com", :password => "welcome", :user_id => "principal", :role_id => principal.id)
+  end
+  
+  unless @user_bod.present?
+    User.create(:email => "bod@manthan.com", :password => "welcome", :user_id => "bod", :role_id => bod.id)
+  end
+  
+  
   unless @user_admin.present?
     User.create(:email => "admin@manthan.com", :password => "welcome", :user_id => "admin", :role_id => admin_role.id)
   end

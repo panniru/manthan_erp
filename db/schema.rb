@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626073721) do
+ActiveRecord::Schema.define(version: 20140627092858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,16 @@ ActiveRecord::Schema.define(version: 20140626073721) do
     t.string   "form_no"
   end
 
+  create_table "approval_items", force: true do |t|
+    t.string   "status"
+    t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "item_type"
+    t.integer  "defined_by"
+    t.integer  "approved_by"
+  end
+
   create_table "approvals", force: true do |t|
     t.string   "approved"
     t.string   "def_by"
@@ -159,6 +169,13 @@ ActiveRecord::Schema.define(version: 20140626073721) do
     t.string   "staff_id"
   end
 
+  create_table "faculty_masters", force: true do |t|
+    t.integer  "user_id"
+    t.string   "faculty_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "fee_alert_failures", force: true do |t|
     t.string   "e_mail"
     t.integer  "job_run_id"
@@ -173,16 +190,6 @@ ActiveRecord::Schema.define(version: 20140626073721) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "grade_to"
-  end
-
-  create_table "fee_structure_approvals", force: true do |t|
-    t.string   "approved_by"
-    t.string   "defined_by"
-    t.string   "status"
-    t.string   "academic_year"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "fee_type"
   end
 
   create_table "fee_types", force: true do |t|
@@ -208,6 +215,8 @@ ActiveRecord::Schema.define(version: 20140626073721) do
     t.string   "post"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "enquiry_no"
+    t.string   "status"
   end
 
   create_table "grade_bucket_mappings", force: true do |t|
@@ -412,10 +421,25 @@ ActiveRecord::Schema.define(version: 20140626073721) do
   end
 
   create_table "teacher_grade_mappings", force: true do |t|
-    t.integer  "user_id"
     t.string   "grade_master_id"
     t.string   "section_master_id"
     t.string   "subject_master_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "faculty_master_id"
+  end
+
+  create_table "teachers_time_tables", force: true do |t|
+    t.integer  "faculty_id"
+    t.string   "academic_year"
+    t.integer  "period_id"
+    t.string   "mon_grade_section"
+    t.string   "tue_grade_section"
+    t.string   "wed_grade_section"
+    t.string   "thu_grade_section"
+    t.string   "fri_grade_section"
+    t.string   "sat_grade_section"
+    t.string   "sun_grade_section"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

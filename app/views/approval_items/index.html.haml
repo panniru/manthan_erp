@@ -1,0 +1,25 @@
+.col-md-10{:ng_controller => "approvalsController", :ng_init => "index()"}
+  %h3 
+    = "Approvals"
+  %hr
+  .col-md-12
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Defined by
+          %th Type 
+          %th Status
+          %th Academic Year
+          %th Approved by
+          %th Action
+      %tbody
+        %tr{"ng-repeat" => "item in approvals"}
+          %td {{item.defined_by}}
+          %td {{item.item_type}}
+          %td {{item.status}} 
+          %td {{item.academic_year}}
+          %td {{item.approved_by}}
+          %td 
+            %a{:href => "#", :ng_class => "{'label label-danger': item.status == 'pending', 'label label-success': item.status == 'approved' }", :ng_click => "approve(item)", :ng_disabled => "approval_item.status != 'pending'"}
+              {{item.status == 'pending' ? 'Pending' : 'Approved' }}
+              

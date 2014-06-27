@@ -26,12 +26,20 @@
                                            "update": { method: "PUT"}
                                        }
                                       );
+        var ApprovalItem = $resource('/approval_items/:id.json', {id: '@id'}, 
+                                      {
+                                          "update": { method: "PUT"},
+                                          "fee_structure_approval_item": { url: '/approval_items/fee_structure_approval_item.json', method: "GET"},
+                                          "approve": { url: "/approval_items/:id/approve.json", id:'@id', method: "PUT"}
+                                      }
+                                    );
         
         return {
             FeeGradeBucket : FeeGradeBucket,
             TermDefinition : TermDefinition,
             PostDatedCheque : PostDatedCheque,
-            DefaultMaster : DefaultMaster
+            DefaultMaster : DefaultMaster,
+            ApprovalItem : ApprovalItem
         };
         
     }]);

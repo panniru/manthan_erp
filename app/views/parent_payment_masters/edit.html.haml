@@ -1,5 +1,6 @@
 .col-md-12
   %student_header_details{ :student_id => "#{@parent_payment_master.student_id}"}
+
 .col-md-12
   - if @parent_payment_master.monthly_payment? 
     = render "monthly_pdc_history"
