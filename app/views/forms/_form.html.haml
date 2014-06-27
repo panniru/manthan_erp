@@ -6,9 +6,13 @@
     %br
     %center 
       = form_for @form, :html => { :class => "form-horizontal", :role => "form" } do |f|
-       
         .row
-          
+          .col-sm-10
+            = f.label "Enquiry NO:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.text_field :enquiry_no,:class => 'form-control'
+              %br
+        .row
           .col-sm-10
             = f.label "Name Of The Applicant:", :class => 'col-sm-3 control-label'
             .col-sm-3
@@ -18,7 +22,7 @@
           .col-sm-10
             = f.label "Date Of Birth:", :class => 'col-sm-3 control-label'
             .col-sm-3
-              = f.text_field :dob, :class => 'datepicker form-control'
+              = f.text_field :dob,:class => 'datepicker form-control'
               %br
  
           .col-sm-10
@@ -37,7 +41,7 @@
               %br
  
           .col-sm-10
-            = f.label "MObile No:", :class => 'col-sm-3 control-label'
+            = f.label "Mobile No:", :class => 'col-sm-3 control-label'
             .col-sm-3
               = f.text_field :mobile_no, :class => 'form-control'
               %br
@@ -89,6 +93,12 @@
             = f.label "Nationality:", :class => 'col-sm-3 control-label'
             .col-sm-3
               = f.country_select :nationality, {object: f.object, prompt: 'Country'}
+              %br
+              %br
+          .col-sm-10
+            = f.label "Status:", :class => 'col-sm-3 control-label'
+            .col-sm-3
+              = f.text_field :status,:class => 'form-control'
               %br
               %br
               = f.submit "submit", :class => "btn btn-primary"

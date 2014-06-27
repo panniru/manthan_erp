@@ -1,12 +1,25 @@
+%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New"
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title New Schedule
+        = form_for Interviewscheduler.new do |f|
+          .modal-body
+            = render 'form'
+            .modal-footer
+              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+              = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
 %h4 Listing interviewschedulers:
 .row
   .col-sm-5
     #calendar
-
+      %br
   .col-sm-7
     %br
-    
-%table
+    %br
+%table{style: "width:60%"}
   %tr
     %th{style: "width:7%"} Name
     %th{style: "width:7%"} Description
@@ -24,5 +37,6 @@
          
           %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"),  edit_interviewscheduler_path(interviewscheduler), :class => "btn btn-warning btn-sm", :title => "Edit"
           %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), interviewscheduler, :class => "btn btn-danger btn-sm",:method => :delete, :data => { :confirm => 'Are you sure?' }, :title => "Delete"         
-= link_to button_tag('New ',:class => 'btn btn-primary'), new_interviewscheduler_path
+
+
           

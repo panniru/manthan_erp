@@ -4,7 +4,7 @@ class DocumentuploadersController < ApplicationController
     @documentuploader = Documentuploader.new(documentuploader_params)
     if @documentuploader.save
       flash[:success] = I18n.t :success, :scope => [:documentuploader, :create]
-      redirect_to documentuploaders_path
+      redirect_to forms_path
     else
       render "new"
     end
