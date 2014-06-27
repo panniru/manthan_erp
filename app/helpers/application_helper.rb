@@ -15,29 +15,19 @@ module ApplicationHelper
   
   def main_menu_list
     main_menu = []
-    main_menu << MenuItem.new(:label => "Fee Management", :klass => "", :icon => "bank 2x", :href => root_path, :is_active => controller.controller_name == "home")
-    main_menu << MenuItem.new(:label => "Admissions", :klass => "", :icon => "book 2x", :href => "/admissions", :is_active => controller.controller_name == "admissions")
-    main_menu << MenuItem.new(:label => "Academics", :klass => "", :icon => "graduation-cap 2x", :href => "/time_tables", :is_active => controller.controller_name == "time_tables")
-    main_menu << MenuItem.new(:label => "Results", :klass => "", :icon => "bullhorn 2x", :href => "#", :is_active => false)
-    main_menu << MenuItem.new(:label => "HRM", :klass => " ", :icon => "group 2x", :href => "#", :is_active => false)
-    main_menu << MenuItem.new(:label => "Recruitment", :klass => " ", :icon => " database  2x", :href => "/recruitments")
-    main_menu << MenuItem.new(:label => "Defaults", :klass => " ", :icon => " edit  2x", :href => "/default_masters", :is_active => controller.controller_name == "default_masters")
+    main_menu << MenuItem.new(:label => "Fee Management", :klass => ContextDetector.mapped_module_name(controller.controller_name) == "fee_management"? "active" :"", :icon => "bank", :href => root_path)
+    main_menu << MenuItem.new(:label => "Admissions", :klass => ContextDetector.mapped_module_name(controller.controller_name) == "enquiry_admission"? "active" :"", :icon => "book", :href => "/admissions")
+    main_menu << MenuItem.new(:label => "Academics", :klass => ContextDetector.mapped_module_name(controller.controller_name) == "academic"? "active" :"", :icon => "graduation-cap", :href => "/academics")
+    main_menu << MenuItem.new(:label => "Results", :klass => ContextDetector.mapped_module_name(controller.controller_name) == "result"? "active" :"", :icon => "bullhorn", :href => "#")
+    main_menu << MenuItem.new(:label => "HRM", :klass => ContextDetector.mapped_module_name(controller.controller_name) == "hrm"? "active" :"", :icon => "group", :href => "#", :is_active => false)
+    main_menu << MenuItem.new(:label => "Recruitment", :klass => ContextDetector.mapped_module_name(controller.controller_name) == "recruitment_sub_menu"? "active" :"", :icon => " database", :href => "/recruitments")
+    main_menu << MenuItem.new(:label => "Defaults", :klass => ContextDetector.mapped_module_name(controller.controller_name) == "default_master_sub_menu"? "active" :"", :icon => " edit", :href => "/default_masters")
   end
 
   def sub_menu
     user_menu = UserMenu.new(current_user, ContextDetector.get_context(controller.controller_name))
     user_menu.sub_menu
   end
-  def admission_sub_menu
-    context = "enquiry_admission".classify.constantize.new
-    user_menu = UserMenu.new(current_user, context)
-    user_menu.admission_sub_menu
-  end
 
-  def recruitment_sub_menu
-    context = "recruitment".classify.constantize.new
-    user_menu = UserMenu.new(current_user,context)
-    user_menu.recruitment_sub_menu
-  end
- 
 end
+

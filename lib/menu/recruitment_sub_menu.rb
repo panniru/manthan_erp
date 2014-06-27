@@ -1,4 +1,4 @@
-class RecruitmentSubMenu
+class RecruitmentSubMenu < Struct.new(:controller)
 
 
   def admin_sub_menu

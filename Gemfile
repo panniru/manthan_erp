@@ -52,6 +52,8 @@ gem 'carmen-rails', '~> 1.0.0'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 
+gem 'oj'
+gem 'oj_mimic_json' # we need this for Rails 4.1.x
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

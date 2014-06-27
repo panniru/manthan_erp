@@ -1,10 +1,10 @@
-class Academic
+class Academic < Struct.new(:controller)
   
   def admin_sub_menu
     sub_menu = []
     sub_menu << time_tables
-    sub_menu << teacher_timetable
-    sub_menu << teaching_plan
+    sub_menu << teacher_timetables
+    sub_menu << teaching_plans
     sub_menu
   end
 
@@ -12,14 +12,14 @@ class Academic
   private
 
   def time_tables
-    MenuItem.new(:label => "Time Table", :klass => "", :icon => "tasks", :href => "/time_tables" )
+    MenuItem.new(:label => "Academic Time Table", :klass => "", :icon => "tasks", :href => "/time_tables" )
   end
 
-  def teacher_timetable
-    MenuItem.new(:label => "Teacher Timetable", :klass => "archive", :icon => "codepen", :href => "/time_tables")
+  def teacher_timetables
+    MenuItem.new(:label => "Teachers Timetable", :klass => "archive", :icon => "codepen", :href => "/teachers_time_tables")
   end
 
-  def teaching_plan
+  def teaching_plans
     MenuItem.new(:label => "Teaching Plan", :klass => "", :icon => "cubes", :href => "/teaching_plans")
   end
 

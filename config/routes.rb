@@ -7,7 +7,7 @@ ManthanErp::Application.routes.draw do
 
   resources :staffs
   get "staffs/staffview"
-  
+
   devise_for :users, :controllers => { :sessions => 'sessions'}
  
   get 'auto_search/student_name_by_grade_and_section'
@@ -160,4 +160,12 @@ ManthanErp::Application.routes.draw do
   
   resources :default_masters
   
+  resources :academics
+
+  resources :teachers_time_tables do
+    collection do
+      get "get_faculty_names_view"
+      get "get_faculty_garde_sections_view"
+    end  
+  end
 end

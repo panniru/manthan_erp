@@ -1,10 +1,8 @@
-.pull-left
-  = link_to 'New Enquiry', enquiry_new_admissions_path, :class => 'btn btn-primary'
 %h4
   %center
     Enquiry Forms
 
-%table.table.table.striped
+%table.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
       %th Form no
@@ -15,10 +13,6 @@
       %th Date of Birth
       %th Mobile
       %th E-mail
-      %th
-      %th
-      %th
-      %th
         
   %tbody
     - @admissions.each do |admission|
@@ -31,8 +25,4 @@
         %td= admission.dob
         %td= admission.mobile
         %td= admission.email
-        %td= link_to "<See More>", enquiry_show_admission_path(admission)
-        %td= link_to "Application",admission_new_admission_path(admission), :class => 'btn btn-primary'
-        %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_admission_path(admission), :class => "btn btn-warning btn-sm", :title => "Edit"
-        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"),admission, :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
 

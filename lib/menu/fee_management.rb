@@ -1,4 +1,4 @@
-class FeeManagement
+class FeeManagement < Struct.new(:controller)
   
   def admin_sub_menu
     sub_menu = []
@@ -28,35 +28,35 @@ class FeeManagement
   private
 
   def fee_types
-    MenuItem.new(:label => "Fee Types", :klass => "", :icon => "tasks", :href => "/fee_types" )
+    MenuItem.new(:label => "Fee Types", :klass => controller == "fee_types" ? "active" : "", :icon => "tasks", :href => "/fee_types" )
   end
 
   def grade_buckets
-    MenuItem.new(:label => "Grade Buckets", :klass => "archive", :icon => "codepen", :href => "/fee_grade_buckets")
+    MenuItem.new(:label => "Grade Buckets", :klass => controller == "fee_grade_buckets" ? "active" : "", :icon => "codepen", :href => "/fee_grade_buckets")
   end
 
   def terms
-    MenuItem.new(:label => "Terms", :klass => "", :icon => "cubes", :href => "/term_definitions")
+    MenuItem.new(:label => "Terms", :klass => controller == "term_definitions" ? "active" : "", :icon => "cubes", :href => "/term_definitions")
   end
 
   def monthly_pdcs
-    MenuItem.new(:label => "Monthly PDCs", :klass => "", :icon => "calendar-o", :href => "/post_dated_cheques")
+    MenuItem.new(:label => "Monthly PDCs", :klass => controller == "post_dated_cheques" ? "active" : "", :icon => "calendar-o", :href => "/post_dated_cheques")
   end
 
   def fee_structure
-    MenuItem.new(:label => "Fee Structure", :klass => "", :icon => "th", :href => "/grade_wise_fees")
+    MenuItem.new(:label => "Fee Structure", :klass => controller == "grade_wise_fees" ? "active" : "", :icon => "th", :href => "/grade_wise_fees")
   end
 
   def payments
-    MenuItem.new(:label => "Pay Fee", :klass => "", :icon => "inr", :href => "/parent_payment_masters")
+    MenuItem.new(:label => "Pay Fee", :klass => controller == "parent_payment_masters" ? "active" : "", :icon => "inr", :href => "/parent_payment_masters")
   end
 
   def cheques
-    MenuItem.new(:label => "Cheques", :klass => "", :icon => "money", :href => "/parent_cheques")
+    MenuItem.new(:label => "Cheques", :klass => controller == "parent_cheques" ? "active" : "", :icon => "money", :href => "/parent_cheques")
   end
 
   def mailings
-    MenuItem.new(:label => "Mailing Jobs", :klass => "", :icon => "envelope-o", :href => "/job_runs")
+    MenuItem.new(:label => "Mailing Jobs", :klass => controller == "job_runs" ? "active" : "", :icon => "envelope-o", :href => "/job_runs")
   end
 
 end

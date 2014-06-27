@@ -18,7 +18,6 @@
       .col-md-4
         = submit_tag("SHOW TIME TABLE",{class: "btn btn-primary", :ng_click => "showPeriods()"})        
     .col-md-2
-      = submit_tag("NEW TIME TABLE",{class: "btn btn-primary", :ng_click => "addPeriods()"})
   %br
   .row
     .col-md-1
@@ -34,7 +33,7 @@
             %th FRI
             %th SAT 
             %th 
-          %tr{"ng-repeat" => "timeperiod in timeperiods | orderBy:timeperiod['id']"}
+          %tr{"ng-repeat" => "timeperiod in timeperiods | orderBy:'id'"}
             %td Period{{" "+($index+1)}}
             %td               
               %select{ "ng-hide" => "mySelectedValue","ng-model" => "timeperiod['mon_sub']", "ng-options" => "subject.id as  subject.subject for subject in subjects",:class => "form-control",:placeholder => "first name"} 
@@ -55,15 +54,15 @@
               %select{"ng-model" => "timeperiod['sat_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}  
                 %option{value: ""}
             %td
-              %input{:type => "button", "ng-click" => "clearPeriods($index)", :class => "btn btn-danger btn-sm", :value => "CLEAR" }             
-    .col-md-2 
+              %input{:type => "button", "ng-click" => "clearRowPeriods($index)", :class => "btn btn-danger btn-sm", :value => "CLEAR" } 
+          %tr
+            %td
+            %td{"ng-repeat" => "i in [1, 2, 3, 4, 5, 6]"}
+              %input{:type => "button", "ng-click" => "clearColumnPeriods($index)", :class => "btn btn-danger btn-sm", :value => "CLEAR   " }
+            %td
+              %input{:type => "button", "ng-click" => "clearAllPeriods()", :class => "btn btn-danger btn-sm", :value => "CLEAR ALL" } 
+            
+    .col-md-2{"ng-show" => "myValue"} 
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "savePeriods()", :value => "SAVE",:redirct_to =>"time_tables_path"} 
   .row
-    = render "show_periods"      
-  .row
-    .col-md-1
-    .col-md-8
-    .col-md-3
-  .row{"ng-show" => "myValue"}    
-    .col-md-4.col-md-offset-10     
-      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "savePeriods()", :value => "Save",:redirct_to =>"time_tables_path"} 
-      = link_to "Back", time_tables_path, :class => "btn btn-primary"
+    = render "show_periods" 

@@ -10,7 +10,7 @@
         %th THU
         %th FRI
         %th SAT
-      %tr{"ng-repeat" => "timeperiod in timeperiods| orderBy:timeperiod['id']"}
+      %tr{"ng-repeat" => "timeperiod in timeperiods| orderBy:'id'"}
         %td Period{{" "+($index+1)}}
         %td {{timeperiod['mon_sub_name']}}
         %td {{timeperiod['tue_sub_name']}}          
@@ -18,12 +18,9 @@
         %td {{timeperiod['thu_sub_name']}}           
         %td {{timeperiod['fri_sub_name']}}          
         %td {{timeperiod['sat_sub_name']}}
-.row
-  .col-md-1
-  .col-md-8
-  .col-md-3{"ng-show" => "myShowValue"}
-    = submit_tag("EDIT",{class: "btn btn-primary", :ng_click => "editPeriods()"})
-    = link_to "Back", time_tables_path, :class => "btn btn-primary"
+  .col-md-2{"ng-show" => "myShowValue"}
+    = submit_tag("EDIT",{class: "btn btn-primary", :ng_click => "editPeriods()"})    
+
 .row
   :css
     table, th, td
@@ -35,13 +32,13 @@
     {
     padding:5px;
     } 
-.row
+.row 
   .col-md-2
-  .col-md-8{"ng-show" => "error_code"}
+  .col-md-8
     %h1
-      %p
+      %p{"ng-show" => "error_code_one"}
         Time Table Already Exists!!
-        Click Show TimeTable To See/Edit TimeTable 
+        Click Show TimeTable To See/Edit TimeTable       
   .col-md-2
 
 

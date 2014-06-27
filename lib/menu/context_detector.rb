@@ -14,16 +14,27 @@ class ContextDetector
     "admissions" => "enquiry_admission",
     "events" => "enquiry_admission",
     "staffs" => "enquiry_admission",
+    "academics" => "academic",
     "time_tables" => "academic",
+    "teachers_time_tables" => "academic",
     "teaching_plans" => "academic",
     "recruitments" => "recruitment_sub_menu",
     "adds" => "recruitment_sub_menu",
     "forms" => "recruitment_sub_menu",
     "documentuploaders" => "recruitment_sub_menu",
     "interviewschedulers" => "recruitment_sub_menu",
+    "default_masters" => "default_master_sub_menu"
   }
-
+  
   def self.get_context(key)
-    CONTEXT_CONTROLLER_MAPPER[key].present? ? CONTEXT_CONTROLLER_MAPPER[key].classify.constantize.new : nil
+    CONTEXT_CONTROLLER_MAPPER[key].present? ? CONTEXT_CONTROLLER_MAPPER[key].classify.constantize.new(key) : nil
   end
+
+
+
+  def self.mapped_module_name(key)
+    CONTEXT_CONTROLLER_MAPPER[key].present? ? CONTEXT_CONTROLLER_MAPPER[key] : ""
+  end
+  
+  
 end

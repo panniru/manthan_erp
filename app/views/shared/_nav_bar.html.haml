@@ -3,8 +3,8 @@
     .col-md-offset-2.col-md-10
       %ul.nav.navbar-nav
         - main_menu_list.each do |menu_item|
-          %li{:class => menu_item.is_active ? "active" : "" }
+          %li{:class => menu_item.klass}
             %a{:href => menu_item.href}
-              = fa_icon menu_item.icon, :class => "menu-icon"
+              = fa_icon "#{menu_item.icon} 2x", :class => "menu-icon"
               %span.menu-text
                 = menu_item.label
