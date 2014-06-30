@@ -102,7 +102,7 @@ end
 
 
 def seed_parents
-  Parent.first_or_create(:father_name => "Raghu", :mother_name => "Janaki", :father_email => "srikanth@ostrylabs.com", :mother_email => "srikanth@ostryalabs.com", :user_id => User.find_by_role_id(Role.find_by_code("parent")))
+  Parent.first_or_create(:father_name => "Raghu", :mother_name => "Janaki", :father_email => "srikanth@ostrylabs.com", :mother_email => "srikanth@ostryalabs.com", :user_id => User.find_by_role_id(Role.find_by_code("parent")).id)
 end
 
 def seed_students
