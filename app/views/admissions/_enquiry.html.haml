@@ -151,22 +151,7 @@
         .col-sm-3
           = f.label "Email ", :class => 'control-label'          
         .col-sm-3
-          %div{"ng-app" => "MyApp"}
-            %div{"ng-controller" => "MyCtrl"}
-              %form.form-horizontal{name: "myForm"}
-                %fieldset
-                
-                  %input{name: "email", "ng-maxlength" => "30", "ng-minlength" => "5", "ng-model" => "user.email", required: "", type: "email"}/
-                %p
-                  %span{"ng-show" => "myForm.email.$error.required"}
-                    Email address is required
-                  %span{"ng-show" => "myForm.email.$error.email"}
-                    Please enter a valid email address
-                  %span{"ng-show" => "myForm.email.$error.minlength"}
-                    Email should be of minimum 5 char length
-                  %span{"ng-show" => "myForm.email.$error.maxlength"}
-                    Email should be of maximum 30 char length
-          
+          = f.text_field :email, :class => 'form-control'
       .form-group
         .col-sm-3
           = f.label "Landline: ", :class => 'control-label'

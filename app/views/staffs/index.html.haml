@@ -40,7 +40,7 @@
                       = f.label :start_time
                   %tr
                     .col-sm-3
-                      = f.text_field :start_time, :class => 'timepicker form-control'
+                      = f.time_field :start_time, :class => 'form-control'
               .row
                 .field
                   %tr
@@ -48,12 +48,12 @@
                       = f.label :end_time
                   %tr
                     .col-sm-3
-                      = f.text_field :end_time, :class => 'timepicker form-control'
+                      = f.time_field :end_time, :class => 'form-control'
               .row
                 .field
                   %tr
                     .col-sm-3
-                      = f.label :period
+                      = f.label :period, :class => 'control-label'
                   %tr
                     .col-sm-3
                       = f.text_field :period, :class => 'form-control'
@@ -65,9 +65,9 @@
                   %tr
                     .col-sm-3
                       = f.text_field :date, :class => 'datepicker form-control'
-              .modal-footer
-                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-                = f.submit "save", :class => 'btn btn-primary'
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+            = f.submit "save", :class => 'btn btn-primary'
           
 
 .pull-left

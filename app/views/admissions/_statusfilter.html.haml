@@ -1,0 +1,41 @@
+%div{"data-ng-controller" => "FormCtrl"}
+  %ul.inline
+    %li
+      .alert.alert-info
+        %h4 Total: 
+    %li
+      .btn-group{"data-ng-class" => "{open: open}"}
+        %button.btn Filter
+        %button.btn.dropdown-toggle{"data-ng-click" => "open=!open"}
+          %span.caret
+        %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu"}
+          %li
+            %a{"data-ng-click" => "checkAll()"}
+              %i.icon-ok-sign
+              Check All
+          %li
+            %a{"data-ng-click" => "selectedStatus=[];"}
+              %i.icon-remove-sign
+              Uncheck All
+          %li.divider
+          %li{"data-ng-repeat" => "status in statusList"}
+            %a{"data-ng-click" => "setSelectedForm()"}
+              
+              %span{"data-ng-class" => "isChecked(status.id)"}
+  %hr/
+  %h3 Table:
+  %table.table.table-hover.table-striped
+    %thead
+      %tr
+        %th{style: "width:10%"} #
+        %th{style: "width:20%"} Name
+        %th{style: "width:40%"} Designation
+        %th{style: "width:30%"} Company
+    %tbody
+      %tr{"data-ng-repeat" => "form in filtered = (forms | statusFilter:selectedStatus)"}
+        %td 1
+        %td
+          %em 
+        %td 
+        %td 
+  

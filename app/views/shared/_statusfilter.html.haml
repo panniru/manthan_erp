@@ -1,0 +1,41 @@
+%div{"data-ng-controller" => "EnquiryCtrl"}
+  %ul.inline
+    %li
+      .alert.alert-info
+        %h4 Total: 
+    %li
+      .btn-group{"data-ng-class" => "{open: open}"}
+        %button.btn Filter by Status
+        %button.btn.dropdown-toggle{"data-ng-click" => "open=!open"}
+          %span.caret
+        %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu"}
+          %li
+            %a{"data-ng-click" => "checkAll()"}
+              %i.icon-ok-sign
+              Check All
+          %li
+            %a{"data-ng-click" => "selectedEnquiry=[];"}
+              %i.icon-remove-sign
+              Uncheck All
+          %li.divider
+          %li{"data-ng-repeat" => "name in NameList"}
+            %a{"data-ng-click" => "setSelectedEnquiry()"}
+              
+              %span{"data-ng-class" => "isChecked(enquiry.id)"}
+  %hr/
+  %h3 Status 
+  %table.table.table-hover.table-striped
+    %thead
+      %tr
+        %th{style: "width:10%"} #
+        %th{style: "width:20%"} Name
+        %th{style: "width:40%"} Gender
+        %th{style: "width:30%"} Status
+    %tbody
+      %tr{"data-ng-repeat" => "enquiry in filtered = (enquiries | nameFilter:selectedName)"}
+        %td 1
+        %td
+          %em 
+        %td 
+        %td 
+

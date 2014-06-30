@@ -16,9 +16,10 @@ test:
   database: manthan_test
   pool: 5
   timeout: 5000
+  
 production:
   adapter: postgresql
   database: manthan_production
   pool: 5
   timeout: 5000
- 
+  

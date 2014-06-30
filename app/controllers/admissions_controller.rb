@@ -2,6 +2,9 @@ class AdmissionsController < ApplicationController
   def index
     @events = Event.all
     @admissions = Admission.all
+    @admissions = Admission.search(params[:search])
+    
+    
   end
   def admission_home
     @admissions = Admission.all
@@ -52,9 +55,12 @@ class AdmissionsController < ApplicationController
   end
  def enquiry_index
    @admissions = Admission.all
+   @admissions = Admission.search(params[:admission_no]).all
  end
  def admission_index
    @admissions = Admission.all
+   @admissions = Admission.search(params[:search]).all
+   
  end
  def enquiry_new
    @admission = Admission.new
@@ -63,6 +69,10 @@ class AdmissionsController < ApplicationController
    @admission = Admission.find(params[:id])
 
  end
+ def admission_home
+   @admissions = Admission.search(params[:search])
+ end
+ 
  
  def update
    @admission = Admission.find(params[:id])
