@@ -15,13 +15,17 @@
             $scope.isErrorsAt = [];
             termWiseFeeService.getTermWiseFeeView()
                 .then(function(result) {
-                    var colHeads = new Set();
-                    var rowHeads = new Set();
+                    var colHeads = [];
+                    var rowHeads = [];
                     result.data.forEach(function(buckets){
                         var total_amount = 0;
                         buckets.forEach(function(bctWiseFee){
-                            colHeads.add(bctWiseFee.term_definition_name);
-                            rowHeads.add(bctWiseFee.fee_grade_bucket_name);
+                            if(colHeads.indexOf(bctWiseFee.term_definition_name) == -1){
+                                colHeads.push(bctWiseFee.term_definition_name);
+                            }
+                            if(rowHeads.indexOf(bctWiseFee.fee_grade_bucket_name) == -1){
+                                rowHeads.push(bctWiseFee.fee_grade_bucket_name);
+                            }
                             // on doing sum of the parseFloat giving long precessions so i am increasing the value by multiplying 1000 and devinding finally with 1000 
                             total_amount += isNaN(parseFloat(bctWiseFee.amount_in_rupees)) ? 0 : parseFloat(bctWiseFee.amount_in_rupees*1000) ;
                         });

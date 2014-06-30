@@ -16,7 +16,7 @@
                 term.termdate = $("#date-"+index).val()
             });
             resourceService.TermDefinition.bulk({bulk_term: $scope.newTermDefinitions})
-                .then(function(responce){
+                .$promise.then(function(responce){
                     $scope.termDefinitions = resourceService.TermDefinition.query()
                     $('#createModal').modal('hide')
                 })
