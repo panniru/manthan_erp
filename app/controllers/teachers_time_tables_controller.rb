@@ -28,4 +28,14 @@ class TeachersTimeTablesController < ApplicationController
         
   end
 
+  def check_teachers_timetable
+    p params[:my_Teacher]=2
+    respond_to do |format|
+      format.json do
+        teacherstimetables = TeachersTimeTable.where('faculty_master_id = '+"#{params[:my_Teacher]}").count 
+        render :json => teacherstimetables
+      end
+    end  
+  end
+
 end

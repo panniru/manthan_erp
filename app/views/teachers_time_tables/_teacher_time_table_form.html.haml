@@ -56,16 +56,9 @@
               %input{:type => "button", "ng-click" => "clearColumnPeriods($index)", :class => "btn btn-danger btn-sm", :value => "CLEAR   " }
             %td
               %input{:type => "button", "ng-click" => "clearAllPeriods()", :class => "btn btn-danger btn-sm", :value => "CLEAR ALL" } 
-    .col-md-2 
-      
+    .col-md-2{"ng-show" => "myValue"} 
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "savePeriods()", :value => "SAVE",:redirct_to =>"time_tables_path"} 
+
 .row
-  :css
-    table, th, td
-    {
-    border-collapse:collapse;
-    border:5px solid #6aa6d6;
-    }
-    th, td
-    {
-    padding:5px;
-    } 
+  = render "show_teacher_time_table_form"
+    
