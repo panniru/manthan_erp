@@ -4,13 +4,16 @@
         $scope.error_code=0;
         gradeService.getGradeServiceView()
             .then(function(result) {
-                $scope.grades=result.data                
+                $scope.grades=result.data
             });
+
+
         sectionService.getSectionServiceView()
             .then(function(result) {
                 $scope.sections=result.data
                 
             });
+       
         
         subjectService.getSubjectServiceView()
             .then(function(result) {

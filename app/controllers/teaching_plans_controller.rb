@@ -8,8 +8,8 @@ class TeachingPlansController < ApplicationController
   def edit
   end
   def show
-  end
 
+  end
   def gradeserviceview
     respond_to do |format|
       format.json do
@@ -29,5 +29,20 @@ class TeachingPlansController < ApplicationController
         render :json => sections
       end
     end  
+  end
+  def create
+    @teaching_plan = TeachingPlan.new(teachingplan_params)
+    respond_to do |format|
+      if @teaching_plan.save
+        format.html { redirect_to @teaching_plan, notice: 'Plan was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @teaching_plan }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @teaching_plan.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  def teachingplan_params
+    params.require(:teaching_plan).permit(:grade_master_id, :section_master_id,:teaching_date,:plan_month )
   end
 end
