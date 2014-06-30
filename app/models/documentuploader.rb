@@ -6,4 +6,10 @@ class Documentuploader < ActiveRecord::Base
   validates :previous_employment_proof, :presence => true
   validates :salary_slips_for_previous_months, :presence => true
   # Make sure the owner's name is present.
+
+ 
+  def self.search(search)
+    return scoped unless search.present?
+    where(['name LIKE ? OR educational_certificates LIKE ? OR previous_employment_proof LIKE ? ', "%#{search}%", "%#{search}%", "%#{search}%" ])
+  end
 end

@@ -6,6 +6,7 @@
     %br
     %center 
       = form_for @form, :html => { :class => "form-horizontal", :role => "form" } do |f|
+        = render "shared/error_messages", :object => f.object
         .row
           .col-sm-10
             = f.label "Enquiry NO:", :class => 'col-sm-3 control-label'

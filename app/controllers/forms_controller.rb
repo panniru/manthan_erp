@@ -11,6 +11,7 @@ class FormsController < ApplicationController
     end
   def index
     @forms = Form.all
+    @forms = Form.search(params[:search])
   end
 
   def new

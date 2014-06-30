@@ -5,6 +5,7 @@ class InterviewschedulersController < ApplicationController
   # GET /interviewschedulers.json
   def index
     @interviewschedulers = Interviewscheduler.all
+    @interviewschedulers = Interviewscheduler.search(params[:search])
   end
 
   # GET /interviewschedulers/1

@@ -1,10 +1,9 @@
-%h3 
-.col-sm-6
-  .col-sm-6
-    .pull-right
-    %h3  Documents
-%br
-%table.table.table.striped.table-bordered.table-condensed.table-hover{style: "width:70%"}
+= form_tag documentuploaders_path, method: :get do
+  %input#search{name: "search", placeholder: "Enter search term...", type: "text",:class => 'form'}/
+  = submit_tag "Search", name: nil, :class => 'btn btn-primary'
+  %br
+  %br
+%table.table.table.striped.table-bordered.table-condensed.table-hover{style: "width:80%"}
   %thead
     %tr
       %th Name

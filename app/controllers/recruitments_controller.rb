@@ -13,6 +13,7 @@ class RecruitmentsController < ApplicationController
     end
   def index
     @recruitments = Recruitment.all
+    @recruitments = Recruitment.search(params[:search])
   end
 
   def new

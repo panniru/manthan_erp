@@ -14,6 +14,7 @@ module ApplicationHelper
   end
   
   def main_menu_list
+
     user_menu = UserMenu.new(current_user, nil, controller.controller_name)
     user_menu.main_menu
   end

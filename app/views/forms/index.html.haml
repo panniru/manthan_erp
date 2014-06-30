@@ -1,13 +1,12 @@
-%h3 
-  = link_to "Add New", new_form_path, :class => "btn btn-primary"
-  .col-sm-10
-    .row{"ng-controller" => "formsController"}
-      .form-group.col-md-3
-        %label{:class=> "form-label col-md-6"} Status
-        .col-md-6   
-          %select{"ng-model" => "myGrade", :ng_options => "form.id as form.status for status in forms", :class => "form-control"} 
-      %br
-      %br
+.row
+  .col-sm-11
+    .pull-right
+      = link_to "Add New", new_form_path, :class => "btn btn-primary"
+= form_tag forms_path, method: :get do
+  %input#search{name: "search", placeholder: "Enter search term...", type: "text"}/
+  = submit_tag "Search", name: nil, :class => 'btn btn-primary'
+  %br
+  %br
 %table.table.table.striped.table-bordered.table-condensed.table-hover{style: "width:90%"}
   %thead
     %tr
@@ -20,13 +19,14 @@
       %th Preferred Subject
       %th Status
   %tbody
-    - @forms.all.each do |form|
+    - @forms.each do |form|
       %tr
         %td= form.enquiry_no
         %td= form.name
         %td= form.email
-        %td= form.mobile_no        
+        %td= form.mobile_no
         %td= form.education_qualification
         %td= form.klass
         %td= form.subject
         %td= form.status
+      
