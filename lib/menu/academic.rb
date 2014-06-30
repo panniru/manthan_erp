@@ -5,6 +5,7 @@ class Academic < Struct.new(:controller)
     sub_menu << time_tables
     sub_menu << teacher_timetables
     sub_menu << teaching_plans
+    sub_menu << teacher_grade_mappings
     sub_menu
   end
 
@@ -21,6 +22,10 @@ class Academic < Struct.new(:controller)
 
   def teaching_plans
     MenuItem.new(:label => "Teaching Plan", :klass => "", :icon => "cubes", :href => "/teaching_plans")
+  end
+  
+  def teacher_grade_mappings
+    MenuItem.new(:label => "Teacher Grade Mapping", :klass => "", :icon => "arrows-h", :href => "/teacher_grade_mappings")
   end
 
 end

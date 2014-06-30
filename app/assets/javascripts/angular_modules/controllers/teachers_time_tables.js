@@ -13,16 +13,43 @@
         teachersService.getFacultyGradeSectionsServiceView()
             .then(function(result) {
                 $scope.faculty_grade_sections = result.data                
-            });
+            });       
+        
+        $scope.showTimeTable = function(){
+            alert($scope.myTeacher);
+            
+            teachersService.checkTeachersTimeTable($scope.myTeacher)
+                .then(function(result) {
+                    $scope.check_techers_time_table = result.data 
+                    if ($scope.check_techers_time_table == 0)
+                    {
+                        $scope.error_code = 2
+                        $scope.myValue = "false"
+                        $scope.myShowValue = "false"
+                        $scope.addPeriods();
+                    }
+                    else
+                    {
+                        $scope.error_code = 0
+                        $scope.myValue="false"
+                        $scope.myShowValue="true"           
+                        timeTableService.getPeriods($scope.myGrade,$scope.mySection)
+                            .then(function(result) {  
+                                $scope.timeperiods=result.data
+                            });
+                    }
+                });
+        };
 
-        $scope.showTimeTable = function (){
+
+        $scope.addPeriods = function (){
             
             $scope.myValue="true"
             $scope.timeperiods = [];
             // Add a periodItem to the Time Period List
             for ( var i = 0; i < $scope.no_of_periods; i++ ) {
                 $scope.timeperiods.push({ 
-                    grade_master_id: $scope.myTeacher,
+                    faculty_master_id: $scope.myTeacher,
                     mon_grade_section: "",
                     tue_grade_section: "",
                     wed_grade_section: "",
@@ -32,7 +59,7 @@
                     sun_grade_section: "",
                 });              
             }            
-            };
+        };
 
         $scope.savePeriods = function(){
             //alert(JSON.stringify($scope.timeperiods));
@@ -40,6 +67,11 @@
                 .then(function(result) {
                     
                 });            
+        };
+        
+        $scope.editPeriods = function(){ 
+            $scope.myShowValue="false"
+            $scope.myValue="true"
         };
 
         $scope.clearRowPeriods = function($index){

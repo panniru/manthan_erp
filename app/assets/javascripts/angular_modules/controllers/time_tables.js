@@ -114,7 +114,6 @@
         $scope.editPeriods = function(){ 
             $scope.myShowValue="false"
             $scope.myValue="true"
-            $index = 0;
         };
 
         $scope.clearRowPeriods = function($index){
