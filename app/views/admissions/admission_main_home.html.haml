@@ -21,8 +21,8 @@
   %tbody
     - @admissions.each do |admission|
       %tr
-        %td= link_to "#{admission.form_no}",home_main_index_admission_path(admission)
-        %td= link_to "#{admission.admission_no}",home_main_index_admission_path(admission)
+        %td= link_to "#{admission.form_no}",home_index_admission_path(admission)
+        %td= link_to "#{admission.admission_no}",home_index_admission_path(admission)
         %td= admission.name
         %td= admission.klass
         %td= admission.father_name

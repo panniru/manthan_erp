@@ -134,7 +134,8 @@ ManthanErp::Application.routes.draw do
       get 'admission_new'
       get 'event_new'    
       get 'event_show'
-     
+      get 'home_index'
+      get 'home_main_index'
     end
 
     collection do
@@ -143,6 +144,7 @@ ManthanErp::Application.routes.draw do
       get "enquiry_new"
       get "event_index"
       get 'admission_home'
+      get 'admission_main_home'
     end
   end
   

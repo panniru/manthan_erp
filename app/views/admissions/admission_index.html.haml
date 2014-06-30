@@ -2,9 +2,6 @@
   = form_tag admission_index_admissions_path, method: :get do
     %input#search{name: "search", placeholder: "Enter search term...", type: "text"}/
     = submit_tag "Search", name: nil, :class => 'btn btn-primary'
-.pull-right
-  = link_to 'New Application', enquiry_new_admissions_path, :class => 'btn btn-primary'
-
 %h4
   %center
     Application Form
