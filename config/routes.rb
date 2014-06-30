@@ -174,12 +174,14 @@ ManthanErp::Application.routes.draw do
       get "get_faculty_names_view"
       get "get_faculty_garde_sections_view"
       get "check_teachers_timetable"
+      post "saveperiods"
+      post "getperiods"
     end  
   end
 
   resources :teacher_grade_mappings do
     collection do
-      
+      get "check_teachers_grades_mapping"
       end
   end
   

@@ -8,7 +8,6 @@
         .form-group.col-md-12
           %select{"ng-model" => "myTeacher", "ng-options" => "faculty.id as faculty.name for faculty  in faculty_names | orderBy:'name'",:class => "form-control",:required => "required"}       
             %option{style: "display:none", value: ""} Select Teacher
-          {{myTeacher}}
       .col-md-6
         .col-md-12
           = submit_tag("SHOW TIME TABLE",{class: "btn btn-primary", :ng_click => "showTimeTable()"})         
@@ -27,7 +26,7 @@
             %th FRI
             %th SAT 
             %th 
-          %tr{"ng-repeat" => "timeperiod in timeperiods | orderBy:timeperiod['id']"}
+          %tr{"ng-repeat" => "timeperiod in timeperiods | orderBy:'id'"}
             %td Period{{" "+($index+1)}}
             %td               
               %select{"ng-model" => "timeperiod['mon_grade_section']", "ng-options" => "gradesection.grade_section as  gradesection.grade_section for gradesection in faculty_grade_sections | filter: {id:myTeacher}",:class => "form-control"} 
@@ -59,6 +58,6 @@
     .col-md-2{"ng-show" => "myValue"} 
       %input{:type => "button", :class => "btn btn-primary", "ng-click" => "savePeriods()", :value => "SAVE",:redirct_to =>"time_tables_path"} 
 
-.row
-  = render "show_teacher_time_table_form"
+  .row
+    = render "show_teacher_time_table_form"
     
