@@ -189,7 +189,7 @@
         .col-sm-3
           = f.label "You came to know about our school through:", :class => 'control-label'
         .col-sm-3
-          = f.select(:transport, options_for_select([['Friends'],['Advertisements'],['Internet'],['Word of Mouth'],['Parents whose children are studying here']]),{ :class => 'form-control' })
+          = f.select(:know_school, options_for_select([['Friends'],['Advertisements'],['Internet'],['Word of Mouth'],['Parents whose children are studying here']]),{ :class => 'form-control' })
       .form-group
         .col-sm-4
           = f.label "If yes,mention their details ", :class => 'control-label'

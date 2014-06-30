@@ -62,6 +62,13 @@ class AdmissionsController < ApplicationController
    @admissions = Admission.search(params[:search]).all
    
  end
+ def home_index
+   @admission = Admission.find(params[:id])
+ end
+ def home_main_index
+   @admission = Admission.find(params[:id])
+ end
+ 
  def enquiry_new
    @admission = Admission.new
  end
@@ -72,14 +79,16 @@ class AdmissionsController < ApplicationController
  def admission_home
    @admissions = Admission.search(params[:search])
  end
- 
+ def admission_main_home
+   @admissions = Admission.search(params[:search])
+ end
  
  def update
    @admission = Admission.find(params[:id])
    respond_to do |format|
      if @admission.update(admission_params)
        @admission.update(:status => "Application Created")
-       format.html { redirect_to admissions_path, notice: 'Admission was successfully updated.' }
+       format.html { redirect_to admission_main_home_admissions_path, notice: 'Admission was successfully updated.' }
        format.json { render action: 'index', :status => "success" }
        
      else
