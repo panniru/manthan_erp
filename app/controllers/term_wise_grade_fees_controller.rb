@@ -9,7 +9,7 @@ class TermWiseGradeFeesController < ApplicationController
         term_wise_fees = TermWiseGradeFee.belongs_to_fee_grade_bucket(student.grade_bucket_id).map do |term_fee|
           {:term => term_fee.term_definition.term_definition, :amount_in_rupees => s_f_c.applicable_term_fee(term_fee)}
         end
-        render :json => Struct.new(:term_fee_details, :total).new(term_wise_fees, Formatter.two_decimal(total))
+        render :json => {:term_fee_details => term_wise_fees, :total => Formatter.two_decimal(total) }
       end
     end
   end

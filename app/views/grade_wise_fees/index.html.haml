@@ -1,12 +1,13 @@
 .col-md-10
-  .col-md-4.col-md-offset-8{:ng_controller => "approvalsController", :ng_init => "fee_structure_item()"}
-    .col-md-6{:ng_controller => "MailingController"}
-      = link_to "Send Mail", "#", :class => "btn btn-primary", :ng_hide => "isMailActionFired", :ng_click => "feeStructureMail()", :ng_disabled => "approval_item.status != 'approved'"
-    .col-md-6
-      %a{:href =>"#", :ng_class => "{'btn btn-danger': approval_item.status == 'new', 'btn btn-warning': approval_item.status == 'pending', 'btn btn-success': approval_item.status == 'approved' }", :ng_click => "create()" , :ng_disabled => "approval_item.status != 'new'"}
-        %span{ :ng_show => "approval_item.status == 'new'"} Send For Approval
-        %span{ :ng_show => "approval_item.status == 'pending'"} Approval Pending 
-        %span{ :ng_show => "approval_item.status == 'approved'"} Approved
+  - if current_user.admin? or current_user.accountant?
+    .col-md-4.col-md-offset-8{:ng_controller => "approvalsController", :ng_init => "fee_structure_item()"}
+      .col-md-6{:ng_controller => "MailingController"}
+        = link_to "Send Mail", "#", :class => "btn btn-primary", :ng_hide => "isMailActionFired", :ng_click => "feeStructureMail()", :ng_disabled => "approval_item.status != 'approved'"
+      .col-md-6
+        %a{:href =>"#", :ng_class => "{'btn btn-danger': approval_item.status == 'new', 'btn btn-warning': approval_item.status == 'pending', 'btn btn-success': approval_item.status == 'approved' }", :ng_click => "create()" , :ng_disabled => "approval_item.status != 'new'"}
+          %span{ :ng_show => "approval_item.status == 'new'"} Send For Approval
+          %span{ :ng_show => "approval_item.status == 'pending'"} Approval Pending 
+          %span{ :ng_show => "approval_item.status == 'approved'"} Approved
         
   = render "grade_wise_fee_grid"
   = render "shared/amount_units"

@@ -5,6 +5,7 @@ class ParentCheque < ActiveRecord::Base
   
   scope :belongs_to_student, lambda{|student_id| where(:student_id => student_id)}
   scope :pending_cheques, lambda{where(:status => "pending")}
+  scope :cleared_cheques, lambda{where(:status => "cleared")}
   scope :cheques_on_or_before, lambda{|cheque_date| where("cheque_date <= ?", cheque_date.strftime('%Y-%m-%d'))}
   scope :cheques_on_or_after, lambda{|cheque_date| where("cheque_date >= ?", cheque_date.strftime('%Y-%m-%d'))}
 

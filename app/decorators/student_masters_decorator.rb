@@ -13,5 +13,13 @@ class StudentMastersDecorator < Draper::Decorator
     JSON.parse(model.to_json).merge!(:grade => grade, :section => section).to_json
   end
   
+  def context_based_url(context)
+    if context == "parent_payment_masters"
+      "/parent_payment_masters/pay?student_id="+model.id.to_s
+    elsif context == "parent_payment_transactions"
+    else
+    end
+    
+  end 
 
 end

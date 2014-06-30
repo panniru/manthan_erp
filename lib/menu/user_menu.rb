@@ -11,6 +11,7 @@ class UserMenu
     if @user.admin? or @user.accountant?
       return admin_main_menu
     elsif @user.parent?
+      return admin_main_menu
     end
   end
   

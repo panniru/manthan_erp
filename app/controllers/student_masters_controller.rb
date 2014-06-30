@@ -28,11 +28,11 @@ class StudentMastersController < ApplicationController
         s_f_c = StudentFeeCalculator.new(@student_master)
         if payment_master.present?
           monthly_pdcs = MonthlyPdcAmount.belongs_to_fee_grade_bucket(@student_master.grade_bucket_id).pending_pdc_submissions(@student_master).map do |pdc_amount|
-            Struct.new(:post_dated_cheque_id, :month, :amount_in_rupees, :cheque_number, :clearence_date).new(pdc_amount.post_dated_cheque_id, pdc_amount.post_dated_cheque.month, s_f_c.applicable_month_fee(pdc_amount), nil ,nil)
+            {:post_dated_cheque_id => pdc_amount.post_dated_cheque_id, :month => pdc_amount.post_dated_cheque.month, :amount_in_rupees => s_f_c.applicable_month_fee(pdc_amount), :cheque_number => nil, :clearence_date => nil}
           end
         else
           monthly_pdcs = MonthlyPdcAmount.belongs_to_fee_grade_bucket(@student_master.grade_bucket_id).map do |pdc_amount|
-            Struct.new(:post_dated_cheque_id, :month, :amount_in_rupees, :cheque_number, :clearence_date).new(pdc_amount.post_dated_cheque_id, pdc_amount.post_dated_cheque.month, s_f_c.applicable_month_fee(pdc_amount), nil ,nil)
+            {:post_dated_cheque_id => pdc_amount.post_dated_cheque_id, :month => pdc_amount.post_dated_cheque.month, :amount_in_rupees => s_f_c.applicable_month_fee(pdc_amount), :cheque_number => nil, :clearence_date => nil }
           end
         end
         render :json => monthly_pdcs
@@ -52,7 +52,7 @@ class StudentMastersController < ApplicationController
           term = payment_master.next_term_fee 
         end
         amount = s_f_c.applicable_term_fee(term)
-        render :json => Struct.new(:term_definition_id, :amount_in_rupees, :term, :term_date).new(term.term_definition_id, amount, term.term_definition.term_definition)
+        render :json => {:term_definition_id => term.term_definition_id, :amount_in_rupees => amount, :term => term.term_definition.term_definition, :term_date => term.term_definition.termdate }
       end
     end  
   end

@@ -1,9 +1,9 @@
 = form_for @parent_payment_master, :html => { :class => "form-horizontal", :role => "form", :method => "put" } do |f|
   = render "shared/error_messages", :object => f.object
   - if @parent_payment_master.monthly_payment? 
-    = render "monthly_fee_payment"
+    = render :file =>"app/assets/javascripts/templates/month_fee_payment"
   - elsif @parent_payment_master.term_wise_payment? 
-    = render "term_fee_payment"
+    = render :file =>"app/assets/javascripts/templates/term_fee_payment"
       
   .col-md-8.pull-right
     = f.submit "Do Payment", :class => 'btn btn-primary'

@@ -2,8 +2,9 @@
   .col-md-12
     %h4 
       Term Wise Grade Fee
-      .pull-right
-        = link_to fa_icon("edit"), new_term_wise_grade_fee_path, :title => "Edit"
+      - if current_user.admin? or current_user.accountant?
+        .pull-right
+          = link_to fa_icon("edit"), new_term_wise_grade_fee_path, :title => "Edit"
     %hr
 
 .col-md-12{ "ng-controller" => "TermWiseFeesController", "ng-init" => "getGridView()"}

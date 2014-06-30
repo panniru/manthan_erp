@@ -3,7 +3,7 @@
     app.directive('paymentTypeTabs', function(){
         return{
             restrict: 'E',
-            controller: function($scope, $attrs, $http, paymentService) {
+            controller: ["$scope", "$attrs", "$http", "paymentService", function($scope, $attrs, $http, paymentService) {
                 $scope.terms = [];
                 $scope.is_tems_initiated = false;
                 $scope.is_months_initiated = false;
@@ -43,7 +43,7 @@
                     }
                     $('#feeTab a:last').tab('show') 
                 };
-            },
+            }],
             templateUrl: 'payment_type_tabs.html'
         };
     });

@@ -1,0 +1,14 @@
+%table.table.table-bordered.table-striped.table-hover
+  %thead
+    %th Name
+    %th Grade
+    %th Section
+    %th Academic Year
+  %tbody
+    - @students.each do |student|
+      %tr
+        %td= link_to student.name, student.context_based_url(controller.controller_name)
+        %td= student.grade
+        %td= student.section
+        %td= student.academic_year
+      

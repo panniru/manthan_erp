@@ -5,7 +5,7 @@ class ParentPaymentTransaction < ActiveRecord::Base
   has_one :payment_receipt
   
   scope :bolongs_to_parent_payment_master, lambda{|parent_payment_master| where(:parent_payment_master_id => parent_payment_master)}
-  
+  scope :cleared_transactions, lambda{where(:status => "cleared")}
 
   def fee_type_contribution_amounts
     parent_payment_master.fee_type_contribution_percentages.map do |fee_type|

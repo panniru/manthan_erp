@@ -3,7 +3,7 @@
     app.directive('gradeFeeDetails', function(){
         return{
             restrict: 'E',
-            controller: function($scope, $attrs, $http) {
+            controller: ["$scope", "$attrs", "$http",  function($scope, $attrs, $http) {
                 var url = "/grade_wise_fees/grade_wise_fee_of_student.json?student_id="+$attrs.studentId
                 $http.get(url)
                     .then(function(response){
@@ -11,7 +11,7 @@
                         $scope.fee_types = response.data.fee_details;
                         $scope.total = response.data.total;
                     });
-            },
+            }],
             templateUrl: 'grade_fee_details.html'
         };
     });

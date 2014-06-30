@@ -20,6 +20,6 @@
           %td {{item.academic_year}}
           %td {{item.approved_by}}
           %td 
-            %a{:href => "#", :ng_class => "{'label label-danger': item.status == 'pending', 'label label-success': item.status == 'approved' }", :ng_click => "approve(item)", :ng_disabled => "approval_item.status != 'pending'"}
+            %a{:href => "#", :ng_class => "{'label label-danger': item.status == 'pending', 'label label-success': item.status == 'approved' }", :ng_click => "approve(item)", :ng_disabled => "item.status == 'approved'"}
               {{item.status == 'pending' ? 'Pending' : 'Approved' }}
               

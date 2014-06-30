@@ -102,14 +102,14 @@ end
 
 
 def seed_parents
-  Parent.first_or_create(:father_name => "Raghu", :mother_name => "Janaki", :father_email => "srikanth@ostrylabs.com", :mother_email => "srikanth@ostryalabs.com")
+  Parent.first_or_create(:father_name => "Raghu", :mother_name => "Janaki", :father_email => "srikanth@ostrylabs.com", :mother_email => "srikanth@ostryalabs.com", :user_id => User.find_by_role_id(Role.find_by_code("parent")))
 end
 
 def seed_students
   student = StudentMaster.first
   unless student.present?
-    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.find("2").id)
-    StudentMaster.create(:name => "Srikanth", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.find("4").id)
+    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.first.id)
+    StudentMaster.create(:name => "Srikanth", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.last.id)
   end
 end
 

@@ -10,7 +10,7 @@ class GradeWiseFeesController < ApplicationController
           total = total + amount
           {:fee_type => fee.fee_type.fee_type, :amount_in_rupees => amount}
         end
-        render :json => Struct.new(:grade, :fee_details, :total).new("Grade-"+student.grade_master.grade_name.to_s, fee_details, Formatter.two_decimal(total))
+        render :json => {:grade => student.grade_master.grade_name, :fee_details => fee_details, :total => Formatter.two_decimal(total)}
       end
     end
   end

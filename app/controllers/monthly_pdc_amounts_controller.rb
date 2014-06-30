@@ -13,7 +13,7 @@ class MonthlyPdcAmountsController < ApplicationController
           total = total + monthly_amount
           {:month => month_fee.post_dated_cheque.month, :amount_in_rupees => monthly_amount}
         end
-        render :json => Struct.new(:month_fee_details, :total).new(month_wise_fees, Formatter.two_decimal(total))
+        render :json => {:month_fee_details => month_wise_fees, :total => Formatter.two_decimal(total) }
       end
     end
   end

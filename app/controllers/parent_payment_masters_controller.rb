@@ -1,6 +1,16 @@
 class ParentPaymentMastersController < ApplicationController
   load_resource :only => [:new, :pending_pdcs, :cleared_pdcs, :update, :payment_transactions, :submitted_pdcs]
 
+  def index
+    if current_user.parent?
+      @students = current_user.parent.students
+      @students = StudentMastersDecorator.decorate_collection(@students)
+      render "shared/student_payment_index"
+    else
+      render "index"
+    end
+  end
+  
   def new
     if params[:student_id].present?
       @parent_payment_master.student_id = params[:student_id]
@@ -53,7 +63,7 @@ class ParentPaymentMastersController < ApplicationController
   def cleared_pdcs
     respond_to do |format|
       format.json do
-        cleared_pdcs = @parent_payment_master.parent_payment_transactions.map do |ppt|
+        cleared_pdcs = @parent_payment_master.parent_payment_transactions.cleared_transactions.map do |ppt|
           Struct.new(:month, :cheque_number, :cleared_date, :amount_in_rupees).new(ppt.parent_cheque.post_dated_cheque.month, ppt.parent_cheque.cheque_number, ppt.transaction_date, ppt.amount_in_rupees)
         end
         render :json => cleared_pdcs

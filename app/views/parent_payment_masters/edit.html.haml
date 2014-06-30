@@ -7,9 +7,9 @@
   - else
     = render "transactions_history"
     
-    
-.col-md-12{:ng_controller => "PaymentsController", :ng_init => "student_id = '#{@parent_payment_master.student_id}'"}
-  %h4.panel-title 
-    = "Fee Payment"
-  %hr
-  = render "edit_form"
+- unless @parent_payment_master.annual_payment?    
+  .col-md-12{:ng_controller => "PaymentsController", :ng_init => "student_id = '#{@parent_payment_master.student_id}'"}
+    %h4.panel-title 
+      = "Fee Payment"
+    %hr
+      = render "edit_form"
