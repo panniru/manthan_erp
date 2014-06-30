@@ -13,6 +13,7 @@ class AddsController < ApplicationController
     end
   def index
     @adds= Add.all
+    @adds = Add.search(params[:search])
   end
 
   def new

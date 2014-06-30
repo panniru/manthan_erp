@@ -1,26 +1,27 @@
-%h3 
-.col-sm-6
-  .col-sm-6
+.row
+  .col-sm-9
     .pull-right
-    %h3 Guidelines
-%pull-right
-  %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New"
-  #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-          %h4#myModalLabel.modal-title New Guideline
-          = form_for Recruitment.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
-            .modal-body
-              = render 'form'
-              .modal-footer
-                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-                = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
-         
-%br
-%br
-%table.table.table.striped.table-bordered.table-condensed.table-hover{style: "width:70%"}
+      %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New"
+      #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+              %h4#myModalLabel.modal-title New Guideline
+              = form_for Recruitment.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
+                .modal-body
+                  = render 'form'
+                  .modal-footer
+                    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                    = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+                    %br
+                    %br
+= form_tag recruitments_path, method: :get do
+  %input#search{name: "search", placeholder: "Enter search term...", type: "text",:class => 'form'}/
+  = submit_tag "Search", name: nil, :class => 'btn btn-primary'
+  %br
+  %br
+%table.table.table-striped.table-condensed.table-bordered{style: "width:70%"}
   %thead
     %tr
       %th Title
