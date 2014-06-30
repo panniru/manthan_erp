@@ -16,12 +16,13 @@
             });       
         
         $scope.showTimeTable = function(){
-            alert($scope.myTeacher);
+            //alert($scope.myTeacher);
             
             teachersService.checkTeachersTimeTable($scope.myTeacher)
                 .then(function(result) {
-                    $scope.check_techers_time_table = result.data 
-                    if ($scope.check_techers_time_table == 0)
+                    //alert($scope.check_teachers_time_table);
+                    $scope.check_teachers_time_table = result.data 
+                    if ($scope.check_teachers_time_table == 0)
                     {
                         $scope.error_code = 2
                         $scope.myValue = "false"
@@ -33,7 +34,7 @@
                         $scope.error_code = 0
                         $scope.myValue="false"
                         $scope.myShowValue="true"           
-                        timeTableService.getPeriods($scope.myGrade,$scope.mySection)
+                        teachersService.getPeriods($scope.myTeacher)
                             .then(function(result) {  
                                 $scope.timeperiods=result.data
                             });
@@ -58,15 +59,31 @@
                     sat_grade_section: "",
                     sun_grade_section: "",
                 });              
-            }            
+            } 
+            //alert(JSON.stringify($scope.timeperiods));
         };
 
         $scope.savePeriods = function(){
-            //alert(JSON.stringify($scope.timeperiods));
-            gradeService.savePeriods($scope.save_timeperiods)
+            $scope.save_timeperiods = [];
+            for ( var i = 0; i < $scope.no_of_periods; i++ ) {
+                $scope.save_timeperiods.push({
+                    id: $scope.timeperiods[i]['id'],  
+                    faculty_master_id: $scope.myTeacher,
+                    mon_grade_section: $scope.timeperiods[i]['mon_grade_section'] == 0 ? null : $scope.timeperiods[i]['mon_grade_section'],
+                    tue_grade_section: $scope.timeperiods[i]['tue_grade_section'] == 0 ? null : $scope.timeperiods[i]['tue_grade_section'],
+                    wed_grade_section: $scope.timeperiods[i]['wed_grade_section'] == 0 ? null : $scope.timeperiods[i]['wed_grade_section'],
+                    thu_grade_section: $scope.timeperiods[i]['thu_grade_section'] == 0 ? null : $scope.timeperiods[i]['thu_grade_section'],
+                    fri_grade_section: $scope.timeperiods[i]['fri_grade_section'] == 0 ? null : $scope.timeperiods[i]['fri_grade_section'],
+                    sat_grade_section: $scope.timeperiods[i]['sat_grade_section'] == 0 ? null : $scope.timeperiods[i]['sat_grade_section'],
+                    sun_grade_section: $scope.timeperiods[i]['sun_grade_section'] == 0 ? null : $scope.timeperiods[i]['sun_grade_section'],
+                });              
+            }
+            //alert(JSON.stringify($scope.save_timeperiods));
+            teachersService.savePeriods($scope.save_timeperiods)
                 .then(function(result) {
                     
-                });            
+                }); 
+            $scope.showTimeTable();
         };
         
         $scope.editPeriods = function(){ 

@@ -35,11 +35,6 @@ class TimeTablesController < ApplicationController
   end   
    
   def saveperiods
-
-    p "@@@-------------"
-    p params
-    p "@@---------------------"
-
     params[:time_periods].each do |t| 
       if t["id"].present?
         p t["id"]
