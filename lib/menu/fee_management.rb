@@ -32,6 +32,10 @@ class FeeManagement < Struct.new(:controller)
     sub_menu
   end
 
+  def teacher_sub_menu
+    []
+  end
+
   private
 
   def fee_types

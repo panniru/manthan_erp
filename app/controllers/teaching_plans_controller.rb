@@ -8,13 +8,13 @@ class TeachingPlansController < ApplicationController
   def edit
   end
   def show
-
+   # @teaching_plan = TeachingPlan.new(teachingplan_params)
   end
   def gradeserviceview
     respond_to do |format|
       format.json do
         grades = TeacherGradeMapping.all.map do |grade|
-          {grade: grade.grade_master.grade_name, id: grade.id }
+          {grade: grade.grade_master.grade_name, id: grade.id}
         end
         render :json => grades
       end
@@ -24,7 +24,7 @@ class TeachingPlansController < ApplicationController
     respond_to do |format|
       format.json do
         sections = TeacherGradeMapping.all.map do |section|
-          {section: section.section_master.section, id: section.id }
+          {section: section.section_master.section, id: section.id,grade_master_id: section.grade_master_id  }
         end
         render :json => sections
       end

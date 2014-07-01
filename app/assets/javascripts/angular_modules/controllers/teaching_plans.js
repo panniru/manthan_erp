@@ -5,6 +5,7 @@
         $scope.map_grades = []
         gradeService.getGradeServiceMapView()
             .then(function(result) {
+                
                 $scope.map_grades=result.data
                 
             });

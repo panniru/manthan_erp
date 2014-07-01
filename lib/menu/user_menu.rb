@@ -12,21 +12,24 @@ class UserMenu
       return admin_main_menu
     elsif @user.parent?
       return admin_main_menu
+    else
+      return admin_main_menu
     end
   end
   
   def sub_menu
     if @context.present?
       if @user.admin?
-        @context.admin_sub_menu
+        return @context.admin_sub_menu
       elsif @user.parent?
-        @context.parent_sub_menu
+        return @context.parent_sub_menu
       elsif @user.accountant?
-        @context.accountant_sub_menu
+        return @context.accountant_sub_menu
+      elsif @user.teacher?
+        return @context.teacher_sub_menu 
       end
-    else
-      []
     end
+    []
   end
 
   private
