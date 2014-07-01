@@ -184,6 +184,8 @@ ManthanErp::Application.routes.draw do
   resources :teacher_grade_mappings do
     collection do
       get "check_teachers_grades_mapping"
+      post "savemappings"
+      post "getmappings"
       end
   end
   

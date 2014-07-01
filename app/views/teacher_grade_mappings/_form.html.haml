@@ -1,5 +1,4 @@
 .row{"ng-controller" => "TeacherGradeMapController"}
-  - error_code =0
   .row
     .col-md-2 
     .col-md-8
@@ -7,33 +6,43 @@
         .col-md-12
           = label_tag(:grade, "Select Teacher") 
         .form-group.col-md-12
-          %select{"ng-model" => "myTeacher", "ng-options" => "faculty.id as faculty.name for faculty  in faculty_names | orderBy:'name'",:class => "form-control",:required => "required"}       
+          %select{"ng-model" => "myTeacher", "ng-options" => "faculty.id as faculty.name for faculty  in faculty_names | orderBy:'name'",:class => "form-control"}       
             %option{style: "display:none", value: ""} Select Teacher 
       .col-md-5
         = submit_tag("SHOW TEACHER-GRADE MAPPING",{class: "btn btn-primary", :ng_click => "showMappings()"})
       .col-md-2
                
-    .col-md-2
-      
+    .col-md-2  
   .row
     .col-md-1
     .col-md-8
-      .col-md-4 
-        .col-md-12
-          = label_tag(:grade, "Select Grade") 
-        .form-group.col-md-12
-          %select{"ng-model" => "myGrade", "ng-options" => "grade.id as grade.grade for grade in grades",:class => "form-control",:required => "required"}
-            %option{style: "display:none", value: ""} Select Grade   
-      .col-md-4
-        .col-md-12
-          = label_tag(:section, "Select Section")
-        .form-group.col-md-12
-          %select{"ng-model" => "mySection", "ng-options" =>"section.id as section.section for section  in sections | filter : {grade_master_id: myGrade}",:class => "form-control"}
-            %option{style: "display:none", value: ""} Select Section
-      .col-md-4 
-        .col-md-12
-          = label_tag(:grade, "Select Subject") 
-        .form-group.col-md-12
-          %select{"ng-model" => "mySubject", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control",:required => "required"}
-    .col-md-3
-      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "savePeriods()", :value => "SAVE"} 
+      %div{"ng-show" => "myNewEditFormValue"}
+        %table{:class => "table"}
+          %tr
+            %th No
+            %th GRADE
+            %th SECTION
+            %th SUBJECT
+            %th
+          %tr{"ng-repeat" => "mapping in mappings | orderBy:'id'" }
+            %td Mapping {{" "+($index+1)}} {{+" "+data.length}}
+            %td               
+              %select{"ng-model" => "mapping['grade_master_id']", "ng-options" => "grade.id as grade.grade for grade in grades ",:class => "form-control"} 
+                %option{value: ""}
+              {{mapping['grade_master_id']}}
+            %td
+              %select{"ng-model" => "mapping['section_master_id']", "ng-options" => "section.id as section.section for section  in sections | filter : {grade_master_id: mapping['grade_master_id']}",:class => "form-control"}  
+                %option{value: ""}
+              {{mapping['section_master_id']}}
+            %td
+              %select{"ng-model" => "mapping['subject_master_id']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"} 
+                %option{value: ""}
+              {{mapping['subject_master_id']}}
+            %td
+              %select{:multiple => "multiple","ng-model" => "mapping['section_master_id']", "ng-options" => "section.id as section.section for section  in sections | filter : {grade_master_id: mapping['grade_master_id']}",:class => "form-control"}  
+                %option{value: ""}
+              {{mapping['section_master_id']}}
+    .col-md-3{"ng-show" => "myNewEditFormValue"}                     
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveMappings()", :value => "SAVE"}
+  .row
+    = render "show_form"

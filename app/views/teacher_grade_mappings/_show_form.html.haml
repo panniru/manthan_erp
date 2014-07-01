@@ -1,0 +1,28 @@
+.row
+  .col-md-1
+  .col-md-8{"ng-show" => "myShowFormValue"} 
+    %table{:class => "table"}
+      %tr
+        %th NO
+        %th GRADE
+        %th SECTION
+        %th SUBJECT
+      %tr{"ng-repeat" => "mapping in mappings| orderBy:'id'"}
+        %td Map{{" "+($index+1)}}
+        %td {{mapping['grade_name']}}
+        %td {{mapping['section_name']}}          
+        %td {{mapping['subject_name']}}       
+  .col-md-2{"ng-show" => "myShowFormValue"} 
+    = submit_tag("EDIT",{class: "btn btn-primary", :ng_click => "editMappings()"})
+
+.row
+  :css
+    table, th, td
+    {
+    border-collapse:collapse;
+    border:5px solid #6aa6d6;
+    }
+    th, td
+    {
+    padding:5px;
+    } 

@@ -12,22 +12,22 @@
             return $http.get(url,{params:{my_Teacher: myTeacher}});  
         }; 
 
-        var savePeriods = function(timeperiods){
-            var url = "/teachers_time_tables/saveperiods.json"
-            return $http.post(url, {time_periods: timeperiods});
+        var saveMappings = function(mappings){
+            var url = "/teacher_grade_mappings/savemappings.json"
+            return $http.post(url, {_mappings: mappings});
             
         };
         
-        var getPeriods = function(myTeacher){
-            var url = "/teachers_time_tables/getperiods.json"
+        var getMappings = function(myTeacher){
+            var url = "/teacher_grade_mappings/getmappings.json"
             return $http.post(url, {my_Teacher: myTeacher}); 
         }; 
        
         return {
             getFacultyNamesServiceView : getFacultyNamesServiceView,
             checkTeachersGradesMapping : checkTeachersGradesMapping,
-            savePeriods : savePeriods,
-            getPeriods : getPeriods
+            saveMappings : saveMappings,
+            getMappings : getMappings
         };        
     }]);   
 

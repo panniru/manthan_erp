@@ -11,12 +11,11 @@ class TeachersTimeTablesController < ApplicationController
     render :json => faulty_names    
   end
 
-  def get_faculty_garde_sections_view
-    faulty_grade_sections = TeacherGradeMapping.all    
+  def get_faculty_garde_sections_view    
     faulty_grade_sections = TeacherGradeMapping.all.map do |fgs|
       {id: fgs.faculty_master_id, grade: fgs.grade_master.grade_name, section: fgs.section_master.section, grade_section: fgs.grade_master.grade_name+"- "+fgs.section_master.section} 
     end
-    render :json => faulty_grade_sections   
+    render :json => faulty_grade_sections
   end
 
   def check_teachers_timetable
@@ -31,8 +30,6 @@ class TeachersTimeTablesController < ApplicationController
   def saveperiods    
     params[:time_periods].each do |t| 
       if t["id"].present?
-        p t["id"]
-        p t["mon_sub"]
         temp=TeachersTimeTable.find(t["id"])
         temp.mon_grade_section=t["mon_grade_section"]
         temp.tue_grade_section=t["tue_grade_section"]

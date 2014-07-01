@@ -26,7 +26,7 @@
             %th FRI
             %th SAT 
             %th 
-          %tr{"ng-repeat" => "timeperiod in timeperiods | orderBy:'id'"}
+          %tr{"ng-repeat" => "timeperiod in timeperiods | orderBy:'id'" }
             %td Period{{" "+($index+1)}}
             %td               
               %select{"ng-model" => "timeperiod['mon_grade_section']", "ng-options" => "gradesection.grade_section as  gradesection.grade_section for gradesection in faculty_grade_sections | filter: {id:myTeacher}",:class => "form-control"} 

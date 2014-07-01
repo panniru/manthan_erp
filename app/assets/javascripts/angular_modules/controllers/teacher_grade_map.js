@@ -22,76 +22,75 @@
             .then(function(result) {
                 $scope.subjects=result.data
                 
-            });
-        
-        $scope.showMappings = function(){            
+            });        
+       
+        $scope.showMappings = function(){  
             teachersGradesService.checkTeachersGradesMapping($scope.myTeacher)
                 .then(function(result) {
                     $scope.check_teachers_grades_mapping = result.data 
+                    //alert($scope.check_teachers_grades_mapping)
                     if ($scope.check_teachers_grades_mapping == 0)
                     {
-                        $scope.error_code = 2
-                        $scope.myValue = "false"
-                        $scope.myShowValue = "false"
-                        $scope.addPeriods();
+                        $scope.myNewEditFormValue = "false"
+                        $scope.myShowFormValue = "false"
+                        $scope.addMappings();
                     }
                     else
                     {
-                        $scope.error_code = 0
-                        $scope.myValue="false"
-                        $scope.myShowValue="true"           
-                        teachersService.getPeriods($scope.myTeacher)
+                        
+                        $scope.myNewEditFormValue = "false"
+                        $scope.myShowFormValue = "true"           
+                        teachersGradesService.getMappings($scope.myTeacher)
                             .then(function(result) {  
-                                $scope.timeperiods=result.data
+                                $scope.mappings = result.data
+                                //alert(JSON.stringify($scope.mappings))
                             });
                     }
                 });
         };
 
 
-        $scope.addPeriods = function (){
-            
-            $scope.myValue="true"
-            $scope.timeperiods = [];      
-            for ( var i = 0; i < $scope.no_of_periods; i++ ) {
-                $scope.timeperiods.push({ 
+        $scope.addMappings = function (){
+            $scope.myNewEditFormValue="true"
+            $scope.mappings = [];      
+            for ( var i = 0; i < 1 ; i++ ) {
+                $scope.mappings.push({ 
                     faculty_master_id: $scope.myTeacher,
-                    mon_grade_section: "",
-                    tue_grade_section: "",
-                    wed_grade_section: "",
-                    thu_grade_section: "",
-                    fri_grade_section: "",
-                    sat_grade_section: "",
-                    sun_grade_section: "",
+                    grade_master_id: "",
+                    grade_name: "",
+                    section_master_id: "",
+                    section_name: "",
+                    subject_master_id: "",
+                    subject_name: "",
                 });              
             } 
+           
         };
 
-        $scope.savePeriods = function(){
-            $scope.save_timeperiods = [];
-            for ( var i = 0; i < $scope.no_of_periods; i++ ) {
-                $scope.save_timeperiods.push({
-                    id: $scope.timeperiods[i]['id'],  
+        $scope.saveMappings = function(){
+            //alert(JSON.stringify($scope.mappings));
+            //alert($scope.mappings.length);
+            $scope.save_mappings = [];
+            for ( var i = 0; i <  $scope.mappings.length; i++ ) {
+                $scope.save_mappings.push({
+                    id: $scope.mappings[i]['id'],  
                     faculty_master_id: $scope.myTeacher,
-                    mon_grade_section: $scope.timeperiods[i]['mon_grade_section'] == 0 ? null : $scope.timeperiods[i]['mon_grade_section'],
-                    tue_grade_section: $scope.timeperiods[i]['tue_grade_section'] == 0 ? null : $scope.timeperiods[i]['tue_grade_section'],
-                    wed_grade_section: $scope.timeperiods[i]['wed_grade_section'] == 0 ? null : $scope.timeperiods[i]['wed_grade_section'],
-                    thu_grade_section: $scope.timeperiods[i]['thu_grade_section'] == 0 ? null : $scope.timeperiods[i]['thu_grade_section'],
-                    fri_grade_section: $scope.timeperiods[i]['fri_grade_section'] == 0 ? null : $scope.timeperiods[i]['fri_grade_section'],
-                    sat_grade_section: $scope.timeperiods[i]['sat_grade_section'] == 0 ? null : $scope.timeperiods[i]['sat_grade_section'],
-                    sun_grade_section: $scope.timeperiods[i]['sun_grade_section'] == 0 ? null : $scope.timeperiods[i]['sun_grade_section'],
+                    grade_master_id: $scope.mappings[i]['grade_master_id'] == 0 ? null : $scope.mappings[i]['grade_master_id'],
+                    section_master_id: $scope.mappings[i]['section_master_id'] == 0 ? null : $scope.mappings[i]['section_master_id'],
+                    subject_master_id: $scope.mappings[i]['subject_master_id'] == 0 ? null : $scope.mappings[i]['subject_master_id'],                  
                 });              
             }
-            teachersService.savePeriods($scope.save_timeperiods)
+
+            teachersGradesService.saveMappings($scope.save_mappings)
                 .then(function(result) {
                     
                 }); 
-            $scope.showTimeTable();
+            $scope.showMappings();
         };
         
-        $scope.editPeriods = function(){ 
-            $scope.myShowValue="false"
-            $scope.myValue="true"
+        $scope.editMappings = function(){ 
+            $scope.myShowFormValue="false"
+            $scope.myNewEditFormValue="true"
         };       
         
     }]);
