@@ -28,15 +28,15 @@ class EnquiryAdmission < Struct.new(:controller)
   end
  
   def show_enquiry_admissions
-    MenuItem.new(:label => "Enquiry Forms", :klass => "", :icon => "file", :href => "/admissions/enquiry_index" )
+    MenuItem.new(:label => "Enquiry Forms ", :klass => "", :icon => "file", :href => "/admissions/enquiry_index" )
   end
   def show_application_admissions
-    MenuItem.new(:label => "Application Forms", :klass => "", :icon => "file-text", :href => "/admissions/admission_index" )
+    MenuItem.new(:label => "Application Forms ", :klass => "", :icon => "file-text", :href => "/admissions/admission_index" )
   end
   def show_staff_admissions
-    MenuItem.new(:label => "Assessment list", :klass => "", :icon => "book", :href => "/staffs" )
+    MenuItem.new(:label => "Assessments", :klass => "", :icon => "book", :href => "/staffs" )
   end
   def show_event_admissions
-    MenuItem.new(:label => "Events list", :klass => "", :icon => "calendar", :href => "/events" )
+    MenuItem.new(:label => "Scheduled Events", :klass => "", :icon => "calendar", :href => "/events" )
   end
 end

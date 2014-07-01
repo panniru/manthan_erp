@@ -1,6 +1,78 @@
+.col-sm-9
+  %table.table-striped.table-condensed
+    %tr
+      %td{style: "width:25%"}
+        %b
+          %span.label.label-danger Enquiry #
+      %td{style: "width:25%"}
+        = @admission.form_no
+      %td{style: "width:25%"}
+        %b
+          %span.label.label-danger Admission #
+      %td{style: "width:25%"}
+        = @admission.admission_no
+      
+    %tr
+      %td
+        %label{for: "name"} Name
+      %td
+        = @admission.name
+      %td
+        %label{for: "klass"} Class
+      %td
+        = @admission.klass
+    %tr
+      %td
+        %label{for: "dob"} DOB
+      %td
+        = @admission.dob
+      %td
+        %label{for: "gender"} Gender
+      %td
+        = @admission.gender
+  
+    %tr
+      %td
+        %label{for: "father_name"} Father's Name
+      %td
+        = @admission.father_name
+      %td
+        %label{for: "mother_name"} Mother's Name
+      %td
+        = @admission.mother_name
+   
+    %tr
+      %td
+        %label{for: "father_mobile"} Father's Mobile
+      %td
+        = @admission.father_mobile
+      %td
+        %label{for: "mother_mobile"} Mother's Mobile
+      %td
+        = @admission.mother_mobile
 
-= link_to "Enquiry",enquiry_show_admission_path, :class => 'btn btn-primary'
-%br
-%br
-= link_to "Applications",admission_show_admission_path, :class => 'btn btn-primary'
+    %tr
+      %td
+        %label{for: "father_email"} Father's Email
+      %td
+        = @admission.father_email
+      %td
+        %label{for: "mother_email"} Mother's Email
+      %td
+        = @admission.mother_email
+.col-sm-3
+  = link_to "View Enquiry", enquiry_show_admission_path , :class => 'enq_button btn btn-primary'
+  %br
+  %br
+  = link_to "Create Application", admission_new_admission_path , :class => 'enq_button btn btn-primary'
+  %br
+  %br
+  - if("#{@admission.status}" == 'Enquiry Created')
+    = link_to "Close the Form", "#", :class => "change label label-danger",:data=> {:id => "#{@admission.id}"}
+  - else 
+    = link_to "Form Closed", "#", :class => "label label-success",:data=> {:id => "#{@admission.id}"}
+  
+      
 
+    
+      
