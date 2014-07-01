@@ -7,9 +7,23 @@
   .form-group.col-md-3
     %label{:class=> "form-label col-md-4"} Section
     .col-md-6
-      %select{"ng-model" => "mySection", :ng_options => "section.id as section.section for section in map_sections | filter: {id: myGrade}", :class=>"form-control"}
+      %select{"ng-model" => "mySection", :ng_options => "section.id as section.section for section in map_sections | filter: {grade_master_id: myGrade}", :class=>"form-control"}
   .form-group.col-md-5
     = link_to "showplan", "#", :class => "btn btn-primary"
     .col-md-4
       %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add Plan"
       = render "form"
+  .col-sm-6
+    .table-well
+      %center
+        %h4
+          TEACHING PLANS        
+          %table.table-striped.table-condensed.table-bordered
+            %tr
+              %th{style: "width:7%"} Date
+              %th{style: "width:7%"} Plan
+              - @teaching_plans.each do |teaching_plan|
+                %tr
+                  %td= teaching_plan.teaching_date.strftime(" %B, %d, %Y,%a")
+                  %td= teaching_plan.plan_month
+

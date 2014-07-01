@@ -463,20 +463,15 @@ ActiveRecord::Schema.define(version: 20140630055941) do
   end
 
   create_table "teaching_plans", force: true do |t|
-
-    t.string   "plan_month"
-    t.integer  "user_id"
-    t.string   "academic_year"
-
-
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "grade_master_id"
     t.string   "section_master_id"
     t.string   "plan"
     t.date     "teaching_date"
-
-    t.datetime "created_at"
-    t.datetime "updated_at"
-
+    t.string   "plan_month"
+    t.integer  "user_id"
+    t.string   "academic_year"
   end
 
   create_table "term_definitions", force: true do |t|

@@ -19,5 +19,9 @@ class User < ActiveRecord::Base
     self.role.code == "accountant"
   end
 
+  def teacher?
+    self.role.code == "teacher"
+  end
+
 
 end

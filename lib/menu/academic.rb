@@ -8,7 +8,13 @@ class Academic < Struct.new(:controller)
     sub_menu << teacher_grade_mappings
     sub_menu
   end
-
+  def teacher_sub_menu
+    sub_menu = []
+    sub_menu << teaching_plans
+    sub_menu
+  end
+  
+  
   
   private
 
