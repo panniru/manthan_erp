@@ -67,6 +67,8 @@ class CreateAdmissions < ActiveRecord::Migration
       t.string :sib_sex
       t.string :sib_grade
       t.string :sib_school
+      
+      
 
       t.timestamps
     end

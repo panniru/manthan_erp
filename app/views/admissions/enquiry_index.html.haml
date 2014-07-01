@@ -1,13 +1,19 @@
-.pull-left
-  = form_tag enquiry_index_admissions_path, method: :get do
-    %input#search{name: "search", placeholder: "Enter search term...", type: "text",:class => 'form'}/
-    = submit_tag "Search", name: nil, :class => 'btn btn-primary'
+.col-sm-4
+  .pull-left
+    = form_tag enquiry_index_admissions_path, method: :get do
+      %input#search{name: "search", placeholder: "Enter search term...", type: "text",:class => 'form'}/
+      = submit_tag "Search", name: nil, :class => 'btn btn-primary'
+.pull-right
+  = link_to 'New Enquiry', enquiry_new_admissions_path, :class => 'btn btn-primary'
+  
+  %br
+  %br
 
-
-%h4
-  %center
+.col-sm-3
+  %h4
     Enquiry Forms
-
+%br
+%br
 %table.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
