@@ -65,7 +65,13 @@ class StudentMastersController < ApplicationController
     end
   end
 
-  
-  
+  def belongs_to_parent
+    @parent = current_user.parent
+    respond_to do |format|
+      format.json do
+        render :json => StudentMastersDecorator.decorate_collection(@parent.students)
+      end
+    end
+  end
   
 end

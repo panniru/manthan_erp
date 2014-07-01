@@ -4,6 +4,7 @@ class StudentMaster < ActiveRecord::Base
   belongs_to :section_master
   has_one :parent_payment_master, :foreign_key => :student_id
 
+  scope :ids_in_list, lambda{|ids| where("id in ?", ids)}
   def grade_bucket_id
     GradeBucketMapping.find_by_grade_master_id(self.grade_master).fee_grade_bucket_id
   end

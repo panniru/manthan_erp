@@ -1,6 +1,7 @@
 class Parent < ActiveRecord::Base
   has_many :students, :class_name => "StudentMaster"
   belongs_to :user
+  has_many :parent_payment_masters
 
   def parent_name
     return self.father_name if self.father_name.present?

@@ -8,15 +8,19 @@ class User < ActiveRecord::Base
   has_one :parent
 
   def admin?
-    self.role.code == "admin"
+    role_code == "admin"
   end
 
   def parent?
-    self.role.code == "parent"
+    role_code == "parent"
   end
 
   def accountant?
-    self.role.code == "accountant"
+     role_code == "accountant"
+  end
+
+  def role_code
+    self.role.code
   end
 
   def teacher?

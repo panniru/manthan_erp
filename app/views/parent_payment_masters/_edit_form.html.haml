@@ -6,5 +6,8 @@
     = render :file =>"app/assets/javascripts/templates/term_fee_payment"
       
   .col-md-8.pull-right
-    = f.submit "Do Payment", :class => 'btn btn-primary'
+    - unless current_user.parent?
+      = f.submit "Do Payment", :class => 'btn btn-primary'
+    - else
+      = f.submit "Pay Online", :class => 'btn btn-primary'
 

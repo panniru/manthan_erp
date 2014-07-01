@@ -4,7 +4,7 @@ class StudentMastersDecorator < Draper::Decorator
   def grade
     grade_master.present? ? grade_master.grade_name : nil
   end
-
+  
   def section
     section_master.present? ? section_master.section : nil
   end
@@ -19,7 +19,6 @@ class StudentMastersDecorator < Draper::Decorator
     elsif context == "parent_payment_transactions"
     else
     end
-    
   end 
 
 end

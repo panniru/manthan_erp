@@ -1,12 +1,15 @@
-= form_for @parent_payment_master, :html => { :class => "form-horizontal", :role => "form" } do |f|
+= form_for @parent_payment_master, :html => {:class => "form-horizontal", :role => "form"} do |f|
   = render "shared/error_messages", :object => f.object
   - PaymentType.all.order("code").each do |type|
     .form-group.col-md-3
-      = f.radio_button :payment_type_id, type.id, :class => "col-md-2",:ng_click => "go('#{type.code}', '#{f.object.student_id}')"
+      = f.radio_button :payment_type_id, type.id, :class => "col-md-2",:ng_click => "go('#{type.code}', '#{f.object.student_id}')", :ng_disabled => "#{current_user.parent? and type.code == 'monthly'}"
       = f.label "#{type.code}", :class => 'col-md-6 control-label'
   = f.hidden_field :student_id, :ng_model => "student_id"
   .col-md-9
     %div{"ng-view" => true }
 
   .col-md-8.pull-right
-    = f.submit "Do Payment", :class => 'btn btn-primary'
+    - unless current_user.parent?
+      = f.submit "Do Payment", :class => 'btn btn-primary', :ng_show => "typeInitiated"
+    - else
+      = f.submit "Pay Online", :class => 'btn btn-primary', :ng_show => "typeInitiated"

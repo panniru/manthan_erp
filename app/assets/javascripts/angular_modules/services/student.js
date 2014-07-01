@@ -6,7 +6,7 @@
             var url = "/student_masters/"+student_id+".json"
             return $http.get(url);
         }
-        
+
         return {
             student_details : student_details
         };

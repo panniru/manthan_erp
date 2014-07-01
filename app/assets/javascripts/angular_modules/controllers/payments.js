@@ -5,6 +5,7 @@
         $scope.selected_transaction_type = ""
         $scope.go = function (code, student_id ) {
             $scope.student_id = student_id
+            $scope.typeInitiated = true
             var path = "/"
             if(code == "annual"){
                 path = "/annual_payment"
@@ -45,8 +46,11 @@
             }
         }
         
-        $scope.transactionTypes = paymentService.transactionTypes();
+        paymentService.transactionTypes().then(function(response){
+            $scope.transactionTypes = response.data
+        });
         $scope.supportedBanks = paymentService.supportedBanks();
+
     }]);
     
 })(angular, myApp);

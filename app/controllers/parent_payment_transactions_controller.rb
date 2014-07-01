@@ -22,10 +22,35 @@ class ParentPaymentTransactionsController < ApplicationController
       end
     end
   end
+
+  def parent_transactions
+    respond_to do |format|
+      format.json do
+        @students = current_user.parent.students
+        @transactions = []
+        if params[:student_ids].present?
+          @students = @students.ids_in_list(params[:student_ids])
+        end
+        @students.each do |student|
+          if student.parent_payment_master.present?
+            student.parent_payment_master.parent_payment_transactions.find_each do |transaction|
+              @transactions << transaction.attributes.merge!(:student_id => student.id)
+            end
+          end
+        end
+        render :json => @transactions
+      end
+      format.html do
+        render "parent_transactions"
+      end
+    end  
+  end
+  
   
   private 
   
   def load_parent_payment_master
-    @parent_payment_master = ParentPaymentMaster.find(params[:parent_payment_master_id])
+    @parent_payment_master = ParentPaymentMaster.find(params[:parent_payment_master_id]) if params[:parent_payment_master_id].present?
   end
+
 end

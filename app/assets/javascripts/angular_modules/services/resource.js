@@ -33,13 +33,19 @@
                                           "approve": { url: "/approval_items/:id/approve.json", id:'@id', method: "PUT"}
                                       }
                                     );
+        var StudentMaster = $resource('/student_masters/:id.json', {id: '@id'}, 
+                                      {
+                                          "belongs_to_parent": { url: "/student_masters/belongs_to_parent.json", isArray: true}
+                                      }
+                                    );
         
         return {
             FeeGradeBucket : FeeGradeBucket,
             TermDefinition : TermDefinition,
             PostDatedCheque : PostDatedCheque,
             DefaultMaster : DefaultMaster,
-            ApprovalItem : ApprovalItem
+            ApprovalItem : ApprovalItem,
+            StudentMaster : StudentMaster
         };
         
     }]);

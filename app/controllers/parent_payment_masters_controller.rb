@@ -19,23 +19,31 @@ class ParentPaymentMastersController < ApplicationController
  
   def create
     @parent_payment_master = ParentPaymentMaster.new_payment_master(params[:parent_payment_master])
-    if @parent_payment_master.save!
-      @parent_payment_transaction = @parent_payment_master.parent_payment_transactions.last
-      @parent_payment_transaction = ParentPaymentTransactionsDecorator.decorate(@parent_payment_transaction)
-      render "acknowledgement"
+    unless @parent_payment_master.parent_payment_transactions.last.online_payment?
+      if @parent_payment_master.save!
+        @parent_payment_transaction = @parent_payment_master.parent_payment_transactions.last
+        @parent_payment_transaction = ParentPaymentTransactionsDecorator.decorate(@parent_payment_transaction)
+        render "acknowledgement"
+      else
+        render "new"
+      end
     else
-      render "new"
+      render "payment_gateway"
     end
   end
 
   def update
     @parent_payment_master.prepare_payment(params[:parent_payment_master]) 
-    if @parent_payment_master.save!
-      @parent_payment_transaction = @parent_payment_master.parent_payment_transactions.last
-      @parent_payment_transaction = ParentPaymentTransactionsDecorator.decorate(@parent_payment_transaction)
-      render "acknowledgement"
+    unless @parent_payment_master.parent_payment_transactions.last.online_payment?
+      if @parent_payment_master.save!
+        @parent_payment_transaction = @parent_payment_master.parent_payment_transactions.last
+        @parent_payment_transaction = ParentPaymentTransactionsDecorator.decorate(@parent_payment_transaction)
+        render "acknowledgement"
+      else
+        render "edit"
+      end
     else
-      render "edit"
+      render "payment_gateway"
     end
   end
 
@@ -89,6 +97,20 @@ class ParentPaymentMastersController < ApplicationController
       end
     end
   end
+
+  def transaction_types
+    if current_user.parent?
+      @transaction_types = [{value: "online", text: "Online"}]
+    else
+      @transaction_types = [{value: "cash", text: "CASH"}, {value: "cheque", text: "CHEQUE"}]
+    end
+    respond_to do |format|
+      format.json do
+        render :json => @transaction_types
+      end
+    end
+  end
+  
 
 
   private

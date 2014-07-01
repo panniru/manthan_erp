@@ -1,0 +1,18 @@
+.col-md-12
+  %table.table.table-bordered.table-striped.table-hover
+    %thead
+      %th 
+      %th Name
+      %th Grade
+      %th Section
+      %th Academic Year
+    %tbody
+      %tr{:ng_repeat => "student in students"}
+        %td 
+          %input{:type => "checkbox", :ng_click => "checked_item(student)", :id => "student-{{student.id}}"}
+        %td {{student.name }}
+        %td {{ student.grade }}
+        %td {{ student.section }}
+        %td {{ student.academic_year }}
+      
+        

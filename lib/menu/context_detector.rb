@@ -12,6 +12,7 @@ class ContextDetector
     "approval_items" =>"fee_management", 
     "home" => "fee_management",
     "job_runs" => "fee_management",
+    "parent_payment_transactions" => "fee_management", 
     "admissions" => "enquiry_admission",
     "events" => "enquiry_admission",
     "staffs" => "enquiry_admission",

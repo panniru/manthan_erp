@@ -18,7 +18,7 @@ class FeeManagement < Struct.new(:controller)
     sub_menu = []
     sub_menu << fee_structure
     sub_menu << payments
-    sub_menu << cheques
+    #sub_menu << cheques
     sub_menu << transactions
     sub_menu
   end
@@ -75,7 +75,7 @@ class FeeManagement < Struct.new(:controller)
   end
   
   def transactions
-    MenuItem.new(:label => "Transactions", :klass => controller == "approval_items" ? "active" : "", :icon => "suitcase", :href => "/approval_items")
+    MenuItem.new(:label => "Transactions", :klass => controller == "approval_items" ? "active" : "", :icon => "suitcase", :href => "/parent_payment_transactions/parent_transactions")
   end
   
 end

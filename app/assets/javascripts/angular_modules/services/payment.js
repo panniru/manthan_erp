@@ -23,11 +23,17 @@
         };
 
         var transactionTypes = function(){
-            return [{value: "cash", text: "CASH"}, {value: "cheque", text: "CHEQUE"}]
+            var url = "/parent_payment_masters/transaction_types.json"
+            return $http.get(url)
         }
         
         var supportedBanks = function(){
             return [{value: "sbi", text: "State Bank Of India"}, {value: "icici", text: "ICICI"}, {value: "axis_bank", text: "Axis Bank"}]
+        }
+
+        var parent_transactions = function(parent_id){
+            var url = "/parent_payment_transactions/parent_transactions.json"
+            return $http.get(url)
         }
 
         return {
@@ -36,7 +42,8 @@
             annual_discount_details : annual_discount_details,
             parent_payment_transactions : parent_payment_transactions,
             transactionTypes : transactionTypes,
-            supportedBanks : supportedBanks
+            supportedBanks : supportedBanks,
+            parent_transactions : parent_transactions
         };
         
     }]);

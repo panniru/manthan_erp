@@ -18,6 +18,10 @@ class ParentPaymentTransaction < ActiveRecord::Base
   def clear_transaction
     status = "cleared"
   end
+
+  def online_payment?
+    transaction_type == 'online'
+  end
   
   
 end
