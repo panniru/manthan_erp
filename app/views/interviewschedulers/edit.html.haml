@@ -1,7 +1,46 @@
-%h1 Editing interviewscheduler
+%center
+  .pull-left
+    %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Edit Schedule"
+    #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+            %h4#myModalLabel.modal-title New Event
+            = form_for @interviewscheduler do |f|
+              .modal-body
+                .row
+                  .field
+                    .col-sm-3
+                      = f.label "Name:", :class => 'control-label'
+                    .col-sm-7
+                      = f.text_field :name, :class => 'form-control'
+                      %br
+                .row   
+                  .field
+                    .col-sm-3
+                      = f.label "Description:", :class => 'control-label'
+                    .col-sm-7
+                      = f.text_area :description, :class => 'form-control'
+                      %br
+                .row
+                  .field
+                    .col-sm-3
+                      = f.label "start day:", :class => 'control-label'
+                    .col-sm-7
+                      = f.text_field :start_time, :class => 'datepicker form-control'
+                      %br
+                .row
+                  .field
+                    .col-sm-3
+                      = f.label "start time:", :class => 'control-label'
+                    .col-sm-7
+                      = f.time_select :end_time, :class => 'form-control'
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                  = f.submit "save", :class => 'btn btn-primary'
 
-= render 'form'
 
-= link_to 'Show', @interviewscheduler
-\|
-= link_to 'Back', interviewschedulers_path
+
+
+

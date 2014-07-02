@@ -6,9 +6,8 @@
           = select_tag(:search,options_for_select([['Accepted'],['Rejected'],['Pending']],:selected => :status),{:class => 'col-sm-4 form-control'})
         .col-sm-4
           = button_tag "close" , :class => 'btn btn-primary'
-        
 = form_tag forms_path, method: :get do
-  %input#search{name: "search", placeholder: "Enter search term...", type: "text"}/
+  %input#search{name: "search", placeholder: "Enter search term...", type: "text"}
   = submit_tag "Search", name: nil, :class => 'btn btn-primary'
 
   %br

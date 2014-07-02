@@ -10,8 +10,18 @@
               %h4#myModalLabel.modal-title New Advertisement
               = form_for Add.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
                 .modal-body
-                  = render 'form'
-                  %br
+                  .row
+                    .col-sm-3
+                      = f.label "Title:", :class => 'col-sm-3 control-label'
+                    .col-sm-5
+                      = f.text_field :title,:class => 'form-control'
+                      %br
+                  .row
+                    .col-sm-3
+                      = f.label "Description:", :class => 'col-sm-3 control-label'
+                    .col-sm-5
+                      = f.text_area :description, :class => 'form-control'
+                      %br
                   .modal-footer
                     %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
                     = button_tag "Save", :type => "submit", :class => 'btn btn-primary'

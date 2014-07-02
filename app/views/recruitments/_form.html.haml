@@ -1,4 +1,4 @@
-= form_for Recruitment.new,:html => { :class => "form-horizontal", :role => "form" } do |f|
+= form_for @recruitment,:html => { :class => "form-horizontal", :role => "form" } do |f|
   .row
     .col-sm-3
       = f.label "Title:", :class => 'col-sm-3 control-label'
@@ -17,3 +17,4 @@
     .col-sm-5
       = f.text_field :experience, :class => 'form-control'
       %br
+      = f.button "submit" , :class =>'btn btn-primary'

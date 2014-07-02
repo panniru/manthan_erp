@@ -1,1 +1,26 @@
-= render 'form'
+%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "edit Add"
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header 
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title New Advertisement
+        = form_for @add , :html => { :class => "form-horizontal", :role => "form"} do |f|
+          .modal-body
+            .row
+              .col-sm-3
+                = f.label "Title:", :class => 'col-sm-3 control-label'
+              .col-sm-5
+                = f.text_field :title,:class => 'form-control'
+                %br
+            .row
+              .col-sm-3
+                = f.label "Description:", :class => 'col-sm-3 control-label'
+              .col-sm-5
+                = f.text_area :description, :class => 'form-control'
+                %br
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                  = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+                  %br
+                  %br

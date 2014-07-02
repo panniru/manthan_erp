@@ -1,4 +1,4 @@
-= form_for Add.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
+= form_for @add , :html => { :class => "form-horizontal", :role => "form"} do |f|
   .row
     .col-sm-3
       = f.label "Title:", :class => 'col-sm-3 control-label'
@@ -10,4 +10,6 @@
       = f.label "Description:", :class => 'col-sm-3 control-label'
     .col-sm-5
       = f.text_area :description, :class => 'form-control'
-      
+      %br
+      = f.button "submit" , :class =>'btn btn-primary'
+

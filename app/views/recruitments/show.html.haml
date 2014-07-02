@@ -1,27 +1,15 @@
-.container
-  .row
-    .col-sm-9
-    .col-sm-3
-      .col-sm-6
-      .col-sm-6
-        = link_to "Back", new_recruitment_path, :class => "btn btn-primary"
-  %br
-%table.table.table-striped.table-condensed.table-bordered
-  %thead
-    %tr
-      %th Title:
-      %th Education Details:
-      %th Experience:
-      %th
-      %th
-  %tbody
-    - Recruitment.all.each do |recruitment|
-      %tr
-        %td= recruitment.title
-        %td= recruitment.education_details
-        %td= recruitment.experience
-        %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_recruitment_path(recruitment), :class => "btn btn-warning btn-sm", :title => "Edit"
-        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), recruitment_path(recruitment), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
-          
+%p#notice= notice
+
+%p
+  %b Title:
+  = @recruitment.title
+%p
+  %b Education Details:
+  = @recruitment.education_details
+%p
+  %b Experience:
+  = @recruitment.experience
 
 
+= link_to 'Edit', edit_recruitment_path(@recruitment), :class => 'btn btn-primary'
+= link_to 'back',recruitments_path, :class => 'btn btn-primary

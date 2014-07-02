@@ -10,7 +10,23 @@
               %h4#myModalLabel.modal-title New Guideline
               = form_for Recruitment.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
                 .modal-body
-                  = render 'form'
+                  .row
+                    .col-sm-3
+                      = f.label "Title:", :class => 'col-sm-3 control-label'
+                    .col-sm-5
+                      = f.text_field :title,:class => 'form-control'
+                      %br
+                  .row
+                    .col-sm-3
+                      = f.label "Education Details:", :class => 'col-sm-3 control-label'
+                    .col-sm-5
+                      = f.text_area :education_details, :class => 'form-control'
+                      %br
+                  .row
+                    .col-sm-3
+                      = f.label "experience: ", :class => 'col-sm-3 control-label'
+                    .col-sm-5
+                      = f.text_field :experience, :class => 'form-control'
                   .modal-footer
                     %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
                     = button_tag "Save", :type => "submit", :class => 'btn btn-primary'

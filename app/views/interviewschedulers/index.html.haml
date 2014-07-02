@@ -1,47 +1,82 @@
 .row
-  .col-sm-6
-    .pull-right
-      %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New"
-      #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-        .modal-dialog
-          .modal-content
-            .modal-header
-              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-              %h4#myModalLabel.modal-title New Schedule
-              = form_for Interviewscheduler.new do |f|
-                .modal-body
-                  = render 'form'
-                  .modal-footer
-                    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-                    = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
-= form_tag interviewschedulers_path, method: :get do
-  %input#search{name: "search", placeholder: "Enter search term...", type: "text",:class => 'form'}/
-  = submit_tag "Search", name: nil, :class => 'btn btn-primary'
-.row
   .col-sm-5
     #calendar
-      %br
   .col-sm-7
+    .row
+      .col-sm-6
+      .col-sm-5
+        %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "New Schedule"
+        #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+          .modal-dialog
+            .modal-content
+              .modal-header
+                %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+                %h4#myModalLabel.modal-title New Event
+                = form_for Interviewscheduler.new do |f|
+                  .modal-body
+                    .row
+                      .field
+                        .col-sm-3
+                          = f.label "Name:", :class => 'control-label'
+                        .col-sm-7
+                          = f.text_field :name, :class => 'form-control'
+                          %br
+                    .row   
+                      .field
+                        .col-sm-3
+                          = f.label "Description:", :class => 'control-label'
+                        .col-sm-7
+                          = f.text_area :description, :class => 'form-control'
+                          %br
+                    .row
+                      .field
+                        .col-sm-3
+                          = f.label "Start Day:", :class => 'control-label'
+                        .col-sm-7
+                          = f.text_field :start_time, :class => 'datepicker form-control'
+                          %br
+                    .row
+                      .field
+                        .col-sm-3
+                          = f.label "Start Time:", :class => 'control-label'
+                        .col-sm-7
+                          = f.time_select :end_time, :class => 'form-control'
+                          %br
+                                
+                   
+                      .modal-footer
+                        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                        = f.submit "save", :class => 'btn btn-primary'
+                      
     %br
-    %br
-%table{style: "width:60%"}
-  %tr
-    %th{style: "width:7%"} Name
-    %th{style: "width:7%"} Description
-    %th{style: "width:7%"}Start time
-    %th{style: "width:7%"} End time
-    %th{style: "width:1%"}
-    %th{style: "width:1%"}
+    .col-sm-6
+      .table-well
+        %center
+          %h4
+            LISTING Schedules
+            
+        %table.table-striped.table-condensed.table-bordered
+          %tr
+            %th{style: "width:7%"} Name
+            %th{style: "width:7%"} Description
+            %th{style: "width:7%"} Start Day
+            %th{style: "width:5%"} Start Time
+            %th{style: "width:1%"}
+            
+           
+            - @interviewschedulers.each do |interviewscheduler|
+              %tr
+                %td= interviewscheduler.name
+                %td= interviewscheduler.description
+                %td= interviewscheduler.start_time
+                %td= interviewscheduler.end_time
+                %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), interviewscheduler, :class => "btn btn-danger btn-sm",:method => :delete, :data => { :confirm => 'Are you sure?' }, :title => "Delete"         
 
-      - @interviewschedulers.each do |interviewscheduler|
-        %tr
-          %td= interviewscheduler.name
-          %td= interviewscheduler.description
-          %td= interviewscheduler.start_time
-          %td= interviewscheduler.end_time
-         
-          %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"),  edit_interviewscheduler_path(interviewscheduler), :class => "btn btn-warning btn-sm", :title => "Edit"
-          %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), interviewscheduler, :class => "btn btn-danger btn-sm",:method => :delete, :data => { :confirm => 'Are you sure?' }, :title => "Delete"         
+
+                  
+%br
+                  
+                    
 
 
           
