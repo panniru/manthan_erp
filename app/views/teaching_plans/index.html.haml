@@ -16,14 +16,14 @@
   .col-sm-6
     .table-well
       %center
-        %h4
+        %h5
           TEACHING PLANS        
           %table.table-striped.table-condensed.table-bordered
             %tr
               %th{style: "width:7%"} Date
               %th{style: "width:7%"} Plan
-              - @teaching_plans.each do |teaching_plan|
-                %tr
-                  %td= teaching_plan.teaching_date.strftime(" %B, %d, %Y,%a")
-                  %td= teaching_plan.plan_month
+            - @teaching_plans.each do |teaching_plan|
+              %tr
+                %td= teaching_plan.teaching_date.strftime("%B,%d,%Y,%a")
+                %td= teaching_plan.plan_month
 

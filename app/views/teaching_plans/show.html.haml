@@ -1,7 +1,19 @@
-//%p#notice= notice
-//%p
-// %b date:
-// = @teaching_plan.grade_master_id
-//%p
-// %b Plan:
-// = @teaching_plan.plan_month
+%p#notice= notice
+
+%p
+  %b Grade:
+  = @teaching_plan.grade_master.grade_name
+%p
+  %b Section:
+  = @teaching_plan.section_master.section
+%p
+  %b Date:
+  = @teaching_plan.teaching_date.strftime("%B,%d,%Y,%a")
+%p
+  %b Plan:
+  = @teaching_plan.plan_month
+
+
+  %br
+  = link_to button_tag('Edit',:class => 'btn btn-primary'), edit_teaching_plan_path
+  = link_to button_tag('show',:class => 'btn btn-primary'), teaching_plans_path
