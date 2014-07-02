@@ -6,9 +6,20 @@ class TeachingPlansController < ApplicationController
     @teaching_plan = TeachingPlan.new
   end
   def edit
+    @teaching_plan = TeachingPlan.find(params[:id])
+  end
+  def update
+    @teaching_plan = TeachingPlan.find(params[:id])
+    if @teaching_plan.update(teachingplan_params)
+      flash[:success] = I18n.t :success, :scope => [:teachingplan, :update]
+      redirect_to teaching_plans_path
+    else
+      flash.now[:fail] = I18n.t :fail, :scope => [:teachingplan, :update]
+      render "edit"
+    end
   end
   def show
-   # @teaching_plan = TeachingPlan.new(teachingplan_params)
+    @teaching_plan = TeachingPlan.find(params[:id])
   end
   def gradeserviceview
     respond_to do |format|
@@ -43,6 +54,6 @@ class TeachingPlansController < ApplicationController
     end
   end
   def teachingplan_params
-    params.require(:teaching_plan).permit(:grade_master_id, :section_master_id,:teaching_date,:plan_month )
+    params.require(:teaching_plan).permit(:grade_master_id, :section_master_id,:teaching_date,:plan_month  )
   end
 end
