@@ -27,9 +27,7 @@ class StudentMastersController < ApplicationController
         monthly_pdcs = []
         s_f_c = StudentFeeCalculator.new(@student_master)
         if payment_master.present?
-          monthly_pdcs = MonthlyPdcAmount.belongs_to_fee_grade_bucket(@student_master.grade_bucket_id).pending_pdc_submissions(@student_master).map do |pdc_amount|
-            {:post_dated_cheque_id => pdc_amount.post_dated_cheque_id, :month => pdc_amount.post_dated_cheque.month, :amount_in_rupees => s_f_c.applicable_month_fee(pdc_amount), :cheque_number => nil, :clearence_date => nil}
-          end
+          monthly_pdcs = []
         else
           monthly_pdcs = MonthlyPdcAmount.belongs_to_fee_grade_bucket(@student_master.grade_bucket_id).map do |pdc_amount|
             {:post_dated_cheque_id => pdc_amount.post_dated_cheque_id, :month => pdc_amount.post_dated_cheque.month, :amount_in_rupees => s_f_c.applicable_month_fee(pdc_amount), :cheque_number => nil, :clearence_date => nil }

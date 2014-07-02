@@ -18,9 +18,11 @@ class ParentPaymentMastersController < ApplicationController
   end
  
   def create
-    @parent_payment_master = ParentPaymentMaster.new_payment_master(params[:parent_payment_master])
-    unless @parent_payment_master.parent_payment_transactions.last.online_payment?
-      if @parent_payment_master.save!
+    unless current_user.parent?
+      @parent_payment_master = ParentPaymentMaster.new(parent_payment_master_params)
+      @parent_payment_master.parent = @parent_payment_master.student.parent
+      payment_creation_service = PaymentCreationService.new(@parent_payment_master, params[:parent_payment_master], DateTime.now)
+      if payment_creation_service.save
         @parent_payment_transaction = @parent_payment_master.parent_payment_transactions.last
         @parent_payment_transaction = ParentPaymentTransactionsDecorator.decorate(@parent_payment_transaction)
         render "acknowledgement"
@@ -33,9 +35,9 @@ class ParentPaymentMastersController < ApplicationController
   end
 
   def update
-    @parent_payment_master.prepare_payment(params[:parent_payment_master]) 
-    unless @parent_payment_master.parent_payment_transactions.last.online_payment?
-      if @parent_payment_master.save!
+    unless current_user.parent?
+      payment_creation_service = PaymentCreationService.new(@parent_payment_master, params[:parent_payment_master], DateTime.now)
+      if payment_creation_service.save
         @parent_payment_transaction = @parent_payment_master.parent_payment_transactions.last
         @parent_payment_transaction = ParentPaymentTransactionsDecorator.decorate(@parent_payment_transaction)
         render "acknowledgement"
@@ -60,8 +62,8 @@ class ParentPaymentMastersController < ApplicationController
   def pending_pdcs
     respond_to do |format|
       format.json do
-        submitted_pdcs = @parent_payment_master.parent_cheques.pending_cheques.map do |pdc|
-          Struct.new(:month, :cheque_number, :cheque_date, :amount_in_rupees).new(pdc.post_dated_cheque.month, pdc.cheque_number, pdc.cheque_date, pdc.amount_in_rupees)
+        submitted_pdcs = @parent_payment_master.parent_payment_transactions.cheque_type_transactions.pending_transactions.map do |pt|
+          Struct.new(:month, :cheque_number, :cheque_date, :amount_in_rupees).new(pt.parent_cheque.post_dated_cheque.month, pt.parent_cheque.cheque_number, pt.parent_cheque.cheque_date, pt.amount_in_rupees)
         end
         render :json => submitted_pdcs
       end
@@ -71,7 +73,7 @@ class ParentPaymentMastersController < ApplicationController
   def cleared_pdcs
     respond_to do |format|
       format.json do
-        cleared_pdcs = @parent_payment_master.parent_payment_transactions.cleared_transactions.map do |ppt|
+        cleared_pdcs = @parent_payment_master.parent_payment_transactions.cheque_type_transactions.cleared_transactions.map do |ppt|
           Struct.new(:month, :cheque_number, :cleared_date, :amount_in_rupees).new(ppt.parent_cheque.post_dated_cheque.month, ppt.parent_cheque.cheque_number, ppt.transaction_date, ppt.amount_in_rupees)
         end
         render :json => cleared_pdcs
@@ -82,8 +84,8 @@ class ParentPaymentMastersController < ApplicationController
   def submitted_pdcs
     respond_to do |format|
       format.json do
-        submitted_pdcs = @parent_payment_master.parent_cheques.map do |pc|
-          Struct.new(:cheque_number, :cheque_date, :amount_in_rupees, :bank, :ifsc_code, :status).new(pc.cheque_number, pc.cheque_date, pc.amount_in_rupees, pc.bank_name, pc.ifsc_code, pc.status)
+        submitted_pdcs = @parent_payment_master.parent_payment_transactions.cheque_type_transactions.map do |pt|
+          Struct.new(:cheque_number, :cheque_date, :amount_in_rupees, :bank_name, :ifsc_code, :status).new(pt.parent_cheque.cheque_number, pt.parent_cheque.cheque_date, pt.amount_in_rupees, pt.parent_cheque.bank_name, pt.parent_cheque.ifsc_code, pt.parent_cheque.status)
         end
         render :json => submitted_pdcs
       end

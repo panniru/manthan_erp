@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701120148) do
+ActiveRecord::Schema.define(version: 20140702075040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -286,11 +286,7 @@ ActiveRecord::Schema.define(version: 20140701120148) do
   end
 
   create_table "parent_cheques", force: true do |t|
-    t.integer  "parent_id"
-    t.integer  "student_id"
-    t.integer  "parent_payment_master_id"
     t.integer  "parent_payment_transaction_id"
-    t.integer  "amount_in_rupees"
     t.string   "cheque_number"
     t.date     "cheque_date"
     t.string   "status"
@@ -464,8 +460,6 @@ ActiveRecord::Schema.define(version: 20140701120148) do
   end
 
   create_table "teaching_plans", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "grade_master_id"
     t.string   "section_master_id"
     t.string   "plan"
@@ -473,6 +467,9 @@ ActiveRecord::Schema.define(version: 20140701120148) do
     t.string   "plan_month"
     t.integer  "user_id"
     t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+
   end
 
   create_table "term_definitions", force: true do |t|

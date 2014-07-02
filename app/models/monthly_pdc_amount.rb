@@ -4,7 +4,7 @@ class MonthlyPdcAmount < ActiveRecord::Base
   
   scope :belongs_to_fee_grade_bucket, lambda{|bucket| where("fee_grade_bucket_id = ?", bucket)}
   scope :belongs_to_post_dated_cheque, lambda{|pdc| where("post_dated_cheque_id = ?", pdc)}
-  scope :pending_pdc_submissions, lambda{|student| where("post_dated_cheque_id NOT IN(?)", ParentCheque.belongs_to_student(student).map(&:post_dated_cheque_id))}
+  # scope :pending_pdc_submissions, lambda{|student| where("post_dated_cheque_id NOT IN(?)", ParentCheque.belongs_to_student(student).map(&:post_dated_cheque_id))}
   
 
   def amount_real_value

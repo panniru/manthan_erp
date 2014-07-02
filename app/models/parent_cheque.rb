@@ -1,7 +1,6 @@
 class ParentCheque < ActiveRecord::Base
   belongs_to :post_dated_cheque
   belongs_to :parent_payment_transaction
-  belongs_to :parent_payment_master
   
   scope :belongs_to_student, lambda{|student_id| where(:student_id => student_id)}
   scope :pending_cheques, lambda{where(:status => "pending")}
@@ -11,7 +10,7 @@ class ParentCheque < ActiveRecord::Base
 
   scope :multi_search_parent_student_cheque_number, lambda { |term|
     where_clause = "lower(student_masters.name) ILIKE '%#{term.downcase}%' OR lower(parents.father_name) ILIKE '%#{term.downcase}%' OR lower(parents.mother_name) ILIKE '%#{term.downcase}%' OR lower(parent_cheques.cheque_number) ILIKE '%#{term.downcase}%'"
-    includes(parent_payment_master: [:parent, :student]).where(where_clause)
+    includes(parent_payment_transaction: [parent_payment_master: [:parent, :student]]).where(where_clause)
   }
 
   def cleared?
@@ -26,7 +25,6 @@ class ParentCheque < ActiveRecord::Base
       
       self.status = "cleared"
       self.parent_payment_transaction.clear_transaction
-      self.save!
       self.save!
     end
   end

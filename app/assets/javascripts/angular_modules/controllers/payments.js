@@ -34,7 +34,10 @@
         $scope.month_fee_payment_details = function(){
             paymentService.student_monthly_pdcs($scope.student_id)
                 .then(function(response){
-                    $scope.monthlyFees = response.data
+                    $scope.monthlyFees = []
+                    angular.forEach(response.data, function(value){
+                        $scope.monthlyFees.push({post_dated_cheque_id: value.post_dated_cheque_id, month: value.month, amount_in_rupees: value.amount_in_rupees, cheque_number: value.cheque_number, clearence_date: value.clearence_date, bank_name: "", ifsc_code: ""})
+                    })
                 });
         };
         
@@ -49,6 +52,20 @@
         paymentService.transactionTypes().then(function(response){
             $scope.transactionTypes = response.data
         });
+
+        $scope.applyforAllMonths = function(){
+            var first_value = $scope.monthlyFees[0]
+            angular.forEach($scope.monthlyFees, function(value, index){
+                value.cheque_number = parseInt(first_value.cheque_number)+index
+                value.bank_name = first_value.bank_name
+                value.ifsc_code = first_value.ifsc_code
+            });
+        }
+        
+        $scope.checkfirstFilled = function(){
+            var first_value = $scope.monthlyFees[0]
+            return (typeof first_value.cheque_number != 'undefined' && first_value.bank_name != "" && first_value.ifsc_code != "") 
+        }
         $scope.supportedBanks = paymentService.supportedBanks();
 
     }]);
