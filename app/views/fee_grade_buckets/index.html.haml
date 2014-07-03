@@ -2,7 +2,8 @@
   %h3 
     = "Grade Buckets"
     .pull-right
-      = link_to "New Fee Buckets", "#", :class => "btn btn-primary", :ng_click => "newGradeBuckets()"
+      = link_to "New Fee Buckets", "#", :class => "btn btn-primary", :ng_click => "newGradeBuckets()", :ng_disabled => "#{fee_items_can_be_manipulate?}"
+      = link_to "Edit Fee Buckets", "#", :class => "btn btn-primary", :ng_click => "editGradeBuckets()"
   %hr
 
   %table.table.table-bordered
@@ -16,8 +17,8 @@
         %td {{feeGradeBucket.grade_from_name}}
         %td {{feeGradeBucket.grade_to_name}}
         %td
-          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-sm", :title => "Edit", :ng_click => "update(feeGradeBucket)"
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(feeGradeBucket)"
+          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-sm", :title => "Edit", :ng_click => "update(feeGradeBucket)", :ng_disabled => "#{fee_items_can_be_manipulate?}"
+          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(feeGradeBucket)", :ng_disabled => "#{fee_items_can_be_manipulate?}"
 
 
   .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}

@@ -1,10 +1,12 @@
 class ApprovalItemsController < ApplicationController
-  load_resource :only => [:show, :update, :edit, :destroy, :approve]
+  load_resource :only => [:show, :update, :edit, :destroy, :approve, :reject]
   
   def index
-    @approval_items = ApprovalItem.all
     respond_to do |format|
       format.json do
+        @approval_items = ApprovalItem.all.map do |item|
+          item.attributes.merge!(:approved_user => item.approved_user, :defined_user => item.defined_user)
+        end
         render :json => @approval_items
       end
       format.html do
@@ -21,8 +23,18 @@ class ApprovalItemsController < ApplicationController
         end
       end
     end
-    
   end
+
+  def reject
+    respond_to do |format|
+      format.json do
+        if @approval_item.reject
+          render :json => @approval_item
+        end
+      end
+    end
+  end
+
   
   def create
     @approval_item = ApprovalItem.new(approval_item_params)

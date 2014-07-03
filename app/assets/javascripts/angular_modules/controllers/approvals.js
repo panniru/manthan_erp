@@ -18,6 +18,13 @@
                     approval_item = responce.data
                 })
         }
+        
+        $scope.reject = function(approval_item){
+            approval_item.$reject()
+                .then(function(responce){
+                    approval_item = responce.data
+                })
+        }
 
         $scope.create = function(){
             $scope.approval_item.status = "pending"

@@ -30,7 +30,8 @@
                                       {
                                           "update": { method: "PUT"},
                                           "fee_structure_approval_item": { url: '/approval_items/fee_structure_approval_item.json', method: "GET"},
-                                          "approve": { url: "/approval_items/:id/approve.json", id:'@id', method: "PUT"}
+                                          "approve": { url: "/approval_items/:id/approve.json", id:'@id', method: "PUT"},
+                                          "reject": { url: "/approval_items/:id/reject.json", id:'@id', method: "PUT"}
                                       }
                                     );
         var StudentMaster = $resource('/student_masters/:id.json', {id: '@id'}, 

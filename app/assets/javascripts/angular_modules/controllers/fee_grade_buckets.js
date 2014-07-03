@@ -11,13 +11,23 @@
                 $scope.newFeeGradeBuckets.push({"grade_from": null, "grade_to":null, "optionsFrom":[], "optionsTo":[] });
             };
 
+            load_grades();
+            $('#createModal').modal('show')
+        };
+
+        $scope.editGradeBuckets = function(){
+            $scope.newFeeGradeBuckets = $scope.feeGradeBuckets
+            load_grades();
+            $('#createModal').modal('show')
+        };
+
+        var load_grades = function(){
             gradeService.allGrades()
                 .then(function(responce){
                     $scope.grades = responce.data
                     $scope.newFeeGradeBuckets[0]['optionsFrom'] = responce.data
                 });
-            $('#createModal').modal('show')
-        };
+        }
 
         $scope.submitGradeBuckets = function(){
             angular.forEach($scope.newFeeGradeBuckets, function(bucket){

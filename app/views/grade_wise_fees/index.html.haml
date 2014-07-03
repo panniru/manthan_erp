@@ -4,10 +4,11 @@
       .col-md-6{:ng_controller => "MailingController"}
         = link_to "Send Mail", "#", :class => "btn btn-primary", :ng_hide => "isMailActionFired", :ng_click => "feeStructureMail()", :ng_disabled => "approval_item.status != 'approved'"
       .col-md-6
-        %a{:href =>"#", :ng_class => "{'btn btn-danger': approval_item.status == 'new', 'btn btn-warning': approval_item.status == 'pending', 'btn btn-success': approval_item.status == 'approved' }", :ng_click => "create()" , :ng_disabled => "approval_item.status != 'new'"}
+        %a{:href =>"#", :ng_class => "{'btn btn-danger': approval_item.status == 'new', 'btn btn-warning': approval_item.status == 'pending', 'btn btn-success': approval_item.status == 'approved', 'btn btn-info': approval_item.status == 'rejected' }", :ng_click => "create()" , :ng_disabled => "approval_item.status != 'new' || #{!GradeWiseFee.fee_structure_defined?}"}
           %span{ :ng_show => "approval_item.status == 'new'"} Send For Approval
           %span{ :ng_show => "approval_item.status == 'pending'"} Approval Pending 
           %span{ :ng_show => "approval_item.status == 'approved'"} Approved
+          %span{ :ng_show => "approval_item.status == 'rejected'"} Rejected
         
   = render "grade_wise_fee_grid"
   = render "shared/amount_units"

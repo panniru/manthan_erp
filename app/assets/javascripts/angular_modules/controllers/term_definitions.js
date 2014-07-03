@@ -10,6 +10,11 @@
             };
             $('#createModal').modal('show')
         }
+        
+        $scope.editTermDefinitions = function(){
+            $scope.newTermDefinitions = $scope.termDefinitions
+            $('#createModal').modal('show')
+        }
 
         $scope.submitTermDefinitions = function(){
             angular.forEach($scope.newTermDefinitions, function(term, index){

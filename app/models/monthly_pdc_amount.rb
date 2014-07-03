@@ -6,6 +6,10 @@ class MonthlyPdcAmount < ActiveRecord::Base
   scope :belongs_to_post_dated_cheque, lambda{|pdc| where("post_dated_cheque_id = ?", pdc)}
   # scope :pending_pdc_submissions, lambda{|student| where("post_dated_cheque_id NOT IN(?)", ParentCheque.belongs_to_student(student).map(&:post_dated_cheque_id))}
   
+  def self.fee_structure_defined?
+    MonthlyPdcAmount.count > 0
+  end
+
 
   def amount_real_value
     read_attribute(:amount_in_rupees)

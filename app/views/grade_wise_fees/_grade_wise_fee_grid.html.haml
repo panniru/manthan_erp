@@ -4,7 +4,7 @@
       Grade Wise Fee
       - if current_user.admin? or current_user.accountant?
         .pull-right
-          = link_to fa_icon("edit"), new_grade_wise_fee_path, :title => "Edit"
+          = link_to fa_icon("edit"), new_grade_wise_fee_path, :title => "Edit", :ng_disabled => "#{!ApprovalItem.fee_can_be_edit?}", :class => "btn btn-primary"
     %hr
       
 .col-md-12{ "ng-controller" => "GradeWiseFeesController", "ng-init" => "getGridView()"}
