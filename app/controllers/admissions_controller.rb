@@ -3,14 +3,15 @@ class AdmissionsController < ApplicationController
     @events = Event.all
     @admissions = Admission.all
     @admissions = Admission.search(params[:search])
+    if params[:status] == "Form Closed"
+      @admissions = Admission.all
+    else
+      @admissions = Admission.where(:status => 'Form Closed')
+    end
     
     
   end
-  def admission_home
-    @admissions = Admission.all
-    
-  end
-  
+ 
 
   def show
     @event = Event.find(params[:id])
@@ -56,10 +57,12 @@ class AdmissionsController < ApplicationController
  def enquiry_index
    @admissions = Admission.all
    @admissions = Admission.search(params[:admission_no]).all
+   @admissions = Admission.enquiry_forms
  end
  def admission_index
    @admissions = Admission.all
    @admissions = Admission.search(params[:search]).all
+   @admissions = Admission.application_forms
    
  end
  def enquiry_new
@@ -69,9 +72,15 @@ class AdmissionsController < ApplicationController
    @admission = Admission.find(params[:id])
 
  end
+
  def admission_home
-   @admissions = Admission.search(params[:search])
+   @admissions = Admission.enquiry_forms_or_application_forms
  end
+
+ def closed_forms
+   @admissions = Admission.closed_forms
+ end
+
  def home_index
    @admission = Admission.find(params[:id])
  end

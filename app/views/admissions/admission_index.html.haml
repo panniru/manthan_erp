@@ -1,12 +1,11 @@
 .pull-left
-  = form_tag admission_index_admissions_path, method: :get do
-    %input#search{name: "search", placeholder: "Enter search term...", type: "text"}/
-    = submit_tag "Search", name: nil, :class => 'btn btn-primary'
+  %input#search{name: "search", placeholder: "Enter search term...", type: "text"}/
+  
 %h4
   %center
     Application Form
 
-%table.table.table-striped.table-condensed.table-bordered
+%table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
       %th

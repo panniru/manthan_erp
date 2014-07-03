@@ -3,12 +3,12 @@
     %tr
       %td{style: "width:25%"}
         %b
-          %span.label.label-danger Enquiry #
+          %span.label.label-warning Enquiry #
       %td{style: "width:25%"}
         = @admission.form_no
       %td{style: "width:25%"}
         %b
-          %span.label.label-danger Admission #
+          %span.label.label-warning Admission #
       %td{style: "width:25%"}
         = @admission.admission_no
       
@@ -67,7 +67,7 @@
   = link_to "Create Application", admission_new_admission_path , :class => 'enq_button btn btn-primary'
   %br
   %br
-  - if("#{@admission.status}" == 'Enquiry Created')
+  - if("#{@admission.status}" == 'Enquiry Created'||"#{@admission.status}" == 'Application Created' )
     = link_to "Close the Form", "#", :class => "change label label-danger",:data=> {:id => "#{@admission.id}"}
   - else 
     = link_to "Form Closed", "#", :class => "label label-success",:data=> {:id => "#{@admission.id}"}

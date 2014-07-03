@@ -242,12 +242,6 @@ ActiveRecord::Schema.define(version: 20140702075040) do
     t.datetime "updated_at"
   end
 
-  create_table "grades", force: true do |t|
-    t.string   "grade"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "interviewschedulers", force: true do |t|
     t.string   "name"
     t.string   "description"
@@ -316,7 +310,7 @@ ActiveRecord::Schema.define(version: 20140702075040) do
     t.string   "academic_year"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "payment_detail_id"
+    t.integer  "term_definition_id"
     t.string   "status"
   end
 
@@ -392,12 +386,6 @@ ActiveRecord::Schema.define(version: 20140702075040) do
     t.string   "grade_master_id"
   end
 
-  create_table "sections", force: true do |t|
-    t.string   "section"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "staffs", force: true do |t|
     t.string   "staff_name"
     t.string   "staff_exp"
@@ -424,12 +412,6 @@ ActiveRecord::Schema.define(version: 20140702075040) do
   end
 
   create_table "subject_masters", force: true do |t|
-    t.string   "subject"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "subjects", force: true do |t|
     t.string   "subject"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -469,7 +451,6 @@ ActiveRecord::Schema.define(version: 20140702075040) do
     t.string   "academic_year"
     t.datetime "created_at"
     t.datetime "updated_at"
-
   end
 
   create_table "term_definitions", force: true do |t|
@@ -496,6 +477,7 @@ ActiveRecord::Schema.define(version: 20140702075040) do
 
   create_table "time_tables", force: true do |t|
     t.string   "academic_year"
+    t.string   "staffid"
     t.string   "mon_sub"
     t.string   "tue_sub"
     t.string   "wed_sub"
