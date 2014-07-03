@@ -28,5 +28,11 @@ module ApplicationHelper
     
   end
 
+  def fee_items_can_be_manipulate?
+    @value ||= !ApprovalItem.fee_can_be_edit?
+  end
+  
+  
+
 end
 

@@ -42,6 +42,7 @@ ManthanErp::Application.routes.draw do
   resources :approval_items do
     member do
       put "approve"
+      put "reject"
     end
     collection do
       get "fee_structure_approval_item"

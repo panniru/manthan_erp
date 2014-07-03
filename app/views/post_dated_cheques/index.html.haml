@@ -2,7 +2,8 @@
   %h3 
     = "Post Dated Cheques"
     .pull-right
-      = link_to "Define bulk", "#", :class => "btn btn-primary", :ng_click => "newPostDatedCheques()"
+      = link_to "New PDCs", "#", :class => "btn btn-primary", :ng_click => "newPostDatedCheques()", :ng_disabled => "#{fee_items_can_be_manipulate?}"
+      = link_to "Edit PDCs", "#", :class => "btn btn-primary", :ng_click => "editPostDatedCheques()", :ng_disabled => "#{MonthlyPdcAmount.fee_structure_defined?}"
   %hr
   %table.table.table-bordered
     %thead
@@ -15,17 +16,10 @@
         %td {{post_dated_cheque.date}}
         %td {{post_dated_cheque.amount_per}}
         %td
-          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-sm", :title => "Edit", :ng_click => "" 
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(post_dated_cheque)"
+          -#= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-sm", :title => "Edit", :ng_click => "" , :ng_disabled => "#{fee_items_can_be_manipulate?}"
+          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(post_dated_cheque)", :ng_disabled => "#{fee_items_can_be_manipulate?}"
 
-  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
-          %h4.modal-title{ :id => "myModalLabel"} New Post Dated Cheques
-        .modal-body
-          = render "form"
+  = render "form"
           
 
         

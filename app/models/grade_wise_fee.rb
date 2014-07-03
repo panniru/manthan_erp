@@ -15,6 +15,10 @@ class GradeWiseFee < ActiveRecord::Base
     grade_wise_fee
   end
 
+  def self.fee_structure_defined?
+    GradeWiseFee.count > 0 and TermWiseGradeFee.count > 0 and MonthlyPdcAmount.count> 0
+  end
+
 
   # def amount_in_rupees
   #   (read_attribute(:amount_in_rupees).to_f/RuleEngine.new.value(:amount, :unit))

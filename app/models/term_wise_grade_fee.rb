@@ -10,6 +10,11 @@ class TermWiseGradeFee < ActiveRecord::Base
   def amount_real_value
     read_attribute(:amount_in_rupees)
   end
+
+  def self.fee_structure_defined?
+    TermWiseGradeFee.count > 0
+  end
+
   
   # def amount_in_rupees
   #   (read_attribute(:amount_in_rupees).to_f/RuleEngine.new.value(:amount, :unit))
