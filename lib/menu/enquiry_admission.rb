@@ -7,6 +7,7 @@ class EnquiryAdmission < Struct.new(:controller)
     sub_menu << show_application_admissions    
     sub_menu << show_staff_admissions
     sub_menu << show_event_admissions
+    sub_menu << show_closed_forms
   end
 
   def parent_sub_menu
@@ -38,5 +39,8 @@ class EnquiryAdmission < Struct.new(:controller)
   end
   def show_event_admissions
     MenuItem.new(:label => "Scheduled Events", :klass => "", :icon => "calendar", :href => "/events" )
+  end
+  def show_closed_forms
+    MenuItem.new(:label => "Closed Forms", :klass => "", :icon => "ban", :href => "/admissions/closed_forms" )
   end
 end

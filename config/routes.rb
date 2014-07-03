@@ -151,7 +151,7 @@ ManthanErp::Application.routes.draw do
       get "enquiry_new"
       get "event_index"
       get 'admission_home'
-      
+      get 'closed_forms'
     end
   end
   
