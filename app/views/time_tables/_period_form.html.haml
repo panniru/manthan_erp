@@ -36,7 +36,7 @@
           %tr{"ng-repeat" => "timeperiod in timeperiods | orderBy:'id'"}
             %td Period{{" "+($index+1)}}
             %td               
-              %select{ "ng-hide" => "mySelectedValue","ng-model" => "timeperiod['mon_sub']", "ng-options" => "subject.id as  subject.subject for subject in subjects",:class => "form-control",:placeholder => "first name"} 
+              %select{"ng-model" => "timeperiod['mon_sub']", "ng-options" => "subject.id as  subject.subject for subject in subjects",:class => "form-control",:placeholder => "first name"} 
                 %option{value: ""}
             %td
               %select{"ng-model" => "timeperiod['tue_sub']", "ng-options" => "subject.id as  subject.subject for subject in subjects",:class => "form-control"} 
