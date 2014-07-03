@@ -9,6 +9,9 @@ class RecruitmentSubMenu < Struct.new(:controller)
     sub_menu << enquiry_form
     sub_menu << documentation_verification
     sub_menu << interview_scheduler
+    sub_menu << assessment_completed
+    sub_menu << senior_management_review
+    sub_menu << appointed
     
   end
 
@@ -29,7 +32,16 @@ class RecruitmentSubMenu < Struct.new(:controller)
     MenuItem.new(:label => "Documentation verification", :klass => "", :icon => "folder-open", :href => "/documentuploaders")
   end
   def interview_scheduler
-    MenuItem.new(:label => "Interview Scheduler", :klass => "", :icon => "calendar ", :href => "/interviewschedulers")
+    MenuItem.new(:label => "Assessment Scheduler", :klass => "", :icon => "calendar ", :href => "/interviewschedulers")
   end
+  def assessment_completed
+    MenuItem.new(:label => "Assessment Completed", :klass => "", :icon => "file-archive-o ", :href => "#")
+    end
+  def senior_management_review
+    MenuItem.new(:label => "Sr Management Review", :klass => "", :icon => "group ", :href => "#")
+    end
+  def appointed
+    MenuItem.new(:label => "Appointed", :klass => "", :icon => "user ", :href => "#")
+    end
 end
 

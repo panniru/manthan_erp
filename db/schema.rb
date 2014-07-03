@@ -442,6 +442,9 @@ ActiveRecord::Schema.define(version: 20140702075040) do
   end
 
   create_table "teaching_plans", force: true do |t|
+    t.string   "plan_month"
+    t.integer  "user_id"
+    t.string   "academic_year"
     t.string   "grade_master_id"
     t.string   "section_master_id"
     t.string   "plan"
