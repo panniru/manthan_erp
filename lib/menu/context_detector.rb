@@ -26,6 +26,11 @@ class ContextDetector
     "forms" => "recruitment_sub_menu",
     "documentuploaders" => "recruitment_sub_menu",
     "interviewschedulers" => "recruitment_sub_menu",
+    "#" => "recruitment_sub_menu",
+    "#" => "recruitment_sub_menu",
+    "#" => "recruitment_sub_menu",
+    
+
     "default_masters" => "default_master_sub_menu"
   }
   
