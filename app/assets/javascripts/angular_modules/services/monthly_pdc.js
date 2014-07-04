@@ -40,7 +40,7 @@
             }
         }
 
-        var next_month_date = function(current_date, increment_by=1){
+        var next_month_date = function(current_date, increment_by){
             var month = current_date.getMonth(); 
             var year = current_date.getFullYear();
             var date = current_date.getDate();
