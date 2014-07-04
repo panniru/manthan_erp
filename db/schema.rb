@@ -442,15 +442,19 @@ ActiveRecord::Schema.define(version: 20140702075040) do
   end
 
   create_table "teaching_plans", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+<<<<<<< Updated upstream
+
+=======
+    t.string   "plan_month"
+    t.integer  "user_id"
+    t.string   "academic_year"
+>>>>>>> Stashed changes
     t.string   "grade_master_id"
     t.string   "section_master_id"
     t.string   "plan"
     t.date     "teaching_date"
-    t.string   "plan_month"
-    t.integer  "user_id"
-    t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
 
   end
 
