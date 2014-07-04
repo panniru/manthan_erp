@@ -36,7 +36,7 @@
                 $http.put(url)
                     .then(function(responce){
                         cheque.status = "Cleared"
-                    });dateSplit[1]-1
+                    });
             }
         }
 
