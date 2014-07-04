@@ -8,6 +8,7 @@ class MonthlyPdcAmount < ActiveRecord::Base
   
   def self.fee_structure_defined?
     MonthlyPdcAmount.count > 0
+    false
   end
 
 

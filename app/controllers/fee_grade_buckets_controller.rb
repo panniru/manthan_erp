@@ -93,8 +93,6 @@ class FeeGradeBucketsController < ApplicationController
         end
       end
     end
-    
-    
   end
 
   def edit
@@ -119,11 +117,18 @@ class FeeGradeBucketsController < ApplicationController
     params.require(:fee_grade_bucket).permit( :grade_from ,:grade_to)
   end
   
-   def build_fee_grade_bucket_bulk
+  def build_fee_grade_bucket_bulk
     params.require(:bulk_fee_grade_buckets).select{|fee_grade_bucket| fee_grade_bucket["grade_from"].present?  and fee_grade_bucket["grade_to"].present?}.map do |fee_grade_bucket|
-      FeeGradeBucket.new(fee_grade_bucket)
+      if fee_grade_bucket[:id].present?
+        @fee_grade_bucket_obj = FeeGradeBucket.find(fee_grade_bucket[:id])
+        fee_grade_bucket.each do |key, val|
+          @fee_grade_bucket_obj.send(key+"=", val) if fee_grade_bucket_obj.attributes.include?(key)
+        end
+        @fee_grade_bucket_obj
+      else
+        FeeGradeBucket.new(fee_grade_bucket)
+      end
     end
-
   end
 end
 

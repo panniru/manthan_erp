@@ -77,7 +77,15 @@ class TermDefinitionsController < ApplicationController
   
   def build_term_from_bulk
     params.require(:bulk_term).select{|term_definition| term_definition["term_definition"].present? and  term_definition["amount_per"].present?}.map do |term_definition|
-      TermDefinition.new(term_definition)
+      if term_definition[:id].present?
+        @term_definition_obj = TermDefinition.find(term_definition[:id])
+        term_definition.each do |key, val|
+          @term_definition_obj.send(key+"=", val) if @term_definition_obj.attributes.include?(key)
+        end
+        @term_definition_obj
+      else
+        TermDefinition.new(term_definition)
+      end
     end
   end
   

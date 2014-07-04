@@ -17,14 +17,23 @@
         }
 
         $scope.submitTermDefinitions = function(){
+            var total_percentage = 0.0;
             angular.forEach($scope.newTermDefinitions, function(term, index){
                 term.termdate = $("#date-"+index).val()
+                total_percentage += parseFloat(term.amount_per)
             });
-            resourceService.TermDefinition.bulk({bulk_term: $scope.newTermDefinitions})
-                .$promise.then(function(responce){
-                    $scope.termDefinitions = resourceService.TermDefinition.query()
-                    $('#createModal').modal('hide')
-                })
+            if(total_percentage == 100.00){
+                resourceService.TermDefinition.bulk({bulk_term: $scope.newTermDefinitions})
+                    .$promise.then(function(responce){
+                        $scope.termDefinitions = resourceService.TermDefinition.query()
+                        $('#createModal').modal('hide')
+                    })
+            }else{
+                alert("Sum of the maount percentages are not 100.")
+                return false;
+            }
+                
+            
         }
 
         $scope.destroy = function(termDefinition){
