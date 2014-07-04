@@ -1,11 +1,15 @@
 class Admission < ActiveRecord::Base
-
-  scope :enquiry_forms_or_application_forms, lambda{where("status = 'Enquiry Created' or status = 'Application Created'")}
-  scope :closed_forms, lambda{where("status = 'Form Closed'")}
-  scope :enquiry_forms,lambda{where("status = 'Enquiry Created'")}
-  scope :application_forms,lambda{where("status = 'Application Created'")}
+  
+  scope :enquiry_forms_or_application_forms, lambda{where("status = 'Enquiry_Created' or status = 'Application_Created'")}
+  scope :closed_forms, lambda{where("status = 'Form_Closed'")}
+  scope :enquiry_forms,lambda{where("status = 'Enquiry_Created'")}
+  scope :application_forms,lambda{where("status = 'Application_Created'")}
+  scope :search, lambda {|id| where(:id => id)}
   def self.search(search)
-    return scoped unless search.present?
-    where(['admission_no LIKE ? OR form_no LIKE ? OR name LIKE ? OR klass LIKE ?  OR father_name LIKE ? OR father_mobile LIKE ?  ', "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%"])
+    if search 
+      find(:all, :conditions => ['status LIKE ? ', "%#{search}%"])
+    else
+      find(:all)
+    end
   end
 end

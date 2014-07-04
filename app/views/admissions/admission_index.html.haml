@@ -1,5 +1,5 @@
 .pull-left
-  %input#search{name: "search", placeholder: "Enter search term...", type: "text"}/
+  %input#search{name: "search", placeholder: "Enter Search Term...", type: "text"}/
   
 %h4
   %center
@@ -23,8 +23,8 @@
     - @admissions.each do |admission|
       %tr
         %td= check_box_tag "admission_ids[]", admission.id 
-        %td= admission.form_no
-        %td= admission.admission_no
+        %td= link_to "#{admission.form_no}", home_index_admission_path(admission)
+        %td= link_to "#{admission.admission_no}", home_index_admission_path(admission)
         %td= admission.bus
         %td= admission.blood_group
         %td= admission.last_school

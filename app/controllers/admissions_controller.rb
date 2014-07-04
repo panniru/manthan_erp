@@ -3,12 +3,7 @@ class AdmissionsController < ApplicationController
     @events = Event.all
     @admissions = Admission.all
     @admissions = Admission.search(params[:search])
-    if params[:status] == "Form Closed"
-      @admissions = Admission.all
-    else
-      @admissions = Admission.where(:status => 'Form Closed')
-    end
-    
+   
     
   end
  
@@ -31,7 +26,7 @@ class AdmissionsController < ApplicationController
   
   def create
     @admission = Admission.new(admission_params)
-    @admission.update(:status => "Enquiry Created")
+    @admission.update(:status => "Enquiry_Created")
     respond_to do |format|
       if @admission.save
         format.html { redirect_to admission_home_admissions_path, notice: 'Enquiry was successfully created.' }
@@ -56,12 +51,12 @@ class AdmissionsController < ApplicationController
   end
  def enquiry_index
    @admissions = Admission.all
-   @admissions = Admission.search(params[:admission_no]).all
+   @admissions = Admission.search(params[:search])
    @admissions = Admission.enquiry_forms
  end
  def admission_index
    @admissions = Admission.all
-   @admissions = Admission.search(params[:search]).all
+   @admissions = Admission.search(params[:search])
    @admissions = Admission.application_forms
    
  end
@@ -75,6 +70,10 @@ class AdmissionsController < ApplicationController
 
  def admission_home
    @admissions = Admission.enquiry_forms_or_application_forms
+   @admissions = Admission.search(params[:search])
+   
+   
+  
  end
 
  def closed_forms
@@ -87,7 +86,7 @@ class AdmissionsController < ApplicationController
  
  def update
    @admission = Admission.find(params[:id])
-   @admission.update(:status => "Application Created")
+   @admission.update(:status => "Application_Created")
    respond_to do |format|
      if @admission.update(admission_params)
        
@@ -104,7 +103,7 @@ class AdmissionsController < ApplicationController
    @admission = Admission.find(params[:id])
    
    respond_to do |format|
-     if  @admission.update(:status => "Form Closed")
+     if  @admission.update(:status => "Form_Closed")
        format.json { render action: 'index', :status => "success" }
      else
        format.json { render json: @admission.errors, :status => "failure" }
