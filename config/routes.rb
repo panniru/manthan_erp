@@ -193,7 +193,9 @@ ManthanErp::Application.routes.draw do
     collection do
       get "check_teachers_grades_mapping"
       post "savemappings"
-      post "getmappings"      
+      post "getmappings" 
+      post "deletemappings"  
+      get "show_grade_wise"   
       end
   end
   

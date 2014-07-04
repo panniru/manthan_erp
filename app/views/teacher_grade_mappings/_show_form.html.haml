@@ -14,6 +14,7 @@
         %td {{mapping['subject_name']}}       
   .col-md-2{"ng-show" => "myShowFormValue"} 
     = submit_tag("EDIT",{class: "btn btn-primary", :ng_click => "editMappings()"})
+    %input{:type => "button", :class => "btn btn-primary", "ng-click" => "addOneMappings()", :value => "ADD"}
 
 .row
   :css
