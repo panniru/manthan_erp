@@ -3,8 +3,15 @@ $(document).ready(function() {
     // page is now ready, initialize the calendar...
 
     $('#calendar').fullCalendar({
-        events: '/events.json'        // put your options and callbacks here
+        events: '/events.json'     
+        //teaching_plans: '/teaching_plans.json' // put your options and callbacks here
     })
+    
+        $('#calendar1').fullCalendar({
+            events: '/teaching_plans.json'
+        })
+    
+
 
 });
 $(function () {

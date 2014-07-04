@@ -9,11 +9,11 @@
     .col-md-6
       %select{"ng-model" => "mySection", :ng_options => "section.id as section.section for section in map_sections | filter: {grade_master_id: myGrade}", :class=>"form-control"}
   .form-group.col-md-5
-    = link_to "showplan", "#", :class => "btn btn-primary"
+    = link_to "Missing Days", "#", :class => "btn btn-primary"
     .col-md-4
-      %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add Plan"
+      %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "View Plan"
       = render "form"
-  .col-sm-6
+  .col-sm-7
     .table-well
       %center
         %h5
@@ -26,4 +26,7 @@
               %tr
                 %td= teaching_plan.teaching_date.strftime("%B,%d,%Y,%a")
                 %td= teaching_plan.plan_month
+  .col-sm-5
+    .teachingplancaledar
+      #calendar1
 
