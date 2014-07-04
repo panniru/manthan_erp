@@ -1,11 +1,8 @@
 .row
   .col-sm-11
-    .pull-right
-      = form_tag forms_path, :method => 'get' do
-        .col-sm-8
-          = select_tag(:search,options_for_select([['Accepted'],['Rejected'],['Pending']],:selected => :status),{:class => 'col-sm-4 form-control'})
-        .col-sm-4
-          = button_tag "close" , :class => 'btn btn-primary'
+    .pull-right 
+      .col-sm-4
+        = button_tag "close" , :class => 'btn btn-primary'
 = form_tag forms_path, method: :get do
   %input#search{name: "search", placeholder: "Enter search term...", type: "text"}
   = submit_tag "Search", name: nil, :class => 'btn btn-primary'
@@ -28,7 +25,8 @@
   %tbody
     - @forms.each do |form|
       %tr
-        %td= check_box_tag "form_ids[]", form.id
+        %td 
+          %input#formid{:name => "form.id", :type => "checkbox", :value => "1"}
         %td= form.enquiry_no
         %td= form.name
         %td= form.email
