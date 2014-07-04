@@ -1,0 +1,59 @@
+.col-sm-9
+  %table.table-striped.table-condensed
+    %tr
+      %td{style: "width:25%"}
+        %b
+          %span.label.label-warning Enquiry #
+      %td{style: "width:25%"}
+        = @form.enquiry_no
+      %td{style: "width:25%"}
+        %br
+         
+      
+    %tr
+      %td
+        %label{for: "name"} Name
+      %td
+        = @form.name
+      %td
+        %label{for: "klass"} Class
+      %td
+        = @form.klass
+    %tr
+      %td
+        %label{for: "mobile_no"} Mobile No
+      %td
+        = @form.mobile_no
+      %td
+        %label{for: "email"} Email
+      %td
+        = @form.email
+  
+    %tr
+      %td
+        %label{for: "education_qualification"} Education Qualification
+      %td
+        = @form.education_qualification
+      %td
+        %label{for: "subject"} Subject
+      %td
+        = @form.subject
+           
+.col-sm-3
+  = link_to "View Enquiry", form_path , :class => 'enq_button btn btn-primary'
+  %br
+  %br
+  = link_to "Create Enquiry", new_form_path , :class => 'enq_button btn btn-primary'
+  %br
+  %br
+
+ 
+  - if("#{@form.status}" == 'Enquiry Created'||"#{@form.status}" == 'Application Created' ||"#{@form.status}" == 'Assessment Scheduled')
+    = link_to "Close the Form", "#", :class => "change label label-danger",:data=> {:id => "#{@form.id}"}
+  - else 
+    = link_to "Form Closed", "#", :class => "label label-success",:data=> {:id => "#{@form.id}"}
+  
+      
+
+    
+      

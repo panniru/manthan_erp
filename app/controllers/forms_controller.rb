@@ -2,6 +2,7 @@ class FormsController < ApplicationController
   load_resource :only => [:show, :update, :edit, :destroy]
   def create
     @form = Form.new(form_params)
+    @form.update(:status => "Enquiry Created")
     if @form.save
       flash[:success] = I18n.t :success, :scope => [:form, :create]
       redirect_to forms_path
@@ -12,9 +13,12 @@ class FormsController < ApplicationController
   def index
     @forms = Form.all
     @forms = Form.search(params[:search])
-    
+   
   end
-
+def home_index
+   @form = Form.find(params[:id])
+  @forms = Form.forms
+  end
   def new
     @form = Form.new
   end
@@ -26,6 +30,7 @@ def edit
   end
   def update
     @form = Form.find(params[:id])
+    @form.update(:status => "Assessment Scheduled")
     if @form.update(form_params)
       flash[:success] = I18n.t :success, :scope => [:form, :update]
       redirect_to forms_path

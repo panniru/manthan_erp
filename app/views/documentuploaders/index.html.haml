@@ -3,22 +3,22 @@
   = submit_tag "Search", name: nil, :class => 'btn btn-primary'
   %br
   %br
-%table.table.table.striped.table-bordered.table-condensed.table-hover{style: "width:80%"}
+%table.table.table.striped.table-bordered.table-condensed.table-hover{style: "width:90%"}
   %thead
     %tr
-      %th Name
+      %th Enquiry_no
       %th Educational Certificates
       %th Previous employment proof
       %th Salary Slips For Previous Months
-      %th
+      %th 
   %tbody
     - @documentuploaders.each do |documentuploader|
       %tr
-        %td= documentuploader.name
-        %td= link_to "view", documentuploader.educational_certificates_url
-        %td= link_to "view", documentuploader.previous_employment_proof_url
-        %td= link_to "view", documentuploader.salary_slips_for_previous_months_url
-        %td
-          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_documentuploader_path(documentuploader), :class => "btn btn-warning btn-sm", :title => "Edit"
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), documentuploader_path(documentuploader), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+        %td= link_to "#{documentuploader.enquiry_no}",home_index_documentuploader_path(documentuploader)
+        %td= link_to "edu_certificates", documentuploader.educational_certificates_url
+        %td= link_to "Previous_Proofs", documentuploader.previous_employment_proof_url
+        %td= link_to "Salary_Slips", documentuploader.salary_slips_for_previous_months_url
+        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), documentuploader_path(documentuploader), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+        
+       
  

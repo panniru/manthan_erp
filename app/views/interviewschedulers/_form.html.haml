@@ -1,10 +1,10 @@
 = form_for Interviewscheduler.new do |f|
-  .row
+  .row   
     .field
       .col-sm-3
-        = f.label "Name:", :class => 'control-label'
+        = f.label "Enquiry_no:", :class => 'control-label'
       .col-sm-7
-        = f.text_field :name, :class => 'form-control'
+        = f.text_field :enquiry_no, :class => 'form-control'
         %br
   .row   
     .field
@@ -26,5 +26,8 @@
         = f.label "Start Time:", :class => 'control-label'
       .col-sm-7
         = f.time_select :end_time, :class => 'form-control'
-        
-        
+        %br
+  .row
+    .col-sm-3
+    .col-sm-7
+      = f.button "submit" , :class =>'btn btn-primary'

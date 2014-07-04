@@ -1,6 +1,8 @@
 .row
   .col-sm-5
     #calendar
+      %br
+      %br
   .col-sm-7
     .row
       .col-sm-6
@@ -17,9 +19,9 @@
                     .row
                       .field
                         .col-sm-3
-                          = f.label "Name:", :class => 'control-label'
+                          = f.label "Enquiry_no:", :class => 'control-label'
                         .col-sm-7
-                          = f.text_field :name, :class => 'form-control'
+                          = f.text_field :enquiry_no, :class => 'form-control'
                           %br
                     .row   
                       .field
@@ -47,31 +49,28 @@
                       .modal-footer
                         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
                         = f.submit "save", :class => 'btn btn-primary'
-                      
-    %br
-    .col-sm-6
-      .table-well
-        %center
-          %h4
-            LISTING Schedules
-            
-        %table.table-striped.table-condensed.table-bordered
+= form_tag forms_path, method: :get do
+  %input#search{name: "search", placeholder: "Enter search term...", type: "text"}
+    = submit_tag "Search", name: nil, :class => 'btn btn-primary'
+    %br         
+    %center
+      %h5
+        LISTING Schedules
+        %table.table.table.striped.table-bordered.table-condensed.table-hover{style: "width:90%"}
           %tr
-            %th{style: "width:7%"} Name
-            %th{style: "width:7%"} Description
-            %th{style: "width:7%"} Start Day
-            %th{style: "width:5%"} Start Time
-            %th{style: "width:1%"}
+            %th Enquiry NO 
+            %th Description
+            %th Start Day
+            %th Start Time
             
-           
+            
             - @interviewschedulers.each do |interviewscheduler|
               %tr
-                %td= interviewscheduler.name
+                %td= link_to "#{interviewscheduler.enquiry_no}",home_index_interviewscheduler_path(interviewscheduler)
                 %td= interviewscheduler.description
                 %td= interviewscheduler.start_time
                 %td= interviewscheduler.end_time
-                %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), interviewscheduler, :class => "btn btn-danger btn-sm",:method => :delete, :data => { :confirm => 'Are you sure?' }, :title => "Delete"         
-
+               
 
                   
 %br
