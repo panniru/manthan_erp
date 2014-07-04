@@ -6,7 +6,7 @@
         
         $scope.newPostDatedCheques = function(){
             $scope.reset();
-            $('#createModal').modal('show')
+            $('#createModal').modal('show');
         }
 
         $scope.editPostDatedCheques = function(){
@@ -35,7 +35,7 @@
         };
 
         $scope.fillFor100 = function(){
-            var first_value = $scope.newPostDatedCheques[0]
+            var first_value = $scope.newPostDatedCheques[0];
             var amount_per = parseFloat(first_value.amount_per);
             var date; 
             var dateStr = $("#date-0").val()
@@ -43,16 +43,16 @@
                 var dateSplit = dateStr.split('/')
                 date = new Date(dateSplit[2], dateSplit[1]-1, dateSplit[0]);
             }
-            var count = parseInt(100/parseFloat(first_value.amount_per))
-            var left_per = 100%parseFloat(first_value.amount_per)
+            var count = parseInt(100/parseFloat(first_value.amount_per));
+            var left_per = (100%parseFloat(first_value.amount_per));
             for(var i = 0; i < count; i++){
                 var new_date = monthlyPdcService.next_month_date(date, i);
-                $scope.newPostDatedCheques[i].date = new_date.getDate()+'/'+(new_date.getMonth()+1)+'/'+new_date.getFullYear() ;
+                $scope.newPostDatedCheques[i].date = (new_date.getDate()+'/'+(new_date.getMonth()+1)+'/'+new_date.getFullYear()) ;
                 $scope.newPostDatedCheques[i].amount_per =  amount_per ;
             }
             if(left_per != 0.0){
                 var new_date = monthlyPdcService.next_month_date(date, count);
-                $scope.newPostDatedCheques[count].date = new_date.getDate()+'/'+(new_date.getMonth()+1)+'/'+new_date.getFullYear()
+                $scope.newPostDatedCheques[count].date = (new_date.getDate()+'/'+(new_date.getMonth()+1)+'/'+new_date.getFullYear());
                 $scope.newPostDatedCheques[count].amount_per =  left_per;
             }
 
@@ -62,7 +62,7 @@
             $scope.newPostDatedCheques = []
             for(var i=0; i<12; i++){
                 $scope.newPostDatedCheques.push({"date":"", "amount_per":""});
-            };
+            }
         }
         
         $scope.isEligleToShow = function(){
@@ -74,8 +74,6 @@
             }else{
                 return false
             }
-                
-
         };
 
         

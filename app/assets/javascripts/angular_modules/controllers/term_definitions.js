@@ -12,8 +12,8 @@
         }
         
         $scope.editTermDefinitions = function(){
-            $scope.newTermDefinitions = $scope.termDefinitions
-            $('#createModal').modal('show')
+            $scope.newTermDefinitions = $scope.termDefinitions;
+            $('#createModal').modal('show');
         }
 
         $scope.submitTermDefinitions = function(){
