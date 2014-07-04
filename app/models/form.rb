@@ -3,7 +3,9 @@ class Form < ActiveRecord::Base
   validates :dob, presence: true
   validates :mobile_no, presence: true
   validates_format_of :email, with: /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info))\z/i
- 
+
+  scope :forms, lambda{where("status = 'Form Closed'")}
+  scope :forms,lambda{where("status = 'Enquiry Created'")}
   
   def self.search(search)
     return scoped unless search.present?

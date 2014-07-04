@@ -1,0 +1,47 @@
+.col-sm-9
+  %table.table-striped.table-condensed
+    %tr
+      %td{style: "width:25%"}
+        %b
+          %span.label.label-warning Enquiry #
+      %td{style: "width:25%"}
+        = @interviewscheduler.enquiry_no
+      %td{style: "width:25%"}
+        %b
+         
+      
+    %tr
+      %td
+        %label{for: "description"} Description
+      %td
+        = @interviewscheduler.description
+      %td
+        %label{for: "start_time"} Start Time
+      %td
+        = @interviewscheduler.start_time
+    %tr
+      %td
+        %label{for: "end_time"} Start Time
+      %td
+        = @interviewscheduler.end_time
+  
+        %br
+           
+    .col-sm-6
+      = link_to "View Assessment", interviewscheduler_path , :class => 'enq_button btn btn-primary'
+      %br
+      %br
+      = link_to "Create Assessment", new_interviewscheduler_path , :class => 'enq_button btn btn-primary'
+      %br
+      %br
+ 
+  
+  - if("#{@interviewscheduler.status}" == 'Assessment Created'||"#{@interviewscheduler.status}" == 'Assessment Complete')
+    = link_to "Close the Form", "#", :class => "change label label-danger",:data=> {:id => "#{@documentuploader.id}"}
+  - else 
+    = link_to "Form Closed", "#", :class => "label label-success",:data=> {:id => "#{@interviewscheduler.id}"}
+  
+      
+
+    
+      

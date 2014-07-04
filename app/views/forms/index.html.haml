@@ -12,7 +12,7 @@
 %table.table.table.striped.table-bordered.table-condensed.table-hover{style: "width:90%"}
   %thead
     %tr
-      %th
+      
       %th Enquiry No
       %th Name
       %th Email
@@ -25,9 +25,9 @@
   %tbody
     - @forms.each do |form|
       %tr
-        %td 
-          %input#formid{:name => "form.id", :type => "checkbox", :value => "1"}
-        %td= form.enquiry_no
+         
+          
+        %td= link_to "#{form.enquiry_no}",home_index_form_path(form)
         %td= form.name
         %td= form.email
         %td= form.mobile_no
@@ -35,6 +35,9 @@
         %td= form.klass
         %td= form.subject
         %td= form.status
-.row
-  .col-sm-10
-    = link_to "Add New", new_form_path, :class => "btn btn-primary"    
+       
+       
+        
+          
+       
+

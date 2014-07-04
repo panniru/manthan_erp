@@ -12,7 +12,10 @@ class InterviewschedulersController < ApplicationController
   # GET /interviewschedulers/1.json
   def show
   end
-
+  def home_index
+    @interviewscheduler = Interviewscheduler.find(params[:id])
+    @interviewschedulers = Interviewscheduler.interviewschedulers
+  end
   # GET /interviewschedulers/new
   def new
     @interviewscheduler = Interviewscheduler.new
@@ -28,6 +31,7 @@ class InterviewschedulersController < ApplicationController
     @interviewscheduler = Interviewscheduler.new(interviewscheduler_params)
 
     respond_to do |format|
+      @interviewscheduler.update(:status => "Assessment Scheduled")
       if @interviewscheduler.save
         format.html { redirect_to @interviewscheduler, notice: 'Interviewscheduler was successfully created.' }
         format.json { render action: 'show', status: :created, location: @interviewscheduler }
@@ -42,6 +46,7 @@ class InterviewschedulersController < ApplicationController
   # PATCH/PUT /interviewschedulers/1.json
   def update
     respond_to do |format|
+      @interviewscheduler.update(:status => "Assessment Complete")
       if @interviewscheduler.update(interviewscheduler_params)
         format.html { redirect_to @interviewscheduler, notice: 'Interviewscheduler was successfully updated.' }
         format.json { head :no_content }
@@ -70,6 +75,6 @@ class InterviewschedulersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def interviewscheduler_params
-      params.require(:interviewscheduler).permit(:name, :description, :start_time, :end_time)
+      params.require(:interviewscheduler).permit(:enquiry_no, :status, :description, :start_time, :end_time)
     end
 end
