@@ -56,7 +56,7 @@
             %td
               %input{:type => "button", "ng-click" => "clearAllPeriods()", :class => "btn btn-danger btn-sm", :value => "CLEAR ALL" } 
     .col-md-2{"ng-show" => "myValue"} 
-      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "savePeriods()", :value => "SAVE",:redirct_to =>"time_tables_path"} 
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "savePeriods()", :value => "SAVE"} 
 
   .row
     = render "show_teacher_time_table_form"

@@ -23,26 +23,26 @@
             %th GRADE
             %th SECTION
             %th SUBJECT
-            %th
           %tr{"ng-repeat" => "mapping in mappings | orderBy:'id'" }
             %td Mapping {{" "+($index+1)}} {{+" "+data.length}}
             %td               
-              %select{"ng-model" => "mapping['grade_master_id']", "ng-options" => "grade.id as grade.grade for grade in grades ",:class => "form-control"} 
+              %select{"ng-model" => "mapping.grade_master_id", "ng-options" => "grade.id as grade.grade for grade in grades ",:class => "form-control"} 
                 %option{value: ""}
               {{mapping['grade_master_id']}}
-            %td
+            %td{"ng-show" => "mySectionMultiSelect"} 
+              %select{:multiple => "multiple","ng-model" => "mapping['section_master_id']", "ng-options" => "section.id as section.section for section  in sections | filter : {grade_master_id: mapping['grade_master_id']}",:class => "form-control"}  
+                %option{value: ""}
+              {{mapping['section_master_id']}}
+            %td{"ng-show" => "mySingleSelect"} 
               %select{"ng-model" => "mapping['section_master_id']", "ng-options" => "section.id as section.section for section  in sections | filter : {grade_master_id: mapping['grade_master_id']}",:class => "form-control"}  
                 %option{value: ""}
               {{mapping['section_master_id']}}
             %td
               %select{"ng-model" => "mapping['subject_master_id']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"} 
                 %option{value: ""}
-              {{mapping['subject_master_id']}}
-            %td
-              %select{:multiple => "multiple","ng-model" => "mapping['section_master_id']", "ng-options" => "section.id as section.section for section  in sections | filter : {grade_master_id: mapping['grade_master_id']}",:class => "form-control"}  
-                %option{value: ""}
-              {{mapping['section_master_id']}}
+              {{mapping['subject_master_id']}}            
     .col-md-3{"ng-show" => "myNewEditFormValue"}                     
       %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveMappings()", :value => "SAVE"}
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "addOneMappings()", :value => "ADD"}
   .row
     = render "show_form"
