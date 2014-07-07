@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(version: 20140704091043) do
   end
 
   create_table "events", force: true do |t|
+    t.integer  "admission_id"
     t.string   "title"
     t.text     "description"
     t.string   "staff"

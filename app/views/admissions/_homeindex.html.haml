@@ -64,10 +64,25 @@
   = link_to "View Enquiry", enquiry_show_admission_path , :class => 'enq_button btn btn-primary'
   %br
   %br
-  = link_to "Create Application", admission_new_admission_path , :class => 'enq_button btn btn-primary'
+  - if("#{@admission.status}" == 'Enquiry_Created' )
+    = link_to "Edit Enquiry", edit_admission_path , :class => 'enq_button btn btn-primary'
+    %br
+    %br
+    = link_to "Create Application", admission_new_admission_path , :class => 'enq_button btn btn-primary'
+   
+  - else
+    = link_to "View Application", admission_show_admission_path , :class => 'enq_button btn btn-primary'
+    %br
+    %br
+    = link_to "Edit Application", edit_application_admission_path ,:class => 'enq_button btn btn-primary'    
+    %br
+    %br
+    = link_to "Create Assessment", assessment_new_admission_path ,:class => 'enq_button btn btn-primary'    
   %br
   %br
-  - if("#{@admission.status}" == 'Enquiry Created'||"#{@admission.status}" == 'Application Created' )
+
+
+  - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created' )
     = link_to "Close the Form", "#", :class => "change label label-danger",:data=> {:id => "#{@admission.id}"}
   - else 
     = link_to "Form Closed", "#", :class => "label label-success",:data=> {:id => "#{@admission.id}"}

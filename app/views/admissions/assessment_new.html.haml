@@ -1,0 +1,54 @@
+= form_for @event do |f|
+  - if @event.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
+      %ul
+        - @event.errors.full_messages.each do |msg|
+          %li= msg
+ 
+  .row
+    .field
+      .col-sm-3
+        = f.label :title, :class => 'control-label'
+      .col-sm-3
+        = f.text_field :title, :class => 'form-control'
+        %br
+  .row   
+    .field
+      .col-sm-3
+        = f.label :description, :class => 'control-label'
+      .col-sm-3
+        = f.text_area :description, :class => 'form-control'
+  %br
+  .row
+    .field
+      .col-sm-3
+        = f.label :staff, :class => 'control-label'
+      .col-sm-3
+        = f.text_field :staff, :class => 'form-control'
+  %br
+  .row
+    .field
+      .col-sm-3
+        = f.label :grade, :class => 'control-label'
+      .col-sm-3
+        = f.text_field :grade, :class => 'form-control'
+  %br
+  .row
+    .field
+      .col-sm-3
+        = f.label :start_time, :class => 'control-label'
+      .col-sm-3
+        = f.datetime_select :start_time, :class => 'form-control'
+  %br
+  .row
+    .field
+      .col-sm-3
+        = f.label :end_time, :class => 'control-label'
+      .col-sm-3
+        = f.datetime_select :end_time, :class => 'form-control'
+  %br
+  .col-sm-3
+    .pull-right
+      = f.submit 'Save',:class => 'btn btn-primary'
+      

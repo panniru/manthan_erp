@@ -1,5 +1,5 @@
 
-= form_for @admission, :html => { :class => "form-horizontal", :role => "form", :method => "put"} do |f|
+= form_for @admission,:url => {:action => 'update_enquiry'}, :method => :POST do |f|
   = render "shared/error_messages", :object => f.object
   .row
     .col-sm-3
@@ -395,4 +395,4 @@
       = f.hidden_field :status,:value => "Application_Created"
       = f.submit "Create", :class => 'btn btn-primary'
       = link_to 'Back', admissions_path, :class => 'btn btn-primary'
-    
+

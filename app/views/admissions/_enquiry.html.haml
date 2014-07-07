@@ -203,6 +203,7 @@
         .col-sm-3
           = f.text_field :pp, :class => 'form-control'
       %center
+        = f.hidden_field :status, :value => 'Enquiry_Created'
         = f.submit "Create", :class => 'btn btn-primary'
         = link_to 'Back', admissions_path, :class => 'btn btn-primary'
 

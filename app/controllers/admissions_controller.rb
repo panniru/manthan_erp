@@ -1,10 +1,10 @@
 class AdmissionsController < ApplicationController
   def index
-    @events = Event.all
-    @admissions = Admission.all
-    @admissions = Admission.search(params[:search])
-   
-    
+    if params[:search].present?
+      @admissions = Admission.search(params[:search])
+    else
+      @admissions = Admission.all.order("status")
+    end
   end
  
 
@@ -15,10 +15,11 @@ class AdmissionsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:id])
     @admission = Admission.find(params[:id])
   end
-
+  def edit_application
+    @admission = Admission.find(params[:id])
+  end
   def new
     @event = Event.new
     @admission = Admission.new
@@ -26,7 +27,6 @@ class AdmissionsController < ApplicationController
   
   def create
     @admission = Admission.new(admission_params)
-    @admission.update(:status => "Enquiry_Created")
     respond_to do |format|
       if @admission.save
         format.html { redirect_to admission_home_admissions_path, notice: 'Enquiry was successfully created.' }
@@ -47,33 +47,40 @@ class AdmissionsController < ApplicationController
     @event = Event.find(params[:id])
   end
   def event_index
-    @events = Event.all
+    @event = Event.find(params[:admission_id])
+    @admissions = @event.admissions
   end
  def enquiry_index
-   @admissions = Admission.all
-   @admissions = Admission.search(params[:search])
-   @admissions = Admission.enquiry_forms
+   if params[:search].present?
+     @admissions = Admission.search(params[:search])
+   else
+     @admissions = Admission.enquiry_forms
+   end
  end
  def admission_index
-   @admissions = Admission.all
-   @admissions = Admission.search(params[:search])
-   @admissions = Admission.application_forms
-   
+   if params[:search].present?
+     @admissions = Admission.search(params[:search])
+   else
+     @admissions = Admission.application_forms
+   end
  end
  def enquiry_new
    @admission = Admission.new
  end
  def admission_new
    @admission = Admission.find(params[:id])
-
+ end
+ def assessment_new
+   @event = Event.new
  end
 
  def admission_home
-   @admissions = Admission.enquiry_forms_or_application_forms
-   @admissions = Admission.search(params[:search])
-   
-   
-  
+     
+     if params[:search].present?
+       @admissions = Admission.search(params[:search])
+     else
+       @admissions = Admission.enquiry_forms_or_application_forms  
+     end
  end
 
  def closed_forms
@@ -83,10 +90,8 @@ class AdmissionsController < ApplicationController
  def home_index
    @admission = Admission.find(params[:id])
  end
- 
- def update
+ def update_enquiry
    @admission = Admission.find(params[:id])
-   @admission.update(:status => "Application_Created")
    respond_to do |format|
      if @admission.update(admission_params)
        
@@ -99,7 +104,32 @@ class AdmissionsController < ApplicationController
      end
    end
  end
+
+ def update
+   @admission = Admission.find(params[:id])
+   respond_to do |format|
+     if @admission.update(admission_params)
+       format.html { redirect_to admission_home_admissions_path, notice: 'Admission was successfully updated.' }
+       format.json { render action: 'index', :status => "success" }
+       
+     else
+       format.html { render action: 'edit' }
+       format.json { render json: @admission.errors, :status => "failure" }
+     end
+   end
+ end
+ 
  def update_admission
+   @admission = Admission.find(params[:id])
+   respond_to do |format|
+     if  @admission.update(:status => "Form_Closed")
+       format.json { render action: 'index', :status => "success" }
+     else
+       format.json { render json: @admission.errors, :status => "failure" }
+     end
+   end
+ end
+ def update_assessment
    @admission = Admission.find(params[:id])
    
    respond_to do |format|
