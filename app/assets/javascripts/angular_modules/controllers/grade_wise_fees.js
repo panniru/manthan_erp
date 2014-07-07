@@ -49,7 +49,8 @@
         $scope.saveBucketWiseFee = function(){
             gradeWiseFeeService.saveBucketWiseFee($scope.gradeWiseFees)
                 .then(function(result) {
-                    window.location.href = "/grade_wise_fees"
+                 window.location.href = "/grade_wise_fees";
+
                 });
         }
     }]);

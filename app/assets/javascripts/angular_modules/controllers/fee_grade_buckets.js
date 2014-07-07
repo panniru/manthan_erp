@@ -9,17 +9,16 @@
             $scope.newFeeGradeBuckets = [] 
             for(var i=0; i<3; i++){
                 $scope.newFeeGradeBuckets.push({"grade_from": null, "grade_to":null, "optionsFrom":[], "optionsTo":[] });
-            };
-
+            }
             load_grades();
             $('#createModal').modal('show')
-        };
+        }
 
         $scope.editGradeBuckets = function(){
-            $scope.newFeeGradeBuckets = $scope.feeGradeBuckets
+            $scope.newFeeGradeBuckets = $scope.feeGradeBuckets;
             load_grades();
-            $('#createModal').modal('show')
-        };
+            $('#createModal').modal('show');
+        }
 
         var load_grades = function(){
             gradeService.allGrades()
@@ -100,8 +99,6 @@
                 return gradeBucket.grade_from === $scope.grades[$scope.grades.length-1].id
             }
         }
-
-        
     }]);
 	
 })(angular, myApp);
