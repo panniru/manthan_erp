@@ -430,6 +430,8 @@ ActiveRecord::Schema.define(version: 20140704091043) do
     t.integer  "faculty_master_id"
   end
 
+  add_index "teacher_grade_mappings", ["faculty_master_id", "grade_master_id", "section_master_id", "subject_master_id"], name: "teacher_grade_map_index_1", unique: true, using: :btree
+
   create_table "teachers_time_tables", force: true do |t|
     t.integer  "faculty_master_id"
     t.string   "academic_year"
@@ -446,13 +448,13 @@ ActiveRecord::Schema.define(version: 20140704091043) do
   end
 
   create_table "teaching_plans", force: true do |t|
+    t.string   "plan_month"
+    t.integer  "user_id"
+    t.string   "academic_year"
     t.string   "grade_master_id"
     t.string   "section_master_id"
     t.string   "plan"
     t.date     "teaching_date"
-    t.string   "plan_month"
-    t.integer  "user_id"
-    t.string   "academic_year"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

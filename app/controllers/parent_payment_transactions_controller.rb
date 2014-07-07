@@ -1,6 +1,17 @@
 class ParentPaymentTransactionsController < ApplicationController
   load_resource :only => [:print]
   before_action :load_parent_payment_master
+
+
+  def admin_transactions
+    @parent_payment_transactions = ParentPaymentTransaction.all
+    @parent_payment_transactions = @parent_payment_transactions.where(:status => params[:status]) if params[:status].present?
+    @parent_payment_transactions = @parent_payment_transactions.multi_search_parent_student(params[:search_term]) if params[:search_term].present?
+    @parent_payment_transactions = @parent_payment_transactions.transaction_on_or_before(Date.parse(params[:to_date])) if params[:to_date].present?
+    @parent_payment_transactions = @parent_payment_transactions.transaction_on_or_after(Date.parse(params[:from_date])) if params[:from_date].present?
+    @parent_payment_transactions = @parent_payment_transactions.paginate(:page => params[:page].present? ? params[:page] : 1, :per_page => 20)
+    @parent_payment_transactions = ParentPaymentTransactionsDecorator.decorate_collection(@parent_payment_transactions)
+  end
   
   def print
     respond_to do |format|
@@ -45,6 +56,7 @@ class ParentPaymentTransactionsController < ApplicationController
       end
     end  
   end
+
   
   
   private 

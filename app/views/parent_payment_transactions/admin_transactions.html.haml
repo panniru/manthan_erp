@@ -1,0 +1,29 @@
+.col-md-10
+  = render "search_form"
+  %br
+  .row
+    %h4.panel-title 
+      = "Transactions"
+    %hr
+    %table.table.table-bordered.table-striped.table-hover
+      %thead
+
+        %th Parent Name
+        %th Student Name
+        %th Transaction Date
+        %th Amount 
+        %th Type
+        %th Status
+      %tbody
+        - @parent_payment_transactions.each do |transaction|
+          %tr
+            %td= transaction.parent_name
+            %td= transaction.student_name
+            %td= transaction.transaction_date
+            %td= transaction.amount_in_rupees
+            %td= transaction.transaction_type
+            %td= transaction.status
+.col-md-4.col-md-offset-8  
+  = will_paginate @parent_payment_transactions, param_name: "page", previous_label: h("<"), next_label: h(">")
+            
+            

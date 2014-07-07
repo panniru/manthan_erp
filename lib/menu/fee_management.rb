@@ -11,6 +11,7 @@ class FeeManagement < Struct.new(:controller)
     sub_menu << cheques
     sub_menu << mailings
     sub_menu << approvals
+    sub_menu << admin_transactions
     sub_menu
   end
 
@@ -19,7 +20,7 @@ class FeeManagement < Struct.new(:controller)
     sub_menu << fee_structure
     sub_menu << payments
     #sub_menu << cheques
-    sub_menu << transactions
+    sub_menu << parent_transactions
     sub_menu
   end
   
@@ -74,8 +75,13 @@ class FeeManagement < Struct.new(:controller)
     MenuItem.new(:label => "Approvals", :klass => controller == "approval_items" ? "active" : "", :icon => "check", :href => "/approval_items")
   end
   
-  def transactions
-    MenuItem.new(:label => "Transactions", :klass => controller == "approval_items" ? "active" : "", :icon => "suitcase", :href => "/parent_payment_transactions/parent_transactions")
+  def parent_transactions
+    MenuItem.new(:label => "Transactions", :klass => controller == "parent_payment_transactions" ? "active" : "", :icon => "suitcase", :href => "/parent_payment_transactions/parent_transactions")
   end
+  
+  def admin_transactions
+    MenuItem.new(:label => "Transactions", :klass => controller == "parent_payment_transactions" ? "active" : "", :icon => "suitcase", :href => "/parent_payment_transactions/admin_transactions")
+  end
+  
   
 end
