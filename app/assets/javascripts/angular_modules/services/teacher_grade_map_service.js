@@ -22,12 +22,18 @@
             var url = "/teacher_grade_mappings/getmappings.json"
             return $http.post(url, {my_Teacher: myTeacher}); 
         }; 
+
+        var deleteMappings = function(delete_mapping_id){
+            var url = "/teacher_grade_mappings/deletemappings.json"
+            return $http.post(url, {_delete_mapping_id: delete_mapping_id}); 
+        };
        
         return {
             getFacultyNamesServiceView : getFacultyNamesServiceView,
             checkTeachersGradesMapping : checkTeachersGradesMapping,
             saveMappings : saveMappings,
-            getMappings : getMappings
+            getMappings : getMappings,
+            deleteMappings : deleteMappings
         };        
     }]);   
 

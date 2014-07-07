@@ -26,3 +26,22 @@
         = @documentuploader.salary_slips_for_previous_months
   
         %br
+           
+        .col-sm-6
+          = link_to "View Assessment", documentuploader_path , :class => 'enq_button btn btn-primary'
+          %br
+          %br
+          = link_to "Create Assessment", new_documentuploader_path , :class => 'enq_button btn btn-primary'
+          %br
+          %br
+ 
+  
+  - if("#{@documentuploader.status}" == 'Assessment Completed'||"#{@documentuploader.status}" == 'Sr management Review')
+    = link_to "Close the Form", "#", :class => "change label label-danger",:data=> {:id => "#{@documentuploader.id}"}
+  - else 
+    = link_to "Form Closed", "#", :class => "label label-success",:data=> {:id => "#{@documentuploader.id}"}
+  
+      
+
+    
+      

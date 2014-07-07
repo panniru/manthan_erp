@@ -56,8 +56,10 @@ class ApprovalItemsController < ApplicationController
 
   def fee_structure_approval_item
     respond_to do |format|
-      @approval_item = ApprovalItem.find_by_item_type("fee_structure")
-      @approval_item = ApprovalItem.new(:item_type => "fee_structure", :status => "new") unless @approval_item.present?
+      @approval_item = ApprovalItem.where(:item_type => "fee_structure").last
+      if @approval_item.nil? or ( @approval_item.present? and @approval_item.status == 'rejected')
+        @approval_item = ApprovalItem.new(:item_type => "fee_structure", :status => "new") 
+      end
       format.json do
         render :json => @approval_item
       end

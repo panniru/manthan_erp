@@ -21,7 +21,7 @@ class ApprovalItem < ActiveRecord::Base
   end
 
   def self.fee_can_be_edit?
-    approval_item = ApprovalItem.fee_structure_type.first
+    approval_item = ApprovalItem.fee_structure_type.last
     if approval_item.present?
       approval_item.status != 'pending' and approval_item.status != 'approved'
     else

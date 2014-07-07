@@ -1,1 +1,50 @@
-= render 'home'
+.col-sm-9
+  %table.table-striped.table-condensed
+    %tr
+      %td{style: "width:25%"}
+        %b 
+          %span.label.label-danger Applicant's Details
+     
+    %tr
+      %td
+        %label{for: "enquiry_no"} Enquiry no
+      %td
+        = @form.enquiry_no
+      %td
+        %label{for: "name"} Name
+      %td
+        = @form.name
+    %tr
+      %td
+        %label{for: "email"} Email
+      %td
+        = @form.email
+      %td
+        %label{for: "subject"} Subject
+      %td
+        = @form.subject
+    %tr
+      %td
+        %label{for: "klass"} Class
+      %td
+        = @form.klass
+      %td
+        %label{for: "mobile_no"}  Mobile
+      %td
+        = @form.mobile_no
+    %tr    
+      %td
+        %label{for: "language"} Language
+      %td
+        = @form.language
+      %td
+        %label{for: "dob"} Date of birth
+      %td
+        = @form.dob
+          
+      %td
+        %label{for: "expected_salary"} Expected Salary
+      %td
+        = @form.expected_salary
+    
+     

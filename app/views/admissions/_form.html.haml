@@ -9,20 +9,17 @@
     .col-sm-6
       .form-group
         %center
-          .col-sm-5
+          .col-sm-6
             %h5 APPLICATION FORM FOR        
           .col-sm-3
-            = f.text_field :from, :class => 'datepicker form-control' 
-          .col-sm-1
-            to
-          .col-sm-3
-            = f.text_field :to, :class => 'datepicker form-control'
+            = f.text_field :from, :class => 'date-picker-year form-control' 
+        
     .col-sm-3
       .pull-right
+        .col-sm-4
+          = f.label "branch", :class => 'control-label'          
         .col-sm-8
           = f.text_field :branch, :class => 'form-control'
-        .col-sm-4
-          = f.label "branch", :class => 'control-label'
   .row
     .col-sm-4
       .pull-left
@@ -33,7 +30,7 @@
               %th Admission no:
               %th= f.text_field :admission_no, :class => 'form-control'
               %th Class:
-              %td= f.text_field :grade, :class => 'form-control'
+              %td= @admission.klass
     .col-sm-8
       .pull-right
         
@@ -205,7 +202,8 @@
    
   .row
     .col-sm-12
-      = f.label "Proficiency in English Please tick the appropriate ", :class => 'control-label'
+      %b
+        Proficiency in English Please tick the appropriate 
   .row
     .col-sm-12
       %table.table.table.bordered

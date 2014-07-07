@@ -3,7 +3,11 @@ ManthanErp::Application.routes.draw do
   get "teaching_plans/edit"
   get "teaching_plans/index"
   get "teaching_plans/show"
-  resources :interviewschedulers
+  resources :interviewschedulers do
+    member do
+      get 'home_index'
+    end
+  end
 
   resources :staffs
   get "staffs/staffview"
@@ -34,9 +38,19 @@ ManthanErp::Application.routes.draw do
 
   resources :teaching_plans
 
-  resources :documentuploaders
+  resources :documentuploaders do
+    member do
+      get 'home_index'
+    end
+  end
   resources :adds
-  resources :forms
+  
+ resources :forms do
+    member do
+      get 'home_index'
+    end
+  end
+
   resources :recruitments
   resources :discounts 
   resources :approval_items do
@@ -193,7 +207,9 @@ ManthanErp::Application.routes.draw do
     collection do
       get "check_teachers_grades_mapping"
       post "savemappings"
-      post "getmappings"      
+      post "getmappings" 
+      post "deletemappings"  
+      get "show_grade_wise"   
       end
   end
   

@@ -17,14 +17,21 @@
         
         
         $scope.submitPostDatedCheques = function(){
+            var total_percentage = 0.0;
             angular.forEach($scope.newPostDatedCheques, function(cheque, index){
                 cheque.date = $("#date-"+index).val()
+                total_percentage += parseFloat(cheque.amount_per)
             });
-            resourceService.PostDatedCheque.bulk({bulk_post_dated_cheques: $scope.newPostDatedCheques})
-                .$promise.then(function(responce){
-                    $scope.postDatedCheques = resourceService.PostDatedCheque.query()
-                    $('#createModal').modal('hide')
-                })
+            if(total_percentage == 100.00){
+                resourceService.PostDatedCheque.bulk({bulk_post_dated_cheques: $scope.newPostDatedCheques})
+                    .$promise.then(function(responce){
+                        $scope.postDatedCheques = resourceService.PostDatedCheque.query()
+                        $('#createModal').modal('hide')
+                    })
+            }else{
+                alert("Sum of the maount percentages are not 100.")
+                return false;
+            }
         }
 
         $scope.destroy = function(postDatedCheque){

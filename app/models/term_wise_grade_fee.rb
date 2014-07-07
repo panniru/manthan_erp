@@ -13,6 +13,7 @@ class TermWiseGradeFee < ActiveRecord::Base
 
   def self.fee_structure_defined?
     TermWiseGradeFee.count > 0
+    false
   end
 
   

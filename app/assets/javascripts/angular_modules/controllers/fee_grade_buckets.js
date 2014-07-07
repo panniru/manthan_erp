@@ -2,16 +2,26 @@
     "use strict";
     app.controller("FeeGradeBucketsController",["$scope", "gradeService", "gradeBucketService",  function($scope, gradeService, gradeBucketService) {
         $scope.feeGradeBuckets = []
-        //alert(gradeBucketService.FeeGradeBucket.query())
         $scope.feeGradeBuckets = gradeBucketService.FeeGradeBucket.query()
+
         
         $scope.newGradeBuckets = function(){
             $scope.newFeeGradeBuckets = [] 
-            for(var i=0; i<3; i++){
-                $scope.newFeeGradeBuckets.push({"grade_from": null, "grade_to":null, "optionsFrom":[], "optionsTo":[] });
-            }
+            addBuckets(3);
             load_grades();
             $('#createModal').modal('show')
+        }
+
+        $scope.addMoreBuckets = function(){
+            var prev_len = $scope.newFeeGradeBuckets.length
+            addBuckets(3);
+            $scope.gradeChangeActionTo(prev_len-1)
+        }
+        
+        var addBuckets = function(count){
+            for(var i=0; i<count; i++){
+                $scope.newFeeGradeBuckets.push({"grade_from": null, "grade_to":null, "optionsFrom":[], "optionsTo":[] });
+            }
         }
 
         $scope.editGradeBuckets = function(){
@@ -24,7 +34,12 @@
             gradeService.allGrades()
                 .then(function(responce){
                     $scope.grades = responce.data
-                    $scope.newFeeGradeBuckets[0]['optionsFrom'] = responce.data
+                    angular.forEach($scope.newFeeGradeBuckets, function(value){
+                        value.grade_from = parseInt(value.grade_from)
+                        value.grade_to = parseInt(value.grade_to)
+                        value.optionsFrom = $scope.grades
+                        value.optionsTo = $scope.grades
+                    })
                 });
         }
 
@@ -54,14 +69,14 @@
         
         $scope.gradeChangeActionFrom = function(index){
             var gradeBucket = $scope.newFeeGradeBuckets[index]
-            gradeBucket.optionsTo = getOptions(gradeBucket.grade_from,$scope.grades);
+            gradeBucket.optionsTo = getOptions(gradeBucket.grade_from,$scope.grades, "to");
         };
         
         $scope.gradeChangeActionTo = function(index){
             var gradeBucket = $scope.newFeeGradeBuckets[index]
             if(typeof $scope.newFeeGradeBuckets[index+1] != 'undefined'){
                 var nextBucket = $scope.newFeeGradeBuckets[index+1]
-                nextBucket.optionsFrom = getOptions(gradeBucket.grade_to,$scope.grades);
+                nextBucket.optionsFrom = getOptions(gradeBucket.grade_to,$scope.grades, "from");
             }
         };
 
@@ -77,14 +92,16 @@
 
         $scope.isValidToOption = function(index){
             var gradeBucket = $scope.newFeeGradeBuckets[index]
-            return (gradeBucket.grade_to > gradeBucket.grade_from)
+            return (gradeBucket.grade_to >= gradeBucket.grade_from)
         }
 
 
-        var getOptions = function(lowerLimit, grades){
+        var getOptions = function(lowerLimit, grades, type){
             var options = []
             angular.forEach(grades, function(grade){
-                if(grade.id > lowerLimit){
+                if(type === 'to' && grade.id >= lowerLimit){
+                    options.push(grade)
+                }else if(type === 'from' && grade.id > lowerLimit){
                     options.push(grade)
                 }
             });

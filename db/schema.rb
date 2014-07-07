@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702075040) do
+ActiveRecord::Schema.define(version: 20140704091043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -156,6 +156,8 @@ ActiveRecord::Schema.define(version: 20140702075040) do
     t.string   "salary_slips_for_previous_months"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
+    t.string   "enquiry_no"
   end
 
   create_table "events", force: true do |t|
@@ -249,6 +251,8 @@ ActiveRecord::Schema.define(version: 20140702075040) do
     t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
+    t.string   "enquiry_no"
   end
 
   create_table "job_runs", force: true do |t|

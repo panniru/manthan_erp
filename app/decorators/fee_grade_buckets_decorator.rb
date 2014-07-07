@@ -11,11 +11,11 @@ class FeeGradeBucketsDecorator < Draper::Decorator
   end
     
   def docorated_hash
-    JSON.parse(model.to_json).merge!(:grade_from_name => grade_from_name, :grade_to_name => grade_to_name)
+    model.attributes.merge!(:grade_from_name => grade_from_name, :grade_to_name => grade_to_name)
   end
   
   def to_json(options = {})
-    JSON.parse(model.to_json).merge!(:grade_from_name => grade_from_name, :grade_to_name => grade_to_name).to_json
+    model.attributes..merge!(:grade_from_name => grade_from_name, :grade_to_name => grade_to_name).to_json
   end
   
 
