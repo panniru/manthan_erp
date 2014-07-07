@@ -1,7 +1,13 @@
 class TeachingPlansController < ApplicationController
   def index
     @teaching_plans = TeachingPlan.all
+    @teaching_plans = TeachingPlan.find(:all, :order => 'teaching_date,plan_month')
+    @teaching_plans = @teaching_plans.group_by { |t| t.teaching_date.beginning_of_month }
   end
+  def calendardata   
+    @teaching_plans = TeachingPlan.all
+  end
+  
   def new
     @teaching_plan = TeachingPlan.new
   end
@@ -21,7 +27,7 @@ class TeachingPlansController < ApplicationController
   def show
     @teaching_plan = TeachingPlan.find(params[:id])
   end
-  def gradeserviceview
+  def gradeserviceview   
     respond_to do |format|
       format.json do
         grades = TeacherGradeMapping.all.map do |grade|
@@ -54,6 +60,40 @@ class TeachingPlansController < ApplicationController
     end
   end
   def teachingplan_params
-    params.require(:teaching_plan).permit(:grade_master_id, :section_master_id,:teaching_date,:plan_month  )
+    params.require(:teaching_plan).permit(:grade_master_id, :section_master_id,:teaching_date,:plan_month )
+  end
+  def getfacultyidservice   
+    respond_to do |format|
+      format.json do
+        c =User.find(current_user)       
+        faculty = FacultyMaster.where('user_id = '+"#{c.id}")        
+        faculty = faculty.map do |fac|
+          {id: fac.id}
+        end       
+        render :json => faculty
+      end
+    end
+  end
+  def getgradessectionsservice
+p params
+p params[:_faculty_id].to_i   
+          faculty_id = params[:_faculty_id].to_i
+
+    p    d = TeacherGradeMapping.where('faculty_master_id ='+"#{faculty_id}")
+
+
+ 
+p "++++++++"
+    respond_to do |format|
+      format.json do
+        mappings = TeacherGradeMapping.all
+        p mappings
+p "========>"
+       
+        
+
+        render :json => mappings
+      end      
+    end
   end
 end

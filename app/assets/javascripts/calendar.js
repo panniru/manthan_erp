@@ -8,7 +8,7 @@ $(document).ready(function() {
     })
     
         $('#calendar1').fullCalendar({
-            events: '/teaching_plans.json'
+            events: '/teaching_plans/calendardata.json'
         })
     
 

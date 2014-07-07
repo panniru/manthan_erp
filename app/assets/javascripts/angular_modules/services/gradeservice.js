@@ -4,10 +4,21 @@
         var getGradeServiceView = function(){
             var url = "/time_tables/gradeserviceview.json"
             return $http.get(url);
+            
         };
 
         var getGradeServiceMapView = function(){
             var url = "/teaching_plans/gradeserviceview.json"
+            return $http.get(url);
+        };
+        var getGradesSectionsService = function(faculty_id){
+            alert(faculty_id);
+            var url = "/teaching_plans/getgradessectionsservice.json"           
+        return $http.get(url,{params:{_faculty_id: faculty_id}});
+        };
+
+        var getFacultyIdService = function(){
+            var url = "/teaching_plans/getfacultyidservice.json"
             return $http.get(url);
         };
 
@@ -25,7 +36,10 @@
             getGradeServiceView : getGradeServiceView,
             savePeriods : savePeriods,
             allGrades : allGrades,
-            getGradeServiceMapView : getGradeServiceMapView
+            getGradeServiceMapView : getGradeServiceMapView,
+            getFacultyIdService : getFacultyIdService,
+            getGradesSectionsService : getGradesSectionsService
+
          
             
         };

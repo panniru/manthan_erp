@@ -178,9 +178,6 @@ def seed_tecaher_grade_mapping
   end 
 end
 
-
-
-
 def seed_all
   seed_role
   seed_user
