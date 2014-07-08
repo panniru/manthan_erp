@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140704091043) do
+ActiveRecord::Schema.define(version: 20140708124251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,7 +161,6 @@ ActiveRecord::Schema.define(version: 20140704091043) do
   end
 
   create_table "events", force: true do |t|
-    t.integer  "admission_id"
     t.string   "title"
     t.text     "description"
     t.string   "staff"
@@ -474,8 +473,8 @@ ActiveRecord::Schema.define(version: 20140704091043) do
     t.string   "plan"
     t.date     "teaching_date"
     t.string   "plan_month"
-    t.integer  "user_id"
     t.string   "academic_year"
+    t.integer  "faculty_master_id"
   end
 
   create_table "term_definitions", force: true do |t|

@@ -27,26 +27,7 @@ class TeachingPlansController < ApplicationController
   def show
     @teaching_plan = TeachingPlan.find(params[:id])
   end
-  def gradeserviceview   
-    respond_to do |format|
-      format.json do
-        grades = TeacherGradeMapping.all.map do |grade|
-          {grade: grade.grade_master.grade_name, id: grade.id}
-        end
-        render :json => grades
-      end
-    end  
-  end
-  def sectionserviceview
-    respond_to do |format|
-      format.json do
-        sections = TeacherGradeMapping.all.map do |section|
-          {section: section.section_master.section, id: section.id,grade_master_id: section.grade_master_id  }
-        end
-        render :json => sections
-      end
-    end  
-  end
+  
   def create
     @teaching_plan = TeachingPlan.new(teachingplan_params)
     respond_to do |format|
@@ -74,26 +55,19 @@ class TeachingPlansController < ApplicationController
       end
     end
   end
-  def getgradessectionsservice
-p params
-p params[:_faculty_id].to_i   
-          faculty_id = params[:_faculty_id].to_i
-
-    p    d = TeacherGradeMapping.where('faculty_master_id ='+"#{faculty_id}")
-
-
- 
-p "++++++++"
+  def getgradessectionsservice    
+    faculty_id = params[:_faculty_id].to_i
     respond_to do |format|
       format.json do
-        mappings = TeacherGradeMapping.all
-        p mappings
-p "========>"
-       
+        mappings = TeacherGradeMapping.where('faculty_master_id='+"#{faculty_id}")     
+        mappings = mappings.map do |mapping|          
+          {:grade_master_id => mapping.grade_master_id, :grade_name => mapping.grade_master.grade_name,:section_master_id => mapping.section_master_id, :section => mapping.section_master.section}
+          
+        end
         
-
         render :json => mappings
-      end      
+        # end 
+      end     
     end
   end
 end

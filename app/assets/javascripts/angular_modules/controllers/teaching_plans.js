@@ -3,19 +3,19 @@
     app.controller("TeachingPlansController",["$scope", "gradeService","sectionService", function($scope, gradeService, sectionService) {
       //  $scope.myGrade = ""
              
-        $scope.map_grades = []
-        gradeService.getGradeServiceMapView()
-            .then(function(result) {
+     //   $scope.map_grades = []
+      //  gradeService.getGradeServiceMapView()
+        //    .then(function(result) {
                 
-                $scope.map_grades=result.data
+          //      $scope.map_grades=result.data
                 
-            });
-        $scope.map_sections = []
-        sectionService.getSectionServiceMapView()
-            .then(function(result) {
+           // });
+       // $scope.map_sections = []
+       // sectionService.getSectionServiceMapView()
+         //   .then(function(result) {
                 //alert(result.data)
-                $scope.map_sections=result.data
-            });
+           //     $scope.map_sections=result.data
+           // });
         
         
         gradeService.getFacultyIdService()
@@ -28,10 +28,13 @@
                 
                 $scope.grades_sections = []
                 gradeService.getGradesSectionsService($scope.faculty_id)
-                    .then(function(result) {
-                        
-                        $scope.grades_sections=result.data
-                        
+                
+                    .then(function(result) {  
+                       // alert(result.data);
+                        alert(JSON.stringify(result.data))
+                        $scope.grades_sections=result.data 
+                        $scope.map_grades = result.data
+                        $scope.map_sections = result.data
                     });
             });
         
