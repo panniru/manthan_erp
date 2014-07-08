@@ -15,6 +15,7 @@ def seed_role
   @principal = Role.find_by_code("principal")
   @bod = Role.find_by_code("bod")
   @teacher = Role.find_by_code("teacher")
+  @librarian = Role.find_by_code("librarian")
 
   unless @admin.present?
     Role.create(:role => "admin", :code => "admin", :description => "admin")
@@ -38,7 +39,9 @@ def seed_role
   unless @teacher.present?
     Role.create(:role => "teacher", :code => "teacher", :description => "teacher")
   end
-  
+  unless @librarian.present?
+    Role.create(:role => "librarian", :code => "librarian", :description => "librarian")
+  end
 end
 
 
@@ -49,13 +52,14 @@ def seed_user
   principal = Role.find_by_code("principal")
   bod = Role.find_by_code("bod")
   teacher = Role.find_by_code("teacher")
-
+  librarian = Role.find_by_code("librarian")
   @user_admin = User.find_by_role_id(admin_role)
   @user_parent = User.find_by_role_id(parent_role)
   @user_accountant = User.find_by_role_id(accountant_role)
   @user_principal = User.find_by_role_id(principal)
   @user_bod = User.find_by_role_id(bod)
   @user_teacher = User.find_by_role_id(teacher)
+  @user_librarian = User.find_by_role_id(librarian)
 
   unless @user_principal.present?
     User.create(:email => "principal@manthan.com", :password => "welcome", :user_id => "principal", :role_id => principal.id)
@@ -79,6 +83,9 @@ def seed_user
   end
   unless @user_teacher.present?
     User.create(:email => "teacher@manthan.com", :password => "welcome", :user_id => "teacher", :role_id => teacher.id)
+  end
+  unless @user_librarian.present?
+    User.create(:email => "librarian@manthan.com", :password => "welcome", :user_id => "librarian", :role_id => librarian.id)
   end
 end
 

@@ -29,7 +29,8 @@ class ContextDetector
     "#" => "recruitment_sub_menu",
     "#" => "recruitment_sub_menu",
     "#" => "recruitment_sub_menu",
-    
+    "books" => "library",
+    "issuings" => "library",
 
     "default_masters" => "default_master_sub_menu"
   }

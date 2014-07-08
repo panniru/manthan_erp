@@ -1,5 +1,8 @@
-ManthanErp::Application.routes.draw do 
-  
+
+ManthanErp::Application.routes.draw do
+ 
+ 
+
   get "teaching_plans/new"
   get "teaching_plans/edit"
   get "teaching_plans/index"
@@ -9,7 +12,8 @@ ManthanErp::Application.routes.draw do
       get 'home_index'
     end
   end
-
+  resources :issuings
+  resources :books
   resources :staffs
   get "staffs/staffview"
 

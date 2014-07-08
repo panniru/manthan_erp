@@ -27,5 +27,9 @@ class User < ActiveRecord::Base
     self.role.code == "teacher"
   end
 
+  def librarian?
+    self.role.code == "librarian"
+  end
+
 
 end
