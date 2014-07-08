@@ -2,7 +2,7 @@
   %h3 
     = "Terms"
     .pull-right
-      = link_to "New Terms", "#", :class => "btn btn-primary", :ng_click => "newTermDefinitions()", :ng_disabled => "#{fee_items_can_be_manipulate?}"
+      = link_to "New Terms", "#", :class => "btn btn-primary", :ng_click => "newTermDefinition()", :ng_disabled => "#{fee_items_can_be_manipulate?} || termDefinitions.length"
       = link_to "Edit Term", "#", :class => "btn btn-primary", :ng_click => "editTermDefinitions()", :ng_disabled => "#{TermWiseGradeFee.fee_structure_defined?}"
   %hr
   %table.table.table-bordered

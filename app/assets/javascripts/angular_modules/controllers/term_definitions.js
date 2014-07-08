@@ -3,7 +3,7 @@
     app.controller('TermDefinitionsController',["$scope","resourceService", function($scope, resourceService) {
         $scope.termDefinitions = resourceService.TermDefinition.query();
         
-        $scope.newTermDefinitions = function(){
+        $scope.newTermDefinition = function(){
             $scope.newTermDefinitions = []
             for(var i=0; i<3; i++){
                 $scope.newTermDefinitions.push({"term_definition":"", "amount_per" :"", "termdate": "" });
@@ -20,7 +20,10 @@
             var total_percentage = 0.0;
             angular.forEach($scope.newTermDefinitions, function(term, index){
                 term.termdate = $("#date-"+index).val()
-                total_percentage += parseFloat(term.amount_per)
+                if(!isNaN(term.amount_per) && term.amount_per != ''){
+                    total_percentage += parseFloat(term.amount_per)
+                }
+                
             });
             if(total_percentage == 100.00){
                 resourceService.TermDefinition.bulk({bulk_term: $scope.newTermDefinitions})

@@ -4,7 +4,7 @@
         
         $scope.postDatedCheques = resourceService.PostDatedCheque.query();
         
-        $scope.newPostDatedCheques = function(){
+        $scope.newPostDatedCheque = function(){
             $scope.reset();
             $('#createModal').modal('show')
         }
@@ -20,7 +20,9 @@
             var total_percentage = 0.0;
             angular.forEach($scope.newPostDatedCheques, function(cheque, index){
                 cheque.date = $("#date-"+index).val()
-                total_percentage += parseFloat(cheque.amount_per)
+                if(!isNaN(cheque.amount_per) && cheque.amount_per != ''){
+                    total_percentage += parseFloat(cheque.amount_per)
+                }
             });
             if(total_percentage == 100.00){
                 resourceService.PostDatedCheque.bulk({bulk_post_dated_cheques: $scope.newPostDatedCheques})
@@ -77,13 +79,11 @@
             var dateStr = $("#date-0").val()
             if (typeof first_value != 'undefined'){
                 return ( dateStr != "" && first_value.amount_per != "") 
-
+                
             }else{
                 return false
             }
         };
-
-        
     }]);
 })(angular, myApp);
 

@@ -110,7 +110,7 @@ class FeeGradeBucketsController < ApplicationController
       end
     end
   end
- 
+  
   private
 
   def bucket_params

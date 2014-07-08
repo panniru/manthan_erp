@@ -229,4 +229,8 @@ ManthanErp::Application.routes.draw do
   get "/parent_payment_transactions/parent_transactions"
   get "/parent_payment_transactions/admin_transactions"
 
+  resources :grade_masters do
+    resources :section_masters
+  end
+
 end

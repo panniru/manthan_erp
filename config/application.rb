@@ -28,5 +28,6 @@ module ManthanErp
     config.angular_templates.ignore_prefix  = 'templates/'
     config.angular_templates.markups        = %w(erb haml)
     config.angular_templates.htmlcompressor = false
+    config.action_mailer.default_url_options = { host: 'localhost:3000' }
   end
 end

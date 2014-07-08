@@ -1,0 +1,12 @@
+%p
+  Hi #{@reciever.user_id},
+  .letter_body
+    Fee structure has been Approved for the academic year 2014-15.
+    = render "anual_grade_fee"
+    = render "term_grade_fee"
+    = render "month_grade_fee"
+    = render "shared/amount_units"
+    
+    Please see the status at 
+    = url_for(host: 'localhost:3000', controller: 'grade_wise_fees', action: 'index')
+    

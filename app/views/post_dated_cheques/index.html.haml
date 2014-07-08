@@ -2,7 +2,7 @@
   %h3 
     = "Post Dated Cheques"
     .pull-right
-      = link_to "New PDCs", "#", :class => "btn btn-primary", :ng_click => "newPostDatedCheques()", :ng_disabled => "#{fee_items_can_be_manipulate?}"
+      = link_to "New PDCs", "#", :class => "btn btn-primary", :ng_click => "newPostDatedCheque()", :ng_disabled => "#{fee_items_can_be_manipulate?} || postDatedCheques.length"
       = link_to "Edit PDCs", "#", :class => "btn btn-primary", :ng_click => "editPostDatedCheques()", :ng_disabled => "#{MonthlyPdcAmount.fee_structure_defined?}"
   %hr
   %table.table.table-bordered

@@ -19,6 +19,8 @@ class ApprovalItemsController < ApplicationController
     respond_to do |format|
       format.json do
         if @approval_item.approve(current_user)
+          principal = User.find_by_role_id(Role.find_by_code('principal'))
+          FeeAlertsMailer.approved_mail(GradeFeeGrid.new, TermFeeGrid.new, MonthlyPdcGrid.new, current_user, principal).deliver
           render :json => @approval_item
         end
       end
@@ -29,6 +31,8 @@ class ApprovalItemsController < ApplicationController
     respond_to do |format|
       format.json do
         if @approval_item.reject
+          principal = User.find_by_role_id(Role.find_by_code('principal'))
+          FeeAlertsMailer.rejected_mail(GradeFeeGrid.new, TermFeeGrid.new, MonthlyPdcGrid.new, current_user, principal).deliver
           render :json => @approval_item
         end
       end
@@ -45,6 +49,8 @@ class ApprovalItemsController < ApplicationController
     respond_to do |format|
       format.json do
         if @approval_item.save
+          principal = User.find_by_role_id(Role.find_by_code('principal'))
+          FeeAlertsMailer.approve_mail(GradeFeeGrid.new, TermFeeGrid.new, MonthlyPdcGrid.new, current_user, principal).deliver
           render json:  @approval_item
         else
           render json: @approval_item 

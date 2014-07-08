@@ -39,6 +39,8 @@
                                           "belongs_to_parent": { url: "/student_masters/belongs_to_parent.json", isArray: true}
                                       }
                                     );
+        var GradeMaster = $resource('/grade_masters/:id.json', {id: '@id'});
+        var SectionMaster = $resource('/grade_masters/:grade_master_id/section_masters/:id.json', {id: '@id', grade_master_id: '@grade_master_id'});
         
         return {
             FeeGradeBucket : FeeGradeBucket,
@@ -46,7 +48,9 @@
             PostDatedCheque : PostDatedCheque,
             DefaultMaster : DefaultMaster,
             ApprovalItem : ApprovalItem,
-            StudentMaster : StudentMaster
+            StudentMaster : StudentMaster,
+            GradeMaster : GradeMaster,
+            SectionMaster : SectionMaster
         };
         
     }]);

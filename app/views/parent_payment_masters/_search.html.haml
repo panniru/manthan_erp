@@ -1,9 +1,9 @@
-.colmd-10{:ng_controller => "StudentSearchController"}
+.colmd-10{:ng_controller => "GradeSectionsController"}
   = form_tag pay_parent_payment_masters_path, :method => 'get' , :class => "form-inline", :name => "StudentSearchForm" do
     .form-group.col-md-3
       %label{:class=> "form-label col-md-4"} Grade
       .col-md-6
-        %select{:ng_model => "grade", :ng_options => "gr.grade for gr in grades", :class=>"form-control"}
+        %select{:ng_model => "grade", :ng_options => "gr.grade_name for gr in grades", :class=>"form-control", :ng_change => "fetchSections()"}
     .form-group.col-md-3
       %label{:class=> "form-label col-md-4"} Section
       .col-md-6

@@ -39,9 +39,6 @@
             getGradeServiceMapView : getGradeServiceMapView,
             getFacultyIdService : getFacultyIdService,
             getGradesSectionsService : getGradesSectionsService
-
-         
-            
         };
 
         
