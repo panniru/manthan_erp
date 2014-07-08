@@ -1,17 +1,15 @@
-.pull-left
-  %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}/
-    
-.pull-right
-  = link_to 'New Enquiry', enquiry_new_admissions_path, :class => 'btn btn-primary'
-  
-  %br
-  %br
+.panel.panel-default
+  .panel-heading
+    .pull-left
+      %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}/
+    .pull-right
+      = link_to 'New Enquiry', enquiry_new_admissions_path, :class => 'btn btn-primary'
+      %br
+      %br
+    %center
+      %h4
+        Enquiry Forms
 
-%center
-  %h4
-    Enquiry Forms
-%br
-%br
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr

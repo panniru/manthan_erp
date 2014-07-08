@@ -1,0 +1,31 @@
+.panel.panel-default
+  .panel-heading
+    .pull-left
+      %input#search{name: "search", placeholder: "Enter Search Term...", type: "text", :class => 'form-control'}/
+    .pull-right
+      %br
+      %br
+    %center
+      %h4
+        Assessments Planned
+
+%table#tblData.target.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      %th Title
+      %th Description
+      %th Staff
+      %th Grade
+      %th Start Time
+      %th End Time
+        
+  %tbody
+    - @admissions.each do |admission|
+      %tr
+        %td= admission.title
+        %td= admission.description
+        %td= admission.staff
+        %td= admission.klass
+        %td= admission.start_time
+        %td= admission.end_time
+        

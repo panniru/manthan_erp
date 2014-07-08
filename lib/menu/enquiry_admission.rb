@@ -5,6 +5,7 @@ class EnquiryAdmission < Struct.new(:controller)
     sub_menu << home
     sub_menu << show_enquiry_admissions
     sub_menu << show_application_admissions    
+    sub_menu << show_assessment_planned
     sub_menu << show_staff_admissions
     sub_menu << show_event_admissions
     sub_menu << show_closed_forms
@@ -21,7 +22,7 @@ class EnquiryAdmission < Struct.new(:controller)
     sub_menu << fee_structure
     sub_menu
   end
-
+  
 
   private
   def home
@@ -33,6 +34,9 @@ class EnquiryAdmission < Struct.new(:controller)
   end
   def show_application_admissions
     MenuItem.new(:label => "Application Forms ", :klass => "", :icon => "file-text", :href => "/admissions/admission_index" )
+  end
+  def show_assessment_planned
+    MenuItem.new(:label => "Assessment Planned ", :klass => "", :icon => "book", :href => "/admissions/assessment_index" )
   end
   def show_staff_admissions
     MenuItem.new(:label => "Assessments", :klass => "", :icon => "book", :href => "/staffs" )

@@ -3,7 +3,7 @@
 %center
   = form_tag admission_home_admissions_path, :method => 'get' do
     .col-sm-3
-      = select_tag(:search,options_for_select([['All'],['Enquiry_Created'],['Application_Created']]),{:class => 'col-sm-4 form-control'})
+      = select_tag(:search,options_for_select([['All'],['Enquiry_Created'],['Application_Created'],['Assessment_Planned']]),{:class => 'col-sm-4 form-control'})
     .col-sm-1
       = submit_tag "Search", name: nil, :class => 'btn btn-primary'
 

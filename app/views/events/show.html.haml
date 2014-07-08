@@ -18,6 +18,9 @@
 %p
   %b End time:
   = @event.end_time
+%p
+- @event.admissions.each do |admission|
+  = admission.id
 
 = link_to button_tag('Edit',:class => 'btn btn-primary'), edit_event_path(@event)
 

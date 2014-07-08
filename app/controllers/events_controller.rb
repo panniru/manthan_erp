@@ -7,35 +7,36 @@ class EventsController < ApplicationController
     @admissions = Admission.all
     @events = Event.all
   end
-
+  
   # GET /events/1
   # GET /events/1.json
   def show
   end
-
+  
   # GET /events/new
   def new
-    
-    if params[:admission_id].present?
-      @event.admission_id = params[:admission_id]
-    end
-   
+    @event = Event.new
+    @event.admissions << Admission.new
+    @events = Event.all
   end
+  
 
-  # GET /events/1/edit
+
+# GET /events/1/edit
   def edit
   end
 
   # POST /events
   # POST /events.json
   def create
-        
     @event = Event.new(event_params)
-
+    @event.admission_id = current_user.id
+    
     respond_to do |format|
       if @event.save
-        format.html { redirect_to admission_home_admissions_path, notice: 'Event was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @event }
+        format.html { redirect_to admission_home_admissions_path, notice: 'Assessment was successfully planned.' }
+       
+        
       else
         format.html { render action: 'new' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
@@ -74,6 +75,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :description, :staff, :grade, :start_time, :end_time)
+      params.require(:event).permit(:title, :description, :staff, :grade, :start_time, :end_time, :admission_id, :status)
     end
 end
