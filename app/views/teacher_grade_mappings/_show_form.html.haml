@@ -2,18 +2,18 @@
   .col-md-1
   .col-md-8{"ng-show" => "myShowFormValue"} 
     %table{:class => "table"}
-      %tr
-        %th NO
+      %tr       
         %th GRADE
         %th SECTION
         %th SUBJECT
-      %tr{"ng-repeat" => "mapping in mappings| orderBy:'id'"}
-        %td Map{{" "+($index+1)}}
+        %th
+      %tr{"ng-repeat" => "mapping in mappings| orderBy:'id'"}        
         %td {{mapping['grade_name']}}
         %td {{mapping['section_name']}}          
-        %td {{mapping['subject_name']}}       
-  .col-md-2{"ng-show" => "myShowFormValue"} 
-    = submit_tag("EDIT",{class: "btn btn-primary", :ng_click => "editMappings()"})
+        %td {{mapping['subject_name']}} 
+        %td          
+          = link_to raw("<span class='glyphicon glyphicon-pencil'></span>"),"#", :class => "btn btn-warning btn-sm", :title => "EDIT", :ng_click => "editMappings()"
+  .col-md-2{"ng-show" => "myShowFormValue"}   
     %input{:type => "button", :class => "btn btn-primary", "ng-click" => "addOneMappings()", :value => "ADD"}
 
 .row

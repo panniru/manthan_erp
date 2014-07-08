@@ -20,7 +20,7 @@
         subjectService.getSubjectServiceView()
             .then(function(result) {
                 $scope.subjects = result.data                
-            });        
+            });         
        
         $scope.showMappings = function(){  
             teachersGradesService.checkTeachersGradesMapping($scope.myTeacher)
@@ -67,7 +67,7 @@
             $scope.save_mappings = [];
             for ( var i = 0; i <  $scope.mappings.length; i++ ) {    
                 for( var j = 0; j <  $scope.mappings[i]['section_master_id'].length; j++ )
-                { if ( $scope.mappings[i]['grade_master_id'] != 0 && $scope.mappings[i]['grade_master_id'] != null &&  $scope.mappings[i]['section_master_id'] != 0 && $scope.mappings[i]['section_master_id'] != null )
+                { if ( $scope.mappings[i]['grade_master_id'] != 0 && $scope.mappings[i]['section_master_id'] != 0 && $scope.mappings[i]['subject_master_id'] != 0)
                   {                 
                     $scope.save_mappings.push({
                         id: $scope.mappings[i]['id'],  
@@ -127,7 +127,15 @@
             $scope.showMappings();
         };
 
-        
+        $scope.getGeadeWiseMappings= function(){
+            teachersGradesService.getGradeWiseMappings($scope.myGrade,$scope.mySection)
+                .then(function(result) {  
+                    $scope.mappings = result.data                  
+                }); 
+            $scope.myShowGradeWiseFormValue = "true" 
+        };
+
+      
         
     }]);    
    

@@ -20,32 +20,26 @@
     .col-md-8
       %div{"ng-show" => "myNewEditFormValue"}
         %table{:class => "table"}
-          %tr
-            %th No
+          %tr            
             %th GRADE
             %th SECTION
             %th SUBJECT
-            %th{"ng-show" => "mySingleSelect"}
-          %tr{"ng-repeat" => "mapping in mappings | orderBy:'id'" }
-            %td Mapping {{" "+($index+1)}} {{+" "+data.length}}
+            %th{"ng-show" => "mySingleSelect"}            
+          %tr{"ng-repeat" => "mapping in mappings | orderBy:'id'" }  
             %td               
               %select{"ng-model" => "mapping.grade_master_id", "ng-options" => "grade.id as grade.grade for grade in grades ",:class => "form-control"} 
-                %option{value: ""}
-              {{mapping['grade_master_id']}}
+                %option{value: ""}             
             %td{"ng-show" => "mySectionMultiSelect"} 
               %select{:multiple => "multiple","ng-model" => "mapping['section_master_id']", "ng-options" => "section.id as section.section for section  in sections | filter : {grade_master_id: mapping['grade_master_id']}",:class => "form-control"}  
-                %option{value: ""}
-              {{mapping['section_master_id']}}
+                %option{value: ""}              
             %td{"ng-show" => "mySingleSelect"} 
               %select{"ng-model" => "mapping['section_master_id']", "ng-options" => "section.id as section.section for section  in sections | filter : {grade_master_id: mapping['grade_master_id']}",:class => "form-control"}  
-                %option{value: ""}
-              {{mapping['section_master_id']}}
+                %option{value: ""}             
             %td
               %select{"ng-model" => "mapping['subject_master_id']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"} 
-                %option{value: ""}
-              {{mapping['subject_master_id']}}
-            %td{"ng-show" => "mySingleSelect"} 
-              %input{:type => "button", :class => "btn btn-danger", "ng-click" => "deleteMappings($index)", :value => "DELETE"}
+                %option{value: ""}             
+            %td{"ng-show" => "mySingleSelect"}             
+              = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteMappings($index)"
     .col-md-3{"ng-show" => "myNewEditFormValue"} 
       .col-md-12{"ng-show" => "mySingleSelect"}                     
         %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveUpdateMappings()", :value => "SAVE"}        
