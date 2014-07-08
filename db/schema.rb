@@ -245,6 +245,12 @@ ActiveRecord::Schema.define(version: 20140704091043) do
     t.datetime "updated_at"
   end
 
+  create_table "grades", force: true do |t|
+    t.string   "grade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "interviewschedulers", force: true do |t|
     t.string   "name"
     t.string   "description"
@@ -315,7 +321,7 @@ ActiveRecord::Schema.define(version: 20140704091043) do
     t.string   "academic_year"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "term_definition_id"
+    t.integer  "payment_detail_id"
     t.string   "status"
   end
 
@@ -391,6 +397,12 @@ ActiveRecord::Schema.define(version: 20140704091043) do
     t.string   "grade_master_id"
   end
 
+  create_table "sections", force: true do |t|
+    t.string   "section"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "staffs", force: true do |t|
     t.string   "staff_name"
     t.string   "staff_exp"
@@ -417,6 +429,12 @@ ActiveRecord::Schema.define(version: 20140704091043) do
   end
 
   create_table "subject_masters", force: true do |t|
+    t.string   "subject"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subjects", force: true do |t|
     t.string   "subject"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -449,15 +467,15 @@ ActiveRecord::Schema.define(version: 20140704091043) do
   end
 
   create_table "teaching_plans", force: true do |t|
-    t.string   "plan_month"
-    t.integer  "user_id"
-    t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "grade_master_id"
     t.string   "section_master_id"
     t.string   "plan"
     t.date     "teaching_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "plan_month"
+    t.integer  "user_id"
+    t.string   "academic_year"
   end
 
   create_table "term_definitions", force: true do |t|
@@ -484,7 +502,6 @@ ActiveRecord::Schema.define(version: 20140704091043) do
 
   create_table "time_tables", force: true do |t|
     t.string   "academic_year"
-    t.string   "staffid"
     t.string   "mon_sub"
     t.string   "tue_sub"
     t.string   "wed_sub"

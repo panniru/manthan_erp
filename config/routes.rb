@@ -37,7 +37,13 @@ ManthanErp::Application.routes.draw do
 
   resources :time_tables  
 
-  resources :teaching_plans
+  resources :teaching_plans do
+     collection do
+      get "calendardata"
+      get "getfacultyidservice"
+      get "getgradessectionsservice"
+    end
+  end
 
   resources :documentuploaders do
     member do
