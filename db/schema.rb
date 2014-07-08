@@ -11,8 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140709054434) do
 
+ActiveRecord::Schema.define(version: 20140708074747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -491,8 +491,10 @@ ActiveRecord::Schema.define(version: 20140709054434) do
     t.string   "section_master_id"
     t.string   "plan"
     t.date     "teaching_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "plan_month"
+    t.string   "academic_year"
+    t.integer  "faculty_master_id"
+
   end
 
   create_table "term_definitions", force: true do |t|
