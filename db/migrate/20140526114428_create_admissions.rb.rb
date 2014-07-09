@@ -1,7 +1,6 @@
 class CreateAdmissions < ActiveRecord::Migration
   def change
     create_table :admissions do |t|
-      t.string :form_no
       t.string :admission_no
       t.string :branch
       t.string :surname
@@ -9,7 +8,7 @@ class CreateAdmissions < ActiveRecord::Migration
       t.string :board
       t.string :grade
       t.string :medium
-      t.string :year
+      t.integer :year
       t.string :written
       t.string :reading
       t.string :spoken
@@ -38,7 +37,7 @@ class CreateAdmissions < ActiveRecord::Migration
       t.string :father_education
       t.string :mother_education
       t.string :income
-      t.string :address
+      t.text :address
       t.string :landline
       t.string :mobile
       t.string :email
@@ -55,8 +54,8 @@ class CreateAdmissions < ActiveRecord::Migration
       t.string :mother_office_address
       t.string :father_office_telephone
       t.string :mother_office_telephone
-      t.string :mother_mobile
       t.string :father_mobile
+      t.string :mother_mobile
       t.string :mother_religion
       t.string :father_religion
       t.string :father_employer
@@ -68,15 +67,8 @@ class CreateAdmissions < ActiveRecord::Migration
       t.string :sib_sex
       t.string :sib_grade
       t.string :sib_school
-      t.string :bus
-      t.string :closestatus
-      t.string :title
-      t.string :description
-      t.string :start_time
-      t.string :end_time
-      t.string :staff
-      t.string :comment
-      t.string :result
+      
+      
 
       t.timestamps
     end

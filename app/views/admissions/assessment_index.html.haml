@@ -12,6 +12,7 @@
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
+      %th Form no
       %th Title
       %th Description
       %th Staff
@@ -22,6 +23,7 @@
   %tbody
     - @admissions.each do |admission|
       %tr
+        %td= link_to "#{admission.form_no}", home_index_admission_path(admission)
         %td= admission.title
         %td= admission.description
         %td= admission.staff
