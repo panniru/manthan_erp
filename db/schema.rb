@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20140708074747) do
+ActiveRecord::Schema.define(version: 20140709054434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140708074747) do
     t.string   "board"
     t.string   "grade"
     t.string   "medium"
+    t.integer  "year"
     t.string   "written"
     t.string   "reading"
     t.string   "spoken"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20140708074747) do
     t.string   "father_education"
     t.string   "mother_education"
     t.string   "income"
+    t.text     "address"
     t.string   "landline"
     t.string   "mobile"
     t.string   "email"
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 20140708074747) do
     t.string   "mother_office_address"
     t.string   "father_office_telephone"
     t.string   "mother_office_telephone"
+    t.string   "father_mobile"
     t.string   "mother_mobile"
     t.string   "mother_religion"
     t.string   "father_religion"
@@ -92,8 +94,6 @@ ActiveRecord::Schema.define(version: 20140708074747) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_no"
-    t.integer  "year"
-    t.text     "address"
     t.string   "bus"
     t.string   "closestatus"
     t.string   "title"
@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(version: 20140708074747) do
   end
 
   create_table "events", force: true do |t|
+    t.integer  "admission_id"
     t.string   "title"
     t.text     "description"
     t.string   "staff"
@@ -189,7 +190,6 @@ ActiveRecord::Schema.define(version: 20140708074747) do
     t.datetime "updated_at"
     t.string   "staff_id"
     t.string   "status"
-    t.string   "admission_id", limit: nil
   end
 
   create_table "faculty_masters", force: true do |t|
@@ -298,14 +298,6 @@ ActiveRecord::Schema.define(version: 20140708074747) do
     t.string   "code"
     t.string   "description"
     t.string   "job_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "locations", force: true do |t|
-    t.string   "address"
-    t.float    "latitude"
-    t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -420,7 +412,7 @@ ActiveRecord::Schema.define(version: 20140708074747) do
   end
 
   create_table "section_masters", force: true do |t|
-    t.string   "section"
+    t.string   "section_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "grade_master_id"
@@ -452,15 +444,15 @@ ActiveRecord::Schema.define(version: 20140708074747) do
   end
 
   create_table "subject_masters", force: true do |t|
-    t.string   "subject"
+    t.string   "subject_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "teacher_grade_mappings", force: true do |t|
-    t.string   "grade_master_id"
-    t.string   "section_master_id"
-    t.string   "subject_master_id"
+    t.integer  "grade_master_id"
+    t.integer  "section_master_id"
+    t.integer  "subject_master_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "faculty_master_id"
@@ -485,16 +477,14 @@ ActiveRecord::Schema.define(version: 20140708074747) do
 
   create_table "teaching_plans", force: true do |t|
     t.string   "plan_month"
-    t.integer  "user_id"
     t.string   "academic_year"
     t.string   "grade_master_id"
     t.string   "section_master_id"
     t.string   "plan"
     t.date     "teaching_date"
-    t.string   "plan_month"
-    t.string   "academic_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "faculty_master_id"
-
   end
 
   create_table "term_definitions", force: true do |t|

@@ -31,6 +31,7 @@ class TeachingPlansController < ApplicationController
   def create
     @teaching_plan = TeachingPlan.new(teachingplan_params)
     respond_to do |format|
+      
       if @teaching_plan.save
         format.html { redirect_to @teaching_plan, notice: 'Plan was successfully created.' }
         format.json { render action: 'show', status: :created, location: @teaching_plan }
@@ -41,7 +42,7 @@ class TeachingPlansController < ApplicationController
     end
   end
   def teachingplan_params
-    params.require(:teaching_plan).permit(:grade_master_id, :section_master_id,:teaching_date,:plan_month )
+    params.require(:teaching_plan).permit(:grade_master_id, :section_master_id,:teaching_date,:plan_month,:faculty_master_id )
   end
   def getfacultyidservice   
     respond_to do |format|
@@ -61,7 +62,7 @@ class TeachingPlansController < ApplicationController
       format.json do
         mappings = TeacherGradeMapping.where('faculty_master_id='+"#{faculty_id}")     
         mappings = mappings.map do |mapping|          
-          {:grade_master_id => mapping.grade_master_id, :grade_name => mapping.grade_master.grade_name,:section_master_id => mapping.section_master_id, :section => mapping.section_master.section}
+          {:grade_master_id => mapping.grade_master_id, :grade_name => mapping.grade_master.grade_name,:section_master_id => mapping.section_master_id, :section_name => mapping.section_master.section_name}
           
         end
         

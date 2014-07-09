@@ -15,8 +15,7 @@ def seed_role
   @principal = Role.find_by_code("principal")
   @bod = Role.find_by_code("bod")
   @teacher = Role.find_by_code("teacher")
-  @librarian = Role.find_by_code("librarian")
-
+  @librarian = Role.find_by_code("librarian") 
   unless @admin.present?
     Role.create(:role => "admin", :code => "admin", :description => "admin")
   end
@@ -42,6 +41,7 @@ def seed_role
   unless @librarian.present?
     Role.create(:role => "librarian", :code => "librarian", :description => "librarian")
   end
+
 end
 
 
@@ -53,6 +53,7 @@ def seed_user
   bod = Role.find_by_code("bod")
   teacher = Role.find_by_code("teacher")
   librarian = Role.find_by_code("librarian")
+
   @user_admin = User.find_by_role_id(admin_role)
   @user_parent = User.find_by_role_id(parent_role)
   @user_accountant = User.find_by_role_id(accountant_role)
@@ -60,7 +61,7 @@ def seed_user
   @user_bod = User.find_by_role_id(bod)
   @user_teacher = User.find_by_role_id(teacher)
   @user_librarian = User.find_by_role_id(librarian)
-
+  @user_teacher = User.find_by_user_id('teacher1')
   unless @user_principal.present?
     User.create(:email => "principal@manthan.com", :password => "welcome", :user_id => "principal", :role_id => principal.id)
   end
@@ -86,6 +87,9 @@ def seed_user
   end
   unless @user_librarian.present?
     User.create(:email => "librarian@manthan.com", :password => "welcome", :user_id => "librarian", :role_id => librarian.id)
+  end
+  unless @user_teacher.present?
+    User.create(:email => "swamy@manthan.com", :password => "welcome", :user_id => "teacher1", :role_id => teacher.id)
   end
 end
 
@@ -164,7 +168,7 @@ def seed_faculty
   unless FacultyMaster.first.present?
     FacultyMaster.create(:faculty_name => 'SRIKANTH')
     FacultyMaster.create(:faculty_name => 'MURALEE')
-    FacultyMaster.create(:faculty_name => 'SWAMY')
+    FacultyMaster.create(:faculty_name => 'SWAMY', :user_id => User.find_by_user_id('teacher1').id)
     FacultyMaster.create(:faculty_name => 'PRIYA')
     FacultyMaster.create(:faculty_name => 'NAVYA')
     FacultyMaster.create(:faculty_name => 'UMA')
