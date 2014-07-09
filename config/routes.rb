@@ -239,4 +239,9 @@ ManthanErp::Application.routes.draw do
     resources :section_masters
   end
 
+  resources :class_teacher_mappings do
+    collection do   
+    end  
+  end
+
 end

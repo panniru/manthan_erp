@@ -6,13 +6,14 @@
         %th GRADE
         %th SECTION
         %th SUBJECT
-        %th
+        %th 
+          = link_to raw("<span class='glyphicon glyphicon-pencil'></span>"),"#", :class => "btn btn-warning btn-sm", :title => "EDIT", :ng_click => "editMappings()"
       %tr{"ng-repeat" => "mapping in mappings| orderBy:'id'"}        
         %td {{mapping['grade_name']}}
         %td {{mapping['section_name']}}          
-        %td {{mapping['subject_name']}} 
+        %td {{mapping['subject_name']}}        
         %td          
-          = link_to raw("<span class='glyphicon glyphicon-pencil'></span>"),"#", :class => "btn btn-warning btn-sm", :title => "EDIT", :ng_click => "editMappings()"
+          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteMappings($index)"
   .col-md-2{"ng-show" => "myShowFormValue"}   
     %input{:type => "button", :class => "btn btn-primary", "ng-click" => "addOneMappings()", :value => "ADD"}
 
