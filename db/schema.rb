@@ -11,9 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-
-ActiveRecord::Schema.define(version: 20140708074747) do
+ActiveRecord::Schema.define(version: 20140709054434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +25,6 @@ ActiveRecord::Schema.define(version: 20140708074747) do
   end
 
   create_table "admissions", force: true do |t|
-    t.string   "form_no"
     t.string   "admission_no"
     t.string   "branch"
     t.string   "surname"
@@ -35,7 +32,6 @@ ActiveRecord::Schema.define(version: 20140708074747) do
     t.string   "board"
     t.string   "grade"
     t.string   "medium"
-    t.string   "year"
     t.string   "written"
     t.string   "reading"
     t.string   "spoken"
@@ -64,7 +60,6 @@ ActiveRecord::Schema.define(version: 20140708074747) do
     t.string   "father_education"
     t.string   "mother_education"
     t.string   "income"
-    t.string   "address"
     t.string   "landline"
     t.string   "mobile"
     t.string   "email"
@@ -82,7 +77,6 @@ ActiveRecord::Schema.define(version: 20140708074747) do
     t.string   "father_office_telephone"
     t.string   "mother_office_telephone"
     t.string   "mother_mobile"
-    t.string   "father_mobile"
     t.string   "mother_religion"
     t.string   "father_religion"
     t.string   "father_employer"
@@ -94,17 +88,20 @@ ActiveRecord::Schema.define(version: 20140708074747) do
     t.string   "sib_sex"
     t.string   "sib_grade"
     t.string   "sib_school"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "form_no"
+    t.integer  "year"
+    t.text     "address"
     t.string   "bus"
     t.string   "closestatus"
     t.string   "title"
     t.string   "description"
     t.string   "start_time"
     t.string   "end_time"
-    t.string   "staff"
+    t.string   "faculty_id"
     t.string   "comment"
     t.string   "result"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "approval_items", force: true do |t|
@@ -179,6 +176,7 @@ ActiveRecord::Schema.define(version: 20140708074747) do
     t.datetime "updated_at"
     t.string   "staff_id"
     t.string   "status"
+    t.string   "admission_id", limit: nil
   end
 
   create_table "faculty_masters", force: true do |t|
@@ -279,6 +277,14 @@ ActiveRecord::Schema.define(version: 20140708074747) do
     t.string   "code"
     t.string   "description"
     t.string   "job_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "locations", force: true do |t|
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
