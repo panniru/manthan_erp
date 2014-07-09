@@ -13,7 +13,7 @@ class TeachersTimeTablesController < ApplicationController
 
   def get_faculty_garde_sections_view    
     faulty_grade_sections = TeacherGradeMapping.all.map do |fgs|
-      {id: fgs.faculty_master_id, grade: fgs.grade_master.grade_name, section: fgs.section_master.section, grade_section: fgs.grade_master.grade_name+"- "+fgs.section_master.section} 
+      {id: fgs.faculty_master_id, grade: fgs.grade_master.grade_name, section: fgs.section_master.section_name, grade_section: fgs.grade_master.grade_name+"- "+fgs.section_master.section_name} 
     end
     render :json => faulty_grade_sections
   end

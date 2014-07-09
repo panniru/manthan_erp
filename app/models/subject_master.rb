@@ -3,7 +3,7 @@ class SubjectMaster < ActiveRecord::Base
     if sub_exists == false
       nil # explicit nil
     else
-      SubjectMaster.find(sub_id).subject 
+      SubjectMaster.find(sub_id).subject_name 
     end
   end
 end

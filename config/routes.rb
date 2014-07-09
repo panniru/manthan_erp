@@ -227,7 +227,8 @@ ManthanErp::Application.routes.draw do
       post "savemappings"
       post "getmappings" 
       post "deletemappings"  
-      get "show_grade_wise"   
+      get "show_grade_wise"
+      get "get_grade_wise_mappings"   
       end
   end
   
