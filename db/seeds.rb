@@ -132,20 +132,20 @@ end
 def seed_sections
   unless SectionMaster.first.present?
     grademasters=GradeMaster.all
-    SectionMaster.create(:section => 'A', :grade_master_id => grademasters[0]['id'])
-    SectionMaster.create(:section => 'B', :grade_master_id => grademasters[0]['id'])
-    SectionMaster.create(:section => 'C', :grade_master_id => grademasters[1]['id'])
-    SectionMaster.create(:section => 'D', :grade_master_id => grademasters[1]['id'])
-    SectionMaster.create(:section => 'E', :grade_master_id => grademasters[2]['id'])
+    SectionMaster.create(:section_name => 'A', :grade_master_id => grademasters[0]['id'])
+    SectionMaster.create(:section_name => 'B', :grade_master_id => grademasters[0]['id'])
+    SectionMaster.create(:section_name => 'C', :grade_master_id => grademasters[1]['id'])
+    SectionMaster.create(:section_name => 'D', :grade_master_id => grademasters[1]['id'])
+    SectionMaster.create(:section_name => 'E', :grade_master_id => grademasters[2]['id'])
   end
 end
 def seed_subjects
   unless SubjectMaster.first.present?
-    SubjectMaster.create(:subject => 'PHYSICS')
-    SubjectMaster.create(:subject => 'CHEMISTRY')
-    SubjectMaster.create(:subject => 'MATHEMATICS')
-    SubjectMaster.create(:subject => 'ENGLISH')
-    SubjectMaster.create(:subject => 'TELUGU')    
+    SubjectMaster.create(:subject_name => 'PHYSICS')
+    SubjectMaster.create(:subject_name => 'CHEMISTRY')
+    SubjectMaster.create(:subject_name => 'MATHEMATICS')
+    SubjectMaster.create(:subject_name => 'ENGLISH')
+    SubjectMaster.create(:subject_name => 'TELUGU')    
   end
 end
 def seed_defaults

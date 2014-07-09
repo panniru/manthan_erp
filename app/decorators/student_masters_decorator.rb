@@ -6,7 +6,7 @@ class StudentMastersDecorator < Draper::Decorator
   end
   
   def section
-    section_master.present? ? section_master.section : nil
+    section_master.present? ? section_master.section_name : nil
   end
 
   def to_json(options = {})

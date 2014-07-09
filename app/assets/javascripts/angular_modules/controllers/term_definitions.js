@@ -23,10 +23,6 @@
                 if(!isNaN(term.amount_per) && term.amount_per != ''){
                     total_percentage += parseFloat(term.amount_per)
                 }
-                
-
-                total_percentage += parseFloat(term.amount_per)
-                errorPopover("amount-"+index, "Invalid")
             });
             if(total_percentage == 100.00){
                 resourceService.TermDefinition.bulk({bulk_term: $scope.newTermDefinitions})
