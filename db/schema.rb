@@ -12,10 +12,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/library
 ActiveRecord::Schema.define(version: 20140708074747) do
 
 
