@@ -1,0 +1,47 @@
+.row
+  .col-sm-9
+    .pull-right
+      %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "edit"
+      #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+              %h4#myModalLabel.modal-title edit book
+              = form_for @book , :html => { :class => "form-horizontal", :role => "form"} do |f|
+                .modal-body
+                  .row
+                    .col-sm-2
+                      = f.label "Name:", :class => 'col-sm-3 control-label'
+                    .col-sm-2
+                      = f.label "ISDN:", :class => 'col-sm-3 control-label'
+                    .col-sm-2
+                      = f.label "Author:", :class => 'col-sm-3 control-label'
+                    .col-sm-2
+                      = f.label"YOP:",:class => 'col-sm-3 control-label'
+                    .col-sm-2
+                      = f.label "NOC:", :class => 'col-sm-3 control-label'
+                    .col-sm-2
+                      = f.label "DP:", :class => 'col-sm-3 control-label'
+                  .row
+                    .col-sm-2
+                      = f.text_field :name, :class => 'col-sm-3 form-control'
+                    .col-sm-2
+                      = f.text_field :isdn, :class => 'col-sm-3 form-control'
+                    .col-sm-2
+                      = f.text_field :author, :class => 'col-sm-3 form-control'
+                    .col-sm-2
+                      = f.text_field :year, :class => 'col-sm-3 datepicker form-control'
+                    .col-sm-2
+                      = f.text_field :noc, :class => 'col-sm-3 form-control'
+                    .col-sm-2
+                      = f.text_field :dp, :class => 'col-sm-3 datepicker form-control'
+                      
+
+                    
+                 
+                      
+                  .modal-footer
+                    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                    = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+                    %br

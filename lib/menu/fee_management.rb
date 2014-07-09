@@ -82,6 +82,8 @@ class FeeManagement < Struct.new(:controller)
   def admin_transactions
     MenuItem.new(:label => "Transactions", :klass => controller == "parent_payment_transactions" ? "active" : "", :icon => "suitcase", :href => "/parent_payment_transactions/admin_transactions")
   end
-  
+  def method_missing(meth, *args, &block)
+    []
+  end
   
 end

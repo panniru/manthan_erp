@@ -27,6 +27,8 @@ class UserMenu
         return @context.accountant_sub_menu
       elsif @user.teacher?
         return @context.teacher_sub_menu 
+      elsif @user.librarian?
+        return @context.librarian_sub_menu 
       end
     end
     []
@@ -43,6 +45,8 @@ class UserMenu
     main_menu << MenuItem.new(:label => "HRM", :klass => ContextDetector.mapped_module_name(@controller_name) == "hrm"? "active" :"", :icon => "group", :href => "#")
     main_menu << MenuItem.new(:label => "Recruitment", :klass => ContextDetector.mapped_module_name(@controller_name) == "recruitment_sub_menu"? "active" :"", :icon => "user", :href => "/forms")
     main_menu << MenuItem.new(:label => "Defaults", :klass => ContextDetector.mapped_module_name(@controller_name) == "default_master_sub_menu"? "active" :"", :icon => " edit", :href => "/default_masters")
+    main_menu
+    main_menu << MenuItem.new(:label => "Library", :klass => ContextDetector.mapped_module_name(@controller_name) == "library"? "active" :"", :icon => " book", :href => "books")
     main_menu
   end
 

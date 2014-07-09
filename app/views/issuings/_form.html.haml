@@ -1,0 +1,22 @@
+= form_for @issuing, :html => { :class => "form-horizontal", :role => "form" } do |f|
+  = render "shared/error_messages", :object => f.object  
+  .row
+    .col-sm-2
+    .col-sm-3
+      = f.label "Name:", :class => 'control-label'
+    .col-sm-3
+      = f.label "Grade:", :class => ' control-label'
+    .col-sm-4
+      = f.label "Section:", :class => ' control-label'
+   
+  .row
+    .col-sm-2
+    .col-sm-3
+      = f.text_field :name, :class => 'form-control'
+    .col-sm-3
+      = f.select :grade, options_for_select([['PP1'],['PP2'],['Grade-1'],['Grade-2'],['Grade-3'],['Grade-4'],['Grade-5'],['Grade-6'],['Grade-7'],['Grade-8'],['Grade-9']]), :class => 'form-control'
+    .col-sm-3
+      = f.select :section, options_for_select([['A'],['B'],['C'],['D'],['E']]), :class => 'form-control'    
+    .col-sm-1
+  %center
+    = f.submit "submit", :class => "btn btn-primary"

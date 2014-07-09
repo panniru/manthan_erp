@@ -24,6 +24,9 @@
                     total_percentage += parseFloat(term.amount_per)
                 }
                 
+
+                total_percentage += parseFloat(term.amount_per)
+                errorPopover("amount-"+index, "Invalid")
             });
             if(total_percentage == 100.00){
                 resourceService.TermDefinition.bulk({bulk_term: $scope.newTermDefinitions})
@@ -35,10 +38,17 @@
                 alert("Sum of the maount percentages are not 100.")
                 return false;
             }
-                
-            
         }
 
+        var errorPopover = function(id, data){
+            $("#"+id).popover({
+                html: true,
+                content: data, 
+                placement: "right",
+            })
+            $("#"+id).popover('show')
+        }
+        
         $scope.destroy = function(termDefinition){
             termDefinition.$delete()
                 .then(function(responce){

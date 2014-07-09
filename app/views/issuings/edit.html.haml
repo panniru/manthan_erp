@@ -1,0 +1,32 @@
+.row
+  .col-sm-9
+    %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "edit"
+    #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+            %h4#myModalLabel.modal-title edit book
+            = form_for @issuing , :html => { :class => "form-horizontal", :role => "form"} do |f|
+              .modal-body
+                .row
+                  .col-sm-2
+                  .col-sm-3
+                    = f.label "Name:", :class => 'col-sm-3 control-label'
+                  .col-sm-3
+                    = f.label "Grade:", :class => 'col-sm-3 control-label'
+                  .col-sm-3
+                    = f.label "Section:", :class => 'col-sm-3 control-label'
+                  .col-sm-1
+                .row
+                  .col-sm-2
+                  .col-sm-3
+                    = f.text_field :name, :class => 'col-sm-6 form-control'
+                  .col-sm-3
+                    = f.select :grade, options_for_select([['PP1'],['PP2'],['Grade-1'],['Grade-2'],['Grade-3'],['Grade-4'],['Grade-5'],['Grade-6'],['Grade-7'],['Grade-8'],['Grade-9']]), :class => 'col-sm-6 form-control'
+                  .col-sm-3
+                    = f.select :section, options_for_select([['A'],['B'],['C'],['D'],['E']]), :class => 'col-sm-6 form-control'    
+                  .col-sm-1
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                  = button_tag "Save", :type => "submit", :class => 'btn btn-primary'

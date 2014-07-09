@@ -12,8 +12,12 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/library
 ActiveRecord::Schema.define(version: 20140708074747) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +128,18 @@ ActiveRecord::Schema.define(version: 20140708074747) do
     t.string   "year"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "books", force: true do |t|
+    t.string   "name"
+    t.string   "isdn"
+    t.string   "author"
+    t.date     "yop"
+    t.string   "noc"
+    t.date     "dp"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "year"
   end
 
   create_table "default_masters", force: true do |t|
@@ -262,6 +278,14 @@ ActiveRecord::Schema.define(version: 20140708074747) do
     t.datetime "updated_at"
     t.string   "status"
     t.string   "enquiry_no"
+  end
+
+  create_table "issuings", force: true do |t|
+    t.string   "name"
+    t.string   "grade"
+    t.string   "section"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "job_runs", force: true do |t|

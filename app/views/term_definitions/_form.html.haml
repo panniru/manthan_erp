@@ -7,7 +7,7 @@
       = text_field_tag "bulk_term[][termdate]",nil, :class => 'datepicker form-control', :placeholder => "Term Date", :id => "date-{{$index}}", :ng_model => "term_definition.termdate"
     .col-md-3
       .input-group
-        = text_field_tag "bulk_term[][amount_per]",nil, :class => "form-control" , :placeholder => "Amount Percent", :ng_model => "term_definition['amount_per']", :ng_model => "term_definition.amount_per"
+        = text_field_tag "bulk_term[][amount_per]",nil, :class => "form-control" , :placeholder => "Amount Percent", :id => "amount-{{$index}}", :ng_model => "term_definition['amount_per']", :ng_model => "term_definition.amount_per"
         %span.input-group-addon %
      
   .row
