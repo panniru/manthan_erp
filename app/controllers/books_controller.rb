@@ -9,6 +9,9 @@ class BooksController < ApplicationController
       render "new"
     end
   end
+  def home_index
+    @books = Book.all
+  end
   def show
     end
   def index
@@ -44,6 +47,6 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:name, :isdn, :author, :yop, :noc, :dp,:year)
+    params.require(:book).permit(:name, :isdn, :author, :year_of_publishing, :no_of_copies, :purchased_date,:year, :book_type)
   end
 end

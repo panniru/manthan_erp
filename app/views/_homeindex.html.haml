@@ -1,0 +1,32 @@
+.row
+  .col-sm-9
+    %h4 Home
+    .pull-left
+      .col-sm-10                 
+        %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
+%br
+%table#tblData.target.table.table-striped.table-condensed.table-bordered{style: "width:70%"}
+  %thead
+    %tr
+      %th Name
+      %th ISBN Number
+      %th Author
+      %th Year Of Publishing
+    
+      %th Date Purchased
+      %th Type
+     
+     
+  %tbody
+    - @books.each do |book|
+      %tr
+        %td= book.name
+        %td= book.isdn
+        %td= book.author
+        %td= book.year_of_publishing
+       
+        %td= book.purchased_date
+        %td= book.book_type
+       
+
+      

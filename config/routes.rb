@@ -13,7 +13,7 @@ ManthanErp::Application.routes.draw do
     end
   end
   resources :issuings
-  resources :books
+ 
   resources :staffs
   get "staffs/staffview"
 
@@ -40,7 +40,11 @@ ManthanErp::Application.routes.draw do
 
 
   resources :time_tables  
-
+  resources :books do 
+    collection do 
+      get  'home_index'
+    end
+  end
   resources :teaching_plans do
      collection do
       get "calendardata"
