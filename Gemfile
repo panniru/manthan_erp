@@ -5,7 +5,7 @@ gem 'jquery-timepicker-rails'
 gem 'rails', '4.0.2'
 
 gem "geocoder"
-sssssgem 'gmaps4rails'
+gem 'gmaps4rails'
 gem 'carrierwave'
 
 gem 'rails3-jquery-autocomplete'
