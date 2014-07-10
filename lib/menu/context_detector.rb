@@ -29,6 +29,9 @@ class ContextDetector
     "#" => "recruitment_sub_menu",
     "#" => "recruitment_sub_menu",
     "#" => "recruitment_sub_menu",
+    "new_vehicles" => "transport",
+    "routes" => "transport",
+    
     
 
     "default_masters" => "default_master_sub_menu"

@@ -20,7 +20,10 @@
             var total_percentage = 0.0;
             angular.forEach($scope.newPostDatedCheques, function(cheque, index){
                 cheque.date = $("#date-"+index).val()
-                total_percentage += parseFloat(cheque.amount_per)
+		if(!isNaN(cheque.amount_per) && cheque.amount_per > 0.0 ){
+		    total_percentage += parseFloat(cheque.amount_per)
+		}
+                
             });
             if(total_percentage == 100.00){
                 resourceService.PostDatedCheque.bulk({bulk_post_dated_cheques: $scope.newPostDatedCheques})

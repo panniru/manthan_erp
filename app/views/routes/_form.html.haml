@@ -1,0 +1,27 @@
+= form_for @route, :html => { :class => "form-horizontal", :role => "form"} do |f| 
+  .modal-body
+    .row
+      .col-sm-4
+        = f.label "Route no"
+      .col-sm-3
+        = f.text_field "route_no", :class => 'form-control'
+        %br
+    .row
+      .col-sm-4
+        = f.label "Last point"
+      .col-sm-3
+        = f.text_field "lpp", :class => 'form-control'
+        %br
+    .row
+      .col-sm-4
+        = f.label "Bus no" 
+      .col-sm-3
+        = f.text_field "busno_up", :class => 'form-control'
+        %br
+    .row
+      .col-sm-4
+        = f.label "No of Children"
+      .col-sm-3
+        = f.text_field "no_of_children", :class => 'form-control'
+        = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+      

@@ -125,6 +125,8 @@ GEM
       railties (>= 3.2, < 5.0)
     fssm (0.2.10)
     fullcalendar-rails (1.6.1.0)
+    geocoder (1.2.2)
+    gmaps4rails (2.1.2)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -285,6 +287,8 @@ DEPENDENCIES
   factory_girl_rails
   font-awesome-rails
   fullcalendar-rails (= 1.6.1.0)
+  geocoder
+  gmaps4rails
   haml-rails
   jbuilder (~> 1.2)
   jquery-rails

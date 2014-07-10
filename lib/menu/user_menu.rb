@@ -43,6 +43,7 @@ class UserMenu
     main_menu << MenuItem.new(:label => "HRM", :klass => ContextDetector.mapped_module_name(@controller_name) == "hrm"? "active" :"", :icon => "group", :href => "#")
     main_menu << MenuItem.new(:label => "Recruitment", :klass => ContextDetector.mapped_module_name(@controller_name) == "recruitment_sub_menu"? "active" :"", :icon => "user", :href => "/forms")
     main_menu << MenuItem.new(:label => "Defaults", :klass => ContextDetector.mapped_module_name(@controller_name) == "default_master_sub_menu"? "active" :"", :icon => " edit", :href => "/default_masters")
+    main_menu << MenuItem.new(:label => "Transport", :klass => ContextDetector.mapped_module_name(@controller_name) == "transport_sub_menu"? "active" :"", :icon => " truck", :href => "/new_vehicles")
     main_menu
   end
 

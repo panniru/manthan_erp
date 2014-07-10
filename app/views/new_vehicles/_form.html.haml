@@ -1,0 +1,43 @@
+= form_for @new_vehicle , :html => { :class => "form-horizontal", :role => "form"} do |f| 
+  .modal-body
+    .row
+      .col-sm-4
+        = f.label "Make Of Bus"
+      .col-sm-3
+        = f.text_field "make_of_bus", :class => 'form-control'
+        %br
+    .row
+      .col-sm-4
+        = f.label "Model No."
+      .col-sm-3
+        = f.text_field "model_no", :class => 'form-control'
+        %br
+    .row
+      .col-sm-4
+        = f.label "Year of Manufacture" 
+      .col-sm-3
+        = f.text_field "yom", :class => 'form-control'
+        %br
+    .row
+      .col-sm-4
+        = f.label "Purchase"
+      .col-sm-2
+        = f.select "purchase_option" , options_for_select([['Own'],['Lease']])
+        %br
+        %br
+    .row
+      .col-sm-4
+        = f.label "Purchase Date"
+      .col-sm-3
+        = f.text_field "purchase_option_date", :class => 'datepicker'
+        %br
+        %br
+    .row
+      .col-sm-4
+        = f.label "Capacity"
+      .col-sm-3
+        = f.text_field "capacity", :class => 'form-control'
+        %br
+        
+        = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+      

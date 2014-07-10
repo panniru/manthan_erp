@@ -1,4 +1,8 @@
 ManthanErp::Application.routes.draw do
+  get "new_vehicles/index"
+  get "new_vehicles/show"
+  get "new_vehicles/edit"
+  get "new_vehicles/new"
   get "teaching_plans/new"
   get "teaching_plans/edit"
   get "teaching_plans/index"
@@ -8,7 +12,7 @@ ManthanErp::Application.routes.draw do
       get 'home_index'
     end
   end
-
+ 
   resources :staffs
   get "staffs/staffview"
 
@@ -44,6 +48,7 @@ ManthanErp::Application.routes.draw do
     end
   end
   resources :adds
+  resources :new_vehicles 
   
  resources :forms do
     member do
@@ -109,6 +114,11 @@ ManthanErp::Application.routes.draw do
 
 
   resources :post_dated_cheques do
+    collection do
+      post "create_bulk"
+    end
+  end
+  resources :routes do
     collection do
       post "create_bulk"
     end

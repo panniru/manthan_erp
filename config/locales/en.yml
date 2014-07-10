@@ -57,6 +57,16 @@ en:
     update:
       success: "Term has been updated"
       fail: "Term not been updated"
+  route:
+    create:
+      success: "Route has been saved"
+      fail: "Route not been saved"
+    destroy:
+      success: "Route has been deleted"
+      fail: "Route has not been deleted"
+    update:
+      success: "Route has been updated"
+      fail: "Route not been updated"
   post_dated_cheque:
     create:
       success: "cheque has been saved"
@@ -159,3 +169,13 @@ en:
     update:
       success: "Default Value has been updated"
       fail: "Default Value not been updated"
+  new_vehicle:
+    create:
+      success: "Vehicle has been saved"
+      fail: "Vehicle Value not been saved"
+    destroy:
+      success: "Vehicle has been deleted"
+      fail: "Vehicle has not been deleted"
+    update:
+      success: " Vehicle has been updated"
+      fail: "Vehicle not been updated"
