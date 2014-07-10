@@ -1,0 +1,29 @@
+.col-sm-10
+  %h3 
+    = "Vehicles list"
+.col-sm-2
+  = render "modal"
+ 
+
+%table#tblData.target.table.table-striped.table-condensed.table-bordered
+  %thead
+    %th Company of Bus
+    %th Model No
+    %th Year Of Manufacturing
+    %th Purchase
+    %th Purchase Date
+    %th Capacity
+    %th
+  %tbody
+    - @new_vehicle.each do |new_vehicle|
+      %tr
+        %td= new_vehicle.make_of_bus
+        %td= new_vehicle.model_no
+        %td= new_vehicle.yom
+        %td= new_vehicle.purchase_option
+        %td= new_vehicle.purchase_option_date
+        %td= new_vehicle.capacity
+        %td 
+          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_new_vehicle_path(new_vehicle), :class => "btn btn-warning"
+          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), new_vehicles_path(new_vehicle), :class => "form btn btn-danger",:data => { :confirm => "Are You Sure to Delete " }
+

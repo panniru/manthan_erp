@@ -1,0 +1,52 @@
+%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New Bus"
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title New Bus
+        = form_for NewVehicle.new , :html => { :class => "form-horizontal", :role => "form"} do |f| 
+          .modal-body
+            .row
+              .col-sm-4
+                = f.label "Make Of Bus"
+              .col-sm-3
+                = f.text_field "make_of_bus", :class => 'form-control'
+                %br
+            .row
+              .col-sm-4
+                = f.label "Model No."
+              .col-sm-3
+                = f.text_field "model_no", :class => 'form-control'
+                %br
+            .row
+              .col-sm-4
+                = f.label "YearofManufacture" 
+              .col-sm-3
+                = f.text_field "yom", :class => 'datepicker'
+                %br
+            .row
+              .col-sm-4
+                = f.label "Purchase"
+              .col-sm-2
+                = f.select "purchase_option" , options_for_select([['Own'],['Lease']])
+                %br
+                %br
+            .row
+              .col-sm-4
+                = f.label "Purchase Date"
+              .col-sm-3
+                = f.text_field "purchase_option_date", :class => 'datepicker'
+                %br
+                %br
+            .row
+              .col-sm-4
+                = f.label "Capacity"
+              .col-sm-3
+                = f.text_field "capacity", :class => 'form-control'
+                %br
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+            = f.hidden_field :status, :value => "pending"
+            = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+          

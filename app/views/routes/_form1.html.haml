@@ -1,0 +1,12 @@
+ = form_tag create_bulk_routes_path, :method => "POST",:class=>"form-horizontal" do
+   .row{"ng-repeat" => "no_of_stops in routes"}
+     .form-group
+       = label_tag "stop  {{$index+1}}", nil, :class => "form-label col-md-2"
+       .col-md-3
+         = text_field_tag "bulk_route[][no_of_stops]",nil, :class => "form-control"
+        .col-md-3
+          .input-group
+            = text_field_tag "bulk_term[][sequence_no]",nil, :class => "form-control" 
+             
+            %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMoreterms()"}=  "More stops"
+            %button{:type=>"button", :class=> "btn btn-primary"}=  "Save"
