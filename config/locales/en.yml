@@ -159,6 +159,7 @@ en:
     update:
       success: "Default Value has been updated"
       fail: "Default Value not been updated"
+<<<<<<< HEAD
   parent:
     create:
       success: "Parent has been created"
@@ -185,3 +186,16 @@ en:
     upload:
       success: "Students has been uploaded"
       fail: "Students has not been uploaded"
+=======
+  book:
+    create:
+      success: "book has been saved"
+      fail: "book not been saved"
+    destroy:
+      success: "book has been deleted"
+      fail: "book has not been deleted"
+    update:
+      success: "book has been updated"
+      fail: "book not been updated"
+  
+>>>>>>> origin/library
