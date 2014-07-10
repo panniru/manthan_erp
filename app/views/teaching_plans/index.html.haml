@@ -7,30 +7,37 @@
   .form-group.col-md-3
     %label{:class=> "form-label col-md-4"} Section
     .col-md-6
-      %select{"ng-model" => "mySection", :ng_options => "section.section_master_id as section.section for section in map_sections | filter: {grade_master_id: myGrade}", :class=>"form-control"}
+      %select{"ng-model" => "mySection", :ng_options => "section.section_master_id as section.section_name for section in map_sections | filter: {grade_master_id: myGrade}", :class=>"form-control"}
   .form-group.col-md-5
-    = link_to "Show Plan", "#", :class => "btn btn-primary"
+   
     .col-md-4
-      %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "View Plan"
+      %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add Plan"
+    .col-sm-5
+      .teachingplancaledar
+        #calendar1                    
       = render "form"
   .row
-    .col-md-4   
+    .col-md-3   
       #accordion.panel-group                     
         .panel.panel-default
           .panel-heading
             %h4.panel-title
               %a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseTwo"}
-                TeachingPlans
+                %center ShowPlans
                 #collapseTwo.panel-collapse.collapse
                   .panel-body
                     - @teaching_plans.sort.each do |month, teaching_plans|
                       %h2= month.strftime('%B')
                       - for teaching_plan in teaching_plans
                         .teaching_plan
+                          Grade:
+                          %strong= teaching_plan.grade_master.grade_name
+                          %br
+                          Section:
+                          %strong= teaching_plan.section_master.section_name
+                          %br
                           %strong= teaching_plan.teaching_date
-                          plan on #{teaching_plan.plan_month}      
+                          plan on #{teaching_plan.plan_month}
+                         
                    
-    .col-sm-5
-      .teachingplancaledar
-        #calendar1
-                                                
+                  

@@ -28,7 +28,9 @@ class UserMenu
       elsif @user.teacher?
         return @context.teacher_sub_menu 
       elsif @user.librarian?
-        return @context.librarian_sub_menu 
+        return @context.librarian_sub_menu
+      elsif @user.swamy?
+        return @context.swamy_sub_menu 
       end
     end
     []

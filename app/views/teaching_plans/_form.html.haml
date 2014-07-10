@@ -15,10 +15,11 @@
             .row
               .col-sm-3
                 = f.label "Plan", :class => 'col-sm-3 control-label'              
-              .col-sm-5
+              .col-sm-5{"ng-controller" => "TeachingPlansController"}
                 = f.text_area :plan_month ,:class => 'form-control'
                 = f.hidden_field :grade_master_id, :value => "{{myGrade}}"
                 = f.hidden_field :section_master_id,:value => "{{mySection}}"
+                = f.hidden_field :faculty_master_id, :value => "{{faculty_id}}"
                 %br
                   
           .modal-footer
