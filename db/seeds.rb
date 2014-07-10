@@ -99,7 +99,6 @@ def seed_jobs
   Job.where(code: job_attributes[:code]).first_or_create!(job_attributes.delete_if { |k,v| k == :code })
 end
 
-a
 def seed_payment_types
   PaymentType.where(code: "annual").first_or_create!(:code => "annual")
   PaymentType.where(code: "term_wise").first_or_create!(:code => "term_wise")
