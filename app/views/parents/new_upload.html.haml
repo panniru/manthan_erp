@@ -1,0 +1,19 @@
+.page-header
+  %h2
+    = link_to "Upload Prents", "#"
+%p
+  A Csv or Exel can be uploaded. First row should have the column names
+= form_for @parent_uploader, :url => upload_parents_path, :multipart => true, :html => { :class => "form"} do |f|
+  = render "shared/error_messages", :object => f.object
+  .panel.panel-info
+    .panel-body
+      %strong Columns Required: &nbsp;
+      
+      %strong.pull-right
+        = link_to "Download Template", new_upload_parents_path(:format => :xls)
+      %br
+      %br
+        .col-sm-3
+          = f.file_field :file
+        .col-sm-2
+          = f.submit "Upload", :class => "btn btn-primary pull-right"

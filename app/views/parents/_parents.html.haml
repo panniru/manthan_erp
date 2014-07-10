@@ -1,0 +1,23 @@
+%table.table.table-bordered.table-hover.table-striped
+  %thead
+    %th Father Name
+    %th Mother Name
+    %th Guardian Name
+    %th Father Email
+    %th Mother Email
+    %th Guardian Email
+    %th Father Phone
+    %th Mother Phone
+    %th Guardian Phone
+  %tbody
+    - parents.each do |parent|
+      %tr
+        %td= parent.father_name
+        %td= parent.mother_name
+        %td= parent.guardian_name
+        %td= parent.father_email
+        %td= parent.mother_email
+        %td= parent.guardian_email
+        %td= parent.father_phone
+        %td= parent.mother_phone
+        %td= parent.guardian_phone

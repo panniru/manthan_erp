@@ -1,0 +1,20 @@
+%table.table.table-bordered.table-hover.table-striped
+  %thead
+    %th Name
+    %th DOB
+    %th Joining Date
+    %th Father Name
+    %th Grade
+    %th Section
+    %th Bus Facilty
+  %tbody
+    - students.each do |student|
+      %tr
+        %td= student.name
+        %td= student.dob
+        %td= student.joining_date
+        %td= student.parent.father_name
+        %td= student.grade_master.grade_name
+        %td= student.section_master.section_name
+        %td= student.bus_facility
+

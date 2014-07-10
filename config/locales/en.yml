@@ -159,4 +159,29 @@ en:
     update:
       success: "Default Value has been updated"
       fail: "Default Value not been updated"
-  
+  parent:
+    create:
+      success: "Parent has been created"
+      fail: "Parent not been created"
+    destroy:
+      success: "Parent has been removed"
+      fail: "Parent has not been removed"
+    update:
+      success: "Parent has been updated"
+      fail: "Parent not been updated"
+    upload:
+      success: "Parents has been uploaded"
+      fail: "Parents has not been uploaded"
+  student_master:
+    create:
+      success: "Student has been created"
+      fail: "Student not been created"
+    destroy:
+      success: "Student has been removed"
+      fail: "Student has not been removed"
+    update:
+      success: "Student has been updated"
+      fail: "Student not been updated"
+    upload:
+      success: "Students has been uploaded"
+      fail: "Students has not been uploaded"

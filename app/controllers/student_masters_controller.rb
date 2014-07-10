@@ -1,8 +1,9 @@
 class StudentMastersController < ApplicationController
   load_resource :only => [:show, :monthly_pdcs, :next_term_fee, :annual_discount_details]
   def index
+    page = params[:page].present? ? params[:page] : 1
     if current_user.admin?
-      @student_masters = Student.all
+      @student_masters = StudentMaster.all.order("name").paginate(:page => page)
     elsif current_user.parent?
       @student_masters = current_user.parent.students
     end
@@ -69,6 +70,25 @@ class StudentMastersController < ApplicationController
       format.json do
         render :json => StudentMastersDecorator.decorate_collection(@parent.students)
       end
+    end
+  end
+
+  def new_upload
+    @student_master_uploader = StudentMasterUploader.new
+    respond_to do |format|
+      format.html { render "new_upload"}
+      format.xls { send_data @student_master_uploader.xls_template(col_sep: "\t") }
+    end
+  end
+
+
+  def upload
+    @student_master_uploader = StudentMasterUploader.new(params[:student_master_uploader])
+    if @student_master_uploader.save
+      flash[:success] = I18n.t :success, :scope => [:student_master, :upload]
+      redirect_to student_masters_path
+    else
+      render "new_upload"
     end
   end
   

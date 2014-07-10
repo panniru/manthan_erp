@@ -130,15 +130,16 @@ ManthanErp::Application.routes.draw do
   resources :student_masters do
     collection do
       get "belongs_to_parent"
+      get "new_upload"
+      post "upload"
     end
     member do
       get 'monthly_pdcs'
       get 'next_term_fee'
       get "annual_discount_details"
-  
     end
   end
-
+  
   resources :parent_payment_masters do
     collection do
       get "pay"
@@ -239,4 +240,10 @@ ManthanErp::Application.routes.draw do
     resources :section_masters
   end
 
+  resources :parents do
+    collection do
+      get "new_upload"
+      post "upload"
+    end
+  end
 end

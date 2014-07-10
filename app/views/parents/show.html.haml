@@ -1,0 +1,22 @@
+.page-header
+  %h3
+    = @parent.name
+    .pull-right
+      - if can?:create, :Student
+        = link_to "Edit", edit_parent_path(@parent), :class => "btn btn-success"
+        = link_to "Delete", parent_path(@parent), :class => "btn btn-danger", :data => {:confirm => "Are You Sure?", :method => :delete}
+.col-md-12
+  %table.table.table-bordered
+    %thead
+      %th Roll Number
+      %th Name
+      %th Course
+      %th Semester
+      %th Email
+    %tbody
+      %tr
+        %td= @parent.roll_number
+        %td= @parent.name
+        %td= @parent.course_name
+        %td= @parent.semester
+        %td= @parent.user.try(:email)

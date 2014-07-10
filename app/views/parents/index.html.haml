@@ -1,0 +1,8 @@
+%h3
+  Parents
+  .pull-right
+    = link_to "Upload Parents", new_upload_parents_path, :class => "btn btn-primary"
+%hr
+= render :partial => "parents", :locals => {:parents => @parents}
+
+= will_paginate @parents, param_name: "page", previous_label: h("<"), next_label: h(">")
