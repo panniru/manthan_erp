@@ -33,14 +33,16 @@
                   .modal-footer
                     %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
                     = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+    .pull-left
+      .col-sm-10                 
+        %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
 %br
-%table.table.table-striped.table-condensed.table-bordered{style: "width:70%"}
+%table#tblData.target.table.table-striped.table-condensed.table-bordered{style: "width:70%"}
   %thead
     %tr
       %th Name
       %th Grade
       %th Section
-     
       %th
   %tbody
     - @issuings.each do |issuing|

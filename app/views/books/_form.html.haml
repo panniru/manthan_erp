@@ -10,7 +10,7 @@
     .col-sm-2
       = f.label"YOP:",:class => 'control-label'
     .col-sm-2
-      = f.label "NOC:", :class => 'control-label'
+      = f.label "Type", :class => 'control-label'
     .col-sm-2
       = f.label "DP:", :class => 'control-label'
   .row
@@ -21,11 +21,11 @@
     .col-sm-2
       = f.text_field :author, :class => 'form-control'
     .col-sm-2
-      = f.text_field :yop, :class => 'datepicker form-control'
+      = f.text_field :year_of_publishing, :class => 'datepicker form-control'
     .col-sm-2
-      = f.text_field :noc, :class => 'form-control'
+      = f.text_field :book_type, :class => 'form-control'
     .col-sm-2
-      = f.text_field :dp, :class => 'datepicker form-control'
+      = f.text_field :purchased_date, :class => 'datepicker form-control'
       %br
   %center
     = f.button "submit" , :class =>'btn btn-primary'

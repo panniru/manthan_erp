@@ -17,7 +17,7 @@ end
   end
   private 
   def home
-    MenuItem.new(:label => "Home", :klass => "", :icon => "home ", :href => "#")
+    MenuItem.new(:label => "Home", :klass => "", :icon => "home ", :href => "books/home_index")
   end
   def  books
     MenuItem.new(:label => "Books", :klass => "", :icon => "book ", :href => "books")

@@ -128,12 +128,13 @@ ActiveRecord::Schema.define(version: 20140709054434) do
     t.string   "name"
     t.string   "isdn"
     t.string   "author"
-    t.date     "yop"
-    t.string   "noc"
-    t.date     "dp"
+    t.date     "year_of_publishing"
+    t.string   "number_of_copies"
+    t.date     "purchased_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "year"
+    t.string   "book_type"
   end
 
   create_table "default_masters", force: true do |t|
