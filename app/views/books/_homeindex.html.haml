@@ -4,29 +4,30 @@
     .pull-left
       .col-sm-10                 
         %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
-          %br
-%table#tblData.target.table.table-striped.table-condensed.table-bordered
-  %thead
-    %tr
-      %th Name
-      %th ISBN Number
-      %th Author
-      %th Year Of Publishing
-      %th No Of Copies
-      %th Date Purchased
-      %th Type
-     
-     
-  %tbody
-    - @books.each do |book|
+%br
+.row
+  %table#tblData.target.table.table-striped.table-condensed.table-bordered
+    %thead
       %tr
-        %td= book.name
-        %td= book.isdn
-        %td= book.author
-        %td= book.year_of_publishing
-        %td= book.no_of_copies
-        %td= book.purchased_date
-        %td= book.book_type
+        %th Name
+        %th ISBN Number
+        %th Author
+        %th Year Of Publishing
+        %th No Of Copies
+        %th Date Purchased
+        %th Type
+     
+     
+    %tbody
+      - @books.each do |book|
+        %tr
+          %td= book.name
+          %td= book.isdn
+          %td= book.author
+          %td= book.year_of_publishing
+          %td= book.number_of_copies
+          %td= book.created_at
+          %td= book.book_type
        
 
       

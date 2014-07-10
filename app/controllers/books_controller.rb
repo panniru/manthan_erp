@@ -44,9 +44,10 @@ class BooksController < ApplicationController
     end
     redirect_to books_path
   end
+ 
   private
 
   def book_params
-    params.require(:book).permit(:name, :isdn, :author, :year_of_publishing, :no_of_copies, :purchased_date,:year, :book_type)
+    params.require(:book).permit(:name, :isdn, :author, :year_of_publishing, :number_of_copies, :purchased_date,:year, :book_type)
   end
 end
