@@ -246,4 +246,9 @@ ManthanErp::Application.routes.draw do
       post "upload"
     end
   end
+  
+  resources :class_teacher_mappings do
+    collection do   
+    end  
+  end
 end

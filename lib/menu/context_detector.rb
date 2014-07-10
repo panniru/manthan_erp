@@ -21,6 +21,7 @@ class ContextDetector
     "teachers_time_tables" => "academic",
     "teaching_plans" => "academic",
     "teacher_grade_mappings" => "academic",
+    "class_teacher_mappings" => "academic",
     "recruitments" => "recruitment_sub_menu",
     "adds" => "recruitment_sub_menu",
     "forms" => "recruitment_sub_menu",

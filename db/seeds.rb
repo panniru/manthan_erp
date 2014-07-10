@@ -171,20 +171,6 @@ def seed_faculty
   end
 end 
 
-def seed_tecaher_grade_mapping
-  unless TeacherGradeMapping.first.present?
-    grademasters=GradeMaster.all
-    sectionmasters=SectionMaster.all
-    subjectmasters=SubjectMaster.all
-    facultymasters=FacultyMaster.all
-    TeacherGradeMapping.create(:grade_master_id => grademasters[1]['id'], :section_master_id => sectionmasters[0]['id'], :subject_master_id => subjectmasters[0]['id'] , :faculty_master_id => facultymasters[0]['id'])
-    TeacherGradeMapping.create(:grade_master_id => grademasters[1]['id'], :section_master_id => sectionmasters[1]['id'], :subject_master_id => subjectmasters[0]['id'] , :faculty_master_id => facultymasters[0]['id'])
-    TeacherGradeMapping.create(:grade_master_id => grademasters[0]['id'], :section_master_id => sectionmasters[4]['id'], :subject_master_id => subjectmasters[0]['id'] , :faculty_master_id => facultymasters[0]['id'])
-    TeacherGradeMapping.create(:grade_master_id => grademasters[2]['id'], :section_master_id => sectionmasters[3]['id'], :subject_master_id => subjectmasters[1]['id'] , :faculty_master_id => facultymasters[1]['id'])
-    TeacherGradeMapping.create(:grade_master_id => grademasters[3]['id'], :section_master_id => sectionmasters[2]['id'], :subject_master_id => subjectmasters[1]['id'] , :faculty_master_id => facultymasters[1]['id'])
-  end 
-end
-
 def seed_all
   seed_role
   seed_user
@@ -198,7 +184,6 @@ def seed_all
   seed_defaults
   seed_default_discount
   seed_faculty
-  seed_tecaher_grade_mapping
 end
 
 seed_all
