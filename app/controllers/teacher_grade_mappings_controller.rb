@@ -69,7 +69,7 @@ class TeacherGradeMappingsController < ApplicationController
 
   def get_grade_wise_mappings    
     respond_to do |format|
-      format.json do
+      format.json do        
         my_Grade = params[:my_Grade]
         my_Section = params[:my_Section]
 

@@ -259,7 +259,9 @@ ManthanErp::Application.routes.draw do
   end
   
   resources :class_teacher_mappings do
-    collection do   
+    collection do
+      get "get_grade_wise_mappings"   
     end  
   end
+  
 end

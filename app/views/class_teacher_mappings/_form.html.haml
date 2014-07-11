@@ -1,0 +1,27 @@
+.row{"ng-controller" => "ClassTeacherMappingController"}
+  .row
+    .col-md-1
+    .col-md-8
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "getGrade()", :value => "GRADE PP2"}
+  .row{"ng-show" => "myFormValue"}
+    .col-md-1
+    .col-md-8
+      %table{:class => "table"}
+        %tr            
+          %th GRADE
+          %th SECTION
+          %th TEACHER 
+          %th
+        %tr{"ng-repeat" => "mapping in mappings | orderBy:'id'"}  
+          %td {{mapping['grade_name']}}                     
+          %td {{mapping['section_name']}}           
+          %td {{mapping['faculty_name']}}
+          %td 
+            %select{"ng-model" => "mapping[faculty_master_id]", "ng-options" => "mapping.id  as mapping.faculty_name  for mapping in mappings",:class => "form-control"}           
+    .col-md-3  
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveMappings()", :value => "SAVE"}
+ 
+  .row{"ng-show" => "myShowFormValue"} 
+    = render "show_form" 
+    
+  

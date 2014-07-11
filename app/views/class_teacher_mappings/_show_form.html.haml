@@ -1,0 +1,35 @@
+.row 
+  .row
+    .col-md-1
+    .col-md-8
+      %table{:class => "table"}
+        %tr            
+          %th GRADE
+          %th SECTION
+          %th TEACHER 
+          %th 
+            = link_to raw("<span class='glyphicon glyphicon-pencil'></span>"),"#", :class => "btn btn-warning btn-sm", :title => "EDIT", :ng_click => "editMappings()"
+         
+        %tr{"ng-repeat" => "mapping in mappings | orderBy:'id'"}  
+          %td {{mapping['grade_name']}}                     
+          %td {{mapping['section_name']}}           
+          %td {{mapping['faculty_name']}}
+          %td          
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteMappings()"
+                   
+    .col-md-3  
+    
+ 
+
+  .row
+    :css
+      table, th, td
+      {
+      border-collapse:collapse;
+      border:5px solid #6aa6d6;
+      }
+      th, td
+      {
+      padding:5px;
+      }   
+  
