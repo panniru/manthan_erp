@@ -2,7 +2,7 @@ class TeachingPlansController < ApplicationController
   def index
     @teaching_plans = TeachingPlan.all
     @teaching_plans = TeachingPlan.find(:all, :order => 'teaching_date,plan_month')
-    @teaching_plans = @teaching_plans.group_by { |t| t.teaching_date.beginning_of_month }
+  # @teaching_plans = @teaching_plans.group_by { |t| t.teaching_date.beginning_of_month }
   end
   def calendardata   
     @teaching_plans = TeachingPlan.all
@@ -42,7 +42,7 @@ class TeachingPlansController < ApplicationController
     end
   end
   def teachingplan_params
-    params.require(:teaching_plan).permit(:grade_master_id, :section_master_id,:teaching_date,:plan_month,:faculty_master_id )
+    params.require(:teaching_plan).permit(:grade_master_id, :section_master_id,:teaching_date,:plan_month,:faculty_master_id,:subject_master_id )
   end
   def getfacultyidservice   
     respond_to do |format|
@@ -65,6 +65,23 @@ class TeachingPlansController < ApplicationController
           {:grade_master_id => mapping.grade_master_id, :grade_name => mapping.grade_master.grade_name,:section_master_id => mapping.section_master_id, :section_name => mapping.section_master.section_name}
           
         end
+        
+        render :json => mappings
+        # end 
+      end     
+    end
+  end
+  def get_grade_section_subject_service    
+    faculty_id = params[:_faculty_id].to_i
+    respond_to do |format|
+      format.json do
+        mappings = TeacherGradeMapping.where('faculty_master_id='+"#{faculty_id}")     
+        mappings = mappings.map do |mapping|          
+          {:id => faculty_id, :grade_master_id => mapping.grade_master_id, :grade_name => mapping.grade_master.grade_name,:section_master_id => mapping.section_master_id, :section_name => mapping.section_master.section_name, :subject_master_id => mapping.subject_master_id, :subject_name => mapping.subject_master.subject_name, :grade_section_subject => (mapping.grade_master.grade_name+"- "+mapping.section_master.section_name+"- "+mapping.subject_master.subject_name)}
+          
+        end
+        p mappings
+        p "=======>"
         
         render :json => mappings
         # end 

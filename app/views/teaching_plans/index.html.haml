@@ -1,43 +1,46 @@
 .row{"ng-controller" => "TeachingPlansController"}
-  .form-group.col-md-3
-    %label{:class=> "form-label col-md-4"} Grade
+  .form-group.col-md-7
+    %label{:class=> "form-label col-md-4"} Grade-Section-Subject
     .col-md-6      
-      %select{"ng-model" => "myGrade", :ng_options => "grade.grade_master_id as grade.grade_name for grade in map_grades", :class => "form-control"}  
+      %select{"ng-model" => "myGrade_Section_Subject", :ng_options => "a.grade_section_subject for a in grades_sections_subjects", :class => "form-control"} 
         
-  .form-group.col-md-3
-    %label{:class=> "form-label col-md-4"} Section
-    .col-md-6
-      %select{"ng-model" => "mySection", :ng_options => "section.section_master_id as section.section_name for section in map_sections | filter: {grade_master_id: myGrade}", :class=>"form-control"}
-  .form-group.col-md-5
-   
+    .col-sm-12
+      %table{:class => "table"}
+      %center
+        %h5
+         
+          TEACHING PLANS        
+          %table{:class => "table"}
+            %tr
+              %th{style: "width:7%"} Date
+              %th{style: "width:7%"} Grade Section Subject
+              %th{style: "width:7%"} Plan
+              - @teaching_plans.each do |teaching_plan|
+                %tr
+                  %td= teaching_plan.teaching_date
+                  %td= teaching_plan.grade_master.grade_name+"-"+ teaching_plan.section_master.section_name+"-"+teaching_plan.subject_master.subject_name                
+                  %td= teaching_plan.plan_month
+                
+                          
+  .form-group.col-md-5 
     .col-md-4
       %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add Plan"
     .col-sm-5
       .teachingplancaledar
         #calendar1                    
-      = render "form"
-  .row
-    .col-md-3   
-      #accordion.panel-group                     
-        .panel.panel-default
-          .panel-heading
-            %h4.panel-title
-              %a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseTwo"}
-                %center ShowPlans
-                #collapseTwo.panel-collapse.collapse
-                  .panel-body
-                    - @teaching_plans.sort.each do |month, teaching_plans|
-                      %h2= month.strftime('%B')
-                      - for teaching_plan in teaching_plans
-                        .teaching_plan
-                          Grade:
-                          %strong= teaching_plan.grade_master.grade_name
-                          %br
-                          Section:
-                          %strong= teaching_plan.section_master.section_name
-                          %br
-                          %strong= teaching_plan.teaching_date
-                          plan on #{teaching_plan.plan_month}
-                         
-                   
+          = render "form"
+        
                   
+  .row
+    :css
+      table, th, td
+      {
+      border-collapse:collapse;
+      border:5px solid #6aa6d6;
+      }
+      th, td
+      {
+      padding:5px;
+      } 
+  
+          

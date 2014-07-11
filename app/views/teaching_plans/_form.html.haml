@@ -17,15 +17,15 @@
                 = f.label "Plan", :class => 'col-sm-3 control-label'              
               .col-sm-5{"ng-controller" => "TeachingPlansController"}
                 = f.text_area :plan_month ,:class => 'form-control'
-                = f.hidden_field :grade_master_id, :value => "{{myGrade}}"
-                = f.hidden_field :section_master_id,:value => "{{mySection}}"
+                = f.hidden_field :grade_master_id, :value => "{{myGrade_Section_Subject.grade_master_id}}"
+                = f.hidden_field :section_master_id,:value => "{{myGrade_Section_Subject.section_master_id}}"
                 = f.hidden_field :faculty_master_id, :value => "{{faculty_id}}"
+                = f.hidden_field :subject_master_id, :value => "{{myGrade_Section_Subject.subject_master_id}}"
                 %br
                   
           .modal-footer
-            .col-md-5.col-md-offset-3
-              %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMoreplans()"}=  "More plans"           
-              = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+            = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
    
                       
 
