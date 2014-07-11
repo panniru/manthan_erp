@@ -10,7 +10,8 @@
         var getGradeServiceMapView = function(){
             var url = "/teaching_plans/gradeserviceview.json"
             return $http.get(url);
-        };
+        };                                       
+
         var getGradesSectionsService = function(faculty_id){
             alert(faculty_id);
             var url = "/teaching_plans/getgradessectionsservice.json"           
