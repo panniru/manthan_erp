@@ -47,10 +47,12 @@ class TeachersTimeTablesController < ApplicationController
   end
 
   def getperiods    
+    
     teacherstimetables = TeachersTimeTable.where('faculty_master_id = '+"'#{params[:my_Teacher]}'")
     teacherstimetables = teacherstimetables.map do |timetable|
       {id: timetable.id,  mon_grade_section: timetable.mon_grade_section, tue_grade_section: timetable.tue_grade_section, wed_grade_section: timetable.wed_grade_section, thu_grade_section: timetable.thu_grade_section, fri_grade_section: timetable.fri_grade_section, sat_grade_section: timetable.sat_grade_section }
       end    
-    render :json => teacherstimetables    
+    render :json => teacherstimetables  
+    
   end
 end

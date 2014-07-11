@@ -14,6 +14,7 @@
 //= require underscore
 //= require gmaps/google
 //= require jquery.timepicker.js
+//= require jquery.turbolinks
 //= require_tree .
 
 

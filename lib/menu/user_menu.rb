@@ -31,6 +31,10 @@ class UserMenu
         return @context.librarian_sub_menu
       elsif @user.swamy?
         return @context.swamy_sub_menu 
+      elsif @user.principal?
+        return @context.principal_sub_menu 
+        
+
       end
     end
     []

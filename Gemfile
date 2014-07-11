@@ -48,7 +48,7 @@ gem 'cancan'
 gem 'devise'  
 gem 'delayed_job_active_record'
 gem 'factory_girl_rails'
-
+gem 'jquery-turbolinks', '~> 0.2.1'
 gem 'fullcalendar-rails', '1.6.1.0'
 gem 'jbuilder', '~> 1.2'
 gem 'carmen-rails', '~> 1.0.0'
@@ -63,8 +63,8 @@ gem 'oj_mimic_json' # we need this for Rails 4.1.x
 gem 'turbolinks'
 
 gem 'pg'
-gem 'roadie'
 
+gem 'roadie', "~> 2.4"
 # Use unicorn as the app server
 # gem 'unicorn'
 

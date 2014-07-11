@@ -16,7 +16,7 @@
             });       
         
         $scope.showTimeTable = function(){
-            //alert($scope.myTeacher);
+            alert($scope.myTeacher);
             
             teachersService.checkTeachersTimeTable($scope.myTeacher)
                 .then(function(result) {

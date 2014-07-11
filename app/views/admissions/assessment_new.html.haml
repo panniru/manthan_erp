@@ -1,55 +1,23 @@
-= form_for @admission do |f|
-  - if @admission.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@admission.errors.count, "error")} prohibited this event from being saved:"
-      %ul
-        - @admission.errors.full_messages.each do |msg|
-          %li= msg
- 
-  .row
-    .field
-      .col-sm-3
-        = f.label :title, :class => 'control-label'
-      .col-sm-3
-        = f.text_field :title, :class => 'form-control'
-        %br
-  .row   
-    .field
-      .col-sm-3
-        = f.label :description, :class => 'control-label'
-      .col-sm-3
-        = f.text_area :description, :class => 'form-control'
-  %br
-  .row
-    .field
-      .col-sm-3
-        = f.label :staff, :class => 'control-label'
-      .col-sm-3
-        = f.text_field :staff, :class => 'form-control'
-  %br
-  .row
-    .field
-      .col-sm-3
-        = f.label :grade, :class => 'control-label'
-      .col-sm-3
-        = f.text_field :grade, :class => 'form-control'
-  %br
-  .row
-    .field
-      .col-sm-3
-        = f.label :start_time, :class => 'control-label'
-      .col-sm-3
-        = f.time_field :start_time, :class => 'form-control'
-  %br
-  .row
-    .field
-      .col-sm-3
-        = f.label :end_time, :class => 'control-label'
-      .col-sm-3
-        = f.time_field :end_time, :class => 'form-control'
-  %br
-  .col-sm-3
-    .pull-right
-      = f.hidden_field :status,:value => "Assessment_Planned"
-      = f.submit 'Save',:class => 'btn btn-primary'
-      
+.col-sm-6
+  .well1
+    #calendar1
+.well2
+  #createEventModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel1", role: "dialog", tabindex: "-1"}
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} x
+      %h3#myModalLabel1 Create Assessment
+    .modal-body
+      %form#createForm.form-horizontal
+        .control-group
+          %label.control-label{for: "inputStaff"} Staff
+          .controls
+            %input#Name{name: "Name"}/
+            %input#apptStartTime{type: "hidden"}/
+            %input#apptEndTime{type: "hidden"}/
+            %input#apptAllDay{type: "hidden"}/
+        .control-group
+          %label.control-label{for: "when"} When:
+          #when.controls.controls-row
+      .modal-footer
+        %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
+        %button#submitButton.btn.btn-primary{type: "submit"} Save

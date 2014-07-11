@@ -26,7 +26,7 @@
         %td= link_to "#{admission.form_no}", home_index_admission_path(admission)
         %td= admission.title
         %td= admission.description
-        %td= admission.staff
+        %td= admission.grade_master.grade_name
         %td= admission.klass
         %td= admission.start_time
         %td= admission.end_time

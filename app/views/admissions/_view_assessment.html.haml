@@ -61,7 +61,10 @@
           %label{for: "mother_email"} Mother's Email
         %td
           = @admission.mother_email
-          
+  
+  .col-sm-1
+    .pull-left
+      = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_assessment_admission_path, :class => "btn btn-warning btn-sm", :title => "Edit"        
   .col-sm-3
   
     - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned' )
@@ -74,16 +77,10 @@
     %br
     %br
     - if("#{@admission.status}" == 'Enquiry_Created' )
-      = link_to "Edit Enquiry", edit_admission_path , :class => 'enq_button btn btn-primary'
-      %br
-      %br
       = link_to "Create Application", admission_new_admission_path , :class => 'enq_button btn btn-primary'
       
     - if("#{@admission.status}" == 'Application_Created')
       = link_to "View Application", admission_show_admission_path , :class => 'enq_button btn btn-primary'
-      %br
-      %br
-      = link_to "Edit Application", edit_application_admission_path ,:class => 'enq_button btn btn-primary'    
       %br
       %br
       = link_to "Create Assessment", assessment_new_admission_path ,:class => 'enq_button btn btn-primary'    
@@ -96,10 +93,7 @@
       = link_to "View Assessment", view_assessment_admission_path ,:class => 'enq_button btn btn-primary'    
       %br
       %br
-      = link_to "Edit Assessment",edit_assessment_admission_path ,:class => 'enq_button btn btn-primary'
-      %br
-      %br
-      = link_to "Assessment Review",edit_assessment_admission_path , :class => 'enq_button btn btn-primary'
+      = link_to "Assessment Review",admission_home_admissions_path , :class => 'enq_button btn btn-success'
      
 .row
   .col-sm-8
@@ -110,7 +104,7 @@
       .panel-body
         %b
           %label.btn.btn-default
-            = @admission.staff
+            = @admission.faculty_master.faculty_name
       
         .pull-right
           %label.btn.btn-default
@@ -118,5 +112,3 @@
           to
           %label.btn.btn-default
             = @admission.end_time
-        
-          
