@@ -5,13 +5,13 @@ gem 'jquery-timepicker-rails'
 gem 'rails', '4.0.2'
 
 gem "geocoder"
-sssssgem 'gmaps4rails'
+gem 'gmaps4rails'
 gem 'carrierwave'
-
+gem 'gon'
 gem 'rails3-jquery-autocomplete'
 gem 'pg_search'
 gem 'jquery-ui-rails', '4.1.0'
-
+gem "paranoia", "~> 2.0"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

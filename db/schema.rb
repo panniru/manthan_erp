@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140704091043) do
+ActiveRecord::Schema.define(version: 20140711072710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -283,6 +283,21 @@ ActiveRecord::Schema.define(version: 20140704091043) do
     t.datetime "updated_at"
   end
 
+  create_table "new_vehicles", force: true do |t|
+    t.string   "model_no"
+    t.string   "make_of_bus"
+    t.date     "yom"
+    t.string   "purchase_option"
+    t.date     "purchase_option_date"
+    t.integer  "capacity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "status"
+    t.datetime "deleted_at"
+  end
+
+  add_index "new_vehicles", ["deleted_at"], name: "index_new_vehicles_on_deleted_at", using: :btree
+
   create_table "parent_cheques", force: true do |t|
     t.integer  "parent_payment_transaction_id"
     t.string   "cheque_number"
@@ -383,6 +398,24 @@ ActiveRecord::Schema.define(version: 20140704091043) do
     t.datetime "updated_at"
   end
 
+  create_table "routes", force: true do |t|
+    t.string   "route_no"
+    t.string   "no_of_stops"
+    t.string   "lpp"
+    t.string   "distance"
+    t.string   "busno_up"
+    t.string   "busno_down"
+    t.integer  "no_of_children"
+    t.integer  "sequence_no"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "deleted_at"
+  end
+
+  add_index "routes", ["deleted_at"], name: "index_routes_on_deleted_at", using: :btree
+
   create_table "section_masters", force: true do |t|
     t.string   "section"
     t.datetime "created_at"
@@ -430,6 +463,8 @@ ActiveRecord::Schema.define(version: 20140704091043) do
     t.integer  "faculty_master_id"
   end
 
+  add_index "teacher_grade_mappings", ["faculty_master_id", "grade_master_id", "section_master_id", "subject_master_id"], name: "teacher_grade_map_index_1", unique: true, using: :btree
+
   create_table "teachers_time_tables", force: true do |t|
     t.integer  "faculty_master_id"
     t.string   "academic_year"
@@ -446,13 +481,13 @@ ActiveRecord::Schema.define(version: 20140704091043) do
   end
 
   create_table "teaching_plans", force: true do |t|
+    t.string   "plan_month"
+    t.integer  "user_id"
+    t.string   "academic_year"
     t.string   "grade_master_id"
     t.string   "section_master_id"
     t.string   "plan"
     t.date     "teaching_date"
-    t.string   "plan_month"
-    t.integer  "user_id"
-    t.string   "academic_year"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -496,6 +531,14 @@ ActiveRecord::Schema.define(version: 20140704091043) do
     t.string   "grade_master_id"
     t.string   "section_master_id"
     t.integer  "period_id"
+  end
+
+  create_table "user_mails", force: true do |t|
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
