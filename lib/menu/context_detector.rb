@@ -34,7 +34,10 @@ class ContextDetector
     "issuings" => "library",
     "default_masters" => "default_master_sub_menu",
     "student_masters" => "default_master_sub_menu",
-    "parents" => "default_master_sub_menu"
+    "parents" => "default_master_sub_menu",
+    "new_vehicles" => "transport",
+    "routes" => "transport",
+    "default_masters" => "default_master_sub_menu"
   }
   
   def self.get_context(key)

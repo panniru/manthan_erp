@@ -20,9 +20,9 @@ end
     MenuItem.new(:label => "Home", :klass => "", :icon => "home ", :href => "books/home_index")
   end
   def  books
-    MenuItem.new(:label => "Books", :klass => "", :icon => "book ", :href => "books")
+    MenuItem.new(:label => "Books", :klass => "", :icon => "book ", :href => "/books")
   end
   def issuing_books
-    MenuItem.new(:label => "Issuing Books", :klass => "", :icon => "cubes", :href => "issuings")
+    MenuItem.new(:label => "Issuing Books", :klass => "", :icon => "cubes", :href => "/issuings")
   end
 end
