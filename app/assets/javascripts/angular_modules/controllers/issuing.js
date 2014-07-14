@@ -15,6 +15,9 @@
      .then(function(result) {
          alert(JSON.stringify(result.data))
        $scope.sections=result.data
-   });
-        
+     });
+    }]);
+    
+})(angular, myApp);
+    
         

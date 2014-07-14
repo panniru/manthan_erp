@@ -1,4 +1,4 @@
-function(angular, app) {
+(function(angular, app) {
     "use strict";
     app.controller("BooksController",["$scope", function($scope) {
         $scope.books = []
