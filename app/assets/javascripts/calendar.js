@@ -7,11 +7,13 @@ $(document).ready(function() {
         //teaching_plans: '/teaching_plans.json' // put your options and callbacks here
     })
     
-        $('#calendar1').fullCalendar({
-            events: '/teaching_plans/calendardata.json'
+    $('#calendar1').fullCalendar({
+        events: '/teaching_plans/calendardata.json'
             
-        })
-    
+    })
+    $('#calendar2').fullCalendar({
+        events: '/teaching_plans/calendardata.json'
+    })
 
 
 });

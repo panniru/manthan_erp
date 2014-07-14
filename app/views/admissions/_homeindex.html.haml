@@ -21,7 +21,7 @@
         %td
           %label{for: "klass"} Class
         %td
-          = @admission.klass
+          = @admission.grade_master.grade_name
       %tr
         %td
           %label{for: "dob"} DOB
@@ -75,16 +75,11 @@
     %br
     %br
     - if("#{@admission.status}" == 'Enquiry_Created' )
-      = link_to "Edit Enquiry", edit_admission_path , :class => 'enq_button btn btn-primary'
-      %br
-      %br
       = link_to "Create Application", admission_new_admission_path , :class => 'enq_button btn btn-success'
-      
+      %br
+      %br
     - if("#{@admission.status}" == 'Application_Created')
       = link_to "View Application", admission_show_admission_path , :class => 'enq_button btn btn-primary'
-      %br
-      %br
-      = link_to "Edit Application", edit_application_admission_path ,:class => 'enq_button btn btn-primary'    
       %br
       %br
       = link_to "Create Assessment", assessment_new_admission_path ,:class => 'enq_button btn btn-success'    
@@ -97,12 +92,8 @@
       = link_to "View Assessment", view_assessment_admission_path ,:class => 'enq_button btn btn-primary'    
       %br
       %br
-      = link_to "Edit Assessment",edit_assessment_admission_path ,:class => 'enq_button btn btn-primary'
-      %br
-      %br
       = link_to "Assessment Review",edit_assessment_admission_path , :class => 'enq_button btn btn-success'
       %br
       %br
-  
+    = @admission.teacher_leader.faculty_leader
     
-      

@@ -32,7 +32,7 @@
       %td
         %label{for: "klass"} Class
       %td
-        = @admission.klass
+        = @admission.grade
       %td
         %label{for: "father_occupation"} Father's Occupation
       %td
@@ -136,8 +136,9 @@
         %label{for: "class"} Class
       %td        
         = @admission.pp
-%hr
-.row
-  .pull-right
-  
+
+.col-sm-3
+  .pull-left
+    - if("#{@admission.status}" == 'Enquiry_Created')
+      = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_admission_path, :class => "btn btn-warning btn-sm", :title => "Edit"
       

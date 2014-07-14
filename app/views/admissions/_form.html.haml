@@ -30,7 +30,7 @@
               %th Admission no:
               %th= f.text_field :admission_no, :class => 'form-control'
               %th Class:
-              %td= @admission.klass
+              %td= @admission.grade_master.grade_name
     .col-sm-8
       .pull-right
         

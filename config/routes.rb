@@ -188,6 +188,7 @@ ManthanErp::Application.routes.draw do
       post "admissions/update_assessment"
       put 'update_admission'
       get 'view_assessment'
+      get 'time_table'
     end
     
     collection do
@@ -197,7 +198,8 @@ ManthanErp::Application.routes.draw do
       get "enquiry_new"
       get 'admission_home'
       get 'closed_forms'
-      
+      get 'calendar'
+      get "get_klass_view"
       
       
     end
