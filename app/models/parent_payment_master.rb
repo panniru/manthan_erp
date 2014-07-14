@@ -5,6 +5,14 @@ class ParentPaymentMaster < ActiveRecord::Base
   belongs_to :payment_type
   has_many :parent_payment_transactions
   accepts_nested_attributes_for :parent_payment_transactions
+
+
+  scope :payment_type_wise_count_and_sum, lambda{joins(:parent_payment_transactions).select("parent_payment_masters.payment_type_id, count(*) as count, sum(parent_payment_transactions.amount_in_rupees)as sum").group("parent_payment_masters.payment_type_id")}
+  
+  scope :belongs_to_grade, lambda{|grade| joins(:student).where("student_masters.grade_master_id = ?", grade)}
+  scope :belongs_to_payment_type, lambda{|payment_type| where("payment_type_id = ?", payment_type)}
+
+
   
   def self.new_student_payment_master(student_id)
     payment_master = ParentPaymentMaster.new

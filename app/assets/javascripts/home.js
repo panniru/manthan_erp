@@ -1,4 +1,3 @@
-
 $(document ).ready(function() {
   $("#map").height(gon.height)
   $("#map").width(gon.width)
@@ -23,4 +22,13 @@ $(document ).ready(function() {
             dateFormat: 'dd/mm/yy'
         });
     });
+
+    $("#flot-placeholder").on("plotclick", function (event, pos, item) { 
+        angular.element($('#flot-placeholder')).scope().gridDataPoint(item)
+    });
+    
+    $("#flot-placeholder1").on("plotclick", function (event, pos, item) { 
+        angular.element($('#flot-placeholder')).scope().gridDataPoint1(item)
+    });
 });
+

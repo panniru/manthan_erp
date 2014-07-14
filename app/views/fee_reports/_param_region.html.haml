@@ -1,0 +1,12 @@
+%form{:ng_submit => "buildChart()", :class => "form-inline", :role => "form", :action => "#"}
+  .form-group
+    %lable{:class => "form-label col-md-5"} Report Type
+    .col-md-4   
+      %select{:ng_model => "report_type", :ng_options => "report.name for report in report_types", :class=>"form-control"}
+  .form-group
+    %lable{:class => "form-label col-md-4"} Grade
+    .col-md-4
+      %select{:ng_model => "grade", :ng_options => "gr.id as gr.grade_name for gr in grades", :class=>"form-control"}
+  .form-group
+    = link_to "Go", "#", :ng_click => "buildChart()", :class => "btn-primary btn"
+    

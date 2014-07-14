@@ -1,0 +1,27 @@
+= wicked_pdf_stylesheet_link_tag 'bootstrap'
+
+= render "shared/brand_header", :handlers => [:pdf, :haml]
+.col-md-12
+  %h5 Report : #{@report_type}
+  %h5 Grade  : #{@grade.grade_name}
+  %h5 Payment Type : #{@payment_type.code}
+
+.col-md-12
+  %table.table.table-bordered
+    %thead
+      %th Student Name
+      %th Parent Name
+      %th Transaction Date
+      %th Transaction Type
+      %th Status
+      %th Amount
+    %tbody
+      - @transactions.each do |transaction|
+        %tr
+          %td= transaction[:student_name]
+          %td= transaction[:parent_name]
+          %td= transaction[:transaction_date]
+          %td= transaction[:transaction_type]          
+          %td= transaction[:status]
+          %td= transaction[:amount]    
+          

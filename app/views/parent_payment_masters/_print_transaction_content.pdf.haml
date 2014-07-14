@@ -1,18 +1,4 @@
-.row
-  .col-xs-2
-    = wicked_pdf_image_tag "logo.png"
-  .col-xs-10
-    .row
-      .col-xs-offset-2.col-xs-10
-        %h5
-          %strong 
-            MANTHAN INTERNATIONAL SCHOOL
-    .row
-      %h5
-        %strong
-          %center Tellapur, Hyderabad
-          %center [Reciept]
-        
+= render "shared/brand_header", :handlers => [:pdf, :haml]        
 .col-xs-12
   .col-xs-6
     %label Reciept No : 

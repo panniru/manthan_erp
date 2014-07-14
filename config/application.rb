@@ -23,6 +23,7 @@ module ManthanErp
     
     config.autoload_paths += %W(#{Rails.root}/lib/)
     config.autoload_paths += %W(#{Rails.root}/lib/menu)
+        config.autoload_paths += %W(#{Rails.root}/lib/reports)
     config.autoload_paths += %W(#{Rails.root}/app/models/uploaders)
     config.roadie.enabled = true
     config.assets.enabled = true

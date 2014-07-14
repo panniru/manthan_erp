@@ -269,4 +269,7 @@ ManthanErp::Application.routes.draw do
     end  
   end
   
+  get "/fee_reports", to: "fee_reports#index"
+  get "/fee_reports/payment_status_report", to: "fee_reports#payment_status_report"
+  get "/fee_reports/payment_type_details", to: "fee_reports#payment_type_details"
 end

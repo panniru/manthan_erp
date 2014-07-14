@@ -1,0 +1,14 @@
+.modal.fade{ :id => "drillModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+        %h4.modal-title{ :id => "myModalLabel"} {{payment_type}}
+      .modal-body
+        %table.table.table-bordered.table-hover.table-striped
+          %thead
+            %th{"ng-repeat" => "header in table_header"} {{header}}
+          %tbody
+            %tr{"ng-repeat" => "row in table_data"}
+              %td{"ng-repeat" => "header in table_header"}= "{{row[header]}}"
+        = link_to "Print", "/fee_reports/payment_type_details.pdf?grade_id={{grade}}&payment_type_id={{payment_type_id}}", :target => "_blank", :class => "btn btn-primary"
