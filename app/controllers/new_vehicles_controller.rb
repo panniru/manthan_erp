@@ -9,7 +9,6 @@ class NewVehiclesController < ApplicationController
   end
   
   def update
-    @new_vehicle = NewVehicle.find(params[:id])
     if @new_vehicle.update(vehicle_params)
       flash[:success] = I18n.t :success, :scope => [:new_vehicle, :update]
       redirect_to new_vehicles_path
@@ -20,11 +19,10 @@ class NewVehiclesController < ApplicationController
   end
  
   def destroy
-    @new_vehicle = NewVehicle.find(params[:id])
-    if @new_vehicle.update(:status => "Approved")
-      format.json { render json:  @new_vehicle , :status => "success"}
+   if @new_vehicle.destroy
+      flash[:success] = I18n.t :success, :scope => [:new_vehicle ,:destroy]
     else
-      format.json { render json: @new_vehicle , :status => "failure"}
+      flash.now[:fail] = I18n.t :fail, :scope => [:new_vehicle, :destroy]
     end
     redirect_to new_vehicles_path
   end
@@ -43,6 +41,6 @@ class NewVehiclesController < ApplicationController
   end
   
    def vehicle_params
-    params.require(:new_vehicle).permit(:make_of_bus,:model_no,:yom,:purchase_option,:purchase_option_date,:capacity,:status)
+    params.require(:new_vehicle).permit(:make_of_bus,:model_no,:yom,:purchase_option,:purchase_option_date,:capacity)
   end
 end

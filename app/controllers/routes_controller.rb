@@ -1,12 +1,11 @@
 class RoutesController < ApplicationController
   load_resource :only => [:show, :update, :edit, :destroy]
   def index
-     @route = Route.paginate(:page => params[:page].present? ? params[:page] : 1)
-    @hash = Gmaps4rails.build_markers(@route) do |route, marker|
-      marker.lat route.latitude
-      marker.lng route.longitude
-      marker.infowindow route.lpp
-end
+    @route = Route.paginate(:page => params[:page].present? ? params[:page] : 1)
+    @map_data = GoogleMapProcessor.build_map_data(@route)
+    gon.gmap_data = @map_data.to_json
+    gon.width = "750px"
+    gon.height = "350px"
   end
 
   def show

@@ -330,7 +330,10 @@ ActiveRecord::Schema.define(version: 20140710131714) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status"
+    t.datetime "deleted_at"
   end
+
+  add_index "new_vehicles", ["deleted_at"], name: "index_new_vehicles_on_deleted_at", using: :btree
 
   create_table "parent_cheques", force: true do |t|
     t.integer  "parent_payment_transaction_id"
@@ -445,7 +448,10 @@ ActiveRecord::Schema.define(version: 20140710131714) do
     t.datetime "updated_at"
     t.float    "latitude"
     t.float    "longitude"
+    t.datetime "deleted_at"
   end
+
+  add_index "routes", ["deleted_at"], name: "index_routes_on_deleted_at", using: :btree
 
   create_table "section_masters", force: true do |t|
     t.string   "section_name"
@@ -513,6 +519,7 @@ ActiveRecord::Schema.define(version: 20140710131714) do
 
   create_table "teaching_plans", force: true do |t|
     t.string   "plan_month"
+  t.integer  "user_id"
     t.string   "academic_year"
     t.string   "grade_master_id"
     t.string   "section_master_id"
