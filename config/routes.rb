@@ -33,8 +33,8 @@ ManthanErp::Application.routes.draw do
   post "/time_tables/checktimetable"
   get "/time_tables/checktimetable"
 
-  get "/teaching_plans/gradeserviceview"
-  get "/teaching_plans/sectionserviceview"
+  #get "/teaching_plans/gradeserviceview"
+  #get "/teaching_plans/sectionserviceview"
  
 
   root to: "home#index"
@@ -50,7 +50,10 @@ ManthanErp::Application.routes.draw do
      collection do
       get "calendardata"
       get "getfacultyidservice"
-      get "getgradessectionsservice"
+      get "getgradessectionsservice"      
+      get 'calendarpopup'
+      get 'get_grade_section_subject_service'
+    
     end
   end
 

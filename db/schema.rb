@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140709054434) do
+ActiveRecord::Schema.define(version: 20140710131714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,6 +135,14 @@ ActiveRecord::Schema.define(version: 20140709054434) do
     t.datetime "updated_at"
     t.string   "year"
     t.string   "book_type"
+  end
+
+  create_table "class_teacher_mappings", force: true do |t|
+    t.integer  "grade_master_id"
+    t.integer  "section_master_id"
+    t.integer  "faculty_master_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "default_masters", force: true do |t|
@@ -312,6 +320,18 @@ ActiveRecord::Schema.define(version: 20140709054434) do
     t.datetime "updated_at"
   end
 
+  create_table "new_vehicles", force: true do |t|
+    t.string   "model_no"
+    t.string   "make_of_bus"
+    t.date     "yom"
+    t.string   "purchase_option"
+    t.date     "purchase_option_date"
+    t.integer  "capacity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "status"
+  end
+
   create_table "parent_cheques", force: true do |t|
     t.integer  "parent_payment_transaction_id"
     t.string   "cheque_number"
@@ -412,6 +432,21 @@ ActiveRecord::Schema.define(version: 20140709054434) do
     t.datetime "updated_at"
   end
 
+  create_table "routes", force: true do |t|
+    t.string   "route_no"
+    t.string   "no_of_stops"
+    t.string   "lpp"
+    t.string   "distance"
+    t.string   "busno_up"
+    t.string   "busno_down"
+    t.integer  "no_of_children"
+    t.integer  "sequence_no"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
+  end
+
   create_table "section_masters", force: true do |t|
     t.string   "section_name"
     t.datetime "created_at"
@@ -481,11 +516,11 @@ ActiveRecord::Schema.define(version: 20140709054434) do
     t.string   "academic_year"
     t.string   "grade_master_id"
     t.string   "section_master_id"
-    t.string   "plan"
     t.date     "teaching_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "faculty_master_id"
+    t.integer  "subject_master_id"
   end
 
   create_table "term_definitions", force: true do |t|
@@ -512,21 +547,28 @@ ActiveRecord::Schema.define(version: 20140709054434) do
 
   create_table "time_tables", force: true do |t|
     t.string   "academic_year"
-    t.string   "staffid"
-    t.string   "mon_sub"
-    t.string   "tue_sub"
-    t.string   "wed_sub"
-    t.string   "thu_sub"
-    t.string   "fri_sub"
-    t.string   "sat_sub"
-    t.string   "sun_sub"
+    t.integer  "mon_sub"
+    t.integer  "tue_sub"
+    t.integer  "wed_sub"
+    t.integer  "thu_sub"
+    t.integer  "fri_sub"
+    t.integer  "sat_sub"
+    t.integer  "sun_sub"
     t.time     "st_time"
     t.time     "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "grade_master_id"
-    t.string   "section_master_id"
+    t.integer  "grade_master_id"
+    t.integer  "section_master_id"
     t.integer  "period_id"
+  end
+
+  create_table "user_mails", force: true do |t|
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
