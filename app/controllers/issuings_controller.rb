@@ -41,6 +41,7 @@ class IssuingsController < ApplicationController
     end
     redirect_to issuings_path
   end
+ 
   private
 
   def issuing_params

@@ -1,31 +1,17 @@
-(function(angular, app) {
+function(angular, app) {
     "use strict";
-    app.controller("BooksController",["$scope", "gradeService","sectionService", function($scope, gradeService, sectionService) {
-      $scope.myGrade = ""
-             
-     $scope.map_grades = []
-     gradeService.getGradeServiceView()
-     .then(function(result) {                
-        $scope.grades=result.data
-         alert(JSON.stringify($scope.grades));
-                
-   });
-   $scope.map_sections = []
-     sectionService.getSectionServiceView()
-     .then(function(result) {
-         alert(JSON.stringify(result.data))
-       $scope.sections=result.data
-   });
+    app.controller("BooksController",["$scope", function($scope) {
+        $scope.books = []
+        for(var i=0; i<5; i++){
+            $scope.books.push({"Name":"", "ISBN" :"", "Type": ""});
+        };
         
-        
-          
-                      
-        
-        
-
+        $scope.addMoreterms = function(){
+            var lnt = parseInt($scope.books.length)
+            for(var i=lnt; i< lnt+5; i++){
+                $scope.books.push({"Name":"", "ISBN" :"", "Type": ""});
+            };
+        }
     }]);
-    
 })(angular, myApp);
-
-
-
+    

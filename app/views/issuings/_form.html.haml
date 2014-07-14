@@ -1,4 +1,4 @@
-.row{"ng-controller" => "BooksController"}
+.row{"ng-controller" => "IssuingsController"}
   .form-group.col-md-3
     %label{:class=> "form-label col-md-4"} Grade
     .col-md-6
@@ -11,4 +11,5 @@
   .form-group.col-md-5
    
     .col-md-4
-      %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add Plan"
+     
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveMappings()", :value => "SAVE"} 
