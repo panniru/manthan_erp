@@ -26,8 +26,9 @@ $(document ).ready(function() {
         angular.element($('#flot-placeholder')).scope().gridDataPoint(item)
     });
     
-    $("#flot-placeholder1").on("plotclick", function (event, pos, item) { 
-        angular.element($('#flot-placeholder')).scope().gridDataPoint1(item)
+    $("#flot-placeholder1").on("plotclick", function (event, pos, item) {
+        angular.element($('#flot-placeholder')).scope().gridDataPoint(item)
+        //angular.element($('#flot-placeholder')).scope().gridDataPoint1(item)
     });
 });
 
