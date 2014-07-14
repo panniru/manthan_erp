@@ -224,7 +224,6 @@ GEM
       rspec-mocks (~> 3.0.0)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.2)
-
     ruby-ole (1.2.11.7)
     rubyzip (1.1.4)
     sass (3.2.19)
@@ -321,12 +320,8 @@ DEPENDENCIES
   pg_search
   rails (= 4.0.2)
   rails3-jquery-autocomplete
-<<<<<<< Updated upstream
-  roadie
-  roo
-=======
   roadie (~> 2.4)
->>>>>>> Stashed changes
+  roo
   rspec-rails
   sass-rails (~> 4.0.0)
   shoulda-matchers
