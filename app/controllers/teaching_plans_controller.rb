@@ -1,9 +1,14 @@
 class TeachingPlansController < ApplicationController
   def index
-    @teaching_plans = TeachingPlan.all
-    @teaching_plans = TeachingPlan.find(:all, :order => 'teaching_date,plan_month')
-  # @teaching_plans = @teaching_plans.group_by { |t| t.teaching_date.beginning_of_month }
+    page = params[:page].present? ? params[:page] : 1
+    if params[:search].present?
+      @teaching_plans = TeachingPlan.search(params[:search]).paginate(:page => 1, :per_page => 5)
+    else
+      @teaching_plans1 = TeachingPlan.paginate(:page => page, :per_page => 2)
+
+      @teaching_plans = @teaching_plans1.group_by { |t| t.teaching_date.beginning_of_month }
   end
+end
   def calendardata   
     @teaching_plans = TeachingPlan.all
   end
@@ -87,5 +92,14 @@ class TeachingPlansController < ApplicationController
         # end 
       end     
     end
+  end
+  def destroy
+    @teaching_plan = TeachingPlan.find(params[:id])    
+    if @teaching_plan.destroy
+      flash[:success] = I18n.t :success, :scope => [:teaching_plan, :destroy]
+    else
+      flash.now[:fail] = I18n.t :fail, :scope => [:teaching_plan, :destroy]
+    end
+    redirect_to teaching_plans_path
   end
 end

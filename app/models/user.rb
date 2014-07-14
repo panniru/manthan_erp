@@ -31,9 +31,11 @@ class User < ActiveRecord::Base
     self.role.code == "librarian"
   end
   
+
   def principal?
     self.role.code == "principal"
   end
     
+
 
 end

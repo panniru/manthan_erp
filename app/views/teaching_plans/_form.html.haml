@@ -1,4 +1,4 @@
-#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+#myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
     .modal-content
       .modal-header
@@ -10,7 +10,7 @@
               .col-sm-3
                 = f.label "Date", :class => 'col-sm-3 control-label'
               .col-sm-5
-                = f.text_field :teaching_date ,:class => 'datepicker form-control'
+                = f.text_field :teaching_date ,:class => 'form-control', :id => 'selectdate'
                 %br
             .row
               .col-sm-3
