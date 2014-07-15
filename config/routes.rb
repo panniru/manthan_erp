@@ -54,6 +54,7 @@ ManthanErp::Application.routes.draw do
       get 'calendarpopup'
       get 'monthlywiseplan'
       get 'get_grade_section_subject_service'
+      get 'teaching_date'
     
     end
   end

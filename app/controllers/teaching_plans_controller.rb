@@ -10,8 +10,21 @@ class TeachingPlansController < ApplicationController
   end
 end
   def calendardata   
-    @teaching_plans = TeachingPlan.all
-  end
+    @teaching_plans = TeachingPlan.first
+    respond_to do |format|
+      format.json do
+        c =User.find(current_user)       
+        calendar_date = TeachingPlan.select(:teaching_date).distinct        
+        calendar_date = calendar_date.map do |teach|
+          {start: teach.teaching_date, title: "Plan", description: "Plan", url: "#", teaching_date: teach.teaching_date}
+        end
+        p calendar_date
+        p "++++++++++++++++++++++"
+        render :json => calendar_date
+      end
+    end
+  end   
+
   
   def new
     @teaching_plan = TeachingPlan.new
@@ -102,4 +115,19 @@ end
     end
     redirect_to teaching_plans_path
   end
+  def teaching_date
+    respond_to do |format|
+      format.json do
+        c =User.find(current_user)       
+        teachingdate = TeachingPlan.where("teaching_date = '#{params[:date]}'")        
+        teachingdate = teachingdate.map do |teach|
+          {id: teach.id, plan_month: teach.plan_month}
+        end
+        p teachingdate
+        p "********************"
+        render :json => teachingdate
+      end
+    end
+  end
+
 end

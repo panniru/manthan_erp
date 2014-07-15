@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710131714) do
+ActiveRecord::Schema.define(version: 20140711072710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,9 @@ ActiveRecord::Schema.define(version: 20140710131714) do
     t.string   "faculty_id"
     t.string   "comment"
     t.string   "result"
+    t.integer  "grade_master_id"
+    t.string   "faculty"
+    t.integer  "teacher_leader_id"
   end
 
   create_table "approval_items", force: true do |t|
@@ -502,6 +505,14 @@ ActiveRecord::Schema.define(version: 20140710131714) do
 
   add_index "teacher_grade_mappings", ["faculty_master_id", "grade_master_id", "section_master_id", "subject_master_id"], name: "teacher_grade_map_index_1", unique: true, using: :btree
 
+  create_table "teacher_leaders", force: true do |t|
+    t.string   "admission_id"
+    t.string   "klass"
+    t.string   "faculty_leader"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "teachers_time_tables", force: true do |t|
     t.integer  "faculty_master_id"
     t.string   "academic_year"
@@ -519,7 +530,6 @@ ActiveRecord::Schema.define(version: 20140710131714) do
 
   create_table "teaching_plans", force: true do |t|
     t.string   "plan_month"
-  t.integer  "user_id"
     t.string   "academic_year"
     t.string   "grade_master_id"
     t.string   "section_master_id"
