@@ -15,6 +15,7 @@
                                            "update": { method: "PUT"}
                                        }
                                       );
+
         var PostDatedCheque = $resource('/post_dated_cheques/:id.json', {id: '@id'}, 
                                        {
                                            "bulk": { url: "/post_dated_cheques/create_bulk", method:'POST'},
@@ -39,6 +40,12 @@
                                           "belongs_to_parent": { url: "/student_masters/belongs_to_parent.json", isArray: true}
                                       }
                                     );
+	var Route = $resource('/routes/:id.json', {id: '@id'}, 
+			      {
+                                  "bulk": { url: "/routes/create_bulk", method:'POST'},
+                                  "update": { method: "PUT"}
+                              }
+                             );
         
         return {
             FeeGradeBucket : FeeGradeBucket,
@@ -46,7 +53,8 @@
             PostDatedCheque : PostDatedCheque,
             DefaultMaster : DefaultMaster,
             ApprovalItem : ApprovalItem,
-            StudentMaster : StudentMaster
+            StudentMaster : StudentMaster,
+	    Route:Route
         };
         
     }]);

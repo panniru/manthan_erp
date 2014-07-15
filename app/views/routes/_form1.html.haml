@@ -1,0 +1,16 @@
+%form{:class=>"form-horizontal", :ng_submit => "submitRoutes()"}
+  .form-group{"ng-repeat" => "route in newRoutes"}
+    = label_tag "stop  {{$index+1}}", nil, :class => "form-label col-md-2"
+    .col-md-3
+      = text_field_tag "bulk_route[][lpp]",nil, :class => "form-control",:ng_model => "route.lpp" 
+    .col-sm-3
+      .input-group
+        = text_field_tag "bulk_route[][sequence_no]",nil, :class => "form-control" , :ng_model => "route.sequence_no"
+      
+  .row
+    .col-md-5.col-md-offset-3
+      %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMoreterms()"}=  "More stops"
+      %button{:type=>"submit", :class=> "btn btn-primary" , :ng_click => "submitRoutes()"}=  "Save"
+
+          
+     
