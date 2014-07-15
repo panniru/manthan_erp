@@ -1,48 +1,19 @@
-= form_for @book,:html => { :class => "form-horizontal", :role => "form" } do |f|
-  = render "shared/error_messages", :object => f.object
+%form{:class=>"form-horizontal", :ng_submit => "submitBooks()"}
+  .form-group{"ng-repeat" => "book in newBooks"}
+    = label_tag  "Book {{$index+1}}", nil, :class => "form-label col-md-2"
+    .col-sm-2  
+      = text_field_tag  "bulk_book[][name]",nil, :class => "form-control", :ng_model => "book.name", :placeholder => "Name"
+    .col-sm-2
+      = text_field_tag "bulk_book[][isdn]",nil, :class => 'form-control', :placeholder => "ISBN", :id => "isdn-{{$index}}", :ng_model => "book.isdn"
+    .col-sm-2
+      = text_field_tag "bulk_book[][author]",nil, :class => "form-control" , :placeholder => "Author", :id => "author-{{$index}}", :ng_model => "book['author']", :ng_model => "book.author"
+    .col-sm-2
+      = text_field_tag "bulk_book[][year_of_publishing]",nil, :class => 'form-control', :placeholder => "YearOfPublishing", :id => "year_of_publishing-{{$index}}", :ng_model => "book.year_of_publishing"
+    .col-sm-2
+      = text_field_tag "bulk_book[][book_type]",nil, :class => 'form-control', :placeholder => "BookType", :id => "book_type-{{$index}}", :ng_model => "book.book_type"
+    
   .row
-    .col-sm-3
-      = f.label "Name:", :class => 'col-sm-3 control-label'
-    .col-sm-3
-      = f.text_field :name, :class => 'col-sm-12 form-control'
-      %br
-      %br
-  .row
-    .col-sm-3
-      = f.label "ISBN:", :class => 'col-sm-3 control-label'
-    .col-sm-3
-      = f.text_field :isdn, :class => 'col-sm-12 form-control'
-      %br
-      %br
-  .row
-    .col-sm-3
-      = f.label "Author:", :class => 'col-sm-3 control-label'
-    .col-sm-3
-      = f.text_field :author, :class => 'col-sm-12 form-control'
-      %br
-      %br
-  .row
-    .col-sm-3
-      = f.label"Year Of Published:",:class => 'col-sm-3 control-label'
-    .col-sm-3
-      = f.text_field :year_of_publishing, :class => 'col-sm-12 datepicker form-control'
-      %br
-      %br
-  .row
-    .col-sm-3
-      = f.label "Type:", :class => 'col-sm-3 control-label'
-    .col-sm-3
-      = f.text_field :book_type, :class => 'col-sm-12 form-control'
-      %br
-      %br
-  .row
-    .col-sm-3
-      = f.label "NO Of Copies:", :class => 'col-sm-3 control-label'
-    .col-sm-3
-      = f.text_field :number_of_copies, :class => 'col-sm-12 form-control'
-      
-      
-      
-      %br
-  %center
-    = f.button "submit" , :class =>'btn btn-primary'
+    .col-md-5.col-md-offset-3
+      %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMorebooks()"}=  "More books"
+      %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"
+     

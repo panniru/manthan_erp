@@ -1,20 +1,16 @@
-.row
-  .col-sm-10
-    .row{"ng-controller" => "IssuingsController"}
-      .form-group.col-md-3
-        %label{:class=> "form-label col-md-4"} Grade
-        .col-sm-6
-          %select{"ng-model" => "myGrade", :ng_options => "grade.id as grade.grade for grade in grades", :class => "form-control"}
-        
-      .form-group.col-md-3
-        %label{:class=> "form-label col-md-4"} Section
-        .col-sm-6
-          %select{"ng-model" => "mySection", :ng_options => "section.id  as section.section for section in sections | filter: {grade_master_id: myGrade}", :class=>"form-control"}
-      .form-group.col-md-5
-   
-        .col-md-4
-     
-      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveMappings()", :value => "SAVE"} 
+= form_tag("/issuings", :method => "get") do
+  .row{"ng-controller" => "IssuingsController"}
+    .form-group.col-md-3
+      %label{:class=> "form-label col-md-4"} Grade
+      .col-sm-6
+        %select{"ng-model" => "myGrade", :ng_options => "grade.id as grade.grade for grade in grades", :class => "form-control", :name => "grade_master_id"}
+             
+    .form-group.col-md-3
+      %label{:class=> "form-label col-md-4"} Section
+      .col-sm-6
+        %select{"ng-model" => "mySection", :ng_options => "section.id  as section.section for section in sections | filter: {grade_master_id: myGrade}", :class=>"form-control", :name => "section_master_id"}
+    .col-md-4
+      = submit_tag 'Save'
     .pull-left
       .col-sm-10                 
         %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
@@ -24,10 +20,14 @@
     %tr
       %th Name
       %th Aloted Books
+      %th Return
      
   %tbody
-    - @issuings.each do |issuing|
+    - @students.each do |student|
       %tr
-        %td= issuing.name
-        %td
-       
+        %td= student.name
+        %td 
+          - student.issuings.each do |issuing|
+            = "#{issuing.book} "
+            
+      

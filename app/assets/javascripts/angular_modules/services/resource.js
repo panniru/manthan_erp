@@ -41,6 +41,12 @@
                                     );
         var GradeMaster = $resource('/grade_masters/:id.json', {id: '@id'});
         var SectionMaster = $resource('/grade_masters/:grade_master_id/section_masters/:id.json', {id: '@id', grade_master_id: '@grade_master_id'});
+        var Book = $resource('/books/:id.json', {id: '@id'}, 
+                                       {
+                                           "bulk": { url: "/books/create_bulk", method:'POST'},
+                                           "update": { method: "PUT"}
+                                       }
+                                      );
         
         return {
             FeeGradeBucket : FeeGradeBucket,
@@ -50,7 +56,8 @@
             ApprovalItem : ApprovalItem,
             StudentMaster : StudentMaster,
             GradeMaster : GradeMaster,
-            SectionMaster : SectionMaster
+            SectionMaster : SectionMaster,
+            Book : Book
         };
         
     }]);

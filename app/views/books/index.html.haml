@@ -1,88 +1,43 @@
-.row
-  .col-sm-12
-    %h4 Add Book
+.col-md-7{"ng-controller" => "BooksController"}
+  %h3 
+    = "Books"
     .pull-right
-      %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add Book"
-      #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-        .modal-dialog
-          .modal-content
-            .modal-header
-              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-              %h4#myModalLabel.modal-title New book
-              = form_for Book.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
-                = render "shared/error_messages", :object => f.object
-                .modal-body
-                %br
-                %form{:class=>"form-horizontal", "ngController" => "BooksController"}
-                  .row{"ng-repeat" => "book in newBooks"}
-                    .form-group
-                      = label_tag " Name {{$index+1}} ", nil, :class => 'col-sm-2 control-label'
-                      .col-sm-4
-                        = text_field_tag "bulk_books[][isdn]",nil, :class => 'datepicker form-control', :placeholder => "ISBN", :ng_model => "book.isbn"
-                      .col-sm-4
-                    .input-group
-                      = text_field_tag "bulk_books[][book_type]",nil , :class => 'form-control', :placeholder => "TYPE", :ng_model => "book.book_type"
-                      %span.input-group-addon %
-                  .row
-                    .col-sm-2
-                      = f.label "Name:", :class => 'col-sm-3 control-label'
-                    .col-sm-2
-                      = f.label "ISBN:", :class => 'col-sm-3 control-label'
-                    .col-sm-2
-                      = f.label "Author:", :class => 'col-sm-3 control-label'
-                    .col-sm-2
-                      = f.label "Year Of publishing:", :class => 'col-sm-3 control-label'
-                    .col-sm-2
-                      = f.label "Type:", :class => 'col-sm-3 control-label'
-                    .col-sm-2
-                      = f.label "No Of Copies:", :class => 'col-sm-3 control-label'
-                  .row
-                    .col-sm-2
-                      = f.text_field :name, :class => 'col-sm-12 form-control'
-                    .col-sm-2
-                      = f.text_field :isdn, :class => 'col-sm-12 form-control'
-                    .col-sm-2
-                      = f.text_field :author, :class => 'col-sm-12 form-control'
-                    .col-sm-2
-                      = f.text_field :year_of_publishing, :class => 'col-sm-12 datepicker form-control'
-                    .col-sm-2
-                      = f.text_field :book_type, :class => 'col-sm-12 form-control'
-                    .col-sm-2
-                      = f.text_field :number_of_copies, :class => 'col-sm-12 form-control'
-                      %br
-                  
-                        
-                 
-                  .modal-footer
-                    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-                    = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
-                    %br
+      = link_to "New Books", "#", :class => "btn btn-primary", :ng_click => "newBook()"
+                         
     .pull-left
       .col-sm-10                 
         %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
-%br
-%table#tblData.target.table.table-striped.table-condensed.table-bordered
-  %thead
-    %tr
-      %th Name
-      %th ISBN Number
-      %th Author
-      %th Year Of Publishing
-      %th No Of Copies
-      %th Purchased Date
-      %th Type
-      %th
-  %tbody
-    - @books.each do |book|
+        %br
+  %table#tblData.target.table.table-striped.table-condensed.table-bordered
+    %thead
       %tr
-        %td= book.name
-        %td= book.isdn
-        %td= book.author
-        %td= book.year_of_publishing
-        %td= book.number_of_copies
-        %td= book.created_at
-        %td= book.book_type
+        %th Name
+        %th ISBN Number
+        %th Author
+        %th Year Of Publishing
+        %th Purchased Date
+        %th Type
+        %th
+    %tbody
+      %tr{"ng-repeat" => "book in books"}
+        %td {{book.name}}
+        %td {{book.isdn}}
+        %td {{book.author}}
+        %td {{book.year_of_publishing}}
+        %td {{book.created_at}}
+        %td {{book.book_type}}
         %td
-          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_book_path(book), :class => "btn btn-warning btn-sm", :title => "Edit"
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), book_path(book), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
-       
+          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(book)"
+        
+  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} New Book
+        .modal-body
+          = render "form"
+          
+                
+                
+                

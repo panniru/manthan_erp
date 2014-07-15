@@ -12,16 +12,26 @@ class BooksController < ApplicationController
   def home_index
     @books = Book.all
   end
+  
   def show
-    end
-  def index
-    @books = Book.all
-   
   end
-
+  
+  def index
+    respond_to do |format|
+      format.json do
+        @books = Book.all
+        render :json => @books
+      end
+      format.html do
+        render "index"
+      end
+    end
+  end
+  
   def new
     @book = Book.new
   end
+  
   def edit
     @book = Book.find(params[:id])
   end
@@ -37,16 +47,18 @@ class BooksController < ApplicationController
   end
   
   def create_bulk
-    @book_bulk = build_book_from_bulk
-    if !@book_bulk.empty? and @book_bulk.map(&:valid?).all?
+    
+  p   @book_bulk = build_book_from_bulk
+  if !@book_bulk.empty? and @book_bulk.map(&:valid?).all?
       @book_bulk.each(&:save!)
       flash[:success] = I18n.t :success, :scope => [:book, :create_bulk]
       redirect_to books_path
-    else
-      flash[:fail] = I18n.t :fail, :scope => [:book, :create_bulk]
-      render "new"
+  else
+    flash[:fail] = I18n.t :fail, :scope => [:book, :create_bulk]
+    render "new"
     end
   end
+  
   def destroy
     @book = Book.find(params[:id])    
     if @book.destroy
@@ -56,9 +68,22 @@ class BooksController < ApplicationController
     end
     redirect_to books_path
   end
- 
+  
+  def build_book_from_bulk
+    params.require(:bulk_book).select{|book| book["name"].present? and  book["isdn"].present?}.map do |book|
+      if book[:id].present?
+        @book_obj = Book.find(book[:id])
+        book.each do |key, val|
+          @book_obj.send(key+"=", val) if @book_obj.attributes.include?(key)
+        end
+        @book_obj
+      else
+        Book.new(book)
+      end
+    end
+  end
   private
-
+  
   def book_params
     params.require(:book).permit(:name, :isdn, :author, :year_of_publishing, :number_of_copies, :purchased_date,:year, :book_type)
   end

@@ -44,6 +44,7 @@ ManthanErp::Application.routes.draw do
   resources :books do 
     collection do 
       get  'home_index'
+      post 'create_bulk'
     end
   end
   resources :teaching_plans do

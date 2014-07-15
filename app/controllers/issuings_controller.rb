@@ -13,12 +13,49 @@ class IssuingsController < ApplicationController
     end
   def index
     @issuings = Issuing.all
+    p '======>'
+    p params 
+    p' ======>'
    
+  
+    p '======>'
+    @students =  StudentMaster.all #StudentMaster.where("grade_master_id = :grade_master_id AND section_master_id = :section_master_id", {grade_master_id: params[:grade_master_id], section_master_id: params[:section_master_id]})
+    # @students = students.map do |student|
+      
+    # {:name => student.student_master.name, :books => student.issuings.book,:issuing_id => student.issuings.issuing_id}
+          
+   # end
+        
+    
+    #     render :json => mappings
+    #     # end
+     
+    end
+   
+  
+  def gradeserviceview
+    respond_to do |format|
+      format.json do
+        grades = GradeMaster.all.map do |grade|
+          {grade: grade.grade_name, id: grade.id}
+        end
+        render :json => grades
+      end
+    end  
   end
-
   def new
     @issuing = Issuing.new
   end
+  def sectionserviceview
+    respond_to do |format|
+      format.json do
+        get_sections = SectionMaster.all.map do |section|
+          {section: section.section_name, id: section.id, grade_master_id: section.grade_master_id }
+        end
+        render :json => get_sections
+      end
+    end  
+  end  
   def edit
     @issuing = Issuing.find(params[:id])
   end
@@ -45,6 +82,6 @@ class IssuingsController < ApplicationController
   private
 
   def issuing_params
-    params.require(:issuing).permit(:name, :grade, :section)
+    params.require(:issuing).permit(:name, :grade, :section, :student_master_id)
   end
 end

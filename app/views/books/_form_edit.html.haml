@@ -1,0 +1,39 @@
+= form_for @book, :class => "form-horizntal" do |f|
+  = render "shared/error_messages", :object => f.object
+  .form-group
+    = f.label :name, :class => "form-label col-sm-2"
+    .col-md-5
+      = f.text_field :name, :class => "form-control"
+   
+  .form-group
+    %br
+    %br
+    .col-md-1
+    = f.label :isbn, :class => "form-label col-sm-2"
+    .col-md-2
+      = f.text_field :isdn, :class => "form-control"
+   
+  .form-group
+    %br
+    %br
+    .col-md-1
+    = f.label :author, :class => "form-label col-sm-2"
+    .col-md-2
+      = f.text_field :author, :class => "form-control"
+  .form-group
+    %br
+    %br
+    .col-md-1
+    = f.label :year_of_publishing, :class => "form-label col-sm-2"
+    .col-md-2
+      = f.text_field :year_of_publishing, :class => "form-control"
+  .form-group
+    %br
+    %br
+    .col-md-1
+    = f.label :book_type, :class => "form-label col-md-2"
+    .col-md-2
+      = f.text_field :book_type, :class => "form-control"
+  .form-group
+    .col-md-2
+      = f.submit "Save", :class=> "btn btn-primary"
