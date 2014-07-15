@@ -1,2 +1,3 @@
 module AdmissionsHelper
+
 end

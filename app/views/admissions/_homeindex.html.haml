@@ -21,7 +21,7 @@
         %td
           %label{for: "klass"} Class
         %td
-          = @admission.grade_master.grade_name
+          = @admission.grade
       %tr
         %td
           %label{for: "dob"} DOB
@@ -64,7 +64,7 @@
           
   .col-sm-3
     
-    - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned' )
+    - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned'||"#{@admission.status}" == 'Assessment_Completed' )
       = link_to "Close the Form", "#", :class => "change label label-danger",:data=> {:id => "#{@admission.id}"}
     - else 
       = link_to "Form Closed", "#", :class => "label label-success",:data=> {:id => "#{@admission.id}"}
@@ -84,7 +84,8 @@
       %br
       = link_to "Create Assessment", assessment_new_admission_path ,:class => 'enq_button btn btn-success'    
       %br
-      %br
+      %br   
+      
     - if("#{@admission.status}" == 'Assessment_Planned' )
       = link_to "View Application", admission_show_admission_path , :class => 'enq_button btn btn-primary'
       %br
@@ -92,8 +93,55 @@
       = link_to "View Assessment", view_assessment_admission_path ,:class => 'enq_button btn btn-primary'    
       %br
       %br
-      = link_to "Assessment Review",edit_assessment_admission_path , :class => 'enq_button btn btn-success'
+    
+    - if("#{@admission.status}" == 'Assessment_Completed' )
+      = link_to "View Application", admission_show_admission_path , :class => 'enq_button btn btn-primary'
       %br
       %br
-    = @admission.teacher_leader.faculty_leader
+      = link_to "View Assessment", view_assessment_admission_path ,:class => 'enq_button btn btn-primary'    
+      %br
+      %br
+  
+    - if current_user.teacher?
+      - if("#{@admission.status}" == 'Assessment_Planned' )
+        %button.btn.btn-success{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"} Assessment Review
+        .modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
+          .modal-dialog.modal-sm
+            .modal-content
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+              %h4.modal-title Assessment Plan
+              = form_for @admission do |f|
+                .modal-body
+                  .row
+                    .col-sm-3
+                      = f.label "Assessment Review", :class => 'col-sm-3 control-label'
+                    .col-sm-5
+                      = f.text_area :comment ,:class => 'form-control', :id => 'selectdate'
+              
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+                  = f.hidden_field :status,:value => "Assessment_Completed"
+                  = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+
+    
+  - if current_user.principal?
+    %button.btn.btn-success{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"} Management Review
+    .modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
+      .modal-dialog.modal-sm
+        .modal-content
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4.modal-title Management Review
+          = form_for @admission do |f|
+            .modal-body
+              .row
+                .col-sm-3
+                  = f.label "Management Review", :class => 'col-sm-3 control-label'
+                .col-sm-5
+                  = f.text_area :result ,:class => 'form-control', :id => 'selectdate'
+              
+            .modal-footer
+              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+              = f.hidden_field :status,:value => "Management_Reviewed"
+              = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+
     

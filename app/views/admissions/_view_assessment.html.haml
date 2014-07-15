@@ -65,9 +65,13 @@
   .col-sm-1
     .pull-left
       = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_assessment_admission_path, :class => "btn btn-warning btn-sm", :title => "Edit"        
+
+    
+
+
   .col-sm-3
   
-    - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned' )
+    - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned'||"#{@admission.status}" == 'Assessment_Completed' )
       = link_to "Close the Form", "#", :class => "change label label-danger",:data=> {:id => "#{@admission.id}"}
     - else 
       = link_to "Form Closed", "#", :class => "label label-success",:data=> {:id => "#{@admission.id}"}
@@ -93,22 +97,27 @@
       = link_to "View Assessment", view_assessment_admission_path ,:class => 'enq_button btn btn-primary'    
       %br
       %br
-      = link_to "Assessment Review",admission_home_admissions_path , :class => 'enq_button btn btn-success'
-     
+      
+    - if("#{@admission.status}" == 'Assessment_Completed' )
+      = link_to "View Application", admission_show_admission_path , :class => 'enq_button btn btn-primary'
+      %br
+      %br
+      = link_to "View Assessment", view_assessment_admission_path ,:class => 'enq_button btn btn-primary'    
+   
 .row
   .col-sm-8
-    .panel.panel-default
-      .panel-heading
-        .panel-title
-          Assessment Plan
-      .panel-body
-        %b
-          %label.btn.btn-default
-            = @admission.faculty_master.faculty_name
-      
-        .pull-right
-          %label.btn.btn-default
-            = @admission.start_time
-          to
-          %label.btn.btn-default
-            = @admission.end_time
+    #accordion.panel-group
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title
+            %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseOne"}
+              Assessment Plan
+        #collapseOne.panel-collapse.collapse.in
+          .panel-body
+            %b
+              %label.btn.btn-default
+                = @admission.teacher_leader.faculty_leader
+                
+            .pull-right
+              %label.btn.btn-default
+                = @admission.start_time

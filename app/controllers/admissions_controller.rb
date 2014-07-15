@@ -2,24 +2,24 @@ class AdmissionsController < ApplicationController
   def get_klass_view
     
     klass = TeacherLeader.all.map do |klass|
-      {grade: klass.klass, id: klass.id}
+      {grade_name: klass.klass,faculty_name: klass.faculty_leader, id: klass.id}
     end
     render :json => klass
   end
-    
  
   def index
-    if params[:search].present?
-      @admissions = Admission.search(params[:search])
-    else
-      @admissions = Admission.all.order("status")
+    
+    @admission = Admission.all
+    respond_to do |format|
+    format.html
+    format.json { render :json => @admissions}
     end
   end
   
   
   def show
 
-    @admission = Admission.find(params[:id])
+    @admissions = Admission.all
     
   end
   def time_table
@@ -40,8 +40,12 @@ class AdmissionsController < ApplicationController
     @admission = Admission.new
   end
   
+  
   def create
+    p admission_params
+    
     @admission = Admission.new(admission_params)
+    @admission.teacher_leader = TeacherLeader.where(:klass => admission_params[:grade]).first
     
     respond_to do |format|
       if @admission.save 
@@ -64,14 +68,26 @@ class AdmissionsController < ApplicationController
   
   def assessment_show
     @admission = Admission.find(params[:id])
+    @admissions = Admission.all
   end
   
   def assessment_index
+    
     if params[:search].present?
       @admission = Admission.search(params[:search])
       
     else
       @admissions = Admission.assessment_planned
+      
+    end
+  end
+  def assessment_completed
+    
+    if params[:search].present?
+      @admission = Admission.search(params[:search])
+      
+    else
+      @admissions = Admission.assessment_completed
       
     end
   end
@@ -187,6 +203,6 @@ class AdmissionsController < ApplicationController
  end
  
  def admission_params
-   params.require(:admission).permit(:admission_no,:branch,:surname,:second_lang,:board,:grade,:medium,:year,:written,:spoken,:reading,:blood_group,:allergy,:doctor_name,:doctor_mobile,:guardian_name,:guardian_mobile,:guardian_relationship,:from,:to,:avatar,:father_office_address,:mother_office_address,:father_office_telephone,:mother_office_telephone,:father_mobile,:mother_mobile,:father_religion,:mother_religion,:father_employer,:mother_employer,:father_email,:mother_email,:sib_name,:sib_age,:sib_sex,:sib_grade,:sib_school,:bus,:form_no, :middle_name,:name,:klass, :dob,:gender,:nationality,:language,:father_name,:mother_name,:father_occupation,:mother_occupation,:father_company,:mother_company,:father_education, :mother_education,:income,:address, :landline,:mobile,:email,:transport, :busstop,:last_school, :city, :changing_reason, :know_school,:person, :pp,:status,:closestatus,:title, :description, :staff, :grade, :start_time, :end_time, :grade_master_id)
+   params.require(:admission).permit(:admission_no,:branch,:surname,:second_lang,:board,:grade,:medium,:year,:written,:spoken,:reading,:blood_group,:allergy,:doctor_name,:doctor_mobile,:guardian_name,:guardian_mobile,:guardian_relationship,:from,:to,:avatar,:father_office_address,:mother_office_address,:father_office_telephone,:mother_office_telephone,:father_mobile,:mother_mobile,:father_religion,:mother_religion,:father_employer,:mother_employer,:father_email,:mother_email,:sib_name,:sib_age,:sib_sex,:sib_grade,:sib_school,:bus,:form_no, :middle_name,:name,:klass, :dob,:gender,:nationality,:language,:father_name,:mother_name,:father_occupation,:mother_occupation,:father_company,:mother_company,:father_education, :mother_education,:income,:address, :landline,:mobile,:email,:transport, :busstop,:last_school, :city, :changing_reason, :know_school,:person, :pp,:status,:closestatus,:title, :description, :staff, :grade, :start_time, :end_time, :grade_master_id,:teacher_leader_id,:faculty,:comment, :result)
  end
 end

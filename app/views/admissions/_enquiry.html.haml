@@ -18,11 +18,11 @@
         .col-sm-3
           = label_tag(:grade,"Admission sought into Class:")
         .col-sm-3
-          %select{"ng-model" => "myAdmission", "ng-options" => "klass.id as klass.klass for klass in klasses",:class => "form-control",:required => "required"}          
+          %select{"ng-model" => "myAdmission", "ng-options" => "klass.id as klass.grade_name for klass in klasses",:class => "form-control",:required => "required"}          
             %option{style: "display:none", value: ""} Select Grade
           {{myAdmission}}
-          
-          
+          = f.hidden_field :grade, :value => "{{myAdmission}}"
+        
         .col-sm-3
           = f.label "Date of Birth: ", :class => 'control-label'
         .col-sm-3
@@ -207,6 +207,7 @@
         .col-sm-3
           = f.text_field :pp, :class => 'form-control'
       %center
+               
         = f.hidden_field :status, :value => 'Enquiry_Created'
         = f.submit "Create", :class => 'btn btn-primary'
         = link_to 'Back', admissions_path, :class => 'btn btn-primary'

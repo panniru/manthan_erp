@@ -18,7 +18,7 @@
       %th Description
       %th Faculty
       %th Time
-      
+      %th Status
         
   %tbody
     - @admissions.each do |admission|
@@ -27,5 +27,5 @@
         %td= admission.title
         %td= admission.faculty
         %td= admission.start_time
-        
+        %td= admission.status
         

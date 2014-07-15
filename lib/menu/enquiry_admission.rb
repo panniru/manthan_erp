@@ -29,8 +29,8 @@ class EnquiryAdmission < Struct.new(:controller)
  def teacher_sub_menu
    sub_menu = []
    sub_menu << view_schedule
-   sub_menu << update_admission_result
-   sub_menu << show_event_admissions
+   sub_menu << assessment_completed
+   sub_menu << show_closed_forms
    sub_menu
  end
  
@@ -66,8 +66,8 @@ class EnquiryAdmission < Struct.new(:controller)
   def view_schedule
     MenuItem.new(:label => "View Schedule", :klass => "", :icon => "book", :href => "/admissions/assessment_index" )
   end
-  def update_admission_result
-    MenuItem.new(:label => "Update Results", :klass => "", :icon => "book", :href => "/admissions/assessment_index" )
+  def assessment_completed
+    MenuItem.new(:label => "Assessment Completed", :klass => "", :icon => "book", :href => "/admissions/assessment_completed" )
   end
   def management_review
     MenuItem.new(:label => "Management Review", :klass => "", :icon => "book", :href => "/admissions/assessment_index" )

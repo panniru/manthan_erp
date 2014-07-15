@@ -1,23 +1,23 @@
-%p#notice= notice
+.row
+  .col-sm-5
+    .well
+      #calendar2
 
-%p
-  %b Title:
-  = @admission.title
-%p
-  %b Description:
-  = @admission.description
-%p
-  %b Staff:
-  = @admission.staff
-%p
-  %b Grade:
-  = @admission.klass
-%p
-  %b Start time:
-  = @admission.start_time
-%p
-  %b End time:
-  = @admission.end_time
-
-
-
+  .col-sm-7
+                    
+    %br
+    .col-sm-6
+      .table-well
+        %center
+          %h4
+            LISTING EVENTS
+            
+        %table.table-striped.table-condensed.table-bordered
+          %tr
+            %th{style: "width:7%"} Title
+            %th{style: "width:7%"} Start time
+            - @admissions.each do |admission|
+              %tr
+                %td= admission.title
+                %td= admission.start_time
+                

@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
   attr_accessor :admission, :admission_id
-  has_many :admissions
-  
+  belongs_to :admission
+  belongs_to :teacher_leader,:foreign_key => 'teacher_leader_id'
 end

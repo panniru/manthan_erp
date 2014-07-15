@@ -1,10 +1,15 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-
+  def get_faculty_view
+    faculty = TeacherLeader.all.map do |faculty|
+      {faculty_name: faculty.faculty_leader, id: faculty.id}
+      end
+    render :json => faculty
+  end
   # GET /events
   # GET /events.json
   def index
-    @admissions = Admission.all
+    
     @events = Event.all
   end
   
@@ -15,9 +20,9 @@ class EventsController < ApplicationController
   
   # GET /events/new
   def new
+    @admissions = Admission.all
     @event = Event.new
-    @event.admissions << Admission.new
-    @events = Event.all
+    
   end
   
 
@@ -29,20 +34,18 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+   
     @event = Event.new(event_params)
-    @event.admission_id = current_user.id
-    
-    respond_to do |format|
+    @event.teacher_leader = TeacherLeader.where(:klass => event_params[:grade]).first
+     respond_to do |format|
       if @event.save
         format.html { redirect_to admission_home_admissions_path, notice: 'Assessment was successfully planned.' }
-       
-        
       else
         format.html { render action: 'new' }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
   end
+ 
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update

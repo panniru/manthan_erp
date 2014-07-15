@@ -1,55 +1,27 @@
-= form_for [@admission, @event] do |f|
-  - if @event.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
-      %ul
-        - @event.errors.full_messages.each do |msg|
-          %li= msg
-  .row
-    = f.hidden_field :staffid, :value => @staff.id 
-  .row
-    .field
-      .col-sm-3
-        = f.label :title, :class => 'control-label'
-      .col-sm-3
-        = f.text_field :title, :class => 'form-control'
-        %br
-  .row   
-    .field
-      .col-sm-3
-        = f.label :description, :class => 'control-label'
-      .col-sm-3
-        = f.text_area :description, :class => 'form-control'
-  %br
-  .row
-    .field
-      .col-sm-3
-        = f.label :staff, :class => 'control-label'
-      .col-sm-3
-        = f.text_field :staff, :class => 'form-control'
-  %br
-  .row
-    .field
-      .col-sm-3
-        = f.label :grade, :class => 'control-label'
-      .col-sm-3
-        = f.text_field :grade, :class => 'form-control'
-  %br
-  .row
-    .field
-      .col-sm-3
-        = f.label :start_time, :class => 'control-label'
-      .col-sm-3
-        = f.datetime_select :start_time, :class => 'form-control'
-  %br
-  .row
-    .field
-      .col-sm-3
-        = f.label :end_time, :class => 'control-label'
-      .col-sm-3
-        = f.datetime_select :end_time, :class => 'form-control'
-  %br
-  .col-sm-3
-    .pull-right
-      = f.submit 'Save',:class => 'btn btn-primary'
-      
+#myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title Assessment Plan
+        = form_for @event do |f|
+          .modal-body
+            .row
+              .col-sm-3
+                = f.label "Time", :class => 'col-sm-3 control-label'
+              .col-sm-5
+                = f.text_field :start_time ,:class => 'form-control', :id => 'selectdate'
+                %br
+            .row
+              .col-sm-3
+                = f.label "Description", :class => 'col-sm-3 control-label'              
+              .col-sm-5
+                = f.text_area :title ,:class => 'form-control'
+            .row
+              .col-sm-3
+              
+          
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+            = f.hidden_field :status,:value => "Assessment_Planned"
+            = button_tag "Save", :type => "submit", :class => 'btn btn-primary'

@@ -1,23 +1,28 @@
-.col-sm-6
-  .well1
-    #calendar1
-.well2
-  #createEventModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel1", role: "dialog", tabindex: "-1"}
-    .modal-header
-      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} x
-      %h3#myModalLabel1 Create Assessment
-    .modal-body
-      %form#createForm.form-horizontal
-        .control-group
-          %label.control-label{for: "inputStaff"} Staff
-          .controls
-            %input#Name{name: "Name"}/
-            %input#apptStartTime{type: "hidden"}/
-            %input#apptEndTime{type: "hidden"}/
-            %input#apptAllDay{type: "hidden"}/
-        .control-group
-          %label.control-label{for: "when"} When:
-          #when.controls.controls-row
-      .modal-footer
-        %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
-        %button#submitButton.btn.btn-primary{type: "submit"} Save
+#calendar2
+#myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title Assessment Plan
+        = form_for @admission do |f|
+          .modal-body
+            .row
+              .col-sm-3
+                = f.label "Time", :class => 'col-sm-3 control-label'
+              .col-sm-5
+                = f.text_field :start_time ,:class => 'form-control', :id => 'selectdate'
+                %br
+            .row
+              .col-sm-3
+                = f.label "Description", :class => 'col-sm-3 control-label'              
+              .col-sm-5
+                = f.text_area :title ,:class => 'form-control'
+            .row
+              .col-sm-3
+            
+            
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+            = f.hidden_field :status,:value => "Assessment_Planned"
+            = button_tag "Save", :type => "submit", :class => 'btn btn-primary'

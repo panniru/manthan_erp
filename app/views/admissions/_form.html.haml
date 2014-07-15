@@ -30,7 +30,7 @@
               %th Admission no:
               %th= f.text_field :admission_no, :class => 'form-control'
               %th Class:
-              %td= @admission.grade_master.grade_name
+              %td= @admission.grade
     .col-sm-8
       .pull-right
         
@@ -392,6 +392,9 @@
                     
   .row
     %center
+      - @admission.faculty = @admission.teacher_leader.faculty_leader
+      = @admission.faculty
+      = f.hidden_field :faculty, :value => @admission.faculty
       = f.hidden_field :status,:value => "Application_Created"
       = f.submit "Create", :class => 'btn btn-primary'
       = link_to 'Back', admissions_path, :class => 'btn btn-primary'

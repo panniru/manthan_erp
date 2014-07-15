@@ -1,138 +1,23 @@
-%center
-  %h4 ADMISSION
 .row
-  .col-sm-6
-    .row
-      = image_tag "#{@admission.avatar}",:style => "width:40%; height:30%;"
-    .row
-      %table
-        %thead
-          %tr
-            Parent's Details
-          %tr
-            %th{style: "width:50%"}
-              %label{for: "father_office_address"} Father's Office Address:
-            %th= @admission.father_office_address
-          %tr
-            %th{style: "width:50%"}
-              %label{for: "mother_office_address"} Mother's Office Address:
-            %th= @admission.mother_office_address
-              
-    
+  .col-sm-5
+    .well
+      #calendar2
 
-  .col-sm-6
-    = label_tag "Student's Details"
-    %table.table.table-striped.table-condensed.table-bordered
-      %thead
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "admission_no"} Admission no
-          %th= @admission.admission_no
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "branch"} Branch
-          %th
-            = @admission.branch
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "surname"} Surname
-          %th{style: "width:20%"}
-            = @admission.surname
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "second_lang"} Second Lang
-          %th
-            = @admission.second_lang
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "board"} Board
-          %th
-            = @admission.board
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "grade"} Grade
-          %th
-            = @admission.grade
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "medium"} Medium
-          %th
-            = @admission.medium
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "year"} Year
-    
-          %th
-            = @admission.year
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "Written"} Written
-    
-          %th
-            = @admission.written
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "Reading"} Reading
-    
-          %th
-            = @admission.reading
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "spoken"} Spoken
-          %th
-            = @admission.spoken
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "Blood Group"} Blood Group
-          %th
-            = @admission.blood_group
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "allergy"} Allergy
-          %th
-            = @admission.allergy
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "Name of the Doctor"} Name of the Doctor
-          %th
-            = @admission.doctor_name
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "mobile"} Doctor's Mobile
-          %th
-            = @admission.doctor_mobile
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "guardian_name"} Guardian's name
-          %th
-            = @admission.guardian_name
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "guardian_mobile"} Guardian's Mobile
-          %th
-            = @admission.guardian_mobile
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "guardian_relationship"} Guardian's Relationship
-    
-          %th
-            = @admission.guardian_relationship
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "from"} From
-          %th
-            = @admission.from
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "to"} To
-          %th
-            = @admission.to
-        %tr
-          %th{style: "width:20%"}
-            %label{for: "middle_name"} Middle name
-          %th
-            = @admission.middle_name
-      %center
-  = link_to "Back", admissions_path , :class => 'btn btn-primary'
-      
-  
+  .col-sm-7
+                    
+    %br
+    .col-sm-6
+      .table-well
+        %center
+          %h4
+            LISTING EVENTS
+            
+        %table.table-striped.table-condensed.table-bordered
+          %tr
+            %th{style: "width:7%"} Title
+            %th{style: "width:7%"} Start time
+            - @admissions.each do |admission|
+              %tr
+                %td= admission.title
+                %td= admission.start_time
+                

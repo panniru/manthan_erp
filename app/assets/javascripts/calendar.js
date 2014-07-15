@@ -1,6 +1,10 @@
 $(document).ready(function() {
+    $('#sel').hide();
+});
 
+$(document).ready(function() {
     // page is now ready, initialize the calendar...
+
 
     $('#calendar').fullCalendar({
         events: '/events.json'     
@@ -39,6 +43,38 @@ $(document).ready(function() {
             $('#selectdate').val(date)
             $('#myModal').modal('show');   
             
+    })
+    $('#calendar2').fullCalendar({
+
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,basicWeek,basicDay',
+            ignoreTimezone: false
+        },
+        
+        admissions: '/admissions.json',
+        selectable: true,
+        select: function(date) {
+            alert("welcome "+ date);
+            $('#selectdate').val(date)
+            $('#myModal').modal('show');                
+        }
+    })
+    });
+   
+
+
+
+
+$(function () {
+    $(":file").change(function () {
+        //alert("Display image")
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+
         }
     })
     

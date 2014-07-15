@@ -4,10 +4,13 @@ ManthanErp::Application.routes.draw do
   get "new_vehicles/show"
   get "new_vehicles/edit"
   get "new_vehicles/new"
- # get "teaching_plans/new"
- # get "teaching_plans/edit"
-  #get "teaching_plans/index"
-  #get "teaching_plans/show"
+  get "teaching_plans/new"
+  get "teaching_plans/edit"
+  get "teaching_plans/index"
+  get "teaching_plans/show"
+  
+     
+  
   resources :interviewschedulers do
     member do
       get 'home_index'
@@ -198,6 +201,7 @@ ManthanErp::Application.routes.draw do
       get "enquiry_index"
       get "admission_index"
       get "assessment_index"
+      get "assessment_completed"
       get "enquiry_new"
       get 'admission_home'
       get 'closed_forms'
@@ -265,7 +269,9 @@ ManthanErp::Application.routes.draw do
       post "upload"
     end
   end
-  
+  resources :admissions do
+    resources :events
+  end
   resources :class_teacher_mappings do
     collection do
       get "get_grade_wise_mappings"   
