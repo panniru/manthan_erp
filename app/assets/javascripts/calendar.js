@@ -37,15 +37,14 @@ $(document).ready(function() {
             
 	},
         select: function(date) {
-            alert("welcome "+ date);
             // date: new Date($('#myModal').val(date))
             //console.log($('#myModal').val(date));
             $('#selectdate').val(date)
             $('#myModal').modal('show');   
-            
+        }    
     })
     $('#calendar2').fullCalendar({
-
+        
         header: {
             left: 'prev,next today',
             center: 'title',

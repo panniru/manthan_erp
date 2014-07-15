@@ -64,7 +64,7 @@
             StudentMaster : StudentMaster,
             GradeMaster : GradeMaster,
             SectionMaster : SectionMaster,
-            Book : Book
+            Book : Book,
 	    Route:Route
         };
     }]);
