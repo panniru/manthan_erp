@@ -35,7 +35,7 @@
         
         return {
             getSectionServiceView : getSectionServiceView,
-            getSectionServiceMapView : getSectionServiceMapView
+            //getSectionServiceMapView : getSectionServiceMapView
         };
         
     }]);

@@ -4,10 +4,10 @@ ManthanErp::Application.routes.draw do
   get "new_vehicles/show"
   get "new_vehicles/edit"
   get "new_vehicles/new"
-  get "teaching_plans/new"
-  get "teaching_plans/edit"
-  get "teaching_plans/index"
-  get "teaching_plans/show"
+ # get "teaching_plans/new"
+ # get "teaching_plans/edit"
+  #get "teaching_plans/index"
+  #get "teaching_plans/show"
   resources :interviewschedulers do
     member do
       get 'home_index'
@@ -53,7 +53,9 @@ ManthanErp::Application.routes.draw do
       get "getfacultyidservice"
       get "getgradessectionsservice"      
       get 'calendarpopup'
+      get 'monthlywiseplan'
       get 'get_grade_section_subject_service'
+      get 'teaching_date'
     
     end
   end

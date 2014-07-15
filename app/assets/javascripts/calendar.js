@@ -8,127 +8,44 @@ $(document).ready(function() {
     })
     
     $('#calendar1').fullCalendar({
-        events: '/teaching_plans/calendardata.json'
-            
-    })
-    $('#calendar2').fullCalendar({
-        events: '/teaching_plans/calendardata.json'
-    })
-
-
-});
-$(function () {
-    $(":file").change(function () {
-        //alert("Display image")
-        if (this.files && this.files[0]) {
-            var reader = new FileReader();
-            reader.onload = imageIsLoaded;
-            reader.readAsDataURL(this.files[0]);
-        }
-    });
-});
-
-function imageIsLoaded(e) {
-    $('#myImg').attr('src', e.target.result);
-};
-
-
-$(document).ready(function(){
-    $('input.timepicker').timepicker({ 'scrollDefaultNow': true });
-    
-});
-$(function() {
-    $('.date-picker-year').datepicker({
-        changeYear: true,
-        showButtonPanel: true,
-        dateFormat: 'yy',
-        onClose: function(dateText, inst) { 
-            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-            $(this).datepicker('setDate', new Date(year, 1));
-        }
-    });
-    $(".date-picker-year").focus(function () {
-        $(".ui-datepicker-month").hide();
-    });
-});
-$(document).ready(function()
-                  {
-	              $('#search').keyup(function()
-	                                 {
-		                             searchTable($(this).val());
-	                                 });
-                  });
-
-function searchTable(inputVal)
-{
-    var table = $('#tblData');
-    table.find('tr').each(function(index, row)
-	                  {
-		              var allCells = $(row).find('td');
-		              if(allCells.length > 0)
-		              {
-			          var found = false;
-			          allCells.each(function(index, td)
-			                        {
-				                    var regExp = new RegExp(inputVal, 'i');
-				                    if(regExp.test($(td).text()))
-				                    {
-					                found = true;
-					                return false;
-				                    }
-			                        });
-			          if(found == true)$(row).show();else $(row).hide();
-		              }
-	                  });
-}
-
-
-$(document).ready(function() {
-  //alert("hey");
-      var calendar2 = $('#calendar2').fullCalendar({
-      defaultView: 'agendaWeek',
-      editable: true,
+        events: '/teaching_plans/calendardata.json',
         selectable: true,
-      //header and other values
-      select: function(start, end, allDay) {
-          endtime = $.fullCalendar.formatDate(end,'h:mm tt');
-          starttime = $.fullCalendar.formatDate(start,'ddd, MMM d, h:mm tt');
-          var mywhen = starttime + ' - ' + endtime;
-          $('#createEventModal #apptStartTime').val(start);
-          $('#createEventModal #apptEndTime').val(end);
-          $('#createEventModal #apptAllDay').val(allDay);
-          $('#createEventModal #when').text(mywhen);
-          $('#createEventModal').modal('show');
-       }
-    });
+        eventMouseover: function(data, event, view) {
+            var url = "/teaching_plans/teaching_date.json?date="+data.teaching_date
+            var curr_object = $(this) 
+            $.get(url, function( data ) {
+                var content_html = "<table><tbody>"
+                content_html+= "<tr>"
+                for (var i=0; i< data.length;i++)
+                {
+                    content_html+= "<tr>";                 
+                    content_html+= '<td><a href="/teaching_plans/'+data[i].id+'">'+data[i].plan_month+'</a></td>';                  
+           
+                    content_html+= "</tr>";
+                    
+                }                 
+                content_html+= "</tbody></table>";
+             
+                curr_object.popover({html:true,title:event.title,placement:'top',container:'body', content: content_html}).popover('show');
+            });
+            //alert(JSON.stringify(data))
+            
+            
+	},
+        select: function(date) {
+            alert("welcome "+ date);
+            // date: new Date($('#myModal').val(date))
+            //console.log($('#myModal').val(date));
+            $('#selectdate').val(date)
+            $('#myModal').modal('show');   
+            
+        }
+    })
+    
 
-  $('#submitButton').on('click', function(e){
-    // We don't want this to act as a link so cancel the link action
-    e.preventDefault();
 
-    doSubmit();
-  });
-
-  function doSubmit(){
-    $("#createEventModal").modal('hide');
-    console.log($('#apptStartTime').val());
-    console.log($('#apptEndTime').val());
-    console.log($('#apptAllDay').val());
-    alert("form submitted");
-        
-    $("#calendar2").fullCalendar('renderEvent',
-        {
-            title: $('#patientName').val(),
-            start: new Date($('#apptStartTime').val()),
-            end: new Date($('#apptEndTime').val()),
-            allDay: ($('#apptAllDay').val() == "true"),
-        },
-        true);
-   }
 });
-$(document).ready(function() {
-$('.popover-dismiss').popover({
-  trigger: 'focus'
-})
-});
+
+
+
 

@@ -5,42 +5,37 @@
       %select{"ng-model" => "myGrade_Section_Subject", :ng_options => "a.grade_section_subject for a in grades_sections_subjects", :class => "form-control"} 
         
     .col-sm-12
-      %table{:class => "table"}
       %center
         %h5
-         
           TEACHING PLANS        
-          %table{:class => "table"}
+      - @teaching_plans.sort.each do |month, teaching_plans|
+        %h5= month.strftime("%B")
+        
+        %table.table.table-bordered.table-hover.table-striped
+          %tr
+            %th{style: "width:7%"} Date
+            %th{style: "width:7%"} Grade Section Subject
+            %th{style: "width:7%"} Plan
+            %th{style: "width:1%"}
+          - for teaching_plan in teaching_plans
             %tr
-              %th{style: "width:7%"} Date
-              %th{style: "width:7%"} Grade Section Subject
-              %th{style: "width:7%"} Plan
-              - @teaching_plans.each do |teaching_plan|
-                %tr
-                  %td= teaching_plan.teaching_date
-                  %td= teaching_plan.grade_master.grade_name+"-"+ teaching_plan.section_master.section_name+"-"+teaching_plan.subject_master.subject_name                
-                  %td= teaching_plan.plan_month
+              %td= teaching_plan.teaching_date
+              %td= teaching_plan.grade_master.grade_name+"-"+ teaching_plan.section_master.section_name+"-"+teaching_plan.subject_master.subject_name                
+              %td= teaching_plan.plan_month
+              %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), teaching_plan_path(teaching_plan), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+
+ 
                 
                           
   .form-group.col-md-5 
     .col-md-4
-      %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add Plan"
+      = link_to "ViewPlan",'#' , :class => 'enq_button btn btn-primary'
+      // %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add Plan"
     .col-sm-5
       .teachingplancaledar
-        #calendar1                    
-          = render "form"
-        
+        #calendar1     
+        = render "form"
+    = will_paginate @teaching_plans1, param_name: "page", previous_label: h("<"), next_label: h(">")
+                
+                      
                   
-  .row
-    :css
-      table, th, td
-      {
-      border-collapse:collapse;
-      border:5px solid #6aa6d6;
-      }
-      th, td
-      {
-      padding:5px;
-      } 
-  
-          

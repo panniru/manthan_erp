@@ -1,12 +1,30 @@
 class TeachingPlansController < ApplicationController
   def index
-    @teaching_plans = TeachingPlan.all
-    @teaching_plans = TeachingPlan.find(:all, :order => 'teaching_date,plan_month')
-  # @teaching_plans = @teaching_plans.group_by { |t| t.teaching_date.beginning_of_month }
+    page = params[:page].present? ? params[:page] : 1
+    if params[:search].present?
+      @teaching_plans = TeachingPlan.search(params[:search]).paginate(:page => 1, :per_page => 5)
+    else
+      @teaching_plans1 = TeachingPlan.paginate(:page => page, :per_page => 2)
+
+      @teaching_plans = @teaching_plans1.group_by { |t| t.teaching_date.beginning_of_month }
   end
+end
   def calendardata   
-    @teaching_plans = TeachingPlan.all
-  end
+    @teaching_plans = TeachingPlan.first
+    respond_to do |format|
+      format.json do
+        c =User.find(current_user)       
+        calendar_date = TeachingPlan.select(:teaching_date).distinct        
+        calendar_date = calendar_date.map do |teach|
+          {start: teach.teaching_date, title: "Plan", description: "Plan", url: "#", teaching_date: teach.teaching_date}
+        end
+        p calendar_date
+        p "++++++++++++++++++++++"
+        render :json => calendar_date
+      end
+    end
+  end   
+
   
   def new
     @teaching_plan = TeachingPlan.new
@@ -88,4 +106,28 @@ class TeachingPlansController < ApplicationController
       end     
     end
   end
+  def destroy
+    @teaching_plan = TeachingPlan.find(params[:id])    
+    if @teaching_plan.destroy
+      flash[:success] = I18n.t :success, :scope => [:teaching_plan, :destroy]
+    else
+      flash.now[:fail] = I18n.t :fail, :scope => [:teaching_plan, :destroy]
+    end
+    redirect_to teaching_plans_path
+  end
+  def teaching_date
+    respond_to do |format|
+      format.json do
+        c =User.find(current_user)       
+        teachingdate = TeachingPlan.where("teaching_date = '#{params[:date]}'")        
+        teachingdate = teachingdate.map do |teach|
+          {id: teach.id, plan_month: teach.plan_month}
+        end
+        p teachingdate
+        p "********************"
+        render :json => teachingdate
+      end
+    end
+  end
+
 end
