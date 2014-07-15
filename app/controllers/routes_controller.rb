@@ -1,13 +1,22 @@
 class RoutesController < ApplicationController
   load_resource :only => [:show, :update, :edit, :destroy]
   def index
-    @route = Route.paginate(:page => params[:page].present? ? params[:page] : 1)
-    @map_data = GoogleMapProcessor.build_map_data(@route)
-    gon.gmap_data = @map_data.to_json
-    gon.width = "750px"
-    gon.height = "350px"
+    respond_to do |format|
+      @route = Route.paginate(:page => params[:page].present? ? params[:page] : 1)
+      @map_data = GoogleMapProcessor.build_map_data(@route)
+      gon.gmap_data = @map_data.to_json
+      gon.width = "750px"
+      gon.height = "350px"
+      
+      format.json do
+        render :json => Route.all
+      end
+      format.html do 
+        render "index"
+      end
+    end
   end
-
+  
   def show
   end
   
@@ -57,11 +66,11 @@ class RoutesController < ApplicationController
 
  
   def route_params
-    params.require(:route).permit( :route_no , :lpp, :busno_up , :no_of_children )
+    params.require(:route).permit( :route_no , :lpp, :busno_up , :no_of_children ,:start_point , :end_point)
   end
   
   def build_route_from_bulk
-    params.require(:bulk_route).select{|route| route["no_of_stops"].present? and route["sequence_no"].present?}.map do |route|
+    params.require(:bulk_route).select{|route| route["lpp"].present? }.map do |route|
       Route.new(route)
     end
   end

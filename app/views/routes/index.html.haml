@@ -1,27 +1,29 @@
-%script{:src => "//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry", :type => "text/javascript"}
-%script{:src => "//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js", :type => "text/javascript"}
-.col-sm-10
-  %h3 
-    = "Routes"
-.col-sm-2
-  =  link_to "New Route", new_route_path, :class => "btn btn-primary"
-%table#tblData.target.table.table-striped.table-condensed.table-bordered
-  %thead
-    %th Route No
-    %th Last Point
-    %th Bus No
-    %th No.of Children
-    %th
-  %tbody
-    - @route.each do |route|
-      %tr
-        %td= route.route_no
-        %td= route.lpp
-        %td= route.busno_up
-        %td= route.no_of_children
+.col-md-7{"ng-controller" => "RouteController"}
+  %h3
+    Routes
+  %h5
+    = link_to "New Route", "#", :class => "btn btn-primary", :ng_click => "newRoute()"
+  %hr
+  %table.table.table-bordered
+    %thead
+      %th waypoints
+      %th
+    %tbody
+      %tr{"ng-repeat" => "route in routes"}
+        %td {{route.lpp}}
         %td 
-          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_route_path(route), :class => "btn btn-warning"
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), route_path(route), :class => "btn btn-danger",:data => {:method => 'delete' , :confirm => "Are You Sure to Delete "}
-%div{:style => "width: 800px;"}
-  #map{:style => "width: 800px; height: 400px;"}
+          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete" , :ng_click => "destroy(route) ", :data => { :confirm => "Are You Sure to Delete "}
+  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} New Route
+        .modal-body
+          = render "form1"
+        
+.row
+  = render "shared/gmap"
+ 
+
 

@@ -1,9 +1,14 @@
-.col-sm-10
-  %h3 
-    = "Vehicles list"
-.col-sm-2
-  = render "modal"
-
+.panel.panel-default
+  .panel-heading
+    .pull-left
+      %input#search{name: "search", placeholder: "Enter Search Term...", type: "text", :class => 'form-control'}/
+    .pull-right
+      %br
+      %br
+    %center
+      %h3
+        Vehicle List
+        = render 'modal'
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %th Company of Bus

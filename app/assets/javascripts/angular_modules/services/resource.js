@@ -15,6 +15,7 @@
                                            "update": { method: "PUT"}
                                        }
                                       );
+
         var PostDatedCheque = $resource('/post_dated_cheques/:id.json', {id: '@id'}, 
                                        {
                                            "bulk": { url: "/post_dated_cheques/create_bulk", method:'POST'},
@@ -46,7 +47,13 @@
                                            "bulk": { url: "/books/create_bulk", method:'POST'},
                                            "update": { method: "PUT"}
                                        }
-                                      );
+                            );
+	var Route = $resource('/routes/:id.json', {id: '@id'}, 
+			      {
+                                  "bulk": { url: "/routes/create_bulk", method:'POST'},
+                                  "update": { method: "PUT"}
+                              }
+                             );
         
         return {
             FeeGradeBucket : FeeGradeBucket,
@@ -58,7 +65,7 @@
             GradeMaster : GradeMaster,
             SectionMaster : SectionMaster,
             Book : Book
+	    Route:Route
         };
-        
     }]);
 })(angular, myApp);
