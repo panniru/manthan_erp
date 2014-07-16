@@ -2,17 +2,28 @@
   %h3
     Routes
   %h5
-    = link_to "New Route", "#", :class => "btn btn-primary", :ng_click => "newRoute()"
-  %hr
+    = link_to "New Route", "#", :class => "btn btn-primary",:ng_click => "defineNew()"
+ 
   %table.table.table-bordered
     %thead
-      %th waypoints
-      %th
+      %tr
+        %th Route No
+        %th Bus No
+        %th start point
+        %th End point
+        %th No of Children
+        %th
     %tbody
-      %tr{"ng-repeat" => "route in routes"}
-        %td {{route.lpp}}
-        %td 
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete" , :ng_click => "destroy(route) ", :data => { :confirm => "Are You Sure to Delete "}
+      - @routes.all.each do |route|
+        %tr
+          %td= route.route_no
+          %td= route.busno_up
+          %td= route.start_point
+          %td= route.end_point
+          %td= route.no_of_children
+          %td
+            =  link_to raw("<span class='glyphicon glyphicon-trash'></span>"),route_path(route), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+            
   .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
     .modal-dialog
       .modal-content

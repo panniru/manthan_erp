@@ -12,7 +12,8 @@
   function calcRoute() {
   var origin      = new google.maps.LatLng(17.385044, 78.486671);
   var destination = new google.maps.LatLng(17.000538, 81.804034);
-  var waypts = [{ location:'vijayawada', stopover:true},{ location:'khammam', stopover:true},{ location:'secunderabad', stopover:true}]
+
+  var waypts = gon.waypts;
   var request = {
   origin:      origin,
   destination: destination,

@@ -50,7 +50,6 @@
                             );
 	var Route = $resource('/routes/:id.json', {id: '@id'}, 
 			      {
-                                  "bulk": { url: "/routes/create_bulk", method:'POST'},
                                   "update": { method: "PUT"}
                               }
                              );
@@ -66,6 +65,7 @@
             SectionMaster : SectionMaster,
             Book : Book,
 	    Route:Route
+
         };
     }]);
 })(angular, myApp);

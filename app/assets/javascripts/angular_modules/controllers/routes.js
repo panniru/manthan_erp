@@ -2,38 +2,27 @@
     "use strict";
     app.controller("RouteController",["$scope","resourceService", function($scope, resourceService) {
 	$scope.routes = resourceService.Route.query();
-        $scope.newRoutes = []
         
-        $scope.newRoute = function(){
-
-            for(var i=0; i<1; i++){
-                $scope.newRoutes.push({"lpp":"", "sequence_no" :"" });
+	$scope.defineNew = function(){
+	    $scope.newRoute = new resourceService.Route({"busno_up":"", "no_of_children":"", "route_no":"", "locations":[]})
+	    for(var i=0; i<1; i++){
+                $scope.newRoute.locations.push({"location":"" , "sequence_no": "" });
             };
             $('#createModal').modal('show')
         }
-	$scope.editRoutes = function(){
-            $scope.newRoutes = $scope.routes
-            $('#createModal').modal('show')
-        }
+	
         $scope.submitRoutes = function(){
-            resourceService.Route.bulk({bulk_route: $scope.newRoutes})
-                .$promise.then(function(responce){
-                    $scope.routes = resourceService.Route.query()
+	    $scope.newRoute.$save()
+	        .then(function(responce){
+	    	    $scope.routes = resourceService.Route.query()
                     $('#createModal').modal('hide')
-                })
+	    	})
 	}
-	$scope.destroy = function(route){
-            route.$delete()
-                .then(function(responce){
-                    $scope.routes.splice($scope.routes.indexOf(route), 1)
-                })
-        };
-        
-      
+	
         $scope.addMoreterms = function(){
-	    var lnt = parseInt($scope.newRoutes.length)
+	    var lnt = parseInt($scope.newRoute.locations.length)
             for(var i=lnt; i< lnt+1; i++){
-                $scope.newRoutes.push({"lpp":"" , "sequence_no":""});
+                $scope.newRoute.locations.push({"location":"" ,"sequence_no":""});
             };
         }
     }]);
