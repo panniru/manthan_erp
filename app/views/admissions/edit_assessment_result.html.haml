@@ -1,0 +1,20 @@
+- if current_user.teacher?
+  %button.btn.btn-success{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"} Assessment Review
+  .modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
+    .modal-dialog.modal-sm
+      .modal-content
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModal.modal-title Assessment Plan
+        = form_for @admission do |f|
+          .modal-body
+            .row
+              .col-sm-3
+                = f.label "Assessment Review", :class => 'col-sm-3 control-label'
+              .col-sm-5
+                = f.text_area :comment ,:class => 'form-control', :id => 'selectdate'
+                  
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+            = f.hidden_field :status,:value => "Assessment_Completed"
+            = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+

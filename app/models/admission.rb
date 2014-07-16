@@ -9,7 +9,8 @@ class Admission < ActiveRecord::Base
   scope :application_forms,lambda{where("status = 'Application_Created'")}
   scope :assessment_planned,lambda{where("status = 'Assessment_Planned'")}
   scope :assessment_completed,lambda{where("status = 'Assessment_Completed'")}
-  
+  scope :management_review,lambda{where("status = 'Management_Reviewed'")}
+  scope :selected_students,lambda{where("result = 'Selected'")}
   scope :search, lambda {|id| where(:id => id)}
   def self.search(search)
     if search 

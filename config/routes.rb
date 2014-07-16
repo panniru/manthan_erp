@@ -190,10 +190,13 @@ ManthanErp::Application.routes.draw do
       get 'home_index'
       get 'edit_application'
       get 'edit_assessment'
+      get 'edit_assessment_result'
       post "admissions/update_enquiry"
       post "admissions/update_assessment"
       put 'update_admission'
       get 'view_assessment'
+      get 'assessment_result'
+      get 'management_result'
       get 'time_table'
     end
     
@@ -202,11 +205,14 @@ ManthanErp::Application.routes.draw do
       get "admission_index"
       get "assessment_index"
       get "assessment_completed"
+      get 'management_index'
       get "enquiry_new"
       get 'admission_home'
       get 'closed_forms'
       get 'calendar'
       get "get_klass_view"
+      get "get_details"
+      get "selected_students"
       
       
     end
