@@ -19,7 +19,8 @@
         %td {{timeperiod['fri_sub_name']}}          
         %td {{timeperiod['sat_sub_name']}}
   .col-md-2{"ng-show" => "myShowValue"}
-    = submit_tag("EDIT",{class: "btn btn-primary", :ng_click => "editPeriods()"})    
+    - if current_user.admin?
+      = submit_tag("EDIT",{class: "btn btn-primary", :ng_click => "editPeriods()"})    
 
 .row
   :css

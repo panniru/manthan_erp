@@ -7,12 +7,12 @@
                 $scope.grades=result.data
             });
 
-
-        sectionService.getSectionServiceView()
-            .then(function(result) {
-                $scope.sections=result.data
-                
-            });
+        $scope.getSections = function (){
+            sectionService.getSectionServiceView()
+                .then(function(result) {
+                    $scope.sections=result.data                    
+                });
+        };
        
         
         subjectService.getSubjectServiceView()
@@ -29,40 +29,27 @@
                
             });
                
-        $scope.addPeriods = function (){
-            
-            timeTableService.checkTimeTable($scope.myGrade,$scope.mySection)
-                .then(function(result) {
-                    $scope.check_time_table = result.data
-                    if ($scope.check_time_table > 0)
-                    {                       
-                        $scope.error_code = 1
-                        $scope.myValue = "false"
-                        $scope.myShowValue = "false"
-                    }
-                    else
-                    {
-                        $scope.error_code = 0
-                        $scope.myShowValue="false"
-                        $scope.myValue="true"           
-                        $scope.timeperiods = [];
-                        // Add a periodItem to the Time Period List
-                        for ( var i = 0; i < $scope.no_of_periods; i++ ) {
-                            $scope.timeperiods.push({ 
-                                grade_master_id: $scope.myGrade,
-                                section_master_id: $scope.mySection,
-                                mon_sub: "",
+        $scope.addPeriods = function (){             
+            $scope.myShowValue="false"
+            $scope.myValue="true"           
+            $scope.timeperiods = [];
+
+            // Add a periodItem to the Time Period List
+            for ( var i = 0; i < $scope.no_of_periods; i++ ) {
+                $scope.timeperiods.push({ 
+                    grade_master_id: $scope.myGrade,
+                    section_master_id: $scope.mySection,
+                    mon_sub: "",
                                 tue_sub: "",
-                                wed_sub: "",
-                                thu_sub: "",
-                                fri_sub: "",
-                                sat_sub: "",
-                                sun_sub: "",
-                            });              
-                        }
-                    } 
-                }); 
-        };
+                    wed_sub: "",
+                    thu_sub: "",
+                    fri_sub: "",
+                    sat_sub: "",
+                    sun_sub: "",
+                });              
+            }
+        } ;
+        
                        
         $scope.savePeriods = function(){
             $scope.save_timeperiods = [];
@@ -95,23 +82,31 @@
                 .then(function(result) {
                     $scope.check_time_table = result.data 
                     if ($scope.check_time_table == 0)
-                    {
-                        $scope.error_code = 2
+                    {                       
                         $scope.myValue = "false"
                         $scope.myShowValue = "false"
                         $scope.addPeriods();
                     }
                     else
-                    {
-                    $scope.error_code = 0
-                    $scope.myValue="false"
-                    $scope.myShowValue="true"           
-                    timeTableService.getPeriods($scope.myGrade,$scope.mySection)
-                        .then(function(result) {  
-                            $scope.timeperiods=result.data
-                        });
+                    {                    
+                        $scope.myValue="false"
+                        $scope.myShowValue="true"                   
+                        $scope.getPeriods($scope.myGrade,$scope.mySection);
                     }
+                    
+                   
                 });
+        };
+
+        $scope.getPeriods = function(grade,section){
+
+            timeTableService.getPeriods(grade,section)
+                .then(function(result) {  
+                    $scope.timeperiods=result.data                  
+                        $scope.myShowValue="true"
+                   
+                });
+            
         };
 
         $scope.editPeriods = function(){ 

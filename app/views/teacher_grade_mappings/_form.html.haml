@@ -26,13 +26,13 @@
             %th SUBJECT                      
           %tr{"ng-repeat" => "mapping in mappings | orderBy:'id'" }  
             %td               
-              %select{"ng-model" => "mapping.grade_master_id", "ng-options" => "grade.id as grade.grade for grade in grades ",:class => "form-control"} 
+              %select{"ng-model" => "mapping.grade_master_id", "ng-options" => "grade.grade_master_id as grade.grade_name for grade in grades ",:class => "form-control","ng-change" => "getSections()"} 
                 %option{value: ""}             
             %td{"ng-show" => "mySectionMultiSelect"} 
-              %select{:multiple => "multiple","ng-model" => "mapping['section_master_id']", "ng-options" => "section.id as section.section for section  in sections | filter : {grade_master_id: mapping['grade_master_id']}",:class => "form-control"}  
+              %select{:multiple => "multiple","ng-model" => "mapping['section_master_id']", "ng-options" => "section.section_master_id as section.section_name for section  in sections | filter : {grade_master_id: mapping['grade_master_id']}",:class => "form-control",}  
                 %option{value: ""}              
             %td{"ng-show" => "mySingleSelect"} 
-              %select{"ng-model" => "mapping['section_master_id']", "ng-options" => "section.id as section.section for section  in sections | filter : {grade_master_id: mapping['grade_master_id']}",:class => "form-control"}  
+              %select{"ng-model" => "mapping['section_master_id']", "ng-options" => "section.section_master_id as section.section_name for section  in sections | filter : {grade_master_id: mapping['grade_master_id']}",:class => "form-control"}  
                 %option{value: ""}             
             %td
               %select{"ng-model" => "mapping['subject_master_id']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"} 
