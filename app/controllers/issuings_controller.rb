@@ -1,36 +1,26 @@
 class IssuingsController < ApplicationController
   load_resource :only => [:show, :update, :edit, :destroy]
+
   def create
-    @issuing = Issuing.new(issuing_params)
-    if @issuing.save
+    @issuing = params[:book_issuing_objects]
+    
+    if BookIssuingFormObject.create_collection(params[:book_issuing_objects])
       flash[:success] = I18n.t :success, :scope => [:issuing, :create]
       redirect_to issuings_path
     else
       render "new"
     end
   end
-  def show
-    end
-  def index
-    @issuings = Issuing.all
-    p '======>'
-    p params 
-    p' ======>'
-   
   
-    p '======>'
+  def show
+  end
+  
+  def index
     @students =  StudentMaster.all #StudentMaster.where("grade_master_id = :grade_master_id AND section_master_id = :section_master_id", {grade_master_id: params[:grade_master_id], section_master_id: params[:section_master_id]})
-    # @students = students.map do |student|
-      
-    # {:name => student.student_master.name, :books => student.issuings.book,:issuing_id => student.issuings.issuing_id}
-          
-   # end
-        
-    
-    #     render :json => mappings
-    #     # end
-     
-    end
+    @book_issuing_objects = BookIssuingFormObject.build_collection(@students)
+    p "==================="
+    p @book_issuing_objects
+  end
    
   
   def gradeserviceview
@@ -61,6 +51,7 @@ class IssuingsController < ApplicationController
   end
   def update
     @issuing = Issuing.find(params[:id])
+   
     if @issuing.update(issuing_params)
       flash[:success] = I18n.t :success, :scope => [:issuing, :update]
       redirect_to issuings_path
@@ -82,6 +73,8 @@ class IssuingsController < ApplicationController
   private
 
   def issuing_params
-    params.require(:issuing).permit(:name, :grade, :section, :student_master_id)
+    params.require(:issuing).permit(:name, :grade, :section, :student_master_id, :book, :deleted_at )
   end
+  
+ 
 end

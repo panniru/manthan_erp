@@ -15,19 +15,29 @@
       .col-sm-10                 
         %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
 %br
-%table#tblData.target.table.table-striped.table-condensed.table-bordered{style: "width:70%"}
-  %thead
-    %tr
-      %th Name
-      %th Aloted Books
-      %th Return
-     
-  %tbody
-    - @students.each do |student|
+= form_tag("/issuings", :method => "POST") do
+  %table#tblData.target.table.table-striped.table-condensed.table-bordered{style: "width:70%"}
+    %thead
       %tr
-        %td= student.name
-        %td 
-          - student.issuings.each do |issuing|
-            = "#{issuing.book} "
-            
+        %th Name
+        %th Return
+        %th Aloted Books
       
+     
+    %tbody
+      - @book_issuing_objects.each do |bio|
+        %tr
+          %td= bio.student.name
+          %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), issuings_path, :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+          = hidden_field_tag "book_issuing_objects[][student_master_id]", "#{bio.student.id} "
+          %td
+            - bio.issuings.each do |issuing|
+              // = "#{issuing.book} "
+              //= text_field_tag "issuings[book][][name]", nil, :placeholder=> " - Add Book- "
+              = text_field_tag "book_issuing_objects[][issuings][][book]", "#{issuing.book} "
+              = hidden_field_tag "book_issuing_objects[][issuings][][id]", "#{issuing.id}"
+        
+         
+  .row
+    %center
+      %button{:type=>"submit", :class=> "btn btn-primary" }=  "save" 
