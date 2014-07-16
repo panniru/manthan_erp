@@ -129,5 +129,34 @@ end
       end
     end
   end
+  def getmonthlycalendarservice
+    respond_to do |format|
+      format.json do
+        c =User.find(current_user)       
+        calendar_date = TeachingPlan.select("to_char(teaching_date, 'Month') as month").distinct        
+        calendar_date = calendar_date.map do |teach|
+          {month: teach.month}
+        end
+        p calendar_date
+        p "-----------------"
+        render :json => calendar_date
+      end
+    end
+  end
+  def getmonthdataservice
+    respond_to do |format|
+      format.json do
+        c =User.find(current_user)       
+        month_date = TeachingPlan.where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'")
+        month_date = month_date.map do |teach|
+          {date: teach.teaching_date, plan_month: teach.plan_month, grade_Section_subject: teach.grade_master.grade_name+"-"+ teach.section_master.section_name+"-"+teach.subject_master.subject_name}
+        end
+        p month_date
+        p "###################"
+        render :json => month_date
+      end
+    end
+  end
+
 
 end

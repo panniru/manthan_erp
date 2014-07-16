@@ -8,25 +8,31 @@
       %center
         %h5
           TEACHING PLANS        
-      - @teaching_plans.sort.each do |month, teaching_plans|
-        %h5= month.strftime("%B")
-        
-        %table.table.table-bordered.table-hover.table-striped
-          %tr
-            %th{style: "width:7%"} Date
-            %th{style: "width:7%"} Grade Section Subject
-            %th{style: "width:7%"} Plan
-            %th{style: "width:1%"}
-          - for teaching_plan in teaching_plans
-            %tr
-              %td= teaching_plan.teaching_date
-              %td= teaching_plan.grade_master.grade_name+"-"+ teaching_plan.section_master.section_name+"-"+teaching_plan.subject_master.subject_name                
-              %td= teaching_plan.plan_month
-              %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), teaching_plan_path(teaching_plan), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+      %ul.nav.nav-tabs{:role => "tablist"}
+        %li{"ng-repeat" =>"month in months"}                 
+          %a{:ng_click => "getMonthData(month)","data-toggle" => "tab", :role => "tab"} {{month.month}}                   
+      .tab-content
+        %br
+        #month.tab-pane.active              
+          %table.table.table-bordered{:ng_show => "monthData"}
+            %thead
+              %th Date
+              %th Grade Section Subject
+              %th Plan
+              %th
+            %tbody
+              %tr{"ng-repeat" => "teaching_plan in monthData"}
+                %td {{teaching_plan.date}}
+                %td {{teaching_plan.grade_Section_subject}}
+                %td {{teaching_plan.plan_month}}
+                %td
+          
+              
+
 
  
-                
-                          
+              
+                    
   .form-group.col-md-5 
     .col-md-4
       = link_to "ViewPlan",'#' , :class => 'enq_button btn btn-primary'
@@ -35,7 +41,7 @@
       .teachingplancaledar
         #calendar1     
         = render "form"
-    = will_paginate @teaching_plans1, param_name: "page", previous_label: h("<"), next_label: h(">")
+        / = will_paginate @teaching_plans1, param_name: "page", previous_label: h("<"), next_label: h(">")
                 
                       
                   

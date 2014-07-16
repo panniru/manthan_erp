@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140711072710) do
+ActiveRecord::Schema.define(version: 20140715115728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,6 +202,7 @@ ActiveRecord::Schema.define(version: 20140711072710) do
     t.datetime "updated_at"
     t.string   "staff_id"
     t.string   "status"
+    t.integer  "teacher_leader_id"
   end
 
   create_table "faculty_masters", force: true do |t|
@@ -293,6 +294,8 @@ ActiveRecord::Schema.define(version: 20140711072710) do
     t.string   "section"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "book"
+    t.integer  "student_master_id"
   end
 
   create_table "job_runs", force: true do |t|
@@ -452,6 +455,9 @@ ActiveRecord::Schema.define(version: 20140711072710) do
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "deleted_at"
+    t.boolean  "gmaps"
+    t.string   "start_point"
+    t.string   "end_point"
   end
 
   add_index "routes", ["deleted_at"], name: "index_routes_on_deleted_at", using: :btree
