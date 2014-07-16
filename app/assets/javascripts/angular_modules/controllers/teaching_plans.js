@@ -45,11 +45,38 @@
                         $scope.grades_sections_subjects =result.data 
                        // $scope.map_grades = result.data
                        // $scope.map_sections = result.data
+                       // alert("");
+                     //   $scope.monthlycalendar = []
+                    
                     });
             });
+        $scope.months = []       
+        teachingPlanService.getMonthlyCalendarService()
+            .then(function(result) {                         
+                alert(JSON.stringify(result.data))
+                $scope.months = result.data
+            });
+      //  $scope.monthdata = []
+       // teachingPlanService.getMonthDataService(month)
+         //   .then(function(result) { 
+               // alert("hey");
+           //     alert(JSON.stringify(result.data))
+             //   $scope.monthdata = result.data
+           // });
+        
+        $scope.getMonthData = function(month){
+            alert("welcome");
+            teachingPlanService.getMonthDataService(month)
+                .then(function(result) {                    
+                   alert(JSON.stringify(result.data))
+                    $scope.monthData = result.data
+                });
+       }     
+       
         
 
     }]);
+    
     
 })(angular, myApp);
 
