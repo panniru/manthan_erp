@@ -13,7 +13,7 @@
         teachersService.getFacultyGradeSectionsServiceView()
             .then(function(result) {
                 $scope.faculty_grade_sections = result.data
-                alert(JSON.stringify($scope.faculty_grade_sections));                
+                //alert(JSON.stringify($scope.faculty_grade_sections));                
             });       
         
         $scope.showTimeTable = function(){

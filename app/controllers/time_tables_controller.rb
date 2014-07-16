@@ -5,10 +5,15 @@ class TimeTablesController < ApplicationController
   def gradeserviceview
     respond_to do |format|
       format.json do
+        grades = GradeMaster.get_grades_by_role(current_user)
+        p grades
+        p "=++++++++++++===>"
         grades = GradeMaster.all.map do |grade|
           {grade: grade.grade_name, id: grade.id}
         end
         render :json => grades
+        p grades
+        p "============>"
       end
     end  
   end

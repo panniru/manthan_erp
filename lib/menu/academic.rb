@@ -14,6 +14,12 @@ class Academic < Struct.new(:controller)
     sub_menu << teaching_plans
     sub_menu
   end
+  def parent_sub_menu
+    sub_menu = [] 
+    sub_menu << time_tables   
+    sub_menu
+  end
+  
   
   
   

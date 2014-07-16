@@ -15,7 +15,7 @@
           %td {{mapping['section_name']}}           
           %td {{mapping['faculty_name']}}
           %td          
-            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteMappings()"
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteMappings($index)"
                    
     .col-md-3  
     
