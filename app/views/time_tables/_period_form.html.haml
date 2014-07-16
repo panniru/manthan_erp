@@ -1,5 +1,4 @@
-.row{"ng-controller" => "GradeController"}
-  - error_code =0
+.row{"ng-controller" => "GradeController"}  
   .row
     .col-md-2 
     .col-md-8
@@ -7,13 +6,13 @@
         .col-md-12
           = label_tag(:grade, "Select Grade") 
         .form-group.col-md-12
-          %select{"ng-model" => "myGrade", "ng-options" => "grade.id as grade.grade for grade in grades",:class => "form-control",:required => "required"}
+          %select{"ng-model" => "myGrade", "ng-options" => "grade.grade_master_id as grade.grade_name for grade in grades",:class => "form-control","ng-change" => "getSections()"}
             %option{style: "display:none", value: ""} Select Grade   
       .col-md-4
         .col-md-12
           = label_tag(:section, "Select Section")
         .form-group.col-md-12
-          %select{"ng-model" => "mySection", "ng-options" =>"section.id as section.section for section  in sections | filter : {grade_master_id: myGrade}",:class => "form-control"}
+          %select{"ng-model" => "mySection", "ng-options" =>"section.section_master_id as section.section_name for section  in sections | filter : {grade_master_id: myGrade}",:class => "form-control"}
             %option{style: "display:none", value: ""} Select Section
       .col-md-4
         = submit_tag("SHOW TIME TABLE",{class: "btn btn-primary", :ng_click => "showPeriods()"})        
@@ -64,5 +63,5 @@
             
     .col-md-2{"ng-show" => "myValue"} 
       %input{:type => "button", :class => "btn btn-primary", "ng-click" => "savePeriods()", :value => "SAVE",:redirct_to =>"time_tables_path"} 
-  .row
+  .row   
     = render "show_periods" 

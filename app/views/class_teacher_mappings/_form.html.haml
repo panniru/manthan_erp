@@ -2,7 +2,36 @@
   .row
     .col-md-1
     .col-md-8
-      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "getGrade()", :value => "GRADE PP2"}
+      .col-md-12
+        .col-md-1
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(1)", :value => "PP1"}
+        .col-md-1
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(2)", :value => "PP2"}
+        .col-md-1
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(3)", :value => "1"}
+        .col-md-1
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(4)", :value => "2"}
+        .col-md-1
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(5)", :value => "3"}
+        .col-md-1
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(6)", :value => "4"}
+        .col-md-1         
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(7)", :value => "5"}
+      .col-md-12
+        .col-md-1
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(8)", :value => "6"}
+        .col-md-1
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(9)", :value => "7"}
+        .col-md-1
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(10)", :value => "8"}
+        .col-md-1
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(11)", :value => "9"}
+        .col-md-1
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(12)", :value => "10"}
+        .col-md-1
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(13)", :value => "11"}
+        .col-md-1
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(14)", :value => "12"}
   .row{"ng-show" => "myFormValue"}
     .col-md-1
     .col-md-8
@@ -10,14 +39,12 @@
         %tr            
           %th GRADE
           %th SECTION
-          %th TEACHER 
-          %th
+          %th TEACHER          
         %tr{"ng-repeat" => "mapping in mappings | orderBy:'id'"}  
           %td {{mapping['grade_name']}}                     
-          %td {{mapping['section_name']}}           
-          %td {{mapping['faculty_name']}}
+          %td {{mapping['section_name']}}         
           %td 
-            %select{"ng-model" => "mapping[faculty_master_id]", "ng-options" => "mapping.id  as mapping.faculty_name  for mapping in mappings",:class => "form-control"}           
+            %select{"ng-model" => "mapping['faculty_master_id']", "ng-options" => "faculty.faculty_name  for faculty in faculty_names", :class => "form-control"}            
     .col-md-3  
       %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveMappings()", :value => "SAVE"}
  

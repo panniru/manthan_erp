@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   belongs_to :role
   has_one :parent
+  has_one :faculty_master
 
   def admin?
     role_code == "admin"

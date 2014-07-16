@@ -5,10 +5,8 @@ class TimeTablesController < ApplicationController
   def gradeserviceview
     respond_to do |format|
       format.json do
-        grades = GradeMaster.all.map do |grade|
-          {grade: grade.grade_name, id: grade.id}
-        end
-        render :json => grades
+        grades = GradeMaster.get_grades_by_role(current_user)        
+        render :json => grades        
       end
     end  
   end
@@ -16,10 +14,13 @@ class TimeTablesController < ApplicationController
   def sectionserviceview
     respond_to do |format|
       format.json do
-        get_sections = SectionMaster.all.map do |section|
-          {section: section.section_name, id: section.id, grade_master_id: section.grade_master_id }
-        end
-        render :json => get_sections
+        sections = SectionMaster.get_sections_by_role(current_user)
+        #p a        
+        #p "===========>"
+        #sections = SectionMaster.all.map do |section|
+          #{section_master_id: section.id, section_name: section.section_name, grade_master_id: section.grade_master_id }
+        #end
+        render :json => sections
       end
     end  
   end  
@@ -85,6 +86,7 @@ class TimeTablesController < ApplicationController
           {id: timetable.id, grade_master_id: timetable.grade_master_id, section_master_id: timetable.section_master_id, mon_sub: timetable.mon_sub.to_i,tue_sub: timetable.tue_sub.to_i, wed_sub: timetable.wed_sub.to_i, thu_sub: timetable.thu_sub.to_i, fri_sub: timetable.fri_sub.to_i, sat_sub: timetable.sat_sub.to_i, mon_sub_name: SubjectMaster.get_sub_name(timetable.mon_sub.present?,timetable.mon_sub.to_i), tue_sub_name: SubjectMaster.get_sub_name(timetable.tue_sub.present?,timetable.tue_sub.to_i), wed_sub_name: SubjectMaster.get_sub_name(timetable.wed_sub.present?,timetable.wed_sub.to_i), thu_sub_name: SubjectMaster.get_sub_name(timetable.thu_sub.present?,timetable.thu_sub.to_i), fri_sub_name: SubjectMaster.get_sub_name(timetable.fri_sub.present?,timetable.fri_sub.to_i), sat_sub_name: SubjectMaster.get_sub_name(timetable.sat_sub.present?,timetable.sat_sub.to_i)}
         end    
         render :json => timetables
+        p timetables
       end
     end
   end

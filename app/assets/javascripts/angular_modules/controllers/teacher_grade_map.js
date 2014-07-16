@@ -12,10 +12,12 @@
                 $scope.grades = result.data               
             });
 
+        $scope.getSections = function (){    
         sectionService.getSectionServiceView()
             .then(function(result) {
                 $scope.sections = result.data              
-            });  
+            }); 
+            }; 
         
         subjectService.getSubjectServiceView()
             .then(function(result) {
