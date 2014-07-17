@@ -1,4 +1,3 @@
-
 = form_for @admission,:url => {:action => 'update_enquiry'}, :method => :POST do |f|
   = render "shared/error_messages", :object => f.object
   .row
@@ -304,8 +303,8 @@
             %th= @admission.nationality
           %tr
             %th= label_tag "Religion"
-            %th= f.text_field :father_religion
-            %th= f.text_field :mother_religion
+            %th= f.text_field :father_religion, :class => 'form-control'
+            %th= f.text_field :mother_religion, :class => 'form-control'
           %tr
             %th= label_tag "Home Address"
             %th= @admission.address
@@ -316,24 +315,24 @@
             %th= @admission.mobile
           %tr
             %th= label_tag "Office Address"
-            %th= f.text_field :father_office_address
-            %th= f.text_field :mother_office_address
+            %th= f.text_field :father_office_address, :class => 'form-control'
+            %th= f.text_field :mother_office_address, :class => 'form-control'
           %tr
             %th= label_tag "Office Telephone"
-            %th= f.text_field :father_office_telephone
-            %th= f.text_field :mother_office_telephone
+            %th= f.text_field :father_office_telephone, :class => 'form-control'
+            %th= f.text_field :mother_office_telephone, :class => 'form-control'
           %tr
             %th= label_tag "Mobile"
-            %th= f.text_field :father_mobile
-            %th= f.text_field :mother_mobile
+            %th= f.text_field :father_mobile, :class => 'form-control'
+            %th= f.text_field :mother_mobile, :class => 'form-control'
           %tr
             %th= label_tag "Email"
-            %th= f.text_field :father_email
-            %th= f.text_field :mother_email
+            %th= f.text_field :father_email, :class => 'form-control'
+            %th= f.text_field :mother_email, :class => 'form-control'
           %tr
             %th= label_tag "Employer's Name"
-            %th= f.text_field :father_employer
-            %th= f.text_field :mother_employer
+            %th= f.text_field :father_employer, :class => 'form-control'
+            %th= f.text_field :mother_employer, :class => 'form-control'
           %tr
             %th= label_tag "Family Income"
             %th
@@ -394,5 +393,6 @@
     %center
       = f.hidden_field :status,:value => "Application_Created"
       = f.submit "Create", :class => 'btn btn-primary'
-      = link_to 'Back', admissions_path, :class => 'btn btn-primary'
+      = f.submit "Reset", :type => "reset" , :class => 'btn btn-primary'
+      
 

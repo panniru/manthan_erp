@@ -1,63 +1,26 @@
 class AdmissionsController < ApplicationController
+  
   def get_klass_view
-    
     klass = TeacherLeader.all.map do |klass|
-      {grade_name: klass.klass,faculty_name: klass.faculty_leader, id: klass.id}
+      { grade_name: klass.klass,faculty_name: klass.faculty_leader, id: klass.id}
     end
     render :json => klass
   end
-  def get_details
-    @admissions = Admission.all
-    respond_to do |format|
-      format.html
-      format.json { render :json => @admissions}
+  
+  def index
+    if params[:teacher_leader_id].present?
+      @admissions = Admission.where(:teacher_leader_id => params[:teacher_leader_id])
+    else
+      @admissions = Admission.all
+      #respond_to do |format|
+      # format.html
+      # format.json { render :json => @admission}
     end
   end
-
-  def index
-    
-    @admissions = Admission.all
-    #respond_to do |format|
-     # format.html
-     # format.json { render :json => @admission}
-   # end
-  end
-  
-  
-  def show
-
-    @admissions = Admission.all
-    
-  end
-  def time_table
-    @admission = Admission.find(params[:id])
-  end
-
-  def edit
-    @admission = Admission.find(params[:id])
-  end
-
-  def edit_application
-    @admission = Admission.find(params[:id])
-  end
-  def edit_assessment
-    @admission = Admission.find(params[:id])
-  end
-  def edit_assessment_result
-    @admission = Admission.find(params[:id])
-  end
-
-  def new
-    @admission = Admission.new
-  end
-  
   
   def create
-    p admission_params
-    
     @admission = Admission.new(admission_params)
     @admission.teacher_leader = TeacherLeader.where(:klass => admission_params[:grade]).first
-    
     respond_to do |format|
       if @admission.save 
         format.html { redirect_to admission_home_admissions_path, notice: 'Enquiry was successfully created.' }
@@ -69,39 +32,42 @@ class AdmissionsController < ApplicationController
     end
   end
   
-  def enquiry_show
+  def new
+    @admission = Admission.new
+  end
+  
+  def edit
     @admission = Admission.find(params[:id])
   end
   
-  def admission_show
-    @admission = Admission.find(params[:id])
-  end
-  
-  def assessment_show
-    @admission = Admission.find(params[:id])
+  def show
     @admissions = Admission.all
   end
   
-  def assessment_index
-    
+  def admission_home
     if params[:search].present?
-      @admission = Admission.search(params[:search])
-      
+      @admissions = Admission.search(params[:search])
     else
-      @admissions = Admission.assessment_planned
-      
+      @admissions = Admission.enquiry_forms_or_application_forms  
     end
   end
-  def assessment_completed
-    
-    if params[:search].present?
-      @admission = Admission.search(params[:search])
-      
-    else
-      @admissions = Admission.assessment_completed
-      
-    end
+  
+  def home_index
+    @admission = Admission.find(params[:id])
   end
+  
+  def enquiry_new
+    @admission = Admission.new
+  end
+  
+  def admission_new
+    @admission = Admission.find(params[:id])
+  end
+  
+  def assessment_new
+    @admission = Admission.find(params[:id])
+  end
+  
   def enquiry_index
     if params[:search].present?
       @admissions = Admission.search(params[:search])
@@ -115,8 +81,17 @@ class AdmissionsController < ApplicationController
       @admissions = Admission.search(params[:search])
     else
       @admissions = Admission.application_forms
-   end
+    end
   end
+  
+  def assessment_index
+    if params[:search].present?
+      @admissions = Admission.search(params[:search])
+    else
+      @admissions = Admission.assessment_planned
+    end
+  end
+  
   def management_index
     if params[:search].present?
       @admissions = Admission.search(params[:search])
@@ -124,49 +99,43 @@ class AdmissionsController < ApplicationController
       @admissions = Admission.management_review
     end
   end
-    
-  def enquiry_new
-    @admission = Admission.new
-  end
   
-  def admission_new
+  def edit_application
     @admission = Admission.find(params[:id])
   end
   
-  def assessment_new
+  def edit_assessment
     @admission = Admission.find(params[:id])
-  end
-  
-  def admission_home
-    
-     if params[:search].present?
-       @admissions = Admission.search(params[:search])
-     else
-       @admissions = Admission.enquiry_forms_or_application_forms  
-     end
-  end
-  
-  def closed_forms
-    @admissions = Admission.closed_forms
-  end
-  
-  def home_index
-   @admission = Admission.find(params[:id])
   end
 
-  def view_assessment
+  def edit_assessment_result
     @admission = Admission.find(params[:id])
   end
-  def selected_students
+  
+  def enquiry_show
+    @admission = Admission.find(params[:id])
+  end
+  
+  def admission_show
+    @admission = Admission.find(params[:id])
+  end
+  
+  def assessment_show
+    @admission = Admission.find(params[:id])
+  end
+  def assessment_completed
     
     if params[:search].present?
       @admissions = Admission.search(params[:search])
       
     else
-      @admissions = Admission.selected_students
+      @admissions = Admission.assessment_completed
       
     end
-
+  end
+  
+  def view_assessment
+    @admission = Admission.find(params[:id])
   end
 
   def assessment_result
@@ -176,20 +145,30 @@ class AdmissionsController < ApplicationController
   def management_result
     @admission = Admission.find(params[:id])
   end
+
+  def selected_students
+    if params[:search].present?
+      @admissions = Admission.search(params[:search])
+    else
+      @admissions = Admission.selected_students
+    end
+  end
+  
+  def closed_forms
+    @admissions = Admission.closed_forms
+  end
   
   def update_enquiry
     @admission = Admission.find(params[:id])
     respond_to do |format|
       if @admission.update(admission_params)
-        
-       format.html { redirect_to admission_home_admissions_path, notice: 'Admission was successfully updated.' }
+        format.html { redirect_to admission_home_admissions_path, notice: 'Admission was successfully updated.' }
         format.json { render action: 'index', :status => "success" }
-        
-     else
+      else
         format.html { render action: 'edit' }
         format.json { render json: @admission.errors, :status => "failure" }
       end
-   end
+    end
   end
   
  def update
@@ -221,10 +200,8 @@ class AdmissionsController < ApplicationController
    @admission = Admission.find(params[:id])
    respond_to do |format|
      if @admission.update(admission_params)
-       
        format.html { redirect_to admission_home_admissions_path, notice: 'Assessment Planned was successfully updated.' }
        format.json { render action: 'index', :status => "success" }
-       
      else
        format.html { render action: 'edit' }
        format.json { render json: @admission.errors, :status => "failure" }

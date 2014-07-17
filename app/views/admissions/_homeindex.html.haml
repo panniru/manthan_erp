@@ -65,57 +65,60 @@
   .col-sm-3
     
     - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned'||"#{@admission.status}" == 'Assessment_Completed'||"#{@admission.status}" == 'Management_Reviewed' )
-      = link_to "Close the Form", "#", :class => "change label label-danger",:data=> {:id => "#{@admission.id}"}
+      = link_to "Close the Form", "#", :class => "change btn btn-danger",:data=> {:id => "#{@admission.id}"}
     - else 
-      = link_to "Form Closed", "#", :class => "label label-success",:data=> {:id => "#{@admission.id}"}
+      = link_to "Form Closed", "#", :class => "btn btn-success",:data=> {:id => "#{@admission.id}"}
     %br
     %br
 
-    = link_to "View Enquiry", enquiry_show_admission_path , :class => 'enq_button btn btn-primary'
+    = link_to "View Enquiry", enquiry_show_admission_path , :class => 'btn btn-primary'
     %br
     %br
     - if("#{@admission.status}" == 'Enquiry_Created' )
-      = link_to "Create Application", admission_new_admission_path , :class => 'enq_button btn btn-success'
+      = link_to "Create Application", admission_new_admission_path , :class => 'btn btn-success'
       %br
       %br
     - if("#{@admission.status}" == 'Application_Created')
-      = link_to "View Application", admission_show_admission_path , :class => 'enq_button btn btn-primary'
+      = link_to "View Application", admission_show_admission_path , :class => 'btn btn-primary'
       %br
       %br
-      = link_to "Create Assessment", assessment_new_admission_path ,:class => 'enq_button btn btn-success'    
+      
+      = link_to "Create Assessment", "#", :onclick => "createAssessment('#{@admission.teacher_leader_id}');", :class => 'btn btn-primary'
+     
+                        
       %br
       %br   
       
     - if("#{@admission.status}" == 'Assessment_Planned' )
-      = link_to "View Application", admission_show_admission_path , :class => 'enq_button btn btn-primary'
+      = link_to "View Application", admission_show_admission_path , :class => 'btn btn-primary'
       %br
       %br
-      = link_to "View Assessment", view_assessment_admission_path ,:class => 'enq_button btn btn-primary'    
+      = link_to "View Assessment", view_assessment_admission_path ,:class => 'btn btn-primary'    
       %br
       %br
     
     - if("#{@admission.status}" == 'Assessment_Completed' )
-      = link_to "View Application", admission_show_admission_path , :class => 'enq_button btn btn-primary'
+      = link_to "View Application", admission_show_admission_path , :class => 'btn btn-primary'
       %br
       %br
-      = link_to "View Assessment", view_assessment_admission_path ,:class => 'enq_button btn btn-primary'    
+      = link_to "View Assessment", view_assessment_admission_path ,:class => 'btn btn-primary'    
       %br
       %br
-      = link_to "Assessment Result", assessment_result_admission_path ,:class => 'enq_button btn btn-primary'    
+      = link_to "Assessment Result", assessment_result_admission_path ,:class => 'btn btn-primary'    
       %br
       %br
      
     - if("#{@admission.status}" == 'Management_Reviewed' )
-      = link_to "View Application", admission_show_admission_path , :class => 'enq_button btn btn-primary'
+      = link_to "View Application", admission_show_admission_path , :class => 'btn btn-primary'
       %br
       %br
-      = link_to "View Assessment", view_assessment_admission_path ,:class => 'enq_button btn btn-primary'    
+      = link_to "View Assessment", view_assessment_admission_path ,:class => 'btn btn-primary'    
       %br
       %br
-      = link_to "Assessment Result", assessment_result_admission_path ,:class => 'enq_button btn btn-primary'    
+      = link_to "Assessment Result", assessment_result_admission_path ,:class => 'btn btn-primary'    
       %br
       %br
-      = link_to "Management Review", management_result_admission_path ,:class => 'enq_button btn btn-primary'    
+      = link_to "Management Review", management_result_admission_path ,:class => 'btn btn-primary'    
       %br
       %br
   
@@ -177,4 +180,38 @@
                   = f.hidden_field :status,:value => "Management_Reviewed"
                   = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
                   
-    
+.row
+  .col-sm-10
+    .calendar2
+    #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+            .row
+              %h1.pull-right.btn.btn-warning
+                = @admission.faculty
+              %center
+                %h4#myModalLabel.modal-title Assessment Plan
+            = form_for @admission do |f|
+              .modal-body
+                .row
+                  .col-sm-3
+                    = f.label "Time", :class => 'col-sm-3 control-label'
+                  .col-sm-5
+                    = f.time_field :start_time ,:class => 'form-control'
+                  
+                    %br
+                .row
+                  .col-sm-3
+                    = f.label "Description", :class => 'col-sm-3 control-label'              
+                  .col-sm-5
+                    = f.text_area :title ,:class => 'form-control'
+                .row
+                  .col-sm-3
+                    
+              .modal-footer
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+                = f.hidden_field :status,:value => "Assessment_Planned"
+                = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
+                  

@@ -4,7 +4,7 @@ $(function() {
         
 	id =  $(this).data("id");
 	this_klass = $(this)
-	this_klass.removeClass("label-danger").addClass("label-success");  
+	this_klass.removeClass("btn-danger").addClass("btn-success");  
 	this_klass.text('Form Closed');
         function toggleFields() {
             if ($(".change").text == 'Form Closed' )

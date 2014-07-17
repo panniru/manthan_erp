@@ -9,9 +9,6 @@ class EnquiryAdmission < Struct.new(:controller)
     sub_menu << assessment_completed
     sub_menu << view_management_review
     sub_menu << show_closed_forms
-    sub_menu << show_staff_admissions
-    sub_menu << show_event_admissions
-    
   end
 
   def principal_sub_menu

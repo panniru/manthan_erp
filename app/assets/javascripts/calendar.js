@@ -16,6 +16,7 @@ $(document).ready(function() {
         },
         
         events: '/admissions.json',
+        
         selectable: true,
         select: function(date) {
             alert("welcome "+ date);
