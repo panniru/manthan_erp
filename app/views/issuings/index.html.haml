@@ -10,7 +10,9 @@
       .col-sm-6
         %select{"ng-model" => "mySection", :ng_options => "section.id  as section.section for section in sections | filter: {grade_master_id: myGrade}", :class=>"form-control", :name => "section_master_id"}
     .col-md-4
-      = submit_tag 'Save'
+      //= submit_tag 'Save'
+      %button{:type=>"submit", :class=> "btn btn-primary" }=  "save" 
+      %br
     .pull-left
       .col-sm-10                 
         %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
@@ -20,24 +22,29 @@
     %thead
       %tr
         %th Name
-        %th Return
-        %th Aloted Books
+        %th 
+       
+        %th Alloted Books
+       
       
      
     %tbody
       - @book_issuing_objects.each do |bio|
         %tr
           %td= bio.student.name
-          %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), issuings_path, :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
-          = hidden_field_tag "book_issuing_objects[][student_master_id]", "#{bio.student.id} "
+         
+          %td
+            = hidden_field_tag "book_issuing_objects[][student_master_id]", "#{bio.student.id} "
           %td
             - bio.issuings.each do |issuing|
               // = "#{issuing.book} "
               //= text_field_tag "issuings[book][][name]", nil, :placeholder=> " - Add Book- "
-              = text_field_tag "book_issuing_objects[][issuings][][book]", "#{issuing.book} "
+              = text_field_tag "book_issuing_objects[][issuings][][book]", "#{issuing.book} "            
+              = submit_tag 'Return'
               = hidden_field_tag "book_issuing_objects[][issuings][][id]", "#{issuing.id}"
+             
         
-         
+       
   .row
     %center
       %button{:type=>"submit", :class=> "btn btn-primary" }=  "save" 

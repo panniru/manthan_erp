@@ -18,8 +18,8 @@ class IssuingsController < ApplicationController
   def index
     @students =  StudentMaster.all #StudentMaster.where("grade_master_id = :grade_master_id AND section_master_id = :section_master_id", {grade_master_id: params[:grade_master_id], section_master_id: params[:section_master_id]})
     @book_issuing_objects = BookIssuingFormObject.build_collection(@students)
-    p "==================="
-    p @book_issuing_objects
+    # p "==================="
+    # p @book_issuing_objects
   end
    
   
@@ -73,7 +73,7 @@ class IssuingsController < ApplicationController
   private
 
   def issuing_params
-    params.require(:issuing).permit(:name, :grade, :section, :student_master_id, :book, :deleted_at )
+    params.require(:issuing).permit(:name, :grade, :section, :student_master_id, :book, :deleted_at, :return ,:book_return)
   end
   
  

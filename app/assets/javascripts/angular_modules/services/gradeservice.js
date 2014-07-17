@@ -35,7 +35,9 @@
 
         
         return {
-            getSectionServiceView : getSectionServiceView        
+
+            getSectionServiceView : getSectionServiceView
+
         };
         
     }]);
