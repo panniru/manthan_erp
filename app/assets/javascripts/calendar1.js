@@ -30,6 +30,6 @@
             //console.log($('#myModal').val(date));
             $('#selectdate').val(date)
             $('#myModal').modal('show');   
-            
-    })
- 
+        }            
+    });
+
