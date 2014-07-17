@@ -2,26 +2,16 @@
     "use strict";
     app.controller('ClassTeacherMappingController',["$scope", "classTeacherService", "teachersService", function($scope, classTeacherService, teachersService) { 
 
-       // teachersService.getFacultyNamesServiceView()
-         //   .then(function(result) {
-           //     $scope.faculty_names=result.data                
-           // });       
-        
-
-        $scope.showMappings  = function (grade_id){ 
-            //alert();            
+        $scope.showMappings  = function (grade_id){                   
             $scope.myGrade = grade_id             
             classTeacherService.getGradeWiseFacultyNames($scope.myGrade)
-                .then(function(result) { 
-                    //alert("a");
-                    $scope.faculty_names = result.data  
-                    //alert(JSON.stringify($scope.faculty_names));
+                .then(function(result) {                     
+                    $scope.faculty_names = result.data;
                 });
             
             classTeacherService.getClassTeacherMappings($scope.myGrade)
                 .then(function(result) {                   
-                    $scope.mappings = result.data                     
-                    //alert(result.data.length);
+                    $scope.mappings = result.data               
                            
                     if (result.data.length == 0)
                     {                       
@@ -30,8 +20,7 @@
                         $scope.addMappings();
                     }
                     else
-                    {
-                        //alert(JSON.stringify($scope.mappings));
+                    {                        
                         $scope.myFormValue = "false"
                         $scope.myShowFormValue = "true"           
                     } 
@@ -41,25 +30,19 @@
 
         $scope.addMappings = function (){
             $scope.mappings = [];
-            $scope.myFormValue = "true"
-            //alert($scope.myGrade);            
+            $scope.myFormValue = "true"                 
             classTeacherService.getGradeWiseMappings($scope.myGrade)
-                .then(function(result) { 
-                    //alert("a");
-                    $scope.mappings = result.data  
-                    //alert(JSON.stringify($scope.mappings));
+                .then(function(result) {                     
+                    $scope.mappings = result.data                    
                 });                        
         };
         
-        $scope.editMappings = function(){
-            //alert(JSON.stringify($scope.mappings));           
+        $scope.editMappings = function(){               
             $scope.myFormValue = "true"
-            $scope.myShowFormValue = "false"
-            //alert(JSON.stringify($scope.mappings));
+            $scope.myShowFormValue = "false"           
         };
         
-        $scope.saveMappings = function(){
-            //alert(JSON.stringify($scope.mappings));
+        $scope.saveMappings = function(){           
             $scope.save_mappings = [];
             for ( var i = 0; i <  $scope.mappings.length; i++ ) {    
                 
@@ -72,19 +55,14 @@
                         faculty_master_id: $scope.mappings[i]['faculty_master_id']['faculty_master_id'],                     
                     });
                 }             
-            }           
-
-            //alert(JSON.stringify($scope.check_faculty_ids));
+            }             
 
             classTeacherService.checkForTeacherMapping()
-                .then(function(result) {
-                    //alert(JSON.stringify(result.data));
+                .then(function(result) {                    
                     $scope.check_faculty_ids = result.data
-                    for ( var i = 0; i <  $scope.save_mappings.length; i++ ){      
-                        //alert("1");
+                    for ( var i = 0; i <  $scope.save_mappings.length; i++ ){                             
 
-                        for ( var j = 0; j <$scope.check_faculty_ids.length; j++ ){
-                            //alert("2");
+                        for ( var j = 0; j <$scope.check_faculty_ids.length; j++ ){                          
 
                             if ($scope.save_mappings[i]['faculty_master_id'] ==$scope.check_faculty_ids[j]['faculty_id']){
                                 alert("Teacher "+JSON.stringify($scope.mappings[i]['faculty_master_id']['faculty_name'])+" Already Assigned For A Class");
@@ -102,9 +80,7 @@
             $scope.showMappings($scope.myGrade);
         };       
         
-        $scope.deleteMappings =  function($index){
-            //alert($index)
-            //alert(JSON.stringify($scope.mappings));
+        $scope.deleteMappings =  function($index){           
             $scope.delete_mappping_id = $scope.mappings[$index]['id']
 
             classTeacherService.deleteMappings($scope.delete_mappping_id)

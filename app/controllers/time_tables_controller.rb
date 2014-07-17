@@ -1,12 +1,21 @@
 class TimeTablesController < ApplicationController
   def index
+    if current_user.admin?
+      render "index"      
+    elsif  current_user.parent?
+      render "parent_index"
+    elsif  current_user.teacher?
+      render "teacher_index"
+    end
+
   end
 
   def gradeserviceview
     respond_to do |format|
       format.json do
-        grades = GradeMaster.get_grades_by_role(current_user)        
-        render :json => grades        
+        grades = GradeMaster.get_grades_by_role(current_user)
+                render :json => grades 
+         
       end
     end  
   end

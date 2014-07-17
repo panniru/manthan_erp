@@ -15,18 +15,11 @@ class GradeMaster < ActiveRecord::Base
       end
          
     elsif current_user.role.role == "teacher"
-      p current_user.faculty_master.id
-      p current_user.id
-      p "========>"
-      teachers = FacultyMaster.where('user_id = '+"#{current_user.id}") 
-      p teachers
-      p "========>"
-      #teachers_grades_sections = TeacherGradeMapping.where('faculty_master_id = '+"#{current_user.faculty_master.id}")
+      teachers_grades_sections =  ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.faculty_master.id}").all.map do |teacher|
+        {grade_master_id: teacher.grade_master_id, grade_name: teacher.grade_master.grade_name, section_master_id: teacher.section_master_id,  section_name: teacher.section_master.section_name, faculty_name: current_user.faculty_master.faculty_name}
+      end
 
-      GradeMaster.all 
-
-    else 
-
+    else
       GradeMaster.all 
     end
     

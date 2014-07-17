@@ -284,6 +284,18 @@ ManthanErp::Application.routes.draw do
       get "check_for_teacher_mapping"
     end  
   end
+
+  resources :grades_sections_mappings do
+    collection do
+      
+    end  
+  end
+
+  resources :grades_subjects_mappings do
+    collection do
+      
+    end  
+  end
   
   get "/fee_reports", to: "fee_reports#index"
   get "/fee_reports/payment_status_report", to: "fee_reports#payment_status_report"

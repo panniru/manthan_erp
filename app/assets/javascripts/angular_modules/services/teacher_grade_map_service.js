@@ -6,16 +6,14 @@
             return $http.get(url);
         };
         
-        var checkTeachersGradesMapping = function(myTeacher){
-            //alert("hello");
+        var checkTeachersGradesMapping = function(myTeacher){          
             var url = "/teacher_grade_mappings/check_teachers_grades_mapping.json"             
             return $http.get(url,{params:{my_Teacher: myTeacher}});  
         }; 
 
         var saveMappings = function(mappings){
             var url = "/teacher_grade_mappings/savemappings.json"
-            return $http.post(url, {_mappings: mappings});
-            
+            return $http.post(url, {_mappings: mappings});            
         };
         
         var getMappings = function(myTeacher){

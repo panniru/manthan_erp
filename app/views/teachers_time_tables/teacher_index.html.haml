@@ -1,0 +1,9 @@
+
+.row{"ng-controller" => "TeachersTimeTablesController","ng-init" => "getPeriods(#{current_user.faculty_master.id})"}
+  .row
+    .col-md-12
+      %h4{style: "font-weight: bold"} NAME: {{faculty_names[0]['faculty_name']}} ID: {{faculty_names[0]['faculty_master_id']}}    
+    .col-md-12
+      = render 'show_teacher_time_table_form'
+ 
+  
