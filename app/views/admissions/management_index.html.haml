@@ -9,23 +9,29 @@
       %br
     %center
       %h4
-        Assessment Completed
+        Management Review
 
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
       %th Form no
-      %th Description
+      %th Student's Name
       %th Faculty
       %th Time
-      %th Status
+      %th Comment
+      %th Description
+      %th Result
+      
         
   %tbody
     - @admissions.each do |admission|
       %tr
         %td= link_to "#{admission.form_no}", home_index_admission_path(admission)
-        %td= admission.title
+        %td= admission.name
         %td= admission.faculty
         %td= admission.start_time
-        %td= admission.status
+        %td= admission.comment
+        %td= admission.description
+        %td= admission.result
+        
         

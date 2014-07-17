@@ -6,14 +6,21 @@ class AdmissionsController < ApplicationController
     end
     render :json => klass
   end
- 
+  def get_details
+    @admissions = Admission.all
+    respond_to do |format|
+      format.html
+      format.json { render :json => @admissions}
+    end
+  end
+
   def index
     
-    @admission = Admission.all
-    respond_to do |format|
-    format.html
-    format.json { render :json => @admissions}
-    end
+    @admissions = Admission.all
+    #respond_to do |format|
+     # format.html
+     # format.json { render :json => @admission}
+   # end
   end
   
   
@@ -36,6 +43,10 @@ class AdmissionsController < ApplicationController
   def edit_assessment
     @admission = Admission.find(params[:id])
   end
+  def edit_assessment_result
+    @admission = Admission.find(params[:id])
+  end
+
   def new
     @admission = Admission.new
   end
@@ -106,7 +117,14 @@ class AdmissionsController < ApplicationController
       @admissions = Admission.application_forms
    end
   end
-  
+  def management_index
+    if params[:search].present?
+      @admissions = Admission.search(params[:search])
+    else
+      @admissions = Admission.management_review
+    end
+  end
+    
   def enquiry_new
     @admission = Admission.new
   end
@@ -137,6 +155,25 @@ class AdmissionsController < ApplicationController
   end
 
   def view_assessment
+    @admission = Admission.find(params[:id])
+  end
+  def selected_students
+    
+    if params[:search].present?
+      @admissions = Admission.search(params[:search])
+      
+    else
+      @admissions = Admission.selected_students
+      
+    end
+
+  end
+
+  def assessment_result
+    @admission = Admission.find(params[:id])
+  end
+
+  def management_result
     @admission = Admission.find(params[:id])
   end
   

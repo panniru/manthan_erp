@@ -1,31 +1,34 @@
 .panel.panel-default
   .panel-heading
-    .pull-left{"ng-controller" => "AdmissionsController"}
+    .pull-left
       %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}/
-      
-        
-    .pull-right
       %br
       %br
     %center
       %h4
-        Assessment Completed
+        List of Selected Forms
 
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
       %th Form no
+      %th Name
+      %th Class
+      %th Gender
+      %th Father's name
+      %th Comment
       %th Description
-      %th Faculty
-      %th Time
-      %th Status
+      %th Result
         
   %tbody
     - @admissions.each do |admission|
       %tr
         %td= link_to "#{admission.form_no}", home_index_admission_path(admission)
-        %td= admission.title
-        %td= admission.faculty
-        %td= admission.start_time
-        %td= admission.status
-        
+        %td= admission.name
+        %td= admission.grade
+        %td= admission.gender
+        %td= admission.father_name
+        %td= admission.comment
+        %td= admission.description
+        %td= admission.result
+

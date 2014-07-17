@@ -1,4 +1,3 @@
-
 .row
   = form_for @admission, :html => { :class => "form-horizontal", :role => "form" } do |f|
     = render "shared/error_messages", :object => f.object
@@ -15,11 +14,15 @@
         .col-sm-3
           = f.text_field :name, :class => 'form-control'
             
-      .form-group
+      .form-group{"ng-controller" => "AdmissionsController"}
         .col-sm-3
-          = f.label "Admission sought into Class:", :class => 'control-label'
+          = label_tag(:grade,"Admission sought into Class:")
         .col-sm-3
-          = f.text_field :klass, :class => 'form-control'
+          %select{"ng-model" => "myAdmission", "ng-options" => "klass.id as klass.grade_name for klass in klasses",:class => "form-control",:required => "required"}          
+            %option{style: "display:none", value: ""} Select Grade
+          {{myAdmission}}
+          = f.hidden_field :grade, :value => "{{myAdmission}}"
+        
         .col-sm-3
           = f.label "Date of Birth: ", :class => 'control-label'
         .col-sm-3
@@ -29,7 +32,7 @@
         .col-sm-3
           = f.label "Male/Female: ", :class => 'col-sm-3 control-label'
         .col-sm-3
-          = f.select :gender, options_for_select([['Male'],['Female']]),{ :class => 'btn btn-danger' }
+          = f.select :gender, options_for_select([['Male'],['Female']])
         .col-sm-3
           = f.label "Language spoken at home: ", :class => 'control-label'
         .col-sm-3
@@ -204,6 +207,8 @@
         .col-sm-3
           = f.text_field :pp, :class => 'form-control'
       %center
+               
         = f.hidden_field :status, :value => 'Enquiry_Created'
         = f.submit "Create", :class => 'btn btn-primary'
         = link_to 'Back', admissions_path, :class => 'btn btn-primary'
+

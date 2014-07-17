@@ -5,7 +5,7 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
         %h4#myModalLabel.modal-title Assessment Plan
-        = form_for @admission do |f|
+        = form_for Admission.new do |f|
           .modal-body
             .row
               .col-sm-3
