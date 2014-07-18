@@ -215,3 +215,23 @@ en:
     update:
       success: " Vehicle has been updated"
       fail: "Vehicle not been updated"
+  issuing:
+    create:
+      success: "Issuing has been saved"
+      fail: "Issuing Value not been saved"
+    destroy:
+      success: "Issuing has been deleted"
+      fail: "Issuing has not been deleted"
+    update:
+      success: " Issuing has been updated"
+      fail: "Issuing not been updated"
+  damagebook:
+    create:
+      success: "Damage has been saved"
+      fail: "Damage Value not been saved"
+    destroy:
+      success: "Damage has been deleted"
+      fail: "Damageg has not been deleted"
+    update:
+      success: " Damage has been updated"
+      fail: "Damage not been updated"

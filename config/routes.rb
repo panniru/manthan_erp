@@ -1,5 +1,6 @@
 
 ManthanErp::Application.routes.draw do
+ 
   get "new_vehicles/index"
   get "new_vehicles/show"
   get "new_vehicles/edit"
@@ -16,6 +17,7 @@ ManthanErp::Application.routes.draw do
       get 'home_index'
     end
   end
+  resources :damagebooks
   resources :issuings
   
   resources :staffs

@@ -18,33 +18,31 @@
         %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
 %br
 = form_tag("/issuings", :method => "POST") do
-  %table#tblData.target.table.table-striped.table-condensed.table-bordered{style: "width:70%"}
+  %table#tblData.target.table.table-striped.table-condensed.table-bordered{style: "width:80%"}
     %thead
       %tr
         %th Name
-        %th 
-       
+      
+      
         %th Alloted Books
        
-      
      
     %tbody
       - @book_issuing_objects.each do |bio|
         %tr
-          %td= bio.student.name
+          %td
+            = bio.student.name
+            = hidden_field_tag "book_issuing_objects[][student_master_id]", "#{bio.student.id} "
          
           %td
-            = hidden_field_tag "book_issuing_objects[][student_master_id]", "#{bio.student.id} "
-          %td
             - bio.issuings.each do |issuing|
-              // = "#{issuing.book} "
-              //= text_field_tag "issuings[book][][name]", nil, :placeholder=> " - Add Book- "
-              = text_field_tag "book_issuing_objects[][issuings][][book]", "#{issuing.book} "            
-              = submit_tag 'Return'
+              = text_field_tag "book_issuing_objects[][issuings][][book]", "#{issuing.book} "    
+              Return
+              %input#book_issuing_objects__issuings__book{name: "book_issuing_objects[][issuings][][is_returned]", type: "checkbox", value: "true" }
               = hidden_field_tag "book_issuing_objects[][issuings][][id]", "#{issuing.id}"
-             
-        
-       
+         
+          
+          
   .row
     %center
       %button{:type=>"submit", :class=> "btn btn-primary" }=  "save" 

@@ -13,7 +13,8 @@ end
     sub_menu << home
     sub_menu << books
     sub_menu << issuing_books
-    
+    sub_menu << damage_books
+    sub_menu << block_books
   end
   private 
   def home
@@ -24,5 +25,11 @@ end
   end
   def issuing_books
     MenuItem.new(:label => "Issuing Books", :klass => "", :icon => "cubes", :href => "/issuings")
+  end
+  def damage_books
+    MenuItem.new(:label => "Damage/Loss Books", :klass => "", :icon => "file-excel-o ", :href => "/damagebooks")
+  end
+  def block_books
+    MenuItem.new(:label => "Block Books", :klass => "", :icon => "file-excel-o ", :href => "#")
   end
 end
