@@ -19,7 +19,8 @@
         %td {{timeperiod['fri_grade_section']}}          
         %td {{timeperiod['sat_grade_section']}}
   .col-md-2{"ng-show" => "myShowValue"}
-    = submit_tag("EDIT",{class: "btn btn-primary", :ng_click => "editPeriods()"})    
+    - if current_user.admin?
+      = submit_tag("EDIT",{class: "btn btn-primary", :ng_click => "editPeriods()"})    
 
 .row
   :css
@@ -32,11 +33,3 @@
     {
     padding:5px;
     } 
-.row 
-  .col-md-2
-  .col-md-8
-    %h1
-      %p{"ng-show" => "error_code_one"}
-        Time Table Already Exists!!
-        Click Show TimeTable To See/Edit TimeTable       
-  .col-md-2

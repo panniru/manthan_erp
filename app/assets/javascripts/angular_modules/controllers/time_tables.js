@@ -1,7 +1,6 @@
 (function(angular, app) {
     "use strict";
-    app.controller('GradeController',["$scope","gradeService","sectionService","subjectService","timeTableService",function($scope,gradeService,sectionService,subjectService,timeTableService) {
-        $scope.error_code=0;
+    app.controller('GradeController',["$scope","gradeService","sectionService","subjectService","timeTableService",function($scope,gradeService,sectionService,subjectService,timeTableService) {       
         gradeService.getGradeServiceView()
             .then(function(result) {
                 $scope.grades=result.data
@@ -12,18 +11,19 @@
                 .then(function(result) {
                     $scope.sections=result.data                    
                 });
-        };
-       
+        };       
         
         subjectService.getSubjectServiceView()
             .then(function(result) {
                 $scope.subjects=result.data
                 
             });
+
         timeTableService.getDefaultPeriodsServiceView()
             .then(function(result) {
                 $scope.no_of_periods = result.data
             });
+
         timeTableService.getTimeTableServiceView()
             .then(function(result) {
                
@@ -34,7 +34,7 @@
             $scope.myValue="true"           
             $scope.timeperiods = [];
 
-            // Add a periodItem to the Time Period List
+            
             for ( var i = 0; i < $scope.no_of_periods; i++ ) {
                 $scope.timeperiods.push({ 
                     grade_master_id: $scope.myGrade,
@@ -67,7 +67,7 @@
                     sun_sub: $scope.timeperiods[i]['sun_sub'] == 0 ? null : $scope.timeperiods[i]['sun_sub'],
                 });              
             }
-            //alert(JSON.stringify($scope.timeperiods));
+           
             gradeService.savePeriods($scope.save_timeperiods)
                 .then(function(result) {
                    

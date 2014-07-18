@@ -2,16 +2,19 @@ class Academic < Struct.new(:controller)
   
   def admin_sub_menu
     sub_menu = []
+    sub_menu << grades_sections_mappings
+    sub_menu << grades_subjects_mappings
     sub_menu << time_tables
-    sub_menu << teacher_timetables
-    sub_menu << teaching_plans
     sub_menu << teacher_grade_mappings
     sub_menu << class_teacher_mappings
+    sub_menu << teacher_timetables
+    sub_menu << teaching_plans    
     sub_menu
   end
   def teacher_sub_menu
     sub_menu = []
-    sub_menu << time_tables 
+    sub_menu << time_tables
+    sub_menu << teacher_timetables 
     sub_menu << teaching_plans
     sub_menu
   end
@@ -44,6 +47,14 @@ class Academic < Struct.new(:controller)
 
   def class_teacher_mappings
     MenuItem.new(:label => "Class Teacher Mapping", :klass => "", :icon => "arrows-h", :href => "/class_teacher_mappings")
+  end
+
+  def grades_sections_mappings
+    MenuItem.new(:label => "Grade Sections Mapping", :klass => "", :icon => "arrows-h", :href => "/grades_sections_mappings")
+  end
+
+  def grades_subjects_mappings
+    MenuItem.new(:label => "Grade Subjects Mapping", :klass => "", :icon => "arrows-h", :href => "/grades_subjects_mappings")
   end
 
 end

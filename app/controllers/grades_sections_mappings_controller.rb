@@ -1,0 +1,2 @@
+class GradesSectionsMappingsController < ApplicationController
+end

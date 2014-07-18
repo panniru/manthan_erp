@@ -1,14 +1,2 @@
--if current_user.admin?
-  .row  
-    = render 'period_form'
--if current_user.parent?   
-  .row{"ng-controller" => "GradeController","ng-init" => "getSections()"}
-    %div{"ng-repeat" =>"section  in sections"} 
-      .row
-        .col-md-12
-          %h4 NAME: {{section.student_name}} GRADE: {{section.grade_master_id}} SECTION: {{section.section_master_id}}
-        .row       
-          %div{"ng-controller" => "GradeController","ng-init" => "getPeriods(section.grade_master_id,section.section_master_id)"}
-            = render 'show_periods'
--if current_user.teacher? 
-  .row{"ng-controller" => "GradeController"}
+.row  
+  = render 'period_form'

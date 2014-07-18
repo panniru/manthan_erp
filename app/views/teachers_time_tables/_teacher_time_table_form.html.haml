@@ -6,13 +6,10 @@
         .col-md-12
           = label_tag(:grade, "Select Teacher") 
         .form-group.col-md-12
-          %select{"ng-model" => "myTeacher", "ng-options" => "faculty.id as faculty.name for faculty in faculty_names | orderBy:'name'",:class => "form-control",:required => "required"}          
-            %option{style: "display:none", value: ""} Select Teacher
-          {{myTeacher}}
-          
+          %select{"ng-model" => "myTeacher", "ng-options" => "faculty.faculty_master_id as faculty.faculty_name for faculty in faculty_names | orderBy:'name'",:class => "form-control",:required => "required"}          
+            %option{style: "display:none", value: ""} Select Teacher          
       .col-md-6
         .col-md-12
-
           = submit_tag("SHOW TIME TABLE",{class: "btn btn-primary", :ng_click => "showTimeTable()"})         
     .col-md-2
   .row
@@ -33,8 +30,7 @@
             %td Period{{" "+($index+1)}}
             %td               
               %select{"ng-model" => "timeperiod['mon_grade_section']", "ng-options" => "gradesection.grade_section as  gradesection.grade_section for gradesection in faculty_grade_sections | filter: {id:myTeacher}",:class => "form-control"} 
-                %option{value: ""}
-              //{{timeperiod['mon_grade_section']}}
+                %option{value: ""}              
             %td
               %select{"ng-model" => "timeperiod['tue_grade_section']", "ng-options" => "gradesection.grade_section as  gradesection.grade_section for gradesection in faculty_grade_sections | filter: {id:myTeacher}",:class => "form-control"} 
                 %option{value: ""}

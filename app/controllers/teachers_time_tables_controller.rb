@@ -1,14 +1,17 @@
 class TeachersTimeTablesController < ApplicationController
   
   def index
+    if current_user.admin?
+      render "index"    
+    elsif  current_user.teacher?
+      @fm = FacultyMaster.new
+      render "teacher_index"
+    end
   end
 
   def get_faculty_names_view
-    faulty_names = FacultyMaster.all    
-    faulty_names = FacultyMaster.all.map do |fn|
-      {id: fn.id, name: fn.faculty_name} 
-      end
-    render :json => faulty_names    
+    faculty_names = FacultyMaster.get_faculty_names_by_role(current_user)    
+    render :json => faculty_names    
   end
 
   def get_faculty_garde_sections_view    
