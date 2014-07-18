@@ -1,7 +1,23 @@
-.row{"ng-controller" => "ClassTeacherMappingController"}
+.row{"ng-controller" => "GradesSectionsMappingController"}
   .row
     .col-md-1
-    .col-md-8
+    .col-md-4
+      %h4{style: "font-weight: bold"} SELECT SECTIONS FOR GRADES
+    .col-md-4
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveSectionsMappings()", :value => "DONE"}
     .col-md-3
+      go
+  .row{"ng-repeat" => "grade in grades"}
+    .col-md-1
+    .col-md-9
+      %h4{style: "font-weight: bold"} {{grade.grade_name}}
+      .col-md-1{"ng-repeat" => "section in sections"}
+        %input{"ng-model" => "value", type: "checkbox", "ng-change" => "addSections(value,{{grade.grade_master_id}},{{section}})"}
+        {{section.text}}
+        {{value}}
+    .col-md-2
   .row
+    .col-md-1
+    .col-md-9
+      {{grade.sections}}
     
