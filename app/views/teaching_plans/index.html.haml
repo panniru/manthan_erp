@@ -9,7 +9,7 @@
         %h5
           TEACHING PLANS        
       %ul.nav.nav-tabs{:role => "tablist"}
-        %li{"ng-repeat" =>"month in months"}                 
+        %li{"ng-repeat" =>"month in months", :ng_class => "{'active': isCurrentMonth(month)}"}                 
           %a{:ng_click => "getMonthData(month)","data-toggle" => "tab", :role => "tab"} {{month.month}}                   
       .tab-content
         %br

@@ -6,7 +6,7 @@ class TeachingPlansController < ApplicationController
     else
       @teaching_plans1 = TeachingPlan.paginate(:page => page, :per_page => 2)
 
-      @teaching_plans = @teaching_plans1.group_by { |t| t.teaching_date.beginning_of_month }
+     # @teaching_plans = @teaching_plans1.group_by { |t| t.teaching_date.beginning_of_month }
   end
 end
   def calendardata   
@@ -14,7 +14,7 @@ end
     respond_to do |format|
       format.json do
         c =User.find(current_user)       
-        calendar_date = TeachingPlan.select(:teaching_date).distinct        
+        calendar_date = TeachingPlan.select(:teaching_date).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'").distinct        
         calendar_date = calendar_date.map do |teach|
           {start: teach.teaching_date, title: "Plan", description: "Plan", url: "#", teaching_date: teach.teaching_date}
         end
@@ -130,16 +130,16 @@ end
     end
   end
   def getmonthlycalendarservice
+   # @teaching_plans = @teaching_plans1.group_by { |t| t.teaching_date.beginning_of_month }
     respond_to do |format|
       format.json do
         c =User.find(current_user)       
-        calendar_date = TeachingPlan.select("to_char(teaching_date, 'Month') as month").distinct        
+        calendar_date = TeachingPlan.select("to_char(teaching_date, 'Month') as month, to_char(teaching_date, 'mm') as month_number, to_char(teaching_date, 'yyyy') as year").distinct        
         calendar_date = calendar_date.map do |teach|
-          {month: teach.month}
+          {month: teach.month, month_number: teach.month_number.to_i-1, year: teach.year}
         end
-        p calendar_date
-        p "-----------------"
-        render :json => calendar_date
+        sorted_dates = calendar_date.sort{|d1, d2| Date.new(d1[:year].to_i, d1[:month_number].to_i, 1) <=> Date.new(d2[:year].to_i, d2[:month_number].to_i, 1) }
+        render :json => sorted_dates
       end
     end
   end
