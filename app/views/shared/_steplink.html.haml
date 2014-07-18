@@ -1,20 +1,62 @@
-%link{href: "http://fontawesome.io/assets/font-awesome/css/font-awesome.css", media: "screen", rel: "stylesheet"}/
-.container
-  .process
-    .process-row
-      .process-step
-        %button.btn.btn-warning.btn-circle{disabled: "disabled", type: "button"}
-          %i.fa.fa-user.fa-2x
-        %p Personal data
-      .process-step
-        %button.btn.btn-warning.btn-circle{disabled: "disabled", type: "button"}
-          %i.fa.fa-comments-o.fa-2x
-        %p We confirm you
-      .process-step
-        %button.btn.btn-warning.btn-circle{disabled: "disabled", type: "button"}
-          %i.fa.fa-thumbs-up.fa-2x
-        %p Tiger comes
-      .process-step
-        %button.btn.btn-warning.btn-circle{disabled: "disabled", type: "button"}
-          %i.fa.fa-eur.fa-2x
-        %p You Pay
+.row
+  .container
+    .process
+      .process-row
+        .process-step
+          - if("#{@admission.status}" == "Enquiry_Created")
+            %button.btn.btn-warning.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-comments-o.fa-2x
+            %br
+            %span.label.label-default Enquiry Form
+          - else
+            %button.btn.btn-success.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-comments-o.fa-2x
+            %br
+            %span.label.label-default Enquiry Form
+        .process-step
+          - if("#{@admission.status}" == "Application_Created")
+            %button.btn.btn-warning.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-file-text.fa-2x
+            %br
+            %span.label.label-default Application Form
+          - else
+            %button.btn.btn-success.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-file-text.fa-2x
+            %br
+            %span.label.label-default Application Form
+
+        .process-step
+          - if("#{@admission.status}" == "Assessment_Planned")
+            %button.btn.btn-warning.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-calendar-o.fa-2x
+            %br
+            %span.label.label-default Assessment Planned
+          - else
+            %button.btn.btn-success.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-calendar-o.fa-2x
+            %br
+            %span.label.label-default Assessment Planned
+        .process-step
+          - if("#{@admission.status}" == "Assessment_Completed")
+            %button.btn.btn-warning.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-tasks.fa-2x
+            %br
+            %span.label.label-default Assessment Completed
+          - else
+            %button.btn.btn-success.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-tasks.fa-2x
+            %br
+            %span.label.label-default Assessment Completed
+      
+        .process-step
+          - if("#{@admission.status}" == "Management_Reviewed")
+            %button.btn.btn-warning.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-user.fa-2x
+            %br
+            %span.label.label-default Management Review
+          - else
+            %button.btn.btn-success.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-user.fa-2x
+            %br
+            %span.label.label-default Management Review
+      

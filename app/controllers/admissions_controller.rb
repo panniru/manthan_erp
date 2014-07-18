@@ -123,14 +123,13 @@ class AdmissionsController < ApplicationController
   def assessment_show
     @admission = Admission.find(params[:id])
   end
+  
   def assessment_completed
     
     if params[:search].present?
       @admissions = Admission.search(params[:search])
-      
     else
       @admissions = Admission.assessment_completed
-      
     end
   end
   
@@ -177,7 +176,6 @@ class AdmissionsController < ApplicationController
      if @admission.update(admission_params)
        format.html { redirect_to admission_home_admissions_path, notice: 'Form was successfully updated.' }
        format.json { render action: 'index', :status => "success" }
-       
      else
        format.html { render action: 'edit' }
        format.json { render json: @admission.errors, :status => "failure" }
