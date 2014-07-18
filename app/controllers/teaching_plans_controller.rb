@@ -1,13 +1,11 @@
 class TeachingPlansController < ApplicationController
   def index
-    page = params[:page].present? ? params[:page] : 1
-    if params[:search].present?
-      @teaching_plans = TeachingPlan.search(params[:search]).paginate(:page => 1, :per_page => 5)
-    else
-      @teaching_plans1 = TeachingPlan.paginate(:page => page, :per_page => 2)
-
-     # @teaching_plans = @teaching_plans1.group_by { |t| t.teaching_date.beginning_of_month }
-  end
+  # @teaching_plans = TeachingPlan.all
+   # page = params[:page].present? ? params[:page] : 1
+   # if params[:search].present?
+     # @teaching_plans = TeachingPlan.search(params[:search]).paginate(:page => 1, :per_page => 5)
+   # else
+    #  @teaching_plans1 = TeachingPlan.paginate(:page => page, :per_page => 2)
 end
   def calendardata   
     @teaching_plans = TeachingPlan.first
@@ -108,12 +106,19 @@ end
   end
   def destroy
     @teaching_plan = TeachingPlan.find(params[:id])    
-    if @teaching_plan.destroy
-      flash[:success] = I18n.t :success, :scope => [:teaching_plan, :destroy]
-    else
-      flash.now[:fail] = I18n.t :fail, :scope => [:teaching_plan, :destroy]
+    respond_to do |format|
+      format.json do
+        render :json => @teaching_plan.destroy
+      end
+      format.html do
+        if @teaching_plan.destroy
+          flash[:success] = I18n.t :success, :scope => [:teaching_plan ,:destroy]
+        else
+          flash.now[:fail] = I18n.t :fail, :scope => [:teaching_plan, :destroy]
+        end
+        redirect_to teaching_plans_path
+      end
     end
-    redirect_to teaching_plans_path
   end
   def teaching_date
     respond_to do |format|
@@ -149,7 +154,7 @@ end
         c =User.find(current_user)       
         month_date = TeachingPlan.where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'")
         month_date = month_date.map do |teach|
-          {date: teach.teaching_date, plan_month: teach.plan_month, grade_Section_subject: teach.grade_master.grade_name+"-"+ teach.section_master.section_name+"-"+teach.subject_master.subject_name}
+          {date: teach.teaching_date, plan_month: teach.plan_month, grade_Section_subject: teach.grade_master.grade_name+"-"+ teach.section_master.section_name+"-"+teach.subject_master.subject_name, :id => teach.id}
         end
         p month_date
         p "###################"

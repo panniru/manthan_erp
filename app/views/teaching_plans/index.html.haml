@@ -1,16 +1,20 @@
-.row{"ng-controller" => "TeachingPlansController"}
-  .form-group.col-md-7
-    %label{:class=> "form-label col-md-4"} Grade-Section-Subject
-    .col-md-6      
-      %select{"ng-model" => "myGrade_Section_Subject", :ng_options => "a.grade_section_subject for a in grades_sections_subjects", :class => "form-control"} 
-        
-    .col-sm-12
+.col-md-12{"ng-controller" => "TeachingPlansController"}
+  .row
+    .form-group.col-md-4
+      %label{:class=> "form-label col-md-4"} Grade-Section-Subject
+      .col-md-5     
+        %select{"ng-model" => "myGrade_Section_Subject", :ng_options => "a.grade_section_subject for a in grades_sections_subjects", :class => "form-control"}
+      .col-md-2
+        = link_to "ViewPlan",'#' , :class => 'enq_button btn btn-primary' 
+  .row
+    .col-md-8
       %center
         %h5
           TEACHING PLANS        
       %ul.nav.nav-tabs{:role => "tablist"}
         %li{"ng-repeat" =>"month in months", :ng_class => "{'active': isCurrentMonth(month)}"}                 
-          %a{:ng_click => "getMonthData(month)","data-toggle" => "tab", :role => "tab"} {{month.month}}                   
+          %a{:ng_click => "getMonthData(month, false)","data-toggle" => "tab", :role => "tab"} {{month.month}}                 
+
       .tab-content
         %br
         #month.tab-pane.active              
@@ -25,23 +29,13 @@
                 %td {{teaching_plan.date}}
                 %td {{teaching_plan.grade_Section_subject}}
                 %td {{teaching_plan.plan_month}}
-                %td
-          
-              
+                %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "/teaching_plans/{{teaching_plan.id}}", :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete" 
+  
+    .col-md-2 
+      #calendar1     
 
-
- 
-              
-                    
-  .form-group.col-md-5 
-    .col-md-4
-      = link_to "ViewPlan",'#' , :class => 'enq_button btn btn-primary'
-      // %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add Plan"
     .col-sm-5
-      .teachingplancaledar
-        #calendar1     
-        = render "form"
-        / = will_paginate @teaching_plans1, param_name: "page", previous_label: h("<"), next_label: h(">")
+      = render "form"
                 
                       
                   
