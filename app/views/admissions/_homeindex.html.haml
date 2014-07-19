@@ -71,6 +71,37 @@
             
 
       = link_to "Close the Form", "#", :class => "change btn btn-danger",:data=> {:id => "#{@admission.id}"}
+      #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+              %center
+                %h4#myModalLabel.modal-title Reason for Closing
+            = form_for @admission do |f|
+              .modal-body
+                .row
+                  .col-sm-1
+                    = f.radio_button :closestatus, "Not upto the mark"
+                  .col-sm-10
+                    = f.label "Not Upto the Mark"
+                .row
+                  .col-sm-1
+                    = f.radio_button :closestatus, "Financial Crisis"
+                  .col-sm-10
+                    = f.label "Financial Crisis"
+                .row
+                  .col-sm-1
+                    = f.radio_button :closestatus, "Didn't Pick the Interview Call"
+                  .col-sm-10
+                    = f.label "Didn't Pick the Interview Call"
+                                 
+              .modal-footer
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+                = f.hidden_field :status,:value => "Form_Closed"
+                = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
+                  
+
     - else 
       = link_to "Form Closed", "#", :class => "btn btn-success",:data=> {:id => "#{@admission.id}"}
     %br
@@ -88,7 +119,7 @@
       %br
       %br
       
-      = link_to "Create Assessment", "#", :onclick => "createAssessment('#{@admission.teacher_leader_id}');", :class => 'btn btn-primary'
+      = link_to "Create Assessment", "#", :onclick => "createAssessment('#{@admission.teacher_leader_id}');", :class => 'btn btn-success'
      
                         
       %br
