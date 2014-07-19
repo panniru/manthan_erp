@@ -1,0 +1,42 @@
+.row
+  .col-sm-2
+    = label_tag "Route no:", nil, :class => "form-label"
+  .col-sm-2
+    = label_tag @route.route_no ,nil
+  .col-sm-2
+    = label_tag "Busno:", nil, :class => "form-label"
+  .col-sm-2
+    = label_tag @route.busno_up , nil 
+  .col-sm-2
+    = label_tag "Children:", nil, :class => "form-label"
+  .col-sm-2
+    = label_tag @route.no_of_children,nil 
+.row
+  .col-sm-2
+    = label_tag "Starting Point:", nil, :class => "form-label"
+  .col-sm-2
+    = label_tag @route.start_location.location_name,nil 
+  .col-sm-2
+    = label_tag "Ending point:", nil, :class => "form-label"
+  .col-sm-2
+    = label_tag @route.end_location.location_name ,nil 
+    %br
+.row
+  .col-sm-3
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Location
+          %th Sequence No
+         
+      %tbody
+        - @route.locations.each do |location|
+          %tr
+            %td= location_master.location_name
+            %td= location.sequence_no
+            
+  .col-sm-9
+    = render "shared/gmap"
+    
+    
+     
