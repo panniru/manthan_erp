@@ -90,3 +90,4 @@ function searchTable(inputVal)
 		              }
 	                  });
 }
+   

@@ -5,6 +5,7 @@
 //= require_tree ./templates
 //= require_tree ./angular_modules
 //= require jquery
+//= require jquery.cookie
 //= require jquery.ui.datepicker
 //= require jquery_ujs
 //= require jquery.ui.autocomplete

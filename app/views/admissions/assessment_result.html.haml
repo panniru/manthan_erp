@@ -1,15 +1,18 @@
 .row
+  = render "shared/steplink"
+  %br
+.row
   .col-sm-8
     %table.table-striped.table-condensed
       %tr
         %td{style: "width:25%"}
           %b
-            %span.label.label-warning Enquiry #
+            %span.label.label-info Enquiry #
         %td{style: "width:25%"}
           = @admission.form_no
         %td{style: "width:25%"}
           %b
-            %span.label.label-warning Admission #
+            %span.label.label-info Admission #
         %td{style: "width:25%"}
           = @admission.admission_no
       
@@ -89,9 +92,9 @@
   .col-sm-3
   
     - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned'||"#{@admission.status}" == 'Assessment_Completed'||"#{@admission.status}" == 'Management_Reviewed' )
-      = link_to "Close the Form", "#", :class => "change label label-danger",:data=> {:id => "#{@admission.id}"}
+      = link_to "Close the Form", "#", :class => "change btn btn-danger",:data=> {:id => "#{@admission.id}"}
     - else 
-      = link_to "Form Closed", "#", :class => "label label-success",:data=> {:id => "#{@admission.id}"}
+      = link_to "Form Closed", "#", :class => "btn btn-success",:data=> {:id => "#{@admission.id}"}
     %br
     %br
     = link_to "View Enquiry", enquiry_show_admission_path , :class => 'enq_button btn btn-primary'
