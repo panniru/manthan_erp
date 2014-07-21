@@ -76,29 +76,17 @@ class TeachingPlansController < ApplicationController
       end
     end
   end
-  
-  def getgradessectionsservice    
-    faculty_id = params[:_faculty_id].to_i
-    respond_to do |format|
-      format.json do
-        mappings = TeacherGradeMapping.where('faculty_master_id='+"#{faculty_id}")     
-        mappings = mappings.map do |mapping|          
-          {:grade_master_id => mapping.grade_master_id, :grade_name => mapping.grade_master.grade_name,:section_master_id => mapping.section_master_id, :section_name => mapping.section_master.section_name}
-          
-        end
-        
-        render :json => mappings
-        # end 
-      end     
-    end
-  end
-  
   def get_grade_section_subject_service    
     faculty_id = params[:_faculty_id].to_i
     respond_to do |format|
       format.json do
-        mappings = TeacherGradeMapping.where('faculty_master_id='+"#{faculty_id}")     
-        mappings = mappings.map do |mapping|          
+        mappings = []
+        if current_user.admin?
+          mappings = TeacherGradeMapping.all
+        elsif current_user.teacher? 
+          mappings = TeacherGradeMapping.where('faculty_master_id='+"#{faculty_id}")     
+        end
+          mappings = mappings.map do |mapping|          
           {:id => faculty_id, :grade_master_id => mapping.grade_master_id, :grade_name => mapping.grade_master.grade_name,:section_master_id => mapping.section_master_id, :section_name => mapping.section_master.section_name, :subject_master_id => mapping.subject_master_id, :subject_name => mapping.subject_master.subject_name, :grade_section_subject => (mapping.grade_master.grade_name+"- "+mapping.section_master.section_name+"- "+mapping.subject_master.subject_name)}
           
         end
@@ -163,6 +151,19 @@ class TeachingPlansController < ApplicationController
       end
     end
   end
+ # def get_faculty_names
+  #  respond_to do |format|
+   #   format.json do
+    #    faculty_names = FacultyMaster.get_faculty_names_by_role(current_user)    
+     #   faculty_names = faculty_names.map do |teach|
+      #  {faculty_names: teach.FacultyMaster.faculty_name}
+     # end
+     # p faculty_names
+     # p "$$$$$$$$$$$$$$$"
+     # render :json => faculty_names  
+   # end
+  #  end
+ # end
 
   def student_teaching_plans
     respond_to do |format|

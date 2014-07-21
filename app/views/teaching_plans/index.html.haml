@@ -1,9 +1,15 @@
 .col-md-12{"ng-controller" => "TeachingPlansController"}
   .row
+    - if current_user.admin?
+      .form-group.col-md-4
+        %label{:class=> "form-label col-md-4"} Teacher
+        .col-md-5     
+          %select{"ng-model" => "myTeacher", "ng-options" => "faculty.faculty_master_id as faculty.faculty_name for faculty in faculty_names | orderBy:'name'",:class => "form-control",:required => "required"}
+            %option{style: "display:none", value: ""} Select Teacher
     .form-group.col-md-4
       %label{:class=> "form-label col-md-4"} Grade-Section-Subject
       .col-md-5     
-        %select{"ng-model" => "myGrade_Section_Subject", :ng_options => "a.grade_section_subject for a in grades_sections_subjects", :class => "form-control"}
+        %select{"ng-model" => "myGrade_Section_Subject", :ng_options => "a.grade_section_subject for a in grades_sections_subjects", :class => "form-control"}          
       .col-md-2
         = link_to "ViewPlan",'#' , :class => 'enq_button btn btn-primary' 
   .row

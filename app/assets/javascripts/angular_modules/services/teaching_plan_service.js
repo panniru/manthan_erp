@@ -1,6 +1,11 @@
 (function(angular, app) {
     "use strict";
     app.service("teachingPlanService",["$http", "$q",  function($http, $q) {
+    app.service("teachingPlanService",["$http", function($http) {
+        var getFacultyNamesServiceView = function(){
+            var url = "/teachers_time_tables/get_faculty_names_view.json"
+            return $http.get(url);
+        };
         
     	var getGradeServiceMapView = function(){
             var url = "/teaching_plans/gradeserviceview.json"
@@ -60,7 +65,9 @@
             getGradesSectionSubjectService : getGradesSectionSubjectService ,
             getMonthlyCalendarService : getMonthlyCalendarService,
             getMonthDataService :  getMonthDataService,
-            student_teaching_plans : student_teaching_plans
+            student_teaching_plans : student_teaching_plans,
+            getFacultyNamesServiceView :  getFacultyNamesServiceView
+
         }; 
         
     }]); 
