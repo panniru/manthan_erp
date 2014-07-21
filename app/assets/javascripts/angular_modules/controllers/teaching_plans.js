@@ -26,8 +26,6 @@
             .then(function(result) {                         
                 $scope.months = result.data
             });
-
-        
         var drawCalander = function(month){
             $('#calendar1').html("");
             $('#calendar1').fullCalendar({
@@ -56,22 +54,25 @@
             })
             $('#calendar1').fullCalendar('gotoDate', new Date(month.year, month.month_number, "01"));
         }
-        
-        $scope.getMonthData = function(month){
-            drawCalander(month)
+
+        $scope.getMonthData = function(month, implicit){
             teachingPlanService.getMonthDataService(month)
                 .then(function(result) {                    
                     $scope.monthData = result.data
+                    if (!implicit){
+                        drawCalander(month)
+                    }
+                    
                 });
-        }
-
+        }     
+        
+        
+                                              
         var monthNames = [ "January", "February", "March", "April", "May", "June",
                            "July", "August", "September", "October", "November", "December" ];
         var today = new Date();
         var current_month = {month: monthNames[today.getMonth()], month_number: today.getMonth(), year: today.getYear()}
-        $scope.getMonthData(current_month)
-
-        
+        $scope.getMonthData(current_month, true)
         
         $scope.isCurrentMonth = function(month){
             var today = new Date();

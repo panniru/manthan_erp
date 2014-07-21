@@ -6,9 +6,13 @@
 %p
   %b Section:
   = @teaching_plan.section_master.section_name
+%p 
+  %b Subject:
+  = @teaching_plan.subject_master.subject_name
 %p
   %b Date:
   = @teaching_plan.teaching_date.strftime("%B,%d,%Y,%a")
+  %p
 %p
   %b Plan:
   = @teaching_plan.plan_month

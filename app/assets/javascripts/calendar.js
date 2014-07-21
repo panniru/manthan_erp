@@ -24,7 +24,37 @@ $(document).ready(function() {
             $('#myModal').modal('show');                
         }
     })
-
+    
+    var monthNames = [ "January", "February", "March", "April", "May", "June",
+                       "July", "August", "September", "October", "November", "December" ]
+    var today = new Date();
+    $('#calendar1').html("");
+    $('#calendar1').fullCalendar({
+        events: '/teaching_plans/calendardata.json?month='+monthNames[today.getMonth()],
+        selectable: true,
+        eventMouseover: function(data, event, view) {
+            var url = "/teaching_plans/teaching_date.json?date="+data.teaching_date
+            var curr_object = $(this) 
+            $.get(url, function( data ) {
+                var content_html = "<table><tbody>"
+                content_html+= "<tr>"
+                for (var i=0; i< data.length;i++)
+                {
+                    content_html+= "<tr>";                 
+                    content_html+= '<td><a href="/teaching_plans/'+data[i].id+'">'+data[i].plan_month+'</a></td>';                  
+                    content_html+= "</tr>";
+                }                 
+                content_html+= "</tbody></table>";
+                curr_object.popover({html:true,title:event.title,placement:'top',container:'body', content: content_html}).popover('show');
+            });
+	},
+        select: function(date) {
+            $('#selectdate').val(date)
+            $('#myModal').modal('show');   
+        }    
+    })
+    $('#calendar1').fullCalendar('gotoDate', new Date(parseInt(month.year), parseInt(month.month_number), 1));
+    
 });
 $(function () {
     $(":file").change(function () {
