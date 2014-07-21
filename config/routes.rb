@@ -293,7 +293,7 @@ ManthanErp::Application.routes.draw do
 
   resources :grades_sections_mappings do
     collection do
-      
+      post "save_sections_mappings"      
     end  
   end
 
