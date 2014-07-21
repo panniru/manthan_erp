@@ -73,7 +73,7 @@ class IssuingsController < ApplicationController
   private
 
   def issuing_params
-    params.require(:issuing).permit(:name, :grade, :section, :student_master_id, :book, :deleted_at, :return ,:book_return)
+    params.require(:issuing).permit(:name, :grade, :section, :student_master_id, :book, :deleted_at, :returned_date, :issuing_date)
   end
   
  

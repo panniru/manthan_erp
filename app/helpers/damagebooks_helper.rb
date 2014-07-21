@@ -1,0 +1,2 @@
+module DamagebooksHelper
+end

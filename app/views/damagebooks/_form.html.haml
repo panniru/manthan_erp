@@ -1,0 +1,37 @@
+= form_for @damagebook , :html => { :class => "form-horizontal", :role => "form"} do |f|
+  .row
+    .col-sm-3
+      = f.label "ISBN:", :class => 'col-sm-3 control-label'
+    .col-sm-5
+      = f.text_field :isbn, :class => 'form-control'
+      %br
+  .row 
+    .col-sm-3
+      = label_tag "BookStage:"
+    .col-sm-5
+      .btn-group{"data-toggle" => "buttons-radio"}
+      .col-sm-2
+        %label{for: "Loss", :id => "first"} Loss
+      .col-sm-2
+        = f.radio_button :book_stage, "Loss"
+      .col-sm-2
+        %label{for: "Damage", :id => "second"} Damage
+      .col-sm-2
+        = f.radio_button :book_stage, "Damage"
+        
+   
+      
+  .row
+    .col-sm-3
+      = f.label "Damage Type:", :class => 'col-sm-3 control-label'
+    .col-sm-5
+      = f.select :damage_type, options_for_select([['Damaged Covers'],['Covers Separating from the Text Block'],[' Missing Pages'],['Torn Pages'],['Loose Pages'],['Stains'],['Wet Books'],['Mold ']])
+      %br
+    
+  .row
+    .col-sm-3
+      = f.label "Description:", :class => 'col-sm-3 control-label'
+    .col-sm-5
+      = f.text_area :damage_description, :class => 'form-control'
+      %br
+      = f.button "submit" , :class =>'btn btn-primary'

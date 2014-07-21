@@ -10,7 +10,12 @@ class BookIssuingFormObject
         if issuing[:id].present?
           issuing_obj = Issuing.find(issuing[:id])
           issuing_obj.book = issuing[:book]
-          
+          # if issuing[:is_issued].present? and (issuing[:is_issued] == "true" or issuing[:is_issued]
+          #                                      issuing_obj.issuing_date = DateTime.now
+          #                                    end
+          if issuing[:is_returned].present? and ( issuing[:is_returned] == "true" or issuing[:is_returned]) 
+            issuing_obj.returned_date = DateTime.now
+          end 
         else
           issuing_obj = Issuing.new({student_master_id: param[:student_master_id], book: issuing[:book]})
         end
