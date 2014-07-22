@@ -1,8 +1,8 @@
-%h3
-  Students
-  .pull-right
-    = link_to "Upload Students", new_upload_student_masters_path, :class => "btn btn-primary"
+.col-md-12
+  = render :partial => "shared/search_student", :locals => { :submit_path => student_masters_path}
 %hr
-= render :partial => "students", :locals => {:students => @student_masters}
+%br
+
+= render :partial => "students", :locals => {:students => @student_masters, :context => ""}
 
 = will_paginate @student_masters, param_name: "page", previous_label: h("<"), next_label: h(">")

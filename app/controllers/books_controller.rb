@@ -14,6 +14,14 @@ class BooksController < ApplicationController
   end
   
   def show
+    respond_to do |format|
+      format.json do
+        render :json => @book
+      end
+      format.html do
+        render "show"
+      end
+    end
   end
   
   def index

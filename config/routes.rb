@@ -18,7 +18,12 @@ ManthanErp::Application.routes.draw do
     end
   end
   resources :damagebooks
-  resources :issuings
+
+  resources :issuings do
+    collection do
+      get "student_book_issuings"
+    end
+  end
   
   resources :staffs
   get "staffs/staffview"
@@ -42,7 +47,7 @@ ManthanErp::Application.routes.draw do
   #get "/teaching_plans/sectionserviceview"
  
 
-  root to: "home#index"
+
 
 
   resources :time_tables  
@@ -63,7 +68,7 @@ ManthanErp::Application.routes.draw do
       get 'teaching_date'
       get 'getmonthlycalendarservice'
       get 'getmonthdataservice'
-    
+      get "student_teaching_plans"
     end
   end
 
@@ -161,6 +166,7 @@ ManthanErp::Application.routes.draw do
       get 'monthly_pdcs'
       get 'next_term_fee'
       get "annual_discount_details"
+      get "dashboard"
     end
   end
   
@@ -308,4 +314,5 @@ ManthanErp::Application.routes.draw do
   get "/fee_reports", to: "fee_reports#index"
   get "/fee_reports/payment_status_report", to: "fee_reports#payment_status_report"
   get "/fee_reports/payment_type_details", to: "fee_reports#payment_type_details"
+  root to: "home#index"
 end

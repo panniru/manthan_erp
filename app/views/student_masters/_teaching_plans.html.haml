@@ -1,0 +1,18 @@
+.panel.panel-info
+  .panel-heading
+    .col-md-7
+      Teaching Plans
+    .col-md-offset-7{:ng_controller => "DatePickerController"}
+      %p.input-group
+        %input.form-control{"close-text" => "Close", "date-disabled" => "disabled(date, mode)", "datepicker-options" => "dateOptions", "datepicker-popup" => "", "is-open" => "opened", "max-date" => "'2015-06-22'", "min-date" => "minDate", "ng-model" => "dt", "ng-required" => "true", type: "text", :ng_change => "$parent.reflectContent(dt)","ng-bind" => "dt | dt:'yyyy-MM-dd'"}
+        %span.input-group-btn
+          %button.btn.btn-default{"ng-click" => "open($event)", type: "button"}
+            %i.glyphicon.glyphicon-calendar
+
+  .panel-body
+    .col-md-12
+      %ul.list-group.less-margin
+        %li.list-group-item.list-group-item-success.active{:ng_repeat => "value in subjects_data"}
+          %span.badge.label.label-info {{value.subject_name}}
+          {{value.plan_month}}
+    

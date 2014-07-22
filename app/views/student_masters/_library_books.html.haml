@@ -1,0 +1,37 @@
+.panel.panel-info
+  .panel-heading
+    %h4.panel-title
+      Library
+  .panel-body
+    #accordion.panel-group
+      .panel.panel-info{:ng_repeat => "book in book_names"}
+        .panel-heading
+          .col-md-11
+            {{book}}
+          .col-md-offset-11
+            %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapse-{{$index}}", }
+              = fa_icon "book lg"
+        .panel-collapse.collapse{:id => "collapse-{{$index}}"}
+          .panel-body
+            .row{:ng_repeat => "issuing in books[book]"}
+              .col-md-12
+                .form-label Issue Date : {{issuing.book_issue_date}}
+              .col-md-12
+                .form-label Return Date : {{issuing.book_return_date}}
+            .row
+              .pull-right
+                %a{:href => "#", :class=>"label label-info", :ng_click => "showBookDetails(book)"} Book Info
+            .row{:ng_show => "books[book+'_shown']"}
+              %table.table
+                %tr
+                  %th.info Author
+                  %td= "{{books[book+'_details']['author']}}"
+                %tr
+                  %th.info Book Type
+                  %td= "{{books[book+'_details']['book_type']}}"
+                %tr
+                  %th.info ISBN#
+                  %td= "{{books[book+'_details']['isdn']}}"
+                %tr
+                  %th.info No of Copies
+                  %td= "{{books[book+'_details']['number_of_copies']}}"

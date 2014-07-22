@@ -1,20 +1,25 @@
 class StudentMastersController < ApplicationController
-  load_resource :only => [:show, :monthly_pdcs, :next_term_fee, :annual_discount_details]
+  load_resource :only => [:show, :monthly_pdcs, :next_term_fee, :annual_discount_details, :dashboard]
+  
   def index
     page = params[:page].present? ? params[:page] : 1
     if current_user.admin?
-      @student_masters = StudentMaster.all.order("name").paginate(:page => page)
+      if params[:student_id].present?
+        @student_masters = StudentMaster.where(:id => params[:student_id]).paginate(:page => page)
+      else
+        @student_masters = StudentMaster.all.order("name").paginate(:page => page)
+      end
     elsif current_user.parent?
       @student_masters = current_user.parent.students
     end
   end
-
+  
   def show
     respond_to do |format|
       format.json do
         render :json => StudentMastersDecorator.decorate(@student_master)
       end
-
+      
       format.html do
         render "show"
       end
@@ -90,6 +95,9 @@ class StudentMastersController < ApplicationController
     else
       render "new_upload"
     end
+  end
+  
+  def dashboard
   end
   
 end

@@ -1,6 +1,6 @@
 (function(angular, app) {
     "use strict";
-    app.service("teachingPlanService",["$http", function($http) {
+    app.service("teachingPlanService",["$http", "$q",  function($http, $q) {
         
     	var getGradeServiceMapView = function(){
             var url = "/teaching_plans/gradeserviceview.json"
@@ -37,6 +37,18 @@
             var url = "/teaching_plans/getmonthdataservice.json?month="+month.month
             return $http.get(url);
         };
+        
+        var student_teaching_plans = function(student_id, date){
+            var deferred = $q.defer();
+            $http.get("/teaching_plans/student_teaching_plans.json?student_id="+student_id+"&dated_on="+date)
+                .then(function(data){
+                    deferred.resolve(data)
+                },function(error){
+                    deferred.reject(data)
+                });
+            
+            return deferred.promise;
+        }
 
 
         
@@ -47,7 +59,8 @@
             getSectionServiceMapView : getSectionServiceMapView ,
             getGradesSectionSubjectService : getGradesSectionSubjectService ,
             getMonthlyCalendarService : getMonthlyCalendarService,
-            getMonthDataService :  getMonthDataService
+            getMonthDataService :  getMonthDataService,
+            student_teaching_plans : student_teaching_plans
         }; 
         
     }]); 

@@ -38,6 +38,7 @@ GEM
       railties (>= 3.1)
       sprockets
       tilt
+    angular-ui-bootstrap-rails (0.11.0)
     angularjs-rails (1.2.18)
     anticipate (0.1.1)
     arel (4.0.2)
@@ -286,6 +287,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-nulldb-adapter!
   angular-rails-templates
+  angular-ui-bootstrap-rails (~> 0.11.0)
   angularjs-rails (= 1.2.18)
   anticipate
   bootstrap-sass (~> 3.0.3.0)

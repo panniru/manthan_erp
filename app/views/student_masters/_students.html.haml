@@ -10,7 +10,7 @@
   %tbody
     - students.each do |student|
       %tr
-        %td= student.name
+        %td= link_to student.name, dashboard_student_master_path(student)
         %td= student.dob
         %td= student.joining_date
         %td= student.parent.father_name

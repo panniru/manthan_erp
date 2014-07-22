@@ -21,6 +21,7 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'angularjs-rails', '1.2.18'
 gem 'angular-rails-templates'
+gem 'angular-ui-bootstrap-rails', '~> 0.11.0'
 
 gem 'font-awesome-rails'                
 gem 'numbers_and_words'

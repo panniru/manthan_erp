@@ -1,0 +1,11 @@
+.row
+  .col-md-12
+    %student_header_details{ :student_id => "#{@student_master.id}"}
+    %hr
+  .col-md-12
+    .col-md-7{:ng_controller => "HRMTeachingPlansController", :ng_init => "getPlans('#{@student_master.id}', '#{DateTime.now.strftime("%Y-%m-%d")}')"}
+      = render "teaching_plans"
+    .col-md-5{:ng_controller => "StudentsController", :ng_init => "bookIssuings('#{@student_master.id}')"}
+      = render "library_books"
+      
+      

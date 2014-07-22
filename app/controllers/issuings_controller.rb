@@ -69,6 +69,15 @@ class IssuingsController < ApplicationController
     end
     redirect_to issuings_path
   end
+
+  def student_book_issuings
+    respond_to do |format|
+      format.json do
+        @student = StudentMaster.find(params[:student_id])
+        render :json => Issuing.student_book_issuings(@student)
+      end
+    end
+  end
  
   private
 

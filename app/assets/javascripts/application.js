@@ -2,6 +2,8 @@
 //= require angular-resource
 //= require angular-route.min
 //= require angular-rails-templates
+//= require angular-ui-bootstrap-tpls
+
 //= require_tree ./templates
 //= require_tree ./angular_modules
 //= require jquery

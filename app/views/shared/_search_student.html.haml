@@ -1,0 +1,23 @@
+.colmd-10{:ng_controller => "GradeSectionsController"}
+  = form_tag submit_path, :method => 'get' , :class => "form-inline", :name => "StudentSearchForm" do
+    .form-group.col-md-3
+      %label{:class=> "form-label col-md-4"} Grade
+      .col-md-6
+        %select{:ng_model => "grade", :ng_options => "gr.grade_name for gr in grades", :class=>"form-control", :ng_change => "fetchSections()"}
+    .form-group.col-md-3
+      %label{:class=> "form-label col-md-4"} Section
+      .col-md-6
+        %select{:ng_model => "section", :ng_options => "sc.section_name for sc in sections", :class=>"form-control"}
+    .form-group.col-md-5
+      .col-md-3
+        %label{:class=> "form-label col-md-4"} Student
+      .col-md-6
+        = autocomplete_field_tag :student,
+        '',
+        "/auto_search/student_name_by_grade_and_section?grade={{grade.id}}&section= {{section.id}}",
+        :placeholder => "Student Name", :class => 'form-control',
+          :required => true,
+          :id_element => "#student_id"
+      .col-md-3
+        = hidden_field_tag :student_id, :id => "student_id"
+        = submit_tag "Go", :name => nil, :class => "btn-primary btn"
