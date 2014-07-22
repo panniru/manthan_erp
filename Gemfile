@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'jquery-timepicker-rails'
-
+gem 'language_list', '~> 1.0.0'
 gem 'jquery-cookie-rails', '~> 1.3.1.1'
 gem 'rails', '4.0.2'
 

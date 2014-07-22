@@ -4,20 +4,21 @@ class RecruitmentSubMenu < Struct.new(:controller)
   def admin_sub_menu
     sub_menu = []
     sub_menu << home
-    sub_menu << guidelines
-    sub_menu << advertisements
     sub_menu << enquiry_form
     sub_menu << documentation_verification
     sub_menu << interview_scheduler
     sub_menu << assessment_completed
     sub_menu << senior_management_review
     sub_menu << appointed
+    sub_menu << guidelines
+    sub_menu << advertisements
+
     
   end
 
   private 
   def home
-    MenuItem.new(:label => "Home", :klass => "", :icon => "home ", :href => "/forms")
+    MenuItem.new(:label => "Home", :klass => "", :icon => "home ", :href => "recruitments/recruitment_home")
     end
   def  guidelines
     MenuItem.new(:label => "Guidelines", :klass => "", :icon => "pencil-square-o ", :href => "/recruitments")

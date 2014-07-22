@@ -157,6 +157,7 @@ GEM
     jquery-ui-rails (4.1.0)
       railties (>= 3.1.0)
     json (1.8.1)
+    language_list (1.0.0)
     launchy (2.4.2)
       addressable (~> 2.3)
     mail (2.5.4)
@@ -316,6 +317,7 @@ DEPENDENCIES
   jquery-timepicker-rails
   jquery-turbolinks (~> 0.2.1)
   jquery-ui-rails (= 4.1.0)
+  language_list (~> 1.0.0)
   launchy
   numbers_and_words
   oj

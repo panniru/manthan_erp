@@ -70,7 +70,7 @@
     - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned'||"#{@admission.status}" == 'Assessment_Completed'||"#{@admission.status}" == 'Management_Reviewed' )
             
 
-      = link_to "Close the Form", "#", :class => "change btn btn-danger",:data=> {:id => "#{@admission.id}"}
+      = link_to "Close the Form", "#", :class => "change btn1 btn btn-danger",:data=> {:id => "#{@admission.id}"}
       #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
         .modal-dialog
           .modal-content
@@ -103,64 +103,64 @@
                   
 
     - else 
-      = link_to "Form Closed", "#", :class => "btn btn-success",:data=> {:id => "#{@admission.id}"}
+      = link_to "Form Closed", "#", :class => "btn1 btn btn-success",:data=> {:id => "#{@admission.id}"}
     %br
     %br
 
-    = link_to "View Enquiry", enquiry_show_admission_path , :class => 'btn btn-primary'
+    = link_to "View Enquiry", enquiry_show_admission_path , :class => 'btn1 btn btn-primary'
     %br
     %br
     - if("#{@admission.status}" == 'Enquiry_Created' )
-      = link_to "Create Application", admission_new_admission_path , :class => 'btn btn-success'
+      = link_to "Create Application", admission_new_admission_path , :class => 'btn1 btn btn-success'
       %br
       %br
     - if("#{@admission.status}" == 'Application_Created')
-      = link_to "View Application", admission_show_admission_path , :class => 'btn btn-primary'
+      = link_to "View Application", admission_show_admission_path , :class => 'btn1 btn btn-primary'
       %br
       %br
       
-      = link_to "Create Assessment", "#", :onclick => "createAssessment('#{@admission.teacher_leader_id}');", :class => 'btn btn-success'
+      = link_to "Create Assessment", "#", :onclick => "createAssessment('#{@admission.teacher_leader_id}');", :class => 'btn1 btn btn-success'
      
                         
       %br
       %br   
       
     - if("#{@admission.status}" == 'Assessment_Planned' )
-      = link_to "View Application", admission_show_admission_path , :class => 'btn btn-primary'
+      = link_to "View Application", admission_show_admission_path , :class => 'btn1 btn btn-primary'
       %br
       %br
-      = link_to "View Assessment", view_assessment_admission_path ,:class => 'btn btn-primary'    
+      = link_to "View Assessment", view_assessment_admission_path ,:class => 'btn1 btn btn-primary'    
       %br
       %br
     
     - if("#{@admission.status}" == 'Assessment_Completed' )
-      = link_to "View Application", admission_show_admission_path , :class => 'btn btn-primary'
+      = link_to "View Application", admission_show_admission_path , :class => 'btn1 btn btn-primary'
       %br
       %br
-      = link_to "View Assessment", view_assessment_admission_path ,:class => 'btn btn-primary'    
+      = link_to "View Assessment", view_assessment_admission_path ,:class => 'btn1 btn btn-primary'    
       %br
       %br
-      = link_to "Assessment Result", assessment_result_admission_path ,:class => 'btn btn-primary'    
+      = link_to "Assessment Result", assessment_result_admission_path ,:class => 'btn1 btn btn-primary'    
       %br
       %br
      
     - if("#{@admission.status}" == 'Management_Reviewed' )
-      = link_to "View Application", admission_show_admission_path , :class => 'btn btn-primary'
+      = link_to "View Application", admission_show_admission_path , :class => 'btn1 btn btn-primary'
       %br
       %br
-      = link_to "View Assessment", view_assessment_admission_path ,:class => 'btn btn-primary'    
+      = link_to "View Assessment", view_assessment_admission_path ,:class => 'btn1 btn btn-primary'    
       %br
       %br
-      = link_to "Assessment Result", assessment_result_admission_path ,:class => 'btn btn-primary'    
+      = link_to "Assessment Result", assessment_result_admission_path ,:class => 'btn1 btn btn-primary'    
       %br
       %br
-      = link_to "Management Review", management_result_admission_path ,:class => 'btn btn-primary'    
+      = link_to "Management Review", management_result_admission_path ,:class => 'btn1 btn btn-primary'    
       %br
       %br
   
     - if current_user.teacher?
       - if("#{@admission.status}" == 'Assessment_Planned' )
-        %button.btn.btn-success{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"} Assessment Review
+        %button.btn1.btn.btn-success{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"} Assessment Review
         .modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
           .modal-dialog.modal-sm
             .modal-content
@@ -182,7 +182,7 @@
     
     - if current_user.principal?
       - if("#{@admission.status}" == 'Assessment_Completed' )
-        %button.btn.btn-success{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"} Management Review
+        %button.btn1.btn.btn-success{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"} Management Review
         .modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
           .modal-dialog.modal-sm
             .modal-content

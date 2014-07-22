@@ -1,14 +1,18 @@
 .panel.panel-default
-  .panel-heading
-    .pull-left
-      %input#search{name: "search", placeholder: "Enter Search Term...", type: "text", :class => 'form-control'}/
-    .pull-right
-      %br
-      %br
-    %center
-      %h4
-        Application Forms
-
+  .panel-body
+    .col-sm-3
+      .pull-left
+        .input-group
+          %span.input-group-addon
+            = fa_icon "search lg"
+          %input#search{name: "search", placeholder: "Enter Search Term", type: "text", :class => 'form-control'}/
+          %br
+    .col-sm-4
+      %center
+        %h4
+          Application Forms
+          %br
+          %br
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr

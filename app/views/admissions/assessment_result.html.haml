@@ -92,51 +92,51 @@
   .col-sm-3
   
     - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned'||"#{@admission.status}" == 'Assessment_Completed'||"#{@admission.status}" == 'Management_Reviewed' )
-      = link_to "Close the Form", "#", :class => "change btn btn-danger",:data=> {:id => "#{@admission.id}"}
+      = link_to "Close the Form", "#", :class => "change btn1 btn btn-danger",:data=> {:id => "#{@admission.id}"}
     - else 
-      = link_to "Form Closed", "#", :class => "btn btn-success",:data=> {:id => "#{@admission.id}"}
+      = link_to "Form Closed", "#", :class => "btn1 btn btn-success",:data=> {:id => "#{@admission.id}"}
     %br
     %br
-    = link_to "View Enquiry", enquiry_show_admission_path , :class => 'enq_button btn btn-primary'
+    = link_to "View Enquiry", enquiry_show_admission_path , :class => 'btn1 btn btn-primary'
     %br
     %br
     - if("#{@admission.status}" == 'Enquiry_Created' )
-      = link_to "Create Application", admission_new_admission_path , :class => 'enq_button btn btn-primary'
+      = link_to "Create Application", admission_new_admission_path , :class => 'btn1 btn btn-primary'
       
     - if("#{@admission.status}" == 'Application_Created')
-      = link_to "View Application", admission_show_admission_path , :class => 'enq_button btn btn-primary'
+      = link_to "View Application", admission_show_admission_path , :class => 'btn1 btn btn-primary'
       %br
       %br
-      = link_to "Create Assessment", assessment_new_admission_path ,:class => 'enq_button btn btn-primary'    
+      = link_to "Create Assessment", assessment_new_admission_path ,:class => 'btn1 btn btn-primary'    
       %br
       %br
     - if("#{@admission.status}" == 'Assessment_Planned' )
-      = link_to "View Application", admission_show_admission_path , :class => 'enq_button btn btn-primary'
+      = link_to "View Application", admission_show_admission_path , :class => 'btn1 btn btn-primary'
       %br
       %br
-      = link_to "View Assessment", view_assessment_admission_path ,:class => 'enq_button btn btn-primary'    
+      = link_to "View Assessment", view_assessment_admission_path ,:class => 'btn1 btn btn-primary'    
       %br
       %br
       
     - if("#{@admission.status}" == 'Assessment_Completed' )
-      = link_to "View Application", admission_show_admission_path , :class => 'enq_button btn btn-primary'
+      = link_to "View Application", admission_show_admission_path , :class => 'btn1 btn btn-primary'
       %br
       %br
-      = link_to "View Assessment", view_assessment_admission_path ,:class => 'enq_button btn btn-primary'    
+      = link_to "View Assessment", view_assessment_admission_path ,:class => 'btn1 btn btn-primary'    
       %br
       %br
-      = link_to "Assessment Result", assessment_result_admission_path ,:class => 'enq_button btn btn-primary'    
+      = link_to "Assessment Result", assessment_result_admission_path ,:class => 'btn1 btn btn-primary'    
     - if("#{@admission.status}" == 'Management_Reviewed' )
-      = link_to "View Application", admission_show_admission_path , :class => 'enq_button btn btn-primary'
+      = link_to "View Application", admission_show_admission_path , :class => 'btn1 btn btn-primary'
       %br
       %br
-      = link_to "View Assessment", view_assessment_admission_path ,:class => 'enq_button btn btn-primary'    
+      = link_to "View Assessment", view_assessment_admission_path ,:class => 'btn1 btn btn-primary'    
       %br
       %br
-      = link_to "Assessment Result", assessment_result_admission_path ,:class => 'enq_button btn btn-primary'    
+      = link_to "Assessment Result", assessment_result_admission_path ,:class => 'btn1 btn btn-primary'    
       %br
       %br
-      = link_to "Management Review", management_result_admission_path ,:class => 'enq_button btn btn-primary'    
+      = link_to "Management Review", management_result_admission_path ,:class => 'btn1 btn btn-primary'    
       %br
       %br
    

@@ -86,7 +86,6 @@ ManthanErp::Application.routes.draw do
     end
   end
 
-  resources :recruitments
   resources :discounts 
   resources :approval_items do
     member do
@@ -309,6 +308,17 @@ ManthanErp::Application.routes.draw do
     collection do
       
     end  
+  end
+
+  resources :recruitments do
+    member do
+      get "homeindex"
+    end
+    collection do
+      get 'recruitment_home'
+      get 'get_subject_view'
+      get 'get_klass_view'
+    end
   end
   
   get "/fee_reports", to: "fee_reports#index"

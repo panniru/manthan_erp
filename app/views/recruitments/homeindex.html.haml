@@ -1,0 +1,49 @@
+.row
+  .col-sm-8
+    %table.table-striped.table-condensed
+      %tr
+        %td{style: "width:25%"}
+          %b
+            %span.label.label-info Application #
+        %td{style: "width:25%"}
+          = @recruitment.form_no
+          
+      %tr
+        %td
+          %label{for: "name"} Name
+        %td
+          = @recruitment.name
+        %td
+          %label{for: "dob"} DOB
+        %td
+          = @recruitment.dob
+      %tr
+        %td
+          %label{for: "gender"} Gender
+        %td
+          = @recruitment.gender
+        %td
+          %label{for: "email"} Email
+        %td
+          = @recruitment.email
+  
+      %tr
+        %td
+          %label{for: "mobile_no"} Mobile No
+        %td
+          = @recruitment.mobile_no
+        %td
+          %label{for: "Address"} Address
+        %td
+          = @recruitment.address
+        
+      %tr
+        %td
+          %label{for: "nationality"} Nationality
+        %td
+          = @recruitment.nationality
+        %td
+          %label{for: "preferred subject"} Preferred Class
+        %td
+          = @recruitment.subject
+

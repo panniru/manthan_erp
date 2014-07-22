@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140715115728) do
+ActiveRecord::Schema.define(version: 20140722095711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -296,7 +296,12 @@ ActiveRecord::Schema.define(version: 20140715115728) do
     t.datetime "updated_at"
     t.string   "book"
     t.integer  "student_master_id"
+    t.datetime "deleted_at"
+    t.string   "book_return"
+    t.string   "book_issue"
   end
+
+  add_index "issuings", ["deleted_at"], name: "index_issuings_on_deleted_at", using: :btree
 
   create_table "job_runs", force: true do |t|
     t.integer  "job_id"
@@ -313,6 +318,16 @@ ActiveRecord::Schema.define(version: 20140715115728) do
     t.string   "code"
     t.string   "description"
     t.string   "job_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "locations", force: true do |t|
+    t.string   "location"
+    t.integer  "sequence_no"
+    t.integer  "route_id"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -426,11 +441,33 @@ ActiveRecord::Schema.define(version: 20140715115728) do
   end
 
   create_table "recruitments", force: true do |t|
-    t.string   "title"
-    t.string   "education_details"
+    t.string   "form_no"
+    t.string   "name"
+    t.string   "dob"
+    t.string   "gender"
+    t.string   "email"
+    t.string   "mobile_no"
+    t.string   "address"
+    t.string   "language"
     t.string   "experience"
+    t.string   "klass"
+    t.string   "subject"
+    t.string   "education_qualification"
+    t.string   "expected_salary"
+    t.string   "nationality"
+    t.string   "post"
+    t.string   "status"
+    t.string   "staff_name"
+    t.string   "description"
+    t.string   "start_time"
+    t.string   "end_time"
+    t.string   "educational_certificates"
+    t.string   "previous_employment_proof"
+    t.string   "salary_slips_for_previous_months"
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "subject_master_id"
   end
 
   create_table "roles", force: true do |t|
