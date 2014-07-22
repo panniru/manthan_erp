@@ -1,4 +1,4 @@
-.row{"ng-controller" => "GradesSectionsMappingController"}
+.row
   .row
     .col-md-1
     .col-md-4
@@ -6,18 +6,14 @@
     .col-md-4
       %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveSectionsMappings()", :value => "DONE"}
     .col-md-3
-      go
-  .row{"ng-repeat" => "grade in grades"}
+     
+  .row{"ng-repeat" => "grade in grades_sections_all"}
     .col-md-1
     .col-md-9
       %h4{style: "font-weight: bold"} {{grade.grade_name}}
-      .col-md-1{"ng-repeat" => "section in sections"}
-        %input{"ng-model" => "value", type: "checkbox", "ng-change" => "addSections(value,{{grade.grade_master_id}},{{section}})"}
-        {{section.text}}
-        {{value}}
+      .col-md-1{"ng-repeat" => "section in grade.sections"}
+        %input{"ng-model" => "section.checked_value", type: "checkbox", "ng-change" => "addSections({{!section.checked_value}},{{grade.grade_master_id}},{{section}})", "ng-checked" => "section.checked_value"}      
+        {{section.text}}        
     .col-md-2
-  .row
-    .col-md-1
-    .col-md-9
-      {{grade.sections}}
+  
     
