@@ -10,23 +10,22 @@
         teachingPlanService.getFacultyIdService()
             .then(function(result) {  
                 $scope.faculty_id = result.data
-               // $scope.faculty_id = $scope.faculty_id[0]['id']
-               // $scope.grades_sections = []
-               //teachingPlanService.getGradesSectionsService($scope.faculty_id)
-                   // .then(function(result) {  
-                       // $scope.grades_sections=result.data 
-                       // $scope.map_grades = result.data
-                     //   $scope.map_sections = result.data
-                   // });
+                // $scope.faculty_id = $scope.faculty_id[0]['id']
+                // $scope.grades_sections = []
+                //teachingPlanService.getGradesSectionsService($scope.faculty_id)
+                // .then(function(result) {  
+                // $scope.grades_sections=result.data 
+                // $scope.map_grades = result.data
+                //   $scope.map_sections = result.data
+                // });
                 
                 $scope.grades_sections_subjects = []
-             //   $scope.getfaculty_id = function(faculty_id){
-                teachingPlanService.getGradesSectionSubjectService($scope.faculty_id)
-                
+                //   $scope.getfaculty_id = function(faculty_id){
+                teachingPlanService.getGradesSectionSubjectService($scope.faculty_id)                
                     .then(function(result) {                         
                         $scope.grades_sections_subjects =result.data 
                     });
-
+                
             });
         $scope.months = []       
         teachingPlanService.getMonthlyCalendarService()
@@ -61,7 +60,7 @@
             })
             $('#calendar1').fullCalendar('gotoDate', new Date(month.year, month.month_number, "01"));
         }
-
+        
         $scope.getMonthData = function(month, implicit){
             teachingPlanService.getMonthDataService(month)
                 .then(function(result) {                    
@@ -74,7 +73,7 @@
         }     
         
         
-                                              
+        
         var monthNames = [ "January", "February", "March", "April", "May", "June",
                            "July", "August", "September", "October", "November", "December" ];
         var today = new Date();

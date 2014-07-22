@@ -55,7 +55,10 @@
             return deferred.promise;
         }
 
-
+        var getFacultyDatesService  = function(month){
+            var url = "/teaching_plans/getfacultydatesservice.json"
+            return $http.get(url);
+        };
         
     	return {
     	    getGradeServiceMapView : getGradeServiceMapView,
@@ -64,9 +67,10 @@
             getSectionServiceMapView : getSectionServiceMapView ,
             getGradesSectionSubjectService : getGradesSectionSubjectService ,
             getMonthlyCalendarService : getMonthlyCalendarService,
-            getMonthDataService :  getMonthDataService,
+            getMonthDataService :  getMonthDataService,                
             student_teaching_plans : student_teaching_plans,
-            getFacultyNamesServiceView :  getFacultyNamesServiceView
+            getFacultyNamesServiceView :  getFacultyNamesServiceView,
+            getFacultyDatesService : getFacultyDatesService
 
         }; 
         

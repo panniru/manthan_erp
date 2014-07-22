@@ -16,5 +16,7 @@ class TeachingPlan < ActiveRecord::Base
       data[key.to_s] = attrs
     end
     data
-  end
+  end  
+  scope :belongs_to_faculty, lambda{|faculty| where(:faculty_master_id => faculty)} 
+
 end

@@ -1,31 +1,31 @@
 class TeachingPlansController < ApplicationController
   def index
-    page = params[:page].present? ? params[:page] : 1
-    if params[:search].present?
-      @teaching_plans = TeachingPlan.search(params[:search]).paginate(:page => 1, :per_page => 5)
-    else
-      @teaching_plans1 = TeachingPlan.paginate(:page => page, :per_page => 2)
-      
-      # @teaching_plans = @teaching_plans1.group_by { |t| t.teaching_date.beginning_of_month }
-    end
+    # @teaching_plans = TeachingPlan.all  
   end
-  
   def calendardata   
-    @teaching_plans = TeachingPlan.first
+    # @teaching_plans = TeachingPlan.first
     respond_to do |format|
       format.json do
-        c =User.find(current_user)       
-        calendar_date = TeachingPlan.select(:teaching_date).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'").distinct        
-        calendar_date = calendar_date.map do |teach|
-          {start: teach.teaching_date, title: "Plan", description: "Plan", url: "#", teaching_date: teach.teaching_date}
+        # calendar_date = []
+        if current_user.admin?
+          if params[:faculty_id].present?
+            calendar_date  = TeachingPlan.belongs_to_faculty(params[:faculty_id])
+          else
+            calendar_date = TeachingPlan.all
+          end
+        elsif  current_user.teacher?
+          # c =User.find(current_user) 
+          calendar_date = TeachingPlan.select(:teaching_date).belongs_to_faculty(current_user.faculty_master.id).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'").distinct          
+          calendar_date = calendar_date.map do |teach|
+            {start: teach.teaching_date, title: "Plan", description: "Plan", url: "#", teaching_date: teach.teaching_date}
+          end
         end
         p calendar_date
         p "++++++++++++++++++++++"
         render :json => calendar_date
-      end
+      end      
     end
-  end   
-  
+  end
   
   def new
     @teaching_plan = TeachingPlan.new
@@ -49,8 +49,7 @@ class TeachingPlansController < ApplicationController
   
   def create
     @teaching_plan = TeachingPlan.new(teachingplan_params)
-    respond_to do |format|
-      
+    respond_to do |format|      
       if @teaching_plan.save
         format.html { redirect_to @teaching_plan, notice: 'Plan was successfully created.' }
         format.json { render action: 'show', status: :created, location: @teaching_plan }
@@ -75,18 +74,23 @@ class TeachingPlansController < ApplicationController
         render :json => faculty
       end
     end
-  end
+  end  
+  
   def get_grade_section_subject_service    
     faculty_id = params[:_faculty_id].to_i
     respond_to do |format|
-      format.json do
+      format.json do      
         mappings = []
         if current_user.admin?
-          mappings = TeacherGradeMapping.all
+          if params[:faculty_id].present?
+            mappings = TeacherGradeMapping.belongs_to_faculty(params[:faculty_id])     
+          else
+            mappings = TeacherGradeMapping.all
+          end
         elsif current_user.teacher? 
-          mappings = TeacherGradeMapping.where('faculty_master_id='+"#{faculty_id}")     
+          mappings = TeacherGradeMapping.belongs_to_faculty(current_user.faculty_master.id)     
         end
-          mappings = mappings.map do |mapping|          
+        mappings = mappings.map do |mapping|          
           {:id => faculty_id, :grade_master_id => mapping.grade_master_id, :grade_name => mapping.grade_master.grade_name,:section_master_id => mapping.section_master_id, :section_name => mapping.section_master.section_name, :subject_master_id => mapping.subject_master_id, :subject_name => mapping.subject_master.subject_name, :grade_section_subject => (mapping.grade_master.grade_name+"- "+mapping.section_master.section_name+"- "+mapping.subject_master.subject_name)}
           
         end
@@ -126,7 +130,7 @@ class TeachingPlansController < ApplicationController
   end
   
   def getmonthlycalendarservice
-   # @teaching_plans = @teaching_plans1.group_by { |t| t.teaching_date.beginning_of_month }
+    # @teaching_plans = @teaching_plans1.group_by { |t| t.teaching_date.beginning_of_month }
     respond_to do |format|
       format.json do
         c =User.find(current_user)       
@@ -150,21 +154,8 @@ class TeachingPlansController < ApplicationController
         render :json => month_date
       end
     end
-  end
- # def get_faculty_names
-  #  respond_to do |format|
-   #   format.json do
-    #    faculty_names = FacultyMaster.get_faculty_names_by_role(current_user)    
-     #   faculty_names = faculty_names.map do |teach|
-      #  {faculty_names: teach.FacultyMaster.faculty_name}
-     # end
-     # p faculty_names
-     # p "$$$$$$$$$$$$$$$"
-     # render :json => faculty_names  
-   # end
-  #  end
- # end
-
+  end 
+  
   def student_teaching_plans
     respond_to do |format|
       format.json do
@@ -174,5 +165,25 @@ class TeachingPlansController < ApplicationController
     end
   end
   
-
+  
+  
+  def getfacultydatesservice
+    respond_to do |format|
+      format.json do
+        faculty_dates = []
+        if current_user.admin?
+          faculty_dates = TeachersTimeTable.all
+        elsif current_user.teacher?
+          faculty_dates = TeachersTimeTable.where('faculty_master_id = '+"faculty_master_id")    
+          faculty_dates = faculty_dates.map do |teach|
+            {faculty_master_id: teach.faculty_master_id}
+          end
+        end       
+        p faculty_dates
+        p "@@@@@@@@@@@@@@@@"
+        render :json => faculty_dates
+      end
+    end
+  end
+  
 end
