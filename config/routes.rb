@@ -307,7 +307,8 @@ ManthanErp::Application.routes.draw do
 
   resources :grades_subjects_mappings do
     collection do
-      
+      get "get_grades_subjects_service_view"
+      post "save_subjects_mappings"     
     end  
   end
   

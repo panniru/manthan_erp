@@ -1,1 +1,18 @@
-form
+.row
+  .row
+    .col-md-1
+    .col-md-4
+      %h4{style: "font-weight: bold"} SELECT SECTIONS FOR GRADES
+    .col-md-4
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveSubjectsMappings()", :value => "DONE"}
+    .col-md-3
+     
+  .row{"ng-repeat" => "grade in grades_subjects_all"}
+    .col-md-1
+    .col-md-9
+      %h4{style: "font-weight: bold"} {{grade.grade_name}}
+      .col-md-2{"ng-repeat" => "subject in grade.subjects  | orderBy:'text'"}
+        %input{"ng-model" => "subject.checked_value", type: "checkbox", "ng-change" => "addSubjects({{!subject.checked_value}},{{grade.grade_master_id}},{{subject}})", "ng-checked" => "subject.checked_value"}      
+        {{subject.text}}        
+    .col-md-2
+  

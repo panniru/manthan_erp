@@ -90,7 +90,8 @@
 
         $scope.showSectionsMappings = function(){            
             $scope.myFormValue = "false";
-            $scope.myShowFormValue = "true";            
+            $scope.myShowFormValue = "true"; 
+                       
             sectionService.getSectionServiceView()
                 .then(function(result) {
                     $scope.show_sections = result.data;              
