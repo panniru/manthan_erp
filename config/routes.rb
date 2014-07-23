@@ -321,7 +321,13 @@ ManthanErp::Application.routes.draw do
       get 'get_klass_view'
     end
   end
-  
+
+    resources :assessment_criterias do
+      collection do
+        get "get_assessment_criteria_service"  
+      end  
+    end
+    
   get "/fee_reports", to: "fee_reports#index"
   get "/fee_reports/payment_status_report", to: "fee_reports#payment_status_report"
   get "/fee_reports/payment_type_details", to: "fee_reports#payment_type_details"
