@@ -1,11 +1,26 @@
 class RoutesController < ApplicationController
   load_resource :only => [:show, :update, :edit, :destroy]
+
+  def get_location_view
+    var = LocationMaster.all.map do |var|
+      {location_name: var.location_name,id: var.id}
+    end
+    render :json => var
+  end
+  
   def index
+    if current_user.role.role == "admin"
+      @routes =  Route.all
+    else current_user.role.role == "parent"
+      current_user.parent.students.each do |student|
+        student.route = @route.find(params[:id])
+      end
+    end
     respond_to do |format|
-      @routes = Route.all
+      
       #@map_data = GoogleMapProcessor.build_map_data(@route)
-      @your_hash = [{ location:'vijayawada', stopover:true},{ location:'khammam', stopover:true},{ location:'secunderabad', stopover:true}]
-      gon.waypts = @your_hash
+      @location = [{ location:'vijayawada', stopover:true},{ location:'khammam', stopover:true},{ location:'secunderabad', stopover:true}]
+      gon.waypts = @location
       #gon.gmap_data = @map_data.to_json
       gon.width = "750px"
       gon.height = "350px"
@@ -20,6 +35,20 @@ class RoutesController < ApplicationController
   end
   
   def show
+    @route = Route.find(params[:id])
+    @location = Location.all
+    @location = []
+    @route.locations.each do |location|
+      @location.push({:location => location.location_master.location_name})
+    end
+    gon.start_point_latitude = @route.start_location.location_master.latitude.to_s 
+    gon.start_point_longitude =@route.start_location.location_master.longitude.to_s
+    gon.end_point_latitude = @route.end_location.location_master.latitude.to_s 
+    gon.end_point_longitude = @route.end_location.location_master.longitude.to_s
+    gon.waypts = @location.to_json
+    gon.width = "750px"
+    gon.height = "350px"
+    
   end
   
   def update
@@ -42,21 +71,18 @@ class RoutesController < ApplicationController
   end
   def create
     respond_to do |format|
-      p route_params
       @route= Route.new(route_params)
-      @route.add_locations(params[:locations])
+      status = @route.save_route(params[:locations])
       format.json do
-        
-        #
-        render :json => @route.save
+        render :json => status
       end
       format.html do
-         if @route.save
-           flash.now[:success] = I18n.t :success, :scope => [:route, :create]
-           redirect_to  routes_path
-         else
-           render "new"
-         end
+        if status
+          flash.now[:success] = I18n.t :success, :scope => [:route, :create]
+          redirect_to  routes_path
+        else
+          render "new"
+        end
         render :json => nil
       end
     end
@@ -87,8 +113,9 @@ class RoutesController < ApplicationController
   end
   
   def build_route_from_bulk
-    params.require(:bulk_location).select{|locations| route["location"].present? and route["sequence_no"].present? }.map do |route|
+    params.require(:bulk_location).select{|locations| location["location_master_id"].present? and route["sequence_no"].present? }.map do |route|
       Location.new(location)
     end
   end
 end
+

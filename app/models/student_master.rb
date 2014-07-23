@@ -7,6 +7,7 @@ class StudentMaster < ActiveRecord::Base
   validates :joining_date, :presence => true
 
   belongs_to :parent
+  belongs_to :student_route_mapping
   belongs_to :grade_master
   belongs_to :section_master
   has_one :parent_payment_master, :foreign_key => :student_id

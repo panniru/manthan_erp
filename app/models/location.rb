@@ -1,5 +1,3 @@
 class Location < ActiveRecord::Base
-  geocoded_by :location  
-  after_validation :geocode
-  belongs_to :route
+  belongs_to :location_master
 end

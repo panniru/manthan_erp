@@ -14,12 +14,12 @@
         %th No of Children
         %th
     %tbody
-      - @routes.all.each do |route|
+      - @routes.each do |route|
         %tr
-          %td= route.route_no
+          %td= link_to "#{route.route_no}" , route_path(route)
           %td= route.busno_up
-          %td= route.start_point
-          %td= route.end_point
+          %td= route.start_location.location_master.location_name
+          %td= route.end_location.location_master.location_name
           %td= route.no_of_children
           %td
             =  link_to raw("<span class='glyphicon glyphicon-trash'></span>"),route_path(route), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
@@ -30,11 +30,8 @@
         .modal-header
           %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
           %h4.modal-title{ :id => "myModalLabel"} New Route
-        .modal-body
+        .modal-body{"ng-controller" => "RouteController"}
           = render "form1"
         
 .row
   = render "shared/gmap"
- 
-
-

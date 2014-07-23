@@ -1,9 +1,8 @@
 class GoogleMapProcessor
-  def self.build_map_data(routes)
-    Gmaps4rails.build_markers(routes) do |route , marker|
-      marker.lat route.latitude
-      marker.lng route.longitude
-      marker.infowindow route.lpp
+  def self.build_map_data(locations)
+    Gmaps4rails.build_markers(locations) do |location, marker|
+      marker.lat location.latitude
+      marker.lng location.longitude
     end
   end
 end

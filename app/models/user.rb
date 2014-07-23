@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable, :authentication_keys => [:user_id]
 
   belongs_to :role
-  has_one :parent
+   has_one :parent
   has_one :faculty_master
 
   def admin?

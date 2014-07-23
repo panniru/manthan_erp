@@ -10,10 +10,13 @@
 
 
   function calcRoute() {
-  var origin      = new google.maps.LatLng(17.385044, 78.486671);
-  var destination = new google.maps.LatLng(17.000538, 81.804034);
+ 
+  var origin      = new google.maps.LatLng(gon.start_point_latitude , gon.start_point_longitude);
+  var destination = new google.maps.LatLng(gon.end_point_latitude , gon.end_point_longitude);
 
-  var waypts = gon.waypts;
+
+
+  var waypts = JSON.parse(gon.waypts);
   var request = {
   origin:      origin,
   destination: destination,

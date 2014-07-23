@@ -15,25 +15,27 @@
   .col-sm-2
     = label_tag "Starting Point:", nil, :class => "form-label"
   .col-sm-2
-    = label_tag @route.start_location.location_name,nil 
+    = label_tag @route.start_location.location_master.location_name,nil 
   .col-sm-2
     = label_tag "Ending point:", nil, :class => "form-label"
   .col-sm-2
-    = label_tag @route.end_location.location_name ,nil 
+    = label_tag @route.end_location.location_master.location_name ,nil 
     %br
 .row
   .col-sm-3
     %table.table.table-bordered
       %thead
         %tr
-          %th Location
           %th Sequence No
+          %th Location
          
       %tbody
         - @route.locations.each do |location|
           %tr
-            %td= location_master.location_name
             %td= location.sequence_no
+          - @route.location_masters.each do |location|
+            %td= @location.location_name
+
             
   .col-sm-9
     = render "shared/gmap"

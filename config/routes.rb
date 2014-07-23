@@ -1,6 +1,11 @@
 
 ManthanErp::Application.routes.draw do
- 
+
+  get "location_masters/index"
+  get "location_masters/show"
+  get "location_masters/create"
+  get "location_masters/destroy"
+
   get "new_vehicles/index"
   get "new_vehicles/show"
   get "new_vehicles/edit"
@@ -150,6 +155,7 @@ ManthanErp::Application.routes.draw do
   resources :routes do
     collection do
       post "create_bulk"
+      get "get_location_view"
     end
   end
 

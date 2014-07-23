@@ -8,6 +8,13 @@ class Transport < Struct.new(:controller)
       
   end
 
+
+  def parent_sub_menu
+    sub_menu = []
+    sub_menu << routes
+    sub_menu
+  end
+
   private 
   def newbus
     MenuItem.new(:label => "Buses", :klass => "", :icon => "tachometer ", :href => "/new_vehicles")
