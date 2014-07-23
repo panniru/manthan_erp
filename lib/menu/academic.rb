@@ -8,7 +8,8 @@ class Academic < Struct.new(:controller)
     sub_menu << teacher_grade_mappings
     sub_menu << class_teacher_mappings
     sub_menu << teacher_timetables
-    sub_menu << teaching_plans    
+    sub_menu << teaching_plans
+    sub_menu << assessment_criteria
     sub_menu
   end
   def teacher_sub_menu
@@ -55,6 +56,10 @@ class Academic < Struct.new(:controller)
 
   def grades_subjects_mappings
     MenuItem.new(:label => "Grade Subjects Mapping", :klass => "", :icon => "arrows-h", :href => "/grades_subjects_mappings")
+  end
+
+  def assessment_criteria
+    MenuItem.new(:label => "Assessment Criteria", :klass => "", :icon => "list-ol", :href => "/assessment_criterias")
   end
 
 end
