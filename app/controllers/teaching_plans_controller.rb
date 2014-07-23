@@ -15,10 +15,10 @@ class TeachingPlansController < ApplicationController
           end
         elsif  current_user.teacher?
           # c =User.find(current_user) 
-          calendar_date = TeachingPlan.select(:teaching_date).belongs_to_faculty(current_user.faculty_master.id).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'").distinct          
-          calendar_date = calendar_date.map do |teach|
-            {start: teach.teaching_date, title: "Plan", description: "Plan", url: "#", teaching_date: teach.teaching_date}
-          end
+          calendar_date = TeachingPlan.select(:teaching_date).belongs_to_faculty(current_user.faculty_master.id).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'").distinct         
+        end
+        calendar_date = calendar_date.map do |teach|
+          {start: teach.teaching_date, title: "Plan", description: "Plan", url: "#", teaching_date: teach.teaching_date}
         end
         p calendar_date
         p "++++++++++++++++++++++"
@@ -49,17 +49,29 @@ class TeachingPlansController < ApplicationController
   
   def create
     @teaching_plan = TeachingPlan.new(teachingplan_params)
-    respond_to do |format|      
-      if @teaching_plan.save
-        format.html { redirect_to @teaching_plan, notice: 'Plan was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @teaching_plan }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @teaching_plan.errors, status: :unprocessable_entity }
+    respond_to do |format|
+      if current_user.admin?
+        if params[:faculty_master_id].present?
+          faculty_master_id  = (params[:teaching_plan][:faculty_master_id])      
+          
+        end 
+      elsif current_user.teacher?
+        faculty_master_id  = (params[:teaching_plan][:faculty_master_id])        
+        @teaching_plan.faculty_master_id = faculty_master_id
+        p (params[:teaching_plan][:faculty_master_id])
+        p "**********"
+        p faculty_master_id
+        p "&&&&&&&&&&&&&&&&&&"
+        if @teaching_plan.save        
+          format.html { redirect_to @teaching_plan, notice: 'Plan was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @teaching_plan }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @teaching_plan.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
-  
   def teachingplan_params
     params.require(:teaching_plan).permit(:grade_master_id, :section_master_id,:teaching_date,:plan_month,:faculty_master_id,:subject_master_id )
   end
@@ -67,6 +79,7 @@ class TeachingPlansController < ApplicationController
   def getfacultyidservice   
     respond_to do |format|
       format.json do
+        c = User.find(current_user)       
         faculty = FacultyMaster.where('user_id = '+"#{c.id}")        
         faculty = faculty.map do |fac|
           {id: fac.id}

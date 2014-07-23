@@ -1,7 +1,6 @@
 (function(angular, app) {
-    "use strict";
-    app.service("teachingPlanService",["$http", "$q",  function($http, $q) {
-    app.service("teachingPlanService",["$http", function($http) {
+    "use strict";    
+    app.service("teachingPlanService",["$http","$q", function($http, $q) {
         var getFacultyNamesServiceView = function(){
             var url = "/teachers_time_tables/get_faculty_names_view.json"
             return $http.get(url);
