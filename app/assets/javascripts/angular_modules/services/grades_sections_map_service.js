@@ -7,14 +7,23 @@
             return $http.post(url, {mappings: grades_sections});          
         };
 
-
-
         return {
             saveSectionsMappings : saveSectionsMappings,
-        }     
-
-
-
+        }  
     }]);   
+
+    app.service("sectionService",["$http", function($http) {
+            var getSectionServiceView = function(){
+                var url = "/time_tables/sectionserviceview.json"
+                return $http.get(url);
+            }; 
+
+        return {
+            getSectionServiceView : getSectionServiceView,
+        }
+        
+    }]);   
+
+  
 
 })(angular, myApp);

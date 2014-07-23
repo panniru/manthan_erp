@@ -37,7 +37,7 @@ class TimeTablesController < ApplicationController
     respond_to do |format|
       format.json do
         get_subjects = SubjectMaster.all.map do |subject|
-          {subject: subject.subject_name, id: subject.id}
+          {subject_name: subject.subject_name, subject_master_id: subject.id}
           end
         render :json => get_subjects
       end

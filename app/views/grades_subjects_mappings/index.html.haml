@@ -1,2 +1,5 @@
-.row
-  = render 'form'
+.row{"ng-controller" => "GradesSubjectsMappingController"}
+  .row{"ng-show" => "myShowFormValue"}
+    = render 'show_form'
+  .row{"ng-show" => "myFormValue"}
+    = render 'form'

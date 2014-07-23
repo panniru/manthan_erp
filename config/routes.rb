@@ -300,13 +300,14 @@ ManthanErp::Application.routes.draw do
 
   resources :grades_sections_mappings do
     collection do
-      post "save_sections_mappings"      
+      post "save_sections_mappings"           
     end  
   end
 
   resources :grades_subjects_mappings do
     collection do
-      
+      get "get_grades_subjects_service_view"
+      post "save_subjects_mappings"     
     end  
   end
 
