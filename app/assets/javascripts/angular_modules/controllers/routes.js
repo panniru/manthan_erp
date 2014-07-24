@@ -2,12 +2,12 @@
     "use strict";
     app.controller("RouteController",["$scope","resourceService","routesService", function($scope, resourceService, routesService) {
 	$scope.routes = resourceService.Route.query();
-
+	
 	var fetch_loactions = function(){
 	    routesService.getLocationServiceView()
 		.then(function(result) {
                     $scope.all_locations =result.data
-            });
+		});
 	}
 	
         

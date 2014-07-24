@@ -7,7 +7,7 @@
     = javascript_include_tag "application", media: "all", "data-turbolinks-track" => true
     = include_gon 
     = csrf_meta_tags
-   
+  
   %body
     .navbar-fixed-top
       = render "shared/banner"
@@ -39,4 +39,4 @@
                   = content_tag(:div,value,:class => "#{flash_alert_class(key)}")
           
               = yield
-      
+              = yield :scripts

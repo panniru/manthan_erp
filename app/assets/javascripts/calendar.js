@@ -53,7 +53,7 @@ $(document).ready(function() {
             $('#myModal').modal('show');   
         }    
     })
-    $('#calendar1').fullCalendar('gotoDate', new Date(parseInt(month.year), parseInt(month.month_number), 1));
+//   $('#calendar1').fullCalendar('gotoDate', new Date(parseInt(month.year), parseInt(month.month_number), 1));
     
 });
 $(function () {
