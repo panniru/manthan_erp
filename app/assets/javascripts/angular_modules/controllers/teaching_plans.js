@@ -3,7 +3,7 @@
     app.controller("TeachingPlansController",["$scope","teachersService", "teachingPlanService", function($scope,teachersService,teachingPlanService) {
         teachersService.getFacultyNamesServiceView()
             .then(function(result) {
-                alert(JSON.stringify(result.data));
+               // alert(JSON.stringify(result.data));
                 $scope.faculty_names=result.data                
             });
         teachingPlanService.getFacultyIdService()
@@ -23,6 +23,12 @@
             .then(function(result) {                         
                 $scope.months = result.data
             });
+       // $scope.facultyDates = []       
+       // teachingPlanService.getFacultyDatesService()
+         //   .then(function(result) {
+            //  alert(JSON.stringify(result.data));                         
+           //     $scope.facultyDates = result.data
+           // });
         var drawCalander = function(month){
             $('#calendar1').html("");
             $('#calendar1').fullCalendar({
@@ -45,6 +51,8 @@
                     });
 	        },
                 select: function(date) {
+                    
+                    
                     $('#selectdate').val(date)
                     $('#myModal').modal('show');   
                 }    

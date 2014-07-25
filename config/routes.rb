@@ -65,6 +65,9 @@ ManthanErp::Application.routes.draw do
       get 'getmonthlycalendarservice'
       get 'getmonthdataservice'
       get "student_teaching_plans"
+      get 'getfacultydatesservice' 
+      get 'plan_exists' 
+
     end
   end
 

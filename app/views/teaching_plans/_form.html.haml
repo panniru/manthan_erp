@@ -17,10 +17,12 @@
                 = f.label "Plan", :class => 'col-sm-3 control-label'              
               .col-sm-5{"ng-controller" => "TeachingPlansController"}
                 = f.text_area :plan_month ,:class => 'form-control'
-                = f.hidden_field :grade_master_id, :value => "{{myGrade_Section_Subject.grade_master_id}}"
-                = f.hidden_field :section_master_id,:value => "{{myGrade_Section_Subject.section_master_id}}"
-                = f.hidden_field :faculty_master_id, :value => "{{faculty_id[0]['id']}}"
-                = f.hidden_field :subject_master_id, :value => "{{myGrade_Section_Subject.subject_master_id}}"
+                = f.hidden_field :grade_master_id, :value => "{{myGrade_Section_Subject.grade_master_id}}", :id => "grade_master_id"         
+                = f.hidden_field :section_master_id,:value => "{{myGrade_Section_Subject.section_master_id}}", :id => "section_master_id"
+                
+                = f.hidden_field :faculty_master_id, :value => "{{faculty_id[0]['id']}}", :id => "faculty_master_id"
+                
+                = f.hidden_field :subject_master_id, :value => "{{myGrade_Section_Subject.subject_master_id}}" , :id => "subject_master_id"               
                 %br
                   
           .modal-footer

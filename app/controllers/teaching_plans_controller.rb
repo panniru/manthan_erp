@@ -189,7 +189,7 @@ class TeachingPlansController < ApplicationController
         elsif current_user.teacher?
           faculty_dates = TeachersTimeTable.where('faculty_master_id = '+"faculty_master_id")    
           faculty_dates = faculty_dates.map do |teach|
-            {faculty_master_id: teach.faculty_master_id}
+            {faculty_master_id: teach.faculty_master_id, period_id: teach.period_id}
           end
         end       
         p faculty_dates
@@ -198,5 +198,20 @@ class TeachingPlansController < ApplicationController
       end
     end
   end
-  
+  def plan_exists
+    respond_to do |format|
+      format.json do
+        day = Date.parse(params[:date]).strftime("%a").downcase
+        faculty_master_id = params[:faculty_master_id]
+        section_master = SectionMaster.find(params[:section_master_id])
+        p day
+        p "#$#$#$#$#"
+        grade_section_param = "#{section_master.grade_master.grade_name}- #{section_master.section_name}"
+        render :json => TeachersTimeTable.belongs_to_faculty_master(faculty_master_id).dynamic_day_on_grade_section(day, grade_section_param).count
+        p grade_section_param
+        p "hhhhhhhhhhhhhhhhhhhhhh"
+        
+      end
+    end
+  end
 end
