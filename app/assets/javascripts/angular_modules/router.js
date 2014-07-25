@@ -11,7 +11,8 @@
             .when('/monthly_payment', {
                 "templateUrl": 'month_fee_payment.html'
             })
-       // $locationProvider.html5Mode(true); 
+       // $locationProvider.html5Mode(true);
+           
     }]);
 })(angular, myApp);
 
