@@ -1,0 +1,40 @@
+.row
+  .row
+    .col-md-1
+    .col-md-4
+      %h4{style: "font-weight: bold"} ASSESSMENT CRITERIA FOR SUBJECTS
+    .col-md-4
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveSectionsMappings()", :value => "DONE"}     
+    .col-md-3
+  .row
+    .col-md-1
+    .col-md-2
+      %h5{style: "font-weight: bold"} SELECT SUBJECT
+      .col-md-12
+        %select{"ng-model" => "mySubject", "ng-options" => "subject.subject_master_id as subject.subject_name for subject in subjects",:class => "form-control"}       
+        {{mySubject}}
+    .col-md-9    
+      %h5{style: "font-weight: bold"} SELECT GRADES
+      .col-md-1{"ng-repeat" => "grade in grades"}
+        %h5{style: "font-weight: bold"} 
+          %input{"ng-model" => "checked_value", type: "checkbox", "ng-change" => "addAssessmentCriteriaMappings(grade.grade_master_id,checked_value)"}      
+          {{grade.grade_name}} 
+          {{grade.checked_value}}
+          {{checked_value}}
+  .row
+    .col-md-1
+    .col-md-4
+      .form-group{"ng-repeat" =>"criteria in criterias"}
+        .col-md-6        
+          = label_tag "Criteria  {{$index+1}}", nil, :class => "form-label"
+        .col-md-6
+          .input-group
+            = text_field_tag "",nil, :class => "form-control",:ng_model => "criteria.myCriteria" ,:placeholder => "Criteria"
+            %button{:type => "button", :class=> "btn btn-danger", :ng_click => "destroyCriteria($index)"}=  "-"
+            
+  .row
+    %br
+    .col-md-5.col-md-offset-3
+      %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addCriteria($index)"}=  "Add  Criteria"
+      %button{:type=>"submit", :class=> "btn btn-primary", :ng_click => "saveAssessmentsCriteriaMappings()"}=  "Save"
+        

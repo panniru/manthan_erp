@@ -321,6 +321,12 @@ ManthanErp::Application.routes.draw do
       get 'get_klass_view'
     end
   end
+ 
+  resources :assessment_criterias do
+    collection do
+    get "get_assessment_criteria_service"
+    end
+  end
 
     resources :assessment_criterias do
       collection do
