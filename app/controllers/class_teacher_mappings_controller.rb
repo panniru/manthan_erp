@@ -88,7 +88,8 @@ class ClassTeacherMappingsController < ApplicationController
     respond_to do |format|
       format.json do         
         if params[:_delete_mapping_id].present?
-          ClassTeacherMapping.find(params[:_delete_mapping_id]).destroy          end
+          ClassTeacherMapping.find(params[:_delete_mapping_id]).destroy 
+        end
         render :json => true
       end
     end

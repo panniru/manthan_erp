@@ -1,7 +1,7 @@
 class AssessmentCriteriasController < ApplicationController
   def get_assessment_criteria_service
     respond_to do |format|
-      format.json do  
+      format.json do        
         p params
         p "~~~~~~~~~~~~~~>"
         subjects_assessments = AssessmentCriteria.where('grade_master_id = '+"#{params[:my_Grade]}") 
@@ -17,4 +17,35 @@ class AssessmentCriteriasController < ApplicationController
       end
     end
   end
+
+  def save_assessment_criterias
+    respond_to do |format|
+      format.json do  
+        p params 
+        p "!!!!!!!!!!!!!!!=>"
+        mappings = params[:mappings]        
+        mappings.each do |t|         
+          @assessment_criteria=AssessmentCriteria.new(t)
+          @assessment_criteria.save
+          p @assessment_criteria
+          p "!!!!!!!!!!!!!!!=>"
+        end 
+        render :json => true
+      end
+    end
+  end
+
+  def deletemappings
+    respond_to do |format|
+      format.json do  
+        p params
+        p "@@@@@@@@@@@@@@@=>"
+        if params[:_delete_mapping_id].present?
+          AssessmentCriteria.find(params[:_delete_mapping_id]).destroy 
+        end
+        render :json => true
+      end
+    end
+  end
+  
 end
