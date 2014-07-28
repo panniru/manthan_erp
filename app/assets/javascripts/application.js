@@ -13,6 +13,8 @@
 //= require jquery.ui.autocomplete
 //= require autocomplete-rails
 //= require bootstrap
+//= require underscore
+//= require gmaps/google
 //= require fullcalendar
 //= require jquery.timepicker.js
 //= require jquery.turbolinks

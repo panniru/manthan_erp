@@ -160,6 +160,22 @@ def seed_teacher_leader
   end
 end
 
+def seed_location_masters
+  unless LocationMaster.first.present?
+    LocationMaster.create(:id => '4', :location_name =>  'Kothaguda', :latitude => ' 17.4652114 '  , :longitude => '78.37569' )
+    LocationMaster.create(:id => '5', :location_name =>  'Madinaguda', :latitude => '  17.4936856'  , :longitude => '78.3401293' )
+    LocationMaster.create(:id => '6', :location_name =>  'Rajahmundry', :latitude => ' 17.0005383  '  , :longitude => '81.8040345' )
+    LocationMaster.create(:id => '7', :location_name =>  'Khammam', :latitude => ' 17.4652114 '  , :longitude => '78.37569' )
+    LocationMaster.create(:id => '8', :location_name =>  'Hyderabad', :latitude => '  17.2472528 '  , :longitude => '80.1514447 ' )
+    LocationMaster.create(:id => '9', :location_name =>  'Vijayawada', :latitude => '  16.5061743  '  , :longitude => '80.6480153') 
+    LocationMaster.create(:id => '10', :location_name =>  'Yousufguda', :latitude => ' 17.4353328 '  , :longitude => '78.4357118 ' )
+    LocationMaster.create(:id => '11', :location_name =>  'Gachibowli', :latitude => ' 17.4359437 '  , :longitude => ' 78.3416731' )
+    LocationMaster.create(:id => '12', :location_name =>  'Mind Space', :latitude => '  52.60207 '  , :longitude => '-2.126895 ' )
+  end
+end
+
+   
+    
 def seed_sections
   unless SectionMaster.first.present?
     grademasters=GradeMaster.all
@@ -170,6 +186,17 @@ def seed_sections
     SectionMaster.create(:section_name => 'E', :grade_master_id => grademasters[2]['id'])
   end
 end
+
+def seed_routes
+  unless Route.first.present?
+    Route.create(:id => '18' , :route_no => '1', :busno_up => '2' , :no_of_children => '3', :gmaps => '' , :start_point => '25' , :end_point => '26' )
+    Route.create(:id => '19' , :route_no => '2', :busno_up => '23' , :no_of_children => '45', :gmaps => '' , :start_point => '30' , :end_point => '29' )
+  end
+end
+
+
+
+    
 def seed_subjects
   unless SubjectMaster.first.present?
     SubjectMaster.create(:subject_name => 'PHYSICS')
@@ -232,6 +259,8 @@ def seed_all
   seed_defaults
   seed_default_discount
   seed_faculty
+  seed_location_masters
+  seed_routes
 end
 
 seed_all

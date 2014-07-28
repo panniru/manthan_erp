@@ -2,6 +2,7 @@
   %h3
     Routes
   %h5
+    = link_to "Send Mail", send_mail_routes_path, :class => "btn btn-primary"
     = link_to "New Route", "#", :class => "btn btn-primary",:ng_click => "defineNew()"
  
   %table.table.table-bordered
@@ -24,14 +25,14 @@
           %td
             =  link_to raw("<span class='glyphicon glyphicon-trash'></span>"),route_path(route), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
             
-  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
-          %h4.modal-title{ :id => "myModalLabel"} New Route
-        .modal-body{"ng-controller" => "RouteController"}
-          = render "form1"
-        
+      .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+              %h4.modal-title{ :id => "myModalLabel"} New Route
+            .modal-body{"ng-controller" => "RouteController"}
+              = render "form1"
+          
 .row
-  = render "shared/gmap"
+  = render "shared/map1"

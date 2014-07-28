@@ -1,15 +1,10 @@
 
 ManthanErp::Application.routes.draw do
+  
+  
+  
 
-  get "location_masters/index"
-  get "location_masters/show"
-  get "location_masters/create"
-  get "location_masters/destroy"
-
-  get "new_vehicles/index"
-  get "new_vehicles/show"
-  get "new_vehicles/edit"
-  get "new_vehicles/new"
+ 
   get "teaching_plans/new"
   get "teaching_plans/edit"
   get "teaching_plans/index"
@@ -158,13 +153,7 @@ ManthanErp::Application.routes.draw do
       post "create_bulk"
     end
   end
-  resources :routes do
-    collection do
-      post "create_bulk"
-      get "get_location_view"
-    end
-  end
-
+  
   get "fee_alerts/fee_struct_mail_to_parents" 
 
   resources :student_masters do
@@ -199,8 +188,15 @@ ManthanErp::Application.routes.draw do
       end
     end
   end
-
- 
+  
+  resources :routes do
+    collection do
+      post "create_bulk"
+      get "send_mail"
+      get "get_location_view"
+    end
+  end
+  
   resources :admissions do
     member do
       get 'enquiry_show'
@@ -322,6 +318,10 @@ ManthanErp::Application.routes.draw do
       post "save_subjects_mappings"     
     end  
   end
+  
+  resources :location_masters
+
+  resources :new_vehicles
 
   resources :recruitments do
     member do

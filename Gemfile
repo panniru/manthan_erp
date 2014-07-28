@@ -6,7 +6,7 @@ gem 'jquery-cookie-rails', '~> 1.3.1.1'
 gem 'rails', '4.0.2'
 
 gem "geocoder"
-gem 'gmaps4rails'
+gem 'gmaps4rails', '~> 2.1.2'
 gem 'carrierwave'
 gem 'gon'
 gem 'rails3-jquery-autocomplete'

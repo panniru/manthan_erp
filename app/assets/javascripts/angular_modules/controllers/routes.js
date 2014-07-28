@@ -2,12 +2,12 @@
     "use strict";
     app.controller("RouteController",["$scope","resourceService","routesService", function($scope, resourceService, routesService) {
 	$scope.routes = resourceService.Route.query();
-
+	
 	var fetch_loactions = function(){
 	    routesService.getLocationServiceView()
 		.then(function(result) {
                     $scope.all_locations =result.data
-            });
+		});
 	}
 	
         
@@ -28,6 +28,11 @@
 	    	})
 	}
 	
+	//$scope.editLocations = function(){
+          //  $scope.newRoute.locations = $scope.Route;
+            //$('#createModal').modal('show');
+        //}
+
         $scope.addMoreterms = function(){
 	    var lnt = parseInt($scope.newRoute.locations.length)
             for(var i=lnt; i< lnt+1; i++){
