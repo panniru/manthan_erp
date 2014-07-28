@@ -323,7 +323,10 @@ ManthanErp::Application.routes.draw do
  
   resources :assessment_criterias do
     collection do
-    get "get_assessment_criteria_service"    
+      get "get_assessment_criteria_service" 
+      get "get_assessment_criteria_service"
+      post "save_assessment_criterias"
+      post "deletemappings"
     end
   end
 

@@ -8,37 +8,28 @@
                 $scope.grades=result.data
             });
 
-        $scope.initialize = function(){
-            //$scope.j = 0;            
+        $scope.initialize = function(){                       
             $scope.criterias = [];
+            $scope.criterias.push({
+                myCriteria : "",
+            });
         };
         
-        $scope.addCriteria = function(){            
-	    for(var i=0; i<1; i++){
+        $scope.addCriteria = function(){	   
                 $scope.criterias.push({
                     myCriteria : "",
-                });
-            } 
-
-            alert(JSON.stringify($scope.criterias));
-            //$scope.j = j+1;
+                });           
         };
 
-        $scope.destroyCriteria = function($index){
-            //alert($index);
-            $scope.criterias.splice($index, 1);
-            //alert(JSON.stringify($scope.criterias));	    
-            //$scope.j = j+1;
+        $scope.destroyCriteria = function($index){            
+            $scope.criterias.splice($index, 1);            
         };
         
         $scope.getAssessmentsCriteriaMappings = function(myGrade)        
         {
             assessmentCriteriaService.getAssessmentCriteriaService(myGrade)
                 .then(function(result) {
-                    $scope.assessments = result.data; 
-                    //alert(JSON.stringify($scope.assessments.length));
-
-                    //alert(myGrade);
+                    $scope.assessments = result.data;                   
                     if (result.data.length != 0)
                     {
                         $scope.myShowFormValue = "true";
@@ -55,8 +46,9 @@
 
         $scope.showAssessmentsCriteriaMappings = function()
         {
-            $scope.myShowFormValue = "true";
+            $scope.myShowFormValue = "false";
             $scope.myFormValue = "false";
+            myShowIndexValue= true;
         };
 
         $scope.editAssessmentCriteriaMappings = function()
@@ -65,15 +57,12 @@
             $scope.checked_value = false;
             $scope.grades_all = $scope.grades;
             $scope.assessment_grades=[];
-            //alert();
+
             subjectService.getSubjectServiceView()
                 .then(function(result) {
-                    $scope.subjects=result.data
-                    //alert(JSON.stringify($scope.subjects));
+                    $scope.subjects=result.data; 
+                    alert(JSON.stringify($scope.subjects));
                 }); 
-           
-           
-            //alert(JSON.stringify($scope.assessment_grades));
             
             $scope.myShowIndexValue= false;
             $scope.initialize();
@@ -81,19 +70,13 @@
             $scope.myFormValue = "true";
         };
 
-        $scope.addAssessmentCriteriaMappings = function(grade_master_id,checked_value){
-            //alert($scope.assessment_grades.length)
-            //alert(checked_value); 
-            //alert(grade_master_id); 
-            alert(JSON.stringify($scope.criterias)); 
-          
+        $scope.addAssessmentCriteriaMappings = function(grade_master_id,checked_value){          
             if (!checked_value)
             {
                 for(var i = 0; i < $scope.assessment_grades.length; i++)
                 {                
                     if ($scope.assessment_grades[i]['grade_master_id'] == grade_master_id)
-                    {        
-                        alert("slice");        
+                    {                                     
                         $scope.assessment_grades.splice(i, 1);
                     }                   
                 }
@@ -103,25 +86,46 @@
                 $scope.assessment_grades.push({
                     grade_master_id: grade_master_id,
                 });  
-            }
-            
-            alert(JSON.stringify($scope.assessment_grades));
-            
+            }            
         };       
  
-        $scope.saveAssessmentsCriteriaMappings = function()
+        $scope.saveAssessmentCriteriaMappings = function()
         {            
-            $scope.myShowIndexValue= true;
+            $scope.myShowIndexValue = true;
             $scope.myShowFormValue = false;
             $scope.myFormValue = "false";
+            $scope.save_assessment_criterias = [];
 
-            alert($scope.mySubject);
-            alert(JSON.stringify($scope.assessment_grades));
-            alert(JSON.stringify($scope.criterias)); 
+            for (var i = 0; i < $scope.assessment_grades.length; i++){
+                for (var j = 0; j < $scope.criterias.length; j++){
+                    $scope.save_assessment_criterias.push({
+                        subject_master_id : $scope.mySubject,
+                        grade_master_id : $scope.assessment_grades[i]['grade_master_id'],
+                        subject_criteria : $scope.criterias[j]['myCriteria'],                        
+                    });                        
+                }       
+            }
 
-            
+            //alert(JSON.stringify($scope.save_assessment_criterias));
+            //alert($scope.mySubject+"=="+JSON.stringify($scope.assessment_grades)+"=="+JSON.stringify($scope.criterias)); 
+
+            assessmentCriteriaService.saveAssessmentCriteriaMappings($scope.save_assessment_criterias)
+                .then(function(result) {
+                                       
+                });
+
+            $scope.grades_all = []; 
+            $scope.showAssessmentsCriteriaMappings();
         };
-        
+
+        $scope.deleteAssessmentCriteriaMappings = function (assessment_id){
+            $scope.delete_mappping_id = assessment_id
+            assessmentCriteriaService.deleteAssessmentCriteriaMappings($scope.delete_mappping_id)
+                .then(function(result) {
+                    
+                }); 
+            $scope.getAssessmentsCriteriaMappings($scope.myGrade);            
+        }; 
 
 
     }]);    

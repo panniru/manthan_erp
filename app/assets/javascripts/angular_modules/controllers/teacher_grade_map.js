@@ -21,7 +21,8 @@
         
         subjectService.getSubjectServiceView()
             .then(function(result) {
-                $scope.subjects = result.data                
+                $scope.subjects = result.data  
+                //alert(JSON.stringify($scope.subjects));              
             });         
        
         $scope.showMappings = function(){  
