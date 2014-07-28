@@ -4,7 +4,7 @@
     %title Manthan
     
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", media: "all", "data-turbolinks-track" => true
+    
     = include_gon 
     = csrf_meta_tags
 
@@ -39,3 +39,6 @@
                   = content_tag(:div,value,:class => "#{flash_alert_class(key)}")
           
               = yield
+      
+    = javascript_include_tag "application"
+

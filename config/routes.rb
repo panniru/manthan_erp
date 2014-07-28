@@ -1,15 +1,9 @@
 ManthanErp::Application.routes.draw do
-  
-  
-  
 
- 
   get "teaching_plans/new"
   get "teaching_plans/edit"
   get "teaching_plans/index"
   get "teaching_plans/show"
-  
-     
   
   resources :interviewschedulers do
     member do
@@ -17,6 +11,7 @@ ManthanErp::Application.routes.draw do
     end
   end
 
+  resources :damagebooks
 
   resources :issuings do
     collection do
@@ -50,10 +45,6 @@ ManthanErp::Application.routes.draw do
 
   #get "/teaching_plans/gradeserviceview"
   #get "/teaching_plans/sectionserviceview"
- 
-
-
-
 
   resources :time_tables  
   resources :books do 
@@ -166,6 +157,7 @@ ManthanErp::Application.routes.draw do
       get 'next_term_fee'
       get "annual_discount_details"
       get "dashboard"
+      put "update_address"
     end
   end
   

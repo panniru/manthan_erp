@@ -3,6 +3,9 @@
     app.controller("StudentsController",["$scope", "studentService", "resourceService", function($scope, studentService, resourceService) {
         $scope.students = []
         $scope.student = {}
+        $scope.student_id = ""
+        $scope.address = {address_line1: "", address_line2: "", city: "", state: "", pin:""}
+        $scope.transport = {}
         
         $scope.getStudentDetails = function(student_id){
             studentService.student_details(student_id).then(function(student) {
@@ -28,6 +31,15 @@
             }
             $scope.books[book+"_shown"] = true;
         }
+        
+        $scope.updateAddress = function(){
+            alert($scope.student_id)
+            console.log($scope.address)
+            $scope.isAddressEdit = false
+            studentService.Student.update_address({address: $scope.address, id: $scope.student_id})
+        }
+        
+        
     }]);
     
 })(angular, myApp);

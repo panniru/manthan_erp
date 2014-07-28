@@ -16,6 +16,27 @@ $(document ).ready(function() {
         angular.element($('#flot-placeholder')).scope().gridDataPoint(item)
         //angular.element($('#flot-placeholder')).scope().gridDataPoint1(item)
     });
+    $("#student_attendence_calendar").fullCalendar({
+        events: [
+            {
+                title  : 'event1',
+                start  : '2010-01-01',
+                color: 'red'
+            },
+            {
+                title  : 'event2',
+                start  : '2014-07-05',
+                end    : '2014-07-07',
+                color : 'red'
+            },
+            {
+                title  : 'event3',
+                start  : '2014-07-09T12:30:00',
+                allDay : true // will make the time show
+            }
+        ]
+    })
+    
 });
 
 function createAssessment(teacher_leader_id) {

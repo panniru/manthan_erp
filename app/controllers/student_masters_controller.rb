@@ -1,5 +1,5 @@
 class StudentMastersController < ApplicationController
-  load_resource :only => [:show, :monthly_pdcs, :next_term_fee, :annual_discount_details, :dashboard]
+  load_resource :only => [:show, :monthly_pdcs, :next_term_fee, :annual_discount_details, :dashboard, :update_address]
   
   def index
     page = params[:page].present? ? params[:page] : 1
@@ -98,6 +98,14 @@ class StudentMastersController < ApplicationController
   end
   
   def dashboard
+  end
+
+  def update_address
+    respond_to do |format|
+      format.json do
+        render :json => @student_master.update(JSON.parse(params[:address]))
+      end
+    end
   end
   
 end

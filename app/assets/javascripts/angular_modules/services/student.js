@@ -1,6 +1,6 @@
 (function(angular, app) {
     "use strict";
-    app.service("studentService",["$http", "$q",  function($http, $q) {
+    app.service("studentService",["$http", "$q", "$resource",  function($http, $q, $resource) {
 
         var student_details = function(student_id){
             var url = "/student_masters/"+student_id+".json"
@@ -18,10 +18,16 @@
             
             return deferred.promise;
         }
-
+        var Student = $resource('/student_masters/:id.json', {id: '@id'}, 
+                             {
+                                 "update_address": { url: "/student_masters/:id/update_address.json", method:'PUT', params: {address: '@address'}},
+                             }
+                            );
+        
         return {
             student_details : student_details,
-            book_issuings : book_issuings
+            book_issuings : book_issuings,
+            Student : Student
         };
         
     }]);
