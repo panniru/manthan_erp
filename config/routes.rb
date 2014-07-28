@@ -1,4 +1,3 @@
-
 ManthanErp::Application.routes.draw do
   
   
@@ -317,6 +316,21 @@ ManthanErp::Application.routes.draw do
       get "get_grades_subjects_service_view"
       post "save_subjects_mappings"     
     end  
+  end
+  get "/assessment_criterias/sample"
+  
+  resources :assessment_criterias do
+    collection do
+    get "get_assessment_criteria_service"    
+    end
+  end
+
+  resources :gradings do
+    collection do
+    get "get_grading_service_view"
+    post "save_gradings_mappings"
+    post "delete_grading_mappings"
+    end
   end
   
   resources :location_masters

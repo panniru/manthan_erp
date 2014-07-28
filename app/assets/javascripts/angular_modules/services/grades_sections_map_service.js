@@ -12,18 +12,4 @@
         }  
     }]);   
 
-    app.service("sectionService",["$http", function($http) {
-            var getSectionServiceView = function(){
-                var url = "/time_tables/sectionserviceview.json"
-                return $http.get(url);
-            }; 
-
-        return {
-            getSectionServiceView : getSectionServiceView,
-        }
-        
-    }]);   
-
-  
-
 })(angular, myApp);

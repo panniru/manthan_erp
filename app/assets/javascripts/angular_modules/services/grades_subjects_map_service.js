@@ -17,20 +17,6 @@
             getGradesSubjectsServiceView : getGradesSubjectsServiceView,
             saveSubjectsMappings : saveSubjectsMappings
         }  
-    }]);   
-
-    app.service("subjectService",["$http", function($http) {
-        var getSubjectServiceView = function(){
-            var url = "/time_tables/subjectservicevew.json"
-            return $http.get(url);
-        }; 
-
-        return {
-            getSubjectServiceView : getSubjectectServiceView,
-        }
-        
-    }]);   
-
-    
+    }]);    
 
 })(angular, myApp);
