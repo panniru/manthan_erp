@@ -1,4 +1,3 @@
-
 ManthanErp::Application.routes.draw do
  
   get "new_vehicles/index"
@@ -324,7 +323,15 @@ ManthanErp::Application.routes.draw do
  
   resources :assessment_criterias do
     collection do
-    get "get_assessment_criteria_service"
+    get "get_assessment_criteria_service"    
+    end
+  end
+
+  resources :gradings do
+    collection do
+    get "get_grading_service_view"
+    post "save_gradings_mappings"
+    post "delete_grading_mappings"
     end
   end
 

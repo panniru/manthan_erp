@@ -1,0 +1,48 @@
+.row
+  .row 
+    .col-md-1
+    .col-md-9{"ng-show" => "myShowFormValue"} 
+      %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addGradingMappings()"}=  "ADD GRADING"
+    .col-md-9{"ng-show" => "myEditFormValue"} 
+      = link_to 'BACK', gradings_path,:class => 'btn btn-primary'    
+  .row
+    .col-md-1
+    .col-md-9
+      %table{:class => "table"}
+        %tr
+          %th GRADE         
+          %th GRADE DESCRIPTION 
+          %th{"ng-show" => "myShowFormValue"}  
+            EDIT
+          %th{"ng-show" => "myEditFormValue"}  
+            EDIT / SAVE
+          %th{"ng-show" => "myShowFormValue"} 
+            DELETE
+        %tr{"ng-repeat" => "grading in show_gradings"}
+          %td{"ng-show" => "grading.grading_show_value"} 
+            {{grading.grading_name}}            
+          %td{"ng-show" => "grading.grading_edit_value"}          
+            = text_field_tag "",nil, :class => "form-control",:ng_model => "grading.grading_name" ,:placeholder => ""
+          %td{"ng-show" => "grading.grading_show_value"}  
+            {{grading.grading_desc}}            
+          %td{"ng-show" => "grading.grading_edit_value"}  
+            = text_field_tag "",nil, :class => "form-control",:ng_model => "grading.grading_desc" ,:placeholder => "" 
+          %td{"ng-show" => "grading.grading_show_value"}  
+            = link_to raw("<span class='glyphicon glyphicon-pencil'></span>"),"#", :class => "btn btn-warning btn-sm", :title => "EDIT", :ng_click => "editGradingMappings($index)"
+          %td{"ng-show" => "grading.grading_edit_value"}   
+            = link_to raw("<span class='glyphicon glyphicon-save'></span>"),"#", :class => "btn btn btn-primary btn-sm", :title => "SAVE", :ng_click => "saveGradingMappings(grading)"
+          %td{"ng-show" => "myShowFormValue"}  
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "DELETE", :ng_click => "deleteGradingMappings(grading)"
+          
+    .col-md-2
+  .row
+    :css
+      table, th, td
+      {
+      border-collapse:collapse;
+      border:5px solid #6aa6d6;
+      }
+      th, td
+      {
+      padding:5px;
+      } 
