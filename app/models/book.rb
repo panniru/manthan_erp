@@ -1,10 +1,8 @@
 class Book < ActiveRecord::Base
- # validates :name, :presence => true
-  #validates :isdn, :presence => true
-  #validates :author, :presence => true
- 
-  ### validates :number_of_copies, :presence => true
- 
-  ### validates :book_type, :presence => true
-  
+  has_many :damagebooks
+  #attr_accessible :name, :author
+  # create_table :book do |t|
+  #    t.column :name, :string
+  #    t.column :author, :string
+  #  end
 end

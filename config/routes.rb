@@ -17,20 +17,26 @@ ManthanErp::Application.routes.draw do
       get 'home_index'
     end
   end
-  resources :damagebooks
+
 
   resources :issuings do
     collection do
       get "student_book_issuings"
     end
   end
-  
+  resources :damagebooks do
+    collection do
+      get 'get_book_service_view'
+     
+    end
+  end 
   resources :staffs
   get "staffs/staffview"
 
   devise_for :users, :controllers => { :sessions => 'sessions'}
  
   get 'auto_search/student_name_by_grade_and_section'
+  get 'auto_search/autocomplete_book_isbn'
   get 'auto_search/autocomplete_staff_grade'
   get "time_tables/gradeserviceview"
   get "time_tables/sectionserviceview"
