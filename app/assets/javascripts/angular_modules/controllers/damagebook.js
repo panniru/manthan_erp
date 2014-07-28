@@ -1,8 +1,6 @@
 (function(angular, app) {
     "use strict";
     app.controller("DamagebooksController",["$scope","bookService", function($scope, bookService) {
-       
-       
         bookService.getbookServiceView()
             .then(function(result) {
                 alert(JSON.stringify(result.data))
@@ -16,8 +14,8 @@
                             $scope.myShowValue="true"
                         });
                 };
-}]);
-    
+          }
+    }]);
 })(angular, myApp);        
 
 
