@@ -10,28 +10,73 @@
       = label_tag "BookStage:"
     .col-sm-5
       .btn-group{"data-toggle" => "buttons-radio"}
-      .col-sm-2
-        %label{for: "Loss", :id => "first"} Loss
-      .col-sm-2
-        = f.radio_button :book_stage, "Loss"
-      .col-sm-2
-        %label{for: "Damage", :id => "second"} Damage
-      .col-sm-2
-        = f.radio_button :book_stage, "Damage"
         
-   
-      
-  .row
-    .col-sm-3
-      = f.label "Damage Type:", :class => 'col-sm-3 control-label'
-    .col-sm-5
-      = f.select :damage_type, options_for_select([['Damaged Covers'],['Covers Separating from the Text Block'],[' Missing Pages'],['Torn Pages'],['Loose Pages'],['Stains'],['Wet Books'],['Mold ']])
-      %br
+    -#   .col-sm-2
+    -#     %label{for: "Loss", :id => "first"} Loss
+    -#   .col-sm-2
+    -#     = f.radio_button :book_stage, "Loss"
+    -#   .col-sm-2
+    -#     %label{for: "Damage", :id => "second"} Damage
+    -#   .col-sm-2
+    -#     = f.radio_button :book_stage, "Damage"
+        
     
-  .row
-    .col-sm-3
-      = f.label "Description:", :class => 'col-sm-3 control-label'
-    .col-sm-5
-      = f.text_area :damage_description, :class => 'form-control'
-      %br
+      
+  
+      :javascript
+        function yesnoCheck() {
+        if (document.getElementById('yesCheck').checked) {
+        document.getElementById('ifYes').style.display = 'block';
+        }
+        else document.getElementById('ifYes').style.display = 'none';
+        
+        }
+    Damage
+    %input#yesCheck{name: "yesno", onclick: "javascript:yesnoCheck();", type: "radio"}/
+    Loss
+    %input#noCheck{name: "yesno", onclick: "javascript:yesnoCheck();", type: "radio"}/
+    %br/
+    #ifYes{style: "display:none"}
+      First name:
+      %input{name: "damage_type", type: "text", value: ""}/
+      %br/
+      Last name:
+      %input{name: "damage_description", type: "text_area", value: ""}/
+      %br/
+      %input#yes{name: "yes", type: "text"}/
+      %input#yes{name: "yes", type: "text"}/
+      %br/
+      What can we do to accommodate you?
+ 
       = f.button "submit" , :class =>'btn btn-primary'
+:javascript
+  function yesnoCheck() {
+      if (document.getElementById('yesCheck').checked) {
+          document.getElementById('ifYes').style.display = 'block';
+      }
+      else document.getElementById('ifYes').style.display = 'none';
+  
+  }
+Yes
+%input#yesCheck{name: "yesno", onclick: "javascript:yesnoCheck();", type: "radio"}/
+No
+%input#noCheck{name: "yesno", onclick: "javascript:yesnoCheck();", type: "radio"}/
+%br/
+#ifYes{style: "display:none"}
+  First name:
+  %input{name: "damage_type", type: "text", value: ""}/
+  %br/
+  Last name:
+  %input{name: "damage_description", type: "text_area", value: ""}/
+  %br/
+  %input#yes{name: "yes", type: "text"}/
+  %input#yes{name: "yes", type: "text"}/
+  %br/
+  %select
+  %option{value: "volvo"} Volvo
+  %option{value: "saab"} Saab
+  %option{value: "opel"} Opel
+  %option{value: "audi"} Audi
+  What can we do to accommodate you?
+ 
+  %input{type: "submit", value: "Submit"}/
