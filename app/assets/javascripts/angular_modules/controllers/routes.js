@@ -28,6 +28,11 @@
 	    	})
 	}
 	
+	//$scope.editLocations = function(){
+          //  $scope.newRoute.locations = $scope.Route;
+            //$('#createModal').modal('show');
+        //}
+
         $scope.addMoreterms = function(){
 	    var lnt = parseInt($scope.newRoute.locations.length)
             for(var i=lnt; i< lnt+1; i++){

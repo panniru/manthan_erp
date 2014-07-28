@@ -1,32 +1,41 @@
  class RoutesController < ApplicationController
-  load_resource :only => [:show, :update, :edit, :destroy]
-
+   load_resource :only => [:show, :update, :edit, :destroy]
+   
    def index
      if current_user.admin?
        @routes =  Route.all
+      
      else current_user.parent?
+       #@route = Route.find(params[:id])
        current_user.parent.students.each do |student|
          studentroutemappings = StudentRouteMapping.where('student_master_id = '+"#{student.id}")
+         location = []
          studentroutemappings = studentroutemappings.all.map do |route|
-           {temp: route.route_id }
+           #{temp: route.route_id }
+           #studentroutemappings[0][:temp]
+           route.locations.each do |location|
+             location.push({:location => location.location_master.location_name})
+           end
+           gon.start_point_latitude = route.start_location.location_master.latitude.to_s 
+           gon.start_point_longitude =route.start_location.location_master.longitude.to_s
+           gon.end_point_latitude = route.end_location.location_master.latitude.to_s 
+           gon.end_point_longitude = route.end_location.location_master.longitude.to_s
+           gon.waypts = location.to_json
+           gon.width = "750px"
+           gon.height = "350px"
          end
-         p studentroutemappings[0][:temp]
-         id = 19
-         render "show/id"
        end
      end
      @routes =  Route.all
+     @locations = Location.all
      locations = []
      Route.all.each do |route| 
-       locations.concat(route.locations)
+      locations.concat(route.locations)
      end
      gmap_data = Gmaps4rails.build_markers(locations) do |location, marker|
-       marker.lat location.location_master.latitude
-       marker.lng location.location_master.longitude
+      marker.lat location.location_master.latitude
+      marker.lng location.location_master.longitude
      end
-     
-     
-     #p gmap_data
      gon.gmap_data = gmap_data.to_json
      gon.width = "750px"
      gon.height = "350px"
@@ -38,7 +47,18 @@
          render "index"
        end
      end
-  end
+   end
+
+   def send_mail
+     
+     
+     UserMailer.welcome_email.deliver
+     flash[:success] = I18n.t :success, :scope => [:route, :send_mail]
+     redirect_to routes_path
+
+
+   end
+   
    
    def get_location_view
      var = LocationMaster.all.map do |var|
@@ -87,6 +107,7 @@
      respond_to do |format|
        @route= Route.new(route_params)
        status = @route.save_route(params[:locations])
+      
        format.json do
          render :json => status
        end

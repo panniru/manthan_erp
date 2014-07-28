@@ -67,6 +67,9 @@ en:
     update:
       success: "Route has been updated"
       fail: "Route not been updated"
+    send_mail:
+      success: "Mail sent"
+      fail: "Route not been updated"
   post_dated_cheque:
     create:
       success: "cheque has been saved"

@@ -1,22 +1,17 @@
-%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New Route"
-#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-        %h4#myModalLabel.modal-title New Route
-        .modal-body{ "ng-controller" => "RoutesController", "ng-init" => "initialize()"}
-          = form_tag create_bulk_routes_path, :method => "POST",:class=>"form-horizontal" do 
-            .row{"ng-repeat" => "lpp in routes"}
-              .form-group
-                = label_tag "stop  {{$index+1}}", nil, :class => "form-label col-md-2"
-                .col-md-3
-                  = select_tag "bulk_route[][lpp]",options_for_select( StudentMaster.all.collect {|p| [ p.name, p.id ] ), :class => "form-control"
-                .col-md-3
-                  .input-group
-                    = text_field_tag "bulk_route[][sequence_no]",nil, :class => "form-control" 
-          
-            %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMoreterms()"}=  "More stops"
-            = submit_tag "Save",  :class => 'btn btn-primary'
-            
-           
+.form-group{"ng-repeat" => "location in newRoute.locations"}
+  .row
+    = label_tag "stop  {{$index+1}}", nil, :class => "form-label col-md-2"
+    .col-md-3
+      %select{"ng-model" => "location.location_master_id", "ng-options" => "var.id as var.location_name for var in all_locations",:class => "form-control",:required => "required", }
+        %option{style: "display:none", value: ""} Select Location
+    .col-sm-3
+      .input-group
+        = text_field_tag "bulk_location[][sequence_no]",nil, :class => "form-control" , :ng_model => "location.sequence_no" , :placeholder => "Sequence#"
+  .row
+    .col-md-5.col-md-offset-3
+      %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMoreterms()"}=  "More stops"
+      %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"
+        
+        
+              
+              
