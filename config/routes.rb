@@ -342,8 +342,7 @@ ManthanErp::Application.routes.draw do
  
   resources :assessment_criterias do
     collection do
-      get "get_assessment_criteria_service" 
-      get "get_assessment_criteria_service"
+      get "get_assessment_criteria_service"       
       post "save_assessment_criterias"
       post "deletemappings"
     end
@@ -357,14 +356,17 @@ ManthanErp::Application.routes.draw do
     end
   end
 
-    resources :assessment_criterias do
-      collection do
-        get "get_assessment_criteria_service"  
-      end  
-    end
-    
   get "/fee_reports", to: "fee_reports#index"
   get "/fee_reports/payment_status_report", to: "fee_reports#payment_status_report"
   get "/fee_reports/payment_type_details", to: "fee_reports#payment_type_details"
   root to: "home#index"
+
+  resources :assessments do
+    collection do
+      get "get_assessment_types_service"
+      post "delete_assessment_type_mappings"
+      post "save_assessment_type_mappings"
+    end  
+  end
+
 end

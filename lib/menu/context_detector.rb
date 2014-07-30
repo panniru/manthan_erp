@@ -27,6 +27,7 @@ class ContextDetector
     "grades_subjects_mappings" => "academic", 
     "assessment_criterias" => "academic", 
     "gradings" => "academic", 
+    "assessments" => "academic",
     "recruitments" => "recruitment_sub_menu",
     "adds" => "recruitment_sub_menu",
     "forms" => "recruitment_sub_menu",

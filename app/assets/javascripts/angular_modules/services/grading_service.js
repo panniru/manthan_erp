@@ -1,7 +1,7 @@
 (function(angular, app) {
     "use strict";
     app.service("gradingService",["$http", function($http) {
-        var getGradingServiceView = function(myGrade){
+        var getGradingServiceView = function(){
             var url = "/gradings/get_grading_service_view.json"
             return $http.get(url);
         };         
