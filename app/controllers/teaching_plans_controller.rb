@@ -96,17 +96,18 @@ class TeachingPlansController < ApplicationController
         mappings = []
         if current_user.admin?
           if params[:faculty_id].present?
-            mappings = TeacherGradeMapping.belongs_to_faculty(params[:faculty_id])     
+            mappings = TeacherGradeMapping.belongs_to_faculty(params[:faculty_id])
           else
             mappings = TeacherGradeMapping.all
           end
         elsif current_user.teacher? 
-          mappings = TeacherGradeMapping.belongs_to_faculty(current_user.faculty_master.id)     
-        end
-        mappings = mappings.map do |mapping|          
-          {:id => faculty_id, :grade_master_id => mapping.grade_master_id, :grade_name => mapping.grade_master.grade_name,:section_master_id => mapping.section_master_id, :section_name => mapping.section_master.section_name, :subject_master_id => mapping.subject_master_id, :subject_name => mapping.subject_master.subject_name, :grade_section_subject => (mapping.grade_master.grade_name+"- "+mapping.section_master.section_name+"- "+mapping.subject_master.subject_name)}
+          mappings = TeacherGradeMapping.belongs_to_faculty(current_user.faculty_master.id)          
           
         end
+        mappings = mappings.map do |mapping|          
+          {:id => mapping.id, :grade_master_id => mapping.grade_master_id, :grade_name => mapping.grade_master.grade_name,:section_master_id => mapping.section_master_id, :section_name => mapping.section_master.section_name, :subject_master_id => mapping.subject_master_id, :subject_name => mapping.subject_master.subject_name, :grade_section_subject => (mapping.grade_master.grade_name+"- "+mapping.section_master.section_name+"- "+mapping.subject_master.subject_name), :faculty_master_id => mapping.faculty_master_id}
+          
+        end        
         render :json => mappings
         # end 
       end     

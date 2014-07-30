@@ -10,9 +10,9 @@
             .then(function(result) {
                 $scope.faculty_id = result.data
                 $scope.grades_sections_subjects = []
-                teachingPlanService.getGradesSectionSubjectService($scope.faculty_id)
+                teachingPlanService.getGradesSectionSubjectService($scope.faculty_id)                
                     .then(function(result) {
-                       
+                       // alert(JSON.stringify(result.data));
                         $scope.grades_sections_subjects =result.data
                     });
                 
@@ -50,13 +50,26 @@
                         curr_object.popover({html:true,title:event.title,placement:'top',container:'body', content: content_html}).popover('show');
                     });
 	        },
-                select: function(date) {
-                    
-                    
+                select: function(date) {                             
+                        var grade_master_id = $("#grade_master_id").val()            
+                        var section_master_id = $("#section_master_id").val()
+                        var faculty_master_id = $("#faculty_master_id").val()
+                        var subject_master_id = $("#subject_master_id").val()            
+                        var dateFormat = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()         
+                        var checkUrl = "teaching_plans/plan_exists.json?grade_master_id="+grade_master_id+"&section_master_id="+section_master_id+"&subject_master_id="+subject_master_id+"&faculty_master_id="+faculty_master_id+"&date="+dateFormat
+                        
+                        alert(checkUrl)
+                    $.get(checkUrl,function(data) {
+                        if(parseInt(data) > 0){                
+                                  
                     $('#selectdate').val(date)
                     $('#myModal').modal('show');   
-                }    
+                }else{
+                    alert("There is no plan defined on this day")                   
+                    }
             })
+                    }
+                })
             $('#calendar1').fullCalendar('gotoDate', new Date(month.year, month.month_number, "01"));
         }
         

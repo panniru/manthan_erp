@@ -9,7 +9,7 @@
     .form-group.col-md-4
       %label{:class=> "form-label col-md-4"} Grade-Section-Subject
       .col-md-5     
-        %select{"ng-model" => "myGrade_Section_Subject", :ng_options => "a.grade_section_subject for a in grades_sections_subjects", :class => "form-control"}          
+        %select{"ng-model" => "myGrade_Section_Subject", :ng_options => "a.grade_section_subject for a in grades_sections_subjects | filter: {faculty_master_id:myTeacher}", :class => "form-control"}          
       .col-md-2
         = link_to "ViewPlan",'#' , :class => 'enq_button btn btn-primary' 
   .row
