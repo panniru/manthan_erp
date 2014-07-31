@@ -1,3 +1,20 @@
 .row
-  .col-md-3
-    mapping index
+  .row
+    .col-md-1
+    .col-md-9
+      %table{:class => "table"}
+        %tr
+          %th ASSESSMENT DESCRIPTION 
+          %th{"ng-repeat" => "grade  in grades"}    
+            {{grade.grade_name}}
+          %th EDIT
+        %tr{"ng-repeat" => "assessment_type  in assessment_types"}        
+          %th 
+            {{assessment_type.assessment_type}}     
+          %td{"ng-repeat" => "grade  in grades"}             
+            %div{"ng-if" => "mapping.assessment_type_id == assessment_type.id && mapping.grade_master_id == grade.grade_master_id", "ng-repeat" => "mapping  in assessment_grade_mappings"}
+              {{mapping.no_of_times}}
+          %td
+            %a{href: "#mapping_edit", :class => "btn btn-warning btn-sm",:title => "EDIT","ng-click" => "editAssessmentGradeMappings(assessment_type)"}       
+              %span{class: "glyphicon glyphicon-pencil"}
+  

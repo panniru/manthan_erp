@@ -366,6 +366,8 @@ ManthanErp::Application.routes.draw do
       get "get_assessment_types_service"
       post "delete_assessment_type_mappings"
       post "save_assessment_type_mappings"
+      get "get_assessment_grade_mappings_service"
+      post "save_assessment_grade_mappings"
     end  
   end
 

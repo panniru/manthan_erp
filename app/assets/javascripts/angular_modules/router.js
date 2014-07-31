@@ -33,6 +33,12 @@
             . when('/mapping_index', {
                 templateUrl: 'academics/assessments/mapping_index.html'               
             })
+            . when('/mapping_edit', {
+                templateUrl: 'academics/assessments/mapping_edit.html',                
+            })
+            . when('/mapping_save', {
+                templateUrl: 'academics/assessments/mapping_index.html', 
+            })
         
            
     }]);
