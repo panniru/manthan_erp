@@ -37,8 +37,11 @@
             var url = "/teaching_plans/getmonthlycalendarservice.json"
             return $http.get(url);
         };
-        var getMonthDataService = function(month){
-            var url = "/teaching_plans/getmonthdataservice.json?month="+month.month
+        var getMonthDataService = function(month, faculty_master_id, grade_section_subject){
+            var section_master_id = typeof grade_section_subject.section_master_id == 'undefined' ? "" : grade_section_subject.section_master_id
+            var subject_master_id = typeof grade_section_subject.subject_master_id == 'undefined' ? "" : grade_section_subject.subject_master_id
+            var grade_master_id = typeof grade_section_subject.grade_master_id == 'undefined' ? "" : grade_section_subject.grade_master_id
+            var url = "/teaching_plans/getmonthdataservice.json?month="+month.month+"&faculty_master_id="+faculty_master_id+"&grade_master_id="+grade_master_id+"&section_master_id="+section_master_id+"&subject_master_id="+subject_master_id
             return $http.get(url);
         };
         

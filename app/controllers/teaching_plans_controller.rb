@@ -8,14 +8,19 @@ class TeachingPlansController < ApplicationController
       format.json do
         # calendar_date = []
         if current_user.admin?
-          if params[:faculty_id].present?
-            calendar_date  = TeachingPlan.belongs_to_faculty(params[:faculty_id])
+          if params[:faculty_master_id].present?
+            calendar_date =  TeachingPlan.belongs_to_faculty(params[:faculty_master_id]).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month].strip}'")
+            #calendar_date  = TeachingPlan.belongs_to_faculty(params[:faculty_id])
           else
-            calendar_date = TeachingPlan.all
+            calendar_date = TeachingPlan.where("trim(to_char(teaching_date, 'Month')) = '#{params[:month].strip}'")
+            #calendar_date = TeachingPlan.all
           end
         elsif  current_user.teacher?
           # c =User.find(current_user) 
           calendar_date = TeachingPlan.select(:teaching_date).belongs_to_faculty(current_user.faculty_master.id).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'").distinct         
+        end
+        if params[:grade_master_id].present? and params[:section_master_id].present? and params[:subject_master_id].present?
+          calendar_date = calendar_date.belongs_to_grade(params[:grade_master_id]).belongs_to_section(params[:section_master_id]).belongs_to_subject(params[:subject_master_id])
         end
         calendar_date = calendar_date.map do |teach|
           {start: teach.teaching_date, title: "Plan", description: "Plan", url: "#", teaching_date: teach.teaching_date}
@@ -161,58 +166,75 @@ class TeachingPlansController < ApplicationController
   def getmonthdataservice
     respond_to do |format|
       format.json do
-        month_date = TeachingPlan.where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'")
-        month_date = month_date.map do |teach|
-          {date: teach.teaching_date, plan_month: teach.plan_month, grade_Section_subject: teach.grade_master.grade_name+"-"+ teach.section_master.section_name+"-"+teach.subject_master.subject_name, :id => teach.id}
+        month_date = []
+        if current_user.admin?
+          if params[:faculty_master_id].present?          
+            #month_date = TeachingPlan.belongs_to_faculty(params[:faculty_id]).where("trim(to_char(teaching_date, 'Month'")
+            month_date =  TeachingPlan.belongs_to_faculty(params[:faculty_master_id]).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month].strip}'")
+          else
+            month_date = TeachingPlan.where("trim(to_char(teaching_date, 'Month')) = '#{params[:month].strip}'")
+           # month_date =  TeachingPlan.all            
+          end
+        elsif current_user.teacher?
+          month_date =  TeachingPlan.belongs_to_faculty(current_user.faculty_master.id).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month].strip}'")
         end
+        if params[:grade_master_id].present? and params[:section_master_id].present? and params[:subject_master_id].present?
+          month_date = month_date.belongs_to_grade(params[:grade_master_id]).belongs_to_section(params[:section_master_id]).belongs_to_subject(params[:subject_master_id])
+        end
+        month_date = month_date.map do |teach|
+          {date: teach.teaching_date, plan_month: teach.plan_month, grade_Section_subject: teach.grade_master.grade_name+"-"+ teach.section_master.section_name+"-"+teach.subject_master.subject_name, :id => teach.id, faculty_master_id: teach.faculty_master_id}
+        end  
         render :json => month_date
+       # p month_date
+       # p "#$#$#$#$#$#$#$#$#$#"
       end
     end
-  end 
+  end
   
   def student_teaching_plans
     respond_to do |format|
-      format.json do
-        @student = StudentMaster.find(params[:student_id])
-        render :json => TeachingPlan.student_teaching_plan(@student, params[:dated_on])
+        format.json do
+          @student = StudentMaster.find(params[:student_id])
+          render :json => TeachingPlan.student_teaching_plan(@student, params[:dated_on])
+        end
+      end
+    end
+    
+    
+    
+    def getfacultydatesservice
+      respond_to do |format|
+        format.json do
+          faculty_dates = []
+          if current_user.admin?
+            faculty_dates = TeachersTimeTable.all
+          elsif current_user.teacher?
+            faculty_dates = TeachersTimeTable.where('faculty_master_id = '+"faculty_master_id")    
+            faculty_dates = faculty_dates.map do |teach|
+              {faculty_master_id: teach.faculty_master_id, period_id: teach.period_id}
+            end
+          end       
+        #  p faculty_dates
+        #  p "@@@@@@@@@@@@@@@@"
+          render :json => faculty_dates
+        end
+      end
+    end
+    def plan_exists
+      respond_to do |format|
+        format.json do
+          day = Date.parse(params[:date]).strftime("%a").downcase
+          faculty_master_id = params[:faculty_master_id]
+          section_master = SectionMaster.find(params[:section_master_id])
+          p section_master
+          p "#$#$#$#$#"
+          grade_section_param = "#{section_master.grade_master.grade_name}- #{section_master.section_name}"
+          render :json => TeachersTimeTable.belongs_to_faculty_master(faculty_master_id).dynamic_day_on_grade_section(day, grade_section_param).count
+         # p grade_section_param
+        #  p "hhhhhhhhhhhhhhhhhhhhhh"
+          
+        end
       end
     end
   end
   
-  
-  
-  def getfacultydatesservice
-    respond_to do |format|
-      format.json do
-        faculty_dates = []
-        if current_user.admin?
-          faculty_dates = TeachersTimeTable.all
-        elsif current_user.teacher?
-          faculty_dates = TeachersTimeTable.where('faculty_master_id = '+"faculty_master_id")    
-          faculty_dates = faculty_dates.map do |teach|
-            {faculty_master_id: teach.faculty_master_id, period_id: teach.period_id}
-          end
-        end       
-        p faculty_dates
-        p "@@@@@@@@@@@@@@@@"
-        render :json => faculty_dates
-      end
-    end
-  end
-  def plan_exists
-    respond_to do |format|
-      format.json do
-        day = Date.parse(params[:date]).strftime("%a").downcase
-        faculty_master_id = params[:faculty_master_id]
-        section_master = SectionMaster.find(params[:section_master_id])
-        p day
-        p "#$#$#$#$#"
-        grade_section_param = "#{section_master.grade_master.grade_name}- #{section_master.section_name}"
-        render :json => TeachersTimeTable.belongs_to_faculty_master(faculty_master_id).dynamic_day_on_grade_section(day, grade_section_param).count
-        p grade_section_param
-        p "hhhhhhhhhhhhhhhhhhhhhh"
-        
-      end
-    end
-  end
-end

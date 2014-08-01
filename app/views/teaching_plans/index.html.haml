@@ -10,17 +10,22 @@
       %label{:class=> "form-label col-md-4"} Grade-Section-Subject
       .col-md-5     
         %select{"ng-model" => "myGrade_Section_Subject", :ng_options => "a.grade_section_subject for a in grades_sections_subjects | filter: {faculty_master_id:myTeacher}", :class => "form-control"}          
+        = hidden_field_tag :grade_master_id, "{{myGrade_Section_Subject.grade_master_id}}", :id => "grade_master_id"         
+        = hidden_field_tag :section_master_id, "{{myGrade_Section_Subject.section_master_id}}", :id => "section_master_id"
+        = hidden_field_tag :subject_master_id, "{{myGrade_Section_Subject.subject_master_id}}" , :id => "subject_master_id"
+        = hidden_field_tag :faculty_master_id, "{{faculty_id[0]['id']}}", :id => "faculty_master_id"
+
+        
       .col-md-2
-        = link_to "ViewPlan",'#' , :class => 'enq_button btn btn-primary' 
+        = submit_tag("Viewplan",{class: "btn btn-primary", :ng_click => "viewPlan()"})
   .row
     .col-md-8
       %center
         %h5
           TEACHING PLANS        
-      %ul.nav.nav-tabs{:role => "tablist"}
-        %li{"ng-repeat" =>"month in months", :ng_class => "{'active': isCurrentMonth(month)}"}                 
-          %a{:ng_click => "getMonthData(month, false)","data-toggle" => "tab", :role => "tab"} {{month.month}}                 
-
+      %ul.nav.nav-tabs{:role => "tablist"}      
+        %li{"ng-repeat" =>"month in months", :ng_class => "{'active': isCurrentMonth(month)}"}                
+          %a{:ng_click => "getMonthData(month, false)","data-toggle" => "tab", :role => "tab"} {{month.month}}
       .tab-content
         %br
         #month.tab-pane.active              
