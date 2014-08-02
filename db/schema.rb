@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722095711) do
+ActiveRecord::Schema.define(version: 20140728053344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,15 @@ ActiveRecord::Schema.define(version: 20140722095711) do
     t.datetime "updated_at"
   end
 
+  create_table "damagebooks", force: true do |t|
+    t.string   "isbn"
+    t.string   "book_stage"
+    t.string   "damage_type"
+    t.string   "damage_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "default_masters", force: true do |t|
     t.string   "default_name"
     t.string   "default_value"
@@ -268,6 +277,13 @@ ActiveRecord::Schema.define(version: 20140722095711) do
     t.datetime "updated_at"
   end
 
+  create_table "grade_subject_mappings", force: true do |t|
+    t.integer  "subject_master_id"
+    t.integer  "grade_master_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "grade_wise_fees", force: true do |t|
     t.integer  "fee_grade_bucket_id"
     t.integer  "fee_type_id"
@@ -299,6 +315,9 @@ ActiveRecord::Schema.define(version: 20140722095711) do
     t.datetime "deleted_at"
     t.string   "book_return"
     t.string   "book_issue"
+    t.integer  "book_id"
+    t.date     "book_issue_date"
+    t.date     "book_return_date"
   end
 
   add_index "issuings", ["deleted_at"], name: "index_issuings_on_deleted_at", using: :btree
@@ -322,6 +341,16 @@ ActiveRecord::Schema.define(version: 20140722095711) do
     t.datetime "updated_at"
   end
 
+  create_table "location_masters", force: true do |t|
+    t.string   "location_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "route_id"
+    t.boolean  "gmaps"
+  end
+
   create_table "locations", force: true do |t|
     t.string   "location"
     t.integer  "sequence_no"
@@ -330,6 +359,8 @@ ActiveRecord::Schema.define(version: 20140722095711) do
     t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "location_master_id"
+    t.boolean  "gmaps"
   end
 
   create_table "monthly_pdc_amounts", force: true do |t|
@@ -448,7 +479,7 @@ ActiveRecord::Schema.define(version: 20140722095711) do
     t.string   "email"
     t.string   "mobile_no"
     t.string   "address"
-    t.string   "language"
+    t.string   "language",                         array: true
     t.string   "experience"
     t.string   "klass"
     t.string   "subject"
@@ -531,6 +562,16 @@ ActiveRecord::Schema.define(version: 20140722095711) do
     t.boolean  "bus_facility"
   end
 
+  create_table "student_route_mappings", force: true do |t|
+    t.integer  "route_id"
+    t.integer  "student_master_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "start_point"
+    t.string   "pick_up_point"
+    t.string   "drop_point"
+  end
+
   create_table "subject_masters", force: true do |t|
     t.string   "subject_name"
     t.datetime "created_at"
@@ -574,13 +615,13 @@ ActiveRecord::Schema.define(version: 20140722095711) do
   create_table "teaching_plans", force: true do |t|
     t.string   "plan_month"
     t.string   "academic_year"
-    t.string   "grade_master_id"
-    t.string   "section_master_id"
     t.date     "teaching_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "faculty_master_id"
     t.integer  "subject_master_id"
+    t.integer  "grade_master_id"
+    t.integer  "section_master_id"
   end
 
   create_table "term_definitions", force: true do |t|

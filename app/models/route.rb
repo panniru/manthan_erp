@@ -2,7 +2,7 @@ class Route < ActiveRecord::Base
   has_many :locations
   has_many :location_masters
   accepts_nested_attributes_for :locations
-
+  attr_accessor :text ,:subject
   
   def save_route(location_params)
     location_params.each do |location|

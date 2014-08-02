@@ -2,7 +2,7 @@
   %h3
     Routes
   %h5
-    = link_to "Send Mail", send_mail_routes_path, :class => "btn btn-primary"
+    = render  "user_mailer/welcome_email"
     = link_to "New Route", "#", :class => "btn btn-primary",:ng_click => "defineNew()"
  
   %table.table.table-bordered

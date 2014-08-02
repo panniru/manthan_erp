@@ -186,8 +186,8 @@ ManthanErp::Application.routes.draw do
   resources :routes do
     collection do
       post "create_bulk"
-      get "send_mail"
       get "get_location_view"
+      post "send_mail"
     end
   end
   

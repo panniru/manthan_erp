@@ -4,23 +4,27 @@
    def index
      if current_user.admin?
        @routes =  Route.all
-      
      else current_user.parent?
-       #@route = Route.find(params[:id])
+       @location = Location.all
        current_user.parent.students.each do |student|
          studentroutemappings = StudentRouteMapping.where('student_master_id = '+"#{student.id}")
-         location = []
          studentroutemappings = studentroutemappings.all.map do |route|
-           #{temp: route.route_id }
-           #studentroutemappings[0][:temp]
-           route.locations.each do |location|
-             location.push({:location => location.location_master.location_name})
+           #p studentroutemappings[0][:temp]
+           #{ :temp =>  route.route_id}
+           p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+           p route.route_id
+           @location = [] 
+           @route = Route.find(route.route_id)
+          
+          
+           @route.locations.each do |location|
+             @location.push({:location => location.location_master.location_name})
            end
-           gon.start_point_latitude = route.start_location.location_master.latitude.to_s 
-           gon.start_point_longitude =route.start_location.location_master.longitude.to_s
-           gon.end_point_latitude = route.end_location.location_master.latitude.to_s 
-           gon.end_point_longitude = route.end_location.location_master.longitude.to_s
-           gon.waypts = location.to_json
+           gon.start_point_latitude = @route.start_location.location_master.latitude.to_s 
+           gon.start_point_longitude =@route.start_location.location_master.longitude.to_s
+           gon.end_point_latitude = @route.end_location.location_master.latitude.to_s 
+           gon.end_point_longitude = @route.end_location.location_master.longitude.to_s
+           gon.waypts = @location.to_json
            gon.width = "750px"
            gon.height = "350px"
          end
@@ -33,8 +37,8 @@
       locations.concat(route.locations)
      end
      gmap_data = Gmaps4rails.build_markers(locations) do |location, marker|
-      marker.lat location.location_master.latitude
-      marker.lng location.location_master.longitude
+       marker.lat location.location_master.latitude
+       marker.lng location.location_master.longitude
      end
      gon.gmap_data = gmap_data.to_json
      gon.width = "750px"
@@ -48,17 +52,19 @@
        end
      end
    end
-
-   def send_mail
-     
-     
-     UserMailer.welcome_email.deliver
-     flash[:success] = I18n.t :success, :scope => [:route, :send_mail]
-     redirect_to routes_path
-
-
+   
+  
+   def form_authenticity_param
+     params[request_forgery_protection_token]
    end
    
+   def send_mail
+     route_mail= params[:route_mail]
+     UserMailer.welcome(route_mail[:subject] ,route_mail[:text]).deliver
+     flash[:success] = I18n.t :success, :scope => [:route, :send_mail]
+     I18n.enforce_available_locales = false
+     redirect_to routes_path
+   end
    
    def get_location_view
      var = LocationMaster.all.map do |var|
@@ -81,7 +87,6 @@
      gon.waypts = @location.to_json
      gon.width = "750px"
      gon.height = "350px"
-     
    end
    
    def update
@@ -107,7 +112,7 @@
      respond_to do |format|
        @route= Route.new(route_params)
        status = @route.save_route(params[:locations])
-      
+       
        format.json do
          render :json => status
        end
@@ -140,6 +145,8 @@
    end
    
    private
+   
+ 
    
    def route_params
      route_params = params.require(:route).permit( :route_no , :busno_up , :no_of_children )
