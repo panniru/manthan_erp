@@ -15,6 +15,13 @@ class TeachingPlansController < ApplicationController
             calendar_date = TeachingPlan.where("trim(to_char(teaching_date, 'Month')) = '#{params[:month].strip}'")
             #calendar_date = TeachingPlan.all
           end
+        elsif current_user.parent?
+          if params[:student_master_id].present?
+            student = StudentMaster.find(params[:student_master_id])
+            calendar_date = TeachingPlan.belongs_to_grade(student.grade_master.id).belongs_to_section(student.section_master.id).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'").distinct         
+          else
+            calendar_date = TeachingPlan.belongs_to_grade(current_user.parent.student_grade_ids).belongs_to_section(current_user.parent.student_section_ids).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'").distinct         
+          end
         elsif  current_user.teacher?
           # c =User.find(current_user) 
           calendar_date = TeachingPlan.select(:teaching_date).belongs_to_faculty(current_user.faculty_master.id).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'").distinct         
@@ -174,6 +181,13 @@ class TeachingPlansController < ApplicationController
           else
             month_date = TeachingPlan.where("trim(to_char(teaching_date, 'Month')) = '#{params[:month].strip}'")
            # month_date =  TeachingPlan.all            
+          end
+        elsif current_user.parent?
+          if params[:student_master_id].present?
+            student = StudentMaster.find(params[:student_master_id])
+            month_date = TeachingPlan.belongs_to_grade(student.grade_master.id).belongs_to_section(student.section_master.id).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'").distinct         
+          else
+            month_date = TeachingPlan.belongs_to_grade(current_user.parent.student_grade_ids).belongs_to_section(current_user.parent.student_section_ids).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'").distinct         
           end
         elsif current_user.teacher?
           month_date =  TeachingPlan.belongs_to_faculty(current_user.faculty_master.id).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month].strip}'")

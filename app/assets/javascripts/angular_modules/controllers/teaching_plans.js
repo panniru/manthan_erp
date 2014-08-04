@@ -16,7 +16,7 @@
                 $scope.grades_sections_subjects = []
                 teachingPlanService.getGradesSectionSubjectService($scope.faculty_id)                
                     .then(function(result) {
-                       // alert(JSON.stringify(result.data));
+                        alert(JSON.stringify(result.data));
                         $scope.grades_sections_subjects =result.data
                     });
                 
@@ -38,7 +38,7 @@
            
             var subject_master_id = $("#subject_master_id").val()            
             $('#calendar1').fullCalendar({
-                events: '/teaching_plans/calendardata.json?month='+month.month.trim()+"&grade_master_id="+grade_master_id+"&section_master_id="+section_master_id+"&subject_master_id="+subject_master_id+"&faculty_master_id="+faculty_master_id,                               
+                events: '/teaching_plans/calendardata.json?month='+month.month.trim()+"&grade_master_id="+grade_master_id+"&section_master_id="+section_master_id+"&subject_master_id="+subject_master_id+"&faculty_master_id="+faculty_master_id+"&student_master_id="+$scope.student_master_id,                               
                 selectable: true,
                 eventMouseover: function(data, event, view) {
                     var url = "/teaching_plans/teaching_date.json?date="+data.teaching_date
@@ -81,13 +81,13 @@
         }
         
         $scope.getMonthData = function(month, implicit){
-            teachingPlanService.getMonthDataService(month, $scope.myTeacher, $scope.myGrade_Section_Subject)
+            alert($scope.student_master_id)
+            teachingPlanService.getMonthDataService(month, $scope.myTeacher, $scope.myGrade_Section_Subject, $scope.student_master_id)
                 .then(function(result) { 
                     $scope.monthData = result.data
                     if (!implicit){
                         drawCalander(month, $scope.myTeacher)
                     }
-                    
                 });
         }     
         
