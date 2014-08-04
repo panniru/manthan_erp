@@ -15,8 +15,6 @@
            p route.route_id
            @location = [] 
            @route = Route.find(route.route_id)
-          
-          
            @route.locations.each do |location|
              @location.push({:location => location.location_master.location_name})
            end
@@ -30,7 +28,6 @@
          end
        end
      end
-     @routes =  Route.all
      @locations = Location.all
      locations = []
      Route.all.each do |route| 
@@ -59,16 +56,26 @@
    end
    
    def send_mail
-     route_mail= params[:route_mail]
-     UserMailer.welcome(route_mail[:subject] ,route_mail[:text]).deliver
-     flash[:success] = I18n.t :success, :scope => [:route, :send_mail]
-     I18n.enforce_available_locales = false
-     redirect_to routes_path
+     respond_to do |format|
+       route_mail= params[:route_mail]
+       mailing_job = RouteMailingJob.new(current_user.user_id, DateTime.now, route_mail[:subject], route_mail[:text])
+       Delayed::Job.enqueue mailing_job, mailing_job.job_run_id
+       #UserMailer.welcome(route_mail[:subject] ,route_mail[:text]).deliver
+       result_link = "<a href=\"/job_runs/#{mailing_job.job_run_id}\">here</a>"
+       msg = I18n.t :success, :scope => [:job, :schedule], job: "Route Mailing Job", result_link: result_link
+       format.json do
+         render :json => msg
+       end
+       format.html do
+         flash[:success] = msg.html_safe
+         redirect_to routes_path
+       end
+     end
    end
    
    def get_location_view
-     var = LocationMaster.all.map do |var|
-       {location_name: var.location_name,id: var.id}
+   var = LocationMaster.all.map do |var|
+     {location_name: var.location_name,id: var.id}
      end
      render :json => var
    end

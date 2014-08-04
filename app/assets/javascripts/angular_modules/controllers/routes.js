@@ -37,7 +37,7 @@
 	
 	$scope.editLocations = function(){
 	    alert();
-            $scope.newRoute.locations = $scope.Route;
+	    //$scope.newRoute.locations = $scope.Route;
             $('#editModal').modal('show');
         }
 

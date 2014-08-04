@@ -6,7 +6,6 @@ class UserMenu
     @controller_name = controller_name
   end
 
-
   def main_menu
     if @user.admin? or @user.accountant?
       return admin_main_menu
@@ -48,7 +47,6 @@ class UserMenu
     main_menu << MenuItem.new(:label => "Recruitment", :klass => ContextDetector.mapped_module_name(@controller_name) == "recruitment_sub_menu"? "active" :"", :icon => "user", :href => "recruitments/recruitment_home")
     main_menu << MenuItem.new(:label => "Defaults", :klass => ContextDetector.mapped_module_name(@controller_name) == "default_master_sub_menu"? "active" :"", :icon => " edit", :href => "/default_masters")
     main_menu << MenuItem.new(:label => "Transport", :klass => ContextDetector.mapped_module_name(@controller_name) == "transport_sub_menu"? "active" :"", :icon => " truck", :href => "/new_vehicles")
-    main_menu
     main_menu << MenuItem.new(:label => "Library", :klass => ContextDetector.mapped_module_name(@controller_name) == "library"? "active" :"", :icon => " book", :href => "books/home_index")
     main_menu
   end
@@ -61,7 +59,7 @@ main_menu = []
     main_menu << MenuItem.new(:label => "HRM", :klass => ContextDetector.mapped_module_name(@controller_name) == "hrm"? "active" :"", :icon => "group", :href => "#")
     main_menu << MenuItem.new(:label => "Recruitment", :klass => ContextDetector.mapped_module_name(@controller_name) == "recruitment_sub_menu"? "active" :"", :icon => "user", :href => "/forms")
     main_menu << MenuItem.new(:label => "Defaults", :klass => ContextDetector.mapped_module_name(@controller_name) == "default_master_sub_menu"? "active" :"", :icon => " edit", :href => "/default_masters")
-    main_menu << MenuItem.new(:label => "Transport", :klass => ContextDetector.mapped_module_name(@controller_name) == "transport_sub_menu"? "active" :"", :icon => " truck", :href => "/routes/18")
+    main_menu << MenuItem.new(:label => "Transport", :klass => ContextDetector.mapped_module_name(@controller_name) == "transport_sub_menu"? "active" :"", :icon => " truck", :href => "/routes")
     main_menu
     main_menu << MenuItem.new(:label => "Library", :klass => ContextDetector.mapped_module_name(@controller_name) == "library"? "active" :"", :icon => " book", :href => "books/home_index")
     main_menu

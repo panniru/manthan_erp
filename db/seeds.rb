@@ -133,6 +133,7 @@ def seed_students
   unless student.present?
     StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.first.id, :bus_facility => true, :section_master_id => SectionMaster.first.id)
     StudentMaster.create(:name => "Srikanth", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.last.id, :bus_facility => true ,:section_master_id => SectionMaster.last.id)
+    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.last.id, :grade_master_id => GradeMaster.first.id, :bus_facility => true, :section_master_id => SectionMaster.first.id)
   end
 end
 
@@ -192,9 +193,9 @@ end
 
 def seed_new_vehicles
   unless NewVehicle.first.present?
-    NewVehicle.create(:id => '1',:model_no => 'AT5678',:make_of_bus => 'TAYOTA',:yom => '2011',:purchase_option => 'Own',:purchase_option_date => '5/6/2011',:capacity => '50'  )
-    NewVehicle.create(:id => '2',:model_no => 'AT5678',:make_of_bus => 'TAYOTA',:yom => '2011',:purchase_option => 'Own',:purchase_option_date => '5/6/2011',:capacity => '50'  )
-    NewVehicle.create(:id => '3',:model_no => 'TR879',:make_of_bus => 'TAYOTA',:yom => '2000',:purchase_option => 'Lease',:purchase_option_date => '5/6/2011',:capacity => '50'  )
+    NewVehicle.create(:id => '1',:model_no => 'AT5678',:make_of_bus => 'TAYOTA',:year_of_manufacture => '2011',:purchase_option => 'Own',:purchase_option_date => '5/6/2011',:capacity => '50'  )
+    NewVehicle.create(:id => '2',:model_no => 'AT5678',:make_of_bus => 'TAYOTA',:year_of_manufacture  => '2011',:purchase_option => 'Own',:purchase_option_date => '5/6/2011',:capacity => '50'  )
+    NewVehicle.create(:id => '3',:model_no => 'TR879',:make_of_bus => 'TAYOTA',:year_of_manufacture  => '2000',:purchase_option => 'Lease',:purchase_option_date => '5/6/2011',:capacity => '50'  )
   end
 end
 

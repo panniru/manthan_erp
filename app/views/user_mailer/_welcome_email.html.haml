@@ -7,17 +7,18 @@
         %h4#myModalLabel.modal-title Compose Mail
         .modal-body{"ng-controller" => "RouteController"}
           %div 
-            .row
-              .col-sm-2
-                = label_tag  "Subject"
-              .col-sm-8
-                = text_field_tag  "subject" ,nil , :ng_model => "subject"                               
-                //%input{:name => "subject", :type => "text"}
-            .row
-              .col-sm-2
-              .col-sm-8
-                = text_area_tag  "text" ,nil  , :ng_model => "text"
-            .pull-right
-              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-              = link_to  "Send Mail","#", :class=> "btn btn-primary", :ng_click => "sendMail()"
-              
+          .row
+            .col-sm-2
+              = label_tag  "Subject"
+            .col-sm-8
+              = text_field_tag  "subject" ,nil , :ng_model => "subject"                               
+              //%input{:name => "subject", :type => "text"}
+          .row
+            .col-sm-2
+            .col-sm-8
+              = text_area_tag  "text" ,nil  , :ng_model => "text"
+          .pull-right
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+            = link_to  "Send Mail","#", :class=> "btn btn-primary", :ng_click => "sendMail()"
+            
+            
