@@ -48,10 +48,9 @@
                 %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "/teaching_plans/{{teaching_plan.id}}", :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete" 
   
     .col-md-2 
-      #calendar1     
+      #calendar1{:ng_init => "initializeCalendar()"}     
 
     .col-sm-5
       = render "form"
-                
                       
                   

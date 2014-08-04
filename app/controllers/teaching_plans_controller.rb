@@ -32,8 +32,8 @@ class TeachingPlansController < ApplicationController
         calendar_date = calendar_date.map do |teach|
           {start: teach.teaching_date, title: "Plan", description: "Plan", url: "#", teaching_date: teach.teaching_date}
         end
-        p calendar_date
-        p "++++++++++++++++++++++"
+        #p calendar_date
+       # p "++++++++++++++++++++++"
         render :json => calendar_date
       end      
     end
@@ -70,10 +70,10 @@ class TeachingPlansController < ApplicationController
       elsif current_user.teacher?
         faculty_master_id  = (params[:teaching_plan][:faculty_master_id])        
         @teaching_plan.faculty_master_id = faculty_master_id
-        p (params[:teaching_plan][:faculty_master_id])
-        p "**********"
-        p faculty_master_id
-        p "&&&&&&&&&&&&&&&&&&"
+       # p (params[:teaching_plan][:faculty_master_id])
+       # p "**********"
+       # p faculty_master_id
+       # p "&&&&&&&&&&&&&&&&&&"
         if @teaching_plan.save        
           format.html { redirect_to @teaching_plan, notice: 'Plan was successfully created.' }
           format.json { render action: 'show', status: :created, location: @teaching_plan }
@@ -240,8 +240,8 @@ class TeachingPlansController < ApplicationController
           day = Date.parse(params[:date]).strftime("%a").downcase
           faculty_master_id = params[:faculty_master_id]
           section_master = SectionMaster.find(params[:section_master_id])
-          p section_master
-          p "#$#$#$#$#"
+        #  p section_master
+         # p "#$#$#$#$#"
           grade_section_param = "#{section_master.grade_master.grade_name}- #{section_master.section_name}"
           render :json => TeachersTimeTable.belongs_to_faculty_master(faculty_master_id).dynamic_day_on_grade_section(day, grade_section_param).count
          # p grade_section_param

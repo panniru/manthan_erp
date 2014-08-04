@@ -15,7 +15,7 @@
             .row
               .col-sm-3
                 = f.label "Plan", :class => 'col-sm-3 control-label'              
-              .col-sm-5{"ng-controller" => "TeachingPlansController"}
+              .col-sm-5
                 = f.text_area :plan_month ,:class => 'form-control'
                 = f.hidden_field :grade_master_id, :value => "{{myGrade_Section_Subject.grade_master_id}}"
                 = f.hidden_field :section_master_id,:value => "{{myGrade_Section_Subject.section_master_id}}"

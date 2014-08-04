@@ -42,7 +42,7 @@
             var subject_master_id = typeof grade_section_subject.subject_master_id == 'undefined' ? "" : grade_section_subject.subject_master_id
             var grade_master_id = typeof grade_section_subject.grade_master_id == 'undefined' ? "" : grade_section_subject.grade_master_id
             var student_id = typeof student_master_id == 'undefined' ? "" : student_master_id
-            var url = "/teaching_plans/getmonthdataservice.json?month="+month.month+"&faculty_master_id="+faculty_master_id+"&grade_master_id="+grade_master_id+"&section_master_id="+section_master_id+"&subject_master_id="+subject_master_id+"&student_master_id="+student_id
+            var url = "/teaching_plans/getmonthdataservice.json?month="+month.month.trim()+"&faculty_master_id="+faculty_master_id+"&grade_master_id="+grade_master_id+"&section_master_id="+section_master_id+"&subject_master_id="+subject_master_id+"&student_master_id="+student_id
             return $http.get(url);
         };
         
