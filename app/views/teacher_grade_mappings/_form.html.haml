@@ -35,7 +35,7 @@
               %select{"ng-model" => "mapping['section_master_id']", "ng-options" => "section.section_master_id as section.section_name for section  in sections | filter : {grade_master_id: mapping['grade_master_id']}",:class => "form-control"}  
                 %option{value: ""}             
             %td
-              %select{"ng-model" => "mapping['subject_master_id']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"} 
+              %select{"ng-model" => "mapping['subject_master_id']", "ng-options" => "subject.subject_master_id as subject.subject_name for subject in subjects",:class => "form-control"} 
                 %option{value: ""}             
     .col-md-3{"ng-show" => "myNewEditFormValue"} 
       .col-md-12{"ng-show" => "mySingleSelect"}                     

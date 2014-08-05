@@ -428,6 +428,7 @@ ManthanErp::Application.routes.draw do
       post "save_assessment_type_mappings"
       get "get_assessment_grade_mappings_service"
       post "save_assessment_grade_mappings"
+      get"get_teacher_assessments_service"
     end  
   end
 

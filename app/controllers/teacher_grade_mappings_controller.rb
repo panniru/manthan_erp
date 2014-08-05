@@ -21,7 +21,7 @@ class TeacherGradeMappingsController < ApplicationController
             temp.subject_master_id = t["subject_master_id"].to_i     
             temp.save
           else
-            @timetable = TeacherGradeMapping.new(t)
+            @timetable = TeacherGradeMapping.new(add_params(t))
             @timetable.save
           end
         end
@@ -61,7 +61,8 @@ class TeacherGradeMappingsController < ApplicationController
     respond_to do |format|
       format.json do       
         if params[:_delete_mapping_id].present?
-          TeacherGradeMapping.find(params[:_delete_mapping_id]).destroy          end
+          TeacherGradeMapping.find(params[:_delete_mapping_id]).destroy      
+        end
         render :json => true
       end
     end
@@ -101,6 +102,9 @@ class TeacherGradeMappingsController < ApplicationController
         end
     end    
   end
+
+  def add_params(params)
+    params.permit(:id, :grade_master_id, :section_master_id , :subject_master_id, :faculty_master_id) 
+  end
   
 end
-

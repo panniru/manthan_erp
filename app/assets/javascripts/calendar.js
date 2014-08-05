@@ -30,7 +30,7 @@ $(document).ready(function() {
                        "July", "August", "September", "October", "November", "December" ]
     var today = new Date();
     $('#calendar1').html("");
-    $('#calendar1').fullCalendar({       
+    $('#calendar1').fullCalendar({ 
         events: '/teaching_plans/calendardata.json?month='+monthNames[today.getMonth()],
         selectable: true,
         eventMouseover: function(data, event, view) {

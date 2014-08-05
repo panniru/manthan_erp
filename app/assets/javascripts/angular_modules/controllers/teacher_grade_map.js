@@ -21,8 +21,7 @@
         
         subjectService.getSubjectServiceView()
             .then(function(result) {
-                $scope.subjects = result.data  
-                //alert(JSON.stringify($scope.subjects));              
+                $scope.subjects = result.data                           
             });         
        
         $scope.showMappings = function(){  
@@ -55,6 +54,7 @@
             $scope.mappings = [];      
             for ( var i = 0; i < 1 ; i++ ) {
                 $scope.mappings.push({ 
+                    id : "",
                     faculty_master_id: $scope.myTeacher,
                     grade_master_id: "",
                     grade_name: "",

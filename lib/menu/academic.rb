@@ -23,6 +23,7 @@ class Academic
     sub_menu << time_tables
     sub_menu << teacher_timetables 
     sub_menu << teaching_plans
+    sub_menu << assessments
     sub_menu
   end
   def parent_sub_menu
