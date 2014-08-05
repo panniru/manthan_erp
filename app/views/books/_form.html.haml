@@ -4,7 +4,7 @@
     .col-sm-2  
       = text_field_tag  "bulk_book[][name]",nil, :class => "form-control", :ng_model => "book.name", :placeholder => "Name"
     .col-sm-2
-      = text_field_tag "bulk_book[][isdn]",nil, :class => 'form-control', :placeholder => "ISBN", :id => "isdn-{{$index}}", :ng_model => "book.isdn"
+      = text_field_tag "bulk_book[][isbn]",nil, :class => 'form-control', :placeholder => "ISBN", :id => "isbn-{{$index}}", :ng_model => "book.isbn"
     .col-sm-2
       = text_field_tag "bulk_book[][author]",nil, :class => "form-control" , :placeholder => "Author", :id => "author-{{$index}}", :ng_model => "book['author']", :ng_model => "book.author"
     .col-sm-2

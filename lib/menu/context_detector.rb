@@ -45,11 +45,17 @@ class ContextDetector
     "new_vehicles" => "transport",
     "routes" => "transport",
     "student_route_mappings" => "transport",
-    "default_masters" => "default_master_sub_menu"
+    "default_masters" => "default_master_sub_menu",
+    "HRM" => "hrm_sub_menu"
   }
   
-  def self.get_context(key)
-    CONTEXT_CONTROLLER_MAPPER[key].present? ? CONTEXT_CONTROLLER_MAPPER[key].classify.constantize.new(key) : nil
+  def self.get_context(args)
+    if args[:context].present?
+      CONTEXT_CONTROLLER_MAPPER[args[:context]].present? ? CONTEXT_CONTROLLER_MAPPER[args[:context]].classify.constantize.new(:controller => args[:key], :params => args[:params]) : nil
+    else
+      CONTEXT_CONTROLLER_MAPPER[args[:key]].present? ? CONTEXT_CONTROLLER_MAPPER[args[:key]].classify.constantize.new(:controller =>args[:key], :params => args[:params]) : nil
+    end
+    
   end
 
 

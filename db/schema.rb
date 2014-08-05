@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140728053344) do
+ActiveRecord::Schema.define(version: 20140804120557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,9 +127,17 @@ ActiveRecord::Schema.define(version: 20140728053344) do
     t.datetime "updated_at"
   end
 
+  create_table "assessment_criteria", force: true do |t|
+    t.integer  "subject_master_id"
+    t.integer  "grade_master_id"
+    t.string   "subject_criteria"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "books", force: true do |t|
     t.string   "name"
-    t.string   "isdn"
+    t.string   "isbn"
     t.string   "author"
     t.date     "year_of_publishing"
     t.string   "number_of_copies"
@@ -293,6 +301,13 @@ ActiveRecord::Schema.define(version: 20140728053344) do
     t.datetime "updated_at"
   end
 
+  create_table "grading_masters", force: true do |t|
+    t.string   "grading_name"
+    t.string   "grading_desc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "interviewschedulers", force: true do |t|
     t.string   "name"
     t.string   "description"
@@ -318,6 +333,7 @@ ActiveRecord::Schema.define(version: 20140728053344) do
     t.integer  "book_id"
     t.date     "book_issue_date"
     t.date     "book_return_date"
+    t.date     "return"
   end
 
   add_index "issuings", ["deleted_at"], name: "index_issuings_on_deleted_at", using: :btree
@@ -383,6 +399,7 @@ ActiveRecord::Schema.define(version: 20140728053344) do
     t.datetime "updated_at"
     t.string   "status"
     t.datetime "deleted_at"
+    t.string   "year_of_manufacture"
   end
 
   add_index "new_vehicles", ["deleted_at"], name: "index_new_vehicles_on_deleted_at", using: :btree
@@ -471,36 +488,6 @@ ActiveRecord::Schema.define(version: 20140728053344) do
     t.datetime "updated_at"
   end
 
-  create_table "recruitments", force: true do |t|
-    t.string   "form_no"
-    t.string   "name"
-    t.string   "dob"
-    t.string   "gender"
-    t.string   "email"
-    t.string   "mobile_no"
-    t.string   "address"
-    t.string   "language",                         array: true
-    t.string   "experience"
-    t.string   "klass"
-    t.string   "subject"
-    t.string   "education_qualification"
-    t.string   "expected_salary"
-    t.string   "nationality"
-    t.string   "post"
-    t.string   "status"
-    t.string   "staff_name"
-    t.string   "description"
-    t.string   "start_time"
-    t.string   "end_time"
-    t.string   "educational_certificates"
-    t.string   "previous_employment_proof"
-    t.string   "salary_slips_for_previous_months"
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "subject_master_id"
-  end
-
   create_table "roles", force: true do |t|
     t.string   "role"
     t.string   "code"
@@ -549,6 +536,16 @@ ActiveRecord::Schema.define(version: 20140728053344) do
     t.datetime "updated_at"
   end
 
+  create_table "student_attendances", force: true do |t|
+    t.integer  "grade_master_id"
+    t.integer  "section_master_id"
+    t.integer  "student_master_id"
+    t.date     "date"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "student_masters", force: true do |t|
     t.string   "name"
     t.date     "dob"
@@ -560,6 +557,25 @@ ActiveRecord::Schema.define(version: 20140728053344) do
     t.integer  "grade_master_id"
     t.integer  "section_master_id"
     t.boolean  "bus_facility"
+    t.integer  "branch_id"
+    t.string   "surname"
+    t.string   "second_lang"
+    t.string   "board"
+    t.string   "medium"
+    t.string   "year"
+    t.string   "written"
+    t.string   "reading"
+    t.string   "spoken"
+    t.string   "blood_group"
+    t.string   "gender"
+    t.string   "nationality"
+    t.string   "language"
+    t.string   "last_school"
+    t.string   "address_line1"
+    t.string   "address_line2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "pin"
   end
 
   create_table "student_route_mappings", force: true do |t|
