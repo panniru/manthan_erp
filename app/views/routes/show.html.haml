@@ -1,50 +1,52 @@
 .row{"ng-controller" => "RouteController"}
-  .col-sm-2
-    = label_tag "Route no:", nil, :class => "form-label"
-  .col-sm-2
-    = label_tag @route.route_no ,nil
-  .col-sm-2
-    = label_tag "Busno:", nil, :class => "form-label"
-  .col-sm-2
-    = label_tag @route.busno_up , nil 
-  .col-sm-2
-    = label_tag "Children:", nil, :class => "form-label"
-  .col-sm-2
-    = label_tag @route.no_of_children,nil 
-.row
-  .col-sm-2
-    = label_tag "Starting Point:", nil, :class => "form-label"
-  .col-sm-2
-    = label_tag @route.start_location.location_master.location_name,nil 
-  .col-sm-2
-    = label_tag "Ending point:", nil, :class => "form-label"
-  .col-sm-2
-    = label_tag @route.end_location.location_master.location_name ,nil 
-    %br
-.row
-  .col-sm-3
-    %table.table.table-bordered
-      %thead
-        %tr
-          %th Sequence No
-          %th Location
-         
-      %tbody
-        - @route.locations.each do |location|
-          %tr
-            %td= location.sequence_no
-            %td= location.location_master.location_name
+  .row
+    .col-sm-2
+      = label_tag "Route no:", nil, :class => "form-label"
+    .col-sm-2
+      = label_tag @route.route_no ,nil
+    .col-sm-2
+      = label_tag "Busno:", nil, :class => "form-label"
+    .col-sm-2
+      = label_tag @route.busno_up , nil 
+    .col-sm-2
+      = label_tag "Children:", nil, :class => "form-label"
+    .col-sm-2
+      = label_tag @route.no_of_children,nil 
+  .row
+    .col-sm-2
+      = label_tag "Starting Point:", nil, :class => "form-label"
+    .col-sm-2
+      = label_tag @route.start_location.location_master.location_name,nil 
+    .col-sm-2
+      = label_tag "Ending point:", nil, :class => "form-label"
+    .col-sm-2
+      = label_tag @route.end_location.location_master.location_name ,nil 
       %br
-      = link_to "New Location", "#", :class => "btn btn-primary",:ng_click => "editLocations()"
-      .modal.fade{ :id => "editModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
-        .modal-dialog
-          .modal-content
-            .modal-header
-              %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
-              %h4.modal-title{ :id => "myModalLabel"} New Location
-            .modal-body{"ng-controller" => "RouteController"}
-              = render 'modal'
-              
+  .row
+    .col-sm-3
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th Sequence No
+            %th Location
+            
+        %tbody
+          - @route.locations.each do |location|
+            %tr
+              %td= location.sequence_no
+              %td= location.location_master.location_name
+  = button_tag "location",  :class => 'btn btn-primary',:ng_click => "RouteController.editLocations()"
+                
+           
+  .modal.fade{ :id => "editModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} New Location
+        .modal-body{"ng-controller" => "RouteController"}
+          = render "modal"
+          
   .col-sm-9
     = render "shared/gmap"
     

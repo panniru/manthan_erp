@@ -1,0 +1,20 @@
+%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Allot"
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title Alloting Route
+        = form_for StudentRouteMapping.new , :html => { :class => "form-horizontal", :role => "form"} do |f| 
+          .modal-body{"ng-controller" => "MappingController"}
+            .row{"ng-repeat" => "location in newRoute.locations"}
+              .col-sm-4
+                = f.label "Nearest Location"
+              .col-sm-3
+                %select{"ng-model" => "location.location_master_id", "ng-options" => "var.id as var.location_name for var in all_locations",:class => "form-control",:required => "required", }
+                %option{style: "display:none", value: ""} Select Location
+                
+           
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+            = button_tag "Save", :type => "submit", :class => 'btn btn-primary'

@@ -7,7 +7,4 @@ class MenuItem
   attribute :icon_class
   attribute :href
   attribute :is_active
-  
-  
-  
 end

@@ -97,6 +97,8 @@ end
 def seed_jobs
   job_attributes = FactoryGirl.attributes_for(:fee_structure_mailing)
   Job.where(code: job_attributes[:code]).first_or_create!(job_attributes.delete_if { |k,v| k == :code })
+  job_attributes = FactoryGirl.attributes_for(:route_mailing)
+  Job.where(code: job_attributes[:code]).create(job_attributes.delete_if { |k,v| k == :code })
 end
 
 def seed_payment_types
@@ -121,14 +123,17 @@ end
 
 
 def seed_parents
-  Parent.first_or_create(:father_name => "Raghu", :mother_name => "Janaki", :father_email => "srikanth@ostrylabs.com", :mother_email => "srikanth@ostryalabs.com", :user_id => User.find_by_role_id(Role.find_by_code("parent")).id)
+  Parent.first_or_create(:father_name => "Raghu", :mother_name => "Janaki", :father_email => "navya@ostryalabs.com", :mother_email => "navya@ostryalabs.com", :user_id => User.find_by_role_id(Role.find_by_code("parent")).id)
+  Parent.create(:father_name => "Ramu", :mother_name => "Jani", :father_email => "shanmugapriya@ostryalabs.com", :mother_email => "navya@ostryalabs.com", :user_id => User.find_by_role_id(Role.find_by_code("parent")).id)
+  Parent.create(:father_name => "Raju", :mother_name => "Janu", :father_email => "umarani@ostryalabs.com", :mother_email => "navya@ostryalabs.com", :user_id => User.find_by_role_id(Role.find_by_code("parent")).id)
 end
 
 def seed_students
   student = StudentMaster.first
   unless student.present?
-    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.first.id, :section_master_id => SectionMaster.first.id)
-    StudentMaster.create(:name => "Srikanth", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.last.id, :section_master_id => SectionMaster.last.id)
+    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.first.id, :bus_facility => true, :section_master_id => SectionMaster.first.id)
+    StudentMaster.create(:name => "Srikanth", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.last.id, :bus_facility => true ,:section_master_id => SectionMaster.last.id)
+    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.last.id, :grade_master_id => GradeMaster.first.id, :bus_facility => true, :section_master_id => SectionMaster.first.id)
   end
 end
 
@@ -174,8 +179,34 @@ def seed_location_masters
   end
 end
 
-   
-    
+def seed_locations
+  unless Location.first.present?
+    Location.create(:id => '25' , :sequence_no => '1' , :route_id => '18', :location_master_id => '8'  )
+    Location.create(:id => '26' , :sequence_no => '4' , :route_id => '18', :location_master_id => '6'  )
+    Location.create(:id => '27' , :sequence_no => '2' , :route_id => '18', :location_master_id => '7'  )
+    Location.create(:id => '28' , :sequence_no => '3' , :route_id => '18', :location_master_id => '9'  )
+    Location.create(:id => '29' , :sequence_no => '3' , :route_id => '19', :location_master_id => '4'  )
+    Location.create(:id => '30' , :sequence_no => '1' , :route_id => '19', :location_master_id => '5'  )
+    Location.create(:id => '31' , :sequence_no => '2' , :route_id => '19', :location_master_id => '11'  )
+  end
+end
+
+def seed_new_vehicles
+  unless NewVehicle.first.present?
+    NewVehicle.create(:id => '1',:model_no => 'AT5678',:make_of_bus => 'TAYOTA',:year_of_manufacture => '2011',:purchase_option => 'Own',:purchase_option_date => '5/6/2011',:capacity => '50'  )
+    NewVehicle.create(:id => '2',:model_no => 'AT5678',:make_of_bus => 'TAYOTA',:year_of_manufacture  => '2011',:purchase_option => 'Own',:purchase_option_date => '5/6/2011',:capacity => '50'  )
+    NewVehicle.create(:id => '3',:model_no => 'TR879',:make_of_bus => 'TAYOTA',:year_of_manufacture  => '2000',:purchase_option => 'Lease',:purchase_option_date => '5/6/2011',:capacity => '50'  )
+  end
+end
+
+def seed_student_route_mapping
+  unless StudentRouteMapping.first.present?
+    StudentRouteMapping.create(:id => '1' , :route_id => '18' , :student_master_id => '1' )
+    StudentRouteMapping.create(:id => '2' , :route_id => '18' , :student_master_id => '2' )
+  end
+end
+
+
 def seed_sections
   unless SectionMaster.first.present?
     grademasters=GradeMaster.all
@@ -194,8 +225,6 @@ def seed_routes
   end
 end
 
-
-
     
 def seed_subjects
   unless SubjectMaster.first.present?
@@ -206,6 +235,7 @@ def seed_subjects
     SubjectMaster.create(:subject_name => 'TELUGU')    
   end
 end
+
 def seed_defaults
   unless DefaultMaster.first.present?
     DefaultMaster.create(:default_name => 'no_of_periods',:default_value => '8')
@@ -261,6 +291,9 @@ def seed_all
   seed_faculty
   seed_location_masters
   seed_routes
+  seed_locations
+  seed_new_vehicles
+  seed_student_route_mapping
 end
 
 seed_all

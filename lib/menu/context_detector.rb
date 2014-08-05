@@ -44,6 +44,7 @@ class ContextDetector
     "parents" => "default_master_sub_menu",
     "new_vehicles" => "transport",
     "routes" => "transport",
+    "student_route_mappings" => "transport",
     "default_masters" => "default_master_sub_menu"
   }
   

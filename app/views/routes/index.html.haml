@@ -2,9 +2,9 @@
   %h3
     Routes
   %h5
-    = link_to "Send Mail", send_mail_routes_path, :class => "btn btn-primary"
+    = render  "user_mailer/welcome_email"
     = link_to "New Route", "#", :class => "btn btn-primary",:ng_click => "defineNew()"
- 
+    
   %table.table.table-bordered
     %thead
       %tr
@@ -15,7 +15,7 @@
         %th No of Children
         %th
     %tbody
-      - @routes.each do |route|
+      - Route.all.each do |route|
         %tr
           %td= link_to "#{route.route_no}" , route_path(route)
           %td= route.busno_up

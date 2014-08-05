@@ -57,7 +57,7 @@ gem 'carmen-rails', '~> 1.0.0'
 
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
-
+gem 'mail'
 gem 'oj'
 gem 'oj_mimic_json' # we need this for Rails 4.1.x
 
