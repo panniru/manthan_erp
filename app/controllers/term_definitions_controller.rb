@@ -74,6 +74,11 @@ class TermDefinitionsController < ApplicationController
   def term_definition_params
     params.require(:term_definition).permit(:term_definition, :amount_per)
   end
+
+  def term_definition_attributes(param)
+    param.permit(:term_definition, :amount_per, :termdate)
+  end
+  
   
   def build_term_from_bulk
     params.require(:bulk_term).select{|term_definition| term_definition["term_definition"].present? and  term_definition["amount_per"].present?}.map do |term_definition|
@@ -84,7 +89,7 @@ class TermDefinitionsController < ApplicationController
         end
         @term_definition_obj
       else
-        TermDefinition.new(term_definition)
+        TermDefinition.new(term_definition_attributes(term_definition))
       end
     end
   end

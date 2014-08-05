@@ -117,6 +117,10 @@ class FeeGradeBucketsController < ApplicationController
     params.require(:fee_grade_bucket).permit( :grade_from ,:grade_to)
   end
   
+  def bucket_param_attributes(param)
+    param.permit( :grade_from ,:grade_to)
+  end
+  
   def build_fee_grade_bucket_bulk
     params.require(:bulk_fee_grade_buckets).select{|fee_grade_bucket| fee_grade_bucket["grade_from"].present?  and fee_grade_bucket["grade_to"].present?}.map do |fee_grade_bucket|
       if fee_grade_bucket[:id].present?
@@ -126,7 +130,7 @@ class FeeGradeBucketsController < ApplicationController
         end
         @fee_grade_bucket_obj
       else
-        FeeGradeBucket.new(fee_grade_bucket)
+        FeeGradeBucket.new(bucket_param_attributes(fee_grade_bucket))
       end
     end
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140804120557) do
+ActiveRecord::Schema.define(version: 20140804151320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140804120557) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
   end
 
   create_table "admissions", force: true do |t|
@@ -131,6 +132,20 @@ ActiveRecord::Schema.define(version: 20140804120557) do
     t.integer  "subject_master_id"
     t.integer  "grade_master_id"
     t.string   "subject_criteria"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "assessment_grade_mappings", force: true do |t|
+    t.integer  "grade_master_id"
+    t.integer  "assessment_type_id"
+    t.integer  "no_of_times"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "assessment_types", force: true do |t|
+    t.string   "assessment_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -328,12 +343,12 @@ ActiveRecord::Schema.define(version: 20140804120557) do
     t.string   "book"
     t.integer  "student_master_id"
     t.datetime "deleted_at"
+    t.date     "return"
     t.string   "book_return"
     t.string   "book_issue"
     t.integer  "book_id"
     t.date     "book_issue_date"
     t.date     "book_return_date"
-    t.date     "return"
   end
 
   add_index "issuings", ["deleted_at"], name: "index_issuings_on_deleted_at", using: :btree
@@ -488,6 +503,29 @@ ActiveRecord::Schema.define(version: 20140804120557) do
     t.datetime "updated_at"
   end
 
+  create_table "recruitments", force: true do |t|
+    t.string   "form_no"
+    t.string   "name"
+    t.string   "dob"
+    t.string   "status"
+    t.string   "staff_name"
+    t.string   "description"
+    t.string   "start_time"
+    t.string   "end_time"
+    t.string   "educational_certificates"
+    t.string   "previous_employment_proof"
+    t.string   "salary_slips_for_previous_months"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "subject_master_id"
+    t.string   "closestatus"
+    t.integer  "staff_admission_id"
+    t.string   "comments"
+    t.string   "staffhead"
+    t.string   "final_result"
+  end
+
   create_table "roles", force: true do |t|
     t.string   "role"
     t.string   "code"
@@ -522,6 +560,35 @@ ActiveRecord::Schema.define(version: 20140804120557) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "grade_master_id"
+  end
+
+  create_table "staff_admissions", force: true do |t|
+    t.string   "form_no"
+    t.string   "name"
+    t.string   "dob"
+    t.string   "gender"
+    t.string   "email"
+    t.string   "mobile_no"
+    t.text     "address"
+    t.string   "nationality"
+    t.string   "klass"
+    t.text     "language"
+    t.string   "subject"
+    t.string   "experience"
+    t.string   "expected_salary"
+    t.string   "education_qualification"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "post"
+    t.integer  "staff_leader_id"
+    t.string   "staffhead"
+  end
+
+  create_table "staff_leaders", force: true do |t|
+    t.string   "heads"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "staffs", force: true do |t|

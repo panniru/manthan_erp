@@ -1,5 +1,7 @@
 .col-md-12
   = render :partial => "shared/search_student", :locals => { :submit_path => student_masters_path}
+  - unless params[:context].present?   
+    = link_to "Upload", "student_masters/new_upload", :class => "btn btn-primary"
 %hr
 %br
 

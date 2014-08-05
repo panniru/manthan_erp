@@ -95,6 +95,10 @@ class PostDatedChequesController < ApplicationController
     params.require(:post_dated_cheque).permit( :date, :amount_per )
   end
 
+  def cheque_attributes(param)
+    param.permit( :date, :amount_per )
+  end
+
   def build_post_dated_cheque_from_bulk
     params.require(:bulk_post_dated_cheques).select{|post_dated_cheque| post_dated_cheque["date"].present? and post_dated_cheque["amount_per"].present?}.map do |post_dated_cheque|
       post_dated_cheque_obj = nil
@@ -104,7 +108,7 @@ class PostDatedChequesController < ApplicationController
           post_dated_cheque_obj.send(key+"=", val) if post_dated_cheque_obj.attributes.include?(key)
         end
       else
-        post_dated_cheque_obj = PostDatedCheque.new(post_dated_cheque)
+        post_dated_cheque_obj = PostDatedCheque.new(cheque_attributes(post_dated_cheque))
       end
       post_dated_cheque_obj.month = Date::MONTHNAMES[Date.parse(post_dated_cheque["date"]).month]
       post_dated_cheque_obj
