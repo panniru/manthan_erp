@@ -15,6 +15,7 @@ class Academic
     sub_menu << teaching_plans
     sub_menu << assessment_criteria
     sub_menu << grading
+    sub_menu << assessments
     sub_menu
   end
   def teacher_sub_menu
@@ -70,6 +71,10 @@ class Academic
 
   def grading
     MenuItem.new(:label => "Grading", :klass => "", :icon => "list-ol", :href => "/gradings")
+  end
+
+   def assessments
+    MenuItem.new(:label => "Assessments", :klass => "", :icon => "list-ol", :href => "/assessments")
   end
 
 
