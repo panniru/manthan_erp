@@ -1,21 +1,28 @@
-= form_for @recruitment,:html => { :class => "form-horizontal", :role => "form" } do |f|
+= form_for @staff_admission, :html => { :class => "form-horizontal", :role => "form"} do |f|
   .row
   .col-sm-12
-    .form-group
-      .col-sm-3
+    .form-group{"ng-controller" => "StaffAdmissionsController"}
+      .col-sm-2
         = f.label "Form no:", :class => 'control-label'
-      .col-sm-3
+      .col-sm-2
         = f.text_field :form_no,:class => 'form-control'
-     
-
+      .col-sm-2
+        = f.label "Applied for the Post:", :class => 'control-label'
+      .col-sm-2{"ng-controller" => "StaffsController"}
+        %select{"ng-model" => "myPost", "ng-options" => "post.post_name for post in posts", :class => "form-control", :required => "required"}
+          %option{style: "display:none", value: ""} Select Post
+        = f.hidden_field :post, :value => "{{myPost.post_name}}"
+      .col-sm-1
+        = f.label "Admin Head:", :class => 'control-label'
+      .col-sm-3
+        %select{"ng-model" => "myHead", "ng-options" => "head.head_name for head in heads", :class => "form-control", :required => "required"}
+          %option{style: "display:none", value: ""} Select Head
+        = f.hidden_field :staffhead, :value => "{{myHead.head_name}}"
     .form-group
       .col-sm-3
         = f.label "Name Of The Applicant:", :class => 'control-label'
       .col-sm-3
         = f.text_field :name,:class => 'form-control'
-     
-  
-
       .col-sm-3
         = f.label "Date Of Birth:", :class => 'control-label'
       .col-sm-3
@@ -29,8 +36,6 @@
         = f.label :"female"
         = f.radio_button :gender, 'M'
         = f.label :"male"
-     
-
       .col-sm-3
         = f.label "Email:", :class => 'control-label'
       .col-sm-3
@@ -41,8 +46,6 @@
         = f.label "Mobile No:", :class => 'control-label'
       .col-sm-3
         = f.text_field :mobile_no, :class => 'form-control'
-        
-
       .col-sm-3
         = f.label "Address:", :class => 'control-label'
       .col-sm-3
@@ -64,8 +67,7 @@
       .col-sm-3
         = f.label "Known Languages:", :class => 'control-label'
       .col-sm-3
-        = select_tag :language, options_from_collection_for_select(LanguageList::COMMON_LANGUAGES, "iso_639_1", "name"),:multiple => "true",:size => 3
-        = f.hidden_field :language, :value => @recruitment.language
+        = f.select(:language, options_from_collection_for_select(LanguageList::COMMON_LANGUAGES, "iso_639_3", "name"),{},:multiple => true)
     .form-group{"ng-controller" => "RecruitmentsController"}
       .col-sm-3
         = f.label "Preferred Subject:", :class => 'control-label'
@@ -89,9 +91,10 @@
         = f.label "Education Qualification:", :class => 'control-label'
       .col-sm-3
         = f.select :education_qualification, options_for_select([['M.Sc(B.Ed)'],['M.A'],['M.Sc'],['Graduation'],['MBA'],['MCA']])
+      
+        
+      
   .row
     %center
       = f.hidden_field :status,:value => "Application_Created"
-      = f.submit "Create" , :class =>'btn btn-primary'
-      
- 
+      = button_tag "Create", :type => "submit", :class => 'btn btn-primary'

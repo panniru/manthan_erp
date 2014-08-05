@@ -1,0 +1,70 @@
+.row
+  .container10
+    .process
+      .process-row
+        .process-step
+          - if("#{@staff_admission.status}" == "Application_Created")
+            %button.btn.btn-warning.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-comments-o.fa-2x
+            %br
+            %span.label.label-default Enquiry Form
+          - else
+            %button.btn.btn-success.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-comments-o.fa-2x
+            %br
+            %span.label.label-default Enquiry Form
+        .glyphicon.glyphicon-chevron-right
+        .process-step
+          - if("#{@staff_admission.status}" == "Document_Verified")
+            %button.btn.btn-warning.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-comments-o.fa-2x
+            %br
+            %span.label.label-default Doc Verification
+          - else
+            %button.btn.btn-success.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-comments-o.fa-2x
+            %br
+            %span.label.label-default Doc Verification
+        .glyphicon.glyphicon-chevron-right
+        .process-step
+          - if("#{@staff_admission.status}" == "Assessment_Planned")
+            %button.btn.btn-warning.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-calendar-o.fa-2x
+            %br
+            %span.label.label-default Assessment Planned
+          - else
+            %button.btn.btn-success.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-calendar-o.fa-2x
+            %br
+            %span.label.label-default Assessment Planned
+        .glyphicon.glyphicon-chevron-right
+        .process-step
+          - if("#{@staff_admission.status}" == "Assessment_Completed")
+            %button.btn.btn-warning.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-tasks.fa-2x
+            %br
+            %span.label.label-default Assessment Completed
+          - else
+            %button.btn.btn-success.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-tasks.fa-2x
+            %br
+            %span.label.label-default Assessment Completed
+        .glyphicon.glyphicon-chevron-right      
+        .process-step
+          - if("#{@staff_admission.status}" == "Management_Reviewed")
+            %button.btn.btn-warning.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-user.fa-2x
+            %br
+            %span.label.label-default Management Review
+          - else
+            %button.btn.btn-success.btn-circle{:disabled => "disabled", :type => "button"}
+              %i.fa.fa-user.fa-2x
+            %br
+            %span.label.label-default Management Review
+        .glyphicon.glyphicon-chevron-right      
+        .process-step
+          %button.btn.btn-success.btn-circle{:disabled => "disabled", :type => "button"}
+            %i.fa.fa-user.fa-2x
+          %br
+          %span.label.label-default Selection
+      

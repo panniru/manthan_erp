@@ -6,6 +6,7 @@ $(document).ready(function() {
         events: '/events.json'     
         //teaching_plans: '/teaching_plans.json' // put your options and callbacks here
     })
+
     $('#calendar2').fullCalendar({
         
         header: {

@@ -1,49 +1,96 @@
 .row
+  .col-sm-12
+    = render "shared/steprecruitment"
+    %br
+.row
   .col-sm-8
-    %table.table-striped.table-condensed
-      %tr
-        %td{style: "width:25%"}
-          %b
-            %span.label.label-info Application #
-        %td{style: "width:25%"}
-          = @recruitment.form_no
-          
-      %tr
-        %td
-          %label{for: "name"} Name
-        %td
-          = @recruitment.name
-        %td
-          %label{for: "dob"} DOB
-        %td
-          = @recruitment.dob
-      %tr
-        %td
-          %label{for: "gender"} Gender
-        %td
-          = @recruitment.gender
-        %td
-          %label{for: "email"} Email
-        %td
-          = @recruitment.email
-  
-      %tr
-        %td
-          %label{for: "mobile_no"} Mobile No
-        %td
-          = @recruitment.mobile_no
-        %td
-          %label{for: "Address"} Address
-        %td
-          = @recruitment.address
-        
-      %tr
-        %td
-          %label{for: "nationality"} Nationality
-        %td
-          = @recruitment.nationality
-        %td
-          %label{for: "preferred subject"} Preferred Class
-        %td
-          = @recruitment.subject
+    = render "homeindex"
+  .col-sm-3
+    - if("#{@staff_admission.status}" == 'Application_Created'||"#{@staff_admission.status}" == 'Assessment_Planned'||"#{@staff_admission.status}" == 'Document_Verified'||"#{@staff_admission.status}" == 'Assessment_Completed'||"#{@staff_admission.status}" == 'Management_Reviewed')
+      = link_to "Close the Form", "#", :class => "change btn1 btn btn-danger", :data => {:id => "#{@staff_admission.id}"}
+      #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+              %center
+                %h4#myModalLabel.modal-title Reason for Closing
+            = form_for @recruitment do |f|
+              .modal-body
+                .row
+                  .col-sm-1
+                    = f.radio_button :closestatus, "Not upto the mark"
+                  .col-sm-10
+                    = f.label "Not Upto the Mark"
+                .row
+                  .col-sm-1
+                    = f.radio_button :closestatus, "Financial Crisis"
+                  .col-sm-10
+                    = f.label "Financial Crisis"
+                .row
+                  .col-sm-1
+                    = f.radio_button :closestatus, "Didn't Pick the Interview Call"
+                  .col-sm-10
+                    = f.label "Didn't Pick the Interview Call"
+                                 
+              .modal-footer
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+                = f.hidden_field :status,:value => "Form_Closed"
+                = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
+                
+
+    - else
+      = link_to "Form Closed", "#", :class => "btn1 btn btn-success", :data => {:id => "#{@recruitment.id}"}
+    %br
+    %br
+      
+    - if("#{@staff_admission.status}" == 'Application_Created')
+      = link_to "Doc Verification",document_verification_recruitment_path,:class => 'btn1 btn btn-success'
+    %br
+    %br
+    
+    - if("#{@recruitment.status}" == 'Document_Verified')
+      = link_to "View Documents",view_document_recruitment_path,:class => 'btn1 btn btn-primary'
+      %br
+      %br
+      = link_to "Create Assessment","#", :onclick => "createStaffAssessment('#{@recruitment.staff_leader_id}');", :class => 'btn1 btn btn-success'
+    %br
+    %br
+.row
+  .col-sm-10
+    .calendar2
+    #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+            .row
+              %h1.pull-right.btn.btn-warning
+                = @admission.faculty
+              %center
+                %h4#myModalLabel.modal-title Assessment Plan
+            = form_for @recruitment do |f|
+              .modal-body
+                .row
+                  .col-sm-3
+                    = f.label "Time", :class => 'col-sm-3 control-label'
+                  .col-sm-5
+                    = f.time_field :start_time ,:class => 'form-control'
+                  
+                    %br
+                .row
+                  .col-sm-3
+                    = f.label "Description", :class => 'col-sm-3 control-label'              
+                  .col-sm-5
+                    = f.text_area :title ,:class => 'form-control'
+                .row
+                  .col-sm-3
+                    
+              .modal-footer
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+                = f.hidden_field :status,:value => "Assessment_Planned"
+                = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
+                      
+   
+
 

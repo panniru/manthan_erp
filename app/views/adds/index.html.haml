@@ -1,5 +1,18 @@
-.row
-  .col-sm-9
+.panel.panel-default
+  .panel-body
+    .col-sm-3
+      .pull-left
+        .input-group
+          %span.input-group-addon
+            = fa_icon "search lg"
+          %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+          %br
+    .col-sm-4
+      %center
+        %h4
+          Advertisements
+
+    .col-sm-4
     .pull-right
       %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New"
       #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
@@ -27,12 +40,7 @@
                     = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
                   %br
                   %br
-= form_tag adds_path, method: :get do
-  %input#search{name: "search", placeholder: "Enter search term...", type: "text",:class => 'form'}/
-  = submit_tag "Search", name: nil, :class => 'btn btn-primary'
-  %br
-  %br
-%table.table.table.striped.table-bordered.table-condensed.table-hover{style: "width:70%"}
+%table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
       %th Title

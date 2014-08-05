@@ -16,6 +16,7 @@ def seed_role
   @bod = Role.find_by_code("bod")
   @teacher = Role.find_by_code("teacher")
   @librarian = Role.find_by_code("librarian") 
+  @transport_head = Role.find_by_code("transport_head")
   unless @admin.present?
     Role.create(:role => "admin", :code => "admin", :description => "admin")
   end
@@ -41,6 +42,10 @@ def seed_role
   unless @librarian.present?
     Role.create(:role => "librarian", :code => "librarian", :description => "librarian")
   end
+  
+  unless @transport_head.present?
+    Role.create(:role => "transport_head",:code => "transport_head",:description => "transport_head")
+  end
 
 end
 
@@ -53,7 +58,7 @@ def seed_user
   bod = Role.find_by_code("bod")
   teacher = Role.find_by_code("teacher")
   librarian = Role.find_by_code("librarian")
-
+  transport_head = Role.find_by_code("transport_head")
   @user_admin = User.find_by_role_id(admin_role)
   @user_parent = User.find_by_role_id(parent_role)
   @user_accountant = User.find_by_role_id(accountant_role)
@@ -62,6 +67,7 @@ def seed_user
   @user_teacher = User.find_by_role_id(teacher)
   @user_librarian = User.find_by_role_id(librarian)
   @user_teacher = User.find_by_user_id('teacher1')
+  @user_transport_head = User.find_by_role_id(transport_head)
   unless @user_principal.present?
     User.create(:email => "principal@manthan.com", :password => "welcome", :user_id => "principal", :role_id => principal.id)
   end
@@ -91,6 +97,11 @@ def seed_user
   unless @user_teacher.present?
     User.create(:email => "swamy@manthan.com", :password => "welcome", :user_id => "teacher1", :role_id => teacher.id)
   end
+  
+  unless @user_transport_head.present?
+    User.create(:email => "transport_head@manthan.com", :password => "welcome", :user_id => "transport_head", :role_id => transport_head.id)
+  end
+
 end
 
 
@@ -140,8 +151,8 @@ end
 def seed_admissions
   admission = Admission.first
   unless admission.present?
-    Admission.create( :name => "ShanmugaPriya", :grade => "1", :dob => "14-12-2009", :gender => "Female", :nationality => "IN", :language => "Tamil", :father_name => "Kamaraj", :mother_name => "Selvi", :father_occupation => "Business", :mother_occupation => "Home Maker", :father_company => "Selvi Note Books", :mother_company => "Nil", :father_education => "Graduate", :mother_education => "Graduate", :income => "Rs.20,000 to Rs.50,000 p.m.",:address => "10/45, Nadar Vidhya Salai Street, Southgate,Madurai,TN", :landline => "04522333495", :mobile => "9443591500", :email => "shanmugapriya@ostryalabs.com", :transport => "Private", :busstop => "Nil", :last_school => "St.Joseph Higher Secondary School", :city => "Madurai", :changing_reason => "Transfer", :know_school => "Friends", :person => "Kavya", :pp => "6", :status => "Enquiry_Created", :form_no => "123",:grade_master_id => GradeMaster.first.id, :teacher_leader_id => "3")
-    Admission.create(:admission_no => "12346", :branch => "Madhapur", :surname => "Ramesh", :second_lang => "ENGLISH", :board => "CBSE", :grade => "7", :medium => "ENGLISH", :year => "2013", :written => "Good", :reading => "Good", :spoken => "Good", :blood_group => "A+", :allergy => "nil", :doctor_name => "Dr.Bose", :doctor_mobile => "04522333496", :guardian_name => "Kamaraj", :guardian_mobile => "9443591501",:guardian_relationship => "Uncle", :from => "2014", :middle_name => "R", :name => "Vibhu", :dob => "17-05-2002", :gender => "Male", :nationality => "IN", :language => "Tamil", :father_name => "Ramesh", :mother_name => "Lakshmi", :father_occupation => "Business", :mother_occupation => "I.R.A.S", :father_company => "SEVA TRADERS", :mother_company => "Indian Railway Accounts Service", :father_education => "PG", :mother_education => "PG", :income => "Rs.50,000 to Rs.1,00,000 p.m.",:address => "111E,RostRover Garden,Railway Quarters,Teynampet,Chennai", :landline => "0402333333", :mobile => "9894723978", :email => "contact@sevatraders.com", :transport => "Private", :busstop => "Nil", :last_school => "Chettinad Vidyashram School", :city => "Chennai", :changing_reason => "Transfer", :know_school => "Parents whose children are studying here", :person => "Ananth", :pp => "3", :status => "Application_Created", :father_office_address => "Adayar", :mother_office_address => "Egmore", :father_office_telephone => "04522333334", :father_mobile => "9894723978", :mother_mobile => "9894723979", :mother_religion => "Hindu", :father_religion => "Hindu", :father_employer => "Seva Traders", :mother_employer => "Indian Railway Accounts Service", :father_email => "contact@sevatraders.com" , :mother_email => "lakshmi@iras.in", :sib_name => "Sugi", :sib_sex => "Female", :sib_grade => "6", :sib_school => "St.Joseph Higher Secondary School", :form_no => "124",:grade_master_id => GradeMaster.last.id, :teacher_leader_id => "9")
+    Admission.create( :name => "ShanmugaPriya", :grade => "1", :dob => "14-12-2009", :gender => "Female", :nationality => "IN", :language => "Tamil", :father_name => "Kamaraj", :mother_name => "Selvi", :father_occupation => "Business", :mother_occupation => "Home Maker", :father_company => "Selvi Note Books", :mother_company => "Nil", :father_education => "Graduate", :mother_education => "Graduate", :income => "Rs.20,000 to Rs.50,000 p.m.",:address => "10/45, Nadar Vidhya Salai Street, Southgate,Madurai,TN", :landline => "04522333495", :mobile => "9443591500", :father_email => "shanmugapriya@ostryalabs.com", :transport => "School", :busstop => "Nil", :last_school => "St.Joseph Higher Secondary School", :city => "Madurai", :changing_reason => "Transfer", :know_school => "Friends", :person => "Kavya", :pp => "6", :status => "Enquiry_Created", :form_no => "123",:grade_master_id => GradeMaster.first.id, :teacher_leader_id => "3")
+    Admission.create(:admission_no => "12346", :branch => "Madhapur", :surname => "Ramesh", :second_lang => "ENGLISH", :board => "CBSE", :grade => "7", :medium => "ENGLISH", :year => "2013", :written => "Good", :reading => "Good", :spoken => "Good", :blood_group => "A+", :allergy => "nil", :doctor_name => "Dr.Bose", :doctor_mobile => "04522333496", :guardian_name => "Kamaraj", :guardian_mobile => "9443591501",:guardian_relationship => "Uncle", :from => "2014", :middle_name => "R", :name => "Vibhu", :dob => "17-05-2002", :gender => "Male", :nationality => "IN", :language => "Tamil", :father_name => "Ramesh", :mother_name => "Lakshmi", :father_occupation => "Business", :mother_occupation => "I.R.A.S", :father_company => "SEVA TRADERS", :mother_company => "Indian Railway Accounts Service", :father_education => "PG", :mother_education => "PG", :income => "Rs.50,000 to Rs.1,00,000 p.m.",:address => "111E,RostRover Garden,Railway Quarters,Teynampet,Chennai", :landline => "0402333333", :mobile => "9894723978", :email => "contact@sevatraders.com", :transport => "School", :busstop => "Nil", :last_school => "Chettinad Vidyashram School", :city => "Chennai", :changing_reason => "Transfer", :know_school => "Parents whose children are studying here", :person => "Ananth", :pp => "3", :status => "Application_Created", :father_office_address => "Adayar", :mother_office_address => "Egmore", :father_office_telephone => "04522333334", :father_mobile => "9894723978", :mother_mobile => "9894723979", :mother_religion => "Hindu", :father_religion => "Hindu", :father_employer => "Seva Traders", :mother_employer => "Indian Railway Accounts Service", :father_email => "navya@ostryalabs.com" , :mother_email => "lakshmi@iras.in", :sib_name => "Sugi", :sib_sex => "Female", :sib_grade => "6", :sib_school => "St.Joseph Higher Secondary School", :form_no => "124",:grade_master_id => GradeMaster.last.id, :teacher_leader_id => "9")
   end
 end
 
@@ -206,6 +217,17 @@ def seed_student_route_mapping
   end
 end
 
+
+def seed_staff_leader
+  unless StaffLeader.first.present?
+    StaffLeader.create(:heads => 'NAVYA-Transport')
+    StaffLeader.create(:heads => 'SRIKANTH-Teaching')
+    StaffLeader.create(:heads => 'MURALEE-Non-Teaching')
+    StaffLeader.create(:heads => 'SWAMY-Sports')
+    StaffLeader.create(:heads => 'UMA-Extra-Curricular')
+  end
+end
+  
 
 def seed_sections
   unless SectionMaster.first.present?
@@ -285,6 +307,7 @@ def seed_all
   seed_students
   seed_admissions 
   seed_teacher_leader
+  seed_staff_leader
   seed_subjects
   seed_defaults
   seed_default_discount

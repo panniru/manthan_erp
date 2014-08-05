@@ -1,0 +1,41 @@
+.panel.panel-default
+  .panel-body
+    .col-sm-3
+      .pull-left
+        .input-group
+          %span.input-group-addon
+            = fa_icon "search lg"
+          %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}/
+          %br
+    .col-sm-4
+      %center
+        %h4
+          List of Selected Forms
+          %br
+          %br
+
+%table#tblData.target.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      %th Form no
+      %th Name
+      %th Educational Qualification
+      %th Gender
+      %th Post
+      %th Comments
+      %th Description
+      %th Result
+        
+  %tbody
+    - @staff_admissions.each do |staff_admission|
+      %tr
+        %td= link_to "#{staff_admission.form_no}", homeindex_staff_admission_path(staff_admission)
+        %td= staff_admission.name
+        %td= staff_admission.education_qualification
+        %td= staff_admission.gender
+        %td= staff_admission.post
+      - @recruitments.each do |recruitment|
+        %td= recruitment.comments
+        %td= recruitment.description
+
+

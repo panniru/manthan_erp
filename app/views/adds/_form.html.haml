@@ -11,5 +11,6 @@
     .col-sm-5
       = f.text_area :description, :class => 'form-control'
       %br
+      = f.hidden_field :status, :value => "#{@recruitment.status}"
       = f.button "submit" , :class =>'btn btn-primary'
 

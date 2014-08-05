@@ -13,11 +13,13 @@ class AddsController < ApplicationController
     end
   def index
     @adds= Add.all
-    @adds = Add.search(params[:search])
+    @recruitment = Recruitment.all
+    
   end
 
   def new
     @add = Add.new
+    @recruitment = Recruitment.find(params[:id])
   end
   def edit
     @add = Add.find(params[:id])
@@ -44,6 +46,6 @@ class AddsController < ApplicationController
   private
 
   def add_params
-    params.require(:add).permit(:title, :date, :description)
+    params.require(:add).permit(:title, :date, :description, :status)
   end
 end

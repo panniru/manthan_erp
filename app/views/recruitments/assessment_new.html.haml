@@ -1,0 +1,92 @@
+.row
+  .col-sm-12
+    = render "shared/steprecruitment"
+    %br
+.row
+  .col-sm-8
+    = render "homeindex"
+  .col-sm-3
+    - if("#{@staff_admission.status}" == 'Application_Created'||"#{@staff_admission.status}" == 'Document_Verified'||"#{@staff_admission.status}" == 'Assessment_Planned'||"#{@staff_admission.status}" == 'Assessment_Completed'||"#{@staff_admission.status}" == 'Management_Reviewed')
+      = link_to "Close the Form", "#", :class => "change btn1 btn btn-danger", :data => {:id => "#{@staff_admission.id}"}
+      #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+              %center
+                %h4#myModalLabel.modal-title Reason for Closing
+            = form_for @recruitment do |f|
+              .modal-body
+                .row
+                  .col-sm-1
+                    = f.radio_button :closestatus, "Not upto the mark"
+                  .col-sm-10
+                    = f.label "Not Upto the Mark"
+                .row
+                  .col-sm-1
+                    = f.radio_button :closestatus, "Financial Crisis"
+                  .col-sm-10
+                    = f.label "Financial Crisis"
+                .row
+                  .col-sm-1
+                    = f.radio_button :closestatus, "Didn't Pick the Interview Call"
+                  .col-sm-10
+                    = f.label "Didn't Pick the Interview Call"
+                                 
+              .modal-footer
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+                = f.hidden_field :status,:value => "Form_Closed"
+                = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
+
+    - else
+      = link_to "Form Closed", "#", :class => "btn1 btn btn-success", :data => {:id => "#{@recruitment.id}"}
+
+    %br
+    %br
+      
+    - if("#{@staff_admission.status}" == 'Application_Created')
+      = link_to "Doc Verification",new_staff_admission_recruitment_path(@staff_admission),:class => 'btn1 btn btn-success'
+    - if("#{@staff_admission.status}" == 'Document_Verified')
+      = link_to "View Documents", document_verification_recruitment_path(@staff_admission),:class => 'btn1 btn btn-primary'
+      %br
+      %br
+      = link_to "Create Assessment","#", :onclick => "createStaffAssessment('#{@staff_admission.staff_leader_id}');",:class => 'btn1 btn btn-success'
+    
+
+                  
+.row
+  .col-sm-10
+    .calendar2
+    #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+            .row
+              %h1.pull-right.btn.btn-warning
+                = @staff_admission.staffhead
+              %center
+                %h4#myModalLabel.modal-title Assessment Plan
+            = form_for @recruitment,:url => {:action => 'update_rec'}, :method => :POST do |f|
+              .modal-body
+                .row
+                  .col-sm-3
+                    = f.label "Time", :class => 'col-sm-3 control-label'
+                  .col-sm-5
+                    = f.time_field :start_time ,:class => 'form-control'
+                  
+                    %br
+                .row
+                  .col-sm-3
+                    = f.label "Description", :class => 'col-sm-3 control-label'              
+                  .col-sm-5
+                    = f.text_area :title ,:class => 'form-control'
+                .row
+                  .col-sm-3
+                    
+              .modal-footer
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+                = f.hidden_field :status,:value => "Assessment_Planned"
+                = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
+                      
+   

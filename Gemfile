@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
+gem "nested_form", :git => 'https://github.com/ryanb/nested_form.git'
 
 gem 'jquery-timepicker-rails'
 gem 'language_list', '~> 1.0.0'
 gem 'jquery-cookie-rails', '~> 1.3.1.1'
-gem 'rails', '4.0.2'
+gem 'rails', '~> 4.1.4'
 
 gem "geocoder"
 gem 'gmaps4rails', '~> 2.1.2'

@@ -1,8 +1,15 @@
 ManthanErp::Application.routes.draw do
  
+
   get "student_route_mappings/index"
   get "student_route_mappings/create"
   get "student_route_mappings/show"
+
+  get "new_vehicles/index"
+  get "new_vehicles/show"
+  get "new_vehicles/edit"
+  get "new_vehicles/new"
+
   get "teaching_plans/new"
   get "teaching_plans/edit"
   get "teaching_plans/index"
@@ -295,9 +302,7 @@ ManthanErp::Application.routes.draw do
       post "upload"
     end
   end
-  resources :admissions do
-    resources :events
-  end
+
   resources :class_teacher_mappings do
     collection do
       get "get_grade_wise_mappings"
@@ -344,13 +349,44 @@ ManthanErp::Application.routes.draw do
   resources :recruitments do
     member do
       get "homeindex"
+      get "view_document"
+      get 'create_enquiry'
+      get "document_verification"
+      get 'view_assessment'
+      post 'update_rec'
+      get 'assessment_new'
     end
     collection do
+      
       get 'recruitment_home'
       get 'get_subject_view'
       get 'get_klass_view'
+      get 'enquiry_new'
+      post 'create_enquiry'
+      get 'document_index'
+      get 'sports_index'
+      get 'assessment_index'
+      get 'assessment_completed_index'
+      get 'management_index'
+      get 'selected_staffs'
+      get 'closed_forms'
     end
   end
+  resources :staff_admissions do
+    member do
+      get 'homeindex'
+      get "document_verification"
+    end
+    collection do
+      get 'get_head_view'
+      get 'get_post_view'
+      get 'get_subject_view'
+      get 'get_klass_view'
+      get 'enquiry_index'
+     
+    end
+  end
+
  
   resources :assessment_criterias do
     collection do
@@ -375,6 +411,12 @@ ManthanErp::Application.routes.draw do
       end  
     end
     
+
+   resources :staff_admissions do
+    resources :recruitments
+  end
+  
+
   get "/fee_reports", to: "fee_reports#index"
   get "/fee_reports/payment_status_report", to: "fee_reports#payment_status_report"
   get "/fee_reports/payment_type_details", to: "fee_reports#payment_type_details"

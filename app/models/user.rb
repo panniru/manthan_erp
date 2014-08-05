@@ -36,7 +36,9 @@ class User < ActiveRecord::Base
     self.role.code == "principal"
   end
     
-
+  def transport_head?
+    self.role.code == "transport_head"
+  end
 
 
 end

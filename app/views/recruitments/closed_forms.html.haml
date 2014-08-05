@@ -1,0 +1,33 @@
+.panel.panel-default
+  .panel-body
+    .col-sm-3
+      .pull-left
+        .input-group
+          %span.input-group-addon
+            = fa_icon "search lg"
+          %input#search{name: "search", placeholder: "Enter search term...", type: "text",:class => 'form-control'}/
+          %br
+    .col-sm-4
+      %center
+        %h4
+          Closed Forms
+          %br
+          %br
+
+%table#tblData.target.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      %th Enquiry Form
+      %th Name
+      %th Post
+      %th Reason for Closing
+        
+  %tbody
+    - @staff_admissions.each do |staff_admission|
+      %tr
+        %td= link_to "#{staff_admission.form_no}",homeindex_staff_admission_path(staff_admission)
+        %td= staff_admission.name
+        %td= staff_admission.post
+      - @recruitments.each do |recruitment|
+        %td= recruitment.closestatus
+      

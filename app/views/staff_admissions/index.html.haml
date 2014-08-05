@@ -1,0 +1,35 @@
+.pull-left
+  %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}/
+%center
+  = form_tag recruitment_home_recruitments_path, :method => 'get' do
+    .col-sm-3
+      = select_tag(:search,options_for_select([['Application_Created'],['Assessment_Planned'],['Assessment_Completed'],['Management_Reviewed'],['Selected']]),{:class => 'col-sm-4 form-control'})
+    .col-sm-1
+      = submit_tag "Search", name: nil, :class => 'btn btn-primary'
+      %br
+      %br
+- if current_user.admin?
+  .pull-right
+    = link_to 'New Application', new_staff_admission_path, :class => 'btn btn-primary'
+    %br
+    %br
+%table#tblData.target.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      %th Enquiry Form
+      %th Name
+      %th Date Of Birth
+      %th Email
+      %th Mobile No
+      %th Status
+        
+  %tbody
+    - @staff_admissions.each do |staff_admission|
+      %tr
+        %td= link_to "#{staff_admission.form_no}",homeindex_staff_admission_path(staff_admission)
+        %td= staff_admission.name
+        %td= staff_admission.dob
+        %td= staff_admission.email
+        %td= staff_admission.mobile_no
+        %td= staff_admission.status
+          

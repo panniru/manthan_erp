@@ -5,7 +5,7 @@ class InterviewschedulersController < ApplicationController
   # GET /interviewschedulers.json
   def index
     @interviewschedulers = Interviewscheduler.all
-    @interviewschedulers = Interviewscheduler.search(params[:search])
+
   end
 
   # GET /interviewschedulers/1
@@ -46,7 +46,6 @@ class InterviewschedulersController < ApplicationController
   # PATCH/PUT /interviewschedulers/1.json
   def update
     respond_to do |format|
-      @interviewscheduler.update(:status => "Assessment Complete")
       if @interviewscheduler.update(interviewscheduler_params)
         format.html { redirect_to @interviewscheduler, notice: 'Interviewscheduler was successfully updated.' }
         format.json { head :no_content }
