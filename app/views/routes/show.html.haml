@@ -35,20 +35,20 @@
             %tr
               %td= location.sequence_no
               %td= location.location_master.location_name
-  = button_tag "location",  :class => 'btn btn-primary',:ng_click => "RouteController.editLocations()"
+ 
                 
            
-  .modal.fade{ :id => "editModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
-          %h4.modal-title{ :id => "myModalLabel"} New Location
-        .modal-body{"ng-controller" => "RouteController"}
-          = render "modal"
-          
-  .col-sm-9
-    = render "shared/gmap"
+              .modal.fade{ :id => "editModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+                      %h4.modal-title{ :id => "myModalLabel"} New Location
+                      .modal-body{"ng-controller" => "RouteController"}
+                        = render "modal"
+                        
+    .col-sm-9
+      = render "shared/gmap"
     
     
      

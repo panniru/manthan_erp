@@ -2,7 +2,6 @@
     "use strict";
     app.controller("RouteController", ["$scope","resourceService","routesService", function($scope, resourceService, routesService ) {
 	$scope.routes = resourceService.Route.query();
-	
 	var fetch_loactions = function(){
 	    routesService.getLocationServiceView()
 		.then(function(result) {
@@ -23,8 +22,10 @@
 	$scope.sendMail = function(){
 	    routesService.routeMail($scope.subject, $scope.text)
 		.then(function(response){
-		    //alert(response.data)
+		    //this.modal('hide');
+		    //$location.path('/routes');
 		});
+	    //$('#MailModal').modal('hide')
 	}
 	
         $scope.submitRoutes = function(){
