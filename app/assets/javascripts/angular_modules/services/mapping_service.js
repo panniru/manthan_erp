@@ -1,13 +1,13 @@
 (function(angular, app) {
     "use strict";
-    app.service("MappingService",["$http", function($http) {
-        var getLocationServiceView = function(){
-            var url = "/student_route_mapping/get_location_view.json"
+    app.service("mapService",["$http", function($http) {
+        var getMappingServiceView = function(location){
+	    var url = "/student_route_mappings/get_route_view.json?id="+location
             return $http.get(url);
         };
-   return {
-            getLocationServiceView : getLocationServiceView,
-	   
+	return {
+            getMappingServiceView : getMappingServiceView,
+	    
         };
     }]);
 })(angular, myApp);

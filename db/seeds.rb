@@ -202,7 +202,15 @@ def seed_locations
     Location.create(:id => '28' , :sequence_no => '3' , :route_id => '18', :location_master_id => '9'  )
     Location.create(:id => '29' , :sequence_no => '3' , :route_id => '19', :location_master_id => '4'  )
     Location.create(:id => '30' , :sequence_no => '1' , :route_id => '19', :location_master_id => '5'  )
-    Location.create(:id => '31' , :sequence_no => '2' , :route_id => '19', :location_master_id => '11'  )
+    Location.create(:id => '31' , :sequence_no => '2' , :route_id => '19', :location_master_id => '11' )
+    Location.create(:id => '32' , :sequence_no => '1' , :route_id => '20', :location_master_id => '5'  )
+    Location.create(:id => '33' , :sequence_no => '2' , :route_id => '20', :location_master_id => '8'  )
+    Location.create(:id => '34' , :sequence_no => '3' , :route_id => '20', :location_master_id => '11' )
+    Location.create(:id => '35' , :sequence_no => '4' , :route_id => '20', :location_master_id => '9'  )
+    Location.create(:id => '36' , :sequence_no => '1' , :route_id => '21', :location_master_id => '7'  )
+    Location.create(:id => '37' , :sequence_no => '3' , :route_id => '21', :location_master_id => '9'  )
+    Location.create(:id => '38' , :sequence_no => '2' , :route_id => '21', :location_master_id => '6'  )
+  
   end
 end
 
@@ -248,6 +256,9 @@ def seed_routes
   unless Route.first.present?
     Route.create(:id => '18' , :route_no => '1', :busno_up => '2' , :no_of_children => '3', :gmaps => '' , :start_point => '25' , :end_point => '26' )
     Route.create(:id => '19' , :route_no => '2', :busno_up => '23' , :no_of_children => '45', :gmaps => '' , :start_point => '30' , :end_point => '29' )
+    Route.create(:id => '20' , :route_no => '3', :busno_up => '45' , :no_of_children => '34', :gmaps => '' , :start_point => '32' , :end_point => '35' )
+    Route.create(:id => '21' , :route_no => '4', :busno_up => '56' , :no_of_children => '45', :gmaps => '' , :start_point => '36' , :end_point => '37' )
+  
   end
 end
 

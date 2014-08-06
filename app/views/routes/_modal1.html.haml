@@ -1,5 +1,5 @@
 %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Sent Mail"
-#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+#myModal.modal.fade{:id => "MailModal" ,"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
     .modal-content
       .modal-header
@@ -17,5 +17,5 @@
               = text_area_tag ""
           .pull-right
             %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-            = link_to "Send Mail", send_mail_routes_path, :class => "btn btn-primary"
+            = link_to "Send Mail", send_mail_routes_path, :class => "btn btn-primary",{"data-dismiss" => "modal"}
           

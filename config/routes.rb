@@ -1,6 +1,5 @@
 ManthanErp::Application.routes.draw do
  
-
   get "student_route_mappings/index"
   get "student_route_mappings/create"
   get "student_route_mappings/show"
@@ -17,7 +16,7 @@ ManthanErp::Application.routes.draw do
 
   resources :student_route_mappings do
     collection do
-      get "get_location_view"
+      get "get_route_view"
     end
   end
   

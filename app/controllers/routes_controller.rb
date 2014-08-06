@@ -4,75 +4,61 @@
    def index
      if current_user.admin?
        @routes =  Route.all
-     else current_user.parent?
-       @location = Location.all
-       current_user.parent.students.each do |student|
-         studentroutemappings = StudentRouteMapping.where('student_master_id = '+"#{student.id}")
-         studentroutemappings = studentroutemappings.all.map do |route|
-           #p studentroutemappings[0][:temp]
-           #{ :temp =>  route.route_id}
-           p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-           p route.route_id
-           @location = [] 
-           @route = Route.find(route.route_id)
-           @route.locations.each do |location|
-             @location.push({:location => location.location_master.location_name})
-           end
-           gon.start_point_latitude = @route.start_location.location_master.latitude.to_s 
-           gon.start_point_longitude =@route.start_location.location_master.longitude.to_s
-           gon.end_point_latitude = @route.end_location.location_master.latitude.to_s 
-           gon.end_point_longitude = @route.end_location.location_master.longitude.to_s
-           gon.waypts = @location.to_json
-           gon.width = "750px"
-           gon.height = "350px"
+       @locations = Location.all
+       locations = []
+       Route.all.each do |route| 
+         locations.concat(route.locations)
+       end
+       gmap_data = Gmaps4rails.build_markers(locations) do |location, marker|
+         marker.lat location.location_master.latitude
+         marker.lng location.location_master.longitude
+       end
+       gon.gmap_data = gmap_data.to_json
+       gon.width = "750px"
+       gon.height = "350px"
+       respond_to do |format|   
+         format.json do
+         render :json => Route.all
+         end
+         format.html do 
+           render "index"
          end
        end
      end
-     @locations = Location.all
-     locations = []
-     Route.all.each do |route| 
-      locations.concat(route.locations)
-     end
-     gmap_data = Gmaps4rails.build_markers(locations) do |location, marker|
-       marker.lat location.location_master.latitude
-       marker.lng location.location_master.longitude
-     end
-     gon.gmap_data = gmap_data.to_json
-     gon.width = "750px"
-     gon.height = "350px"
-     respond_to do |format|   
-       format.json do
-         render :json => Route.all
-       end
-       format.html do 
-         render "index"
+     if current_user.parent?
+       current_user.parent.students.each do |student|
+         studentroutemappings = StudentRouteMapping.where('student_master_id = '+"#{student.id}")
+         studentroutemappings = studentroutemappings.all.map do |route|
+           @route = Route.find(route.route_id)
+         end
        end
      end
-   end
+   end  
    
-  
    def form_authenticity_param
      params[request_forgery_protection_token]
    end
    
    def send_mail
-     respond_to do |format|
-       route_mail= params[:route_mail]
-       mailing_job = RouteMailingJob.new(current_user.user_id, DateTime.now, route_mail[:subject], route_mail[:text])
-       Delayed::Job.enqueue mailing_job, mailing_job.job_run_id
-       #UserMailer.welcome(route_mail[:subject] ,route_mail[:text]).deliver
-       result_link = "<a href=\"/job_runs/#{mailing_job.job_run_id}\">here</a>"
-       msg = I18n.t :success, :scope => [:job, :schedule], job: "Route Mailing Job", result_link: result_link
-       format.json do
-         render :json => msg
-       end
-       format.html do
-         flash[:success] = msg.html_safe
-         redirect_to routes_path
+     if current_user.admin?
+       respond_to do |format|
+         route_mail= params[:route_mail]
+         mailing_job = RouteMailingJob.new(current_user.user_id, DateTime.now, route_mail[:subject], route_mail[:text])
+         Delayed::Job.enqueue mailing_job, mailing_job.job_run_id
+         #UserMailer.welcome(route_mail[:subject] ,route_mail[:text]).deliver
+         result_link = "<a href=\"/job_runs/#{mailing_job.job_run_id}\">here</a>"
+         msg = I18n.t :success, :scope => [:job, :schedule], job: "Route Mailing Job", result_link: result_link
+         format.json do
+           render :json => msg
+         end
+         format.html do
+           flash[:success] = msg.html_safe
+           redirect_to routes_path
+         end
        end
      end
    end
-   
+     
    def get_location_view
    var = LocationMaster.all.map do |var|
      {location_name: var.location_name,id: var.id}
