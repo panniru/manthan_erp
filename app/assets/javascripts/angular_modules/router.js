@@ -39,6 +39,12 @@
             . when('/mapping_save', {
                 templateUrl: 'academics/assessments/mapping_index.html', 
             })
+            . when('/teacher_show', {
+                templateUrl: 'academics/assessments/teacher_show.html'               
+            })
+            . when('/teacher_save_form', {
+                templateUrl: 'academics/assessments/teacher_show.html'               
+            })
         
            
     }]);

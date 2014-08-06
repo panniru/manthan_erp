@@ -59,10 +59,11 @@ class TimeTablesController < ApplicationController
             temp.sun_sub=t["sun_sub"]
             temp.save
           else
-            @timetable=TimeTable.new(t)
+            @timetable=TimeTable.new(t)            
             @timetable.save
           end
         end
+        render :json => true
       end
     end
   end

@@ -129,6 +129,10 @@ def seed_grades
     GradeMaster.create(:grade_name => '5')
     GradeMaster.create(:grade_name => '6')
     GradeMaster.create(:grade_name => '7')
+    GradeMaster.create(:grade_name => '7')
+    GradeMaster.create(:grade_name => '8')
+    GradeMaster.create(:grade_name => '9')
+    GradeMaster.create(:grade_name => '10')  
   end
 end
 
@@ -241,17 +245,6 @@ def seed_staff_leader
 end
   
 
-def seed_sections
-  unless SectionMaster.first.present?
-    grademasters=GradeMaster.all
-    SectionMaster.create(:section_name => 'A', :grade_master_id => grademasters[0]['id'])
-    SectionMaster.create(:section_name => 'B', :grade_master_id => grademasters[0]['id'])
-    SectionMaster.create(:section_name => 'C', :grade_master_id => grademasters[1]['id'])
-    SectionMaster.create(:section_name => 'D', :grade_master_id => grademasters[1]['id'])
-    SectionMaster.create(:section_name => 'E', :grade_master_id => grademasters[2]['id'])
-  end
-end
-
 def seed_routes
   unless Route.first.present?
     Route.create(:id => '18' , :route_no => '1', :busno_up => '2' , :no_of_children => '3', :gmaps => '' , :start_point => '25' , :end_point => '26' )
@@ -316,8 +309,7 @@ def seed_all
   seed_user
   seed_jobs
   seed_payment_types
-  seed_grades
-  seed_sections
+  seed_grades  
   seed_parents
   seed_students
   seed_admissions 

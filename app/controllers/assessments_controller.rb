@@ -1,7 +1,11 @@
 class AssessmentsController < ApplicationController
 
-  def raw(stringish)
-    stringish.to_s.html_safe
+  def index
+    if current_user.admin?
+      render "index"    
+    elsif  current_user.teacher?
+      render "teacher_index"
+    end
   end
 
   def get_assessment_types_service
@@ -95,5 +99,16 @@ class AssessmentsController < ApplicationController
     end     
   end
 
-
+  def get_teacher_assessments_service
+    respond_to do |format|
+      format.json do        
+        teacher_assessments = AssessmentTeacherMapping.all
+        teacher_assessments = teacher_assessments.each.map do |mapping|
+          {id: mapping.id, faculty_master_id: mapping.faculty_master_id, faculty_name: mapping.faculty_master.faculty_name, grade_master_id: mapping.faculty_master_id,  grade_name: mapping.grade_master.grade_name, section_master_id: mapping.section_master_id,  section_name: mapping.section_master.section_name, assessment_type_id: mapping.assessment_type_id, assessment_type: mapping.assessment_type.assessment_type} 
+        end
+        render :json => teacher_assessments
+      end
+    end
+  end
+  
 end
