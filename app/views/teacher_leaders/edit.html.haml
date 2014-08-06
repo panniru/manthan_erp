@@ -1,0 +1,21 @@
+.row
+  = form_for @teacher_leader, :html => { :class => "form-horizontal", :role => "form" } do |f|
+    = render "shared/error_messages", :object => f.object
+    .col-sm-12
+      .form-group
+        .col-sm-2
+          = f.label "Grade", :class => 'control-label'
+        .col-sm-3
+          = f.text_field :klass, :class => 'form-control'
+      .form-group
+        .col-sm-2
+          = f.label "Grade's Lead:", :class => 'control-label'
+        .col-sm-3
+          = f.text_field :faculty_leader, :class => 'form-control'
+      %center
+        
+        = f.submit "Create", :class => 'btn btn-primary'
+
+        
+
+    

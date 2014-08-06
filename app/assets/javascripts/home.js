@@ -83,8 +83,3 @@ function createStaffAssessment(staff_leader_id) {
         }
     });
 }
-
-   
-     
-  
-  

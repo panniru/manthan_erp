@@ -7,7 +7,7 @@
             = fa_icon "search lg"
           %input#search{name: "search", placeholder: "Enter search term...", type: "text",:class => 'form-control'}/
           %br
-    .col-sm-4
+    .col-sm-6
       %center
         %h4
           Closed Forms
@@ -23,11 +23,6 @@
       %th Reason for Closing
         
   %tbody
-    - @staff_admissions.each do |staff_admission|
-      %tr
-        %td= link_to "#{staff_admission.form_no}",homeindex_staff_admission_path(staff_admission)
-        %td= staff_admission.name
-        %td= staff_admission.post
-      - @recruitments.each do |recruitment|
-        %td= recruitment.closestatus
+    - @recruitments.each do |recruitment|
+      %td= recruitment.closestatus
       

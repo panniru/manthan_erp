@@ -7,7 +7,7 @@
             = fa_icon "search lg"
           %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}/
           %br
-    .col-sm-4
+    .col-sm-6
       %center
         %h4
           Assessment Completed
@@ -17,19 +17,20 @@
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
-      %th Form no
-      %th Description
       %th Faculty
+      %th Form no
       %th Time
+      %th Review Comments
+      %th Result
       %th Status
         
   %tbody
-    - @staff_admissions.each do |staff_admission|
+    - @recruitments.each do |recruitment|
       %tr
-        %td= link_to "#{staff_admission.form_no}", homeindex_staff_admission_path(staff_admission)
-      - @recruitments.each do |recruitment|
-        %td= recruitment.description
-        %td= recruitment.staff_head
+        %td= recruitment.staffhead
+        %td= link_to "#{recruitment.form_no}",homeindex_recruitment_path(recruitment)
         %td= recruitment.start_time
+        %td= recruitment.title
+        %td= recruitment.assessment_result
         %td= recruitment.status
         

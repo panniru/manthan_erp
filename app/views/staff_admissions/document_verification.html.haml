@@ -68,6 +68,7 @@
              
             %td
               = f.hidden_field :staff_admission_id, :value => @staff_admission.id
+              = f.hidden_field :form_no, :value => @staff_admission.form_no
               = f.hidden_field :status, :value => 'Document_Verified'
               = f.submit "Upload", :class => 'btn btn-primary'
             

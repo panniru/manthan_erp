@@ -1,5 +1,5 @@
 .panel.panel-default
-  .panel-body
+  .test
     .col-sm-3
       .pull-left
         .input-group
@@ -7,7 +7,7 @@
             = fa_icon "search lg"
           %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
           %br
-    .col-sm-4
+    .col-sm-6
       %center
         %h4
           Documents Verified
@@ -19,11 +19,10 @@
       %th Previous Employment Proof
       %th Salary Slips for previous Months
   %tbody
-    %tr
-      - @staff_admissions.each do |staff_admission|
+    - @recruitments.each do |recruitment|
+      %tr
         %td
-          = link_to "#{staff_admission.form_no}",homeindex_staff_admission_path(staff_admission)
-      - @recruitments.each do |recruitment|
+          = link_to "#{recruitment.form_no}",homeindex_recruitment_path(recruitment)
         %td
           = link_to "Edu_Certificates", recruitment.educational_certificates_url
         %td

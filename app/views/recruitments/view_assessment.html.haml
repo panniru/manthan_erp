@@ -55,6 +55,18 @@
       %br
       %br
       = link_to "View Assessment", view_assessment_recruitment_path(@staff_admission), :class => 'btn1 btn btn-primary'
+      %br
+      %br
+    - if("#{@staff_admission.status}" == 'Assessment_Completed')
+      = link_to "View Documents", document_verification_recruitment_path(@staff_admission),:class => 'btn1 btn btn-primary'
+      %br
+      %br
+      = link_to "View Assessment", view_assessment_recruitment_path(@staff_admission), :class => 'btn1 btn btn-primary'
+      %br
+      %br
+      = link_to "Assessment Result", assessment_result_recruitment_path(@staff_admission), :class => 'btn1 btn btn-primary'
+      %br
+      %br
 %br
 %br
 .row

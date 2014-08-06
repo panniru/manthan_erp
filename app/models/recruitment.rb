@@ -14,13 +14,12 @@ class Recruitment < ActiveRecord::Base
   scope :closed_forms,lambda{where("status = 'Form_Closed'")}
   scope :sports,lambda{where("staffhead = ' NAVYA-Transport '")}
   scope :document_verified,lambda{where("status = 'Document_Verified'")}
-  scope :assessment_planned,lambda{where("status = 'Assessment_Planned'")}
   scope :assessment_completed,lambda{where("status = 'Assessment_Completed'")}
   scope :management_review,lambda{where("status = 'Management_Reviewed'")}
   scope :selected_staffs,lambda{where("status = 'Selected'")}
   mount_uploader :educational_certificates, EducationalCertificatesUploader# Teprevious_employment_proof, 
   mount_uploader :previous_employment_proof,PreviousEmploymentProofUploader
   mount_uploader :salary_slips_for_previous_months, SalarySlipsForPreviousMonthsUploader
-
+  
 
 end

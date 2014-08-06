@@ -14,48 +14,25 @@
 
     .col-sm-4
     .pull-right
-      %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New"
-      #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-        .modal-dialog
-          .modal-content
-            .modal-header
-              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-              %h4#myModalLabel.modal-title New Advertisement
-              = form_for Add.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
-                .modal-body
-                  .row
-                    .col-sm-3
-                      = f.label "Title:", :class => 'col-sm-3 control-label'
-                    .col-sm-5
-                      = f.text_field :title,:class => 'form-control'
-                      %br
-                  .row
-                    .col-sm-3
-                      = f.label "Description:", :class => 'col-sm-3 control-label'
-                    .col-sm-5
-                      = f.text_area :description, :class => 'form-control'
-                      %br
-                  .modal-footer
-                    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-                    = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
-                  %br
-                  %br
+      = link_to "Add New", new_add_path , :class => 'btn btn-primary'
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
-      %th Title
-      %th Date
+      %th Department
+      %th Post
       %th Description
-      %th
+      %th Posted_at
+      %th Edit
+      %th Delete
   %tbody
     - @adds.each do |add|
       %tr
+        %td= add.dept
         %td= add.title
-        %td= add.created_at
         %td= add.description
-        %td
-          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_add_path(add), :class => "btn btn-warning btn-sm", :title => "Edit"
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), add_path(add), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+        %td= add.created_at
+        %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_add_path(add), :class => "btn btn-warning btn-sm", :title => "Edit"
+        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), add_path(add), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
           
 	
        

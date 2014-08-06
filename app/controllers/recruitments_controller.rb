@@ -1,44 +1,47 @@
 class RecruitmentsController < ApplicationController
+  def update
+    @recruitment = Recruitment.find(params[:id])
+    respond_to do |format|
+      if @recruitment.update(recruitment_params)
+        format.html { redirect_to staff_admissions_path, notice: 'Form was successfully updated.' }
+        format.json { render action: 'index', :status => "success" }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @recruitment.errors, :status => "failure" }
+      end
+    end
+  end
+  def update_close
+    
+    @recruitment = Recruitment.find(params[:id])
+    @staff_admission = StaffAdmission.find(params[:id])
+    respond_to do |format|
+      if @recruitment.update(recruitment_params)
+        @staff_admission.update(:status => "Form_Closed")
+        format.html { redirect_to staff_admissions_path, notice: 'Form was successfully Closed.' }
+        format.json { render action: 'index', :status => "success" }
+        
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @recruitment.errors, :status => "failure" }
+      end
+    end
+  end
+
   def closed_forms
     @recruitments = Recruitment.closed_forms
-    @staff_admissions = StaffAdmission.closed_forms
-    @staff_leaders = StaffLeader.closed_forms
   end
   def document_index
-    if params[:search].present?
-      @recruitments = Recruitment.search(params[:search])
-    else
-      @recruitments =  Recruitment.document_verified
-      @staff_admissions = StaffAdmission.document_verified
-    end
+    @recruitments = Recruitment.document_verified
   end
   def assessment_index
-    if params[:search].present?
-      @recruitments =  Recruitment.search(params[:search])
-    else
-      @recruitments =  Recruitment.assessment_planned
-      @staff_admissions = StaffAdmission.assessment_planned
-    end
-  end
-  def sports_index
-    @staff_admissions = StaffAdmission.all
-    @recruitments = Recruitment.sports
+    @recruitments =  Recruitment.where("status = 'Assessment_Planned'").order("staffhead")
   end
   def assessment_completed_index
-    if params[:search].present?
-      @recruitments =  Recruitment.search(params[:search])
-    else
-      @recruitments =  Recruitment.assessment_completed
-      @staff_admissions = StaffAdmission.assessment_completed
-    end
+    @recruitments =  Recruitment.assessment_completed
   end
   def management_index
-    if params[:search].present?
-      @recruitments =  Recruitment.search(params[:search])
-    else
-      @recruitments=  Recruitment.management_review
-      @staff_admissions = StaffAdmission.management_review
-    end
+    @recruitments=  Recruitment.management_review
   end
   def selected_staffs
     if params[:search].present?
@@ -48,6 +51,11 @@ class RecruitmentsController < ApplicationController
       @staff_admissions = StaffAdmission.selected_staffs
     end
   end
+   def sports_index
+     @staff_admissions = StaffAdmission.all
+     @recruitments = Recruitment.sports
+   end
+   
   def assessment_new
     @staff_admission = StaffAdmission.find(params[:id])
     @recruitment = Recruitment.new
@@ -83,8 +91,8 @@ class RecruitmentsController < ApplicationController
   
   def create
     @staff_admission = StaffAdmission.find(params[:staff_admission_id])
-    @recruitment = @staff_admission.create_recruitment(params[:recruitment].permit(:id,:post,:staff_name,:description,:start_time,:end_time,:education_qualification,:educational_certificates,:previous_employment_proof,:salary_slips_for_previous_months, :title,:status,:staff_admission_id,:comments,:staffhead,:final_result))
-    
+    @recruitment = @staff_admission.create_recruitment(params[:recruitment].permit(:id,:post,:staff_name,:description,:start_time,:end_time,:education_qualification,:educational_certificates,:previous_employment_proof,:salary_slips_for_previous_months, :title,:status,:staff_admission_id,:comments,:staffhead,:final_result, :form_no,:assessment_result,:closestatus))
+  
     @staff_admission.status = params[:recruitment][:status]    
     @staff_admission.save
     respond_to do |format|
@@ -125,6 +133,38 @@ class RecruitmentsController < ApplicationController
       end
     end
   end
+  def update_ass
+    
+    @recruitment = Recruitment.find(params[:id])
+    @staff_admission = StaffAdmission.find(params[:id])
+    respond_to do |format|
+      if @recruitment.update(recruitment_params)
+        @staff_admission.update(:status => "Assessment_Completed")
+        format.html { redirect_to staff_admissions_path, notice: 'Form was successfully updated.' }
+        format.json { render action: 'index', :status => "success" }
+        
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @recruitment.errors, :status => "failure" }
+      end
+    end
+  end
+  def update_man
+    
+    @recruitment = Recruitment.find(params[:id])
+    @staff_admission = StaffAdmission.find(params[:id])
+    respond_to do |format|
+      if @recruitment.update(recruitment_params)
+        @staff_admission.update(:status => "Management_Reviewed")
+        format.html { redirect_to staff_admissions_path, notice: 'Form was successfully updated.' }
+        format.json { render action: 'index', :status => "success" }
+        
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @recruitment.errors, :status => "failure" }
+      end
+    end
+  end
   
  def destroy
    @recruitment = Recruitment.find(params[:id])
@@ -133,8 +173,16 @@ class RecruitmentsController < ApplicationController
      format.html { redirect_to recruitment_home_recruitments_path }
    end
  end
+ def homeindex
+   @recruitment = Recruitment.new
+   @staff_admission = StaffAdmission.find(params[:id])
+ end
+ def assessment_result
+   @recruitment = Recruitment.find(params[:id])
+   @staff_admission = StaffAdmission.find(params[:id])
+ end
  
  def recruitment_params
-   params.require(:recruitment).permit(:post,:staff_name,:description,:start_time,:end_time,:education_qualification,:educational_certificates,:previous_employment_proof,:salary_slips_for_previous_months, :title,:status,:staff_admission_id,:id,:comments,:staffhead, :final_result)
+   params.require(:recruitment).permit(:post,:staff_name,:description,:start_time,:end_time,:education_qualification,:educational_certificates,:previous_employment_proof,:salary_slips_for_previous_months, :title,:status,:staff_admission_id,:id,:comments,:staffhead, :final_result,:form_no,:assessment_result,:closestatus)
  end
 end

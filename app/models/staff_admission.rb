@@ -1,5 +1,5 @@
 class StaffAdmission < ActiveRecord::Base
-  
+  scope :enquiry, lambda{where("status = 'Management_Reviewed' or status = 'Application_Created' or status = 'Document_Verified' or status = 'Assessment_Planned' or status = 'Assessment_Completed'")}
   scope :closed_forms,lambda{where("status = 'Form_Closed'")}
   scope :sports,lambda{where("staffhead = ' NAVYA-Transport '")}
   scope :enquiry_forms,lambda{where("status = 'Application_Created'")}

@@ -1,5 +1,47 @@
 class StaffAdmissionsController < ApplicationController
-  
+  def update_man
+    
+    @recruitment = Recruitment.find(params[:id])
+    @staff_admission = StaffAdmission.find(params[:id])
+    respond_to do |format|
+      if @recruitment.update(recruitment_params)
+        @staff_admission.update(:status => "Management_Reviewed")
+        format.html { redirect_to staff_admissions_path, notice: 'Form was successfully updated.' }
+        format.json { render action: 'index', :status => "success" }
+        
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @recruitment.errors, :status => "failure" }
+      end
+    end
+  end
+
+  def update_close
+    
+    @staff_admission = StaffAdmission.find(params[:id])
+    respond_to do |format|
+      if @staff_admission.update(staff_admission_params)
+        format.html { redirect_to staff_admissions_path, notice: 'Form was successfully Closed' }
+        format.json { render action: 'index', :status => "success" }
+        
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @recruitment.errors, :status => "failure" }
+      end
+    end
+  end
+
+  def update_admission
+    @staff_admission = StaffAdmission.find(params[:id])
+    respond_to do |format|
+      if  @staff_admission.update(:status => "Form_Closed")
+        format.json { render action: 'index', :status => "success" }
+      else
+        format.json { render json: @staff_admission.errors, :status => "failure" }
+      end
+    end
+  end
+
   def enquiry_index
     if params[:search].present?
       @staff_admissions = StaffAdmission.search(params[:search])
@@ -9,8 +51,8 @@ class StaffAdmissionsController < ApplicationController
   end
   
   def get_head_view
-    head = StaffLeader.all.map do |head|
-      { head_name: head.heads,id: head.id}
+    head = Staffadmin.all.map do |head|
+      { head_name: head.head,dept: head.dept,id: head.id}
     end
     render :json => head
   end
@@ -56,7 +98,7 @@ class StaffAdmissionsController < ApplicationController
   end
   
   def index
-    @staff_admissions = StaffAdmission.all
+    @staff_admissions = StaffAdmission.enquiry
   end
 
   def show
@@ -85,7 +127,7 @@ class StaffAdmissionsController < ApplicationController
   end
  
   def staff_admission_params
-    params.require(:staff_admission).permit(:form_no,:name,:dob,:gender,:email,:mobile_no,:address,:language,:experience,:klass,:subject,:education_qualification,:expected_salary,:nationality,:status,:post,:staffhead)
+    params.require(:staff_admission).permit(:form_no,:name,:dob,:gender,:email,:mobile_no,:address,:language,:experience,:klass,:subject,:education_qualification,:expected_salary,:nationality,:status,:post,:staffhead,:closestatus)
   end
   
 end

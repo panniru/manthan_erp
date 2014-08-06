@@ -1,0 +1,27 @@
+.row
+  .col-sm-6
+    #accordion.panel-group
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title
+            %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseOne"}
+              Grades & TeacherLeaders
+              .pull-right
+                = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), new_teacher_leader_path, :class => "btn btn-primary btn-sm", :title => "New"
+       
+        #collapseOne.panel-collapse.collapse.in
+          .panel-body
+            %h5
+              %label
+                %table.table.table-bordered
+                  %tbody
+                    - @teacher_leaders.each do |teacher_leader|
+                      %tr
+                        %td{style: "width:40%"}
+                          = teacher_leader.klass
+                        %td{style: "width:40%"}
+                          = teacher_leader.faculty_leader
+                        %td{style: "width:10%"}
+                          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_teacher_leader_path(teacher_leader), :class => "btn btn-warning btn-sm", :title => "Edit"
+                        %td{style: "width:10%"}
+                          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), teacher_leader_path(teacher_leader), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"

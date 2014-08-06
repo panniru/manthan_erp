@@ -92,7 +92,7 @@ ManthanErp::Application.routes.draw do
       get 'home_index'
     end
   end
-  resources :adds
+  
   resources :new_vehicles 
   
  resources :forms do
@@ -348,12 +348,17 @@ ManthanErp::Application.routes.draw do
 
   resources :recruitments do
     member do
+      put 'update_admission'
       get "homeindex"
       get "view_document"
       get 'create_enquiry'
       get "document_verification"
       get 'view_assessment'
+      get 'assessment_result'
       post 'update_rec'
+      post 'update_ass'
+      put 'update_man'
+      post 'update_close'
       get 'assessment_new'
     end
     collection do
@@ -376,6 +381,9 @@ ManthanErp::Application.routes.draw do
     member do
       get 'homeindex'
       get "document_verification"
+      post 'update_close'
+      put 'update_admission'
+      put 'update_man'
     end
     collection do
       get 'get_head_view'
@@ -386,7 +394,14 @@ ManthanErp::Application.routes.draw do
      
     end
   end
-
+  
+  resources :teacher_leaders
+  
+  resources :adds do 
+    collection do
+      get 'get_dept_view'
+    end
+  end
  
   resources :assessment_criterias do
     collection do
@@ -415,6 +430,7 @@ ManthanErp::Application.routes.draw do
     resources :recruitments
   end
   
+  resources :staffadmins
 
   get "/fee_reports", to: "fee_reports#index"
   get "/fee_reports/payment_status_report", to: "fee_reports#payment_status_report"
