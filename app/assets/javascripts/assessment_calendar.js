@@ -3,7 +3,7 @@ $(document).ready(function() {
     // page is now ready, initialize the calendar...
     //alert("hi");
     
-    $('#assessments_calendar').fullCalendar({
+    /*$('#assessments_calendar').fullCalendar({
         //events: '/events.json'     
         //teaching_plans: '/teaching_plans.json' // put your options and callbacks here
          selectable: true,
@@ -13,7 +13,7 @@ $(document).ready(function() {
             $('#myModal').modal('show');                
         }
 
-    })
+    })*/
 
 
 });

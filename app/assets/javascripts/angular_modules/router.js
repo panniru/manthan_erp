@@ -45,6 +45,9 @@
             . when('/teacher_save_form', {
                 templateUrl: 'academics/assessments/teacher_show.html'               
             })
+            . when('/teacher_delete_id', {
+                templateUrl: 'academics/assessments/teacher_show.html'              
+            })
         
            
     }]);

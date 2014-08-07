@@ -10,7 +10,7 @@
               %option{style: "display:none", value: ""} select grade - section - subject  
           .col-md-3
             %a{href: "#teacher_show", :class => "btn btn-primary", :title => "SHOW ASSESSMENT TYPES", "ng-click" => ""} SHOW ASSESSMENT TYPES
-        %br
+        %br       
         .row 
           %div{"ng-view" => ""}
       .col-md-5
@@ -41,7 +41,7 @@
                       %option{style: "display:none", value: ""} select assessment type 
           .modal-footer
             .col-md-5.col-md-offset-3             
-              %a{href: "#teacher_save_form", :class => "btn btn btn-primary btn-sm", :title => "SAVE", "ng-click" => "saveAssessmentTypeMappings(assessment_type)"}
+              %a{href: "#teacher_save_form", :class => "btn btn-primary", :title => "SAVE", "ng-click" => "saveTeacherAssessmentMappings()"} SAVE 
 
   .row
     :css
