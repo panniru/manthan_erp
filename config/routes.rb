@@ -354,10 +354,10 @@ ManthanErp::Application.routes.draw do
       get "document_verification"
       get 'view_assessment'
       get 'assessment_result'
-      post 'update_rec'
-      post 'update_ass'
+      put 'update_rec'
+      put 'update_ass'
       put 'update_man'
-      post 'update_close'
+      put 'update_close'
       get 'assessment_new'
     end
     collection do
