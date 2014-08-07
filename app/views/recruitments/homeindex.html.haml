@@ -77,7 +77,7 @@
               %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
               %h4#myModal.modal-title 
                 %center Assessment Review
-              = form_for @recruitment, :url => {:action => 'update_ass'}, :method => :POST do |f|
+              = form_for @recruitment, :url => {:action => 'update_ass'}, :html=> {:method => :PUT} do |f|
                 .modal-body
                   %center
                     .col-sm-3
@@ -100,10 +100,10 @@
                   = f.hidden_field :title, :value => @recruitment.title
                   = f.hidden_field :start_time, :value => @recruitment.start_time
                   = f.hidden_field :staffhead, :value => @recruitment.staffhead
-                  = f.hidden_field :education_qualification, :value => @recruitment.education_qualification
                   = f.hidden_field :educational_certificates, :value => @recruitment.educational_certificates
                   = f.hidden_field :previous_employment_proof, :value => @recruitment.previous_employment_proof
-                  = f.hiiden_field :salary_slips_for_previous_months, :value => @recruitment.form_no 
+                  = f.hidden_field :salary_slips_for_previous_months, :value => @recruitment.salary_slips_for_previous_months
+                  = f.hidden_field :form_no, :value => @recruitment.form_no
                   = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
 
 
