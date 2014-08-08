@@ -1,0 +1,14 @@
+= form_for RequestNewBook.new,:html => { :class => "form-horizontal", :role => "form" } do |f|
+  .row
+    .col-sm-4
+      = f.label "Book Name:", :class => 'control-label'
+      .col-sm-6
+        = f.text_field :book_name,:class => 'form-control'
+    .col-sm-4
+      = f.label "Author Name:", :class => 'control-label'
+      .col-sm-6
+        = f.text_field :author_name,:class => 'form-control'
+    .col-sm-4
+      = f.submit "Save" , :class =>'btn btn-primary'
+     
+  

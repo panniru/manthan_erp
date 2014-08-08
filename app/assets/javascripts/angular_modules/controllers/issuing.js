@@ -1,19 +1,20 @@
 (function(angular, app) {
     "use strict";
-    app.controller("IssuingsController",["$scope", "gradeService","sectionService", function($scope, gradeService, sectionService) {
+    app.controller("IssuingsController",["$scope", "issuingService", function($scope,  issuingService) {
       $scope.myGrade = ""
              
         $scope.map_grades = []
-        gradeService.getGradeServiceView()
+        issuingService.getGradeServiceView()
             .then(function(result) {
+                // alert(JSON.stringify(result.data))
                 $scope.grades=result.data
                 
                 
             });
         $scope.map_sections = []
-        sectionService.getSectionServiceView()
+        issuingService.getSectionServiceView()
             .then(function(result) {
-                
+                // alert(JSON.stringify(result.data))
                 $scope.sections=result.data
             });
        

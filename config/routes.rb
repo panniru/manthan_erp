@@ -9,6 +9,8 @@ ManthanErp::Application.routes.draw do
   get "new_vehicles/edit"
   get "new_vehicles/new"
 
+ 
+ 
   get "teaching_plans/new"
   get "teaching_plans/edit"
   get "teaching_plans/index"
@@ -25,18 +27,34 @@ ManthanErp::Application.routes.draw do
       get 'home_index'
     end
   end
-
-  resources :damagebooks
-
+  resources :block_books do
+    collection do
+      get 'get_book_service_view'
+      get 'getbooks'
+      post 'savebooks'
+      post 'damagebooks'
+      
+    end
+  end 
+ 
+  resources :request_new_books do
+    collection do
+      get 'request_new'
+      get 'request_approval'
+      post 'create_bulk'
+    end
+  end
   resources :issuings do
     collection do
       get "student_book_issuings"
+      get 'gradeserviceview'
+      get 'sectionserviceview'
     end
   end
   resources :damagebooks do
     collection do
       get 'get_book_service_view'
-     
+     post 'damagebooks'
     end
   end 
   resources :staffs

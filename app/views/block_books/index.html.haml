@@ -1,0 +1,71 @@
+.col-md-12{"ng-controller" => "BlockbooksController"}
+  .row
+    .col-sm-9
+      .pull-right
+        %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Block Book"
+        #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+          .modal-dialog
+            .modal-content
+              .modal-header
+                %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+                %h4#myModalLabel.modal-title Block Book
+                .modal-body
+                  .row
+                    .col-sm-2
+                      = label_tag "ISBN:"
+                    .col-sm-3
+                      = autocomplete_field_tag :isbn_name, 
+                      '',
+                      "/auto_search/autocomplete_book_isbn",
+                      :placeholder => "ISBN", :class => 'form-control',
+                      :required => true,
+                      :id_element => "#isbn", :ng_model => "myIsbn" 
+                    .col-md-7
+                      = hidden_field_tag :isbn, :id => "isbn"
+                      %br
+                      = link_to "GO", "#", class: "btn btn-primary",   :ng_click => "Go()"  
+                      .row
+                        .col-sm-4
+                          = label_tag "NAME:"
+                          %input{:name => "name", :ng_model => "bookName"}
+                        .col-sm-2
+                        .col-sm-3
+                          = label_tag "AUTHOR:"
+                          %input{:name => "author", :ng_model => "authorName"}
+                  .row
+                    .col-sm-3
+                      = label_tag "Blocked By:"
+                    .col-sm-5
+                      = select_tag :blocked_by, options_for_select([['Student'],['Faculty']]) ,  :ng_model => "myBlock" 
+                      %br
+                     
+                      
+                  .modal-footer
+                    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                    = link_to "save", "#", class: "btn btn-primary",   :ng_click => "save()"
+                    %br
+                    %br
+%br
+%br
+%table.table.table.striped.table-bordered.table-condensed.table-hover
+  %thead
+    %tr
+      %th ISBN
+      %th NAME 
+      %th AUTHOR
+      %th BLOCKED BY
+      %th 
+  %tbody
+    - @block_books.each do |block_book|
+      %tr
+        %td= block_book.isbn
+        %td= block_book.name
+        %td= block_book.author
+        %td= block_book.blocked_by
+        %td
+         
+          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), block_book_path(block_book), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+          
+
+       
+
