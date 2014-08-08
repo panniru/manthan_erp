@@ -3,17 +3,15 @@
   .col-md-9
     %table{:class => "table_"}
       %tr
-        %th DATE
-        %th GRADE          
-        %th SECTION         
-        %th ASSESSMENT TYPE       
+        %th DATE       
+        %th ASSESSMENT       
+        %th ASSESSMENT DESCRIPTION
         %th
         %th
       %tr{"ng-repeat" => "teacher_assessment  in teacher_assessments"}
-        %td {{teacher_assessment.assessment_date}}
-        %td {{teacher_assessment.grade_name}}
-        %td {{teacher_assessment.section_name}}
+        %td {{teacher_assessment.assessment_date}}       
         %td {{teacher_assessment.assessment_type}}
+        %td {{teacher_assessment.assessment_desc}}
         %td
           %a{href: "#teacher_edit_form", :class => "btn btn-warning btn-sm",:title => "EDIT","ng-click" => "editTeacherAssessmentMappings(teacher_assessment)"}       
             %span{class: "glyphicon glyphicon-pencil"}
