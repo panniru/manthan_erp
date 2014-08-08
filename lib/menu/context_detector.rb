@@ -27,14 +27,15 @@ class ContextDetector
     "grades_subjects_mappings" => "academic", 
     "assessment_criterias" => "academic", 
     "gradings" => "academic", 
+    "assessments" => "academic",
     "recruitments" => "recruitment_sub_menu",
+    "staff_admissions"=> "recruitment_sub_menu",
     "adds" => "recruitment_sub_menu",
+    "teacher_leaders" => "enquiry_admission",
     "forms" => "recruitment_sub_menu",
     "documentuploaders" => "recruitment_sub_menu",
     "interviewschedulers" => "recruitment_sub_menu",
-    "#" => "recruitment_sub_menu",
-    "#" => "recruitment_sub_menu",
-    "#" => "recruitment_sub_menu",
+    "staffadmins" => "recruitment_sub_menu",
     "books" => "library",
     "issuings" => "library",
     "damagebooks"=> "library",
@@ -44,11 +45,18 @@ class ContextDetector
     "parents" => "default_master_sub_menu",
     "new_vehicles" => "transport",
     "routes" => "transport",
-    "default_masters" => "default_master_sub_menu"
+    "student_route_mappings" => "transport",
+    "default_masters" => "default_master_sub_menu",
+    "HRM" => "hrm_sub_menu"
   }
   
-  def self.get_context(key)
-    CONTEXT_CONTROLLER_MAPPER[key].present? ? CONTEXT_CONTROLLER_MAPPER[key].classify.constantize.new(key) : nil
+  def self.get_context(args)
+    if args[:context].present?
+      CONTEXT_CONTROLLER_MAPPER[args[:context]].present? ? CONTEXT_CONTROLLER_MAPPER[args[:context]].classify.constantize.new(:controller => args[:key], :params => args[:params]) : nil
+    else
+      CONTEXT_CONTROLLER_MAPPER[args[:key]].present? ? CONTEXT_CONTROLLER_MAPPER[args[:key]].classify.constantize.new(:controller =>args[:key], :params => args[:params]) : nil
+    end
+    
   end
 
 

@@ -10,7 +10,7 @@
       %br
 - if current_user.admin?
   .pull-right
-    = link_to 'New Application', new_recruitment_path, :class => 'btn btn-primary'
+    = link_to 'New Application', new_staff_admission_path, :class => 'btn btn-primary'
     %br
     %br
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
@@ -24,12 +24,12 @@
       %th Status
         
   %tbody
-    - @recruitments.each do |recruitment|
+    - @staff_admissions.each do |staff_admission|
       %tr
-        %td= link_to "#{recruitment.form_no}",homeindex_recruitment_path(recruitment)
-        %td= recruitment.name
-        %td= recruitment.dob
-        %td= recruitment.email
-        %td= recruitment.mobile_no
-        %td= recruitment.status
-      
+        %td= link_to "#{staff_admission.form_no}",homeindex_recruitment_path(staff_admission)
+        %td= staff_admission.name
+        %td= staff_admission.dob
+        %td= staff_admission.email
+        %td= staff_admission.mobile_no
+        %td= staff_admission.status
+          

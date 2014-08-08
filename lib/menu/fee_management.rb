@@ -1,5 +1,9 @@
-class FeeManagement < Struct.new(:controller)
+class FeeManagement
   
+  def initialize(args)
+    @controller = args[:controller]
+  end
+
   def admin_sub_menu
     sub_menu = []
     sub_menu << fee_types

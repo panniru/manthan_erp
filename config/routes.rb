@@ -1,9 +1,24 @@
 ManthanErp::Application.routes.draw do
+ 
+  get "student_route_mappings/index"
+  get "student_route_mappings/create"
+  get "student_route_mappings/show"
+
+  get "new_vehicles/index"
+  get "new_vehicles/show"
+  get "new_vehicles/edit"
+  get "new_vehicles/new"
 
   get "teaching_plans/new"
   get "teaching_plans/edit"
   get "teaching_plans/index"
   get "teaching_plans/show"
+
+  resources :student_route_mappings do
+    collection do
+      get "get_route_view"
+    end
+  end
   
   resources :interviewschedulers do
     member do
@@ -65,6 +80,9 @@ ManthanErp::Application.routes.draw do
       get 'getmonthlycalendarservice'
       get 'getmonthdataservice'
       get "student_teaching_plans"
+      get 'getfacultydatesservice' 
+      get 'plan_exists' 
+
     end
   end
 
@@ -73,7 +91,7 @@ ManthanErp::Application.routes.draw do
       get 'home_index'
     end
   end
-  resources :adds
+  
   resources :new_vehicles 
   
  resources :forms do
@@ -183,8 +201,8 @@ ManthanErp::Application.routes.draw do
   resources :routes do
     collection do
       post "create_bulk"
-      get "send_mail"
       get "get_location_view"
+      post "send_mail"
     end
   end
   
@@ -283,9 +301,7 @@ ManthanErp::Application.routes.draw do
       post "upload"
     end
   end
-  resources :admissions do
-    resources :events
-  end
+
   resources :class_teacher_mappings do
     collection do
       get "get_grade_wise_mappings"
@@ -331,19 +347,64 @@ ManthanErp::Application.routes.draw do
 
   resources :recruitments do
     member do
+      put 'update_admission'
       get "homeindex"
+      get "view_document"
+      get 'create_enquiry'
+      get "document_verification"
+      get 'view_assessment'
+      get 'assessment_result'
+      put 'update_rec'
+      put 'update_ass'
+      put 'update_man'
+      put 'update_close'
+      get 'assessment_new'
     end
     collection do
+      
       get 'recruitment_home'
       get 'get_subject_view'
       get 'get_klass_view'
+      get 'enquiry_new'
+      post 'create_enquiry'
+      get 'document_index'
+      get 'sports_index'
+      get 'assessment_index'
+      get 'assessment_completed_index'
+      get 'management_index'
+      get 'selected_staffs'
+      get 'closed_forms'
+    end
+  end
+  resources :staff_admissions do
+    member do
+      get 'homeindex'
+      get "document_verification"
+      post 'update_close'
+      put 'update_admission'
+      put 'update_man'
+    end
+    collection do
+      get 'get_head_view'
+      get 'get_post_view'
+      get 'get_subject_view'
+      get 'get_klass_view'
+      get 'enquiry_index'
+     
+    end
+  end
+  
+  resources :teacher_leaders
+  
+  resources :adds do 
+    collection do
+      get 'get_dept_view'
     end
   end
  
   resources :assessment_criterias do
     collection do
-      get "get_assessment_criteria_service" 
-      get "get_assessment_criteria_service"
+      get "get_assessment_criteria_service"       
       post "save_assessment_criterias"
       post "deletemappings"
     end
@@ -363,8 +424,30 @@ ManthanErp::Application.routes.draw do
       end  
     end
     
+
+   resources :staff_admissions do
+    resources :recruitments
+  end
+  
+  resources :staffadmins
+
   get "/fee_reports", to: "fee_reports#index"
   get "/fee_reports/payment_status_report", to: "fee_reports#payment_status_report"
   get "/fee_reports/payment_type_details", to: "fee_reports#payment_type_details"
   root to: "home#index"
+
+  resources :assessments do
+    collection do
+      get "get_assessment_types_service"
+      post "delete_assessment_type_mappings"
+      post "save_assessment_type_mappings"
+      get "get_assessment_grade_mappings_service"
+      post "save_assessment_grade_mappings"
+      get"get_teacher_assessments_service"
+      get "get_teacher_grade_mappings"
+      post "save_teacher_assessments"
+      post "delete_teacher_assessment_mappings"
+    end  
+  end
+
 end

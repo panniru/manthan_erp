@@ -1,0 +1,19 @@
+.row
+  .col-md-1
+  .col-md-9
+    %table{:class => "table"}
+      %tr
+        %th ASSESSMENT DESCRIPTION          
+        %th EDIT         
+        %th DELETE
+      %tr{"ng-repeat" => "assessment_type  in assessment_types"}
+        %td {{assessment_type.assessment_type}}
+        %td
+          %a{href: "#edit_form", :class => "btn btn-warning btn-sm",:title => "EDIT","ng-click" => "editAssessmentTypeMappings(assessment_type)"}       
+            %span{class: "glyphicon glyphicon-pencil"}
+        %td
+          %a{href: "#delete_id", :class => "btn btn-danger btn-sm",:title => "DELETE", "ng-click" => "deleteAssessmentTypeMappings(assessment_type)"}       
+            %span{class: "glyphicon glyphicon-trash"}
+         
+       
+  

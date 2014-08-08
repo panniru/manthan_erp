@@ -1,0 +1,61 @@
+%table.table-striped.table-condensed
+  %tr
+    %td{style: "width:25%"}
+      %b
+        %span.label.label-info Enquiry #
+    %td{style: "width:25%"}
+      = @staff_admission.form_no
+    %td
+      %td
+  %tr
+    %td
+      %label{for: "name"} Name
+    %td
+      = @staff_admission.name
+    %td
+      %label{for: "dob"} DOB
+    %td
+      = @staff_admission.dob
+  %tr
+    %td
+      %label{for: "gender"} Gender
+    %td
+      = @staff_admission.gender
+    %td
+      %label{for: "email"} Email
+    %td
+      = @staff_admission.email
+  %tr
+    %td
+      %label{for: "mobile_no"} Mobile No
+    %td
+      = @staff_admission.mobile_no
+    %td
+      %label{for: "Address"} Address
+    %td
+      = @staff_admission.address
+  %tr
+    %td
+      %label{for: "nationality"} Nationality
+    %td
+      = @staff_admission.nationality
+    %td
+      %label{for: "preferred subject"} Preferred Class
+    %td
+      = @staff_admission.subject
+  %tr
+    %td
+      %label{for: "experience_in_teaching"} Experience in Teaching
+    %td
+      = @staff_admission.experience
+    %td
+      %label{for: "expected_salary"} Expected Salary
+    %td
+      = @staff_admission.expected_salary
+  %tr
+    %td
+      %label{for: "educational_qualification"} Educational Qualification
+    %td
+      = @staff_admission.education_qualification
+    %td
+    %td

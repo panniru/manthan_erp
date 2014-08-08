@@ -59,8 +59,7 @@
             $scope.assessment_grades=[];
             subjectService.getSubjectServiceView()
                 .then(function(result) {
-                    $scope.subjects=result.data; 
-                    alert(JSON.stringify($scope.subjects));
+                    $scope.subjects=result.data;                     
                 }); 
             
             $scope.myShowIndexValue= false;
@@ -104,9 +103,6 @@
                     });                        
                 }       
             }
-
-            //alert(JSON.stringify($scope.save_assessment_criterias));
-            //alert($scope.mySubject+"=="+JSON.stringify($scope.assessment_grades)+"=="+JSON.stringify($scope.criterias)); 
 
             assessmentCriteriaService.saveAssessmentCriteriaMappings($scope.save_assessment_criterias)
                 .then(function(result) {

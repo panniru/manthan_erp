@@ -22,13 +22,17 @@ class GradesSectionsMappingsController < ApplicationController
             @section_master.grade_master_id = t['grade_master_id']
             @section_master.save
           else
-            @section_master=SectionMaster.new(t)
+            @section_master=SectionMaster.new(add_params(t))
             @section_master.save
           end
         end 
         render :json => true
       end
     end
+  end
+
+  def add_params(params)
+    params.permit(:id, :section_master, :section_name, :grade_master_id)
   end
   
 end

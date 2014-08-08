@@ -1,0 +1,32 @@
+.panel.panel-default
+  .test
+    .col-sm-3
+      .pull-left
+        .input-group
+          %span.input-group-addon
+            = fa_icon "search lg"
+          %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+          %br
+    .col-sm-6
+      %center
+        %h4
+          Documents Verified
+%table#tblData.target.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr{style: "width:25%"}
+      %th Form no
+      %th Educational Certificates
+      %th Previous Employment Proof
+      %th Salary Slips for previous Months
+  %tbody
+    - @recruitments.each do |recruitment|
+      %tr
+        %td
+          = link_to "#{recruitment.form_no}",homeindex_recruitment_path(recruitment)
+        %td
+          = link_to "Edu_Certificates", recruitment.educational_certificates_url
+        %td
+          = link_to "Previous Employment Proof", recruitment.previous_employment_proof_url
+        %td
+          = link_to "Salary slips forprevious Months",recruitment.salary_slips_for_previous_months_url
+        

@@ -1,6 +1,8 @@
 class UserMailer < ActionMailer::Base
   default from: "from@example.com"
-  def welcome_email
-    mail(to: 'navya@ostryalabs.com', subject: 'Welcome to My Awesome Site')
+  def welcome(mails, subject, text)
+    @subject = subject
+    @text = text
+    mail(to: mails , subject: @subject )
   end
 end

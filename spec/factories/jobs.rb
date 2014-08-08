@@ -12,6 +12,12 @@ FactoryGirl.define do
     description "Fee Structure Mailing"
     job_type "mailing"
   end
+
+  factory :route_mailing, :class => Job do |job|
+    code "route_mailing"
+    description "Route Mailing"
+    job_type "mailing"
+  end
   
 
   

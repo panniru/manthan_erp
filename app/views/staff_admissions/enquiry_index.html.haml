@@ -1,0 +1,42 @@
+.panel.panel-default
+  .panel-body
+    .col-sm-3
+      .pull-left
+        .input-group
+          %span.input-group-addon
+            = fa_icon "search lg"
+          %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+          %br
+    .col-sm-4
+      %center
+        %h4
+          Enquiry Forms
+
+    .col-sm-4
+      .pull-right
+        - if current_user.admin?
+          = link_to 'New Enquiry', new_staff_admission_path, :class => 'btn btn-primary'
+          %br
+          %br
+%table#tblData.target.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      %th Form no
+      %th Name
+      %th Gender
+      %th Father's name
+      %th Date of Birth
+      %th Mobile
+      %th E-mail
+        
+  %tbody
+    - @staff_admissions.each do |staff_admission|
+      %tr
+        %td= link_to "#{staff_admission.form_no}", homeindex_staff_admission_path(staff_admission)
+        %td= staff_admission.name
+        %td= staff_admission.education_qualification
+        %td= staff_admission.gender
+        %td= staff_admission.dob
+        %td= staff_admission.mobile_no
+        %td= staff_admission.email
+

@@ -1,4 +1,8 @@
-class Academic < Struct.new(:controller)
+class Academic
+
+  def initialize(args)
+    @controller = args[:controller]
+  end
   
   def admin_sub_menu
     sub_menu = []
@@ -11,6 +15,7 @@ class Academic < Struct.new(:controller)
     sub_menu << teaching_plans
     sub_menu << assessment_criteria
     sub_menu << grading
+    sub_menu << assessments
     sub_menu
   end
   def teacher_sub_menu
@@ -18,11 +23,13 @@ class Academic < Struct.new(:controller)
     sub_menu << time_tables
     sub_menu << teacher_timetables 
     sub_menu << teaching_plans
+    sub_menu << assessments
     sub_menu
   end
   def parent_sub_menu
     sub_menu = [] 
-    sub_menu << time_tables   
+    sub_menu << time_tables
+    sub_menu << teaching_plans
     sub_menu
   end
   
@@ -65,6 +72,10 @@ class Academic < Struct.new(:controller)
 
   def grading
     MenuItem.new(:label => "Grading", :klass => "", :icon => "list-ol", :href => "/gradings")
+  end
+
+   def assessments
+    MenuItem.new(:label => "Assessments", :klass => "", :icon => "list-ol", :href => "/assessments")
   end
 
 

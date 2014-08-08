@@ -35,22 +35,22 @@
           %tr{"ng-repeat" => "timeperiod in timeperiods | orderBy:'id'"}
             %td Period{{" "+($index+1)}}
             %td               
-              %select{"ng-model" => "timeperiod['mon_sub']", "ng-options" => "subject.id as  subject.subject for subject in subjects",:class => "form-control",:placeholder => "first name"} 
+              %select{"ng-model" => "timeperiod['mon_sub']", "ng-options" => "subject.subject_master_id as  subject.subject_name for subject in subjects",:class => "form-control",:placeholder => "first name"} 
                 %option{value: ""}
             %td
-              %select{"ng-model" => "timeperiod['tue_sub']", "ng-options" => "subject.id as  subject.subject for subject in subjects",:class => "form-control"} 
+              %select{"ng-model" => "timeperiod['tue_sub']", "ng-options" => "subject.subject_master_id as  subject.subject_name for subject in subjects",:class => "form-control"} 
                 %option{value: ""}
             %td
-              %select{"ng-model" => "timeperiod['wed_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}  
+              %select{"ng-model" => "timeperiod['wed_sub']", "ng-options" => "subject.subject_master_id as  subject.subject_name for subject in subjects",:class => "form-control"}  
                 %option{value: ""}
             %td
-              %select{"ng-model" => "timeperiod['thu_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}  
+              %select{"ng-model" => "timeperiod['thu_sub']", "ng-options" => "subject.subject_master_id as  subject.subject_name for subject in subjects",:class => "form-control"}  
                 %option{value: ""}
             %td 
-              %select{"ng-model" => "timeperiod['fri_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}
+              %select{"ng-model" => "timeperiod['fri_sub']", "ng-options" => "subject.subject_master_id as  subject.subject_name for subject in subjects",:class => "form-control"}
                 %option{value: ""}
             %td 
-              %select{"ng-model" => "timeperiod['sat_sub']", "ng-options" => "subject.id as subject.subject for subject in subjects",:class => "form-control"}  
+              %select{"ng-model" => "timeperiod['sat_sub']", "ng-options" => "subject.subject_master_id as  subject.subject_name for subject in subjects",:class => "form-control"}  
                 %option{value: ""}
             %td
               %input{:type => "button", "ng-click" => "clearRowPeriods($index)", :class => "btn btn-danger btn-sm", :value => "CLEAR" } 

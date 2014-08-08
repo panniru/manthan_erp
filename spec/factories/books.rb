@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :book do
     name "MyString"
-    isdn "MyString"
+    isbn "MyString"
     author "MyString"
     yop "2014-07-08"
     noc "MyString"

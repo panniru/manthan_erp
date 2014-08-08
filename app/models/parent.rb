@@ -25,4 +25,13 @@ class Parent < ActiveRecord::Base
     students.map{|st| st.grade_master.grade_name}
   end
 
+  def student_grade_ids
+    students.map{|st| st.grade_master.id}
+  end
+
+  def student_section_ids
+    students.map{|st| st.section_master.id}
+  end
+  
+
 end

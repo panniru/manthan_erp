@@ -1,5 +1,5 @@
 .panel.panel-default
-  .panel-body
+  .test
     .col-sm-3
       .pull-left
         .input-group
@@ -11,14 +11,11 @@
       %center
         %h4
           Enquiry Forms
-          %br
-          %br
-  - if current_user.admin?
+  
     .col-sm-4
       .pull-right
-        = link_to 'New Enquiry', enquiry_new_admissions_path, :class => 'btn btn-primary'
-        %br
-        %br
+        - if current_user.admin?
+          = link_to 'New Enquiry', enquiry_new_admissions_path, :class => 'btn btn-primary'
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr

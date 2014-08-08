@@ -10,7 +10,7 @@
   %tbody
     - students.each do |student|
       %tr
-        %td= link_to student.name, student
+        %td= link_to student.name, student_master_path(:id => student,:context => context)
         %td= student.dob
         %td= student.joining_date
         %td= student.parent.father_name

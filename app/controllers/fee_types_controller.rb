@@ -57,9 +57,13 @@ class FeeTypesController < ApplicationController
     params.require(:fee_type).permit(:fee_type)
   end
   
+  def fee_type_elements(params)
+    params.permit(:fee_type)
+  end
+  
   def build_fee_type_from_bulk
     params.require(:bulk_fee_types).select{|fee_type| fee_type["fee_type"].present?}.map do |fee_type|
-      FeeType.new(fee_type)
+      FeeType.new(fee_type_elements(fee_type))
     end
   end
   

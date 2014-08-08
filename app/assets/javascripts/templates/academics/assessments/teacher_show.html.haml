@@ -1,0 +1,22 @@
+.row    
+  .col-md-1
+  .col-md-9
+    %table{:class => "table_"}
+      %tr
+        %th DATE
+        %th GRADE          
+        %th SECTION         
+        %th ASSESSMENT TYPE       
+        %th
+        %th
+      %tr{"ng-repeat" => "teacher_assessment  in teacher_assessments"}
+        %td {{teacher_assessment.assessment_date}}
+        %td {{teacher_assessment.grade_name}}
+        %td {{teacher_assessment.section_name}}
+        %td {{teacher_assessment.assessment_type}}
+        %td
+          %a{href: "#teacher_edit_form", :class => "btn btn-warning btn-sm",:title => "EDIT","ng-click" => "editTeacherAssessmentMappings(teacher_assessment)"}       
+            %span{class: "glyphicon glyphicon-pencil"}
+        %td
+          %a{href: "#teacher_delete_id", :class => "btn btn-danger btn-sm",:title => "DELETE", "ng-click" => "deleteTeacherAssessmentMappings(teacher_assessment)"}       
+            %span{class: "glyphicon glyphicon-trash"}

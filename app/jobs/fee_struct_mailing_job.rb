@@ -4,6 +4,7 @@ class FeeStructMailingJob
     @scrolled_by = scrolled_by
     @job_run_id = JobRun.schedule("fee_structure_mailing", scrolled_by, date).id
   end
+
   def perform
     Parent.all.each do |parent|
       applied_grade_master_ids = []

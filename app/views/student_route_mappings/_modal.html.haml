@@ -1,0 +1,42 @@
+%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Allot"
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title Alloting Route
+        = form_for StudentRouteMapping.new , :html => { :class => "form-horizontal", :role => "form"} do |f| 
+          .modal-body
+            .form-group{"ng-controller" => "Mapping1Controller"}
+              .row
+                .col-sm-4
+                  = f.label "Nearest Location"
+                .col-sm-3
+                  %select{"ng-model" => "location", "ng-options" => "var.id as var.location_name for var in all_locations",:class => "form-control",:required => "required", }
+                    %option{style: "display:none", value: ""} Select Location
+                    = f.hidden_field :location_master_id, :value => "{{location}}"
+                .col-sm-3
+                  %button{:type => "button", :class=> "btn btn-primary", :ng_click => "nearRoutes()"}=  "search"
+              .row
+                %br
+                %table.table.table-bordered
+                  %thead
+                    %tr
+                      %th Route id
+                      %th Route No
+                      %th Bus No
+                      %th No of Children
+                      %th
+                  %tbody
+                    %tr{"ng-repeat" => "route in routes"}
+                      %td {{route.id}}
+                      %td {{route.route_no}}
+                      %td {{route.busno_up}}
+                      %td {{route.no_of_children}}
+                      %td   
+                        %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveRoute(id)"}= "allot"
+                        
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+            
+            

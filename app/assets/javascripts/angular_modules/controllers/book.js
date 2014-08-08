@@ -5,7 +5,7 @@
         $scope.newBooks = []
         $scope.newBook = function(){
             for(var i=0; i<3; i++){
-                $scope.newBooks.push({"name":"", "isdn" :"", "author": "", "year_of_publishing":"", "book_type":"" });
+                $scope.newBooks.push({"name":"", "isbn" :"", "author": "", "year_of_publishing":"", "book_type":"" });
             };
             $('#createModal').modal('show')
         }
@@ -32,7 +32,7 @@
 	$scope.addMorebooks = function(){
             var lnt = parseInt($scope.newBooks.length)
             for(var i=lnt; i< lnt+3; i++){
-                $scope.newBooks.push({"name":"", "isdn" :"", "author": "", "year_of_publishing":"",  "book_type":"" });
+                $scope.newBooks.push({"name":"", "isbn" :"", "author": "", "year_of_publishing":"",  "book_type":"" });
             };
         }
         

@@ -4,7 +4,6 @@
         
         recruitmentsService.getSubjectServiceView()
             .then(function(result) {
-                alert('hi');
                 $scope.subjects=result.data
             });
     }]);

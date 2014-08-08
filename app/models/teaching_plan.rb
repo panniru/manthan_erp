@@ -7,6 +7,7 @@ class TeachingPlan < ActiveRecord::Base
   scope :belongs_to_student, lambda{|student| belongs_to_grade(student.grade_master_id).belongs_to_section(student.section_master_id)}
   scope :belongs_to_grade, lambda{|grade| where(:grade_master_id => grade)}
   scope :belongs_to_section, lambda{|section| where(:section_master_id => section)}
+  scope :belongs_to_subject, lambda{|subject| where(:subject_master_id => subject)}
   scope :dated_on, lambda{|date| where(:teaching_date => date)}
 
   def self.student_teaching_plan(student, date)
@@ -16,5 +17,7 @@ class TeachingPlan < ActiveRecord::Base
       data[key.to_s] = attrs
     end
     data
-  end
+  end  
+  scope :belongs_to_faculty, lambda{|faculty| where(:faculty_master_id => faculty)} 
+
 end

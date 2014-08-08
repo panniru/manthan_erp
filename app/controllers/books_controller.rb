@@ -78,7 +78,7 @@ class BooksController < ApplicationController
   end
   
   def build_book_from_bulk
-    params.require(:bulk_book).select{|book| book["name"].present? and  book["isdn"].present?}.map do |book|
+    params.require(:bulk_book).select{|book| book["name"].present? and  book["isbn"].present?}.map do |book|
       if book[:id].present?
         @book_obj = Book.find(book[:id])
         book.each do |key, val|

@@ -1,0 +1,21 @@
+%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Sent Mail"
+#myModal.modal.fade{:id => "MailModal" ,"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title Compose Mail
+        .modal-body
+          .row
+            .col-sm-2
+              = label_tag "Subject"
+            .col-sm-8
+              = text_field_tag ""
+          .row
+            .col-sm-2
+            .col-sm-8
+              = text_area_tag ""
+          .pull-right
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+            = link_to "Send Mail", send_mail_routes_path, :class => "btn btn-primary",{"data-dismiss" => "modal"}
+          

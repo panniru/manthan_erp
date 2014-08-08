@@ -31,21 +31,26 @@ class TeachersTimeTablesController < ApplicationController
   end
 
   def saveperiods    
-    params[:time_periods].each do |t| 
-      if t["id"].present?
-        temp=TeachersTimeTable.find(t["id"])
-        temp.mon_grade_section=t["mon_grade_section"]
-        temp.tue_grade_section=t["tue_grade_section"]
-        temp.wed_grade_section=t["wed_grade_section"]
-        temp.thu_grade_section=t["thu_grade_section"]
-        temp.fri_grade_section=t["fri_grade_section"]
-        temp.sat_grade_section=t["sat_grade_section"]
-        temp.sun_grade_section=t["sun_rade_section"]
-        temp.save
-      else
-        @timetable=TeachersTimeTable.new(t)
-        @timetable.save
+    respond_to do |format|
+      format.json do   
+        params[:time_periods].each do |t| 
+          if t["id"].present?
+            temp=TeachersTimeTable.find(t["id"])
+            temp.mon_grade_section=t["mon_grade_section"]
+            temp.tue_grade_section=t["tue_grade_section"]
+            temp.wed_grade_section=t["wed_grade_section"]
+            temp.thu_grade_section=t["thu_grade_section"]
+            temp.fri_grade_section=t["fri_grade_section"]
+            temp.sat_grade_section=t["sat_grade_section"]
+            temp.sat_grade_section=t["sun_grade_section"]            
+            temp.save
+          else
+            @timetable=TeachersTimeTable.new(add_params(t))
+            @timetable.save
+          end
+        end      
       end
+      render :json => true
     end
   end
 
@@ -58,4 +63,8 @@ class TeachersTimeTablesController < ApplicationController
     render :json => teacherstimetables  
     
   end
+
+   def add_params(params)
+    params.permit(:id, :faculty_master_id, :mon_grade_section, :tue_grade_section, :wed_grade_section, :thu_grade_section, :fri_grade_section, :sat_grade_section, :sun_grade_section)
+   end
 end

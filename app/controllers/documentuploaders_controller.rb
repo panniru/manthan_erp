@@ -5,16 +5,17 @@ class DocumentuploadersController < ApplicationController
     @documentuploader.update(:status => "Assessment Complete")
     if @documentuploader.save
       flash[:success] = I18n.t :success, :scope => [:documentuploader, :create]
-      redirect_to documentuploader_path
+      redirect_to recruitments_path
     else
       render "new"
     end
   end
   def show
+    @documentuploader = DocumentUploader.find(params[:id])
   end
   def index
     @documentuploaders = Documentuploader.all
-    @documentuploaders = Documentuploader.search(params[:search])
+    
   end
 
   def new

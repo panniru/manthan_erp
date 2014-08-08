@@ -1,0 +1,13 @@
+.row
+  .col-md-1
+  .col-md-9
+    %table{:class => "table"}
+      %tr
+        %th ASSESSMENT DESCRIPTION          
+        %th SAVE        
+      %tr{"ng-repeat" => "assessment_type  in edit_assessment_types"}
+        %td
+          %input{type: "text", "ng-model" => "assessment_type.assessment_type",:class => "form-control" }/
+        %td
+          %a{href: "#save_form", :class => "btn btn btn-primary btn-sm", :title => "SAVE", "ng-click" => "saveAssessmentTypeMappings(assessment_type)"}       
+            %span{class: "glyphicon glyphicon-save"}

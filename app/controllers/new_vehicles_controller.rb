@@ -41,6 +41,6 @@ class NewVehiclesController < ApplicationController
   end
   
    def vehicle_params
-    params.require(:new_vehicle).permit(:make_of_bus,:model_no,:yom,:purchase_option,:purchase_option_date,:capacity)
+    params.require(:new_vehicle).permit(:make_of_bus,:model_no,:year_of_manufacture,:purchase_option,:purchase_option_date,:capacity)
   end
 end

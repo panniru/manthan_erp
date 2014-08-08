@@ -8,7 +8,7 @@ class CreateRecruitments < ActiveRecord::Migration
       t.string :email
       t.string :mobile_no
       t.string :address
-      t.string :language, array: true
+      t.text :language, array: true
       t.string :experience
       t.string :klass
       t.string :subject

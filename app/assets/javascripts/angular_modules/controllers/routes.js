@@ -1,8 +1,7 @@
 (function(angular, app) {
     "use strict";
-    app.controller("RouteController",["$scope","resourceService","routesService", function($scope, resourceService, routesService) {
+    app.controller("RouteController", ["$scope","resourceService","routesService", function($scope, resourceService, routesService ) {
 	$scope.routes = resourceService.Route.query();
-	
 	var fetch_loactions = function(){
 	    routesService.getLocationServiceView()
 		.then(function(result) {
@@ -15,10 +14,19 @@
 	    fetch_loactions();
 	    $scope.newRoute = new resourceService.Route({"busno_up":"", "no_of_children":"", "route_no":"", "locations":[]})
 	    for(var i=0; i<1; i++){
-                $scope.newRoute.locations.push({"location_master_id":"" , "sequence_no": "" });
+                $scope.newRoute.locations.push({"location_master_id":"" , "sequence_no": ""});
             };
             $('#createModal').modal('show')
         }
+
+	$scope.sendMail = function(){
+	    routesService.routeMail($scope.subject, $scope.text)
+		.then(function(response){
+		    //this.modal('hide');
+		    //$location.path('/routes');
+		});
+	    //$('#MailModal').modal('hide')
+	}
 	
         $scope.submitRoutes = function(){
 	    $scope.newRoute.$save()
@@ -28,10 +36,11 @@
 	    	})
 	}
 	
-	//$scope.editLocations = function(){
-          //  $scope.newRoute.locations = $scope.Route;
-            //$('#createModal').modal('show');
-        //}
+	$scope.editLocations = function(){
+	    alert();
+	    //$scope.newRoute.locations = $scope.Route;
+            $('#editModal').modal('show');
+        }
 
         $scope.addMoreterms = function(){
 	    var lnt = parseInt($scope.newRoute.locations.length)

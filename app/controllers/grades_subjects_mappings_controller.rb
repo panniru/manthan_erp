@@ -33,7 +33,7 @@ class GradesSubjectsMappingsController < ApplicationController
             @subject_master.grade_master_id = t['grade_master_id']
             @subject_master.save
           else
-            @subject_master=GradeSubjectMapping.new(t)
+            @subject_master=GradeSubjectMapping.new(add_params(t))
             @subject_master.save
           end
         end 
@@ -42,6 +42,10 @@ class GradesSubjectsMappingsController < ApplicationController
     end
   end
 
+  def add_params(params)
+    params.permit(:id, :subject_master_id,:grade_master_id)
+  end
+  
 
 
 

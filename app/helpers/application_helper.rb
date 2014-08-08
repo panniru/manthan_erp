@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def sub_menu
-    user_menu = UserMenu.new(current_user, ContextDetector.get_context(controller.controller_name))
+    user_menu = UserMenu.new(current_user, ContextDetector.get_context(:key => controller.controller_name, :context => params[:context], :params => params))
     user_menu.sub_menu
   end
 

@@ -9,7 +9,7 @@ class LocationMastersController < ApplicationController
     @location_master = LocationMaster.new
   end
   def create
-    p params
+   
     @location_master = LocationMaster.new(location_params)
     if @location_master.save
       flash[:success] = I18n.t :success, :scope => [:location_master, :create]

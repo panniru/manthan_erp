@@ -20,10 +20,10 @@ module ManthanErp
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    
+    config.autoload_paths += %W(#{Rails.root}/lib/form_objects)
     config.autoload_paths += %W(#{Rails.root}/lib/)
     config.autoload_paths += %W(#{Rails.root}/lib/menu)
-        config.autoload_paths += %W(#{Rails.root}/lib/reports)
+    config.autoload_paths += %W(#{Rails.root}/lib/reports)
     config.autoload_paths += %W(#{Rails.root}/app/models/uploaders)
     config.roadie.enabled = true
     config.assets.enabled = true

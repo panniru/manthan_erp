@@ -8,9 +8,4 @@ class Documentuploader < ActiveRecord::Base
   # Make sure the owner's name is present.
   scope :documentuploaders, lambda{where("status = 'form closed'")}
   scope :documentuploaders, lambda{where("status = 'Assessment Complete'")} 
- 
-  def self.search(search)
-    return scoped unless search.present?
-    where(['name LIKE ? OR educational_certificates LIKE ? OR previous_employment_proof LIKE ? ', "%#{search}%", "%#{search}%", "%#{search}%" ])
-  end
 end

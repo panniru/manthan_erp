@@ -40,7 +40,7 @@ $(document ).ready(function() {
 });
 
 function createAssessment(teacher_leader_id) {
-    alert('hi');
+
     $('.calendar2').html("");
     $('.calendar2').fullCalendar({
         header: {
@@ -61,7 +61,25 @@ function createAssessment(teacher_leader_id) {
     });
 }
 
-   
-     
-  
-  
+
+function createStaffAssessment(staff_leader_id) {
+
+    $('.calendar2').html("");
+    $('.calendar2').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,basicWeek,basicDay',
+            ignoreTimezone: false
+        },
+        
+        events: '/staff_admissions.json?staff_leader_id='+staff_leader_id,
+        
+        selectable: true,
+        select: function(date) {
+            alert("welcome "+ date);
+            $('#selectdate').val(date)
+            $('#myModal').modal('show');                
+        }
+    });
+}
