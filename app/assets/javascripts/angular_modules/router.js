@@ -51,6 +51,10 @@
             . when('/teacher_edit_form', {
                 templateUrl: 'academics/assessments/teacher_edit_form.html'               
             })
+            . when('/show_assessments', {
+                templateUrl: 'academics/assessments/show_assessments.html'               
+            })
+
 
         
            

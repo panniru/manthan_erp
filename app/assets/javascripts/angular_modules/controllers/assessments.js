@@ -1,6 +1,6 @@
 (function(angular, app) {
     "use strict";
-    app.controller('AssessmentsController', ["$scope", "assessmentsService", "gradeService", function($scope, assessmentsService, gradeService) {         
+    app.controller('AssessmentsController', ["$scope", "assessmentsService", "gradeService", "sectionService", function($scope, assessmentsService, gradeService, sectionService) {        
         assessmentsService.getAssessmentTypesService()
             .then(function(result) {                 
                 $scope.assessment_types = result.data;                
@@ -120,7 +120,24 @@
             
             $scope.showAssessmentGradeMappings(); 
         };
+        //ADMIN VIEW OF ASSESSMNETS
+        $scope.getSections = function (){
+            sectionService.getSectionServiceView()
+                .then(function(result) {
+                    $scope.sections=result.data                    
+                });
+        };  
+
+        $scope.showAssessmentMappings = function(myGrade,mySection){          
+            assessmentsService.getAssessmentMappingsService(myGrade,mySection)
+                .then(function(result) {  
+                    $scope.assessments = result.data;                   
+                }); 
+        };
+
        
+
+
         
     }]);    
 })(angular, myApp);
