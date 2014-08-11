@@ -1,0 +1,31 @@
+.row
+  .col-md-1
+  .col-md-10
+    .col-md-2     
+      %select{"ng-model" => "myGrade", "ng-options" => "grade.grade_master_id as grade.grade_name for grade in grades",  "ng-change" => "getSections()", :class => "form-control"}
+        %option{style: "display:none", value: ""} Select Grade
+    .col-md-2
+      %select{"ng-model" => "mySection", "ng-options" => "section.section_master_id as section.section_name for section in sections | filter : {grade_master_id: myGrade}",:class => "form-control"}
+        %option{style: "display:none", value: ""} Select Section
+    .col-md-2
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showAssessmentMappings(myGrade,mySection)", :value => "SHOW"}
+%br
+.row
+  .col-md-1
+  .col-md-10
+    %table{:class => "table"}
+      %tr
+        %th SUBJECT
+        %th ASSESSMENT  
+        %th ASSESSMENT DESCRIPTION
+        %th ASSESSMENT DATE
+        %th TEACHER NAME
+      %tr{"ng-repeat" => "assessment in assessments"}
+        %td {{assessment.subject_name}} 
+        %td {{assessment.assessment_type}} 
+        %td {{assessment.assessment_desc}} 
+        %td {{assessment.assessment_date}}
+        %td {{assessment.faculty_name}}
+         
+ 
+   

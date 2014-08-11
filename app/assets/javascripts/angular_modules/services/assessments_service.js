@@ -26,13 +26,21 @@
             var url = "/assessments/save_assessment_grade_mappings.json"
             return $http.post(url, {mappings: save_assessment_grade_mappings});    
         }; 
+
+        var getAssessmentMappingsService = function(myGrade,mySection){
+            var url = "/assessments/get_assessment_mappings_service.json"
+            return $http.get(url, {params: {my_Grade: myGrade, my_Section: mySection}});
+        };       
        
+        //ADMIN VIEW OF ASSESSMENTS
+
         return { 
             getAssessmentTypesService : getAssessmentTypesService,
             deleteAssessmentTypeMappings : deleteAssessmentTypeMappings,
             saveAssessmentTypeMappings : saveAssessmentTypeMappings,
             getAssessmentGrageMappingsService : getAssessmentGrageMappingsService,  
-            saveAssessmentGradeMappings : saveAssessmentGradeMappings
+            saveAssessmentGradeMappings : saveAssessmentGradeMappings,
+            getAssessmentMappingsService : getAssessmentMappingsService,
         } 
 
         

@@ -1,7 +1,6 @@
 (function(angular, app) {
     "use strict";
-    app.controller("DatePickerController",["$scope", function($scope) {
-        
+    app.controller("DatePickerController",["$scope", function($scope) {       
         $scope.today = function() {
             $scope.dt = new Date();
         };

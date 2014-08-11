@@ -1,0 +1,22 @@
+.row
+  .col-md-1
+  .col-md-9
+    %table{:class => "table_"}
+      %tr        
+        %th DATE       
+        %th ASSESSMENT       
+        %th ASSESSMENT DESCRIPTION
+        %th       
+      %tr{"ng-repeat" => "teacher_assessment in edit_teacher_assessments"}
+        %td{"ng-controller" => "DatePickerController"}           
+          %input.form-control{"close-text" => "Close", "datepicker-options" => "dateOptions", "datepicker-popup" => "", "is-open" => "opened", "ng-model" => "teacher_assessment['assessment_date']", "ng-required" => "true", type: "text", :ng_change => "$parent.reflectContent(teacher_assessment['assessment_date'])", "ng-bind" => "dt | dt:'yyyy-MM-dd'", "ng-click" => "open($event)"}  
+          {{teacher_assessment['assessment_date']}}
+        %td
+          %select{"ng-model" => "teacher_assessment['assessment_type_id']", "ng-options" => "assessment_type.id as assessment_type.assessment_type for assessment_type  in assessment_types",:class => "form-control"} 
+          {{teacher_assessment['assessment_type_id']}}
+        %td
+          %input{type: "text", "ng-model" => "teacher_assessment['assessment_desc']",:class => "form-control" }
+          {{teacher_assessment['assessment_desc']}}
+        %td
+          %a{href: "#teacher_save_form", :class => "btn btn btn-primary btn-sm", :title => "SAVE", "ng-click" => "saveEditTeacherAssessmentMappings(teacher_assessment)"}       
+            %span{class: "glyphicon glyphicon-save"}

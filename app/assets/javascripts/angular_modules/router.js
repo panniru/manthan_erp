@@ -48,6 +48,14 @@
             . when('/teacher_delete_id', {
                 templateUrl: 'academics/assessments/teacher_show.html'              
             })
+            . when('/teacher_edit_form', {
+                templateUrl: 'academics/assessments/teacher_edit_form.html'               
+            })
+            . when('/show_assessments', {
+                templateUrl: 'academics/assessments/show_assessments.html'               
+            })
+
+
         
            
     }]);

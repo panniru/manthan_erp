@@ -5,9 +5,9 @@
             var url = "/assessments/get_assessment_types_service.json"
             return $http.get(url);
         }; 
-        var getTeacherAssessmentsService = function(){
+        var getTeacherAssessmentsService = function(myGrade, mySection, mySubject){
             var url = "/assessments/get_teacher_assessments_service.json"
-            return $http.get(url);            
+            return $http.get(url, {params:{my_Grade: myGrade, my_Section: mySection, my_Subject: mySubject}});                  
         }; 
         var getTeacherGradeMappings = function(){
             var url = "/assessments/get_teacher_grade_mappings.json"
