@@ -451,4 +451,9 @@ ManthanErp::Application.routes.draw do
     end  
   end
 
+  resources :assessment_results do   
+    collection do
+   end  
+  end      
+
 end

@@ -15,7 +15,7 @@
             . when('/assessments', {
                 templateUrl: 'academics/assessments/show_form.html'               
             })
-            . when('/show_form', {
+            . when('assessments/show_form', {
                 templateUrl: 'academics/assessments/show_form.html'               
             })
             . when('/edit_form', {
@@ -53,6 +53,12 @@
             })
             . when('/show_assessments', {
                 templateUrl: 'academics/assessments/show_assessments.html'               
+            })
+            . when('/show_form', {
+                templateUrl: 'academics/assessment_results/show_form.html'               
+            })
+            . when('/class_show_form', {
+                templateUrl: 'academics/assessment_results/class_show_form.html'               
             })
 
 

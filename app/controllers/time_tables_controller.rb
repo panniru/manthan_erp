@@ -6,8 +6,7 @@ class TimeTablesController < ApplicationController
       render "parent_index"
     elsif  current_user.teacher?
       render "teacher_index"
-    end
-
+    end 
   end
 
   def gradeserviceview

@@ -137,7 +137,7 @@ class AssessmentsController < ApplicationController
   def get_teacher_assessments_service
     respond_to do |format|
       format.json do       
-        teacher_assessments = AssessmentTeacherMapping.where('grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'"+" AND "+'subject_master_id = '+"'#{params[:my_Subject]}'")       
+        teacher_assessments = AssessmentListing.where('grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'"+" AND "+'subject_master_id = '+"'#{params[:my_Subject]}'")       
         teacher_assessments = teacher_assessments.each.map do |mapping|
           {id: mapping.id, faculty_master_id: mapping.faculty_master_id, faculty_name: mapping.faculty_master.faculty_name, grade_master_id: mapping.grade_master_id,  grade_name: mapping.grade_master.grade_name, section_master_id: mapping.section_master_id,  section_name: mapping.section_master.section_name, subject_master_id: mapping.subject_master_id,  subject_name: mapping.subject_master.subject_name, assessment_type_id: mapping.assessment_type_id, assessment_type: mapping.assessment_type.assessment_type, assessment_desc: mapping.assessment_desc, assessment_date: mapping.assessment_date} 
         end
@@ -152,7 +152,7 @@ class AssessmentsController < ApplicationController
         mappings = params[:mappings]        
         mappings.each do |t|
           if t["id"].present? 
-            @mapping = AssessmentTeacherMapping.find(t["id"])          
+            @mapping = AssessmentListing.find(t["id"])          
             t['faculty_master_id'] = current_user.faculty_master.id
             @mapping.grade_master_id = t['grade_master_id'] 
             @mapping.section_master_id = t['section_master_id']
@@ -163,7 +163,7 @@ class AssessmentsController < ApplicationController
             @mapping.save
           else              
             t['faculty_master_id'] = current_user.faculty_master.id         
-            @mapping = AssessmentTeacherMapping.new(add_teacher_assessments_params(t))
+            @mapping = AssessmentListing.new(add_teacher_assessments_params(t))
             @mapping.save
           end
         end       
@@ -176,7 +176,7 @@ class AssessmentsController < ApplicationController
     respond_to do |format|
       format.json do       
         if params[:_delete_mapping_id].present?
-          AssessmentTeacherMapping.find(params[:_delete_mapping_id]).destroy   
+          AssessmentListing.find(params[:_delete_mapping_id]).destroy   
         end
         render :json => true
       end
@@ -189,16 +189,12 @@ class AssessmentsController < ApplicationController
 
   def get_assessment_mappings_service
     respond_to do |format|
-      format.json do
-        p params
-        p "====================>"
-        assessments = AssessmentTeacherMapping.where('grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'")       
+      format.json do       
+        assessments = AssessmentListing.where('grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'")       
         assessments = assessments.each.map do |mapping|
           {id: mapping.id, faculty_master_id: mapping.faculty_master_id, faculty_name: mapping.faculty_master.faculty_name, grade_master_id: mapping.grade_master_id,  grade_name: mapping.grade_master.grade_name, section_master_id: mapping.section_master_id,  section_name: mapping.section_master.section_name, subject_master_id: mapping.subject_master_id,  subject_name: mapping.subject_master.subject_name, assessment_type_id: mapping.assessment_type_id, assessment_type: mapping.assessment_type.assessment_type, assessment_desc: mapping.assessment_desc, assessment_date: mapping.assessment_date} 
         end
-        render :json => assessments
-        p assessments
-        p "====================>"
+        render :json => assessments       
       end
     end
   end
