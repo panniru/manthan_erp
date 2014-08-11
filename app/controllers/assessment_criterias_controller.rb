@@ -17,7 +17,7 @@ class AssessmentCriteriasController < ApplicationController
       format.json do        
         mappings = params[:mappings]        
         mappings.each do |t|         
-          @assessment_criteria=AssessmentCriteria.new(t)
+          @assessment_criteria=AssessmentCriteria.new(add_params(t))
           @assessment_criteria.save         
         end 
         render :json => true
@@ -34,6 +34,10 @@ class AssessmentCriteriasController < ApplicationController
         render :json => true
       end
     end
+  end
+
+  def add_params(params)   
+    params.permit( :grade_master_id, :subject_master_id, :subject_criteria)
   end
   
 end

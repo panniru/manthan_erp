@@ -16,6 +16,7 @@ class Academic
     sub_menu << assessment_criteria
     sub_menu << grading
     sub_menu << assessments
+    sub_menu << assessment_results
     sub_menu
   end
   def teacher_sub_menu
@@ -24,6 +25,7 @@ class Academic
     sub_menu << teacher_timetables 
     sub_menu << teaching_plans
     sub_menu << assessments
+    sub_menu << assessment_results
     sub_menu
   end
   def parent_sub_menu
@@ -78,5 +80,8 @@ class Academic
     MenuItem.new(:label => "Assessments", :klass => "", :icon => "list-ol", :href => "/assessments")
   end
 
+    def assessment_results
+    MenuItem.new(:label => "Assessments Results", :klass => "", :icon => "list-ol", :href => "/assessment_results")
+  end
 
 end

@@ -1,0 +1,15 @@
+.row{"ng-controller" => "AssessmentsController"}
+  .row
+    .col-md-1
+    .col-md-10
+      .col-md-3
+        %a{href: "#show_form", :class => "btn btn-primary", :title => "MY ASSESSMENTSE", "ng-click" => "editssAssessmentTypeMappings({})"} MY ASSESSMENTS
+      .col-md-3
+        %a{href: "#class_show_form", :class => "btn btn-primary", :title => "MY CLASS ASSESSMENTS", "ng-click" => "editAssessmentTypeMapsspings({})"} MY CLASS ASSESSMENTS
+    .col-md-1
+  .row
+    .col-md-1
+    .col-md-10
+      .row 
+        %div{"ng-view" => ""}
+    .col-md-1

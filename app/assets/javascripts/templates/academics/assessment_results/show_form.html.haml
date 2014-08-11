@@ -1,0 +1,20 @@
+.row{"ng-controller" => "AssessmentResultsController"}
+  %br
+  %br
+  .row
+    .col-md-1
+    .col-md-10
+      .col-md-1
+        %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(1)", :value => "AUG"}
+      .col-md-1
+        %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(1)", :value => "PREV"}
+    .col-md-1
+  %br
+  .row{"ng-repeat" => "mapping in teacher_grade_subject_mappings"}
+    .col-md-1
+    .col-md-10
+      %h3 {{mapping.teacher_grade_subject}}
+      %br
+      %br        
+    .col-md-1
+    

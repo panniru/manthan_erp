@@ -470,4 +470,9 @@ ManthanErp::Application.routes.draw do
   
 
 
+  resources :assessment_results do   
+    collection do
+   end  
+  end      
+
 end
