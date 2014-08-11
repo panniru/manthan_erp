@@ -1,82 +1,49 @@
-= form_for @damagebook , :html => { :class => "form-horizontal", :role => "form"} do |f|
-  .row
-    .col-sm-3
-      = f.label "ISBN:", :class => 'col-sm-3 control-label'
-    .col-sm-5
-      = f.text_field :isbn, :class => 'form-control'
-      %br
-  .row 
-    .col-sm-3
-      = label_tag "BookStage:"
-    .col-sm-5
-      .btn-group{"data-toggle" => "buttons-radio"}
-        
-    -#   .col-sm-2
-    -#     %label{for: "Loss", :id => "first"} Loss
-    -#   .col-sm-2
-    -#     = f.radio_button :book_stage, "Loss"
-    -#   .col-sm-2
-    -#     %label{for: "Damage", :id => "second"} Damage
-    -#   .col-sm-2
-    -#     = f.radio_button :book_stage, "Damage"
-        
+.row                      
+  .col-sm-2
+    = label_tag "ISBN:"
+  .col-sm-3
+    = autocomplete_field_tag :isbn_name,
+    '',
+    "/auto_search/autocomplete_book_isbn",
+    :placeholder => "ISBN", :class => 'form-control',
+    :required => true,
+    :id_element => "#isbn" ,:ng_model => "myIsbn"
+  .col-sm-7
+    = hidden_field_tag :isbn, :id => "isbn"
+    %br
+    = link_to "GO", "#", class: "btn btn-primary",   :ng_click => "Go()"  
+    .row
+      .col-sm-4
+        = label_tag "NAME:"
+        %input{:name => "name", :ng_model => "bookName"}
+      .col-sm-2
+      .col-sm-3
+        = label_tag "AUTHOR:"
+        %input{:name => "author", :ng_model => "authorName"}
+        %br
+        %br
+.row 
+  .col-sm-3
+    = label_tag "BookStage:"
+  .col-sm-2
+    %input{"ng-model" => "bookStage", type: "radio", value: "LOSS", :class => "form-control"}Loss
+  .col-sm-2
+    %input{"ng-model" => "bookStage", type: "radio", value: "DAMAGE", :class => "form-control"}Damage
+  .col-sm-1
+    %br
+.row
+  .col-sm-3
+    = label_tag "Damage Type:"
+  .col-sm-5
+    = select_tag :damage_type, options_for_select([['Damaged Covers'],['Covers Separating from the Text Block'],[' Missing Pages'],['Torn Pages'],['Loose Pages'],['Stains'],['Wet Books'],['Mold ']]),  :ng_model => "damageType" 
     
-      
-  
-      :javascript
-        function yesnoCheck() {
-        if (document.getElementById('yesCheck').checked) {
-        document.getElementById('ifYes').style.display = 'block';
-        }
-        else document.getElementById('ifYes').style.display = 'none';
-        
-        }
-    Damage
-    %input#yesCheck{name: "yesno", onclick: "javascript:yesnoCheck();", type: "radio"}/
-    Loss
-    %input#noCheck{name: "yesno", onclick: "javascript:yesnoCheck();", type: "radio"}/
-    %br/
-    #ifYes{style: "display:none"}
-      First name:
-      %input{name: "damage_type", type: "text", value: ""}/
-      %br/
-      Last name:
-      %input{name: "damage_description", type: "text_area", value: ""}/
-      %br/
-      %input#yes{name: "yes", type: "text"}/
-      %input#yes{name: "yes", type: "text"}/
-      %br/
-      What can we do to accommodate you?
- 
-      = f.button "submit" , :class =>'btn btn-primary'
-:javascript
-  function yesnoCheck() {
-      if (document.getElementById('yesCheck').checked) {
-          document.getElementById('ifYes').style.display = 'block';
-      }
-      else document.getElementById('ifYes').style.display = 'none';
-  
-  }
-Yes
-%input#yesCheck{name: "yesno", onclick: "javascript:yesnoCheck();", type: "radio"}/
-No
-%input#noCheck{name: "yesno", onclick: "javascript:yesnoCheck();", type: "radio"}/
-%br/
-#ifYes{style: "display:none"}
-  First name:
-  %input{name: "damage_type", type: "text", value: ""}/
-  %br/
-  Last name:
-  %input{name: "damage_description", type: "text_area", value: ""}/
-  %br/
-  %input#yes{name: "yes", type: "text"}/
-  %input#yes{name: "yes", type: "text"}/
-  %br/
-  %select
-  %option{value: "volvo"} Volvo
-  %option{value: "saab"} Saab
-  %option{value: "opel"} Opel
-  %option{value: "audi"} Audi
-  What can we do to accommodate you?
- 
-  %input{type: "submit", value: "Submit"}/
+    %br
+.row
+  .col-sm-3
+    = label_tag "Description:"
+  .col-sm-5
+    = text_area_tag :damage_description , "", :ng_model => "damageDescription"
+    %br
+    = link_to "submit", "#", class: "btn btn-primary",   :ng_click => "submit()"
+    %br
+    %br 

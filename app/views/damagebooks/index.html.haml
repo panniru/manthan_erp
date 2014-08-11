@@ -11,59 +11,56 @@
               .modal-header
                 %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
                 %h4#myModalLabel.modal-title New Report
-                = form_for Damagebook.new , :html => {:class => "form-horizontal", :role => "form" , :multiple => true} do |f|
-                  .modal-body
-                    .row                      
-                      .col-sm-3
-                        = f.label "ISBN:", :class => 'col-sm-3 control-label'
-                      .col-sm-5
-                        = autocomplete_field_tag :isbn_name,
-                        '',
-                        "/auto_search/autocomplete_book_isbn",
-                        :placeholder => "ISBN", :class => 'form-control',
-                        :required => true,
-                        :id_element => "#isbn"
-                        .col-md-3
-                          = hidden_field_tag :isbn, :id => "isbn"  
-                          
-                          %br
-                        = submit_tag("GO",{class: "btn btn-primary", :ng_model => ("myIsbn") , :ng_click => "Go()"})  
-                        %br
-                        %br
-                        
-                    .row 
-                      .col-sm-3
-                        = label_tag "BookStage:"
-                      .col-sm-5
-                        .btn-group{"data-toggle" => "buttons-radio"}
-                          .col-sm-1
-                            = f.radio_button :book_stage, "Loss"
-                          .col-sm-3
-                            %label{for: "Loss", :id => "first"} Loss
-                     
-                          .col-sm-1
-                            = f.radio_button :book_stage, "Damage"
-                            
-                          .col-sm-4
-                            %label{for: "Damage", :id => "second"} Damage
-                       
-                            %br
-                    .row
-                      .col-sm-3
-                        = f.label "Damage Type:", :class => 'col-sm-3 control-label'
-                      .col-sm-5
-                        = f.select :damage_type, options_for_select([['Damaged Covers'],['Covers Separating from the Text Block'],[' Missing Pages'],['Torn Pages'],['Loose Pages'],['Stains'],['Wet Books'],['Mold ']])
-                        %br
-                    .row
-                      .col-sm-3
-                        = f.label "Description:", :class => 'col-sm-3 control-label'
-                      .col-sm-5
-                        = f.text_area :damage_description, :class => 'form-control'
-                        %br
-                 
+                .modal-body
+                  .row                      
+                    .col-sm-2
+                      = label_tag "ISBN:"
+                    .col-sm-3
+                      = autocomplete_field_tag :isbn_name,
+                      '',
+                      "/auto_search/autocomplete_book_isbn",
+                      :placeholder => "ISBN", :class => 'form-control',
+                      :required => true,
+                      :id_element => "#isbn" ,:ng_model => "myIsbn"
+                    .col-sm-7
+                      = hidden_field_tag :isbn, :id => "isbn"
+                      %br
+                      = link_to "GO", "#", class: "btn btn-primary",   :ng_click => "Go()"  
+                      .row
+                        .col-sm-4
+                          = label_tag "NAME:"
+                          %input{:name => "name", :ng_model => "bookName"}
+                        .col-sm-2
+                        .col-sm-3
+                          = label_tag "AUTHOR:"
+                          %input{:name => "author", :ng_model => "authorName"}
+                  .row 
+                    .col-sm-3
+                      = label_tag "BookStage:"
+                    .col-sm-2
+                      %input{"ng-model" => "bookStage", type: "radio", value: "LOSS", :class => "form-control"}Loss
+                    .col-sm-2
+                      %input{"ng-model" => "bookStage", type: "radio", value: "DAMAGE", :class => "form-control"}Damage
+                      .col-sm-1
+                        {{bookStage}}
+                  .row
+                    .col-sm-3
+                      {{bookStage}}
+                      = label_tag "Damage Type:"
+                    .col-sm-5
+                      = select_tag :damage_type, options_for_select([['Damaged Covers'],['Covers Separating from the Text Block'],[' Missing Pages'],['Torn Pages'],['Loose Pages'],['Stains'],['Wet Books'],['Mold ']]),  :ng_model => "damageType" 
+                      {{damageType}}
+                      %br
+                  .row
+                    .col-sm-3
+                      = label_tag "Description:"
+                    .col-sm-5
+                      = text_area_tag :damage_description , "", :ng_model => "damageDescription"
+                      %br
+                      {{damageDescription}}
                   .modal-footer
                     %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-                    = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+                    = link_to "submit", "#", class: "btn btn-primary",   :ng_click => "submit()"
                   %br
                   %br
 .pull-left
@@ -89,13 +86,13 @@
     - @damagebooks.each do |damagebook|
       %tr   
         %td= damagebook.isbn
-        %td
-        %td
+        %td= damagebook.name
+        %td= damagebook.author
         %td= damagebook.book_stage
         %td= damagebook.damage_type
         %td= damagebook.damage_description
         %td
-          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_damagebook_path(damagebook), :class => "btn btn-warning btn-sm", :title => "Edit"
+          
           = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), damagebook_path(damagebook), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete" 
        
        

@@ -234,7 +234,27 @@ en:
       fail: "Damage Value not been saved"
     destroy:
       success: "Damage has been deleted"
-      fail: "Damageg has not been deleted"
+      fail: "Damage has not been deleted"
     update:
       success: " Damage has been updated"
       fail: "Damage not been updated"
+  block_book:
+    create:
+      success: "book has been blocked"
+      fail: "book Value not been blocked"
+    destroy:
+      success: "blockedbook has been deleted"
+      fail: "blockedbook has not been deleted"
+    update:
+      success: " blockedbook has been updated"
+      fail: "blockedbook not been updated"
+  request_new_book:
+    create:
+      success: "Book has been saved"
+      fail: "Book Value not been saved"
+    destroy:
+      success: "Book has been deleted"
+      fail: "Book has not been deleted"
+    update:
+      success: " Book has been updated"
+      fail: "Book not been updated"

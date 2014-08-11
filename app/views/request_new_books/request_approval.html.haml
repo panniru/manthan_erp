@@ -1,0 +1,21 @@
+.pull-left
+  .col-sm-10
+    %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
+%br
+%br
+%br
+%table#tblData.target.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      %th
+      %th Book Name
+      %th Author Name
+     
+      
+      
+  %tbody
+    - @request_new_books.each do |request|
+      %tr
+        %td
+        %td= request.book_name
+        %td= request.author_name

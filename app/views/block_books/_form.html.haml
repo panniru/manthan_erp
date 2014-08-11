@@ -1,0 +1,29 @@
+.row
+  .col-sm-2
+    = label_tag "ISBN:"
+  .col-sm-3
+    = autocomplete_field_tag :isbn_name, 
+    '',
+    "/auto_search/autocomplete_book_isbn",
+    :placeholder => "ISBN", :class => 'form-control',
+    :required => true,
+    :id_element => "#isbn", :ng_model => "myIsbn" 
+  .col-md-7
+    = hidden_field_tag :isbn, :id => "isbn"
+    %br
+    = link_to "GO", "#", class: "btn btn-primary",   :ng_click => "Go()"  
+    .row
+      .col-sm-4
+        = label_tag "NAME:"
+        %input{:name => "name", :ng_model => "bookName"}
+      .col-sm-2
+      .col-sm-3
+        = label_tag "AUTHOR:"
+        %input{:name => "author", :ng_model => "authorName"}
+.row
+  .col-sm-3
+    = label_tag "Blocked By:"
+  .col-sm-5
+    = select_tag :blocked_by, options_for_select([['Student'],['Faculty']]) ,  :ng_model => "myBlock" 
+    %br
+    = link_to "save", "#", class: "btn btn-primary",   :ng_click => "save()"

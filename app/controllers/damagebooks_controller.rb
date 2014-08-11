@@ -16,7 +16,7 @@ class DamagebooksController < ApplicationController
   
   def index
     @damagebooks= Damagebook.all
-    # @damagebooks = Damagebook.search(params[:search])
+   
   end
   
   def new
@@ -44,14 +44,32 @@ class DamagebooksController < ApplicationController
     end
     redirect_to damagebooks_path
   end
+  
   def get_book_service_view     
     damage = Book.all.map do |damage|
       { isbn: damage.isbn , name: damage.name,author: damage.author,id: damage.id}     
-     
     end 
     render :json => damage
+  end  
+
+def damagebooks
+  damagebooks = Book.where('isbn = '+"'#{params[:my_Isbn]}'")
+   damagebooks = damagebooks.map do |block|
+     {isbn: block.isbn, name: block.name, author: block.author,book_stage: params[:book_Stage],damage_type: params[:damage_Type],damage_description: params[:damage_Description] }
   end
-     
+  damagebooks.each do |t|
+  @temp=Damagebook.new()
+  @temp.isbn=t[:isbn]
+  @temp.name=t[:name]
+  @temp.author=t[:author]
+  @temp.book_stage=t[:book_stage]
+  @temp.damage_type=t[:damage_type]
+  @temp.damage_description=t[:damage_description]
+  @temp.save
+  end
+  render :json => damagebooks
+end
+ 
   private
 
   def damagebook_params
