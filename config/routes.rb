@@ -206,45 +206,6 @@ ManthanErp::Application.routes.draw do
     end
   end
   
-  resources :admissions do
-    member do
-      get 'enquiry_show'
-      get 'admission_show'
-      get 'admission_new'
-      get 'assessment_new'
-      get 'assessment_show'
-      get 'home_index'
-      get 'edit_application'
-      get 'edit_assessment'
-      get 'edit_assessment_result'
-      post "admissions/update_enquiry"
-      post "admissions/update_assessment"
-      put 'update_admission'
-      get 'view_assessment'
-      get 'assessment_result'
-      get 'management_result'
-      get 'time_table'
-    end
-    
-    collection do
-      get "enquiry_index"
-      get "admission_index"
-      get "assessment_index"
-      get "assessment_completed"
-      get 'management_index'
-      get "enquiry_new"
-      get 'admission_home'
-      get 'closed_forms'
-      get 'calendar'
-      get "get_klass_view"
-      get "get_details"
-      get "selected_students"
-      
-      
-    end
-  end
-  
-  
   resources :staffs do
     member do
       get 'event_new'
@@ -449,5 +410,45 @@ ManthanErp::Application.routes.draw do
       post "delete_teacher_assessment_mappings"
     end  
   end
+  
+  resources :admissions do
+    member do
+      get 'enquiry_show'
+      get 'admission_show'
+      get 'admission_new'
+      get 'assessment_new'
+      get 'assessment_show'
+      get 'home_index'
+      get 'edit_application'
+      get 'edit_assessment'
+      get 'edit_assessment_result'
+      post "admissions/update_enquiry"
+      post "admissions/update_assessment"
+      put 'update_admission'
+      get 'view_assessment'
+      get 'assessment_result'
+      get 'management_result'
+      get 'time_table'
+    end
+    
+    collection do
+      get "enquiry_index"
+      get "admission_index"
+      get "assessment_index"
+      get "assessment_completed"
+      get 'management_index'
+      get "enquiry_new"
+      get 'admission_home'
+      get 'closed_forms'
+      get 'calendar'
+      get "get_klass_view"
+      get "get_details"
+      get "selected_students"
+      
+      
+    end
+  end
+  
+
 
 end

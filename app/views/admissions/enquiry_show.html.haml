@@ -1,3 +1,6 @@
+.row
+  %h4
+    ENQUIRY DETAILS
 .col-sm-9
   %table.table-striped.table-condensed
     %tr
@@ -141,4 +144,4 @@
   .pull-left
     - if("#{@admission.status}" == 'Enquiry_Created')
       = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_admission_path, :class => "btn btn-warning btn-sm", :title => "Edit"
-      
+    = link_to 'Back', home_index_admission_path, :class => 'btn btn-primary'

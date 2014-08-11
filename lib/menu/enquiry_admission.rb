@@ -14,6 +14,7 @@ class EnquiryAdmission
     sub_menu << show_assessment_planned
     sub_menu << assessment_completed
     sub_menu << view_management_review
+    sub_menu << selected_students
     sub_menu << show_closed_forms
     sub_menu << teacher_settings
   end
@@ -46,7 +47,6 @@ class EnquiryAdmission
    sub_menu = []
    sub_menu << view_schedule
    sub_menu << assessment_completed
-   sub_menu << show_closed_forms
    sub_menu
  end
  
