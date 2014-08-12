@@ -24,7 +24,7 @@
       %th Status
         
   %tbody
-    - @staff_admissions.each do |staff_admission|
+    - StaffAdmission.all.each do |staff_admission|
       %tr
         %td= link_to "#{staff_admission.form_no}",homeindex_recruitment_path(staff_admission)
         %td= staff_admission.name

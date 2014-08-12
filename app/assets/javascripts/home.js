@@ -62,7 +62,7 @@ function createAssessment(teacher_leader_id) {
 }
 
 
-function createStaffAssessment(staff_leader_id) {
+function createStaffAssessment(staff_admission_id) {
 
     $('.calendar2').html("");
     $('.calendar2').fullCalendar({
@@ -73,7 +73,7 @@ function createStaffAssessment(staff_leader_id) {
             ignoreTimezone: false
         },
         
-        events: '/staff_admissions.json?staff_leader_id='+staff_leader_id,
+        events: '/recruitments.json?staff_admission_id='+staff_admission_id,
         
         selectable: true,
         select: function(date) {
@@ -92,4 +92,5 @@ $(document ).ready(function() {
         });
     }
     modal();
+  
 });

@@ -326,6 +326,7 @@ ManthanErp::Application.routes.draw do
 
   resources :recruitments do
     member do
+      
       put 'update_admission'
       get "homeindex"
       get "view_document"
@@ -470,9 +471,34 @@ ManthanErp::Application.routes.draw do
   
 
 
+
   resources :assessment_results do   
     collection do
    end  
   end      
+
+
+  resources :staffrecruits do
+    member do
+      get 'upload_document'
+      put 'update_admission'
+      get "homeindex"
+      get "document_verification"
+      get 'view_assessment'
+      get 'assessment_result'
+      get 'management_result'
+    end
+    collection do
+      get 'get_subject_view'
+      get 'get_klass_view'
+      get 'enquiry_index'
+      get 'document_index'
+      get 'assessment_index'
+      get 'assessment_completed_index'
+      get 'management_index'
+      get 'selected_staffs'
+      get 'closed_forms'
+    end
+  end
 
 end

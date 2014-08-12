@@ -1,5 +1,5 @@
 .panel.panel-default
-  .test
+  .panel-body
     .col-sm-3
       .pull-left
         .input-group
@@ -10,32 +10,27 @@
     .col-sm-6
       %center
         %h4
-          Management Review
+          Assessment Completed
           %br
           %br
 
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
-      %th Form no
-      %th Student's Name
       %th Faculty
+      %th Form no
       %th Time
-      %th Staff Comment
-      %th{style: "width:10%"} Management Comment
+      %th Review Comments
       %th Result
-      
+      %th Status
         
   %tbody
-    - @admissions.each do |admission|
+    - @staffrecruits.each do |staffrecruit|
       %tr
-        %td= link_to "#{admission.form_no}", home_index_admission_path(admission)
-        %td= admission.name
-        %td= admission.faculty
-        %td= admission.start_time
-        %td= admission.comment
-        %td{style: "width:10%"} 
-          = admission.description
-        %td= admission.result
-        
+        %td= staffrecruit.staffhead
+        %td= link_to "#{staffrecruit.form_no}",homeindex_staffrecruit_path(staffrecruit)
+        %td= staffrecruit.start_time
+        %td= staffrecruit.title
+        %td= staffrecruit.assessment_result
+        %td= staffrecruit.status
         

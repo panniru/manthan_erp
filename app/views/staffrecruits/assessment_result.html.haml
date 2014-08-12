@@ -1,0 +1,65 @@
+
+.row
+  .col-sm-12
+    = render "shared/steprecruitment"
+    %br
+.row
+  .col-sm-8
+    = render "homeindex"
+  .col-sm-3
+    - if current_user.admin?
+      = link_to "Close the Form", "#", :class => "change btn1 btn btn-danger", :data => {:id => "#{@staffrecruit.id}"}
+      #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+              %center
+                %h4#myModalLabel.modal-title Reason for Closing
+            = form_for @staffrecruit do |f|
+              .modal-body
+                .row
+                  .col-sm-1
+                    = f.radio_button :closestatus, "Not upto the mark"
+                  .col-sm-10
+                    = f.label "Not Upto the Mark"
+                .row
+                  .col-sm-1
+                    = f.radio_button :closestatus, "Financial Crisis"
+                  .col-sm-10
+                    = f.label "Financial Crisis"
+                .row
+                  .col-sm-1
+                    = f.radio_button :closestatus, "Didn't Pick the Interview Call"
+                  .col-sm-10
+                    = f.label "Didn't Pick the Interview Call"
+                                 
+              .modal-footer
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+                = f.hidden_field :status,:value => "Form_Closed"
+                = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
+   
+%br
+%br
+.row
+  .col-sm-8
+    #accordion.panel-group
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title
+            %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseOne"}
+              Assessment Result
+        #collapseOne.panel-collapse.collapse.in
+          .panel-body
+            %b
+              %label.btn.btn-default 
+                Assessment was conducted by
+                = @staffrecruit.staffhead
+            .pull-right
+              %label.btn.btn-default
+                Recommended:
+                = @staffrecruit.assessment_result
+                %br
+                Reason:
+                = @staffrecruit.comments
+                

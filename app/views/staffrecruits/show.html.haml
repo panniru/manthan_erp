@@ -1,0 +1,17 @@
+.row
+  .col-sm-10
+    %table.table.table.striped.table-bordered.table-condensed.table-hover
+      %thead
+        %tr{style: "width:25%"}
+          %th Educational Certificates
+          %th Previous Employment Proof
+          %th Salary Slips for previous Months
+      %tbody
+        %tr
+          %td
+            = link_to "Edu_Certificates", @recruitment.educational_certificates_url
+          %td
+            = link_to "Previous Employment Proof", @recruitment.previous_employment_proof_url
+          %td
+            = link_to "Salary slips forprevious Months",@recruitment.salary_slips_for_previous_months_url
+ 

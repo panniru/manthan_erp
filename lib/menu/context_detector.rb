@@ -29,6 +29,7 @@ class ContextDetector
     "gradings" => "academic", 
     "assessments" => "academic",
     "assessment_results" => "academic",
+    "staffrecruits" => "recruitment_sub_menu",
     "recruitments" => "recruitment_sub_menu",
     "staff_admissions"=> "recruitment_sub_menu",
     "adds" => "recruitment_sub_menu",

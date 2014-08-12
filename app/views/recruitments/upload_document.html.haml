@@ -1,0 +1,28 @@
+.row
+  .col-sm-11
+    .panel.panel-default
+      %h4.panel-heading
+        Document Uploader
+      = form_for @staffrecruit do |f|
+        %table
+          %thead
+            %td
+              = f.label "Educational Certificates", :class => 'control-label'
+            %td
+              = f.label "Previous Employment Proof"
+            %td
+              = f.label "Salary slips for previous months"
+            %td
+
+          %tbody
+            %td
+              = f.file_field :educational_certificates
+            %td
+              = f.file_field :previous_employment_proof
+            %td
+              = f.file_field :salary_slips_for_previous_months
+            %td
+                      
+              = f.hidden_field :status, :value => 'Document_Verified'
+              = f.submit "Upload", :class => 'btn btn-primary'
+   

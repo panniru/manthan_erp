@@ -1,4 +1,3 @@
-
 .row
   .col-sm-12
     = render "shared/steprecruitment"
@@ -151,3 +150,35 @@
                  
                   = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
                   
+                  
+                  
+.row
+  .col-sm-10
+    .calendar2
+    #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            .row
+              %h1.pull-right.btn.btn-warning
+                = @staff_admission.staffhead
+              %center
+                %h4#myModalLabel.modal-title Assessment Plan
+            = form_for @recruitment do |f|
+              .modal-body
+                .row
+                  .col-sm-3
+                    = f.label "Time", :class => 'col-sm-3 control-label'
+                  .col-sm-5
+                    = f.time_field :start_time ,:class => 'form-control'
+                    %br
+                .row
+                  .col-sm-3
+                    = f.label "Description", :class => 'col-sm-3 control-label'              
+                  .col-sm-5
+                    = f.text_area :title ,:class => 'form-control'
+              .modal-footer
+                = f.hidden_field :status,:value => "Assessment_Planned"
+                = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
+                      
+   

@@ -88,7 +88,7 @@ $(function() {
         
 	$.ajax({
             
-	    url: "/recruitments/"+id+"/update_admission.json",
+	    url: "/staffrecruits/"+id+"/update_admission.json",
 	    type: 'PUT',
 	    data: "status=success",
 	    success:function(data) {
