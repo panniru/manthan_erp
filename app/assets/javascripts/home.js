@@ -73,7 +73,7 @@ function createStaffAssessment(staff_admission_id) {
             ignoreTimezone: false
         },
         
-        events: '/recruitments.json?staff_admission_id='+staff_admission_id,
+        events: '/staffrecruits.json?staff_admission_id='+staff_admission_id,
         
         selectable: true,
         select: function(date) {
@@ -88,9 +88,7 @@ $(document ).ready(function() {
     var modal = function(){
         $('body').on('click','.Modal', function(){
             $('#Modal').modal('show');
-            
         });
     }
     modal();
-  
 });

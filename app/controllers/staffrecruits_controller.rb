@@ -1,5 +1,17 @@
 class StaffrecruitsController < ApplicationController
-  
+  def update_admission
+    @staffrecruit = Staffrecruit.find(params[:id])
+    respond_to do |format|
+      if  @staffrecruit.update(:status => "Form_Closed")
+        format.json { render action: 'index', :status => "success" }
+      else
+        format.json { render json: @staffrecruit.errors, :status => "failure" }
+      end
+    end
+  end
+
+  def reports
+  end
   def management_result
     @staffrecruit = Staffrecruit.find(params[:id])
   end
@@ -67,9 +79,12 @@ class StaffrecruitsController < ApplicationController
   end
  
   def index
-    @staffrecruits = Staffrecruit.application_forms
+    if params[:staff_admission_id].present?
+      @staffrecruits = Staffrecruit.where(:staff_admission_id => params[:staff_admission_id])
+    else
+      @staffrecruits = Staffrecruit.application_forms
+    end
   end
-  
   def create
     @staffrecruit = Staffrecruit.new(staffrecruit_params)
     respond_to do |format|

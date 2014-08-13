@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 gem "nested_form", :git => 'https://github.com/ryanb/nested_form.git'
-
+gem "chartkick"
 gem 'jquery-timepicker-rails'
 gem 'language_list', '~> 1.0.0'
 gem 'jquery-cookie-rails', '~> 1.3.1.1'

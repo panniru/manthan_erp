@@ -1,0 +1,2 @@
+module AdmissionReportsHelper
+end

@@ -7,7 +7,7 @@ $(document).ready(function() {
         //teaching_plans: '/teaching_plans.json' // put your options and callbacks here
     })
 
-    $('#calendar2').fullCalendar({
+    $('#calendar3').fullCalendar({
         
         header: {
             left: 'prev,next today',

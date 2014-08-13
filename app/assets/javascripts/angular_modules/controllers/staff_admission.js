@@ -6,5 +6,10 @@
             .then(function(result) {
                 $scope.posts=result.data
             });
+        staffsService.getStatusServiceView()
+            .then(function(result) {
+                $scope.status=result.data
+            });
+        
     }]);
 })(angular, myApp);

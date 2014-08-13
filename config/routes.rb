@@ -410,7 +410,12 @@ ManthanErp::Application.routes.draw do
   end
   
   resources :staffadmins
-
+  resources :admission_reports do
+    collection do
+      get 'get_status_view'
+    end
+  end
+  get "/admission_reports/status", to: "admission_reports#status"
   get "/fee_reports", to: "fee_reports#index"
   get "/fee_reports/payment_status_report", to: "fee_reports#payment_status_report"
   get "/fee_reports/payment_type_details", to: "fee_reports#payment_type_details"
@@ -452,6 +457,7 @@ ManthanErp::Application.routes.draw do
     end
     
     collection do
+      get "get_status_view"
       get "enquiry_index"
       get "admission_index"
       get "assessment_index"
@@ -489,6 +495,7 @@ ManthanErp::Application.routes.draw do
       get 'management_result'
     end
     collection do
+      get 'reports'
       get 'get_subject_view'
       get 'get_klass_view'
       get 'enquiry_index'

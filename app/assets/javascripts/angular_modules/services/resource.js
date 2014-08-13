@@ -65,6 +65,7 @@
             SectionMaster : SectionMaster,
             Book : Book,
 	    Route:Route
+        
 
         };
     }]);

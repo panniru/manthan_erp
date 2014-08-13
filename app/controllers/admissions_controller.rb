@@ -1,5 +1,6 @@
 class AdmissionsController < ApplicationController
-  
+ 
+
   def get_klass_view
     klass = TeacherLeader.all.map do |klass|
       { grade_name: klass.klass,faculty_name: klass.faculty_leader, id: klass.id}

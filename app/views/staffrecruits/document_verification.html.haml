@@ -14,7 +14,7 @@
             .modal-header
               %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
               %center
-                %h4#myModalLabel.modal-title Reason for Closing
+                %h4#mypopModal.modal-title Reason for Closing
             = form_for @staffrecruit do |f|
               .modal-body
                 .row
@@ -34,7 +34,6 @@
                     = f.label "Didn't Pick the Interview Call"
                                  
               .modal-footer
-                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
                 = f.hidden_field :status,:value => "Form_Closed"
                 = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
       
@@ -63,12 +62,11 @@
       .modal-dialog
         .modal-content
           .modal-header
-            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
             .row
               %h1.pull-right.btn.btn-warning
                 = @staffrecruit.staffhead
               %center
-                %h4#myModalLabel.modal-title Assessment Plan
+                %h4#myModal.modal-title Assessment Plan
             = form_for @staffrecruit do |f|
               .modal-body
                 .row
@@ -76,7 +74,6 @@
                     = f.label "Time", :class => 'col-sm-3 control-label'
                   .col-sm-5
                     = f.time_field :start_time ,:class => 'form-control'
-                  
                     %br
                 .row
                   .col-sm-3
@@ -87,7 +84,6 @@
                   .col-sm-3
                     
               .modal-footer
-                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
                 = f.hidden_field :status,:value => "Assessment_Planned"
                 = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
                       
