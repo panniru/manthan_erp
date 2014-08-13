@@ -55,7 +55,7 @@ class BooksController < ApplicationController
   end
   
   def create_bulk
-    
+   p "-------------->" 
   p   @book_bulk = build_book_from_bulk
   if !@book_bulk.empty? and @book_bulk.map(&:valid?).all?
       @book_bulk.each(&:save!)
@@ -86,13 +86,13 @@ class BooksController < ApplicationController
         end
         @book_obj
       else
-        Book.new(book)
+        Book.new(book.permit(:name, :isbn, :author, :year_of_publishing,  :book_type))
       end
     end
   end
   private
   
   def book_params
-    params.require(:book).permit(:name, :isbn, :author, :year_of_publishing, :number_of_copies, :purchased_date,:year, :book_type)
+    params.require(:book).permit(:name, :isbn, :author, :year_of_publishing,  :book_type)
   end
 end

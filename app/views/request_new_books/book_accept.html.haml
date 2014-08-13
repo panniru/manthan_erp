@@ -1,0 +1,12 @@
+%table#tblData.target.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      
+      %th Book Name
+      %th Author Name
+      
+  %tbody
+    - @request_new_books.each do |request|
+      %tr
+        %td= request.book_name
+        %td= request.author_name

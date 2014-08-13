@@ -1,0 +1,24 @@
+.row
+  .col-sm-12
+    %table.table-striped.table-condensed
+      %tr
+        %td{style: "width:25%"}
+          %b
+          %span.label.label-info Book #
+          %td{style: "width:25%"}
+            = @request_new_book.id
+       
+      %tr
+        %td
+          %label{for: "book_name"} Name
+        %td
+          = @request_new_book.book_name
+        %td
+          %label{for: "author_name"} Author
+        %td
+          = @request_new_book.author_name
+          
+  - if("#{@request_new_book.status}" == 'Reject')
+    = link_to "Reject", "#", :class => "changed btn1 btn btn-danger"
+  - else 
+    = link_to "Rejected", "#", :class => "changed btn1 btn btn-danger"

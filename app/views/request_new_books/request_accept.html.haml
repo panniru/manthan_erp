@@ -1,0 +1,15 @@
+%table#tblData.target.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      
+      %th Book Name
+      %th Author Name
+      %th
+  %tbody
+    - @request_new_books.each do |request|
+      %tr
+        %td= request.book_name
+        %td= request.author_name
+        %td
+          = link_to "Accept",book_request_approval_request_new_book_path(request), :class => 'btn btn-success'
+          = link_to "Reject",bookrequest_request_new_book_path(request), :class => 'btn btn-danger'

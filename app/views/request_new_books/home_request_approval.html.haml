@@ -1,0 +1,29 @@
+.row
+  .col-sm-12
+    %table.table-striped.table-condensed
+      %tr
+        %td{style: "width:25%"}
+          %b
+          %span.label.label-info Book #
+          %td{style: "width:25%"}
+            = @request_new_book.id
+       
+      %tr
+        %td
+          %label{for: "book_name"} Name
+        %td
+          = @request_new_book.book_name
+        %td
+          %label{for: "author_name"} Author
+        %td
+          = @request_new_book.author_name
+          
+  - if("#{@request_new_book.status}" == 'Send_Approval')
+    = link_to "Send Approval", "#", :class => "changed btn1 btn btn-danger"
+  - else 
+    = link_to "Approval_sent", "#", :class => "changed btn1 btn btn-success"
+
+
+%center
+  = link_to "back",request_approval_request_new_books_path(request), :class => 'btn btn-primary'
+

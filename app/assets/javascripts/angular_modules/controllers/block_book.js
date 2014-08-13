@@ -8,7 +8,7 @@
         $scope.Go = function(){  
             blockBookService.getBooks($scope.myIsbn)
                 .then(function(result) {
-                    alert(JSON.stringify(result.data))
+                    // alert(JSON.stringify(result.data))
                     $scope.books=result.data
                     $scope.bookName = result.data[0]['name']
                     $scope.authorName = result.data[0]['author']

@@ -1,74 +1,77 @@
          
 .col-md-12{"ng-controller" => "DamagebooksController"}
- 
-  .row
-    .col-sm-9
-      .pull-right
-        %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add Report"
-        #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-          .modal-dialog
-            .modal-content
-              .modal-header
-                %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-                %h4#myModalLabel.modal-title New Report
-                .modal-body
-                  .row                      
-                    .col-sm-2
-                      = label_tag "ISBN:"
-                    .col-sm-3
-                      = autocomplete_field_tag :isbn_name,
-                      '',
-                      "/auto_search/autocomplete_book_isbn",
-                      :placeholder => "ISBN", :class => 'form-control',
-                      :required => true,
-                      :id_element => "#isbn" ,:ng_model => "myIsbn"
-                    .col-sm-7
-                      = hidden_field_tag :isbn, :id => "isbn"
-                      %br
-                      = link_to "GO", "#", class: "btn btn-primary",   :ng_click => "Go()"  
-                      .row
-                        .col-sm-4
-                          = label_tag "NAME:"
-                          %input{:name => "name", :ng_model => "bookName"}
-                        .col-sm-2
-                        .col-sm-3
-                          = label_tag "AUTHOR:"
-                          %input{:name => "author", :ng_model => "authorName"}
-                  .row 
-                    .col-sm-3
-                      = label_tag "BookStage:"
-                    .col-sm-2
-                      %input{"ng-model" => "bookStage", type: "radio", value: "LOSS", :class => "form-control"}Loss
-                    .col-sm-2
-                      %input{"ng-model" => "bookStage", type: "radio", value: "DAMAGE", :class => "form-control"}Damage
+  .panel.panel-default
+    .test
+      .col-sm-3
+        .pull-left
+          .input-group
+            %span.input-group-addon
+              = fa_icon "search lg"
+            %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+            %br
+      .col-sm-4
+        %center
+          %h3
+            DamageBooks
+      .col-sm-5     
+        .pull-right
+          %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add Report"
+          #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+                  %h4#myModalLabel.modal-title New Report
+                  .modal-body
+                    .row                      
+                      .col-sm-2
+                        = label_tag "ISBN:"
+                      .col-sm-5
+                        = autocomplete_field_tag :isbn_name,
+                        '',
+                        "/auto_search/autocomplete_book_isbn",
+                        :placeholder => "ISBN", :class => 'form-control',
+                        :required => true,
+                        :id_element => "#isbn" ,:ng_model => "myIsbn"
+                      .col-sm-7
+                        = hidden_field_tag :isbn, :id => "isbn"
+                        %br
+                        = link_to "GO", "#", class: "btn btn-primary",   :ng_click => "Go()"  
+                        .row
+                          .col-sm-4
+                            = label_tag "NAME:"
+                            %input{:name => "name", :ng_model => "bookName"}
+                          .col-sm-2
+                          .col-sm-3
+                            = label_tag "AUTHOR:"
+                            %input{:name => "author", :ng_model => "authorName"}
+                    .row 
+                      .col-sm-3
+                        = label_tag "BookStage:"
+                      .col-sm-2
+                        %input{"ng-model" => "bookStage", type: "radio", value: "LOSS", :class => "form-control"}Loss
+                      .col-sm-2
+                        %input{"ng-model" => "bookStage", type: "radio", value: "DAMAGE", :class => "form-control"}Damage
                       .col-sm-1
-                        {{bookStage}}
-                  .row
-                    .col-sm-3
-                      {{bookStage}}
-                      = label_tag "Damage Type:"
-                    .col-sm-5
-                      = select_tag :damage_type, options_for_select([['Damaged Covers'],['Covers Separating from the Text Block'],[' Missing Pages'],['Torn Pages'],['Loose Pages'],['Stains'],['Wet Books'],['Mold ']]),  :ng_model => "damageType" 
-                      {{damageType}}
-                      %br
-                  .row
-                    .col-sm-3
-                      = label_tag "Description:"
-                    .col-sm-5
-                      = text_area_tag :damage_description , "", :ng_model => "damageDescription"
-                      %br
-                      {{damageDescription}}
+                       
+                    .row
+                      .col-sm-3
+                        = label_tag "Damage Type:"
+                      .col-sm-5
+                        = select_tag :damage_type, options_for_select([['Damaged Covers'],['Covers Separating from the Text Block'],[' Missing Pages'],['Torn Pages'],['Loose Pages'],['Stains'],['Wet Books'],['Mold ']]),  :ng_model => "damageType" 
+                        %br
+                    .row
+                      .col-sm-3
+                        = label_tag "Description:"
+                      .col-sm-5
+                        = text_area_tag :damage_description , "", :ng_model => "damageDescription"
+                        %br
+                      
                   .modal-footer
                     %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
                     = link_to "submit", "#", class: "btn btn-primary",   :ng_click => "submit()"
                   %br
                   %br
-.pull-left
-  .col-sm-10                 
-    %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
-%br
-%br
-%br
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr

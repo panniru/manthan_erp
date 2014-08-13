@@ -1,28 +1,36 @@
-.col-md-7{"ng-controller" => "RequestsController"}
-  %h3
-    = "Books"
-    .pull-right
-      = link_to "New Books", "#", :class => "btn btn-primary", :ng_click => "newRequest()"
+.col-sm-10{"ng-controller" => "RequestsController"}
+  .panel.panel-default
+    .test
+      .col-sm-3
+        .pull-left
+          .input-group
+            %span.input-group-addon
+              = fa_icon "search lg"
+            %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+            %br
+      .col-sm-4
+        %center
+          %h3
+            Books
+      .col-sm-4 
+        .pull-right
+          = link_to "New Books", "#", :class => "btn btn-primary", :ng_click => "newRequest()"
                          
-    .pull-left
-      .col-sm-10
-        %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
-        %br
-  %table#tblData.target.table.table-striped.table-condensed.table-bordered
+    
+  %table#tblData.table.table.striped.table-bordered.table-condensed.table-hover
     %thead
       %tr
         %th Book Name
         %th Author Name
-        
         %th
     %tbody
-      %tr{"ng-repeat" => "request in Requests"}
-        %td {{request.book_name}}
-        %td {{request.author_name}}
-       
-        %td
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(request_new_book)"
-        
+      - @request_new_books.each do |request|
+        %tr
+          %td= request.book_name
+          %td= request.author_name
+          %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), request_new_book_path(request), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete" 
+
+      
   .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
     .modal-dialog
       .modal-content

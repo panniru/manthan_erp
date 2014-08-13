@@ -1,11 +1,10 @@
 (function(angular, app) {
     "use strict";
     app.controller('RequestsController',["$scope","resourceService", function($scope, resourceService) {
-      
+        $scope.request_new_books = resourceService.RequestNewBook.query();
         $scope.newRequests = []
         $scope.newRequest = function(){
             for(var i=0; i<3; i++){
-         
                 $scope.newRequests.push({"book_name":"", "author_name" :"" });
             };
             $('#createModal').modal('show')
@@ -15,9 +14,10 @@
             alert(JSON.stringify($scope.newRequests))
             resourceService.RequestNewBook.bulk({bulk_book: $scope.newRequests})
                 .$promise.then(function(responce){
-                    alert("hi")
+                    $scope.request_new_books = resourceService.RequestNewBook.query()
+                    //alert("hi")
                     
-                    alert ("welcome")
+                   // alert ("welcome")
                     $('#createModal').modal('hide')
                 })
         }    
@@ -35,6 +35,12 @@
             };
         }
         
+        // $scope.update = function(request_new_book){
+        //     resourceService.updateRequestNewBook  (request_new_book)
+        //         .then(function(responce){
+        //             $('#editModal').modal('hide')
+        //         });
+        // };
     }]);  
     
 })(angular, myApp);

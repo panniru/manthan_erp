@@ -48,6 +48,12 @@
                                            "update": { method: "PUT"}
                                        }
                             );
+        var RequestNewBook = $resource('/request_new_books/:id.json', {id: '@id'},
+                             {
+                                 "bulk": { url: "/request_new_books/create_bulk", method:'POST'},
+                                 "update": { method: "PUT"}
+                             }
+                                      );
 	var Route = $resource('/routes/:id.json', {id: '@id'}, 
 			      {
                                   "update": { method: "PUT"}
@@ -64,8 +70,8 @@
             GradeMaster : GradeMaster,
             SectionMaster : SectionMaster,
             Book : Book,
-	    Route:Route
-
+	    Route:Route,
+            RequestNewBook : RequestNewBook
         };
     }]);
 })(angular, myApp);

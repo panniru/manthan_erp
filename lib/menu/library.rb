@@ -19,6 +19,8 @@ end
     sub_menu << damage_books
     sub_menu << block_books
     sub_menu << approval_for_books
+    sub_menu << accepted_books
+    sub_menu << rejected_books
   end
   def parent_sub_menu
     sub_menu = []
@@ -29,6 +31,12 @@ end
     sub_menu = []
     sub_menu << suggest_new_books
     sub_menu
+  end
+  def principal_sub_menu
+    sub_menu = []
+    sub_menu << approval_books
+    sub_menu << accepted_books
+    sub_menu << rejected_books
   end
   private 
   def home
@@ -50,9 +58,24 @@ end
     MenuItem.new(:label => "Suggest New Book", :klass => "", :icon => "file-excel-o ", :href => "/request_new_books")
   end
   def suggest_new_books
-    MenuItem.new(:label => "Suggest New Book", :klass => "", :icon => "file-excel-o ", :href => "/request_new_books/request_new")
+    MenuItem.new(:label => "Suggest New Book", :klass => "", :icon => "file-excel-o ", :href => "/request_new_books/suggest_teacher")
   end
   def approval_for_books
     MenuItem.new(:label => "Approval For New Book", :klass => "", :icon => "file-excel-o ", :href => "/request_new_books/request_approval")
+  end
+  def approval_books
+    MenuItem.new(:label => "Approval For New Book", :klass => "", :icon => "file-excel-o ", :href => "/request_new_books/request_accept")
+    end
+  def accepted_books
+    MenuItem.new(:label => "Accepted Books", :klass => "", :icon => "file-excel-o ", :href => "/request_new_books/book_accept")
+  end
+  def rejected_books
+    MenuItem.new(:label => "Rejected Books", :klass => "", :icon => "file-excel-o ", :href => "/request_new_books/book_reject")
+  end
+  def accepted_books
+    MenuItem.new(:label => "Accepted Books", :klass => "", :icon => "file-excel-o ", :href => "/request_new_books/book_accept")
+  end
+  def rejected_books
+    MenuItem.new(:label => "Rejected Books", :klass => "", :icon => "file-excel-o ", :href => "/request_new_books/book_reject")
   end
 end

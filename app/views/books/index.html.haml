@@ -1,33 +1,41 @@
-.col-md-7{"ng-controller" => "BooksController"}
-  %h3 
-    = "Books"
-    .pull-right
-      = link_to "New Books", "#", :class => "btn btn-primary", :ng_click => "newBook()"
-                         
-    .pull-left
-      .col-sm-10                 
-        %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
-        %br
-  %table#tblData.target.table.table-striped.table-condensed.table-bordered
-    %thead
-      %tr
-        %th Name
-        %th ISBN Number
-        %th Author
-        %th Year Of Publishing
-        %th Purchased Date
-        %th Type
-        %th
-    %tbody
-      %tr{"ng-repeat" => "book in books"}
-        %td {{book.name}}
-        %td {{book.isbn}}
-        %td {{book.author}}
-        %td {{book.year_of_publishing}}
-        %td {{book.created_at}}
-        %td {{book.book_type}}
-        %td
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(book)"
+.row{"ng-controller" => "BooksController"}                        
+  .panel.panel-default
+    .test
+      .col-sm-3
+        .pull-left
+          .input-group
+            %span.input-group-addon
+              = fa_icon "search lg"
+            %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+            %br
+      .col-sm-4
+        %center
+          %h3
+            Books
+      .col-sm-4 
+        .pull-right
+          = link_to "New Books", "#", :class => "btn btn-primary", :ng_click => "newBook()"
+  .row
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr
+          %th Name
+          %th ISBN Number
+          %th Author
+          %th Year Of Publishing
+          %th Purchased Date
+          %th Type
+          %th
+      %tbody
+        %tr{"ng-repeat" => "book in books"}
+          %td {{book.name}}
+          %td {{book.isbn}}
+          %td {{book.author}}
+          %td {{book.year_of_publishing}}
+          %td {{book.created_at}}
+          %td {{book.book_type}}
+          %td
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(book)"
         
   .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
     .modal-dialog

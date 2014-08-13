@@ -3,7 +3,7 @@
     .form-group.col-md-3
       %label{:class=> "form-label col-md-4"} Grade
       .col-sm-6
-        %select{"ng-model" => "myGrade", :ng_options => "grade.id as grade.grade for grade in grades", :class => "form-control", :name => "grade_master_id"}
+        %select{"ng-model" => "myGrade", :ng_options => "grade.id as grade.grade_name for grade in grades", :class => "form-control", :name => "grade_master_id"}
              
     .form-group.col-md-3
       %label{:class=> "form-label col-md-4"} Section
@@ -13,20 +13,19 @@
       //= submit_tag 'Save'
       %button{:type=>"submit", :class=> "btn btn-primary" }=  "save" 
       %br
+      %br
     .pull-left
-      .col-sm-10                 
+      .col-sm-10 
+        %span.input-group-addon
+          = fa_icon "search lg"
         %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
 %br
 = form_tag("/issuings", :method => "POST") do
   %table#tblData.target.table.table-striped.table-condensed.table-bordered{style: "width:80%"}
     %thead
       %tr
-        %th Name
-      
-      
-        %th Alloted Books
-       
-     
+        %th Name     
+        %th Allot Books    
     %tbody
       - @book_issuing_objects.each do |bio|
         %tr

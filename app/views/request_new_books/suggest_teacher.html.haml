@@ -10,7 +10,7 @@
     .col-sm-4
       %center
         %h4
-          Suggest Book
+          Suggest Books
     .col-sm-4
       .pull-right
         %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Suggest Book"
@@ -53,5 +53,5 @@
         %td= request.book_name
         %td= request.author_name
         %td
-          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_request_new_book_path(request), :class => "btn btn-warning btn-sm", :title => "Edit"
+        
           = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), request_new_book_path(request), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete" 

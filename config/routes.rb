@@ -42,7 +42,18 @@ ManthanErp::Application.routes.draw do
       get 'request_new'
       get 'request_approval'
       post 'create_bulk'
+      get 'request_new_book'
+      get 'request_accept'
+      get 'suggest_teacher'
+      get 'book_accept'
+      get 'book_reject'
+     
     end
+     member do
+      get 'home_request_approval'
+      get 'book_request_approval'
+      get 'bookrequest'
+  end
   end
   resources :issuings do
     collection do
