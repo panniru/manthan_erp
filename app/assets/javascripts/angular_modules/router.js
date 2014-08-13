@@ -54,12 +54,18 @@
             . when('/show_assessments', {
                 templateUrl: 'academics/assessments/show_assessments.html'               
             })
-            . when('/show_form', {
+            . when('/assessment_results/show_form', {
                 templateUrl: 'academics/assessment_results/show_form.html'               
             })
             . when('/class_show_form', {
                 templateUrl: 'academics/assessment_results/class_show_form.html'               
             })
+            . when('/assessment_results/add_form', {
+                templateUrl: 'academics/assessment_results/add_form.html'               
+            })  
+             . when('/assessment_results/results_show_form', {
+                templateUrl: 'academics/assessment_results/results_show_form.html'               
+            }) 
 
 
         

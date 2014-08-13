@@ -1,9 +1,9 @@
-.row{"ng-controller" => "AssessmentsController"}
+.row{"ng-controller" => "AssessmentResultsController"}
   .row
     .col-md-1
     .col-md-10
       .col-md-3
-        %a{href: "#show_form", :class => "btn btn-primary", :title => "MY ASSESSMENTSE", "ng-click" => "editssAssessmentTypeMappings({})"} MY ASSESSMENTS
+        %a{href: "#assessment_results/show_form", :class => "btn btn-primary", :title => "MY ASSESSMENTS", "ng-click" => "editssAssessmentTypeMappings({})"} MY ASSESSMENTS
       .col-md-3
         %a{href: "#class_show_form", :class => "btn btn-primary", :title => "MY CLASS ASSESSMENTS", "ng-click" => "editAssessmentTypeMapsspings({})"} MY CLASS ASSESSMENTS
     .col-md-1
@@ -13,3 +13,14 @@
       .row 
         %div{"ng-view" => ""}
     .col-md-1
+  .row
+    :css
+      table, th, td
+      {
+      border-collapse:collapse;
+      border:5px solid #6aa6d6;
+      }
+      th, td
+      {
+      padding:5px;
+      } 
