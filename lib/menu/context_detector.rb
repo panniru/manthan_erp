@@ -35,6 +35,8 @@ class ContextDetector
     "adds" => "recruitment_sub_menu",
     "teacher_leaders" => "enquiry_admission",
     "forms" => "recruitment_sub_menu",
+    "admission_reports" => "enquiry_admission",
+    "staff_reports" => "recruitment_sub_menu",
     "documentuploaders" => "recruitment_sub_menu",
     "interviewschedulers" => "recruitment_sub_menu",
     "staffadmins" => "recruitment_sub_menu",

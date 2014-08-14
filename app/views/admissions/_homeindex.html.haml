@@ -69,14 +69,13 @@
           
   .col-sm-3
   
-    - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned'||"#{@admission.status}" == 'Assessment_Completed'||"#{@admission.status}" == 'Management_Reviewed' )
+    - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned'||"#{@admission.status}" == 'Assessment_Completed'||"#{@admission.status}" == 'Management_Reviewed'||"#{@admission.status}" == 'Selected' )
       - if current_user.admin?
         = link_to "Close the Form", "#", :class => "change btn1 btn btn-danger",:data=> {:id => "#{@admission.id}"}
         #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
           .modal-dialog
             .modal-content
               .modal-header
-                %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
                 %center
                   %h4#myModalLabel.modal-title Reason for Closing
                 = form_for @admission do |f|
@@ -98,7 +97,6 @@
                         = f.label "Didn't Pick the Interview Call"
                                  
                     .modal-footer
-                      %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
                       = f.hidden_field :status,:value => "Form_Closed"
                       = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
                   

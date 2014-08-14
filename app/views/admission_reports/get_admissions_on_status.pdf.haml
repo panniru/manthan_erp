@@ -1,0 +1,26 @@
+= wicked_pdf_stylesheet_link_tag 'bootstrap'
+
+= render "shared/brand_header", :handlers => [:pdf, :haml]
+.col-md-12
+  %h5 Report : Admission 
+.col-md-12
+  %table.table.table-bordered
+    %thead
+      %th Form No
+      %th Grade
+      %th Name
+      %th Father
+      %th Father's Mobile
+      %th Father's Email
+      
+    %tbody
+      - @admissions.each do |admission|
+        %tr
+          %td= admission[:form_no]
+          %td= admission[:name]    
+          %td= admission[:grade]
+          %td= admission[:father_name]
+          %td= admission[:father_mobile]          
+          %td= admission[:father_email]
+          
+          

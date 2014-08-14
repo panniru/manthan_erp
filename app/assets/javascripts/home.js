@@ -10,12 +10,20 @@ $(document ).ready(function() {
 
     $("#flot-placeholder").on("plotclick", function (event, pos, item) { 
         angular.element($('#flot-placeholder')).scope().gridDataPoint(item)
+        
+    });
+    $("#adm-flot-placeholder").on("plotclick", function (event, pos, item) { 
+        angular.element($('#adm-flot-placeholder')).scope().gridAdmDataPoint(item)
+    });
+    $("#sta-flot-placeholder").on("plotclick", function (event, pos, item) { 
+        angular.element($('#sta-flot-placeholder')).scope().gridStaDataPoint(item)
     });
     
     $("#flot-placeholder1").on("plotclick", function (event, pos, item) {
         angular.element($('#flot-placeholder')).scope().gridDataPoint(item)
         //angular.element($('#flot-placeholder')).scope().gridDataPoint1(item)
     });
+    
     $("#student_attendence_calendar").fullCalendar({
         events: [
             {

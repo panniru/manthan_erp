@@ -37,10 +37,10 @@
             - if("#{@admission.status}" == "Assessment_Planned" || "#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Selected" )
               = link_to raw("<span class= 'fa fa-calendar fa1-2x'></span>"), view_assessment_admission_path, :class => "btn btn-success1 btn-circle"
             - else
-              - if current_user.admin?
+              - if("#{@admission.status}" == "Application_Created") and current_user.admin?
                 = link_to raw("<span class= 'fa fa-calendar fa2-2x'></span>"), "#", :onclick => "createAssessment('#{@admission.teacher_leader_id}');", :class => 'btn1 btn btn-warning1 btn-circle'
               - else
-                - if current_user.teacher? or current_user.principal?
+                - if current_user.teacher? or current_user.principal? or current_user.admin?
                   = link_to raw("<span class= 'fa fa-calendar fa1-2x'></span>"), '#', :class => "btn btn-warning1 btn-circle"
             %br
             %span.label.label-default Assessment Planned
@@ -100,7 +100,7 @@
             - if("#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Selected" )
               = link_to raw("<span class= 'fa fa-users fa1-2x'></span>"), management_result_admission_path, :class => "btn btn-success1 btn-circle"
             - else
-              - if current_user.principal?
+              - if("#{@admission.status}" == "Assessment_Completed") and current_user.principal?
                 = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), "#", :class => 'Modal btn1 btn btn-warning1 btn-circle'
                 #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1", "data-backdrop" => "static" ,"data-keyboard "=> "false"}
                   .modal-dialog.modal-sm
@@ -129,7 +129,7 @@
                           = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
 
               - else
-                - if current_user.admin? or current_user.teacher?
+                - if current_user.admin? or current_user.teacher? or current_user.principal?
                   = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), '#', :class => "btn btn-warning1 btn-circle"
 
             %br

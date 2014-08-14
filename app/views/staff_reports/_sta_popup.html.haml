@@ -1,0 +1,23 @@
+.modal.fade{ :id => "staModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+        %h4.modal-title Status Report
+      .modal-body
+        %table.table.table-bordered.table-hover.table-striped
+          %thead
+            %th Form no
+            %th Name
+            %th Post
+            %th Mobile
+            %th Email
+          %tbody
+            %tr{"ng-repeat" => "row in table_data"}
+              %td {{row.form_no}}
+              %td {{row.name}}
+              %td {{row.post}}
+              %td {{row.mobile}}
+              %td {{row.email}}
+        %center
+          = link_to "Print", "/staff_reports/get_staffrecruits_on_status.pdf?status={{drilItem}}", :target => "_blank", :class => "btn btn-primary"

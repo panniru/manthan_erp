@@ -13,19 +13,13 @@ class RecruitmentSubMenu < Struct.new(:controller)
     sub_menu << advertisements
     sub_menu << show_closed_forms
     sub_menu << admin_settings
-    
+    sub_menu << reports
   end
   
   def teacher_sub_menu
     sub_menu = []
     sub_menu << view_schedule
     sub_menu << assessment_completed
-    sub_menu << show_closed_forms
-  end
-  def transport_head_sub_menu
-    sub_menu = []
-    sub_menu << transport_assessment
-    sub_menu << show_closed_forms
   end
   
   def principal_sub_menu
@@ -35,7 +29,7 @@ class RecruitmentSubMenu < Struct.new(:controller)
     sub_menu << assessment_planned
     sub_menu << documentation_verification
     sub_menu << enquiry_form
-    sub_menu << show_closed_forms
+    
   end
 
   private 
@@ -76,7 +70,10 @@ class RecruitmentSubMenu < Struct.new(:controller)
     MenuItem.new(:label => "Closed Forms", :klass => "", :icon => "ban", :href => "/staffrecruits/closed_forms" )
   end
   def admin_settings
-    MenuItem.new(:label => "Admin Settings", :klass => "", :icon => "ban", :href => "/staffadmins" )
+    MenuItem.new(:label => "Admin Settings", :klass => "", :icon => "wrench", :href => "/staffadmins" )
+  end
+  def reports
+    MenuItem.new(:label => "Reports", :klass => "", :icon => "print", :href => "/staff_reports" )
   end
 
 end

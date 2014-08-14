@@ -1,0 +1,24 @@
+= wicked_pdf_stylesheet_link_tag 'bootstrap'
+
+= render "shared/brand_header", :handlers => [:pdf, :haml]
+.col-md-12
+  %h5 Report : Staff Recruitment
+.col-md-12
+  %table.table.table-bordered
+    %thead
+      %th Form No
+      %th Name
+      %th Post
+      %th Mobile
+      %th Email
+      
+    %tbody
+      - @staffrecruits.each do |staffrecruit|
+        %tr
+          %td= staffrecruit[:form_no]
+          %td= staffrecruit[:name]    
+          %td= staffrecruit[:post]
+          %td= staffrecruit[:mobile]          
+          %td= staffrecruit[:email]
+          
+          

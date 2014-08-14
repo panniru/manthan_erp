@@ -8,14 +8,14 @@
     = render "homeindex"
   .col-sm-3
     - if current_user.admin?
-      = link_to "Close the Form", "#", :class => "change btn1 btn btn-danger", :data => {:id => "#{@staffrecruit.id}"}
+      = link_to "Close the Form", "#", :class => "change2 btn1 btn btn-danger", :data => {:id => "#{@staffrecruit.id}"}
       #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
         .modal-dialog
           .modal-content
             .modal-header
               %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
               %center
-                %h4#myModalLabel.modal-title Reason for Closing
+                %h4#mypopModal.modal-title Reason for Closing
             = form_for @staffrecruit do |f|
               .modal-body
                 .row

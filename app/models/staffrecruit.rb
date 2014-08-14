@@ -15,7 +15,7 @@ class Staffrecruit < ActiveRecord::Base
   scope :document_verified,lambda{where("status = 'Document_Verified'")}
   scope :assessment_completed,lambda{where("status = 'Assessment_Completed'")}
   scope :management_review,lambda{where("status = 'Management_Reviewed'")}
-  scope :selected_staffs,lambda{where("final_result = 'Selected'")}
+  scope :selected_staffs,lambda{where("final_result = 'Selected' and status != 'Form_Closed'")}
   mount_uploader :educational_certificates, EducationalCertificatesUploader# Teprevious_employment_proof, 
   mount_uploader :previous_employment_proof,PreviousEmploymentProofUploader
   mount_uploader :salary_slips_for_previous_months, SalarySlipsForPreviousMonthsUploader

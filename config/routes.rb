@@ -431,10 +431,18 @@ ManthanErp::Application.routes.draw do
   resources :staffadmins
   resources :admission_reports do
     collection do
+      get "get_admissions_on_status"
       get 'get_status_view'
     end
   end
-  get "/admission_reports/status", to: "admission_reports#status"
+  resources :staff_reports do
+    collection do
+      get "get_staffrecruits_on_status"
+      get 'get_status_view'
+    end
+  end
+
+
   get "/fee_reports", to: "fee_reports#index"
   get "/fee_reports/payment_status_report", to: "fee_reports#payment_status_report"
   get "/fee_reports/payment_type_details", to: "fee_reports#payment_type_details"

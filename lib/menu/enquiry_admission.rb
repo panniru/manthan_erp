@@ -17,6 +17,7 @@ class EnquiryAdmission
     sub_menu << selected_students
     sub_menu << show_closed_forms
     sub_menu << teacher_settings
+    sub_menu << reports
   end
 
   def principal_sub_menu
@@ -26,7 +27,6 @@ class EnquiryAdmission
     sub_menu << show_assessment_planned
     sub_menu << show_application_admissions    
     sub_menu << show_enquiry_admissions
-    sub_menu << show_closed_forms
     sub_menu << selected_students
     end
   
@@ -89,6 +89,9 @@ class EnquiryAdmission
     MenuItem.new(:label => "Final Review", :klass => "", :icon => "calendar", :href => "/admissions/management_index" )
   end
   def teacher_settings
-    MenuItem.new(:label => "TeacherLeader Settings", :klass => "", :icon => "ban", :href => "/teacher_leaders" )
+    MenuItem.new(:label => "TeacherLeader Settings", :klass => "", :icon => "wrench", :href => "/teacher_leaders" )
+  end
+  def reports
+    MenuItem.new(:label => "Reports", :klass => "", :icon => "print", :href => "/admission_reports" )
   end
 end
