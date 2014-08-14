@@ -1,0 +1,20 @@
+= form_for @canteen_management  do |f|             
+  .row
+    .col-sm-4
+      = f.label "Mealname", :class => 'control-label'
+    .col-sm-4
+      = f.label "Time", :class => 'control-label'
+    .col-sm-4
+      = f.label "Description", :class => 'control-label'
+  .row
+    .col-sm-4
+      = f.text_field :meal_name ,:class => 'form-control'
+    .col-sm-4
+      = f.time_field :time, :class => 'form-control'
+    .col-sm-4
+      = f.text_field:description ,:class => 'form-control'
+  .modal-footer
+    %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMoremeals()"}=  "Add Moremeals"
+    %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"
+                      
+

@@ -1,0 +1,20 @@
+= form_for @holidaycalendar,:html => { :role => "form" } do |f|
+  .col-sm-12{"ng-controller" => "HolidayCalendarController"}
+    .row
+      .col-sm-6
+        .row
+          .col-sm-3
+            = f.label "Date:", :class => 'control-label'
+          .col-sm-3 
+            = f.text_field :holiday_date,:class => 'datepicker form-control'         
+            %br
+        .row
+          .col-sm-3
+            = f.label "Description:", :class => 'control-label'
+          .col-sm-5
+            = f.text_area :description,:class => 'form-control'
+            %br
+        .row
+          .col-sm-5
+            = f.submit "Create" , :class =>'btn btn-primary'
+            %br

@@ -1,0 +1,24 @@
+.row
+  .col-sm-9
+    %h4 Home
+    .pull-left
+      .col-sm-10                 
+        %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
+%br
+.row
+  %table#tblData.target.table.table-striped.table-condensed.table-bordered
+    %thead
+      %tr
+        %th Meal name
+        %th time
+        %th Description
+         
+    %tbody
+      - @canteen_managements.each do |canteen_management|
+        %tr
+          %td= canteen_management.meal_name
+          %td= canteen_management.time
+          %td= canteen_management.description
+          
+
+      

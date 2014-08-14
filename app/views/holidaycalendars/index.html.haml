@@ -1,0 +1,23 @@
+.row   
+  .col-sm-6
+    %h1 
+    = "Holiday Calendar"
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr
+          %th Date
+          %th Description          
+          %th
+      %tbody
+        - Holidaycalendar.all.each do |holidaycalendar|
+          %tr
+            %td= holidaycalendar.holiday_date.strftime("%B,%d,%Y,%a")
+            %td= holidaycalendar.description
+            %td
+              = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_holidaycalendar_path(holidaycalendar), :class => "btn btn-warning btn-sm", :title => "Edit"
+              = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), holidaycalendar_path(holidaycalendar), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+  .col-sm-6
+    #holiday_calendar
+  .col-sm-5
+    = render "form"
+        

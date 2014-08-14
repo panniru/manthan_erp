@@ -1,4 +1,37 @@
-$(document).ready(function() {
+$(document).ready(function() { 
+   
+    var monthNames = [ "January", "February", "March", "April", "May", "June",
+                       "July", "August", "September", "October", "November", "December" ]
+    var today = new Date();
+    $('#holiday_calendar').html("");
+    $('#holiday_calendar').fullCalendar({      
+        events: '/holidaycalendars/holidaycalendardata.json?month='+monthNames[today.getMonth()],
+        selectable: true,
+        eventMouseover: function(data, event, view) {            
+            var url = "/holidaycalendars/holiday_date.json?date="+data.holiday_date
+           // alert(url)
+            var curr_object = $(this) 
+            $.get(url, function( data ) {
+                var content_html = "<table><tbody>"
+                content_html+= "<tr>"
+                for (var i=0; i< data.length;i++)
+                {
+                    content_html+= "<tr>";                 
+                    content_html+= '<td><a href="/holidaycalendars/'+data[i].id+'">'+data[i].description+'</a></td>';                  
+                    content_html+= "</tr>";
+                }                 
+                content_html+= "</tbody></table>";
+                curr_object.popover({html:true,title:event.title,placement:'top',container:'body', content: content_html}).popover('show');
+            });
+	},
+       
+        select: function(date) {
+           // var checkUrl = "holidaycalendars/holiday_exists.json?date="+dateFormat    
+            $('#myModal').modal('show');                
+        }            
+    });
+    
+
 
     // page is now ready, initialize the calendar...
 
@@ -137,6 +170,10 @@ function searchTable(inputVal)
 			          if(found == true)$(row).show();else $(row).hide();
 		              }
 	                  });
+
+   
+
+
 }
 
 

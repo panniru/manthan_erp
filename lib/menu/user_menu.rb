@@ -34,11 +34,13 @@ class UserMenu
         return @context.principal_sub_menu 
       elsif @user.transport_head?
       return @context.transport_head_sub_menu
+      elsif @user.canteenmanager?
+        return @context.canteenmanager_sub_menu
       end
     end
     []
   end
-
+  
   private
   
   def admin_main_menu
@@ -51,8 +53,8 @@ class UserMenu
     main_menu << MenuItem.new(:label => "Recruitment", :klass => ContextDetector.mapped_module_name(@controller_name) == "recruitment_sub_menu"? "active" :"", :icon => "user", :href => "/staff_admissions")
     main_menu << MenuItem.new(:label => "Defaults", :klass => ContextDetector.mapped_module_name(@controller_name) == "default_master_sub_menu"? "active" :"", :icon => " edit", :href => "/default_masters")
     main_menu << MenuItem.new(:label => "Transport", :klass => ContextDetector.mapped_module_name(@controller_name) == "transport_sub_menu"? "active" :"", :icon => " truck", :href => "/new_vehicles")
-   
     main_menu << MenuItem.new(:label => "Library", :klass => ContextDetector.mapped_module_name(@controller_name) == "library"? "active" :"", :icon => " book", :href => "books/home_index")
+    main_menu << MenuItem.new(:label => "Canteen Facility", :klass => ContextDetector.mapped_module_name(@controller_name) == "canteen_management"? "active" :"", :icon => "cutlery", :href => "/holidaycalendars/empty")
     main_menu
   end
 
