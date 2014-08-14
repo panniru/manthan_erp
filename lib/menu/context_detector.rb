@@ -42,6 +42,7 @@ class ContextDetector
     "damagebooks"=> "library",
     "block_books" => "library",
     "request_new_books" => "library",
+    "donation_of_books" => "library",
     "default_masters" => "default_master_sub_menu",
     "student_masters" => "default_master_sub_menu",
     "parents" => "default_master_sub_menu",

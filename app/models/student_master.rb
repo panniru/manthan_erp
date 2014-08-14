@@ -12,6 +12,7 @@ class StudentMaster < ActiveRecord::Base
   belongs_to :section_master
   has_one :parent_payment_master, :foreign_key => :student_id
   has_many :issuings
+  has_many :donation_of_books
   scope :ids_in_list, lambda{|ids| where("id in ?", ids)}
   scope :has_no_route , lambda{where("id not in (?)", StudentRouteMapping.all.map(&:student_master_id))} 
   scope :has_bus_facility , lambda{where(:bus_facility => true)} 

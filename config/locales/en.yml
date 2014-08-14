@@ -258,3 +258,13 @@ en:
     update:
       success: " Book has been updated"
       fail: "Book not been updated"
+  donation_of_book:
+    create:
+      success: "Book has been saved"
+      fail: "Book Value not been saved"
+    destroy:
+      success: "Book has been deleted"
+      fail: "Book has not been deleted"
+    update:
+      success: " Book has been updated"
+      fail: "Book not been updated"
