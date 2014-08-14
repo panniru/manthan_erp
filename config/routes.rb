@@ -379,4 +379,23 @@ ManthanErp::Application.routes.draw do
   get "/fee_reports/payment_status_report", to: "fee_reports#payment_status_report"
   get "/fee_reports/payment_type_details", to: "fee_reports#payment_type_details"
   root to: "home#index"
+
+
+  resources :canteen_managements do
+    collection do
+      post 'create_bulk'
+      #get "canteenmanagerview"
+      get "home_index"
+    end
+  end
+  resources :canteenmanagers 
+
+  resources :holidaycalendars do
+    collection do
+      get  "holidaycalendardata"
+      get "holiday_date"
+      get "empty"
+    end
+  end
+
 end

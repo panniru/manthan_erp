@@ -46,7 +46,9 @@ class ContextDetector
     "routes" => "transport",
     "student_route_mappings" => "transport",
     "default_masters" => "default_master_sub_menu",
-    "HRM" => "hrm_sub_menu"
+    "HRM" => "hrm_sub_menu",
+    "holidaycalendars" => "canteen",
+    "canteen_managements" =>"canteen"
   }
   
   def self.get_context(args)

@@ -53,7 +53,14 @@
                                   "update": { method: "PUT"}
                               }
                              );
+        var CanteenManagement = $resource('/canteen_managements/:id.json', {id: '@id'}, 
+                             {
+                                 "bulk": { url: "/canteen_managements/create_bulk", method:'POST'},
+                                 "update": { method: "PUT"}
+                             }
+                            );
         
+       
         return {
             FeeGradeBucket : FeeGradeBucket,
             TermDefinition : TermDefinition,
@@ -64,7 +71,9 @@
             GradeMaster : GradeMaster,
             SectionMaster : SectionMaster,
             Book : Book,
-	    Route:Route
+	    Route:Route,
+            CanteenManagement: CanteenManagement,
+          
 
         };
     }]);

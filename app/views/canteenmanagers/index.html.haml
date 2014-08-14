@@ -1,0 +1,41 @@
+.col-md-7{"ng-controller" => "CanteensController"}
+  %h3
+    = "Meal types"
+    .pull-right
+      = link_to "Add Menu", "#", :class => "btn btn-primary", :ng_click => "newMeal()"
+    .pull-left
+      .col-sm-10
+        %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
+        %br
+        %hr
+  %table#tblData.target.table.table-striped.table-condensed.table-bordered
+    %thead
+      %t
+        %th date
+        %th Breakfast
+        %th Lunch
+        %th Snacks
+        %th Dinner
+        %th
+    %tbody
+      - @canteenmanagers.each do |canteenmanager|
+        %tr
+          %td= canteenmanager.date
+          %td= canteenmanager.breakfast
+          %td= canteenmanager.lunch
+          %td= canteenmanager.snaks
+          %td= canteenmanager.dinner
+          %td
+            = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), '#', :class => "btn btn-warning btn-sm", :title => "Edit"
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), canteenmanager_path(canteenmanager), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} Meal types
+        .modal-body
+          = render "form"
+          
+.col-sm-2
+  #canteen_calendar

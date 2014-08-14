@@ -1,0 +1,16 @@
+%form{:class=>"form-horizontal", :ng_submit => "submitMeals()" }
+  .form-group{"ng-repeat" => "meal in newMeals"}
+    = label_tag "Meal {{$index+1}}", nil, :class => "form-label col-md-2"
+    .col-sm-2
+      = text_field_tag "[meal_name]",nil, :class => 'form-control', :ng_model => "meal.meal_name", :placeholder => "Name"
+    .col-md-3
+      .input-group
+        = text_field_tag "[time]",nil, :class => 'form-control', :ng_model => "meal.time"
+        %span.input-group-addon HH:MM
+    .col-sm-2
+      = text_field_tag "[description]",nil, :class => 'form-control', :placeholder => "description", :ng_model => "meal.description"
+  .row
+    .col-md-5.col-md-offset-3
+      %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMoremeals()"}= "More meals"
+      %button{:type=>"submit", :class=> "btn btn-primary"}= "Save"
+      

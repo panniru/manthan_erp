@@ -36,7 +36,11 @@ class User < ActiveRecord::Base
     self.role.code == "principal"
   end
     
-
+  def canteenmanager?
+    self.role.code == "canteenmanager"
+  end
+  
+    
 
 
 end

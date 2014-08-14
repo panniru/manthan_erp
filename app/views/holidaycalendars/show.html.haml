@@ -1,0 +1,13 @@
+%p#notice= notice
+
+%p
+  - Holidaycalendar.all.each do |holidaycalendar|
+    %b Date:
+    = holidaycalendar.holiday_date
+    %p
+    %b Description:
+    = holidaycalendar.description
+    %br
+    = link_to button_tag('Back',:class => 'btn btn-primary'), holidaycalendars_path
+
+              
