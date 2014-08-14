@@ -1,12 +1,11 @@
 (function(angular, app) {
     "use strict";
-    app.controller('AssessmentResultsController', ["$scope", "assessmentsTeacherService", function($scope, assessmentsTeacherService) {        
+    app.controller('AssessmentResultsController', ["$scope", "$location", "assessmentsTeacherService", "assessmentResultsService", "gradingService", function($scope, $location, assessmentsTeacherService, assessmentResultsService, gradingService) {        
         assessmentsTeacherService.getTeacherGradeMappings()
             .then(function(result) {               
-                $scope.mappings = result.data;   
-                //alert(JSON.stringify($scope.mappings));
-                
+                $scope.mappings = result.data;  
                 $scope.teacher_grade_subject_mappings = [];
+                
                 for (var i=0; i< $scope.mappings.length; i++){
                     $scope.teacher_grade_subject_mappings.push({
                         id: $scope.mappings[i]['id'],
@@ -15,33 +14,92 @@
                         subject_master_id: $scope.mappings[i]['subject_master_id'],                       
                         teacher_grade_subject: $scope.mappings[i]['grade_name']+" - "+$scope.mappings[i]['section_name']+" - "+$scope.mappings[i]['subject_name'],                        
                     });
-                }   
-                $scope.teacher_assessments = [];
-                for(var i = 0; i < $scope.teacher_grade_subject_mappings.length; i++){
-                    //alert(i);
-                    //alert($scope.teacher_grade_subject_mappings.length);
-                   
-                    $scope.myGrade = $scope.teacher_grade_subject_mappings[i]['grade_master_id'];
-                    $scope.mySection = $scope.teacher_grade_subject_mappings[i]['section_master_id'];  
-                    $scope.mySubject = $scope.teacher_grade_subject_mappings[i]['subject_master_id']; 
-              
-                    assessmentsTeacherService.getTeacherAssessmentsService($scope.myGrade, $scope.mySection, $scope.mySubject)
-                        .then(function(result) { 
-                            alert(i);
-                            alert($scope.teacher_grade_subject_mappings.length);
-                            if(i != $scope.teacher_grade_subject_mappings.length){
-                                alert();
-                                $scope.teacher_assessments[i] = result.data;
-                                alert(JSON.stringify($scope.teacher_assessments[i]));
-                            }      
-                            
-                        });                    
-                }
-
-               //alert(JSON.stringify($scope.teacher_assessments));
+                }                             
             });
 
-       
+        assessmentResultsService.getTeacherAssessmentsService()
+            .then(function(result){               
+                $scope.teacher_assessments = result.data;                
+            });
         
+        $scope.buildEeditAssessmentResults = function(assessment){            
+            $scope.edit_Assessment_Results = [];
+            $scope.students = [];
+            
+            //getStudentsForGradeAndSectionService
+            assessmentResultsService.getStudentDetailsService(assessment.grade_master_id, assessment.section_master_id)
+                .then(function(result){                   
+                    $scope.students = result.data;  
+                   
+                    for (var i = 0; i < result.data.length; i++){
+                        $scope.edit_Assessment_Results.push({
+                            id: "",
+                            assessment_listing_id: assessment.id,
+                            student_master_id: $scope.students[i]['id'],
+                            student_name: $scope.students[i]['student_name'],
+                            grading_master_id: "",
+                            grading_name: "",
+                            assessment_result_desc: "", 
+                        });                
+                    }                    
+                });
+            
+            gradingService.getGradingServiceView()
+                .then(function(result) {                     
+                    $scope.gradings = result.data;
+                });
+        };
+
+        $scope.editAssessmentResults = function(){  
+            gradingService.getGradingServiceView()
+                .then(function(result) {                     
+                    $scope.gradings = result.data;
+                });
+            $scope.edit_Assessment_Results = $scope.show_Assessment_Results;
+            alert(JSON.stringify($scope.show_Assessment_Results));
+            alert(JSON.stringify($scope.edit_Assessment_Results));
+           
+        };      
+
+        $scope.showAssessmentResults = function(assessment){
+            $scope.assessment_Listing = assessment;            
+            $scope.show_Assessment_Results = []; 
+
+            assessmentResultsService.getAssessmentResultsService(assessment.id)
+                .then(function(result) {  
+                    $scope.show_Assessment_Results = result.data; 
+                    alert(JSON.stringify( $scope.show_Assessment_Results));
+                    if(result.data.length == 0){                       
+                        var path = "/";
+                        path = "/assessment_results/add_form";
+                        $location.path(path); 
+                        $scope.buildEeditAssessmentResults(assessment);                      
+                    }
+                }); 
+        };
+
+        $scope.saveAssessmentResults = function(){           
+            $scope.save_Assessment_Results = [];
+            
+            for (var i=0; i< $scope.edit_Assessment_Results.length; i++){
+                $scope.save_Assessment_Results.push({
+                    id: $scope.edit_Assessment_Results[i]['id'],
+                    assessment_listing_id: $scope.edit_Assessment_Results[i]['assessment_listing_id'],
+                    student_master_id: $scope.edit_Assessment_Results[i]['student_master_id'],
+                    grading_master_id: $scope.edit_Assessment_Results[i]['grading_master_id'],
+                    assessment_result_desc: $scope.edit_Assessment_Results[i]['assessment_result_desc'],
+                });
+            }
+            
+            assessmentResultsService.saveAssessmentResultsService($scope.save_Assessment_Results)
+               .then(function(result) {                    
+               });
+
+            $scope.showAssessmentResults($scope.assessment_Listing);           
+        };
+
+
+
+       
     }]);    
 })(angular, myApp);

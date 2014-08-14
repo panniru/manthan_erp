@@ -491,6 +491,10 @@ ManthanErp::Application.routes.draw do
 
   resources :assessment_results do   
     collection do
+      get "get_teacher_assessments_service"
+      get "get_student_details_service"
+      post "save_assessment_results_service"
+      get "get_assessment_results_service"
    end  
   end      
 
