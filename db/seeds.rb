@@ -16,11 +16,9 @@ def seed_role
   @bod = Role.find_by_code("bod")
   @teacher = Role.find_by_code("teacher")
   @librarian = Role.find_by_code("librarian") 
-<<<<<<< HEAD
   @transport_head = Role.find_by_code("transport_head")
-=======
   @canteenmanager = Role.find_by_code("canteenmanager")
->>>>>>> origin/holiday_calendar
+
   unless @admin.present?
     Role.create(:role => "admin", :code => "admin", :description => "admin")
   end
@@ -46,17 +44,13 @@ def seed_role
   unless @librarian.present?
     Role.create(:role => "librarian", :code => "librarian", :description => "librarian")
   end
-<<<<<<< HEAD
-  
   unless @transport_head.present?
     Role.create(:role => "transport_head",:code => "transport_head",:description => "transport_head")
   end
 
-=======
   unless @canteenmanager.present?
     Role.create(:role => "canteenmanager", :code => "canteenmanager", :description => "canteenmanager")
   end
->>>>>>> origin/holiday_calendar
 end
 
 
@@ -68,12 +62,10 @@ def seed_user
   bod = Role.find_by_code("bod")
   teacher = Role.find_by_code("teacher")
   librarian = Role.find_by_code("librarian")
-<<<<<<< HEAD
   transport_head = Role.find_by_code("transport_head")
-=======
   canteenmanager = Role.find_by_code("canteenmanager")
 
->>>>>>> origin/holiday_calendar
+
   @user_admin = User.find_by_role_id(admin_role)
   @user_parent = User.find_by_role_id(parent_role)
   @user_accountant = User.find_by_role_id(accountant_role)
