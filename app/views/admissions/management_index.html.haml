@@ -22,7 +22,7 @@
       %th Faculty
       %th Time
       %th Staff Comment
-      %th Management Comment
+      %th{style: "width:10%"} Management Comment
       %th Result
       
         
@@ -34,7 +34,8 @@
         %td= admission.faculty
         %td= admission.start_time
         %td= admission.comment
-        %td= admission.description
+        %td{style: "width:10%"} 
+          = admission.description
         %td= admission.result
         
         

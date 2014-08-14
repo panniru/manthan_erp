@@ -40,40 +40,40 @@ class RecruitmentSubMenu < Struct.new(:controller)
 
   private 
   def home
-    MenuItem.new(:label => "Home", :klass => "", :icon => "home ", :href => "/staff_admissions")
+    MenuItem.new(:label => "Home", :klass => "", :icon => "home ", :href => "/staffrecruits")
   end
   def  guidelines
-    MenuItem.new(:label => "Guidelines", :klass => "", :icon => "pencil-square-o ", :href => "/recruitments")
+    MenuItem.new(:label => "Guidelines", :klass => "", :icon => "pencil-square-o ", :href => "/staffrecruits")
   end
   def  advertisements
     MenuItem.new(:label => "Advertisements", :klass => "", :icon => "puzzle-piece ", :href => "/adds")
   end
   def  enquiry_form
-    MenuItem.new(:label => "Enquiry Forms", :klass => "", :icon => "file-text-o", :href => "/staff_admissions/enquiry_index")
+    MenuItem.new(:label => "Enquiry Forms", :klass => "", :icon => "file-text-o", :href => "/staffrecruits/enquiry_index")
   end
   def  documentation_verification
-    MenuItem.new(:label => "Documentation verification", :klass => "", :icon => "folder-open", :href => "/recruitments/document_index")
+    MenuItem.new(:label => "Documentation verification", :klass => "", :icon => "folder-open", :href => "/staffrecruits/document_index")
   end
   def assessment_planned
-    MenuItem.new(:label => "Assessment Planned", :klass => "", :icon => "calendar ", :href => "/recruitments/assessment_index")
+    MenuItem.new(:label => "Assessment Planned", :klass => "", :icon => "calendar ", :href => "/staffrecruits/assessment_index")
   end
   def view_schedule
-    MenuItem.new(:label => "View Schedule", :klass => "", :icon => "calendar ", :href => "/recruitments/assessment_index")
+    MenuItem.new(:label => "View Schedule", :klass => "", :icon => "calendar ", :href => "/staffrecruits/assessment_index")
   end
   def assessment_completed
-    MenuItem.new(:label => "Assessment Completed", :klass => "", :icon => "file-archive-o ", :href => "/recruitments/assessment_completed_index")
+    MenuItem.new(:label => "Assessment Completed", :klass => "", :icon => "file-archive-o ", :href => "/staffrecruits/assessment_completed_index")
   end
   def senior_management_review
-    MenuItem.new(:label => "Sr Management Review", :klass => "", :icon => "group ", :href => "/recruitments/management_index")
+    MenuItem.new(:label => "Sr Management Review", :klass => "", :icon => "group ", :href => "/staffrecruits/management_index")
   end
   def appointed
-    MenuItem.new(:label => "Appointed", :klass => "", :icon => "user ", :href => "/recruitments/selected_staffs")
+    MenuItem.new(:label => "Appointed", :klass => "", :icon => "user ", :href => "/staffrecruits/selected_staffs")
   end
   def transport_assessment
-    MenuItem.new(:label => "Assessment", :klass => "", :icon => "group", :href => "/recruitments/sports_index")
+    MenuItem.new(:label => "Assessment", :klass => "", :icon => "group", :href => "/staffrecruits/sports_index")
   end
   def show_closed_forms
-    MenuItem.new(:label => "Closed Forms", :klass => "", :icon => "ban", :href => "/recruitments/closed_forms" )
+    MenuItem.new(:label => "Closed Forms", :klass => "", :icon => "ban", :href => "/staffrecruits/closed_forms" )
   end
   def admin_settings
     MenuItem.new(:label => "Admin Settings", :klass => "", :icon => "ban", :href => "/staffadmins" )

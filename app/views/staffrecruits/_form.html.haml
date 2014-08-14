@@ -1,0 +1,106 @@
+= form_for @staffrecruit, :html => { :class => "form-horizontal", :role => "form"} do |f|
+  .row
+  .col-sm-12
+    .form-group{"ng-controller" => "StaffAdmissionsController"}
+      .col-sm-1
+        = f.label "Form_No:", :class => 'control-label'
+      .col-sm-2
+        = f.text_field :form_no,:class => 'form-control'
+      .col-sm-1
+        = f.label "Post:", :class => 'control-label'
+      .col-sm-2{"ng-controller" => "StaffsController"}
+        %select{"ng-model" => "myPost", "ng-options" => "post.post_name for post in posts", :class => "form-control", :required => "required"}
+          %option{style: "display:none", value: ""} Select Post
+        = f.hidden_field :post, :value => "{{myPost.post_name}}"
+      .col-sm-1
+        = f.label "Department:", :class => 'control-label'
+      .col-sm-2
+        %select{"ng-model" => "myHead", "ng-options" => "head.dept for head in heads", :class => "form-control", :required => "required"}
+          %option{style: "display:none", value: ""} Select Head
+      .col-sm-1
+        = f.label "Admin Head:", :class => 'control-label'
+      .col-sm-2
+        %select{"ng-model" => "myHead", "ng-options" => "head.head_name for head in heads", :class => "form-control", :required => "required"}
+          %option{style: "display:none", value: ""} Select Head
+        = f.hidden_field :staffhead, :value => "{{myHead.head_name}}"
+        = f.hidden_field :staff_admission_id, :value => "{{myHead.id}}"
+    .form-group
+      .col-sm-3
+        = f.label "Name Of The Applicant:", :class => 'control-label'
+      .col-sm-3
+        = f.text_field :name,:class => 'form-control'
+      .col-sm-3
+        = f.label "Date Of Birth:", :class => 'control-label'
+      .col-sm-3
+        = f.text_field :dob,:class => 'datepicker form-control'
+      
+    .form-group
+      .col-sm-3
+        = f.label "Gender:", :class => 'control-label'
+      .col-sm-3
+        = f.radio_button :gender, 'F'
+        = f.label :"female"
+        = f.radio_button :gender, 'M'
+        = f.label :"male"
+      .col-sm-3
+        = f.label "Email:", :class => 'control-label'
+      .col-sm-3
+        = f.text_field :email, :class => 'form-control'
+      
+    .form-group
+      .col-sm-3
+        = f.label "Mobile No:", :class => 'control-label'
+      .col-sm-3
+        = f.text_field :mobile_no, :class => 'form-control'
+      .col-sm-3
+        = f.label "Address:", :class => 'control-label'
+      .col-sm-3
+        = f.text_area :address, :class => 'form-control'
+    .form-group
+      .col-sm-3
+        = f.label "Nationality:", :class => 'control-label'
+      .col-sm-3
+        = f.country_select :nationality, {object: f.object, prompt: 'Country'} 
+      
+    .form-group{"ng-controller" => "KlassController"}
+      .col-sm-3
+        = f.label "Preferred Class:", :class => 'control-label'
+      .col-sm-3
+        %select{"ng-model" => "myRecruitment", "ng-options" => "klass.grade_name for klass in klasses",:class => "form-control",:required => "required"}          
+          %option{style: "display:none", value: ""} Select Grade
+          
+        = f.hidden_field :klass, :value => "{{myRecruitment.grade_name}}"
+      .col-sm-3
+        = f.label "Known Languages:", :class => 'control-label'
+      .col-sm-3
+        = f.select(:language, options_from_collection_for_select(LanguageList::COMMON_LANGUAGES, "iso_639_3", "name"),{},:multiple => true)
+    .form-group{"ng-controller" => "RecruitmentsController"}
+      .col-sm-3
+        = f.label "Preferred Subject:", :class => 'control-label'
+      .col-sm-3
+        %select{"ng-model" => "myRecruitment", "ng-options" => "subject.subject_name for subject in subjects",:class => "form-control",:required => "required"}          
+          %option{style: "display:none", value: ""} Select Subject
+          
+        = f.hidden_field :subject, :value => "{{myRecruitment.subject_name}}"
+        
+      .col-sm-3
+        = f.label "Experience in Teaching:", :class => 'control-label'
+      .col-sm-3
+        = f.select :experience, options_for_select([['0-1 year'],['1-2 years'],['2-3 years'],['3-4 years'],['4-5 years'],['5-6 years']]), :class => 'form-control'
+     
+    .form-group
+      .col-sm-3
+        = f.label "Expected Salary:", :class => 'control-label'
+      .col-sm-3
+        = f.select :expected_salary, options_for_select([['10000'],['10000-20000'],['20000-30000'],['30000']]), :class => 'span3 form-control'
+      .col-sm-3
+        = f.label "Education Qualification:", :class => 'control-label'
+      .col-sm-3
+        = f.select :education_qualification, options_for_select([['M.Sc(B.Ed)'],['M.A'],['M.Sc'],['Graduation'],['MBA'],['MCA']])
+      
+        
+      
+  .row
+    %center
+      = f.hidden_field :status,:value => "Application_Created"
+      = button_tag "Create", :type => "submit", :class => 'btn btn-primary'

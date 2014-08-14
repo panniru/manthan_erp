@@ -1,0 +1,35 @@
+.row
+  .col-sm-3
+    .pull-left
+      .input-group
+        %span.input-group-addon
+          = fa_icon "search lg"
+        %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+        %br
+  .col-sm-4
+  .col-sm-4
+    - if current_user.admin?
+      .pull-right
+        = link_to 'New Application', new_staffrecruit_path, :class => 'btn btn-primary'
+%br
+%br
+%table#tblData.target.table.table-striped.table-condensed.table-bordered
+  %thead
+    %tr
+      %th Enquiry Form
+      %th Name
+      %th Date Of Birth
+      %th Email
+      %th Mobile No
+      %th Status
+        
+  %tbody
+    - @staffrecruits.each do |staffrecruit|
+      %tr
+        %td= link_to "#{staffrecruit.form_no}",homeindex_staffrecruit_path(staffrecruit)
+        %td= staffrecruit.name
+        %td= staffrecruit.dob
+        %td= staffrecruit.email
+        %td= staffrecruit.mobile_no
+        %td= staffrecruit.status
+ 

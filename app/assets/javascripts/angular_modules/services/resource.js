@@ -78,8 +78,8 @@
             SectionMaster : SectionMaster,
             Book : Book,
 	    Route:Route,
-            RequestNewBook : RequestNewBook
-            CanteenManagement: CanteenManagement,
+            RequestNewBook : RequestNewBook,
+            CanteenManagement: CanteenManagement
         };
     }]);
 })(angular, myApp);

@@ -7,14 +7,6 @@
         %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
         %br
   .col-sm-4  
-    %center
-      = form_tag admission_home_admissions_path, :method => 'get' do
-        .col-sm-10
-          = select_tag(:search,options_for_select([['All'],['Enquiry_Created'],['Application_Created'],['Assessment_Planned'],['Assessment_Completed'],['Management_Reviewed']]),{:class => 'col-sm-4 form-control'})
-        .col-sm-2
-          = submit_tag "Search", name: nil, :class => 'btn btn-primary'
-          %br
-          %br
   .col-sm-4
     - if current_user.admin?
       .pull-right
