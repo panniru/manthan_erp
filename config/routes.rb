@@ -519,7 +519,12 @@ ManthanErp::Application.routes.draw do
       get "home_index"
     end
   end
-  resources :canteenmanagers 
+  resources :canteenmanagers do
+    collection do
+      get "canteenmanagerdata"
+      get "canteen_date"
+    end
+  end
 
   resources :holidaycalendars do
     collection do

@@ -14,7 +14,7 @@ class Canteen
     sub_menu = []
     sub_menu << home
     sub_menu << holiday_calendar   
-    sub_menu << canteen_manager
+    sub_menu << daily_meals
   end
 
   private
@@ -28,8 +28,8 @@ private
   def home
     MenuItem.new(:label => "Home", :klass => "", :icon => "home ", :href => "/canteen_managements/home_index")
     end
-  def canteen_manager
-    MenuItem.new(:label => "CanteenManager", :klass => "", :icon => "cutlery", :href => "/canteenmanagers" )
+  def daily_meals
+    MenuItem.new(:label => "Daily Meals", :klass => "", :icon => "cutlery", :href => "/canteenmanagers" )
 end
  
 end
