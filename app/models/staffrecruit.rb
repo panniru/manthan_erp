@@ -1,6 +1,6 @@
 class Staffrecruit < ActiveRecord::Base
   belongs_to :staff_admission, :foreign_key => 'staff_admission_id'
-  
+  belongs_to :faculty_master
   scope :search, lambda {|id| where(:id => id)}
   def self.search(search)
     if search 

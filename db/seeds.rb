@@ -292,12 +292,12 @@ end
 
 def seed_faculty
   unless FacultyMaster.first.present?
-    FacultyMaster.create(:faculty_name => 'SRIKANTH')
-    FacultyMaster.create(:faculty_name => 'MURALEE')
-    FacultyMaster.create(:faculty_name => 'SWAMY', :user_id => User.find_by_user_id('teacher1').id)
-    FacultyMaster.create(:faculty_name => 'PRIYA')
-    FacultyMaster.create(:faculty_name => 'NAVYA')
-    FacultyMaster.create(:faculty_name => 'UMA')
+    FacultyMaster.create(:name => 'SRIKANTH')
+    FacultyMaster.create(:name => 'MURALEE')
+    FacultyMaster.create(:name => 'SWAMY', :user_id => User.find_by_user_id('teacher1').id)
+    FacultyMaster.create(:name => 'PRIYA')
+    FacultyMaster.create(:name => 'NAVYA')
+    FacultyMaster.create(:name => 'UMA')
   end
 end 
 

@@ -73,7 +73,7 @@
       .col-sm-3
         = f.label "Known Languages:", :class => 'control-label'
       .col-sm-3
-        = f.select(:language, options_from_collection_for_select(LanguageList::COMMON_LANGUAGES, "iso_639_3", "name"),{},:multiple => true)
+        = f.text_field :language, :class => 'form-control'
     .form-group{"ng-controller" => "RecruitmentsController"}
       .col-sm-3
         = f.label "Preferred Subject:", :class => 'control-label'
