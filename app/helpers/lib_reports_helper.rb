@@ -1,0 +1,2 @@
+module LibReportsHelper
+end

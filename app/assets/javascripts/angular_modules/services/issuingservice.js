@@ -8,6 +8,7 @@
         return {
             getbookServiceView : getbookServiceView
         };
+        
     }]);
 
 })(angular, myApp);

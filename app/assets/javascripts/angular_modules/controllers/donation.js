@@ -6,7 +6,7 @@
         $scope.map_grades = []
         donationService.getGradeServiceView()
             .then(function(result) {
-                 //alert(JSON.stringify(result.data))
+               
                 $scope.grades=result.data
                 
                 
@@ -14,7 +14,6 @@
         $scope.map_sections = []
         donationService.getSectionServiceView()
             .then(function(result) {
-                // alert(JSON.stringify(result.data))
                 $scope.sections=result.data
             });
         

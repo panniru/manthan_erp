@@ -1,6 +1,4 @@
 ManthanErp::Application.routes.draw do
- 
-
 
   get "student_route_mappings/index"
   get "student_route_mappings/create"
@@ -17,6 +15,7 @@ ManthanErp::Application.routes.draw do
   get "teaching_plans/edit"
   get "teaching_plans/index"
   get "teaching_plans/show"
+  resources :lib_reports
   resources :donation_of_books do
     collection do
       get 'gradeserviceview'

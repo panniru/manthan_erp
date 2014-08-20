@@ -22,6 +22,7 @@ end
     sub_menu << accepted_books
     sub_menu << rejected_books
     sub_menu << donate_books
+    sub_menu << reports
   end
   def parent_sub_menu
     sub_menu = []
@@ -41,7 +42,7 @@ end
   end
   private 
   def home
-    MenuItem.new(:label => "Home", :klass => "", :icon => "home ", :href => "books/home_index")
+    MenuItem.new(:label => "Home", :klass => "", :icon => "home ", :href => "/books/home_index")
   end
   def  books
     MenuItem.new(:label => "Books", :klass => "", :icon => "book ", :href => "/books")
@@ -81,5 +82,8 @@ end
   end
   def donate_books
     MenuItem.new(:label => "Donate Books", :klass => "", :icon => "cubes  ", :href => "/donation_of_books")
+  end
+  def reports
+    MenuItem.new(:label => "Reports", :klass => "", :icon => "file-image-o  ", :href => "/lib_reports")
   end
 end

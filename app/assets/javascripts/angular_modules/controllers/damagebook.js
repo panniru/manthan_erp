@@ -16,12 +16,11 @@
                 }); 
         };
         $scope.submit = function(){
-            alert("in service changing");
+            
             var isbn = $("#isbn").val()
             blockBookService.damageBooks($scope.myIsbn,$scope.bookName,$scope.authorName,$scope.bookStage,$scope.damageType,$scope.damageDescription)
             
                 .then(function(result) {
-                    alert(JSON.stringify(result.data))
                     $scope. books=result.data
                 });
         };
