@@ -10,6 +10,7 @@ class Transport
     sub_menu << newbus
     sub_menu << routes
     sub_menu << mappings
+    sub_menu << locations
       
   end
 
@@ -29,6 +30,9 @@ class Transport
   end
   def mappings
     MenuItem.new(:label => "Mapping", :klass => "", :icon => "arrows-h ", :href => "/student_route_mappings")
+  end
+  def locations
+    MenuItem.new(:label => "Locations", :klass => "", :icon => "map-marker ", :href => "/location_masters")
   end
 end
 

@@ -1,14 +1,5 @@
 ManthanErp::Application.routes.draw do
  
-  get "student_route_mappings/index"
-  get "student_route_mappings/create"
-  get "student_route_mappings/show"
-
-  get "new_vehicles/index"
-  get "new_vehicles/show"
-  get "new_vehicles/edit"
-  get "new_vehicles/new"
-
   get "teaching_plans/new"
   get "teaching_plans/edit"
   get "teaching_plans/index"
@@ -17,6 +8,7 @@ ManthanErp::Application.routes.draw do
   resources :student_route_mappings do
     collection do
       get "get_route_view"
+      post "save_route"
     end
   end
   
@@ -202,6 +194,7 @@ ManthanErp::Application.routes.draw do
     collection do
       post "create_bulk"
       get "get_location_view"
+      get "get_bus_no"
       post "send_mail"
     end
   end

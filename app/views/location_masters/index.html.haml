@@ -1,13 +1,17 @@
-%h5
-  Locations
-  %table.table.table-bordered
-    %thead
+.row
+  .col-sm-6
+    %h3  Locations
+  .col-sm-6
+    %br
+    = render 'form'
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Locations
+      %th
+  %tbody
+    - @location_master.each do |location_master|
       %tr
-        %th Locations
-        %th
-    %tbody
-      - @location_master.each do |location_master|
-        %tr
-          %td= location_master.location_name
-          %td
-            =  link_to raw("<span class='glyphicon glyphicon-trash'></span>"),location_master_path(location_master), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+        %td= location_master.location_name
+        %td
+          =  link_to raw("<span class='glyphicon glyphicon-trash'></span>"),location_master_path(location_master), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"

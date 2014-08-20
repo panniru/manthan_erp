@@ -1,24 +1,18 @@
-.panel.panel-default
-  .panel-body
-    .col-sm-3
-      .pull-left
-        .input-group
-          %span.input-group-addon
-            = fa_icon "search lg"
-          %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
-          %br
-    .col-sm-4
-      %center
-        %h3
-          Vehicle List
-    .col-sm-3
-    .col-sm-2
-      %h5
-        = render 'modal'
+.row
+  .col-sm-2
+  .col-sm-4
+    %center
+      %h2
+        Vehicle List
+  .col-sm-3
+  .col-sm-2
+    %h5
+      = render 'modal'
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %th Company of Bus
     %th Model No
+    %th Bus No
     %th Year Of Manufacturing
     %th Purchase
     %th Purchase Date
@@ -29,6 +23,7 @@
       %tr
         %td= new_vehicle.make_of_bus
         %td= new_vehicle.model_no
+        %td= new_vehicle.id
         %td= new_vehicle.year_of_manufacture
         %td= new_vehicle.purchase_option
         %td= new_vehicle.purchase_option_date

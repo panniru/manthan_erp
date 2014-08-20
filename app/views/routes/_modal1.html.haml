@@ -16,6 +16,5 @@
             .col-sm-8
               = text_area_tag ""
           .pull-right
-            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
             = link_to "Send Mail", send_mail_routes_path, :class => "btn btn-primary",{"data-dismiss" => "modal"}
           

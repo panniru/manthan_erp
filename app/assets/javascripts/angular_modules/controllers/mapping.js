@@ -6,7 +6,7 @@
 	    .then(function(result) {
 		$scope.all_locations =result.data
 		
-	    });
+	    })
 	
 	$scope.nearRoutes = function(){
 	    $scope.location 
@@ -15,16 +15,15 @@
 		    $scope.routes = response.data
 		});
         }
-	$scope.saveRoute  = function(route_id){
-	    alert(route_id)
-	    $scope.save_routes = [];
-            $scope.save_routes.push({
-                student_master_id: "",
-                route_id: "",
-            }); 
-	    
+	
+	$scope.saveRoute = function(route, student_master_id){
+	    alert(student_master_id)
+	    mapService.saveRoute(route, student_master_id)
+		.then(function(result) {
+		    alert()
+		});
 	};
-		
+	
     }]);
     
 })(angular, myApp);
