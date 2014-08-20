@@ -10,8 +10,6 @@ class StaffrecruitsController < ApplicationController
     end
   end
 
-  def reports
-  end
   def management_result
     @staffrecruit = Staffrecruit.find(params[:id])
   end
@@ -30,7 +28,6 @@ class StaffrecruitsController < ApplicationController
             new_faculty_master.save!
           else
           end
-          
         end
         format.html { redirect_to staffrecruits_path, notice: 'Form was successfully updated.' }
         format.json { render action: 'index', :status => "success" }
@@ -38,7 +35,6 @@ class StaffrecruitsController < ApplicationController
         format.html { render action: 'edit' }
         format.json { render json: @staffrecruit.errors, :status => "failure" }
       end
-
     end
   end
   def closed_forms
@@ -116,13 +112,13 @@ class StaffrecruitsController < ApplicationController
     @staffrecruit = Staffrecruit.find(params[:id])
   end
   
- def destroy
-   @staffrecruit = Staffrecruit.find(params[:id])
-   @staffrecruit.destroy
-   respond_to do |format|
-     format.html { redirect_to staffrecruits_path }
-   end
- end
+  def destroy
+    @staffrecruit = Staffrecruit.find(params[:id])
+    @staffrecruit.destroy
+    respond_to do |format|
+      format.html { redirect_to staffrecruits_path }
+    end
+  end
  def homeindex
    @staffrecruit = Staffrecruit.find(params[:id])
    
@@ -133,12 +129,13 @@ class StaffrecruitsController < ApplicationController
  end
  
  def staffrecruit_params
-   params.require(:staffrecruit).permit(:post,:description,:start_time,:end_time,:education_qualification,:educational_certificates,:previous_employment_proof,:salary_slips_for_previous_months, :title,:status,:staff_admission_id,:id,:comments,:staffhead, :final_result,:form_no,:assessment_result,:closestatus,:management_result,:name,:dob,:subject_master_id,:address,:gender,:email,:mobile_no,:nationality,:klass,:language,:subject,:experience,:expected_salary,:staff_leader_id,:user_id)
+   params.require(:staffrecruit).permit(:post,:description,:start_time,:end_time,:education_qualification,:educational_certificates,:previous_employment_proof,:salary_slips_for_previous_months, :title,:status,:staff_admission_id,:id,:comments,:staffhead, :final_result,:form_no,:assessment_result,:closestatus,:management_result,:faculty_name,:dob,:subject_master_id,:address,:gender,:email,:mobile_no,:nationality,:klass,:language,:subject,:experience,:expected_salary,:staff_leader_id,:user_id,:dept)
  end
  def get_faculty_master(staff_obj)
    FacultyMaster.new do |fm|
-     fm.id = staff_obj.id
-     fm.name = staff_obj.name
+     #fm.id = staff_obj.id
+     fm.dept = staff_obj.dept
+     fm.faculty_name = staff_obj.faculty_name
      fm.post = staff_obj.post
      fm.description = staff_obj.description
      fm.start_time = staff_obj.start_time

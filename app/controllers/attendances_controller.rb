@@ -1,13 +1,12 @@
-class StaffadminsController < ApplicationController
+class AttendancesController < ApplicationController
   
   def get_faculty_names
     faculty = FacultyMaster.all.map do |faculty|
-      { faculty_name: faculty.faculty_name, post: faculty.post, dept: faculty.dept}
+      { faculty_name: faculty.name, post: faculty.post, dept: faculty.dept}
     end
     render :json => faculty
   end
   
- 
   def create
     @staffadmin = Staffadmin.new(staffadmin_params)
     if @staffadmin.save
@@ -59,5 +58,4 @@ class StaffadminsController < ApplicationController
   def staffadmin_params
     params.require(:staffadmin).permit(:dept,:head,:add_id,:title,:post_role)
   end
-
 end

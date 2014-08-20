@@ -428,7 +428,11 @@ ManthanErp::Application.routes.draw do
     resources :recruitments
   end
   
-  resources :staffadmins
+  resources :staffadmins do
+    collection do
+      get 'get_faculty_names'
+    end
+  end
   resources :admission_reports do
     collection do
       get "get_admissions_on_status"
@@ -557,5 +561,5 @@ ManthanErp::Application.routes.draw do
       get 'closed_forms'
       end
     end
-
+  resources :attendances
 end

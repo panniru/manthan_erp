@@ -174,7 +174,14 @@ class AdmissionsController < ApplicationController
  def update
    @admission = Admission.find(params[:id])
    respond_to do |format|
-     if @admission.update(admission_params)
+     if @admission.update!(admission_params)
+       if @admission.finalresult == "Selected"
+         new_student_master = get_student_master(@admission)
+         if new_student_master.valid?
+           new_student_master.save!
+         else
+         end
+       end
        format.html { redirect_to admission_home_admissions_path, notice: 'Form was successfully updated.' }
        format.json { render action: 'index', :status => "success" }
      else
@@ -217,5 +224,61 @@ class AdmissionsController < ApplicationController
  
  def admission_params
    params.require(:admission).permit(:admission_no,:branch,:surname,:second_lang,:board,:grade,:medium,:year,:written,:spoken,:reading,:blood_group,:allergy,:doctor_name,:doctor_mobile,:guardian_name,:guardian_mobile,:guardian_relationship,:from,:to,:avatar,:father_office_address,:mother_office_address,:father_office_telephone,:mother_office_telephone,:father_mobile,:mother_mobile,:father_religion,:mother_religion,:father_employer,:mother_employer,:father_email,:mother_email,:sib_name,:sib_age,:sib_sex,:sib_grade,:sib_school,:bus,:form_no, :middle_name,:name,:klass, :dob,:gender,:nationality,:language,:father_name,:mother_name,:father_occupation,:mother_occupation,:father_company,:mother_company,:father_education, :mother_education,:income,:address, :landline,:mobile,:email,:transport, :busstop,:last_school, :city, :changing_reason, :know_school,:person, :pp,:status,:closestatus,:title, :description, :staff, :grade, :start_time, :end_time, :grade_master_id,:teacher_leader_id,:faculty,:comment, :result,:teachercomment,:finalresult)
+ end
+ def get_student_master(staff_obj)
+   StudentMaster.new do |fm|
+     #fm.id = staff_obj.id
+     fm.admission_no = staff_obj.admission_no
+     fm.name = staff_obj.name
+     fm.branch = staff_obj.branch
+     fm.description = staff_obj.description
+     fm.start_time = staff_obj.start_time
+     fm.end_time = staff_obj.end_time
+     fm.surname = staff_obj.surname
+     fm.second_lang = staff_obj.second_lang
+     fm.board = staff_obj.board
+     fm.medium = staff_obj.medium
+     fm.year = staff_obj.year
+     fm.written = staff_obj.written
+     fm.spoken = staff_obj.spoken
+     fm.reading = staff_obj.reading
+     fm.blood_group = staff_obj.blood_group
+     fm.finalresult = staff_obj.finalresult
+     #fm.form_no = staff_obj.form_no
+     fm.guardian_relationship = staff_obj.guardian_relationship
+     fm.guardian_name = staff_obj.guardian_name
+     fm.closestatus = staff_obj.closestatus
+     fm.dob = staff_obj.dob
+     fm.address = staff_obj.address
+     fm.gender = staff_obj.gender
+     fm.email = staff_obj.email
+     fm.mobile = staff_obj.mobile
+     fm.nationality = staff_obj.nationality
+     fm.klass = staff_obj.klass
+     fm.language = staff_obj.language
+     fm.allergy = staff_obj.allergy
+     fm.doctor_name = staff_obj.doctor_name
+     fm.doctor_mobile = staff_obj.doctor_mobile
+     fm.from = staff_obj.from
+     fm.to = staff_obj.to
+     fm.father_name = staff_obj.father_name
+     fm.mother_name = staff_obj.mother_name
+     fm.income = staff_obj.income
+     fm.landline = staff_obj.landline
+     fm.transport = staff_obj.transport
+     fm.busstop = staff_obj.busstop
+     #fm.last_school = staff_obj.last_school
+     fm.city = staff_obj.city
+     fm.changing_reason = staff_obj.changing_reason
+     fm.know_school = staff_obj.know_school
+     fm.person = staff_obj.person
+     fm.pp = staff_obj.pp
+     fm.status = staff_obj.status
+     fm.sib_name = staff_obj.sib_name
+     fm.sib_age = staff_obj.sib_age
+     fm.sib_sex = staff_obj.sib_sex
+     fm.sib_grade = staff_obj.grade
+     fm.sib_school = staff_obj.sib_school
+   end 
  end
 end
