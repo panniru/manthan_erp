@@ -46,6 +46,7 @@ class ContextDetector
     "block_books" => "library",
     "request_new_books" => "library",
     "donation_of_books" => "library",
+    "lib_reports" => "library",
     "default_masters" => "default_master_sub_menu",
     "student_masters" => "default_master_sub_menu",
     "parents" => "default_master_sub_menu",

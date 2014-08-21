@@ -16,11 +16,12 @@ class IssuingsController < ApplicationController
   end
   
   def index
-    @students =  StudentMaster.all
-    # @students  = StudentMaster.where("grade_master_id = :grade_master_id AND section_master_id = :section_master_id", {grade_master_id: params[:grade_master_id], section_master_id: params[:section_master_id]})
+    #@students =  StudentMaster.all
+
+     @students  = StudentMaster.where("grade_master_id = :grade_master_id AND section_master_id = :section_master_id", {grade_master_id: params[:grade_master_id], section_master_id: params[:section_master_id]})
+  
     @book_issuing_objects = BookIssuingFormObject.build_collection(@students)
-    # p "==================="
-    # p @book_issuing_objects
+    
   end
    
   
@@ -30,6 +31,7 @@ class IssuingsController < ApplicationController
         grades = GradeMaster.all.map do |grade|
           {grade_name: grade.grade_name, id: grade.id}
         end
+        
         render :json => grades
       end
     end  
@@ -43,6 +45,7 @@ class IssuingsController < ApplicationController
         get_sections = SectionMaster.all.map do |section|
           {section: section.section_name, id: section.id, grade_master_id: section.grade_master_id }
         end
+       
         render :json => get_sections
       end
     end  

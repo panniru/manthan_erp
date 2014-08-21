@@ -3,7 +3,7 @@ class Issuing < ActiveRecord::Base
   attr_accessor :is_returned
   
   belongs_to :student, :class_name => "StudentMaster"
-  belongs_to :book
+  #belongs_to :book
   # validates :name, :presence => true
   # validates :section, :presence => true
   # validates :grade, :presence => true
