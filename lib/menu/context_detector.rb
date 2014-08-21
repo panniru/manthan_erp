@@ -55,7 +55,8 @@ class ContextDetector
     "default_masters" => "default_master_sub_menu",
     "HRM" => "hrm_sub_menu",
     "holidaycalendars" => "canteen",
-    "canteen_managements" =>"canteen"
+    "canteen_managements" =>"canteen",
+    "attendances" => "attendance"
   }
   
   def self.get_context(args)

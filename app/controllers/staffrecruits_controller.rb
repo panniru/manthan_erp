@@ -17,10 +17,10 @@ class StaffrecruitsController < ApplicationController
   def enquiry_index
     @staffrecruits = Staffrecruit.all
   end
-    
+  
   def update
     @staffrecruit = Staffrecruit.find(params[:id])
-     respond_to do |format|
+    respond_to do |format|
       if @staffrecruit.update!(staffrecruit_params)
         if @staffrecruit.final_result == "Selected"
           new_faculty_master = get_faculty_master(@staffrecruit)

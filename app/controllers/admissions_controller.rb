@@ -175,14 +175,19 @@ class AdmissionsController < ApplicationController
    @admission = Admission.find(params[:id])
    respond_to do |format|
      if @admission.update!(admission_params)
-       if @admission.finalresult == "Selected"
+       if @admission.status == "Application_Created"
          new_student_master = get_student_master(@admission)
          if new_student_master.valid?
            new_student_master.save!
          else
          end
+         new_parent_master = get_parent_master(@admission)
+         if new_parent_master.valid?
+           new_parent_master.save!
+         else
+         end
        end
-       format.html { redirect_to admission_home_admissions_path, notice: 'Form was successfully updated.' }
+       format.html { redirect_to admission_home_admissions_path, notice: 'Application form trial was successfully updated.' }
        format.json { render action: 'index', :status => "success" }
      else
        format.html { render action: 'edit' }
@@ -225,60 +230,86 @@ class AdmissionsController < ApplicationController
  def admission_params
    params.require(:admission).permit(:admission_no,:branch,:surname,:second_lang,:board,:grade,:medium,:year,:written,:spoken,:reading,:blood_group,:allergy,:doctor_name,:doctor_mobile,:guardian_name,:guardian_mobile,:guardian_relationship,:from,:to,:avatar,:father_office_address,:mother_office_address,:father_office_telephone,:mother_office_telephone,:father_mobile,:mother_mobile,:father_religion,:mother_religion,:father_employer,:mother_employer,:father_email,:mother_email,:sib_name,:sib_age,:sib_sex,:sib_grade,:sib_school,:bus,:form_no, :middle_name,:name,:klass, :dob,:gender,:nationality,:language,:father_name,:mother_name,:father_occupation,:mother_occupation,:father_company,:mother_company,:father_education, :mother_education,:income,:address, :landline,:mobile,:email,:transport, :busstop,:last_school, :city, :changing_reason, :know_school,:person, :pp,:status,:closestatus,:title, :description, :staff, :grade, :start_time, :end_time, :grade_master_id,:teacher_leader_id,:faculty,:comment, :result,:teachercomment,:finalresult)
  end
- def get_student_master(staff_obj)
-   StudentMaster.new do |fm|
-     #fm.id = staff_obj.id
-     fm.admission_no = staff_obj.admission_no
-     fm.name = staff_obj.name
-     fm.branch = staff_obj.branch
-     fm.description = staff_obj.description
-     fm.start_time = staff_obj.start_time
-     fm.end_time = staff_obj.end_time
-     fm.surname = staff_obj.surname
-     fm.second_lang = staff_obj.second_lang
-     fm.board = staff_obj.board
-     fm.medium = staff_obj.medium
-     fm.year = staff_obj.year
-     fm.written = staff_obj.written
-     fm.spoken = staff_obj.spoken
-     fm.reading = staff_obj.reading
-     fm.blood_group = staff_obj.blood_group
-     fm.finalresult = staff_obj.finalresult
-     #fm.form_no = staff_obj.form_no
-     fm.guardian_relationship = staff_obj.guardian_relationship
-     fm.guardian_name = staff_obj.guardian_name
-     fm.closestatus = staff_obj.closestatus
-     fm.dob = staff_obj.dob
-     fm.address = staff_obj.address
-     fm.gender = staff_obj.gender
-     fm.email = staff_obj.email
-     fm.mobile = staff_obj.mobile
-     fm.nationality = staff_obj.nationality
-     fm.klass = staff_obj.klass
-     fm.language = staff_obj.language
-     fm.allergy = staff_obj.allergy
-     fm.doctor_name = staff_obj.doctor_name
-     fm.doctor_mobile = staff_obj.doctor_mobile
-     fm.from = staff_obj.from
-     fm.to = staff_obj.to
-     fm.father_name = staff_obj.father_name
-     fm.mother_name = staff_obj.mother_name
-     fm.income = staff_obj.income
-     fm.landline = staff_obj.landline
-     fm.transport = staff_obj.transport
-     fm.busstop = staff_obj.busstop
-     #fm.last_school = staff_obj.last_school
-     fm.city = staff_obj.city
-     fm.changing_reason = staff_obj.changing_reason
-     fm.know_school = staff_obj.know_school
-     fm.person = staff_obj.person
-     fm.pp = staff_obj.pp
-     fm.status = staff_obj.status
-     fm.sib_name = staff_obj.sib_name
-     fm.sib_age = staff_obj.sib_age
-     fm.sib_sex = staff_obj.sib_sex
-     fm.sib_grade = staff_obj.grade
-     fm.sib_school = staff_obj.sib_school
-   end 
+ def get_student_master(student_obj)
+     StudentMaster.new do |sm|
+       sm.admission_no = student_obj.admission_no
+       sm.name = student_obj.name
+       sm.branch = student_obj.branch
+       sm.description = student_obj.description
+       sm.start_time = student_obj.start_time
+       sm.end_time = student_obj.end_time
+       sm.surname = student_obj.surname
+       sm.second_lang = student_obj.second_lang
+       sm.board = student_obj.board
+       sm.medium = student_obj.medium
+       sm.year = student_obj.year
+       sm.written = student_obj.written
+       sm.spoken = student_obj.spoken
+       sm.reading = student_obj.reading
+       sm.blood_group = student_obj.blood_group
+       sm.finalresult = student_obj.finalresult
+       sm.form_no = student_obj.form_no
+       sm.guardian_relationship = student_obj.guardian_relationship
+       sm.guardian_name = student_obj.guardian_name
+       sm.closestatus = student_obj.closestatus
+       sm.dob = student_obj.dob
+       sm.address = student_obj.address
+       sm.gender = student_obj.gender
+       sm.email = student_obj.email
+       sm.mobile = student_obj.mobile
+       sm.nationality = student_obj.nationality
+       sm.klass = student_obj.klass
+       sm.language = student_obj.language
+       sm.allergy = student_obj.allergy
+       sm.doctor_name = student_obj.doctor_name
+       sm.doctor_mobile = student_obj.doctor_mobile
+       sm.from = student_obj.from
+       sm.to = student_obj.to
+       sm.father_name = student_obj.father_name
+       sm.mother_name = student_obj.mother_name
+       sm.income = student_obj.income
+       sm.landline = student_obj.landline
+       sm.transport = student_obj.transport
+       sm.busstop = student_obj.busstop
+       sm.last_school = student_obj.last_school
+       sm.city = student_obj.city
+       sm.changing_reason = student_obj.changing_reason
+       sm.know_school = student_obj.know_school
+       sm.person = student_obj.person
+       sm.pp = student_obj.pp
+       sm.status = student_obj.status
+       sm.sib_name = student_obj.sib_name
+       sm.sib_age = student_obj.sib_age
+       sm.sib_sex = student_obj.sib_sex
+       sm.sib_grade = student_obj.grade
+       sm.sib_school = student_obj.sib_school
+       sm.grade_master_id = student_obj.grade_master_id
+     end 
+ end
+
+ def get_parent_master(student_obj)
+   ParentMaster.new do |sm|
+     sm.father_name = student_obj.father_name
+     sm.mother_name = student_obj.mother_name
+     sm.father_mobile = student_obj.father_mobile
+     sm.mother_mobile = student_obj.mother_mobile
+     sm.father_email = student_obj.father_email
+     sm.mother_email = student_obj.mother_email
+     sm.father_office_address = student_obj.father_office_address
+     sm.mother_office_address = student_obj.mother_office_address
+     sm.father_occupation = student_obj.father_occupation
+     sm.mother_occupation = student_obj.mother_occupation
+     sm.father_religion = student_obj.father_religion
+     sm.mother_religion = student_obj.mother_religion
+     sm.father_company = student_obj.father_company
+     sm.mother_company = student_obj.mother_company
+     sm.father_education = student_obj.father_education
+     sm.mother_education = student_obj.mother_education
+     sm.father_office_telephone = student_obj.father_office_telephone
+     sm.mother_office_telephone = student_obj.mother_office_telephone
+     sm.father_employer = student_obj.father_employer
+     sm.mother_employer = student_obj.mother_employer
+     sm.student_master_id = student_obj.id
+   end
  end
 end
