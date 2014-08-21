@@ -11,10 +11,10 @@
     %table{:class => "table"}
       %tr
         %th NAME         
-        %th GRADDING 
+        %th GRADE 
         %th DESC 
       %tr{"ng-repeat" => "mapping in edit_Assessment_Results"}
-        %td {{mapping.student_master_id}} {{mapping.student_name}}                                     
+        %td {{mapping.student_name}}                                     
         %td 
           %select{"ng-model" => "mapping['grading_master_id']", "ng-options" => "grading.id as grading.grading_name for grading  in gradings", :class => "form-control"}         
         %td 

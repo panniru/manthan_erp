@@ -55,10 +55,7 @@
                 .then(function(result) {                     
                     $scope.gradings = result.data;
                 });
-            $scope.edit_Assessment_Results = $scope.show_Assessment_Results;
-            alert(JSON.stringify($scope.show_Assessment_Results));
-            alert(JSON.stringify($scope.edit_Assessment_Results));
-           
+            $scope.edit_Assessment_Results = $scope.show_Assessment_Results;           
         };      
 
         $scope.showAssessmentResults = function(assessment){
@@ -67,8 +64,7 @@
 
             assessmentResultsService.getAssessmentResultsService(assessment.id)
                 .then(function(result) {  
-                    $scope.show_Assessment_Results = result.data; 
-                    alert(JSON.stringify( $scope.show_Assessment_Results));
+                    $scope.show_Assessment_Results = result.data;                   
                     if(result.data.length == 0){                       
                         var path = "/";
                         path = "/assessment_results/add_form";
@@ -99,7 +95,13 @@
         };
 
 
-
+    $scope.showStudentsAssessmentResults = function(mapping){
+        $scope.student_mapping = mapping;            
+            assessmentResultsService.getAssessmentResultsService(mapping.id)
+                .then(function(result) {  
+                    $scope.show_Assessment_Results = result.data;                                       
+                }); 
+        };
        
     }]);    
 })(angular, myApp);

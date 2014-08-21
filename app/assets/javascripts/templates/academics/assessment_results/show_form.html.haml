@@ -5,9 +5,13 @@
     .col-md-1
     .col-md-10
       .col-md-1
+        %a{href: "#/assessment_results/show_form", :class => "btn btn btn-primary btn-sm", :title => "PREV", "ng-click" => "showMappings(1)"}      
+          %span{class: "glyphicon glyphicon-chevron-left"}     
+      .col-md-1
         %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(1)", :value => "AUG"}
       .col-md-1
-        %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(1)", :value => "PREV"}
+        %a{href: "#/assessment_results/show_form", :class => "btn btn btn-primary btn-sm", :title => "NEXT", "ng-click" => "showMappings(1)"}      
+          %span{class: "glyphicon glyphicon-chevron-right"}     
     .col-md-1
   %br
   .row{"ng-repeat" => "mapping in teacher_grade_subject_mappings"}

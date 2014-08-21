@@ -415,14 +415,7 @@ ManthanErp::Application.routes.draw do
     post "save_gradings_mappings"
     post "delete_grading_mappings"
     end
-  end
-
-    resources :assessment_criterias do
-      collection do
-        get "get_assessment_criteria_service"  
-      end  
-    end
-    
+  end    
 
    resources :staff_admissions do
     resources :recruitments
@@ -513,6 +506,7 @@ ManthanErp::Application.routes.draw do
       get "get_student_details_service"
       post "save_assessment_results_service"
       get "get_assessment_results_service"
+      get "get_assessments_service"
    end  
   end      
 
