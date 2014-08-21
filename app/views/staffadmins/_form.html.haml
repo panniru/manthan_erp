@@ -1,4 +1,4 @@
-.row
+.row{"ng-controller" => "StaffadminsController"}
   = form_for @staffadmin, :html => { :class => "form-horizontal", :role => "form" } do |f|
     = render "shared/error_messages", :object => f.object
     .col-sm-12
@@ -6,12 +6,20 @@
         .col-sm-2
           = f.label "Department:", :class => 'control-label'
         .col-sm-3
-          = f.text_field :dept, :class => 'form-control'
+          %select{"ng-model" => "staffAdmin", "ng-options" => "faculty.dept for faculty in faculties",:class => "form-control",:required => "required"}          
+            %option{style: "display:none", value: ""} Select Dept
+            
+          = f.hidden_field :dept, :value => "{{staffAdmin.dept}}"
+        
+          
       .form-group
         .col-sm-2
           = f.label "Lead of Department:", :class => 'control-label'
         .col-sm-3
-          = f.text_field :head, :class => 'form-control'
+          %select{"ng-model" => "staffAdmin", "ng-options" => "faculty.faculty_name for faculty in faculties",:class => "form-control",:required => "required"}          
+            %option{style: "display:none", value: ""} Select Staff
+            
+          = f.hidden_field :head, :value => "{{staffAdmin.faculty_name}}"
       %center
         
         = f.submit "Create", :class => 'btn btn-primary'

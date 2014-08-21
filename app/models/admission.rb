@@ -1,5 +1,5 @@
 class Admission < ActiveRecord::Base
-  
+  belongs_to :student_master
   belongs_to :grade_master
   belongs_to :teacher_leader,:foreign_key => 'teacher_leader_id'
   scope :enquiry_forms_or_application_forms, lambda{where("status = 'Enquiry_Created' or status = 'Application_Created' or status = 'Assessment_Planned' or status = 'Assessment_Completed' or status = 'Management_Reviewed' or status = 'Selected'")}

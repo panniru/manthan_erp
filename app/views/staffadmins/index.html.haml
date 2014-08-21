@@ -15,6 +15,13 @@
               %label
                 %table.table.table-bordered
                   %tbody
+                    %tr
+                      %td{style: "width:40%"} Department
+                      %td{style: "width:40%"} Head
+                      %td{style: "width:10%"} Edit
+                      %td{style: "width:10%"} Delete 
+                      
+                  %tbody
                     - @staffadmins.each do |staffadmin|
                       %tr
                         %td{style: "width:40%"}
