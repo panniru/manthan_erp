@@ -1,41 +1,43 @@
 .row{"ng-controller" => "RouteController"}
+  
   .row
     .col-sm-2
       = label_tag "Route no:", nil, :class => "form-label"
     .col-sm-2
-      = label_tag @route.route_no ,nil
+      = label_tag @route.route_no ,nil ,:class => 'form-control'
     .col-sm-2
       = label_tag "Busno:", nil, :class => "form-label"
     .col-sm-2
-      = label_tag @route.busno_up , nil 
+      = label_tag @route.busno_up , nil ,:class => 'form-control'
     .col-sm-2
       = label_tag "Children:", nil, :class => "form-label"
     .col-sm-2
-      = label_tag @route.no_of_children,nil 
+      = label_tag @route.no_of_children,nil ,:class => 'form-control'
   .row
     .col-sm-2
       = label_tag "Starting Point:", nil, :class => "form-label"
     .col-sm-2
-      = label_tag @route.start_location.location_master.location_name,nil 
+      = label_tag @route.start_location.location_master.location_name,nil,:class => 'form-control' 
     .col-sm-2
       = label_tag "Ending point:", nil, :class => "form-label"
     .col-sm-2
-      = label_tag @route.end_location.location_master.location_name ,nil 
+      = label_tag @route.end_location.location_master.location_name ,nil ,:class => 'form-control'
+      %br
+      %br
       %br
   .row
     .col-sm-3
+      %h4 List of Locations:
       %table.table.table-bordered
         %thead
           %tr
-            %th Sequence No
             %th Location
-            
+            %th Sequence No 
         %tbody
           - @route.locations.each do |location|
             %tr
-              %td= location.sequence_no
               %td= location.location_master.location_name
- 
+              %td= location.sequence_no
                 
            
               .modal.fade{ :id => "editModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}

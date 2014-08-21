@@ -49,6 +49,7 @@ class ContextDetector
     "default_masters" => "default_master_sub_menu",
     "student_masters" => "default_master_sub_menu",
     "parents" => "default_master_sub_menu",
+    "location_masters" => "transport",
     "new_vehicles" => "transport",
     "routes" => "transport",
     "student_route_mappings" => "transport",

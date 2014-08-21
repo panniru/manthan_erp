@@ -6,3 +6,4 @@ class UserMailer < ActionMailer::Base
     mail(to: mails , subject: @subject )
   end
 end
+

@@ -23,20 +23,20 @@
               .col-sm-4
                 = f.label "YearofManufacture" 
               .col-sm-3
-                = f.text_field "year_of_manufacture", :class => 'date-picker-year'
+                = f.text_field "year_of_manufacture", :class => 'date-picker-year',:class => 'form-control'
                 %br
             .row
               .col-sm-4
                 = f.label "Purchase"
               .col-sm-2
-                = f.select "purchase_option" , options_for_select([['Own'],['Lease']])
+                = f.select "purchase_option" , options_for_select([['Own'],['Lease']]) , :class => 'form-control'
                 %br
                 %br
             .row
               .col-sm-4
                 = f.label "Purchase Date"
               .col-sm-3
-                = f.text_field "purchase_option_date", :class => 'datepicker'
+                = f.text_field "purchase_option_date", :class => 'datepicker' , :class => 'form-control'
                 %br
                 %br
             .row
@@ -45,7 +45,8 @@
               .col-sm-3
                 = f.text_field "capacity", :class => 'form-control'
                 %br
-          .modal-footer
-            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-            = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+            .row
+              .col-sm-10
+              .col-sm-2
+                = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
           

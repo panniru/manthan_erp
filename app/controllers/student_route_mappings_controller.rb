@@ -19,7 +19,18 @@ class StudentRouteMappingsController < ApplicationController
   
   def show
   end
+
+  def save_route
+    p "=====================><"
+    p params
+    @new=StudentRouteMapping.new()
+    @new.route_id = params[:route_id]
+    @new.student_master_id = params[:student_master_id]
+    @new.save
+    render :json =>  true
+  end
   
+
   private
   
   def mapping_params

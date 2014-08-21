@@ -5,6 +5,10 @@
             var url = "/routes/get_location_view.json"
             return $http.get(url);
         };
+	var getBusServiceView = function(){
+            var url = "/routes/get_bus_no.json"
+            return $http.get(url);
+	};
 	var routeMail = function(subject,text){
 	    var url = "/routes/send_mail.json"
             return $http.post(url,{route_mail:{subject: subject, text: text }}); 
@@ -12,7 +16,8 @@
 	
         return {
             getLocationServiceView : getLocationServiceView,
-	    routeMail : routeMail
+	    routeMail : routeMail,
+	    getBusServiceView : getBusServiceView
         };
     }]);
 })(angular, myApp);
