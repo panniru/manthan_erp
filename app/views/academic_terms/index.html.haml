@@ -1,0 +1,14 @@
+.row{"ng-controller" => "AcademicTermsController"}
+  .row
+    .col-md-1
+    .col-md-10
+      %table{:class => "table"}
+        %tr
+          %th TERM         
+          %th FROM
+          %th TO         
+        %tr{"ng-repeat" => "mapping  in academic_terms"}                                             
+          %td {{mapping.term_name}}           
+          %td {{mapping.from_date}}
+          %td {{mapping.to_date}}         
+    .col-md-1

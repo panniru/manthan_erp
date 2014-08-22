@@ -556,4 +556,11 @@ ManthanErp::Application.routes.draw do
       end
     end
   resources :attendances
+
+  resources :academic_terms do   
+    collection do
+      get 'get_academic_terms_service'
+   end  
+  end  
+
 end
