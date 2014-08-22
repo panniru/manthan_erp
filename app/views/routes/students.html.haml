@@ -1,0 +1,16 @@
+.row{:ng_controller => "RouteController"}
+  .col-sm-6
+    %h4 Students Belongs to this Route
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Student id
+          %th student name
+         
+          
+      %tbody
+        %tr{"ng-repeat" => "row in students"}
+          %td {{row.id}}
+          %td {{row.name}}
+          
+= link_to "Show All", "#", :class => "btn btn-primary" , :ng_click => "allStudents(#{@route.id})"
