@@ -61,10 +61,10 @@ class ContextDetector
     "HRM" => "hrm_sub_menu",
     "holidaycalendars" => "canteen",
     "canteen_managements" =>"canteen",
-    "attendances" => "attendance",
     "mealtypes" => "canteen",
     "mealnames" => "canteen",
     "inventories" => "canteen"
+    "attendances" => "attendance_ctrl"
 
   }
   

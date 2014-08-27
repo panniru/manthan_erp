@@ -1,8 +1,3 @@
 .row{:ng_controller => "AttendanceController"}
-  %table.table.table-bordered.table-hover.table-striped
-    %thead
-      %th Student's Name
-      
-    %tbody
-      %tr{"ng-repeat" => "row in students"}
-        %td {{row.name}}
+  #attendance_calendar
+  = render "form"

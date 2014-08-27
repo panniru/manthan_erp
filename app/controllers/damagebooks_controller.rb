@@ -57,6 +57,8 @@ def damagebooks
    damagebooks = damagebooks.map do |block|
      {isbn: block.isbn, name: block.name, author: block.author,book_stage: params[:book_Stage],damage_type: params[:damage_Type],damage_description: params[:damage_Description] }
   end
+  p "11111111111111111111111"
+  p damagebooks
   damagebooks.each do |t|
   @temp=Damagebook.new()
   @temp.isbn=t[:isbn]
