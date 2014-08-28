@@ -1,0 +1,14 @@
+%table#tblData.table.table.striped.table-bordered.table-condensed.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Grade
+      %th Section
+     
+  %tbody
+    - @student_masters.each do |student|
+      %tr
+        %td= student.name
+        %td= student.grade_master.grade_name
+        %td= student.section_master.section_name
+        

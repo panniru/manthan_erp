@@ -5,7 +5,7 @@
         .input-group
           %span.input-group-addon
             = fa_icon "search lg"
-          %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+          %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}
           %br
     .col-sm-6
       %center
@@ -17,19 +17,19 @@
   %thead
     %tr
       %th Name
-      %th ISBN Number
-      %th Author
-      %th Year Of Publishing
-      %th Purchased Date
-      %th Type
+      -# %th ISBN Number
+      -# %th Author
+      -# %th Year Of Publishing
+      -# %th Purchased Date
+      -# %th Type
      
   %tbody
-    - @books.each do |book|
+    - @issuings.each do |issuing|
       %tr
-        %td= book.name
-        %td= book.isbn
-        %td= book.author
-        %td= book.year_of_publishing
-        %td= book.created_at
-        %td= book.book_type
+        %td= issuing[0]
+        -# %td= book.isbn
+        -# %td= book.author
+        -# %td= book.year_of_publishing
+        -# %td= book.created_at
+        -# %td= book.book_type
 %br

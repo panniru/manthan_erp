@@ -5,7 +5,7 @@
         .input-group
           %span.input-group-addon
             = fa_icon "search lg"
-          %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+          %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}
           %br
     .col-sm-6
       %center
@@ -18,14 +18,10 @@
   %thead
     %tr
       %th Book Name
-      %th Name
-      %th Grade
-      %th Section
+     
       
   %tbody
     - @issuings.each do |issuing|
       %tr
         %td= issuing[0]
-        -# %td= issuing.student.name
-        -# %td= issuing.student.grade_master.grade_name
-        -# %td= issuing.student_master.section_master.section_name
+        

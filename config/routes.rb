@@ -17,6 +17,7 @@ ManthanErp::Application.routes.draw do
   resources :lib_reports do
     collection do
       get 'Leastused'
+      get 'popup'
       end
     end
   resources :donation_of_books do
