@@ -563,4 +563,12 @@ ManthanErp::Application.routes.draw do
    end  
   end  
 
+   resources :term_results do   
+    collection do
+      get 'term_results_mail_to_teachers'
+      get 'get_term_results'
+      get 'get_student_details'
+      get 'get_subject_assessment_criteria'
+    end  
+  end 
 end

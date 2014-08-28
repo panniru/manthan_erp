@@ -7,8 +7,7 @@
           .col-md-9
             = label_tag(:grade, "SELECT GRADE-SECTION-SUBJECT")      
             %select{"ng-model" => "myGradeSection", "ng-options" => "mapping as mapping.teacher_grade_subject for mapping  in teacher_grade_subject_mappings | orderBy:'id'", "ng-change" => "getTeacherAssessmentMappings()", :class => "form-control", :href => "#teacher_show"}            
-              %option{style: "display:none", value: ""} select grade - section - subject
-            //{{myGradeSection}}         
+              %option{style: "display:none", value: ""} select grade - section - subject                 
         %br
         %br
         .row 

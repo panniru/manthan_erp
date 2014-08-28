@@ -10,6 +10,7 @@ class AssessmentResultsController < ApplicationController
        end
     end
   end
+  
   def get_teacher_assessments_service
     respond_to do |format|
       format.json do       

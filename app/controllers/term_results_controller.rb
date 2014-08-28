@@ -1,0 +1,74 @@
+class TermResultsController < ApplicationController
+
+  def index
+    if current_user.admin?
+      render "index"     
+    elsif  current_user.teacher?
+      @academic_terms = AcademicTerm.all     
+      render "teacher_index"
+    elsif  current_user.principal?  
+      @academic_terms = AcademicTerm.all     
+      render "principal_index"    
+    end
+  end
+
+  def term_results_mail_to_teachers
+    respond_to do |format|
+      format.json do          
+        faculty_emails = Array.new
+        faculty_names = Array.new
+        FacultyMaster.all.each do |faculty|         
+          faculty_emails << faculty.email if faculty.email.present?
+          faculty_names << faculty.faculty_name if faculty.email.present?
+        end       
+        emails_names = faculty_emails.zip(faculty_names)       
+        emails_names.each do |mail_name|         
+          TermResultsMailer.term_result_mail(params[:myMailSubject], params[:myMailMessage], [mail_name[0]], mail_name[1]).deliver
+        end
+           
+        render :json=>true
+      end
+    end
+  end
+
+  def get_term_results
+    respond_to do |format|
+      format.json do   
+        p params 
+        p "=============>"
+        term_results = TermResult.where('academic_term_id = '+"'#{params[:academic_Term_Id]}'")
+        p  term_results 
+        p "==================>"
+        term_results = term_results.each.map do |mapping|      
+          {id: mapping.id, academic_term_id: mapping.academic_term_id , grade_master_id: mapping.grade_master_id, section_master_id: mapping.section_master_id, student_master_id: mapping.student_master_id, student_name: mapping.student_master.name, grading_master_id: mapping.grading_master_id, grading_name: mapping.grading_master.grading_name, assessment_criteria_id: mapping.assessment_criteria_id , subject_criteria: mapping.assessment_criteria.subject_criteria}
+        end
+        render :json => term_results
+      end
+    end
+  end
+
+  def get_student_details
+    respond_to do |format|
+      format.json do   
+        students = StudentMaster.where('grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'")       
+        students = students.each.map do |mapping|
+          {id: mapping.id, student_name: mapping.name}
+        end
+        render :json => students
+      end
+    end
+  end
+
+  def get_subject_assessment_criteria
+    respond_to do |format|
+      format.json do   
+        assessment_criteria = AssessmentCriteria.where('grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'subject_master_id = '+"'#{params[:my_Subject]}'")       
+        assessment_criteria = assessment_criteria.each.map do |mapping|
+          {id: mapping.id, subject_master_id: mapping.subject_master_id, grade_master_id: mapping.grade_master_id, subject_criteria: mapping.subject_criteria}
+        end
+        render :json => assessment_criteria 
+      end
+    end
+  end
+  
+end
