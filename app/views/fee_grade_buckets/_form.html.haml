@@ -9,8 +9,7 @@
       %select{:class => "form-control" , :placeholder => "To" ,"ng-model" =>  "gradeBucket.grade_to", :ng_options => "grade.id as grade.grade_name for grade in gradeBucket.optionsTo", :grade_options_manager => "", :index => "{{$index}}", :grade_type => "to"}}
       = hidden_field_tag "bulk_fee_grade_buckets[][grade_to]", "{{gradeBucket.grade_to}}" 
   .row
-    .col-md-5.col-md-offset-4
-      %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"
+    .col-md-5.col-md-offset-4      %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"
       = link_to "Add more", "#", :class => "btn btn-primary", :ng_click => "addMoreBuckets()"
 
       

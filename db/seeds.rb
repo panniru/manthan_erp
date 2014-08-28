@@ -122,6 +122,9 @@ def seed_jobs
   Job.where(code: job_attributes[:code]).first_or_create!(job_attributes.delete_if { |k,v| k == :code })
   job_attributes = FactoryGirl.attributes_for(:route_mailing)
   Job.where(code: job_attributes[:code]).create(job_attributes.delete_if { |k,v| k == :code })
+  job_attributes = FactoryGirl.attributes_for(:special_route_mailing)
+  Job.where(code: job_attributes[:code]).create(job_attributes.delete_if { |k,v| k == :code })
+  
 end
 
 def seed_payment_types
@@ -260,8 +263,8 @@ end
 
 def seed_routes
   unless Route.first.present?
-    Route.create(:id => '18' , :route_no => '1', :busno_up => '2' , :no_of_children => '3', :gmaps => '' , :start_point => '25' , :end_point => '26' )
-    Route.create(:id => '19' , :route_no => '2', :busno_up => '23' , :no_of_children => '45', :gmaps => '' , :start_point => '30' , :end_point => '29' )
+    Route.create(:id => '18' , :route_no => '1', :busno_up => '13' , :no_of_children => '3', :gmaps => '' , :start_point => '25' , :end_point => '26' )
+    Route.create(:id => '19' , :route_no => '2', :busno_up => '13' , :no_of_children => '45', :gmaps => '' , :start_point => '30' , :end_point => '29' )
     Route.create(:id => '20' , :route_no => '3', :busno_up => '45' , :no_of_children => '34', :gmaps => '' , :start_point => '32' , :end_point => '35' )
     Route.create(:id => '21' , :route_no => '4', :busno_up => '56' , :no_of_children => '45', :gmaps => '' , :start_point => '36' , :end_point => '37' )
   

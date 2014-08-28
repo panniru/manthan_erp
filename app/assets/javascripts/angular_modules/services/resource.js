@@ -56,12 +56,19 @@
                                       );
 	var Route = $resource('/routes/:id.json', {id: '@id'}, 
 			      {
+				 
                                   "update": { method: "PUT"}
                               }
                              );
         var CanteenManagement = $resource('/canteen_managements/:id.json', {id: '@id'}, 
-                             {
+					  {
                                  "bulk": { url: "/canteen_managements/create_bulk", method:'POST'},
+                                 "update": { method: "PUT"}
+                             }
+                            );
+	var SpecialDayTransport = $resource('/special_day_transports/:id.json', {id: '@id'}, 
+					  {
+                                 "bulk": { url: "/special_say_transports/create_bulk", method:'POST'},
                                  "update": { method: "PUT"}
                              }
                             );
@@ -79,7 +86,8 @@
             Book : Book,
 	    Route:Route,
             RequestNewBook : RequestNewBook,
-            CanteenManagement: CanteenManagement
+            CanteenManagement: CanteenManagement,
+	    SpecialDayTransport:SpecialDayTransport
         };
     }]);
 })(angular, myApp);

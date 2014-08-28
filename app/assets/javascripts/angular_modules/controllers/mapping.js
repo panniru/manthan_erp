@@ -16,11 +16,10 @@
 		});
         }
 	
-	$scope.saveRoute = function(route, student_master_id){
-	    alert(student_master_id)
-	    mapService.saveRoute(route, student_master_id)
+	$scope.saveRoute = function(route,location, student_master_id){
+	    alert(location)
+	    mapService.saveRoute(route,location,student_master_id)
 		.then(function(result) {
-		    alert()
 		});
 	};
 	

@@ -1,0 +1,18 @@
+.row
+  .col-sm-6
+  .col-sm-2
+    = link_to "Add New",  new_special_day_transport_path, :class => "btn btn-primary"
+    %br
+.row
+  .col-sm-6
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr
+          %th Occations 
+          %th Date
+                     
+      %tbody
+        - @special_day_transports.each do |occation|
+          %tr
+            %td= link_to "#{occation.occation}" , occations_special_day_transports_path
+            %td= occation.date

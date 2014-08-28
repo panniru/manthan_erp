@@ -18,6 +18,12 @@ FactoryGirl.define do
     description "Route Mailing"
     job_type "mailing"
   end
+
+  factory :special_route_mailing, :class => Job do |job|
+    code "special_route_mailing"
+    description "Special Route Mailing"
+    job_type "mailing"
+  end
   
 
   

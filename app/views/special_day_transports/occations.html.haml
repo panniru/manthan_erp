@@ -1,0 +1,22 @@
+.col-sm-11
+  %table#tblData.target.table.table-striped.table-condensed.table-bordered
+    %thead
+      %tr
+        %th Location
+        %th Route No
+        %th Bus No
+        %th Time
+        %th Route No
+        %th Bus No
+        %th Time
+    %tbody
+      -  SpecialDayTransport.all.each do |route|
+        %tr
+          %td= route.location_master_id
+          %td= route.new_up_route
+          %td= route.new_busno_up
+          %td= route.time_up
+          %td= route.new_down_route
+          %td= route.new_busno_down
+          %td= route.time_down
+          

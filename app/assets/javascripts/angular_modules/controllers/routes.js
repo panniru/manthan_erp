@@ -11,10 +11,10 @@
 	var fetch_bus = function(){
 	    routesService.getBusServiceView()
 		.then(function(result) {
-                    $scope.bus =result.data
+		    $scope.bus =result.data
 		});
 	}
-	        
+	
 	$scope.defineNew = function(){
 	    fetch_locations();
 	    fetch_bus();
@@ -24,7 +24,21 @@
             };
             $('#createModal').modal('show')
         }
-
+	
+	$scope.allStudents = function(route){
+	    alert(route)
+	    routesService.getStudentView(route)
+		.then(function(response){
+		    $scope.students = response.data
+		});
+        }
+	$scope.allLocations = function(location){
+	    alert(location)
+	    routesService.getLocationView(location)
+		.then(function(response){
+		    $scope.students = response.data
+		});
+        }
 	$scope.sendMail = function(){
 	    routesService.routeMail($scope.subject, $scope.text)
 		.then(function(response){
@@ -35,8 +49,8 @@
 	}
 	
         $scope.submitRoutes = function(){
-	    $scope.newRoute.$save()
-	        .then(function(responce){
+	    $scope.newRoute.$save($scope.busno_up)
+	   	.then(function(responce){
 		    $scope.routes = resourceService.Route.query()
                     $('#createModal').modal('hide')
 	    	})

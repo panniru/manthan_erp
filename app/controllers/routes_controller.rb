@@ -35,10 +35,7 @@
      end
    end  
    
-   def form_authenticity_param
-     params[request_forgery_protection_token]
-   end
-   
+      
    def send_mail
      if current_user.admin?
        respond_to do |format|
@@ -78,7 +75,7 @@
      @location = Location.all
      @location = []
      @route.locations.each do |location|
-       @location.push({:location => location.location_master.location_name})
+       @location.push({location: location.location_master.location_name})
      end
      gon.start_point_latitude = @route.start_location.location_master.latitude.to_s 
      gon.start_point_longitude =@route.start_location.location_master.longitude.to_s
@@ -99,6 +96,35 @@
      end
    end
    
+   def all_students
+     respond_to do |format|
+       format.json do 
+         map = StudentRouteMapping.show_all_students(params[:route]).map {|student| student.student_master_id}
+         students = StudentMaster.where(:id => map ).each.map do |mapping|
+           {id: mapping.id,  name: mapping.name}
+         end     
+         render :json => students
+       end
+     end
+   end
+   
+   def all_locations
+     respond_to do |format|
+       format.json do 
+         map = StudentRouteMapping.show_all_locations(params[:location]).map {|student| student.student_master_id}
+         students = StudentMaster.where(:id => map ).each.map do |mapping|
+           {id: mapping.id,  name: mapping.name}
+         end     
+         render :json => students
+       end
+     end
+   end
+   
+   def students
+     @route = Route.find(params[:id])
+   end
+
+     
    def destroy
      if @route.destroy
        flash[:success] = I18n.t :success, :scope => [:route ,:destroy]
@@ -108,9 +134,11 @@
      redirect_to routes_path
    end
    
-   def create
+    def create
      respond_to do |format|
-      @route= Route.new(route_params)
+       p "============================"
+       p route_params
+       @route= Route.new(route_params)
        status = @route.save_route(params[:locations])
        
        format.json do
@@ -152,7 +180,8 @@
    
    def build_route_from_bulk
      params.require(:bulk_location).select{|locations| location["location_master_id"].present? and route["sequence_no"].present? }.map do |route|
-       Location.new(location)
+       Location.new(location.permit(:location_master_id, :sequence_no))
+       route_params = params.require(:route).permit( :route_no , :busno_up )
      end
    end
  end

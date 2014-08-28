@@ -11,7 +11,7 @@ class Transport
     sub_menu << routes
     sub_menu << mappings
     sub_menu << locations
-      
+    sub_menu << specialday
   end
 
 
@@ -33,6 +33,9 @@ class Transport
   end
   def locations
     MenuItem.new(:label => "Locations", :klass => "", :icon => "map-marker ", :href => "/location_masters")
+  end
+  def specialday
+    MenuItem.new(:label => "Special Day" , :klass => "", :icon => "magic" , :href => "/special_day_transports")
   end
 end
 
