@@ -22,6 +22,7 @@
             %option{style: "display:none", value: ""} Select Grade
           
           = f.hidden_field :grade, :value => "{{myAdmission.grade_name}}"
+          = f.hidden_field :grade_master_id, :value => "{{myAdmission.id}}"
         
         .col-sm-3
           = f.label "Date of Birth: ", :class => 'control-label'
@@ -207,7 +208,7 @@
         .col-sm-3
           = f.text_field :pp, :class => 'form-control'
       %center
-               
+        
         = f.hidden_field :status, :value => 'Enquiry_Created'
         = f.submit "Create", :class => 'btn btn-primary'
         = f.submit "Reset", :type => "reset" , :class => 'btn btn-primary'

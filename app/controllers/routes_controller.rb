@@ -60,8 +60,15 @@
    end
      
    def get_location_view
-   var = LocationMaster.all.map do |var|
-     {location_name: var.location_name,id: var.id}
+     var = LocationMaster.all.map do |var|
+       {location_name: var.location_name,id: var.id}
+     end
+     render :json => var
+   end
+   
+   def get_bus_no
+     var = NewVehicle.all.map do |var|
+       {id: var.id}
      end
      render :json => var
    end
@@ -103,7 +110,7 @@
    
    def create
      respond_to do |format|
-       @route= Route.new(route_params)
+      @route= Route.new(route_params)
        status = @route.save_route(params[:locations])
        
        format.json do
@@ -138,11 +145,9 @@
    end
    
    private
-   
- 
-   
+      
    def route_params
-     route_params = params.require(:route).permit( :route_no , :busno_up , :no_of_children )
+     route_params = params.require(:route).permit( :route_no , :busno_up )
    end
    
    def build_route_from_bulk

@@ -24,7 +24,7 @@ class CreateAdmissions < ActiveRecord::Migration
       t.string :middle_name
       t.string :name
       t.string :klass
-      t.string :dob
+      t.date :dob
       t.string :gender
       t.string :nationality
       t.string :language

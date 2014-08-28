@@ -1,9 +1,11 @@
 .col-md-7{"ng-controller" => "RouteController"}
-  %h3
-    Routes
-  %h5
-    = render  "user_mailer/welcome_email"
-    = link_to "New Route", "#", :class => "btn btn-primary",:ng_click => "defineNew()"
+  .col-sm-6
+    %h3
+      Routes
+  .col-sm-6
+    %h5
+      = render  "user_mailer/welcome_email"
+      = link_to "New Route", "#", :class => "btn btn-primary",:ng_click => "defineNew()"
     
   %table.table.table-bordered
     %thead

@@ -2,17 +2,16 @@
   .row
     .col-sm-2
       = label_tag "Route no", nil, :class => "form-label"
-    .col-sm-2
+    .col-sm-3
       = text_field_tag "route_no",nil, :class => "form-control" ,:ng_model => "newRoute.route_no"
     .col-sm-2
       = label_tag "Busno", nil, :class => "form-label"
-    .col-sm-2
-      = text_field_tag "busno_up",nil, :class => "form-control" ,:ng_model => "newRoute.busno_up"
-    .col-sm-2
-      = label_tag "Children", nil, :class => "form-label"
-    .col-sm-2
-      = text_field_tag "no_of_children",nil, :class => "form-control" ,:ng_model => "newRoute.no_of_children"
-      %br
+    .col-sm-3
+      %select{"ng-model" => "busno_up.id", "ng-options" => "var.id as var.id  for var in bus",:class => "form-control",:required => "required", }
+        %option{style: "display:none", value: ""} Bus No
+        = hidden_field_tag :busno_up, :value => " "
+    %br
+    %br
       
   .form-group{"ng-repeat" => "location in newRoute.locations"}
     .row

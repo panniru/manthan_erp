@@ -1,4 +1,5 @@
 class Admission < ActiveRecord::Base
+  belongs_to :parent_master
   belongs_to :student_master
   belongs_to :grade_master
   belongs_to :teacher_leader,:foreign_key => 'teacher_leader_id'

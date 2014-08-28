@@ -1,10 +1,10 @@
 class StudentMaster < ActiveRecord::Base
-  validates :name, :presence => true
-  validates :dob, :presence => true
-  validates :parent_id, :presence => true
-  validates :grade_master_id, :presence => true
-  validates :section_master_id, :presence => true
-  validates :joining_date, :presence => true
+  #validates :name, :presence => true
+  #validates :dob, :presence => true
+  #validates :parent_id, :presence => true
+  #validates :grade_master_id, :presence => true
+  #validates :section_master_id, :presence => true
+  #validates :joining_date, :presence => true
 
   belongs_to :parent
   belongs_to :student_route_mapping

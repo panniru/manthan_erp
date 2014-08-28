@@ -11,9 +11,12 @@
             var url = "/issuings/sectionserviceview.json"
             return $http.get(url);
         }; 
+       
+        
         return {
             getGradeServiceView : getGradeServiceView,
             getSectionServiceView : getSectionServiceView
+            
         };
         
     }]);

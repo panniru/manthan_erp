@@ -46,16 +46,19 @@ class ContextDetector
     "block_books" => "library",
     "request_new_books" => "library",
     "donation_of_books" => "library",
+    "lib_reports" => "library",
     "default_masters" => "default_master_sub_menu",
     "student_masters" => "default_master_sub_menu",
     "parents" => "default_master_sub_menu",
+    "location_masters" => "transport",
     "new_vehicles" => "transport",
     "routes" => "transport",
     "student_route_mappings" => "transport",
     "default_masters" => "default_master_sub_menu",
     "HRM" => "hrm_sub_menu",
     "holidaycalendars" => "canteen",
-    "canteen_managements" =>"canteen"
+    "canteen_managements" =>"canteen",
+    "attendances" => "attendance"
   }
   
   def self.get_context(args)

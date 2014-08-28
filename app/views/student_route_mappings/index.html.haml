@@ -1,13 +1,17 @@
 %table.table.table-bordered
   %thead
     %tr
+      %th student id
       %th student name
       %th
-        
+      %br
+      
   %tbody
-    %tr
-      - StudentMaster.has_bus_facility.has_no_route.all.each do |student|   
+    - StudentMaster.has_bus_facility.has_no_route.all.each do |student| 
+      %tr
+        %td= student.id
         %td= student.name 
         %td 
           = render "modal"
+          
         
