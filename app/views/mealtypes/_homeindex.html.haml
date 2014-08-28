@@ -1,0 +1,24 @@
+.row
+  .col-sm-9
+    %h4 Home
+    .pull-left
+      .col-sm-10                 
+        %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
+%br
+.row
+  %table#tblData.target.table.table-striped.table-condensed.table-bordered
+    %thead
+      %tr
+        %th Meal Type
+        %th time
+        
+         
+    %tbody
+      - @mealtypes.each do |mealtype|
+        %tr
+          %td= mealtype.meal_type
+          %td= mealtype.time
+          
+          
+
+      

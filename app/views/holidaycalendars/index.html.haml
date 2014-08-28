@@ -11,7 +11,7 @@
       %tbody
         - Holidaycalendar.all.each do |holidaycalendar|
           %tr
-            %td= holidaycalendar.holiday_date.strftime("%B,%d,%Y,%a")
+            %td= holidaycalendar.holiday_date
             %td= holidaycalendar.description
             %td
               = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_holidaycalendar_path(holidaycalendar), :class => "btn btn-warning btn-sm", :title => "Edit"

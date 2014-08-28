@@ -10,7 +10,8 @@
               .col-sm-3
                 = f.label "Date", :class => 'col-sm-3 control-label'
               .col-sm-5
-                = f.text_field :holiday_date ,:class => 'datepicker form-control'
+                = f.text_field :holiday_date ,:class => 'datepicker form-control', :id => "holiday_date",:readonly => true;
+                
                 %br
             .row
               .col-sm-3

@@ -59,6 +59,9 @@ class ContextDetector
     "holidaycalendars" => "canteen",
     "canteen_managements" =>"canteen",
     "attendances" => "attendance"
+    "mealtypes" => "canteen",
+    "mealnames" => "canteen"
+
   }
   
   def self.get_context(args)

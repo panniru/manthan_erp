@@ -59,12 +59,19 @@
                                   "update": { method: "PUT"}
                               }
                              );
-        var CanteenManagement = $resource('/canteen_managements/:id.json', {id: '@id'}, 
+        var Mealtype = $resource('/mealtypes/:id.json', {id: '@id'}, 
                              {
-                                 "bulk": { url: "/canteen_managements/create_bulk", method:'POST'},
+                                 "bulk": { url: "/mealtypes/create_bulk", method:'POST'},
                                  "update": { method: "PUT"}
                              }
                             );
+        var Mealname = $resource('/mealnames/:id.json', {id: '@id'}, 
+                                 {
+                                     "bulk": { url: "/mealnames/create_bulk", method:'POST'},
+                                     "update": { method: "PUT"}
+                                 }
+                                );
+        
         
        
         return {
@@ -78,8 +85,9 @@
             SectionMaster : SectionMaster,
             Book : Book,
 	    Route:Route,
-            RequestNewBook : RequestNewBook,
-            CanteenManagement: CanteenManagement
+            RequestNewBook : RequestNewBook,           
+            Mealtype: Mealtype,
+            Mealname: Mealname
         };
     }]);
 })(angular, myApp);
