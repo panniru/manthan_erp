@@ -1,4 +1,5 @@
 $(document ).ready(function() {
+    
     $('body').on('focus',".datepicker", function(){
         $(this).datepicker({
             changeMonth: true,

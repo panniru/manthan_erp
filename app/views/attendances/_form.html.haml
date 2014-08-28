@@ -2,29 +2,36 @@
   #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
     .modal-dialog
       .modal-content
-        .modal-header
+        .modal-body
           .pull-left
             %h4#myModalLabel.modal-title Attendance
+            
           .pull-right
             = text_field_tag :attendance_date, "", :class => "form-control", :id => "selectdate", :readonly => true, "ng-model"=>"myDate";
-          -# - myDate = "2014-08-21"
-          
-        .modal-body
-          %table.table.table-bordered
+          %br
+          %br
+          %table.table.table-bordered.table-condensed.table-striped
             %thead
               %tr
                 %th Student's Name
-                %th Attendance
+                %th 
+                  %label{for: "P", :id => "P"} P
+                %th
+                  %label{for: "A", :id => "A"} A
+                %th
+                  %label{for: "L", :id => "L"} L
                 
             %tbody
               %tr{"ng-repeat" => "student in students"}
                 %td
                   {{student.name}}
                 %td
-                  %input{:ng_model =>"student['attendance']", type: "radio", value: "P"} P
-                  %input{:ng_model =>"student['attendance']", type: "radio", value: "A"} A
-                  %input{:ng_model =>"student['attendance']", type: "radio", value: "L"} L
-                  {{student['attendance']}}
+                  %input{:ng_model =>"student['attendance']", type: "radio", value: "P"} 
+                %td
+                  %input{:ng_model =>"student['attendance']", type: "radio", value: "A"} 
+                %td
+                  %input{:ng_model =>"student['attendance']", type: "radio", value: "L"} 
+                  
                   = hidden_field_tag :attendance, :value => "{{student['attendance']}}"
         .modal-footer
           %center

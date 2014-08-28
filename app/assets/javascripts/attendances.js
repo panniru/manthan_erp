@@ -1,3 +1,8 @@
+function myFunction(date){
+    
+    angular.element($('.myFunction')).scope().todayAttendence(date)
+}
+
 $(document).ready(function() { 
    
     var monthNames = [ "January", "February", "March", "April", "May", "June",
@@ -15,6 +20,7 @@ $(document).ready(function() {
            // var checkUrl = "holidaycalendars/holiday_exists.json?date="+dateFormat    
 
             angular.element($('#myModal')).scope().dailyAttendence(date)
+
         }            
     });
     });

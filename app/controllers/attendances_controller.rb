@@ -1,15 +1,29 @@
 class AttendancesController < ApplicationController
-  def save_student_attendance
-    params[:attendence_details].each do |t|
-      @temp = Attendance.new(add_attendance_params(t))
-      @temp.student_master_id = t[:student_master_id]
-      @temp.attendance = t[:attendance]
-      @temp.attendance_date = t[:attendance_date]
-      @temp.save
-    end
-    redirect_to attendances_path
-  end
-  
+   def save_student_attendance
+     params[:attendence_details].each do |t|
+       @temp = Attendance.new(add_attendance_params(t))
+       @temp.student_master_id = t[:student_master_id]
+       @temp.attendance = t[:attendance]
+       @temp.attendance_date = t[:attendance_date]
+       @temp.save
+     end
+     render :json => true
+   end
+  # def save_today_student_attendance
+    
+  #    params[:attendence_details].each do |t|
+  #      @temp = Attendance.new(add_attendance_params(t))
+  #      @temp.student_master_id = t[:student_master_id]
+  #      @temp.attendance = t[:attendance]
+  #      @temp.attendance_date = t[:attendance_date]
+  #      @temp.save
+  #    end
+  #    redirect_to attendances_path
+  #  end
+
+
+
+
   def holidaycalendardata
     respond_to do |format|
       format.json do
@@ -114,7 +128,7 @@ class AttendancesController < ApplicationController
     params.require(:attendance).permit(:name,:attendance,:student_attendance)
   end
   def add_attendance_params(params)
-    params.permit(:attendance,:attendance_date)
+    params.permit(:attendance , :attendance_date)
   end
 
 end

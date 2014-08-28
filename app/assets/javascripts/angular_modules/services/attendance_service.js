@@ -9,9 +9,16 @@
              var url = "/attendances/save_student_attendance.json"
             return $http.post(url,{attendence_details: save_attendence_details});
          };
+        var saveTodayStudentAttendance = function(save_today_attendence_details){
+            var url = "/attendances/save_today_student_attendance.json"
+            return $http.post(url,{attendence_details: save_today_attendence_details});
+        };
+
+
         return {
             getAttendanceServiceView : getAttendanceServiceView,
-            saveStudentAttendance : saveStudentAttendance
+            saveStudentAttendance : saveStudentAttendance,
+            saveTodayStudentAttendance : saveTodayStudentAttendance
         };
     }]);
 })(angular, myApp);

@@ -1,10 +1,10 @@
 (function(angular, app) {
     "use strict";
     app.controller("AttendanceController",["$scope", "attendanceService", function($scope, attendanceService) {
-
         
         $scope.dailyAttendence = function(d){
             $scope.myDate = (d.getFullYear() + "-" + (d.getMonth()+1) +"-"+d.getDate()); 
+
             $('#myModal').modal('show');                
         }
 
