@@ -71,7 +71,15 @@
                                      "update": { method: "PUT"}
                                  }
                                 );
-        
+
+
+
+        var Inventory = $resource('/inventories/:id.json', {id: '@id'}, 
+                                 {
+                                     "bulk": { url: "/inventories/create_bulk", method:'POST'},
+                                     "update": { method: "PUT"}
+                                 }
+                                );
         
        
         return {
@@ -87,7 +95,8 @@
 	    Route:Route,
             RequestNewBook : RequestNewBook,           
             Mealtype: Mealtype,
-            Mealname: Mealname
+            Mealname: Mealname,
+            Inventory: Inventory
         };
     }]);
 })(angular, myApp);

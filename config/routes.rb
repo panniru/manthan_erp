@@ -539,6 +539,7 @@ ManthanErp::Application.routes.draw do
       post "create_bulk"
     end
   end
+    resources :inventories
 
   resources :canteenmanagers do
     collection do
