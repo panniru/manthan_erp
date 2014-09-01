@@ -9,7 +9,6 @@ ManthanErp::Application.routes.draw do
   get "new_vehicles/edit"
   get "new_vehicles/new"
 
-
   get "teaching_plans/new"
   get "teaching_plans/edit"
   get "teaching_plans/index"
@@ -560,8 +559,10 @@ ManthanErp::Application.routes.draw do
   resources :academic_terms do   
     collection do
       get 'get_academic_terms_service'
-   end  
-  end  
+      post 'save_academic_terms'
+      post 'delete_academic_terms'
+    end  
+  end    
 
    resources :term_results do   
     collection do
@@ -570,5 +571,6 @@ ManthanErp::Application.routes.draw do
       get 'get_student_details'
       get 'get_subject_assessment_criteria'
     end  
-  end 
+  end
+  
 end

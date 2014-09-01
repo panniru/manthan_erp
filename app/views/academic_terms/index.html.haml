@@ -12,3 +12,48 @@
           %td {{mapping.from_date}}
           %td {{mapping.to_date}}         
     .col-md-1
+  .col-md-12
+    .col-md-1
+    .col-md-4
+      %h3 Academic Terms
+    .col-md-2
+      %button.btn.btn-primary{"data-target" => "#myAcademicTermsModal","data-toggle" => "modal","ng-click"=>"editAcademicTerms({})"}= "New Term"
+    .col-md-7
+  .row
+    .col-md-1
+    .col-md-10
+      %table.table.table-bordered.table-striped.table-hover
+        %thead
+          %th TERM         
+          %th FROM
+          %th TO   
+          %th EDIT
+          %th DELETE
+        %tbody
+          %tr{"ng-repeat" => "mapping  in academic_terms | orderBy:'term_name'"}                                        
+            %td {{mapping.term_name}}           
+            %td {{mapping.from_date}}
+            %td {{mapping.to_date}}
+            %td 
+              %button.btn.btn-primary{"data-target" => "#myAcademicTermsModal","data-toggle" => "modal","ng-click"=>"editAcademicTerms(mapping)"}= "EDIT"
+            %td
+              = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteAcademicTerms(mapping)"
+    .col-md-1
+  .row   
+    #myAcademicTermsModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+            %h4#myModalLabel.modal-title EDIT ACADEMIC TERM            
+            .modal-body
+              .row{"ng-repeat" => "save_academic_term in save_academic_terms"}
+                .col-sm-3
+                  = text_field_tag "",nil, :class => "form-control",:ng_model => "save_academic_term.term_name" ,:placeholder => ""       
+                .col-sm-3
+                  = text_field_tag "",nil, :class => "form-control",:ng_model => "save_academic_term.from_date" ,:placeholder => ""
+                .col-sm-3
+                  = text_field_tag "",nil, :class => "form-control",:ng_model => "save_academic_term.to_date" ,:placeholder => ""
+            .modal-footer
+              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+              %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveAcademicTerms()", :value => "SAVE"}
