@@ -570,6 +570,7 @@ ManthanErp::Application.routes.draw do
       get 'get_term_results'
       get 'get_student_details'
       get 'get_subject_assessment_criteria'
+      post 'save_term_results'
     end  
   end
   

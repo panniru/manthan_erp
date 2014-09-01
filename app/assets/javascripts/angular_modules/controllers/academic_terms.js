@@ -14,7 +14,8 @@
                 });
         };
 
-        $scope.editAcademicTerms = function(mapping){            
+        $scope.editAcademicTerms = function(mapping){ 
+            $('#myAcademicTermsModal').modal('show');         
             $scope.save_academic_terms = []; 
 
             $scope.save_academic_terms.push({

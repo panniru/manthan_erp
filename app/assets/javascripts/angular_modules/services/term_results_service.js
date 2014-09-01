@@ -17,10 +17,16 @@
             return $http.get(url,{params : {my_Grade: myGrade, my_Subject: mySubject}});
         };  
         
+        var saveTermResultsService = function(term_results){
+            var url = "/term_results/save_term_results.json"
+            return $http.post(url,{term_results: term_results});            
+        };
+        
         return {
             getTermResultsService : getTermResultsService,
             getStudentDetailsService : getStudentDetailsService,
             getSubjectAssessmentCriteriaService : getSubjectAssessmentCriteriaService,
+            saveTermResultsService : saveTermResultsService,
         }
     }]);
 })(angular, myApp);

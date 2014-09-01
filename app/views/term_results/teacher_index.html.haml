@@ -2,7 +2,7 @@
   .row
     .col-md-1
     .col-md-10
-      %table{:class => "table"}
+      %table.table.table-bordered.table-striped.table-hover
         %tr
           %th TERM         
           %th FROM DATE 
@@ -13,37 +13,14 @@
                 %a{href: "#", "ng-click" =>"selectTermResults(#{academic_term.id},'#{academic_term.term_name}')"}= academic_term.term_name     
               %td= academic_term.from_date                     
               %td= academic_term.to_date 
-    .col-md-1
-  .row
-    .modal.fade{ :id => "mailSubjectModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
-      .modal-dialog
-        .modal-content
-          .modal-header
-            %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
-            %h4.modal-title{ :id => "myModalLabel"} MAIL TO ALL FACULTY MEMBERS
-          .modal-body
-            .row
-              .col-md-10
-                .col-md-2
-                  = label_tag "SUBJECT", nil, :class => "form-label"
-                .col-md-10
-                  = text_field_tag "",nil, :class => "form-control", :ng_model => "myMailSubject", :disabled => "disabled"             
-              .col-md-2
-            .row
-              .col-md-10
-                .col-md-2
-                  = label_tag "MESSAGE", nil, :class => "form-label"
-                .col-md-10
-                  = text_area_tag "",nil, :class => "form-control", :ng_model => "myMailMessage"
-              .col-md-2{"ng-controller" => "MailingController"}
-                %button{:type => "button", :class=> "btn btn-primary", :ng_click => "termResultsMail(myMailSubject,myMailMessage)"}=  "SEND"
+    .col-md-1  
   .row
     .modal.fade.bs-example-modal-lg{ :id => "termResultsModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myLargeModalLabe", "aria-hidden" => "true"}
       .modal-dialog.modal-lg
         .modal-content
           .modal-header
             %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
-            %h4.modal-title{ :id => "myModalLabel"} ENTER TERM RESULTS
+            %h4.modal-title{ :id => "myModalLabel"} TERM RESULTS
           .modal-body 
             .row
               .col-md-1
@@ -51,7 +28,7 @@
                 = label_tag(:grade, "SELECT GRADE-SECTION-SUBJECT")      
                 %select{"ng-model" => "myGradeSection", "ng-options" => "mapping as mapping.teacher_grade_subject for mapping  in teacher_grade_subject_mappings | orderBy:'id'", "ng-change" => "getTermResults()", :class => "form-control", :href => "#teacher_show"}   
                   %option{style: "display:none", value: ""} select grade - section - subject  
-                //{{myGradeSection}} 
+                //{{myGradeSection}}           
             %br
             %br   
             .row
@@ -60,35 +37,41 @@
                   %th STUDENT NAME                 
                   %th{"ng-repeat" => "ac in assessment_criteria"}                    
                     {{ac.subject_criteria}} 
-                %tbody
-                  %tr{"ng-repeat" => "term_result  in term_results"}
-                    %td {{term_result.student_name}} 
-                    %td{"ng-repeat" => "ac in assessment_criteria"} 
-                      %p{"ng-repeat" => "result  in term_results | filter : ({assessment_criteria_id: ac.id} && {student_master_id: term_result.student_master_id})"}
-                      
-                       
-            %br
-            %br   
-            .row
-              %table.table.table-bordered.table-striped.table-hover
-                %thead
-                  %th STUDENT NAME                 
-                  %th{"ng-repeat" => "ac in assessment_criteria"}                    
-                    {{ac.subject_criteria}} 
+                  %th EDIT
                 %tbody
                   %tr{"ng-repeat" => "student in students"}
                     %td {{student.student_name}}  
                     %td{"ng-repeat" => "ac in assessment_criteria", "ng-show" => "true"}                       
                       %p{"ng-repeat" => "result  in term_results | filter : {assessment_criteria_id: ac.id} | filter: {student_master_id: student.id}"}   
-                        {{result.grading_name}}                        
+                        
+                        {{result.grading_name}}   
+                    %td
+                      %a{href: "#", :class => "btn btn-warning btn-sm",:title => "EDIT","ng-click" => "editTermResults(student)"}       
+                        %span{class: "glyphicon glyphicon-pencil"}
                     %td{"ng-repeat" => "ac in assessment_criteria", "ng-show" => "false"}   
-                      %select{"ng-model" => "myGrading", "ng-options" => "grading.id as grading.grading_name for grading in gradings", :class => "form-control"}  
-                  
-            %br
-            .row
-              .btn.pull-right
-                .col-md-2
-                  %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveTermResults()"}=  "SAVE"
+                      %select{"ng-model" => "myGrading", "ng-options" => "grading.id as grading.grading_name for grading in gradings", :class => "form-control"} 
+  .row
+    #myEditTermResultsModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+            %h4#myModalLabel.modal-title EDIT STUDENT TERM RESULT           
+            .modal-body             
+              .row
+                %table.table.table-bordered.table-striped.table-hover
+                  %thead
+                    %th STUDENT NAME                 
+                    %th{"ng-repeat" => "ac in assessment_criteria"}                       
+                      {{ac.subject_criteria}} 
+                  %tbody
+                    %tr{"ng-repeat" => "edit_term_result in edit_term_results"}
+                      %td {{edit_term_result.student_name}} 
+                      %td{"ng-repeat" => "ac in assessment_criteria"} 
+                        %select{"ng-model" => "myGrading", "ng-options" => "grading.id as grading.grading_name for grading in gradings", :class => "form-control"}                         
+            .modal-footer
+              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+              %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveTermResults()", :value => "SAVE"}
             
 
 

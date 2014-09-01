@@ -8,15 +8,11 @@
         
         gradingService.getGradingServiceView()
             .then(function(result) {                
-                $scope.gradings = result.data;   
-                //alert(JSON.stringify($scope.gradings));     
-                //$scope.initialize();
+                $scope.gradings = result.data; 
             });
 
         $scope.selectTermResults = function(term_id,term_name){  
             $scope.academic_Term_Id = term_id;
-            //alert(JSON.stringify(term_id+" "+term_name));
-            //$scope.myMailSubject = "Regarding"+"  "+term_name+"  "+"Results"; 
 
             assessmentsTeacherService.getTeacherGradeMappings()
                 .then(function(result) {               
@@ -38,32 +34,58 @@
             
         };
 
-        $scope.getTermResults = function(){   
-            //alert(JSON.stringify($scope.myGradeSection));           
+        $scope.getTermResults = function(){              
             termResultsService.getStudentDetailsService($scope.myGradeSection.grade_master_id, $scope.myGradeSection.section_master_id)
                 .then(function(result){                   
-                    $scope.students = result.data; 
-                    //alert(JSON.stringify($scope.students));
+                    $scope.students = result.data;                    
                 });
 
             termResultsService.getSubjectAssessmentCriteriaService($scope.myGradeSection.grade_master_id, $scope.myGradeSection.subject_master_id)
                 .then(function(result){                   
-                    $scope.assessment_criteria = result.data; 
-                    alert(JSON.stringify($scope.assessment_criteria));
+                    $scope.assessment_criteria = result.data;                   
                 });
 
             termResultsService.getTermResultsService($scope.academic_Term_Id, $scope.myGradeSection.grade_master_id, $scope.myGradeSection.section_master_id, $scope.myGradeSection.subject_master_id)
                 .then(function(result) {               
-                    $scope.term_results = result.data; 
-                    alert(JSON.stringify($scope.term_results));                   
-                });
-            
+                    $scope.term_results = result.data;                                 
+                });            
         };
 
-        $scope.saveTermResults = function(){   
-            alert();
+        $scope.editTermResults = function(student,grading_name){           
+            $scope.edit_term_results = [];  
+            $scope.assessment_criteria_gardings = [];
+           
+            $scope.assessment_criteria_gardings.push({
+                assessment_criteria_id: "",
+                grading_master_id: "",    
+            });
+
+            $scope.edit_term_results.push({
+                id: "",
+                academic_term_id: $scope.academic_Term_Id,
+                grade_master_id: $scope.myGradeSection.grade_master_id,
+                section_master_id: $scope.myGradeSection.section_master_id,
+                subject_master_id: $scope.myGradeSection.subject_master_id,
+                student_master_id: student.id,
+                student_name: student.student_name,
+                assessment_criteria_gardings: $scope.assessment_criteria_gardings,                             
+            });           
+            $('#myEditTermResultsModal').modal('show');      
         };
         
+        $scope.saveTermResults = function(){   
+            alert();
+            termResultsService.saveTermResultsService($scope.edit_term_results)
+                .then(function(result) {               
+                           
+                });
+            $scope.showTermResults();            
+        };   
+
+        $scope.showTermResults = function(){  
+            $('#myEditTermResultsModal').modal('hide');  
+            $scope.getTermResults();
+        };        
 
     }]);
 })(angular, myApp);

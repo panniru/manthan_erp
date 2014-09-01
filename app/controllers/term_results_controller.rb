@@ -70,5 +70,36 @@ class TermResultsController < ApplicationController
       end
     end
   end
+
+  def save_term_results
+    respond_to do |format|
+      format.json do  
+        p params
+        p "================>"
+        term_results = params[:term_results]
+        term_results.each do |t|         
+          if t["id"].present?           
+            @term_result = TermResult.find(t["id"]) 
+            @term_result.academic_term_id = t['academic_term_id'] 
+            @term_result.grade_master_id = t['grade_master_id'] 
+            @term_result.section_master_id = t['section_master_id']   
+            @term_result.subject_master_id = t['subject_master_id']
+            @term_result.assessment_criteria_id = t['assessment_criteria_id']
+            @term_result.grading_master_id = t['grading_master_id']
+            @term_result.save
+          else
+            @term_result = TermResult.new(add_term_results_params(t))
+            @term_result.save
+          end
+        end         
+        render :json => true
+      end
+    end
+  end
+  
+  def add_term_results_params(params)   
+    params.permit(:academic_term_id, :grade_master_id, :section_master_id, :subject_master_id, :assessment_criteria_id, :grading_master_id)
+  end
   
 end
+
