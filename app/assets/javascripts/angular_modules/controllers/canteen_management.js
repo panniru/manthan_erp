@@ -1,10 +1,10 @@
 (function(angular, app) {
     "use strict";
     app.controller('CanteensController',["$scope","resourceService","canteenManagementService", function($scope, resourceService,canteenManagementService) {
-        $scope.mealtypes = resourceService.Mealtype.query();
-        $scope.newMeals = []
+        $scope.mealtypes = resourceService.Mealtype.query();       
         $scope.newMeal = function(date){
-            var dateFormat = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()
+            $scope.newMeals = []
+           var dateFormat = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()
             $scope.canteenDate = dateFormat;            
             for(var i=0; i<1; i++){
                 $scope.newMeals.push({"meal_type":"", "time" :""});
@@ -25,10 +25,8 @@
                //     alert(JSON.stringify($scope.mealnames));
                 });      
             $('#createModal').modal('show')
-        }
-        $scope.submitMeals = function(){
-             //var dateFormat = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()
-            // $scope.canteenDate = dateFormat;            
+        };
+        $scope.submitMeals = function(){                       
             resourceService.Mealtype.bulk({bulk_meal: $scope.newMeals})          
                 .$promise.then(function(responce){                                
                     $('#createModal').modal('hide')
@@ -62,7 +60,8 @@
                 $scope.newMeals.push({"meal_type":"", "time" :""});
             };
         }
-
+      
             
     }]);
 })(angular, myApp);
+
