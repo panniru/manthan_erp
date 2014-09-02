@@ -1,0 +1,30 @@
+#createModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4#myModalLabel.modal-title Daily Meals
+        %form{:class=>"form-horizontal", :ng_submit => "submitMenus()"}
+          .modal-body
+            .row
+              .row
+                .col-md-4                  
+                  = label_tag "Date"
+                .col-sm-4
+                  = text_field_tag :canteen_date, "{{canteenDate}}", :class => 'form-control', :id => "canteen_date", :readonly => true;                   
+                  %br
+              .row{:ng_repeat => "meal in mealnames"}
+                .col-sm-4
+                  %h4 {{meal.meal_type}}
+                .col-sm-4
+                  = text_field_tag "",nil, :class => 'form-control', :ng_model => "meal['meal_detail_name']", :placeholder => "Meal Type"
+                  {{meal.meal_detail_name}}
+                  = hidden_field_tag :meal_type_id, :value => "{{meal.meal_type_id}}"
+                  = hidden_field_tag :meal_detail_name, :value => "{{meal.meal_detail_name}}"              
+                  %br                                                             
+
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+            = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+ 
+
+   

@@ -1,4 +1,4 @@
 class CanteenManagement < ActiveRecord::Base
-  validates :time, numericality: true
+#  validates :time, numericality: true
   
 end

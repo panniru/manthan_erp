@@ -521,6 +521,23 @@ ManthanErp::Application.routes.draw do
       get "home_index"
     end
   end
+
+  resources :mealtypes do
+    collection do
+      post 'create_bulk'
+      #get "canteenmanagerview"
+      get "home_index"
+    end
+  end
+  resources :mealnames do
+    collection do
+      get "canteenmanagerdata"
+      get "canteen_date"
+      get  "getmealtypeidservice"
+      post "create_bulk"
+    end
+  end
+
   resources :canteenmanagers do
     collection do
       get "canteenmanagerdata"

@@ -7,12 +7,12 @@ class FacultyMaster < ActiveRecord::Base
   def self.get_faculty_names_by_role(current_user)
     if current_user.admin?
       faulty_names = FacultyMaster.all.map do |faculty|
-        {faculty_master_id: faculty.id, faculty_name: faculty.faculty_name}
+        {faculty_master_id: faculty.id, faculty_name: faculty.name}
       end
    
     elsif current_user.teacher?
       faulty_names = FacultyMaster.where('id = '+"#{current_user.faculty_master.id}").all.map do |faculty|
-        {faculty_master_id: faculty.id, faculty_name: faculty.faculty_name}
+        {faculty_master_id: faculty.id, faculty_name: faculty.name}
       end
      
     end

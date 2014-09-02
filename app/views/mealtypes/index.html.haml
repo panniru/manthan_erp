@@ -15,13 +15,13 @@
         %th Time       
         %th
     %tbody
-      - @canteen_managements.each do |canteen_management|
+      - @mealtypes.each do |meal_type|
         %tr
-          %td= canteen_management.meal_name
-          %td= canteen_management.time          
+          %td= meal_type.meal_type
+          %td= meal_type.time          
           %td
-            = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_canteen_management_path(canteen_management), :class => "btn btn-warning btn-sm", :title => "Edit"
-            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), canteen_management_path(canteen_management), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+            = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_mealtype_path(meal_type), :class => "btn btn-warning btn-sm", :title => "Edit"
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), mealtype_path(meal_type), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
   .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
     .modal-dialog
       .modal-content

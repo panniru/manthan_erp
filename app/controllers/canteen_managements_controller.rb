@@ -63,7 +63,7 @@ class CanteenManagementsController < ApplicationController
   end
 
   def  build_canteen_from_bulk
-    params.require(:bulk_meal).select{|canteen_management| canteen_management["meal_name"].present? and canteen_management["time"].present? and canteen_management["description"]}.map do |canteen_management| CanteenManagement.new(canteen_management)
+    params.require(:bulk_meal).select{|canteen_management| canteen_management["meal_name"].present? and canteen_management["time"].present? and canteen_management["description"]}.map do |canteen_management| CanteenManagement.new(canteen_management.permit(:meal_name, :time, :description) )
     end
   end
 
