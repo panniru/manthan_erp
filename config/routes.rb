@@ -13,7 +13,12 @@ ManthanErp::Application.routes.draw do
   get "teaching_plans/edit"
   get "teaching_plans/index"
   get "teaching_plans/show"
-  resources :lib_reports
+  resources :lib_reports do
+    collection do
+      get 'Leastused'
+      get 'popup'
+      end
+    end
   resources :donation_of_books do
     collection do
       get 'gradeserviceview'

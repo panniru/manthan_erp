@@ -12,24 +12,16 @@
         %h4
           Reports Based On Usage Of Books
 %h3
-  Most Used Books:
+  Least Used Books:
 %table#tblData.table.table.striped.table-bordered.table-condensed.table-hover
+ 
   %thead
     %tr
-      %th Name
-      -# %th ISBN Number
-      -# %th Author
-      -# %th Year Of Publishing
-      -# %th Purchased Date
-      -# %th Type
+      %th Book Name
      
+      
   %tbody
     - @issuings.each do |issuing|
       %tr
         %td= issuing[0]
-        -# %td= book.isbn
-        -# %td= book.author
-        -# %td= book.year_of_publishing
-        -# %td= book.created_at
-        -# %td= book.book_type
-%br
+        

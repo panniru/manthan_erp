@@ -23,7 +23,7 @@ $(document ).ready(function() {
         angular.element($('#flot-placeholder')).scope().gridDataPoint(item)
         //angular.element($('#flot-placeholder')).scope().gridDataPoint1(item)
     });
-    
+
     $("#student_attendence_calendar").fullCalendar({
         events: [
             {
@@ -44,6 +44,7 @@ $(document ).ready(function() {
             }
         ]
     })
+
     
 });
 
