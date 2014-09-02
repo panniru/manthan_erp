@@ -1,0 +1,60 @@
+%h3 Special Day
+%form{:action => "/special_day_transports", :method => "POST" }
+  .row
+    .col-sm-1
+      = label_tag "Date", nil, :class => "form-label"
+    .col-sm-2
+      = text_field_tag  "[date]", '', {:class => "datepicker form-control", :placeholder => 'Date'}
+    .col-sm-1
+      = label_tag "Occation", nil, :class => "form-label"
+    .col-sm-2
+      = text_field_tag  "occation", '', {:class => "form-control", :placeholder => 'Occation'}
+    .col-sm-2
+      
+    .col-sm-3
+    .col-sm-1
+      = link_to "Back",  special_day_transports_path, :class => "btn btn-primary"
+      %br
+     
+  .row
+    .col-sm-2
+    .col-sm-5
+      %h4 PickUp Details
+    .col-sm-4
+      %h4 DropDown Details
+    
+
+      
+ 
+  .row
+    .col-sm-1
+    .col-sm-10
+      %table
+        %thead
+          %tr
+            %th Location 
+            %th Time pickup
+            %th Route no Up
+            %th Bus no Up
+            %th Time Drop
+            %th Route no Down
+            %th Bus no Down
+            
+        %tbody
+          - @locations.each do |location|
+            %tr
+              %td= location.location_master.location_name
+              = hidden_field_tag "bulk_save[][location_master_id]",'', :value => location.location_master.id
+              %td= text_field_tag "bulk_save[][time_up]", '', {:class => "form-control", :placeholder => 'UP Routeno#'}
+              %td= text_field_tag "bulk_save[][new_up_route]", '', {:class => "form-control", :placeholder => 'UP Routeno#'}
+              %td= text_field_tag "bulk_save[][new_busno_up]", '', {:class => "form-control", :placeholder => 'UP Busno#'}
+              %td= text_field_tag "bulk_save[][time_down]", '', {:class => "form-control", :placeholder => 'Time Drop'}
+              %td= text_field_tag "bulk_save[][new_down_route]", '', {:class => "form-control", :placeholder => 'Down Routeno#'}
+              %td= text_field_tag "bulk_save[][new_busno_down]", '', {:class => "form-control", :placeholder => 'Down Busno#'}
+             
+  .row
+    %center
+      %br
+      %button{:type=>"submit", :class=> "btn btn-primary" }=  "save" 
+        
+        

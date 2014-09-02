@@ -22,6 +22,7 @@ class LocationMastersController < ApplicationController
   end
   
   def destroy
+    @location_master = LocationMaster.find(params[:id])
     if @location_master.destroy
       flash[:success] = I18n.t :success, :scope => [:location_master ,:destroy]
     else

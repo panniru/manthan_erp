@@ -10,24 +10,25 @@
             .row
               .col-sm-4
                 = f.label "Make Of Bus"
-              .col-sm-3
-                = f.text_field "make_of_bus", :class => 'form-control'
-                %br
+              .col-sm-4
+                = f.select "make_of_bus" , options_for_select([['Ashok Leyland'],['Tata Motors '],['Eicher Motors'],['Mahindra'],['MAN'],['Force Motors']]) , :class => 'form-control'
+              %br
+              %br
             .row
               .col-sm-4
                 = f.label "Model No."
-              .col-sm-3
+              .col-sm-4
                 = f.text_field "model_no", :class => 'form-control'
                 %br
             .row
               .col-sm-4
-                = f.label "YearofManufacture" 
-              .col-sm-3
+                = f.label "Year of Manufacture" 
+              .col-sm-4
                 = f.text_field "year_of_manufacture", :class => 'date-picker-year',:class => 'form-control'
                 %br
             .row
               .col-sm-4
-                = f.label "Purchase"
+                = f.label "Purchase option"
               .col-sm-2
                 = f.select "purchase_option" , options_for_select([['Own'],['Lease']]) , :class => 'form-control'
                 %br
@@ -35,14 +36,14 @@
             .row
               .col-sm-4
                 = f.label "Purchase Date"
-              .col-sm-3
-                = f.text_field "purchase_option_date", :class => 'datepicker' , :class => 'form-control'
+              .col-sm-4
+                = f.text_field "purchase_option_date",  :class => 'datepicker form-control'
                 %br
                 %br
             .row
               .col-sm-4
                 = f.label "Capacity"
-              .col-sm-3
+              .col-sm-4
                 = f.text_field "capacity", :class => 'form-control'
                 %br
             .row

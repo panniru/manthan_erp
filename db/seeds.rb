@@ -122,6 +122,9 @@ def seed_jobs
   Job.where(code: job_attributes[:code]).first_or_create!(job_attributes.delete_if { |k,v| k == :code })
   job_attributes = FactoryGirl.attributes_for(:route_mailing)
   Job.where(code: job_attributes[:code]).create(job_attributes.delete_if { |k,v| k == :code })
+  job_attributes = FactoryGirl.attributes_for(:special_route_mailing)
+  Job.where(code: job_attributes[:code]).create(job_attributes.delete_if { |k,v| k == :code })
+  
 end
 
 def seed_payment_types
@@ -231,6 +234,27 @@ def seed_locations
   end
 end
 
+def seed_special_day_transports
+  unless SpecialDayTransport.first.present?
+    SpecialDayTransport.create(:id => '38' , :location_master_id => '8' , :new_up_route => '1A', :new_down_route => '1A' , :new_busno_up => '13', :new_busno_down => '13' , :time_up => '8:15am' , :time_down => '6pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
+    SpecialDayTransport.create(:id => '39' , :location_master_id => '4' , :new_up_route => '1A', :new_down_route => '1A' , :new_busno_up => '13', :new_busno_down => '13' , :time_up => '8:20am' , :time_down => '6:10pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
+    SpecialDayTransport.create(:id => '38' , :location_master_id => '5' , :new_up_route => '1A', :new_down_route => '1A' , :new_busno_up => '13', :new_busno_down => '13' , :time_up => '8:30am' , :time_down => '6:15pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
+    SpecialDayTransport.create(:id => '38' , :location_master_id => '11' , :new_up_route => '2A', :new_down_route => '1A' , :new_busno_up => '14', :new_busno_down => '13' , :time_up => '8:15am' , :time_down => '6:20pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
+    SpecialDayTransport.create(:id => '38' , :location_master_id => '9' , :new_up_route => '2A', :new_down_route => '2A' , :new_busno_up => '14', :new_busno_down => '14' , :time_up => '8:20am' , :time_down => '6pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
+    SpecialDayTransport.create(:id => '38' , :location_master_id => '2' , :new_up_route => '2A', :new_down_route => '2A' , :new_busno_up => '14', :new_busno_down => '14' , :time_up => '8:25am' , :time_down => '6:10pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
+    SpecialDayTransport.create(:id => '38' , :location_master_id => '6' , :new_up_route => '3A', :new_down_route => '2A' , :new_busno_up => '15', :new_busno_down => '14' , :time_up => '8:15am' , :time_down => '6:20pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
+    SpecialDayTransport.create(:id => '38' , :location_master_id => '7' , :new_up_route => '3A', :new_down_route => '2A' , :new_busno_up => '15', :new_busno_down => '14' , :time_up => '8:20am' , :time_down => '6:30pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
+    SpecialDayTransport.create(:id => '38' , :location_master_id => '8' , :new_up_route => '1A', :new_down_route => '1A' , :new_busno_up => '13', :new_busno_down => '13' , :time_up => '8:15am' , :time_down => '6pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
+    SpecialDayTransport.create(:id => '39' , :location_master_id => '4' , :new_up_route => '1A', :new_down_route => '1A' , :new_busno_up => '13', :new_busno_down => '13' , :time_up => '8:20am' , :time_down => '6:10pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
+    SpecialDayTransport.create(:id => '38' , :location_master_id => '5' , :new_up_route => '1A', :new_down_route => '1A' , :new_busno_up => '13', :new_busno_down => '13' , :time_up => '8:30am' , :time_down => '6:15pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
+    SpecialDayTransport.create(:id => '38' , :location_master_id => '11' , :new_up_route => '2A', :new_down_route => '1A' , :new_busno_up => '14', :new_busno_down => '13' , :time_up => '8:15am' , :time_down => '6:20pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
+    SpecialDayTransport.create(:id => '38' , :location_master_id => '9' , :new_up_route => '2A', :new_down_route => '2A' , :new_busno_up => '14', :new_busno_down => '14' , :time_up => '8:20am' , :time_down => '6pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
+    SpecialDayTransport.create(:id => '38' , :location_master_id => '2' , :new_up_route => '2A', :new_down_route => '2A' , :new_busno_up => '14', :new_busno_down => '14' , :time_up => '8:25am' , :time_down => '6:10pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
+    SpecialDayTransport.create(:id => '38' , :location_master_id => '6' , :new_up_route => '3A', :new_down_route => '2A' , :new_busno_up => '15', :new_busno_down => '14' , :time_up => '8:15am' , :time_down => '6:20pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
+    SpecialDayTransport.create(:id => '38' , :location_master_id => '7' , :new_up_route => '3A', :new_down_route => '2A' , :new_busno_up => '15', :new_busno_down => '14' , :time_up => '8:20am' , :time_down => '6:30pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
+  end
+end
+
 def seed_new_vehicles
   unless NewVehicle.first.present?
     NewVehicle.create(:id => '10',:model_no => 'AT5678',:make_of_bus => 'TAYOTA',:year_of_manufacture => '2011',:purchase_option => 'Own',:purchase_option_date => '5/6/2011',:capacity => '50'  )
@@ -242,7 +266,7 @@ end
 def seed_student_route_mapping
   unless StudentRouteMapping.first.present?
 
-    StudentRouteMapping.create(:id => '10' , :route_id => '18' , :student_master_id => '2' )
+    StudentRouteMapping.create(:id => '10' , :route_id => '18' , :student_master_id => '2',:location_master_id => '8' )
   end
 end
 
@@ -260,8 +284,8 @@ end
 
 def seed_routes
   unless Route.first.present?
-    Route.create(:id => '18' , :route_no => '1', :busno_up => '2' , :no_of_children => '3', :gmaps => '' , :start_point => '25' , :end_point => '26' )
-    Route.create(:id => '19' , :route_no => '2', :busno_up => '23' , :no_of_children => '45', :gmaps => '' , :start_point => '30' , :end_point => '29' )
+    Route.create(:id => '18' , :route_no => '1', :busno_up => '13' , :no_of_children => '3', :gmaps => '' , :start_point => '25' , :end_point => '26' )
+    Route.create(:id => '19' , :route_no => '2', :busno_up => '13' , :no_of_children => '45', :gmaps => '' , :start_point => '30' , :end_point => '29' )
     Route.create(:id => '20' , :route_no => '3', :busno_up => '45' , :no_of_children => '34', :gmaps => '' , :start_point => '32' , :end_point => '35' )
     Route.create(:id => '21' , :route_no => '4', :busno_up => '56' , :no_of_children => '45', :gmaps => '' , :start_point => '36' , :end_point => '37' )
   
@@ -337,6 +361,7 @@ def seed_all
   seed_locations
   seed_new_vehicles
   seed_student_route_mapping
+  seed_special_day_transports
 end
 
 seed_all

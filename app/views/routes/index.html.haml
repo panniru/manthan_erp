@@ -2,10 +2,11 @@
   .col-sm-6
     %h3
       Routes
-  .col-sm-6
-    %h5
-      = render  "user_mailer/welcome_email"
-      = link_to "New Route", "#", :class => "btn btn-primary",:ng_click => "defineNew()"
+  - if current_user.transport_head?
+    .col-sm-6
+      %h5
+        = render  "user_mailer/welcome_email"
+        = link_to "New Route", "#", :class => "btn btn-primary",:ng_click => "defineNew()"
     
   %table.table.table-bordered
     %thead
@@ -15,26 +16,29 @@
         %th start point
         %th End point
         %th No of Children
-        %th
+        - if current_user.transport_head?
+          %th
     %tbody
       - Route.all.each do |route|
         %tr
-          %td= link_to "#{route.route_no}" , route_path(route)
+          %td= link_to "#{route.id}" , route_path(route)
           %td= route.busno_up
           %td= route.start_location.location_master.location_name
           %td= route.end_location.location_master.location_name
           %td= route.no_of_children
-          %td
-            =  link_to raw("<span class='glyphicon glyphicon-trash'></span>"),route_path(route), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+          - if current_user.transport_head?
+            %td
+              =  link_to raw("<span class='glyphicon glyphicon-trash'></span>"),route_path(route), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
             
-      .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
-        .modal-dialog
-          .modal-content
-            .modal-header
-              %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
-              %h4.modal-title{ :id => "myModalLabel"} New Route
+    .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+            %h4.modal-title{ :id => "myModalLabel"} New Route
             .modal-body{"ng-controller" => "RouteController"}
               = render "form1"
-          
+              
 .row
   = render "shared/map1"
+                

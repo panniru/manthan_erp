@@ -56,6 +56,7 @@ class ContextDetector
     "new_vehicles" => "transport",
     "routes" => "transport",
     "student_route_mappings" => "transport",
+    "special_day_transports" => "transport",
     "default_masters" => "default_master_sub_menu",
     "HRM" => "hrm_sub_menu",
     "holidaycalendars" => "canteen",

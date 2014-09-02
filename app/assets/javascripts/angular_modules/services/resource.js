@@ -56,9 +56,11 @@
                                       );
 	var Route = $resource('/routes/:id.json', {id: '@id'}, 
 			      {
+				 
                                   "update": { method: "PUT"}
                               }
                              );
+
         var Mealtype = $resource('/mealtypes/:id.json', {id: '@id'}, 
                              {
                                  "bulk": { url: "/mealtypes/create_bulk", method:'POST'},
@@ -80,6 +82,20 @@
                                      "update": { method: "PUT"}
                                  }
                                 );
+
+        var CanteenManagement = $resource('/canteen_managements/:id.json', {id: '@id'}, 
+					  {
+                                 "bulk": { url: "/canteen_managements/create_bulk", method:'POST'},
+                                 "update": { method: "PUT"}
+                             }
+                            );
+	var SpecialDayTransport = $resource('/special_day_transports/:id.json', {id: '@id'}, 
+					  {
+                                 "bulk": { url: "/special_say_transports/create_bulk", method:'POST'},
+                                 "update": { method: "PUT"}
+                             }
+                            );
+
         
        
         return {
@@ -97,6 +113,9 @@
             Mealtype: Mealtype,
             Mealname: Mealname,
             Inventory: Inventory
+            CanteenManagement: CanteenManagement,
+	    SpecialDayTransport:SpecialDayTransport
+
         };
     }]);
 })(angular, myApp);

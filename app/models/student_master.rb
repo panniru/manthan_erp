@@ -10,6 +10,7 @@ class StudentMaster < ActiveRecord::Base
   belongs_to :student_route_mapping
   belongs_to :grade_master
   belongs_to :section_master
+  belongs_to :location_master
   has_one :parent_payment_master, :foreign_key => :student_id
   has_many :issuings
   has_many :donation_of_books

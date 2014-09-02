@@ -6,7 +6,7 @@
     .col-sm-2
       = label_tag @route.route_no ,nil ,:class => 'form-control'
     .col-sm-2
-      = label_tag "Busno:", nil, :class => "form-label"
+      = label_tag "Bus no:", nil, :class => "form-label"
     .col-sm-2
       = label_tag @route.busno_up , nil ,:class => 'form-control'
     .col-sm-2
@@ -19,16 +19,20 @@
     .col-sm-2
       = label_tag @route.start_location.location_master.location_name,nil,:class => 'form-control' 
     .col-sm-2
-      = label_tag "Ending point:", nil, :class => "form-label"
+      = label_tag "Ending Point:", nil, :class => "form-label"
     .col-sm-2
       = label_tag @route.end_location.location_master.location_name ,nil ,:class => 'form-control'
       %br
       %br
       %br
   .row
+    .col-sm-2
+    .col-sm-2
+      = link_to "Show All", "#", :class => "btn btn-primary" , :ng_click => "allStudents(#{@route.id})"
+  .row
     .col-sm-3
       %h4 List of Locations:
-      %table.table.table-bordered
+      %table#tblData.target.table.table-striped.table-condensed.table-bordered
         %thead
           %tr
             %th Location
@@ -36,7 +40,8 @@
         %tbody
           - @route.locations.each do |location|
             %tr
-              %td= location.location_master.location_name
+              //%td= link_to "#{location.location_master.location_name}" , edit_route_path,  :ng_click => "allLocations(#{@location})"
+              %td= location.location_master.location_name 
               %td= location.sequence_no
                 
            
@@ -46,11 +51,26 @@
                     .modal-header
                       %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
                       %h4.modal-title{ :id => "myModalLabel"} New Location
-                      .modal-body{"ng-controller" => "RouteController"}
+                      .modal-body
                         = render "modal"
                         
     .col-sm-9
       = render "shared/gmap"
-    
+  .row{:ng_controller => "RouteController"}
+    .col-sm-6
+      %h4 Students Belongs to this Route
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th Student id
+            %th Student Name
+            
+            
+            
+        %tbody
+          %tr{"ng-repeat" => "student in students"}
+            %td {{student.id}}
+            %td {{student.name}}
+            
     
      

@@ -11,7 +11,7 @@ class Transport
     sub_menu << routes
     sub_menu << mappings
     sub_menu << locations
-      
+    sub_menu << specialday
   end
 
 
@@ -21,6 +21,15 @@ class Transport
     sub_menu
   end
 
+  def transport_head_sub_menu
+    sub_menu = []
+    sub_menu << newbus
+    sub_menu << routes
+    sub_menu << mappings
+    sub_menu << locations
+    sub_menu << specialday
+  end
+  
   private 
   def newbus
     MenuItem.new(:label => "Buses", :klass => "", :icon => "tachometer ", :href => "/new_vehicles")
@@ -33,6 +42,9 @@ class Transport
   end
   def locations
     MenuItem.new(:label => "Locations", :klass => "", :icon => "map-marker ", :href => "/location_masters")
+  end
+  def specialday
+    MenuItem.new(:label => "Special Day" , :klass => "", :icon => "magic" , :href => "/special_day_transports")
   end
 end
 

@@ -9,6 +9,14 @@
             var url = "/routes/get_bus_no.json"
             return $http.get(url);
 	};
+	var getStudentView = function(route){
+	    var url = "/routes/all_students.json?route="+route
+	    return $http.get(url);
+	};
+	var getLocationView = function(){
+	    var url = "/routes/all_locations.json"
+	    return $http.get(url);
+	};
 	var routeMail = function(subject,text){
 	    var url = "/routes/send_mail.json"
             return $http.post(url,{route_mail:{subject: subject, text: text }}); 
@@ -17,7 +25,9 @@
         return {
             getLocationServiceView : getLocationServiceView,
 	    routeMail : routeMail,
-	    getBusServiceView : getBusServiceView
+	    getBusServiceView : getBusServiceView,
+	    getStudentView : getStudentView,
+	    getLocationView : getLocationView
         };
     }]);
 })(angular, myApp);

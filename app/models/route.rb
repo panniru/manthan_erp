@@ -6,7 +6,7 @@ class Route < ActiveRecord::Base
  
   def save_route(location_params)
     location_params.each do |location|
-      locations << Location.new(location)
+      locations << Location.new(location.permit(:location_master_id, :sequence_no))
     end
     status = false
     ActiveRecord::Base.transaction do

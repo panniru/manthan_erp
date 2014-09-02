@@ -32,8 +32,8 @@ class RouteMailingJob
     end
   end
   
-  def make_failure_entry(email, remarks, parent)
-    RouteFailure.create(:e_mail => email, :job_run_id => @job_run_id, :parent_id => parent, :remarks => remarks)
+  def make_failure_entry(email, remarks, parent_id)
+    RouteFailure.create(:e_mail => email, :job_run_id => @job_run_id, :parent_id => parent_id, :remarks => remarks)
   end
   
   def success(job)

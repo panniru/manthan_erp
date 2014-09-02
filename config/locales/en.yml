@@ -70,6 +70,13 @@ en:
     send_mail:
       success: "Mail sent"
       fail: "Route not been updated"
+  location_master:
+    create:
+      success: "Location has been saved"
+      fail: "Location not been saved"
+    destroy:
+      success: "Location has been deleted"
+      fail: "Location has not been deleted"
   post_dated_cheque:
     create:
       success: "cheque has been saved"

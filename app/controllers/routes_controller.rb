@@ -2,7 +2,8 @@
    load_resource :only => [:show, :update, :edit, :destroy]
    
    def index
-     if current_user.admin?
+     @student_route_mappings = StudentRouteMapping.where(:route_id => params[:route_id]).count
+     if current_user.transport_head? 
        @routes =  Route.all
        @locations = Location.all
        locations = []
@@ -25,6 +26,29 @@
          end
        end
      end
+     if current_user.admin? 
+       @routes =  Route.all
+       @locations = Location.all
+       locations = []
+       Route.all.each do |route| 
+         locations.concat(route.locations)
+       end
+       gmap_data = Gmaps4rails.build_markers(locations) do |location, marker|
+         marker.lat location.location_master.latitude
+         marker.lng location.location_master.longitude
+       end
+       gon.gmap_data = gmap_data.to_json
+       gon.width = "750px"
+       gon.height = "350px"
+       respond_to do |format|   
+         format.json do
+           render :json => Route.all
+         end
+         format.html do 
+           render "index"
+         end
+       end
+     end
      if current_user.parent?
        current_user.parent.students.each do |student|
          studentroutemappings = StudentRouteMapping.where('student_master_id = '+"#{student.id}")
@@ -35,10 +59,7 @@
      end
    end  
    
-   def form_authenticity_param
-     params[request_forgery_protection_token]
-   end
-   
+      
    def send_mail
      if current_user.admin?
        respond_to do |format|
@@ -78,7 +99,7 @@
      @location = Location.all
      @location = []
      @route.locations.each do |location|
-       @location.push({:location => location.location_master.location_name})
+       @location.push({location: location.location_master.location_name})
      end
      gon.start_point_latitude = @route.start_location.location_master.latitude.to_s 
      gon.start_point_longitude =@route.start_location.location_master.longitude.to_s
@@ -99,6 +120,30 @@
      end
    end
    
+   def all_students
+     respond_to do |format|
+       format.json do 
+         map = StudentRouteMapping.show_all_students(params[:route]).map {|student| student.student_master_id}
+         students = StudentMaster.where(:id => map ).each.map do |mapping|
+           {id: mapping.id,  name: mapping.name}
+         end     
+         render :json => students
+       end
+     end
+   end
+   
+   def all_locations
+     location =  LocationMaster.all.map do |location|
+       { location: location.location_name,student_name: location.student_master.name, id: location.student_master.id}
+     end
+     render :json => location
+   end
+   
+   def students
+     @route = Route.find(params[:id])
+   end
+
+     
    def destroy
      if @route.destroy
        flash[:success] = I18n.t :success, :scope => [:route ,:destroy]
@@ -110,7 +155,7 @@
    
    def create
      respond_to do |format|
-      @route= Route.new(route_params)
+       @route= Route.new(route_params)
        status = @route.save_route(params[:locations])
        
        format.json do
@@ -128,18 +173,7 @@
      end
    end
    
-   def create_bulk
-     @route_bulk = build_route_from_bulk
-     if !@route_bulk.empty? and @route_bulk.map(&:valid?).all?
-       @route_bulk.each(&:save!)
-       flash[:success] = I18n.t :success, :scope => [:locations, :create_bulk]
-       redirect_to routes_path
-     else
-       flash[:fail] = I18n.t :fail, :scope => [:locations, :create_bulk]
-       render "new"
-     end
-   end
-   
+     
    
    def edit
    end
@@ -147,12 +181,17 @@
    private
       
    def route_params
-     route_params = params.require(:route).permit( :route_no , :busno_up )
+     route_params = params.require(:route).permit(:route_no , :busno_up )
    end
    
    def build_route_from_bulk
-     params.require(:bulk_location).select{|locations| location["location_master_id"].present? and route["sequence_no"].present? }.map do |route|
-       Location.new(location)
+     params.require(:locations).select{|locations| location["location_master_id"].present? and route["sequence_no"].present? }.map do |params|
+       location = Location.new(params[:location].permit(:location_master_id, :sequence_no))
+       p "========="
+       p params[:route]
+       route = Route.new(params[:route].permit(:route_no, :busno_up))
+       route.locations << location
+       route
      end
    end
  end
