@@ -36,7 +36,7 @@ class TermResultsController < ApplicationController
       format.json do   
         p params 
         p "=============>"
-        term_results = TermResult.where('academic_term_id = '+"'#{params[:academic_Term_Id]}'")
+        term_results = TermResult.where('academic_term_id = '+"'#{params[:academic_Term_Id]}'"+" AND "+'grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'"+" AND "+'subject_master_id = '+"'#{params[:my_Subject]}'")
         p  term_results 
         p "==================>"
         term_results = term_results.each.map do |mapping|      
@@ -100,6 +100,30 @@ class TermResultsController < ApplicationController
   def add_term_results_params(params)   
     params.permit(:academic_term_id, :grade_master_id, :section_master_id, :subject_master_id, :assessment_criteria_id, :grading_master_id)
   end
+
+  def get_grades_sections
+    respond_to do |format|
+      format.json do
+        sections = SectionMaster.get_sections_by_role(current_user)        
+        render :json => sections
+      end
+    end  
+  end  
+
+  def get_grade_subjects
+    respond_to do |format|
+      format.json do   
+         p params
+        p "================>"
+        grade_subjects = GradeSubjectMapping.where('grade_master_id = '+"'#{params[:my_Grade]}'")       
+        grade_subjects = grade_subjects.each.map do |mapping|
+          {id: mapping.id, grade_master_id: mapping.grade_master_id, grade_name: mapping.grade_master.grade_name, subject_master_id: mapping.subject_master_id, subject_name: mapping.subject_master.subject_name }
+        end
+        render :json => grade_subjects
+      end
+    end
+  end
+
   
 end
 

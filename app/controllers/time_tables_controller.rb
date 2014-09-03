@@ -22,12 +22,7 @@ class TimeTablesController < ApplicationController
   def sectionserviceview
     respond_to do |format|
       format.json do
-        sections = SectionMaster.get_sections_by_role(current_user)
-        #p a        
-        #p "===========>"
-        #sections = SectionMaster.all.map do |section|
-          #{section_master_id: section.id, section_name: section.section_name, grade_master_id: section.grade_master_id }
-        #end
+        sections = SectionMaster.get_sections_by_role(current_user)        
         render :json => sections
       end
     end  

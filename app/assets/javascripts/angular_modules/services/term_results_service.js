@@ -4,7 +4,7 @@
         
         var getTermResultsService = function(academic_Term_Id,myGrade, mySection, mySubject){
             var url = "/term_results/get_term_results.json"
-            return $http.get(url, {params: {academic_Term_Id: academic_Term_Id, myGrade: myGrade, mySection: mySection, mySubject: mySubject}});
+            return $http.get(url, {params: {academic_Term_Id: academic_Term_Id, my_Grade: myGrade, my_Section: mySection, my_Subject: mySubject}});
         }; 
 
         var getStudentDetailsService = function(myGrade, mySection){
@@ -21,12 +21,24 @@
             var url = "/term_results/save_term_results.json"
             return $http.post(url,{term_results: term_results});            
         };
+
+        var getGradesSectionsService = function(){
+            var url = "/term_results/get_grades_sections.json"
+            return $http.get(url);
+        }; 
+
+        var getGradeSubjectsService = function(myGrade){
+            var url = "/term_results/get_grade_subjects.json"
+            return $http.get(url,{params : {my_Grade: myGrade}});
+        };
         
         return {
             getTermResultsService : getTermResultsService,
             getStudentDetailsService : getStudentDetailsService,
             getSubjectAssessmentCriteriaService : getSubjectAssessmentCriteriaService,
             saveTermResultsService : saveTermResultsService,
+            getGradesSectionsService : getGradesSectionsService,
+            getGradeSubjectsService : getGradeSubjectsService,
         }
     }]);
 })(angular, myApp);

@@ -1,0 +1,50 @@
+.row  
+  .row
+    .col-md-1
+    .col-md-10
+      .col-md-3
+        = label_tag(:grade, "SELECT GRADE-SECTION")      
+        %select{"ng-model" => "studentGradeSection", "ng-options" => "mapping as mapping.student_grade_section for mapping  in grades_sections | orderBy:'grade_master_id'", "ng-change" => "getGradeSectionStudents()", :class => "form-control", :href => "#"}   
+          %option{style: "display:none", value: ""} select grade - section  
+        //{{studentGradeSection}}
+    .col-md-1
+  %br
+  %br
+  .row
+    .col-md-1
+    .col-md-10
+      %table.table.table-bordered.table-striped.table-hover
+        %thead
+          %th STUDENT NAME 
+          - @academic_terms.each do |academic_term|
+            %th TERM  
+        %tbody
+          %tr{"ng-repeat" => "student in students"}
+            %td {{student.student_name}}             
+            %td{"ng-repeat" => "academic_term in academic_terms | orderBy: 'term_name'"}
+              %a{href: "#", "ng-click" =>"showStudentTermResults()"} {{academic_term.term_name}}
+    .col-md-1  
+  .row   
+    #myStudentTermResultsModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+            %h4#myModalLabel.modal-title STUDENT TERM RESULTS            
+            .modal-body
+              .row
+                .rowr{"ng-repeat" => "grade_subject in grade_subjects"}
+                  %h4 {{grade_subject.subject_name}}
+              %table.table.table-bordered.table-striped.table-hover
+                %thead
+                  %th ASSESSMENT CRITERIA
+                  %th GRADE
+                %tbody
+                  %tr{"ng-repeat" => "grade_subject in grade_subjects"}
+                    %td {{grade_subject.subject_name}}                
+            .modal-footer
+              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+             
+          
+  
+  
