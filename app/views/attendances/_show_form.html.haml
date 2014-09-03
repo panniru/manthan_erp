@@ -1,0 +1,13 @@
+.pull-right
+  %a{href: "#", :class => "btn btn-primary", :title => "", "ng-click" => "goToEdit()"} EDIT
+%div{"ng-repeat" => "datePerDate in datesToFilter() | filter:filterDates"}
+  %b {{datePerDate.attendance_date}}
+  %table.table-condensed.table-striped.table-hovered.table-bordered
+    %thead
+      %tr
+        %th Name
+        %th Attendance
+    %tbody
+      %tr{"ng-repeat" => "attendance in attendances | filter:{attendance_date: datePerDate.attendance_date}"}
+        %td {{attendance.student_name}}
+        %td {{attendance.attendance}}

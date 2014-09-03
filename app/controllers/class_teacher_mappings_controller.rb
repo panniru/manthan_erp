@@ -73,7 +73,7 @@ class ClassTeacherMappingsController < ApplicationController
               temp.faculty_master_id = t["faculty_master_id"]    
               temp.save
             else              
-              @mapping = ClassTeacherMapping.new(t)
+              @mapping = ClassTeacherMapping.new(add_params(t))
               @mapping.save
             end
           end
@@ -105,5 +105,8 @@ class ClassTeacherMappingsController < ApplicationController
         render :json =>  faculty_ids
       end
     end    
+  end
+  def add_params(params)   
+    params.permit( :section_master_id, :grade_master_id, :faculty_master_id)
   end
 end

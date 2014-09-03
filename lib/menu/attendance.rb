@@ -7,7 +7,7 @@ class Attendance
   def admin_sub_menu
     sub_menu = []
     sub_menu << daily
-    sub_menu << daily
+  
   end
 
   def principal_sub_menu
@@ -21,6 +21,7 @@ class Attendance
   
   def teacher_sub_menu
     sub_menu = []
+    sub_menu << daily
   end
 
   private

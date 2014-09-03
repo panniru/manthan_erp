@@ -15,11 +15,31 @@ class AttendancesController < ApplicationController
   end
 
   def index
-    #@attendances = Attendance.all
     if current_user.teacher?
-      
+      if(ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
+       
+        render 'index'
+      end
+    end
   end
-  
+  def get_students
+    respond_to do |format|
+      format.json do 
+        if(ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
+          pa="#{current_user.faculty_master.id}"
+          a = ClassTeacherMapping.where(:faculty_master_id => pa).map{|student| student.grade_master_id}
+          students = StudentMaster.where(:grade_master_id => a).each.map do |mapping|
+            {id: mapping.id,  grade_master_id: mapping.grade_master_id, section_master_id: mapping.section_master_id, name: mapping.name}
+          end     
+          render :json => students
+        end
+  #        end  
+   #     end       
+      end
+    end
+  end
+
+            
   def new
     @attendance = Attendance.new
   end
