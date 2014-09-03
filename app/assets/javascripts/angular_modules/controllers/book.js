@@ -2,25 +2,24 @@
     "use strict";
     app.controller('BooksController',["$scope","resourceService", function($scope, resourceService) {
         $scope.books = resourceService.Book.query();
-        $scope.newBooks = []
+        
         $scope.newBook = function(){
+            $scope.newBooks = []
             for(var i=0; i<3; i++){
                 $scope.newBooks.push({"name":"", "isbn" :"", "author": "", "year_of_publishing":"", "book_type":"" });
             };
             $('#createModal').modal('show')
-        }
+        };
         $scope.submitBooks = function(){
             resourceService.Book.bulk({bulk_book: $scope.newBooks})
                 .$promise.then(function(responce){
                     $scope.books = resourceService.Book.query()
-                    // alert ("welcome")
                     $('#createModal').modal('hide')
                 })
         }
             
         $scope.editBooks = function(){
             $scope.newBooks = $scope.Books
-           // alert ("welcome")
             $('#createModal').modal('show')
         }       
         $scope.destroy = function(book){

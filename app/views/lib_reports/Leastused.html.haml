@@ -1,0 +1,27 @@
+.panel.panel-default
+  .test
+    .col-sm-3
+      .pull-left
+        .input-group
+          %span.input-group-addon
+            = fa_icon "search lg"
+          %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}
+          %br
+    .col-sm-6
+      %center
+        %h4
+          Reports Based On Usage Of Books
+%h3
+  Least Used Books:
+%table#tblData.table.table.striped.table-bordered.table-condensed.table-hover
+ 
+  %thead
+    %tr
+      %th Book Name
+     
+      
+  %tbody
+    - @issuings.each do |issuing|
+      %tr
+        %td= issuing[0]
+        

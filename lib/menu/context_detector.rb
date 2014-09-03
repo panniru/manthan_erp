@@ -25,10 +25,12 @@ class ContextDetector
     "class_teacher_mappings" => "academic",
     "grades_sections_mappings" => "academic", 
     "grades_subjects_mappings" => "academic", 
-    "assessment_criterias" => "academic", 
+    "assessment_criterias" => "academic",    
     "gradings" => "academic", 
     "assessments" => "academic",
     "assessment_results" => "academic",
+    "academic_terms" => "academic",
+    "term_results" => "academic",
     "staffrecruits" => "recruitment_sub_menu",
     "recruitments" => "recruitment_sub_menu",
     "staff_admissions"=> "recruitment_sub_menu",
@@ -58,7 +60,11 @@ class ContextDetector
     "HRM" => "hrm_sub_menu",
     "holidaycalendars" => "canteen",
     "canteen_managements" =>"canteen",
-    "attendances" => "attendance"
+    "attendances" => "attendance",
+    "mealtypes" => "canteen",
+    "mealnames" => "canteen",
+    "inventories" => "canteen"
+
   }
   
   def self.get_context(args)

@@ -1,0 +1,2 @@
+module MealnamesHelper
+end

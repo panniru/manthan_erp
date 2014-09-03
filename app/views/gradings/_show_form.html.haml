@@ -28,7 +28,7 @@
           %td{"ng-show" => "grading.grading_edit_value"}  
             = text_field_tag "",nil, :class => "form-control",:ng_model => "grading.grading_desc" ,:placeholder => "" 
           %td{"ng-show" => "grading.grading_show_value"}  
-            = link_to raw("<span class='glyphicon glyphicon-pencil'></span>"),"#", :class => "btn btn-warning btn-sm", :title => "EDIT", :ng_click => "editGradingMappings($index)"
+            = link_to raw("<span class='glyphicon glyphicon-edit'></span>"),"#", :class => "btn btn-warning btn-sm", :title => "EDIT", :ng_click => "editGradingMappings($index)"
           %td{"ng-show" => "grading.grading_edit_value"}   
             = link_to raw("<span class='glyphicon glyphicon-save'></span>"),"#", :class => "btn btn btn-primary btn-sm", :title => "SAVE", :ng_click => "saveGradingMappings(grading)"
           %td{"ng-show" => "myShowFormValue"}  

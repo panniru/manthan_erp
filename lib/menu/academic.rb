@@ -17,6 +17,8 @@ class Academic
     sub_menu << grading
     sub_menu << assessments
     sub_menu << assessment_results
+    sub_menu << academic_terms
+    sub_menu << term_results
     sub_menu
   end
   def teacher_sub_menu
@@ -26,12 +28,18 @@ class Academic
     sub_menu << teaching_plans
     sub_menu << assessments
     sub_menu << assessment_results
+    sub_menu << term_results
     sub_menu
   end
   def parent_sub_menu
     sub_menu = [] 
     sub_menu << time_tables
     sub_menu << teaching_plans
+    sub_menu
+  end
+  def principal_sub_menu
+    sub_menu = [] 
+    sub_menu << term_results    
     sub_menu
   end
   
@@ -80,8 +88,16 @@ class Academic
     MenuItem.new(:label => "Assessments", :klass => "", :icon => "list-ol", :href => "/assessments")
   end
 
-    def assessment_results
+  def assessment_results
     MenuItem.new(:label => "Assessments Results", :klass => "", :icon => "list-ol", :href => "/assessment_results")
+  end
+
+  def academic_terms
+    MenuItem.new(:label => "Academic Terms", :klass => "", :icon => "list-ol", :href => "/academic_terms")
+  end
+
+  def term_results
+    MenuItem.new(:label => "Term Results", :klass => "", :icon => "thumbs-up", :href => "/term_results")
   end
 
 end

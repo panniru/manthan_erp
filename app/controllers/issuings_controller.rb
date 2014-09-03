@@ -19,7 +19,6 @@ class IssuingsController < ApplicationController
     #@students =  StudentMaster.all
 
      @students  = StudentMaster.where("grade_master_id = :grade_master_id AND section_master_id = :section_master_id", {grade_master_id: params[:grade_master_id], section_master_id: params[:section_master_id]})
-  
     @book_issuing_objects = BookIssuingFormObject.build_collection(@students)
     
   end
@@ -49,10 +48,12 @@ class IssuingsController < ApplicationController
         render :json => get_sections
       end
     end  
-  end  
+  end
+  
   def edit
     @issuing = Issuing.find(params[:id])
   end
+  
   def update
     @issuing = Issuing.find(params[:id])
    
@@ -64,6 +65,7 @@ class IssuingsController < ApplicationController
       render "edit"
     end
   end
+  
   def destroy
     @issuing = Issuing.find(params[:id])    
     if @issuing.destroy
@@ -86,7 +88,7 @@ class IssuingsController < ApplicationController
   private
 
   def issuing_params
-    params.require(:issuing).permit(:name, :grade, :section, :student_master_id, :book, :deleted_at, :returned_date, :issuing_date)
+    params.require(:issuing).permit(:name, :grade, :section, :student_master_id, :book, :deleted_at, :returned_date, :issuing_date, :book_id)
   end
   
  

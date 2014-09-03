@@ -9,12 +9,16 @@ ManthanErp::Application.routes.draw do
   get "new_vehicles/edit"
   get "new_vehicles/new"
 
-
   get "teaching_plans/new"
   get "teaching_plans/edit"
   get "teaching_plans/index"
   get "teaching_plans/show"
-  resources :lib_reports
+  resources :lib_reports do
+    collection do
+      get 'Leastused'
+      get 'popup'
+      end
+    end
   resources :donation_of_books do
     collection do
       get 'gradeserviceview'
@@ -415,14 +419,7 @@ ManthanErp::Application.routes.draw do
     post "save_gradings_mappings"
     post "delete_grading_mappings"
     end
-  end
-
-    resources :assessment_criterias do
-      collection do
-        get "get_assessment_criteria_service"  
-      end  
-    end
-    
+  end    
 
    resources :staff_admissions do
     resources :recruitments
@@ -513,6 +510,7 @@ ManthanErp::Application.routes.draw do
       get "get_student_details_service"
       post "save_assessment_results_service"
       get "get_assessment_results_service"
+      get "get_assessments_service"
    end  
   end      
 
@@ -523,6 +521,24 @@ ManthanErp::Application.routes.draw do
       get "home_index"
     end
   end
+
+  resources :mealtypes do
+    collection do
+      post 'create_bulk'
+      #get "canteenmanagerview"
+      get "home_index"
+    end
+  end
+  resources :mealnames do
+    collection do
+      get "canteenmanagerdata"
+      get "canteen_date"
+      get  "getmealtypeidservice"
+      post "create_bulk"
+    end
+  end
+    resources :inventories
+
   resources :canteenmanagers do
     collection do
       get "canteenmanagerdata"
@@ -562,4 +578,23 @@ ManthanErp::Application.routes.draw do
       end
     end
   resources :attendances
+
+  resources :academic_terms do   
+    collection do
+      get 'get_academic_terms_service'
+      post 'save_academic_terms'
+      post 'delete_academic_terms'
+    end  
+  end    
+
+   resources :term_results do   
+    collection do
+      get 'term_results_mail_to_teachers'
+      get 'get_term_results'
+      get 'get_student_details'
+      get 'get_subject_assessment_criteria'
+      post 'save_term_results'
+    end  
+  end
+  
 end

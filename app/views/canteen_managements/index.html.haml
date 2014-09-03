@@ -1,8 +1,8 @@
 .col-md-7{"ng-controller" => "CanteensController"}
   %h3
-    = "Meal types"
+    = "Meal Types"
     .pull-right
-      = link_to "Add Meals", "#", :class => "btn btn-primary", :ng_click => "newMeal()"
+      = link_to "Add Meal Type", "#", :class => "btn btn-primary", :ng_click => "newMeal()"
     .pull-left
       .col-sm-10
         %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
@@ -11,16 +11,14 @@
   %table#tblData.target.table.table-striped.table-condensed.table-bordered
     %thead
       %tr
-        %th Meal name
-        %th time
-        %th Description
+        %th Meal Type
+        %th Time       
         %th
     %tbody
       - @canteen_managements.each do |canteen_management|
         %tr
           %td= canteen_management.meal_name
-          %td= canteen_management.time
-          %td= canteen_management.description
+          %td= canteen_management.time          
           %td
             = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_canteen_management_path(canteen_management), :class => "btn btn-warning btn-sm", :title => "Edit"
             = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), canteen_management_path(canteen_management), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"

@@ -22,13 +22,12 @@
         .col-md-3        
           = label_tag "Criteria  {{$index+1}}", nil, :class => "form-label"
         .col-md-8          
-          = text_field_tag "",nil, :class => "form-control",:ng_model => "criteria.myCriteria" ,:placeholder => "Criteria {{$index+1}}"
+          = text_field_tag "",nil, :class => "form-control",:ng_model => "criteria.myCriteria" ,:placeholder => "Criteria {{$index+1}}" 
         .col-md-1
           %button{:type => "button", :class=> "btn btn-danger", :ng_click => "destroyCriteria($index)"}=  "-"
             
   .row
     %br
     .col-md-5.col-md-offset-3
-      %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addCriteria($index)"}=  "Add  Criteria"
-      %button{:type=>"submit", :class=> "btn btn-primary", :ng_click => "saveAssessmentCriteriaMappings()"}=  "Save"
-        
+      %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addCriteria()"}=  "Add  Criteria"
+      %button{:type=>"submit", :class=> "btn btn-primary", :ng_click => "saveAssessmentCriteriaMappings()"}=  "Save" 

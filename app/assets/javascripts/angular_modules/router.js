@@ -66,6 +66,9 @@
              . when('/assessment_results/results_show_form', {
                 templateUrl: 'academics/assessment_results/results_show_form.html'               
             }) 
+             . when('/assessment_results/students_show_form', {
+                templateUrl: 'academics/assessment_results/students_show_form.html'               
+            }) 
 
 
         
