@@ -22,6 +22,10 @@ class Attendance
   def teacher_sub_menu
     sub_menu = []
     sub_menu << daily
+<<<<<<< Updated upstream:lib/menu/attendance.rb
+=======
+
+>>>>>>> Stashed changes:lib/menu/attendance_ctrl.rb
   end
 
   private

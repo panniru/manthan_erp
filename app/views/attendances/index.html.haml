@@ -1,8 +1,10 @@
 .row{:ng_controller => "AttendanceController"}
-  %table.table.table-bordered.table-hover.table-striped
-    %thead
-      %th Student's Name
-      
-    %tbody
-      %tr{"ng-repeat" => "row in students"}
-        %td {{row.name}}
+  .row{"ng-show" => "myShowFormValue"} 
+    .col-sm-12
+      = render "show_form"
+  .row{"ng-show" => "myEditFormValue"}
+    .col-sm-3
+      #attendance_calendar
+    .col-sm-7
+      = render "edit_form"
+

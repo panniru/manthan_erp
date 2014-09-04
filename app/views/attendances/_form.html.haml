@@ -1,0 +1,29 @@
+%form{"ng-submit" => "saveStudentAttendance()"}
+  //%body{:onload => "myFunction()"}
+  %table#myTable.table.table-bordered.table-condensed.table-striped
+    %thead
+      %tr
+        %th Student's Name
+        %th 
+          %label{for: "P", :id => "P"} P
+        %th
+          %label{for: "A", :id => "A"} A
+        %th
+          %label{for: "L", :id => "L"} L
+                
+    %tbody
+      %tr{"ng-repeat" => "student in students"}
+        %td
+          {{student.name}}
+        %td
+          %input{:ng_model =>"student['attendance']", type: "radio", value: "P"} 
+        %td
+          %input{:ng_model =>"student['attendance']", type: "radio", value: "A"} 
+        %td
+          %input{:ng_model =>"student['attendance']", type: "radio", value: "L"} 
+          = hidden_field_tag :attendance, :value => "{{student['attendance']}}"
+          = hidden_field_tag :name, :value => "{{student.name}}"
+  %input#saveStudentAttendance{:type => "submit", :class => "btn btn-primary", :value => "Submit", "ng-model" => "myDate"}
+            
+  
+

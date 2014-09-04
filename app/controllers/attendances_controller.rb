@@ -1,5 +1,54 @@
 class AttendancesController < ApplicationController
+<<<<<<< Updated upstream
   
+=======
+  def getStudentAndAttendanceView
+    student_attend = Attendance.all.map do |student_attend|
+      { attendance: student_attend.attendance, student_master_id: student_attend.student_master_id, student_name: student_attend.student_master.name,attendance_date: student_attend.attendance_date}
+    end
+    render :json => student_attend
+  end
+    def save_student_attendance
+      p params[:attendence_details]
+      params[:attendence_details].each do |t|
+        @temp = Attendance.new(add_attendance_params(t))
+        @temp.student_master_id = t[:student_master_id]
+        @temp.attendance = t[:attendance]
+        @temp.attendance_date = t[:attendance_date]
+        @temp.name = t[:name]
+        @temp.save
+      end
+      render :json => true
+    end
+
+  def holidaycalendardata
+    respond_to do |format|
+      format.json do
+        holiday_calendar = Holidaycalendar.select(:holiday_date).distinct   
+        #holiday_calendar = Holidaycalendar.select(:holiday_date).distinct         
+        holiday_calendar = holiday_calendar.map do |calendar|
+          {start: calendar.holiday_date, title: "holiday", description: "holiday", url: "#", holiday_date: calendar.holiday_date}
+      end
+        render :json => holiday_calendar
+      end
+      
+    end
+  end
+  def holiday_date
+    respond_to do |format|
+      format.json do
+        holiday_date = Holidaycalendar.where("holiday_date = '#{params[:date]}'")
+        holiday_date = holiday_date.map do |holiday|
+          {id: holiday.holiday_date, description: holiday.description}
+        end
+        render :json => holiday_date
+      end
+    end
+  end
+  def holidaycalendar_params
+    params.require(:holidaycalendar).permit(:holiday_date, :description) 
+  end
+
   def create
     @attendance = Attendance.new(attendance_params)
     if @attendance.save
@@ -17,11 +66,11 @@ class AttendancesController < ApplicationController
   def index
     if current_user.teacher?
       if(ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
-       
         render 'index'
       end
     end
   end
+  
   def get_students
     respond_to do |format|
       format.json do 

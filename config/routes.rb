@@ -603,6 +603,10 @@ ManthanErp::Application.routes.draw do
     collection do
       get 'teacher_index'
       get 'get_students'
+      get 'holidaycalendardata'
+      get 'holiday_date'
+      post 'save_student_attendance'
+      get 'getStudentAndAttendanceView'
     end
   end
 
