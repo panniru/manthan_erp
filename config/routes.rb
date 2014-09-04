@@ -596,6 +596,7 @@ ManthanErp::Application.routes.draw do
       post 'save_term_results'
       get 'get_grades_sections'
       get 'get_grade_subjects'
+      get 'get_student_term_results'
     end  
   end
   

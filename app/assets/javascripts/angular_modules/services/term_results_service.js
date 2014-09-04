@@ -31,6 +31,11 @@
             var url = "/term_results/get_grade_subjects.json"
             return $http.get(url,{params : {my_Grade: myGrade}});
         };
+
+        var getStudentTermResultsService = function(academic_Term_Id, myStudent, myGrade, mySection){
+            var url = "/term_results/get_student_term_results.json"
+            return $http.get(url,{params: {academic_Term_Id: academic_Term_Id, my_Student: myStudent, my_Grade: myGrade, my_Section: mySection}});
+        };
         
         return {
             getTermResultsService : getTermResultsService,
@@ -39,6 +44,8 @@
             saveTermResultsService : saveTermResultsService,
             getGradesSectionsService : getGradesSectionsService,
             getGradeSubjectsService : getGradeSubjectsService,
+            getStudentTermResultsService : getStudentTermResultsService,
         }
+
     }]);
 })(angular, myApp);

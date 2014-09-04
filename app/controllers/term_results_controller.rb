@@ -33,12 +33,9 @@ class TermResultsController < ApplicationController
 
   def get_term_results
     respond_to do |format|
-      format.json do   
-        p params 
-        p "=============>"
+      format.json do       
         term_results = TermResult.where('academic_term_id = '+"'#{params[:academic_Term_Id]}'"+" AND "+'grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'"+" AND "+'subject_master_id = '+"'#{params[:my_Subject]}'")
-        p  term_results 
-        p "==================>"
+       
         term_results = term_results.each.map do |mapping|      
           {id: mapping.id, academic_term_id: mapping.academic_term_id , grade_master_id: mapping.grade_master_id, section_master_id: mapping.section_master_id, student_master_id: mapping.student_master_id, student_name: mapping.student_master.name, grading_master_id: mapping.grading_master_id, grading_name: mapping.grading_master.grading_name, assessment_criteria_id: mapping.assessment_criteria_id , subject_criteria: mapping.assessment_criteria.subject_criteria}
         end
@@ -73,9 +70,7 @@ class TermResultsController < ApplicationController
 
   def save_term_results
     respond_to do |format|
-      format.json do  
-        p params
-        p "================>"
+      format.json do          
         term_results = params[:term_results]
         term_results.each do |t|         
           if t["id"].present?           
@@ -112,9 +107,7 @@ class TermResultsController < ApplicationController
 
   def get_grade_subjects
     respond_to do |format|
-      format.json do   
-         p params
-        p "================>"
+      format.json do         
         grade_subjects = GradeSubjectMapping.where('grade_master_id = '+"'#{params[:my_Grade]}'")       
         grade_subjects = grade_subjects.each.map do |mapping|
           {id: mapping.id, grade_master_id: mapping.grade_master_id, grade_name: mapping.grade_master.grade_name, subject_master_id: mapping.subject_master_id, subject_name: mapping.subject_master.subject_name }
@@ -124,6 +117,16 @@ class TermResultsController < ApplicationController
     end
   end
 
+  def get_student_term_results
+    respond_to do |format|
+      format.json do         
+        term_results = TermResult.where('academic_term_id = '+"'#{params[:academic_Term_Id]}'"+" AND "+'student_master_id = '+"'#{params[:my_Student]}'"+" AND "+'grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'")       
+        term_results = term_results.each.map do |mapping|      
+          {id: mapping.id, academic_term_id: mapping.academic_term_id , grade_master_id: mapping.grade_master_id, section_master_id: mapping.section_master_id, student_master_id: mapping.student_master_id, student_name: mapping.student_master.name, grading_master_id: mapping.grading_master_id, grading_name: mapping.grading_master.grading_name, assessment_criteria_id: mapping.assessment_criteria_id , subject_criteria: mapping.assessment_criteria.subject_criteria}
+        end
+        render :json => term_results
+      end
+    end
+  end
   
 end
-
