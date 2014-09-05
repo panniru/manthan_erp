@@ -4,8 +4,12 @@ class TermResultsController < ApplicationController
     if current_user.admin?
       render "index"     
     elsif  current_user.teacher?
-      @academic_terms = AcademicTerm.all     
-      render "teacher_index"
+      @academic_terms = AcademicTerm.all  
+      if(ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
+        render "class_teacher_index"
+      else
+        render "teacher_index"  
+      end
     elsif  current_user.principal?  
       @academic_terms = AcademicTerm.all     
       render "principal_index"    

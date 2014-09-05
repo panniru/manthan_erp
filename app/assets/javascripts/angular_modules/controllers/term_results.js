@@ -1,11 +1,12 @@
 (function(angular, app) {
     "use strict";
-    app.controller('TermResultsController', ["$scope", "termResultsService", "assessmentsTeacherService", "gradingService", "academicTermsService", function($scope, termResultsService, assessmentsTeacherService, gradingService, academicTermsService) {  
+    app.controller('TermResultsController', ["$scope", "$window", "termResultsService", "assessmentsTeacherService", "gradingService", "academicTermsService", function($scope, $window, termResultsService, assessmentsTeacherService, gradingService, academicTermsService) {  
         //alert();
         $scope.showTriggerForm = false;
         $scope.showShowForm = true;
         $scope.student_Result = false;
-        $scope.teacher_view_term_Result = false;
+        $scope.teacher_view_term_Result = false;  
+        
 
         $scope.showTrigger = function()
         {
@@ -33,6 +34,7 @@
         $scope.selectTermResults = function(academic_term){            
             $scope.academic_Term_Id = academic_term.id;
             $scope.teacher_view_term_Result = true;
+            $scope.teacher_view_select_term_Result = false;
             
             assessmentsTeacherService.getTeacherGradeMappings()
                 .then(function(result) {               
@@ -54,10 +56,11 @@
             
         };
 
-        $scope.getTermResults = function(){              
+        $scope.getTermResults = function(){ 
+            $scope.teacher_view_select_term_Result = true;
             termResultsService.getStudentDetailsService($scope.myGradeSection.grade_master_id, $scope.myGradeSection.section_master_id)
                 .then(function(result){                   
-                    $scope.students = result.data;                    
+                    $scope.students = result.data;                   
                 });
 
             termResultsService.getSubjectAssessmentCriteriaService($scope.myGradeSection.grade_master_id, $scope.myGradeSection.subject_master_id)
@@ -110,6 +113,7 @@
             .then(function(result) {                
                 $scope.mappings = result.data; 
                 $scope.grades_sections = [];
+                
                
                 for(var i=0; i<result.data.length; i++){
                     $scope.grades_sections.push({

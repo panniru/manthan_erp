@@ -16,7 +16,7 @@ class SectionMaster < ActiveRecord::Base
       
     elsif current_user.role.role == "teacher"      
       sections = SectionMaster.all.map do |section|
-        {section_master_id: section.id, section_name: section.section_name, grade_master_id: section.grade_master_id}
+        {section_master_id: section.id, section_name: section.section_name, grade_master_id: section.grade_master_id, grade_name: section.grade_master.grade_name}
     end 
   elsif current_user.role.role == "principal"      
       sections = SectionMaster.all.map do |section|

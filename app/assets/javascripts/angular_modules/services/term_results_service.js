@@ -8,8 +8,8 @@
         }; 
 
         var getStudentDetailsService = function(myGrade, mySection){
-            var url = "/term_results/get_student_details.json"
-            return $http.get(url,{params : {my_Grade: myGrade, my_Section: mySection}});
+            var url = "/term_results/get_student_details.json";           
+            return $http.get(url,{params : {my_Grade: myGrade, my_Section: mySection}});           
         };  
 
         var getSubjectAssessmentCriteriaService = function(myGrade, mySubject){
