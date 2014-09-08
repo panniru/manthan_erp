@@ -33,6 +33,7 @@
         %thead
           %tr
             %th Location 
+            %th Route
             %th Time pickup
             %th Route no Up
             %th Bus no Up
@@ -45,10 +46,12 @@
             %tr
               %td= location.location_master.location_name
               = hidden_field_tag "bulk_save[][location_master_id]",'', :value => location.location_master.id
-              %td= time_field "bulk_save[][time_up]", '', {:class => "form-control", :placeholder => 'Pick up Time'}
+              %td= location.route_id
+              = hidden_field_tag "bulk_save[][route_id]",'', :value => location.route_id
+              %td= text_field_tag "bulk_save[][time_up]", '', {:class => "form-control", :placeholder => 'Pick up Time'}
               %td= text_field_tag "bulk_save[][new_up_route]", '', {:class => "form-control", :placeholder => 'UP Routeno#'}
               %td= text_field_tag "bulk_save[][new_busno_up]", '', {:class => "form-control", :placeholder => 'UP Busno#'}
-              %td= time_field "bulk_save[][time_down]", '', {:class => "form-control", :placeholder => 'Time Drop'}
+              %td= text_field_tag "bulk_save[][time_down]", '', {:class => "form-control", :placeholder => 'Time Drop'}
               %td= text_field_tag "bulk_save[][new_down_route]", '', {:class => "form-control", :placeholder => 'Down Routeno#'}
               %td= text_field_tag "bulk_save[][new_busno_down]", '', {:class => "form-control", :placeholder => 'Down Busno#'}
              

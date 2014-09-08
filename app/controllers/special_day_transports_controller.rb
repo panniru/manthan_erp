@@ -13,6 +13,7 @@ class SpecialDayTransportsController < ApplicationController
     params[:bulk_save].each do |n|
       @new =  SpecialDayTransport.new(:date => params[:date] , :occation => params[:occation])
       @new.location_master_id = n[:location_master_id]
+      @new.route_id = n[:route_id]
       @new.time_up = n[:time_up]
       @new.new_up_route = n[:new_up_route]
       @new.new_busno_up = n[:new_busno_up]
@@ -25,7 +26,8 @@ class SpecialDayTransportsController < ApplicationController
   end
 
   def new
-    @locations = Location.select('DISTINCT location_master_id')
+    @locations = Location.all
+    #select('DISTINCT location_master_id') 
   end
 
   def send_mail
@@ -76,7 +78,6 @@ class SpecialDayTransportsController < ApplicationController
   end
   
   def edit
-    
   end
   
   private
