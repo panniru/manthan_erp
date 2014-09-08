@@ -15,6 +15,7 @@
 	    });
 	};
 	
+	$('#timepicker').timepicker();
 	$scope.submitRoutes = function(){
 	    alert('submit')
 	    $scope.newRoute.$save()

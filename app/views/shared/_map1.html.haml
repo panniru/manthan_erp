@@ -19,7 +19,7 @@
   //handler.buildMap({ internal: {id: 'map'}}, function(){
   //directionsDisplay.setMap(handler.getMap());
   //});
-  alert(gon.gmap_data)
+  //alert(gon.gmap_data)
   handler = Gmaps.build('Google')
   handler.buildMap({ provider: {}, internal: {id: 'map'} }, function(){
   markers = handler.addMarkers(jQuery.parseJSON(gon.gmap_data))

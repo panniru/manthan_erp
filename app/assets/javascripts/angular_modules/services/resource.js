@@ -56,7 +56,7 @@
                                       );
 	var Route = $resource('/routes/:id.json', {id: '@id'}, 
 			      {
-				 
+				  "locations": { url: "/routes/:id/locations.json", id:'@id', isArray: true},
                                   "update": { method: "PUT"}
                               }
                              );
@@ -112,7 +112,7 @@
             RequestNewBook : RequestNewBook,           
             Mealtype: Mealtype,
             Mealname: Mealname,
-            Inventory: Inventory
+            Inventory: Inventory,
             CanteenManagement: CanteenManagement,
 	    SpecialDayTransport:SpecialDayTransport
 

@@ -508,8 +508,10 @@ ManthanErp::Application.routes.draw do
       get "students"
       post "send_mail"
       get 'all_locations'
+
     end
     member do
+      get 'locations'
       get "students"
     end
   end

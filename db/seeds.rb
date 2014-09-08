@@ -202,71 +202,60 @@ end
 
 def seed_location_masters
   unless LocationMaster.first.present?
-    LocationMaster.create(:id => '4', :location_name =>  'Kothaguda', :latitude => ' 17.4652114 '  , :longitude => '78.37569' )
-    LocationMaster.create(:id => '5', :location_name =>  'Madinaguda', :latitude => '  17.4936856'  , :longitude => '78.3401293' )
-    LocationMaster.create(:id => '6', :location_name =>  'Rajahmundry', :latitude => ' 17.0005383  '  , :longitude => '81.8040345' )
-    LocationMaster.create(:id => '7', :location_name =>  'Khammam', :latitude => ' 17.4652114 '  , :longitude => '78.37569' )
-    LocationMaster.create(:id => '8', :location_name =>  'Hyderabad', :latitude => '  17.2472528 '  , :longitude => '80.1514447 ' )
-    LocationMaster.create(:id => '9', :location_name =>  'Vijayawada', :latitude => '  16.5061743  '  , :longitude => '80.6480153') 
-    LocationMaster.create(:id => '10', :location_name =>  'Yousufguda', :latitude => ' 17.4353328 '  , :longitude => '78.4357118 ' )
-    LocationMaster.create(:id => '11', :location_name =>  'Gachibowli', :latitude => ' 17.4359437 '  , :longitude => ' 78.3416731' )
-    LocationMaster.create(:id => '12', :location_name =>  'Mind Space', :latitude => '  52.60207 '  , :longitude => '-2.126895 ' )
+    LocationMaster.create(:id => '10', :location_name =>  'Kothaguda', :latitude => ' 17.4652114 '  , :longitude => '78.37569' )
+    LocationMaster.create(:id => '11', :location_name =>  'Madinaguda', :latitude => '  17.4936856'  , :longitude => '78.3401293' )
+    LocationMaster.create(:id => '12', :location_name =>  'Rajahmundry', :latitude => ' 17.0005383  '  , :longitude => '81.8040345' )
+    LocationMaster.create(:id => '13', :location_name =>  ' Punjagutta', :latitude => '17.4244971  '  , :longitude => ' 78.451038' )
+    LocationMaster.create(:id => '14', :location_name =>  'Hyderabad', :latitude => '  17.2472528 '  , :longitude => '80.1514447 ' )
+    LocationMaster.create(:id => '15', :location_name =>  'Mehadipatnam', :latitude => ' 17.3916361  '  , :longitude => '78.4400648') 
+    LocationMaster.create(:id => '16', :location_name =>  'Yousufguda', :latitude => ' 17.4353328 '  , :longitude => '78.4357118 ' )
+    LocationMaster.create(:id => '17', :location_name =>  'Gachibowli', :latitude => ' 17.4359437 '  , :longitude => ' 78.3416731' )
+    LocationMaster.create(:id => '18', :location_name =>  ' Begumpeta ', :latitude => ' 17.4244971 '  , :longitude => ' 78.451038 ' )
+    LocationMaster.create(:id => '19', :location_name =>  ' Limgampalli ', :latitude => ' 17.480000 '  , :longitude => '78.330000 ' )
+    LocationMaster.create(:id => '20', :location_name => 'Jubilee hills checkpost',:latitude => '17.428604 '  , :longitude => '78.417604 ' )
+    LocationMaster.create(:id => '21', :location_name =>  'Peddamma Temple,hyderabad ', :latitude => '17.430186 '  , :longitude => ' 78.405195 ' )
+    LocationMaster.create(:id => '22', :location_name =>  'Madhapur Police Station, hyderabad ', :latitude => ' 17.4389913' ,:longitude => '78.3971339')
+    LocationMaster.create(:id => '23', :location_name =>  'Miyapur', :latitude => '17.494793'  , :longitude => '78.399644' )
+    LocationMaster.create(:id => '24', :location_name =>  'Kukatpally', :latitude => '17.494793'  , :longitude => '78.399644' )
   end
 end
 
 def seed_locations
   unless Location.first.present?
-    Location.create(:id => '25' , :sequence_no => '1' , :route_id => '18', :location_master_id => '8'  )
-    Location.create(:id => '26' , :sequence_no => '4' , :route_id => '18', :location_master_id => '6'  )
-    Location.create(:id => '27' , :sequence_no => '2' , :route_id => '18', :location_master_id => '7'  )
-    Location.create(:id => '28' , :sequence_no => '3' , :route_id => '18', :location_master_id => '9'  )
-    Location.create(:id => '29' , :sequence_no => '3' , :route_id => '19', :location_master_id => '4'  )
-    Location.create(:id => '30' , :sequence_no => '1' , :route_id => '19', :location_master_id => '5'  )
-    Location.create(:id => '31' , :sequence_no => '2' , :route_id => '19', :location_master_id => '11' )
-    Location.create(:id => '32' , :sequence_no => '1' , :route_id => '20', :location_master_id => '5'  )
-    Location.create(:id => '33' , :sequence_no => '2' , :route_id => '20', :location_master_id => '8'  )
-    Location.create(:id => '34' , :sequence_no => '3' , :route_id => '20', :location_master_id => '11' )
-    Location.create(:id => '35' , :sequence_no => '4' , :route_id => '20', :location_master_id => '9'  )
-    Location.create(:id => '36' , :sequence_no => '1' , :route_id => '21', :location_master_id => '7'  )
-    Location.create(:id => '37' , :sequence_no => '3' , :route_id => '21', :location_master_id => '9'  )
-    Location.create(:id => '38' , :sequence_no => '2' , :route_id => '21', :location_master_id => '6'  )
+    Location.create(:id => '25' , :sequence_no => '1' , :route_id => '18', :location_master_id => '22'  )
+    Location.create(:id => '26' , :sequence_no => '4' , :route_id => '18', :location_master_id => '19'  )
+    Location.create(:id => '27' , :sequence_no => '2' , :route_id => '18', :location_master_id => '10'  )
+    Location.create(:id => '28' , :sequence_no => '3' , :route_id => '18', :location_master_id => '17'  )
+    Location.create(:id => '29' , :sequence_no => '3' , :route_id => '19', :location_master_id => '15'  )
+    Location.create(:id => '30' , :sequence_no => '1' , :route_id => '19', :location_master_id => '13'  )
+    Location.create(:id => '31' , :sequence_no => '2' , :route_id => '19', :location_master_id => '18' )
+    Location.create(:id => '32' , :sequence_no => '1' , :route_id => '20', :location_master_id => '16'  )
+    Location.create(:id => '33' , :sequence_no => '2' , :route_id => '20', :location_master_id => '20'  )
+    Location.create(:id => '34' , :sequence_no => '3' , :route_id => '20', :location_master_id => '21' )
+    Location.create(:id => '35' , :sequence_no => '4' , :route_id => '20', :location_master_id => '14'  )
+    Location.create(:id => '36' , :sequence_no => '1' , :route_id => '21', :location_master_id => '11'  )
+    Location.create(:id => '37' , :sequence_no => '3' , :route_id => '21', :location_master_id => '24'  )
+    Location.create(:id => '38' , :sequence_no => '2' , :route_id => '21', :location_master_id => '23'  )
   
   end
 end
 
-def seed_special_day_transports
-  unless SpecialDayTransport.first.present?
-    SpecialDayTransport.create(:id => '38' , :location_master_id => '8' , :new_up_route => '1A', :new_down_route => '1A' , :new_busno_up => '13', :new_busno_down => '13' , :time_up => '8:15am' , :time_down => '6pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
-    SpecialDayTransport.create(:id => '39' , :location_master_id => '4' , :new_up_route => '1A', :new_down_route => '1A' , :new_busno_up => '13', :new_busno_down => '13' , :time_up => '8:20am' , :time_down => '6:10pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
-    SpecialDayTransport.create(:id => '38' , :location_master_id => '5' , :new_up_route => '1A', :new_down_route => '1A' , :new_busno_up => '13', :new_busno_down => '13' , :time_up => '8:30am' , :time_down => '6:15pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
-    SpecialDayTransport.create(:id => '38' , :location_master_id => '11' , :new_up_route => '2A', :new_down_route => '1A' , :new_busno_up => '14', :new_busno_down => '13' , :time_up => '8:15am' , :time_down => '6:20pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
-    SpecialDayTransport.create(:id => '38' , :location_master_id => '9' , :new_up_route => '2A', :new_down_route => '2A' , :new_busno_up => '14', :new_busno_down => '14' , :time_up => '8:20am' , :time_down => '6pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
-    SpecialDayTransport.create(:id => '38' , :location_master_id => '2' , :new_up_route => '2A', :new_down_route => '2A' , :new_busno_up => '14', :new_busno_down => '14' , :time_up => '8:25am' , :time_down => '6:10pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
-    SpecialDayTransport.create(:id => '38' , :location_master_id => '6' , :new_up_route => '3A', :new_down_route => '2A' , :new_busno_up => '15', :new_busno_down => '14' , :time_up => '8:15am' , :time_down => '6:20pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
-    SpecialDayTransport.create(:id => '38' , :location_master_id => '7' , :new_up_route => '3A', :new_down_route => '2A' , :new_busno_up => '15', :new_busno_down => '14' , :time_up => '8:20am' , :time_down => '6:30pm' , :date => '09-03-2014', :occation => 'AnnualDay2014'  )
-    SpecialDayTransport.create(:id => '38' , :location_master_id => '8' , :new_up_route => '1A', :new_down_route => '1A' , :new_busno_up => '13', :new_busno_down => '13' , :time_up => '8:15am' , :time_down => '6pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
-    SpecialDayTransport.create(:id => '39' , :location_master_id => '4' , :new_up_route => '1A', :new_down_route => '1A' , :new_busno_up => '13', :new_busno_down => '13' , :time_up => '8:20am' , :time_down => '6:10pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
-    SpecialDayTransport.create(:id => '38' , :location_master_id => '5' , :new_up_route => '1A', :new_down_route => '1A' , :new_busno_up => '13', :new_busno_down => '13' , :time_up => '8:30am' , :time_down => '6:15pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
-    SpecialDayTransport.create(:id => '38' , :location_master_id => '11' , :new_up_route => '2A', :new_down_route => '1A' , :new_busno_up => '14', :new_busno_down => '13' , :time_up => '8:15am' , :time_down => '6:20pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
-    SpecialDayTransport.create(:id => '38' , :location_master_id => '9' , :new_up_route => '2A', :new_down_route => '2A' , :new_busno_up => '14', :new_busno_down => '14' , :time_up => '8:20am' , :time_down => '6pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
-    SpecialDayTransport.create(:id => '38' , :location_master_id => '2' , :new_up_route => '2A', :new_down_route => '2A' , :new_busno_up => '14', :new_busno_down => '14' , :time_up => '8:25am' , :time_down => '6:10pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
-    SpecialDayTransport.create(:id => '38' , :location_master_id => '6' , :new_up_route => '3A', :new_down_route => '2A' , :new_busno_up => '15', :new_busno_down => '14' , :time_up => '8:15am' , :time_down => '6:20pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
-    SpecialDayTransport.create(:id => '38' , :location_master_id => '7' , :new_up_route => '3A', :new_down_route => '2A' , :new_busno_up => '15', :new_busno_down => '14' , :time_up => '8:20am' , :time_down => '6:30pm' , :date => '05-09-2014', :occation => 'TeachersDay2014'  )
-  end
-end
+
 
 def seed_new_vehicles
   unless NewVehicle.first.present?
-    NewVehicle.create(:id => '10',:model_no => 'AT5678',:make_of_bus => 'TAYOTA',:year_of_manufacture => '2011',:purchase_option => 'Own',:purchase_option_date => '5/6/2011',:capacity => '50'  )
-    NewVehicle.create(:id => '12',:model_no => 'AT5678',:make_of_bus => 'TAYOTA',:year_of_manufacture  => '2011',:purchase_option => 'Own',:purchase_option_date => '5/6/2011',:capacity => '50'  )
-    NewVehicle.create(:id => '13',:model_no => 'TR879',:make_of_bus => 'TAYOTA',:year_of_manufacture  => '2000',:purchase_option => 'Lease',:purchase_option_date => '5/6/2011',:capacity => '50'  )
+  NewVehicle.create(:id => '10',:model_no => 'AT5678',:make_of_bus =>  'TAYOTA',:year_of_manufacture => '2011',:purchase_option => 'Own',:purchase_option_date => '5/6/2011',:capacity => '50' )
+  NewVehicle.create(:id => '12',:model_no => 'AT5678',:make_of_bus =>  'TAYOTA',:year_of_manufacture => '2011',:purchase_option =>  'Own',:purchase_option_date => '5/6/2011',:capacity => '50' )
+  NewVehicle.create(:id => '13',:model_no => 'TR879',:make_of_bus =>  'TAYOTA',:year_of_manufacture => '2000',:purchase_option =>  'Lease',:purchase_option_date => '5/6/2011',:capacity => '50' ) 
+    NewVehicle.create(:id => '14',:model_no => 'VB879',:make_of_bus =>  'TAYOTA',:year_of_manufacture => '2000',:purchase_option =>  'Lease',:purchase_option_date => '5/6/2011',:capacity => '50' ) 
   end
 end
+
 
 def seed_student_route_mapping
   unless StudentRouteMapping.first.present?
 
-    StudentRouteMapping.create(:id => '10' , :route_id => '18' , :student_master_id => '2',:location_master_id => '8' )
+    StudentRouteMapping.create(:id => '10' , :route_id => '18' , :student_master_id => '2',:location_master_id => '10' )
   end
 end
 
@@ -284,10 +273,10 @@ end
 
 def seed_routes
   unless Route.first.present?
-    Route.create(:id => '18' , :route_no => '1', :busno_up => '13' , :no_of_children => '3', :gmaps => '' , :start_point => '25' , :end_point => '26' )
-    Route.create(:id => '19' , :route_no => '2', :busno_up => '13' , :no_of_children => '45', :gmaps => '' , :start_point => '30' , :end_point => '29' )
-    Route.create(:id => '20' , :route_no => '3', :busno_up => '45' , :no_of_children => '34', :gmaps => '' , :start_point => '32' , :end_point => '35' )
-    Route.create(:id => '21' , :route_no => '4', :busno_up => '56' , :no_of_children => '45', :gmaps => '' , :start_point => '36' , :end_point => '37' )
+    Route.create(:id => '18' ,  :busno_up => '13' , :gmaps => '' , :start_point => '25' , :end_point => '26' )
+    Route.create(:id => '19' , :busno_up => '10' ,  :gmaps => '' , :start_point => '30' , :end_point => '29' )
+    Route.create(:id => '20' ,  :busno_up => '12' , :gmaps => '' , :start_point => '32' , :end_point => '35' )
+    Route.create(:id => '21' ,  :busno_up => '14' ,  :gmaps => '' , :start_point => '36' , :end_point => '37' )
   
   end
 end
@@ -361,7 +350,7 @@ def seed_all
   seed_locations
   seed_new_vehicles
   seed_student_route_mapping
-  seed_special_day_transports
+ 
 end
 
 seed_all

@@ -15,7 +15,6 @@
         %th Bus No
         %th start point
         %th End point
-        %th No of Children
         - if current_user.transport_head?
           %th
     %tbody
@@ -25,20 +24,56 @@
           %td= route.busno_up
           %td= route.start_location.location_master.location_name
           %td= route.end_location.location_master.location_name
-          %td= route.no_of_children
-          - if current_user.transport_head?
-            %td
-              =  link_to raw("<span class='glyphicon glyphicon-trash'></span>"),route_path(route), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+          %td
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),route_path(route), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+
+      -# - @routes.each do |route|
+      -#   %tr
+      -#     %td= link_to "#{route.id}", route_path(route)
+      -#     %td= route.busno_up
+      -#     %td= route.start_location.location_master.location_name
+      -#     %td= route.end_location.location_master.location_name
+      -#     %td= route.no_of_children
+      -#     - if current_user.transport_head?
+      -#       %td 
+      -#         = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-sm", :title => "Edit", :ng_click => "editRoutes(route)"
+      -#         = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(route)"
+
             
-    .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
-      .modal-dialog
-        .modal-content
-          .modal-header
-            %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
-            %h4.modal-title{ :id => "myModalLabel"} New Route
-            .modal-body{"ng-controller" => "RouteController"}
-              = render "form1"
+            
+      #createModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+              %h4#myModalLabel.modal-title New Route            
+              .modal-body{"ng-controller" => "RouteController"}
+                = render "form1"
               
-.row
-  = render "shared/map1"
+        #editModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+          .modal-dialog
+            .modal-content
+              .modal-header
+                %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+                %h4#myModalLabel.modal-title New location            
+              .modal-body
+                .row{"ng-repeat" => "location.route_locations"}
+                  .col-sm-3 
+                    .form-group{"ng-repeat" => "location in newRoute.locations"}
+                      = label_tag "stop  {{$index+1}}", nil, :class => "form-label col-md-2"
+                  .col-md-3
+                    %select{"ng-model" => "location.location_master_id", "ng-options" => "var.id as var.location_name for var in all_locations",:class => "form-control",:required => "required", }
+                    %option{style: "display:none", value: ""} Select Location
+                  .col-sm-3
+                    .input-group
+                      = text_field_tag "bulk_location[][sequence_no]",nil, :class => "form-control" , :ng_model => "location.sequence_no" , :placeholder => "Sequence#"
+                .row
+                  .col-md-5.col-md-offset-3
+                    %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMoreterms()"}=  "More stops"
+                    %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"
+                    
+                      
+            
+  .row
+    = render "shared/map1"
                 

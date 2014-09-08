@@ -1,13 +1,19 @@
 %form{:class=>"form-horizontal", :ng_submit => "submitRoutes()" }
   .row
+    .col-sm-4
+      %select{"ng-model" => "newRoute.point", "ng-options" => "item as item.name for item in items",:class => "form-control",:required => "required", }
+        %option{style: "display:none", value: ""} Select Route
+        = hidden_field_tag :lpp, :value => "{{item}}"
+    .col-sm-2
+      %button{:type => "button", :class=> "btn btn-primary", :ng_click => "busNo()"}=  "search"
     .col-sm-2
       = label_tag "Busno", nil, :class => "form-label"
     .col-sm-3
-      %select{"ng-model" => "newRoute.busno_up", "ng-options" => "var.id as var.id  for var in bus",:class => "form-control",:required => "required", }
+      %select{"ng-model" => "newRoute.busno_up", "ng-options" => "var.id as var.id  for var in bus",:class => "form-control",:required => "required", :options_manager => "" , :index => "{{$index}}"}
         %option{style: "display:none", value: ""} Bus No
-        = hidden_field_tag :busno_up, :value => " "
-    %br
-    %br
+        = hidden_field_tag :busno_up, :value => ""
+        %br
+        %br
       
   .form-group{"ng-repeat" => "location in newRoute.locations"}
     .row

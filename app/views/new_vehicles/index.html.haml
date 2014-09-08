@@ -1,7 +1,7 @@
 .row
   .col-sm-2
     %h3
-      Buses List
+      Bus List
   .col-sm-4
   - if current_user.transport_head?
     .col-sm-2
@@ -10,11 +10,11 @@
   .col-sm-10
     %table#tblData.target.table.table-striped.table-condensed.table-bordered
       %thead
-        %th Company of Bus
-        %th Model No
         %th Bus No
+        %th Company 
+        %th Model 
         %th Year Of Manufacturing
-        %th Purchase
+        %th Ownership
         %th Purchase Date
         %th Capacity
         - if current_user.transport_head?
@@ -22,9 +22,9 @@
       %tbody
         - @new_vehicle.each do |new_vehicle|
           %tr
+            %td= new_vehicle.id
             %td= new_vehicle.make_of_bus
             %td= new_vehicle.model_no
-            %td= new_vehicle.id
             %td= new_vehicle.year_of_manufacture
             %td= new_vehicle.purchase_option
             %td= new_vehicle.purchase_option_date

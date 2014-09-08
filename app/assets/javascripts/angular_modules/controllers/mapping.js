@@ -20,7 +20,7 @@
 	    alert(student_master_id)
 	    mapService.saveRoute(route,location,student_master_id)
 		.then(function(result) {
-		    
+		    $('#myModal').modal('hide');
 		});
 	};
 	

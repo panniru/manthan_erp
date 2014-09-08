@@ -1,5 +1,5 @@
  class RoutesController < ApplicationController
-   load_resource :only => [:show, :update, :edit, :destroy]
+   load_resource :only => [:show, :update, :edit, :destroy, :locations]
    
    def index
      @student_route_mappings = StudentRouteMapping.where(:route_id => params[:route_id]).count
@@ -19,7 +19,7 @@
        gon.height = "350px"
        respond_to do |format|   
          format.json do
-         render :json => Route.all
+           render :json => @routes
          end
          format.html do 
            render "index"
@@ -58,9 +58,9 @@
        end
      end
    end  
-   
       
    def send_mail
+     p ""
      if current_user.admin?
        respond_to do |format|
          route_mail= params[:route_mail]
@@ -133,16 +133,20 @@
    end
    
    def all_locations
-     location =  LocationMaster.all.map do |location|
-       { location: location.location_name,student_name: location.student_master.name, id: location.student_master.id}
+     respond_to do |format|
+       format.json do 
+         loc = StudentRouteMapping.show_all_locations(params[:location]).map {|student| student.student_master_id}
+         locations = StudentMaster.where(:id => loc ).each.map do |mapping|
+           {id: mapping.id,  name: mapping.name}
+         end     
+         render :json => locations
+       end
      end
-     render :json => location
    end
    
+       
    def students
-     @route = Route.find(params[:id])
    end
-
      
    def destroy
      if @route.destroy
@@ -157,7 +161,6 @@
      respond_to do |format|
        @route= Route.new(route_params)
        status = @route.save_route(params[:locations])
-       
        format.json do
          render :json => status
        end
@@ -173,22 +176,26 @@
      end
    end
    
-     
-   
    def edit
    end
    
+   def locations
+     respond_to do |format|
+       format.json do
+         render :json => [{"1" => 12},{"1" => 23}]
+       end
+     end
+   end
+
    private
       
    def route_params
-     route_params = params.require(:route).permit(:route_no , :busno_up )
+     route_params = params.require(:route).permit(:route_no , :busno_up, :lpp )
    end
    
    def build_route_from_bulk
      params.require(:locations).select{|locations| location["location_master_id"].present? and route["sequence_no"].present? }.map do |params|
        location = Location.new(params[:location].permit(:location_master_id, :sequence_no))
-       p "========="
-       p params[:route]
        route = Route.new(params[:route].permit(:route_no, :busno_up))
        route.locations << location
        route

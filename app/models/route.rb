@@ -3,7 +3,7 @@ class Route < ActiveRecord::Base
   has_many :location_masters
   accepts_nested_attributes_for :locations
   attr_accessor :text ,:subject
- 
+  
   def save_route(location_params)
     location_params.each do |location|
       locations << Location.new(location.permit(:location_master_id, :sequence_no))
@@ -24,4 +24,19 @@ class Route < ActiveRecord::Base
   def end_location
     Location.find(end_point)
   end
+  
+  def slice_out(bus)
+    dead = [ ]
+    bus.delete_if do |e|
+      if(yield e)
+        dead.push(e)
+        true
+      else
+        false  
+      end
+    end
+    dead
+  end
+  
+
 end

@@ -4,7 +4,7 @@ var directionsService = new google.maps.DirectionsService();
 function calcRoute() {
     var origin = new google.maps.LatLng(gon.start_point_latitude , gon.start_point_longitude);
     var destination = new google.maps.LatLng(gon.end_point_latitude , gon.end_point_longitude);
-    alert(gon.waypts)
+    //alert(gon.waypts)
     var waypts = JSON.parse(gon.waypts);
     var request = {
 	origin: origin,

@@ -40,15 +40,15 @@
             %th Route no Down
             %th Bus no Down
             
-        %tbody
+        %tbody 
           - @locations.each do |location|
             %tr
               %td= location.location_master.location_name
               = hidden_field_tag "bulk_save[][location_master_id]",'', :value => location.location_master.id
-              %td= text_field_tag "bulk_save[][time_up]", '', {:class => "form-control", :placeholder => 'UP Routeno#'}
+              %td= time_field "bulk_save[][time_up]", '', {:class => "form-control", :placeholder => 'Pick up Time'}
               %td= text_field_tag "bulk_save[][new_up_route]", '', {:class => "form-control", :placeholder => 'UP Routeno#'}
               %td= text_field_tag "bulk_save[][new_busno_up]", '', {:class => "form-control", :placeholder => 'UP Busno#'}
-              %td= text_field_tag "bulk_save[][time_down]", '', {:class => "form-control", :placeholder => 'Time Drop'}
+              %td= time_field "bulk_save[][time_down]", '', {:class => "form-control", :placeholder => 'Time Drop'}
               %td= text_field_tag "bulk_save[][new_down_route]", '', {:class => "form-control", :placeholder => 'Down Routeno#'}
               %td= text_field_tag "bulk_save[][new_busno_down]", '', {:class => "form-control", :placeholder => 'Down Busno#'}
              
