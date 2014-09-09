@@ -86,7 +86,7 @@ class BooksController < ApplicationController
         end
         @book_obj
       else
-        Book.new(book.permit(:name, :isbn, :author, :year_of_publishing,  :book_type))
+        Book.new(book.permit(:name, :isbn, :author, :year_of_publishing,  :book_type, :purchased_date))
       end
     end
   end

@@ -1,7 +1,13 @@
 %form{:class=>"form-horizontal", :ng_submit => "submitBooks()"}
+  .form-group
+    = label_tag  "Purchage Date", nil, :class => "form-label col-md-4"
+    .col-sm-4{"ng-controller" => "DatePickerController"}    
+      %input.form-control{"close-text" => "Close", "datepicker-options" => "dateOptions", "datepicker-popup" => "", "is-open" => "opened", "ng-model" => "purchased_date", "ng-required" => "true", type: "text", :ng_change => "$parent.reflectContent(purchased_date)", "ng-bind" => "dt | dt:'yyyy-MM-dd'", "ng-click" => "open($event)"} 
+      {{purchased_date}}
+      = hidden_field_tag "bulk_book[][purchased_date]","{{purchased_date}}"
   .form-group{"ng-repeat" => "book in newBooks"}
     = label_tag  "Book {{$index+1}}", nil, :class => "form-label col-md-2"
-    .col-sm-2  
+    .col-sm-2        
       = text_field_tag  "bulk_book[][name]",nil, :class => "form-control", :ng_model => "book.name", :placeholder => "Name"
     .col-sm-2
       = text_field_tag "bulk_book[][isbn]",nil, :class => 'form-control', :placeholder => "ISBN", :id => "isbn-{{$index}}", :ng_model => "book.isbn"
@@ -14,6 +20,7 @@
     
   .row
     .col-md-5.col-md-offset-3
+      
       %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMorebooks()"}=  "More books"
       %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"
      

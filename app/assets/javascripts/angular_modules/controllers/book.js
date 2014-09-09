@@ -2,11 +2,12 @@
     "use strict";
     app.controller('BooksController',["$scope","resourceService", function($scope, resourceService) {
         $scope.books = resourceService.Book.query();
+        $scope.purchased_date = null;
         
-        $scope.newBook = function(){
+        $scope.newBook = function(){           
             $scope.newBooks = []
             for(var i=0; i<3; i++){
-                $scope.newBooks.push({"name":"", "isbn" :"", "author": "", "year_of_publishing":"", "book_type":"" });
+                $scope.newBooks.push({"name": "", "isbn": "", "author": "", "year_of_publishing": "", "book_type": "", "purchased_date": $scope.purchased_date});
             };
             $('#createModal').modal('show')
         };
@@ -19,8 +20,9 @@
         }
             
         $scope.editBooks = function(){
+            alert("hey");
             $scope.newBooks = $scope.Books
-            $('#createModal').modal('show')
+            $('#editBookModal').modal('show')
         }       
         $scope.destroy = function(book){
             book.$delete()
@@ -29,9 +31,10 @@
                 })
         };      
 	$scope.addMorebooks = function(){
+            alert($scope.purchased_date);
             var lnt = parseInt($scope.newBooks.length)
             for(var i=lnt; i< lnt+3; i++){
-                $scope.newBooks.push({"name":"", "isbn" :"", "author": "", "year_of_publishing":"",  "book_type":"" });
+                $scope.newBooks.push({"name": "", "isbn": "", "author": "", "year_of_publishing": "", "book_type": "", "purchased_date": $scope.purchased_date });
             };
         }
         
