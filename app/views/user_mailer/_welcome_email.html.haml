@@ -5,21 +5,22 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
         %h4#myModalLabel.modal-title Compose Mail
-        .modal-body{"ng-controller" => "RouteController"}
-          %div 
-          .row
-            .col-sm-3
-              = label_tag  "Subject",nil, :class => 'form-control'
-            .col-sm-8
-              = text_field_tag  "subject" ,nil , :ng_model => "subject", :class => 'form-control'                               
-              //%input{:name => "subject", :type => "text"}
-          .row
-            .col-sm-3
-            .col-sm-8
-              = text_area_tag  "text" ,nil  , :ng_model => "text" , :class => 'form-control'
-              %br
+      .modal-body{"ng-controller" => "RouteController"}
+        %div 
+        .row
+          .col-sm-3
+            = label_tag  "Subject",nil, :class => 'form-control'
+          .col-sm-8
+            = text_field_tag  "subject" ,nil , :ng_model => "subject", :class => 'form-control'                               
+            //%input{:name => "subject", :type => "text"}
+        .row
+          .col-sm-3
+          .col-sm-8
+            = text_area_tag  "text" ,nil  , :ng_model => "text" , :class => 'form-control'
+            %br
           .pull-right
             = link_to  "Send Mail","#", :class=> "btn btn-primary", :ng_click => "sendMail()"
             %br
+            
             
             

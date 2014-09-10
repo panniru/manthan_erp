@@ -21,8 +21,8 @@
 	    var url = "/routes/send_mail.json"
             return $http.post(url,{route_mail:{subject: subject, text: text }}); 
         };
-	var getRouteLocation = function(route){
-	    var url = "/routes/get_route_location.json?route="+route
+	var getRouteLocation = function(routeId){
+	    var url = "/routes/"+routeId+"/get_route_locations.json"
 	    return $http.get(url);
 	};
         return {

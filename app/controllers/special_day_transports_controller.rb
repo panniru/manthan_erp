@@ -7,9 +7,6 @@ class SpecialDayTransportsController < ApplicationController
   end
   
   def create
-    p "==================="
-    p params
-   
     params[:bulk_save].each do |n|
       @new =  SpecialDayTransport.new(:date => params[:date] , :occation => params[:occation])
       @new.location_master_id = n[:location_master_id]
@@ -68,16 +65,21 @@ class SpecialDayTransportsController < ApplicationController
   end
   
   def update
-    if @special_day_transport.update(route_params)
-      flash[:success] = I18n.t :success, :scope => [:special_day_transport, :update]
-      redirect_to special_day_transports_path
-    else
-      flash.now[:fail] = I18n.t :fail, :scope => [:special_day_transport, :update]
-      render "edit"
+    p "=================="
+    p route_params
+    @special_day_transports = SpecialDayTransport.find(params[:id])
+    respond_to do |format|
+      if @special_day_transports.update(route_params)
+        format.html { redirect_to special_day_transports_path, notice: 'Form was successfully updated.' }
+        format.json { render action: 'index', :status => "success" }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @special_day_transport.errors, :status => "failure" }
+      end
     end
   end
-  
   def edit
+    @special_day_transports = SpecialDayTransport.find(params[:id])
   end
   
   private

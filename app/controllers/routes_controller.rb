@@ -4,7 +4,7 @@
    def index
      @student_route_mappings = StudentRouteMapping.where(:route_id => params[:route_id]).count
      if current_user.transport_head? 
-       @routes =  Route.all
+       @routes=  Route.all
        @locations = Location.all
        locations = []
        Route.all.each do |route| 
@@ -19,7 +19,10 @@
        gon.height = "350px"
        respond_to do |format|   
          format.json do
-           render :json => @routes
+           routes = @routes.each do |r|
+             {id: r.id , lpp: r.lpp , busno_up: r.busno_up , no_of_children: r.no_of_children , start_point: r.start_location.location_master.location_name , end_point: r.end_location.location_master.location_name}
+           end
+           render :json => routes
          end
          format.html do 
            render "index"
@@ -60,25 +63,23 @@
    end  
       
    def send_mail
-     p ""
-     if current_user.admin?
-       respond_to do |format|
-         route_mail= params[:route_mail]
-         mailing_job = RouteMailingJob.new(current_user.user_id, DateTime.now, route_mail[:subject], route_mail[:text])
-         Delayed::Job.enqueue mailing_job, mailing_job.job_run_id
-         #UserMailer.welcome(route_mail[:subject] ,route_mail[:text]).deliver
-         result_link = "<a href=\"/job_runs/#{mailing_job.job_run_id}\">here</a>"
-         msg = I18n.t :success, :scope => [:job, :schedule], job: "Route Mailing Job", result_link: result_link
-         format.json do
-           render :json => msg
-         end
-         format.html do
-           flash[:success] = msg.html_safe
-           redirect_to routes_path
-         end
+     respond_to do |format|
+       route_mail= params[:route_mail]
+       mailing_job = RouteMailingJob.new(current_user.user_id, DateTime.now, route_mail[:subject], route_mail[:text])
+       Delayed::Job.enqueue mailing_job, mailing_job.job_run_id
+       #UserMailer.welcome(route_mail[:subject] ,route_mail[:text]).deliver
+       result_link = "<a href=\"/job_runs/#{mailing_job.job_run_id}\">here</a>"
+       msg = I18n.t :success, :scope => [:job, :schedule], job: "Route Mailing Job", result_link: result_link
+       format.json do
+         render :json => {msg: msg}
+       end
+       format.html do
+         flash[:success] = msg.html_safe
+         redirect_to routes_path
        end
      end
    end
+ 
      
    def get_location_view
      var = LocationMaster.all.map do |var|
@@ -108,6 +109,14 @@
      gon.waypts = @location.to_json
      gon.width = "750px"
      gon.height = "350px"
+     respond_to do |format|   
+       format.json do
+         render :json => Route.all
+       end
+       format.html do 
+         render "index"
+       end
+     end
    end
    
    def update
@@ -116,7 +125,7 @@
        redirect_to routes_path
      else
        flash.now[:fail] = I18n.t :fail, :scope => [:route, :update]
-       render "edit"
+       render "index"
      end
    end
    
@@ -179,10 +188,12 @@
    def edit
    end
    
-   def locations
+   def get_route_locations
      respond_to do |format|
        format.json do
-         render :json => [{"1" => 12},{"1" => 23}]
+         @route = Route.find(params[:id])
+         route_locations = @route.locations
+         render :json => route_locations
        end
      end
    end

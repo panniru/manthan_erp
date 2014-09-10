@@ -12,14 +12,9 @@
 	    routesService.getBusServiceView()
 		.then(function(result) {
 		    $scope.bus =result.data
-		    $scope.bus.splice($scope.bus.indexOf(bus), 1)
 		});
 	}
 	
-	$scope.items = [
-	    { id: 1, name: 'Up route' },
-	    { id: 2, name: 'Down Route' }
-	];
 	$scope.defineNew = function(){
 	    fetch_locations();
 	    fetch_bus();
@@ -48,9 +43,10 @@
 		});
         }
 	$scope.sendMail = function(){
+	   // $('#routeModal').modal('show');
 	    routesService.routeMail($scope.subject, $scope.text)
 		.then(function(response){
-		    $('#myModal').modal('hide');
+		    $('#myModal').modal('hide');  
 		});
 	}
 	
@@ -63,18 +59,19 @@
 	}
 	
 	$scope.busNo = function(){
-	    alert(JSON.stringify(lpp));
+	    alert(lpp)
         }
 	
 	$scope.editRoutes = function(route){
-	    resourceService.Route.locations({id: route.id })
-                .then(function(responce){
-		    alert(JSON.strigify(responce.data))
-                    // route.locations = responce.data
-                })
-
-	    $('#editModal').modal('show');
-        }
+	    fetch_bus();
+	    fetch_locations();
+	    routesService.getRouteLocation(route.id)
+		.then(function(response){
+		    route.locations = response.data
+		    $scope.newRoute = route
+		    $('#createModal').modal('show')
+		});
+	}
 	
 	$scope.destroy = function(route){
             route.$delete()

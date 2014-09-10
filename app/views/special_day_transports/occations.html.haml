@@ -16,7 +16,6 @@
     %table#tblData.target.table.table-striped.table-condensed.table-bordered
       %thead
         %tr
-          
           %th Location
           %th Route No
           %th Bus No
@@ -24,6 +23,7 @@
           %th Route No
           %th Bus No
           %th Time
+          %th
       %tbody
         -  @special_day_transports.each do |route|
           %tr
@@ -34,6 +34,7 @@
             %td= route.new_down_route
             %td= route.new_busno_down
             %td= route.time_down
-           
+            %td 
+              = link_to "Edit", edit_special_day_transport_path(route), :class => "btn btn-warning"
             
             
