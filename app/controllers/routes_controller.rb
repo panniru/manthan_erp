@@ -20,7 +20,7 @@
        respond_to do |format|   
          format.json do
            routes = @routes.each do |r|
-             {id: r.id , lpp: r.lpp , busno_up: r.busno_up , no_of_children: r.no_of_children , start_point: r.start_location.location_master.location_name , end_point: r.end_location.location_master.location_name}
+             {id: r.id ,  busno_up: r.busno_up, start_point: r.start_location.location_master.location_name , end_point: r.end_location.location_master.location_name}
            end
            render :json => routes
          end
@@ -109,14 +109,14 @@
      gon.waypts = @location.to_json
      gon.width = "750px"
      gon.height = "350px"
-     respond_to do |format|   
-       format.json do
-         render :json => Route.all
-       end
-       format.html do 
-         render "index"
-       end
-     end
+     # respond_to do |format|   
+     #   format.json do
+     #     render :json => Route.find(params[:id])
+     #   end
+     #   format.html do 
+     #     render "index"
+     #   end
+     # end
    end
    
    def update

@@ -19,14 +19,15 @@
           %th
     %tbody
       %tr{"ng-repeat" => "route in routes"}
-        %td {{route.id}} 
+        %td 
+          %a{href: 'routes/{{route.id}}'} {{route.id}}
         %td {{route.busno_up}}
         %td {{route.start_point}}
         %td {{route.end_point}}
         %td
           = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-sm", :title => "Edit", :ng_click => "editRoutes(route)"
           = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(route)"
-           
+         
       #createModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
         .modal-dialog
           .modal-content
