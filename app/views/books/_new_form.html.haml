@@ -2,11 +2,8 @@
   .form-group
     = label_tag  "Purchage Date", nil, :class => "form-label col-md-4"
     .col-sm-4{"ng-controller" => "DatePickerController"}    
-      %input.form-control{"close-text" => "Close", "datepicker-options" => "dateOptions", "datepicker-popup" => "", "is-open" => "opened", "ng-model" => "purchased_date", "ng-required" => "true", type: "text", :ng_change => "$parent.reflectContent(purchased_date)", "ng-bind" => "dt | dt:'yyyy-MM-dd'", "ng-click" => "open($event)"} 
-      {{purchased_date}}
-      = hidden_field_tag "bulk_book[][purchased_date]","{{purchased_date}}"
-  .form-group{"ng-repeat" => "book in newBooks"}
-    = label_tag  "Book {{$index+1}}", nil, :class => "form-label col-md-2"
+      %input.form-control{"close-text" => "Close", "datepicker-options" => "dateOptions", "datepicker-popup" => "", "is-open" => "opened", "ng-model" => "$parent.purchasedDate", "ng-required" => "true", type: "text", "ng-bind" => "dt | dt:'yyyy-MM-dd'", "ng-click" => "open($event)","ng-change" => "getPurchageDate()"}      
+  .form-group{"ng-repeat" => "book in newBooks"}   
     .col-sm-2        
       = text_field_tag  "bulk_book[][name]",nil, :class => "form-control", :ng_model => "book.name", :placeholder => "Name"
     .col-sm-2
@@ -17,7 +14,7 @@
       = text_field_tag "bulk_book[][year_of_publishing]",nil, :class => 'form-control', :placeholder => "YearOfPublishing", :id => "year_of_publishing-{{$index}}", :ng_model => "book.year_of_publishing"
     .col-sm-2
       = text_field_tag "bulk_book[][book_type]",nil, :class => 'form-control', :placeholder => "BookType", :id => "book_type-{{$index}}", :ng_model => "book.book_type"
-    
+      = hidden_field_tag "bulk_book[][purchased_date:]","{{dateFormat}}"   
   .row
     .col-md-5.col-md-offset-3
       
