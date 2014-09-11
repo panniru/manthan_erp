@@ -51,6 +51,7 @@
 	}
 	
         $scope.submitRoutes = function(){
+	    console.log($scope.newRoute)
 	    $scope.newRoute.$save()
 	   	.then(function(responce){
 		    $scope.routes = resourceService.Route.query()

@@ -1,4 +1,4 @@
-%form{:class=>"form-horizontal", :ng_submit => "submitRoutes()" }
+%form{:class=>"form-horizontal", :ng_submit => "submitRoutes( )" }
   .row
     .col-sm-4
       = select_tag "lpp" , options_for_select([['Up Route'],['Down Route ']]) ,"ng-model" => "newRoute.lpp", :class => 'form-control'

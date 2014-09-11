@@ -19,9 +19,11 @@
        gon.height = "350px"
        respond_to do |format|   
          format.json do
-           routes = @routes.each do |r|
-             {id: r.id ,  busno_up: r.busno_up, start_point: r.start_location.location_master.location_name , end_point: r.end_location.location_master.location_name}
+           routes = @routes.map do |r|
+             {id: r.id ,  busno_up: r.busno_up, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name}
            end
+           p "================"
+           p routes
            render :json => routes
          end
          format.html do 
