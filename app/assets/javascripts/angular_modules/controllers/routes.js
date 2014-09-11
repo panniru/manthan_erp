@@ -25,6 +25,7 @@
 	    fetch_bus();
 	    $scope.newRoute = new resourceService.Route({"route_no":"","lpp":"", "busno_up":"",  "locations":[]})
 	    for(var i=0; i<2; i++){
+		alert('newRoute')
                 $scope.newRoute.locations.push({"location_master_id":"" , "sequence_no": ""});
             };
             $('#createModal').modal('show')
@@ -55,6 +56,7 @@
 	}
 	
         $scope.submitRoutes = function(){
+	    alert('')
 	    $scope.newRoute.$save()
 	   	.then(function(responce){
 		    $scope.routes = resourceService.Route.query()
