@@ -10,7 +10,7 @@
                 .col-md-4                  
                   = label_tag "Date"
                 .col-sm-4
-                  = text_field_tag :canteen_date, "{{canteenDate}}", :class => 'form-control', :id => "canteen_date", :readonly => true;                   
+                  = text_field_tag :canteen_date, "{{canteenDate}}", :class => 'form-control datepicker', :id => "canteen_date", :readonly => true;                   
                   %br
               .row{:ng_repeat => "meal in mealnames"}
                 .col-sm-4

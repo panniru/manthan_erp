@@ -6,8 +6,25 @@
     .pull-left
       .col-sm-10
         %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
-        %br
-        %hr
+          %br
+        
+  %table#tblData.target.table.table-striped.table-condensed.table-bordered
+    %thead
+      %tr
+        %th Name
+        %th Type
+        %th Quantity
+        
+    %tbody
+      - @inventories.each do |inv|
+        %tr
+          %td= inv.name
+          %td= inv.inventory_type
+          %td= inv.quantity
+           
+
+
+
   .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
     .modal-dialog
       .modal-content

@@ -59,7 +59,7 @@ class MealtypesController < ApplicationController
   
   
   def mealtype_params
-    params.require(:mealtypes).permit(:meal_type, :time) 
+    params.require(:mealtype).permit(:meal_type, :time) 
   end
 
   def  build_canteen_from_bulk
@@ -67,7 +67,7 @@ class MealtypesController < ApplicationController
     end
   end
 
-def home_index
-  @mealtypes = Mealtype.all
-end
+  def home_index
+    @mealtypes = Mealtype.all
+  end
 end
