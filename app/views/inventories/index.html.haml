@@ -1,35 +1,57 @@
 .col-md-7{"ng-controller" => "InventoriesController"}
   %h3
-    = "Inventories"
+    = "Pending Inventories"
+  - if current_user.canteenmanager?
     .pull-right
       = link_to "Request for Inventory", "#", :class => "btn btn-primary", :ng_click => "newInventory()"
     .pull-left
       .col-sm-10
         %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
           %br
-        
-  %table#tblData.target.table.table-striped.table-condensed.table-bordered
-    %thead
-      %tr
-        %th Name
-        %th Type
-        %th Quantity
-        
-    %tbody
-      - @inventories.each do |inv|
+      
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
         %tr
-          %td= inv.name
-          %td= inv.inventory_type
-          %td= inv.quantity
-           
+          %th Name
+          %th Type
+          %th Quantity
+          %th status
+          
+      %tbody
+        - @inventories.all.each do |inv|
+          %tr
+            %td= inv.name
+            %td= inv.inventory_type
+            %td= inv.quantity
+            %td= inv.status
+      .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+              %h4.modal-title{ :id => "myModalLabel"} Inventories
+            .modal-body
+              = render "form"
 
-
-
-  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
-          %h4.modal-title{ :id => "myModalLabel"} Inventories
-        .modal-body
-          = render "form"
+  - if current_user.principal?
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr
+          %th Name
+          %th Type
+          %th Quantity
+          %th 
+      
+      %tbody
+        - @inventories.each do |inv|
+          %tr
+            %td= inv.name
+            %td= inv.inventory_type
+            %td= inv.quantity
+            %th
+              - if(inv.status == 'pending')
+                = link_to "Approve", "#", :class => "approve label label-success",:data=> {:id => inv.id}
+                = link_to "reject", "#", :class => "change label label-danger",:data=> {:id => inv.id}
+              
+              //= link_to "Reject", request_reject_inventories_path(inv), :class => 'btn btn-primary'
+              

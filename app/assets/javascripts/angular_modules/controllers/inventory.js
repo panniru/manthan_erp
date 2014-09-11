@@ -19,7 +19,7 @@
 	$scope.addMoreinventories = function(){
             var lnt = parseInt($scope.newInventories.length)
             for(var i=lnt; i< lnt+1; i++){
-                $scope.newInventories.push({"name":"", "quantity" :"", "inventory_type": ""});
+                $scope.newInventories.push({"name":"", "quantity" :"", "inventory_type": "", "status": ""});
             };
         }
         

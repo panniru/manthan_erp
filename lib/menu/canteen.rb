@@ -22,26 +22,35 @@ class Canteen
     sub_menu = []
     sub_menu << daily_meals
   end
+
+  def principal_sub_menu
+    sub_menu = []
+    sub_menu << home
+    sub_menu << inventory
+  end
+    
+
+
   private
+  
   def holiday_calendar
     MenuItem.new(:label => "Holiday Calendar", :klass => "", :icon => "calendar", :href => "/holidaycalendars" )
   end
+  
   def meal_types
     MenuItem.new(:label => "Meal Types", :klass => "", :icon => "cutlery", :href => "/mealtypes") 
   end
+  
   def daily_meals
     MenuItem.new(:label => "Meal names", :klass => "", :icon => "cutlery", :href => "/mealnames" )
   end
-private 
+
   def home
     MenuItem.new(:label => "Home", :klass => "", :icon => "home ", :href => "/mealtypes/home_index")
-    end
-  def daily_meals
-    MenuItem.new(:label => "Daily Meals", :klass => "", :icon => "cutlery", :href => "/mealnames" )
-end
+  end
+  
   def inventory
     MenuItem.new(:label => "Inventories", :klass => "", :icon => "cutlery", :href => "/inventories" )
-   
   end
  
 end

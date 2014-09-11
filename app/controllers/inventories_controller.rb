@@ -1,6 +1,6 @@
 class InventoriesController < ApplicationController
   def index
-    @inventories = Inventory.all
+    @inventories = Inventory.request_pending
   end
   def create
   end
@@ -8,6 +8,10 @@ class InventoriesController < ApplicationController
   end
   def destroy
   end
+
+  
+  
+  
   def show
     respond_to do |format|
       format.json do
@@ -29,13 +33,36 @@ class InventoriesController < ApplicationController
     end
   end
 
+  def request_accept
+    @inventory = Inventory.find(params[:id])
+    if @inventory.update(:status => "Accepted" )
+      render action: 'request_accept'
+    else
+      render json: @inventory.errors
+    end
+  end
+
+  def update
+    @inventory = Inventory.find(params[:id])
+    respond_to do |format|
+      if @inventory.update(:status => "Approved")
+        format.json { render json: @inventory , :status => "success"}
+      else
+        format.json { render json: @inventory , :status => "failure"}
+      end
+    end
+  end
+  
+  
   def inventory_params
     params.require(:inventories).permit(:name, :inventory_type, :quantity , :status) 
   end
   
   def  build_inventory_from_bulk
     params.require(:bulk_inventory).select{|inventory| inventory["name"].present? and inventory["inventory_type"].present? and inventory["quantity"].present?}.map do |inventory| 
-      Inventory.new(inventory.permit(:name, :inventory_type, :quantity, :status))
+      Inventory.new(inventory.permit(:name, :inventory_type, :quantity)) do |inventory|
+        inventory.status = 'pending';
+      end
     end
   end
 end 
