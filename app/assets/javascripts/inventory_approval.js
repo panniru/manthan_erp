@@ -15,6 +15,57 @@ $(function() {
 	    }
 	});
     });
+
+    $(".order ").on("click", function(event) {
+	id = $(this).data("id");
+	this_klass = $(this)
+	this_klass.text('order placed');
+	$.ajax({
+	    url: "/inventories/"+id+"/order_placed.json",
+	    type: 'PUT',
+	    data: "status=success",
+	    success: function(data) {
+		
+		//if ("status==Approved")
+		//{this_klass.text('Approved');}
+	    }
+	});
+    });
+
+    $(".reject ").on("click", function(event) {	
+	id = $(this).data("id");
+	this_klass = $(this)
+	this_klass.text('Rejected');
+	$.ajax({
+	    url: "/inventories/"+id+"/rejected.json",
+	    type: 'PUT',
+	    data: "status=success",
+	    success: function(data) {
+		this_klass.removeClass("label-danger").addClass("label-success");
+	    }
+	});
+    });
+    
+
+    $(".delivered ").on("click", function(event) {	
+	id = $(this).data("id");
+	this_klass = $(this)
+	this_klass.text('Delivered');
+	$.ajax({
+	    url: "/inventories/"+id+"/delivered.json",
+	    type: 'PUT',
+	    data: "status=success",
+	    success: function(data) {
+		this_klass.removeClass("label-danger").addClass("label-success");
+	    }
+	});
+    });
+    
+
+    
+
+
+
     $(".send ").on("click", function(event) {
 	$.ajax({
 	    url: "/inventories.json",

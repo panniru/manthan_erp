@@ -1,6 +1,6 @@
 .col-md-7{"ng-controller" => "InventoriesController"}
   %h3
-    = "Pending Inventories"
+    = " Inventories"
   - if current_user.canteenmanager?
     .pull-right
       = link_to "Request for Inventory", "#", :class => "btn btn-primary", :ng_click => "newInventory()"
@@ -18,7 +18,7 @@
           %th status
           
       %tbody
-        - @inventories.all.each do |inv|
+        - @inventories.each do |inv|
           %tr
             %td= inv.name
             %td= inv.inventory_type
@@ -43,7 +43,7 @@
           %th 
       
       %tbody
-        - @inventories.each do |inv|
+        - @inventories.request_pending.each do |inv|
           %tr
             %td= inv.name
             %td= inv.inventory_type
@@ -51,7 +51,25 @@
             %th
               - if(inv.status == 'pending')
                 = link_to "Approve", "#", :class => "approve label label-success",:data=> {:id => inv.id}
-                = link_to "reject", "#", :class => "change label label-danger",:data=> {:id => inv.id}
+                = link_to "reject", "#", :class => "reject label label-danger",:data=> {:id => inv.id}
+  - if current_user.admin?
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr
+          %th Name
+          %th Type
+          %th Quantity
+          %th Vendor
+      
+      %tbody
+        - @inventories.request_approved.each do |inv|
+          %tr
+            %td= inv.name
+            %td= inv.inventory_type
+            %td= inv.quantity
+            %td
+              = link_to "place order", mail_inventories_path(inv), :class => "order label label-success",:data=> {:id => inv.id}
               
-              //= link_to "Reject", request_reject_inventories_path(inv), :class => 'btn btn-primary'
+                
+
               

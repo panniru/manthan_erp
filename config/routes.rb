@@ -551,10 +551,15 @@ ManthanErp::Application.routes.draw do
   end
   resources :inventories do
     collection do
+      get "mail"
       post 'create_bulk'
     end
     member  do
       get 'request_accept'
+      put 'order_placed'
+      put 'rejected'
+      put 'delivered'
+
     end
   end
 

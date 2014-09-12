@@ -1,6 +1,6 @@
 class InventoriesController < ApplicationController
   def index
-    @inventories = Inventory.request_pending
+    @inventories = Inventory.all
   end
   def create
   end
@@ -9,9 +9,10 @@ class InventoriesController < ApplicationController
   def destroy
   end
 
-  
-  
-  
+  def new
+    @inventories = Inventory.order_placed
+  end
+ 
   def show
     respond_to do |format|
       format.json do
@@ -52,10 +53,53 @@ class InventoriesController < ApplicationController
       end
     end
   end
+
+  def order_placed
+    @inventory = Inventory.find(params[:id])
+    respond_to do |format|
+      if @inventory.update(:status => "Order placed")
+        format.json { render json: @inventory , :status => "success"}
+      else
+        format.json { render json: @inventory , :status => "failure"}
+      end
+    end
+  end
+
+  def rejected
+    @inventory = Inventory.find(params[:id])
+    respond_to do |format|
+      if @inventory.update(:status => "Rejected")
+        format.json { render json: @inventory , :status => "success"}
+      else
+        format.json { render json: @inventory , :status => "failure"}
+      end
+    end
+  end
+
+  def delivered
+    @inventory = Inventory.find(params[:id])
+    respond_to do |format|
+      if @inventory.update(:status => "Delivered")
+        format.json { render json: @inventory , :status => "success"}
+      else
+        format.json { render json: @inventory , :status => "failure"}
+      end
+    end
+  end
+  
+
+
+  
+  def mail
+    @inventory = Inventory.find(params[:format])
+    UserMailer.vendor(@inventory).deliver
+    redirect_to inventories_path
+  end
+    
   
   
   def inventory_params
-    params.require(:inventories).permit(:name, :inventory_type, :quantity , :status) 
+    params.require(:inventories).permit(:name, :inventory_type, :quantity  ) 
   end
   
   def  build_inventory_from_bulk
