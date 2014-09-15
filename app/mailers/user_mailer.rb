@@ -5,5 +5,8 @@ class UserMailer < ActionMailer::Base
     @text = text
     mail(to: mails , subject: @subject )
   end
+  def special(mails)
+    mail(to: mails , subject: "New Routes" )
+  end
 end
 

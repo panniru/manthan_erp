@@ -1,6 +1,8 @@
 class StudentRouteMappingsController < ApplicationController
   def index
     @student_route_mappings = StudentRouteMapping.all
+    @student_masters = StudentMaster.select('DISTINCT id')
+    @routes = Route.select('DISTINCT id')
   end
   
   def get_route_view
@@ -26,6 +28,7 @@ class StudentRouteMappingsController < ApplicationController
     @new=StudentRouteMapping.new()
     @new.route_id = params[:route_id]
     @new.student_master_id = params[:student_master_id]
+    @new.location_master_id = params[:location_master_id]
     @new.save
     render :json =>  true
   end
@@ -34,7 +37,7 @@ class StudentRouteMappingsController < ApplicationController
   private
   
   def mapping_params
-    mapping_params = params.require(:student_route_mapping).permit( :route_id , :student_master_id  )
+    mapping_params = params.require(:student_route_mapping).permit( :route_id , :student_master_id , :location_master_id )
   end
   
 end

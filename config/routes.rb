@@ -1,14 +1,5 @@
 ManthanErp::Application.routes.draw do
 
-  get "student_route_mappings/index"
-  get "student_route_mappings/create"
-  get "student_route_mappings/show"
-
-  get "new_vehicles/index"
-  get "new_vehicles/show"
-  get "new_vehicles/edit"
-  get "new_vehicles/new"
-
   get "teaching_plans/new"
   get "teaching_plans/edit"
   get "teaching_plans/index"
@@ -30,6 +21,9 @@ ManthanErp::Application.routes.draw do
     collection do
       get "get_route_view"
       post "save_route"
+    end
+    member do
+      get "modal"
     end
   end
   
@@ -134,7 +128,7 @@ ManthanErp::Application.routes.draw do
   
   resources :new_vehicles 
   
- resources :forms do
+  resources :forms do
     member do
       get 'home_index'
     end
@@ -238,14 +232,8 @@ ManthanErp::Application.routes.draw do
     end
   end
   
-  resources :routes do
-    collection do
-      post "create_bulk"
-      get "get_location_view"
-      get "get_bus_no"
-      post "send_mail"
-    end
-  end
+
+ 
   
   resources :staffs do
     member do
@@ -421,7 +409,15 @@ ManthanErp::Application.routes.draw do
     end
   end    
 
-   resources :staff_admissions do
+  
+  resources :assessment_criterias do
+    collection do
+      get "get_assessment_criteria_service"  
+    end  
+  end
+  
+  
+  resources :staff_admissions do
     resources :recruitments
   end
   
@@ -503,7 +499,23 @@ ManthanErp::Application.routes.draw do
     end
   end
   
+  resources :routes do
+    collection do
+      post "create_bulk"
+      get "get_location_view"
+      get "get_bus_no"
+      get "all_students"
+      get "students"
+      post "send_mail"
+      get 'all_locations'
 
+    end
+    member do
+      get 'locations'
+      get "students"
+    end
+  end
+  
   resources :assessment_results do   
     collection do
       get "get_teacher_assessments_service"
@@ -543,6 +555,17 @@ ManthanErp::Application.routes.draw do
     collection do
       get "canteenmanagerdata"
       get "canteen_date"
+    end
+  end
+
+  resources :special_day_transports do
+    # member do
+    #   get 'occations'
+    # end
+    collection do
+      post 'create_bulk'
+      get 'send_mail'
+      get 'occations'
     end
   end
 

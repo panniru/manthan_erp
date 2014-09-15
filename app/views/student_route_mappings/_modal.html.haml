@@ -29,14 +29,13 @@
                       %th No of Children
                       %th
                   %tbody
-                    - StudentMaster.has_bus_facility.has_no_route.all.each do |student|
-                      %tr{"ng-repeat" => "route in routes"}
-                        %td {{route.id}}
-                        %td {{route.route_no}}
-                        %td {{route.busno_up}}
-                        %td {{route.no_of_children}}
-                        %td   
-                          %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveRoute(route, #{student.id})"}= "allot"
+                    %tr{"ng-repeat" => "route in routes"}
+                      %td {{route.id}}
+                      %td {{route.route_no}}
+                      %td {{route.busno_up}}
+                      %td {{route.no_of_children}}
+                      %td   
+                        %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveRoute(route,location, #{student_id})"}= "allot"
                           
                           
             

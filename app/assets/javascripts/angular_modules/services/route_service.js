@@ -9,15 +9,29 @@
             var url = "/routes/get_bus_no.json"
             return $http.get(url);
 	};
+	var getStudentView = function(route){
+	    var url = "/routes/all_students.json?route="+route
+	    return $http.get(url);
+	};
+	var getLocationView = function(location){
+	    var url = "/routes/all_locations.json?location="+location
+	    return $http.get(url);
+	};
 	var routeMail = function(subject,text){
 	    var url = "/routes/send_mail.json"
             return $http.post(url,{route_mail:{subject: subject, text: text }}); 
         };
-	
+	var getRouteLocation = function(route){
+	    var url = "/routes/get_route_location.json?route="+route
+	    return $http.get(url);
+	};
         return {
             getLocationServiceView : getLocationServiceView,
 	    routeMail : routeMail,
-	    getBusServiceView : getBusServiceView
+	    getBusServiceView : getBusServiceView,
+	    getStudentView : getStudentView,
+	    getLocationView : getLocationView,
+	    getRouteLocation :getRouteLocation
         };
     }]);
 })(angular, myApp);

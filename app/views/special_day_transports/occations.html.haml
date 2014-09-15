@@ -1,0 +1,39 @@
+.row
+  .col-sm-2
+  .col-sm-5
+    %h4 PickUp Details
+  .col-sm-3
+    %h4 DropDown Details
+  - if current_user.transport_head?
+    .col-sm-1
+      = link_to "Send Mail",  send_mail_special_day_transports_path, :class => "btn btn-primary"
+    .col-sm-1
+     
+  %br
+  %br
+.row
+  .col-sm-11
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr
+          
+          %th Location
+          %th Route No
+          %th Bus No
+          %th Time
+          %th Route No
+          %th Bus No
+          %th Time
+      %tbody
+        -  @special_day_transports.each do |route|
+          %tr
+            %td= route.location_master.location_name
+            %td= route.new_up_route
+            %td= route.new_busno_up
+            %td= route.time_up
+            %td= route.new_down_route
+            %td= route.new_busno_down
+            %td= route.time_down
+           
+            
+            
