@@ -1,7 +1,32 @@
 (function(angular, app) {
     "use strict";
     app.controller("AttendanceController",["$scope", "attendanceService", function($scope, attendanceService) {
+
+        $scope.submitToggle = true;
+        $scope.myShowFormValue = true;
+        $scope.myEditFormValue = false;
         
+       // group by attendance_date
+        var indexedDates = [];
+        $scope.datesToFilter = function()
+        {
+            indexedDates = [];
+            return $scope.attendances;
+        }
+        $scope.filterDates = function(attendance) {
+            var dateIsNew = indexedDates.indexOf(attendance.attendance_date) == -1;
+            if(dateIsNew) {
+                indexedDates.push(attendance.attendance_date);
+            }
+            return dateIsNew;
+        }
+                                              
+        // end of group by attendance_date
+        // -------------------------------------------------------------------
+        // attendance submission
+
+              
+
         $scope.dailyAttendence = function(d){
             $scope.myDate = (d.getFullYear() + "-" + (d.getMonth()+1) +"-"+d.getDate()); 
 
@@ -31,7 +56,8 @@
             }
             attendanceService.saveStudentAttendance($scope.save_attendence_details)
                 .then(function(result) {
-                    $('#myModal').modal('hide');                
+                    $window.location.reload();
+
                 });
             
         };
