@@ -1,7 +1,9 @@
-%table.table.table-bordered
-  %tbody
-    %tr
-      %td{style: "width:40%"} Students
-      
-%tbody
- 
+.row{:ng_controller => "AttendanceController"}
+  .row{"ng-show" => "myShowFormValue"} 
+    = render "show_form"
+  .row{"ng-show" => "myEditFormValue"}
+    .col-sm-3
+      #attendance_calendar
+    .col-sm-7
+      #myTable
+        = render "edit_form"
