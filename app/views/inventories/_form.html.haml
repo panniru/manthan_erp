@@ -6,12 +6,14 @@
     .col-sm-3      
       = text_field_tag "[quantity]",nil, :class => 'form-control', :ng_model => "item.quantity", :placeholder => "Quantity"
     .col-sm-3     
-      = text_field_tag "[type]",nil, :class => 'form-control', :ng_model => "item.type", :placeholder => "Type"
-        
+      = text_field_tag "[inventory_type]",nil, :class => 'form-control', :ng_model => "item.inventory_type", :placeholder => "Type"
+      %br  
    
   .row
     .col-md-3
+    .col-md-3
       %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMoreinventories()"}= "More Inventories"
     .col-md-3
-      %button{:type=>"submit", :class=> "btn btn-danger"}= "Send for Approval"
-      
+      %button{:type=>"submit", :class=> "btn btn-primary"}= "Send for Approval"
+      //%input{:name => "status", :value => "pending", :type => "hidden", :ng_model => "item.status"}
+     

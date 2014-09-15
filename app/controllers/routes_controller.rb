@@ -111,6 +111,14 @@
      gon.waypts = @location.to_json
      gon.width = "750px"
      gon.height = "350px"
+     respond_to do |format|   
+       format.json do
+         render :json => Route.find(params[:id])
+       end
+       format.html do 
+         render "index"
+       end
+     end
    end
    
    def update

@@ -57,7 +57,9 @@ class MealnamesController < ApplicationController
         canteen_date = Mealname.where("canteen_date = '#{params[:date]}'")
         canteen_date = canteen_date.map do |canteen|
           {id: canteen.canteen_date, meal_type_id: canteen.meal_type_id, meal_detail_name: canteen.meal_detail_name }
-        end        
+        end    
+        p"=============="
+        p canteen_date
         render :json => canteen_date
       end
     end

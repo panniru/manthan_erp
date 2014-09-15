@@ -77,12 +77,12 @@
 
 
         var Inventory = $resource('/inventories/:id.json', {id: '@id'}, 
-                                 {
-                                     "bulk": { url: "/inventories/create_bulk", method:'POST'},
-                                     "update": { method: "PUT"}
-                                 }
+                                  {
+                                      "bulk": { url: "/inventories/create_bulk", method:'POST'},
+                                      "update": { method: "PUT"}
+                                  }
                                 );
-
+	
         var CanteenManagement = $resource('/canteen_managements/:id.json', {id: '@id'}, 
 					  {
                                  "bulk": { url: "/canteen_managements/create_bulk", method:'POST'},

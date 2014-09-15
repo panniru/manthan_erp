@@ -21,6 +21,7 @@
 	    fetch_bus();
 	    $scope.newRoute = new resourceService.Route({"route_no":"","lpp":"", "busno_up":"",  "locations":[]})
 	    for(var i=0; i<2; i++){
+		alert('newRoute')
                 $scope.newRoute.locations.push({"location_master_id":"" , "sequence_no": ""});
             };
             $('#createModal').modal('show')
@@ -52,7 +53,6 @@
 	}
 	
 	var createRoutes = function(){
-	    alert('save')
 	    $scope.newRoute.$save()
 	   	.then(function(responce){
 		    $scope.routes = resourceService.Route.query()
@@ -61,7 +61,6 @@
 	}
 
 	var updateRoutes = function(){
-	    alert('update')
 	    $scope.newRoute.$update()
 	   	.then(function(responce){
 		    $scope.routes = resourceService.Route.query()
