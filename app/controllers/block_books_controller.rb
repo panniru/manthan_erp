@@ -57,7 +57,7 @@ class BlockBooksController < ApplicationController
   def getbooks
     block_books = Book.where('isbn = '+"'#{params[:my_Isbn]}'")
     block_books = block_books.map do |block|
-      { name: block.name, author: block.author }      
+      { id: block.id, name: block.name, author: block.author }      
      end
     render :json => block_books
   end

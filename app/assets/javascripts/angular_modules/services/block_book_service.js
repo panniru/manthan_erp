@@ -14,9 +14,9 @@
               var url = "/block_books/savebooks.json"
               return $http.post(url,{my_Block: myBlock,my_Isbn: myIsbn,book_Name: bookName,author_Name: authorName});
           };
-        var damageBooks = function(myIsbn,bookName,authorName,bookStage,damageType,damageDescription){
+        var damageBooks = function(bookId,myIsbn,bookName,authorName,bookStage,damageType,damageDescription){
             var url = "/damagebooks/damagebooks.json"
-            return $http.post(url,{my_Isbn: myIsbn,book_Name: bookName,author_Name: authorName,book_Stage: bookStage,damage_Type: damageType,damage_Description: damageDescription});
+            return $http.post(url,{book_Id: bookId, my_Isbn: myIsbn,book_Name: bookName,author_Name: authorName,book_Stage: bookStage,damage_Type: damageType,damage_Description: damageDescription});
         };
        
             

@@ -2,6 +2,8 @@ class DamagebooksController < ApplicationController
   load_resource :only => [:show, :update, :edit, :destroy]
   
   def create
+    p params
+    p "=================>"
     @damagebook = Damagebook.new(damagebook_params)
     if @damagebook.save
       flash[:success] = I18n.t :success, :scope => [:damagebook, :create]
@@ -55,12 +57,15 @@ class DamagebooksController < ApplicationController
   end  
 
   def damagebooks
+    p params 
+    p "================>"
     damagebooks = Book.where('isbn = '+"'#{params[:my_Isbn]}'")
     damagebooks = damagebooks.map do |block|
-      {isbn: block.isbn, name: block.name, author: block.author,book_stage: params[:book_Stage],damage_type: params[:damage_Type],damage_description: params[:damage_Description] }
+      {book_id: params[:book_Id], isbn:block.isbn, name: block.name, author: block.author,book_stage: params[:book_Stage],damage_type: params[:damage_Type],damage_description: params[:damage_Description] }
     end
     damagebooks.each do |t|
       @temp=Damagebook.new()
+      @temp.book_id= t[:book_id]
       @temp.isbn=t[:isbn]     
       @temp.book_stage=t[:book_stage]
       @temp.damage_type=t[:damage_type]
