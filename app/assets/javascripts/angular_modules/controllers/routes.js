@@ -16,6 +16,7 @@
 	}
 	
 	$scope.defineNew = function(){
+	    $scope.action = "new"
 	    fetch_locations();
 	    fetch_bus();
 	    $scope.newRoute = new resourceService.Route({"route_no":"","lpp":"", "busno_up":"",  "locations":[]})
@@ -50,13 +51,31 @@
 		});
 	}
 	
-        $scope.submitRoutes = function(){
-	    console.log($scope.newRoute)
+	var createRoutes = function(){
+	    alert('save')
 	    $scope.newRoute.$save()
 	   	.then(function(responce){
 		    $scope.routes = resourceService.Route.query()
                     $('#createModal').modal('hide')
 	    	})
+	}
+
+	var updateRoutes = function(){
+	    alert('update')
+	    $scope.newRoute.$update()
+	   	.then(function(responce){
+		    $scope.routes = resourceService.Route.query()
+		    $('#createModal').modal('hide')
+	    	})
+	}
+	
+        $scope.submitRoutes = function(){
+	    alert($scope.action)
+	    if($scope.action === 'edit'){
+		updateRoutes();
+	    }else{
+		createRoutes();
+	    }
 	}
 	
 	$scope.busNo = function(){
@@ -64,6 +83,7 @@
         }
 	
 	$scope.editRoutes = function(route){
+	    $scope.action = "edit"
 	    fetch_bus();
 	    fetch_locations();
 	    routesService.getRouteLocation(route.id)

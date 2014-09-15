@@ -111,23 +111,15 @@
      gon.waypts = @location.to_json
      gon.width = "750px"
      gon.height = "350px"
-     # respond_to do |format|   
-     #   format.json do
-     #     render :json => Route.find(params[:id])
-     #   end
-     #   format.html do 
-     #     render "index"
-     #   end
-     # end
    end
    
    def update
-     if @route.update(route_params)
-       flash[:success] = I18n.t :success, :scope => [:route, :update]
-       redirect_to routes_path
-     else
-       flash.now[:fail] = I18n.t :fail, :scope => [:route, :update]
-       render "index"
+     respond_to do |format|
+       format.json do
+         render :json => @route.update_route(params)
+       end
+       format.html do
+       end
      end
    end
    
@@ -203,7 +195,7 @@
    private
       
    def route_params
-     route_params = params.require(:route).permit(:route_no , :busno_up, :lpp )
+     route_params = params.require(:route).permit(:route_no , :busno_up, :lpp)
    end
    
    def build_route_from_bulk

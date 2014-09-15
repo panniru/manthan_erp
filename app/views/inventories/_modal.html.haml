@@ -1,0 +1,10 @@
+%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "ordered inv"
+#myModal.modal.fade{:id => "MailModal" ,"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title Ordered Inventories
+      .modal-body
+        %table#tblData.target.table.table-striped.table-condensed.table-bordered
+          %h4 ;gsdfg
