@@ -5,16 +5,13 @@
              
         $scope.map_grades = []
         issuingService.getGradeServiceView()
-            .then(function(result) {
-                
-                $scope.grades=result.data
-                
-                
+            .then(function(result) {                
+                $scope.grades=result.data                
             });
+        
         $scope.map_sections = []
         issuingService.getSectionServiceView()
-            .then(function(result) {
-                
+            .then(function(result) {                
                 $scope.sections=result.data
             });
        

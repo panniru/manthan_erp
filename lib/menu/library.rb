@@ -5,22 +5,18 @@ class Library
   end
 
   def admin_sub_menu
-    sub_menu = []
-    sub_menu << home
+    sub_menu = []    
     sub_menu << books
    
 end
   def librarian_sub_menu
     
-    sub_menu = []
-    sub_menu << home
+    sub_menu = []    
     sub_menu << books
     sub_menu << issuing_books
     sub_menu << damage_books
     sub_menu << block_books
-    sub_menu << approval_for_books
-    sub_menu << accepted_books
-    sub_menu << rejected_books
+    sub_menu << approval_for_books   
     sub_menu << donate_books
     sub_menu << reports
   end
@@ -36,19 +32,16 @@ end
   end
   def principal_sub_menu
     sub_menu = []
-    sub_menu << approval_books
-    sub_menu << accepted_books
-    sub_menu << rejected_books
+    sub_menu << approval_books    
   end
+
   private 
-  def home
-    MenuItem.new(:label => "Home", :klass => "", :icon => "home ", :href => "/books/home_index")
-  end
+
   def  books
     MenuItem.new(:label => "Books", :klass => "", :icon => "book ", :href => "/books")
   end
   def issuing_books
-    MenuItem.new(:label => "Issuing Books", :klass => "", :icon => "cubes", :href => "/issuings")
+    MenuItem.new(:label => "Issue/Return Books", :klass => "", :icon => "cubes", :href => "/issuings")
   end
   def damage_books
     MenuItem.new(:label => "Damage/Loss Books", :klass => "", :icon => "file-excel-o ", :href => "/damagebooks")

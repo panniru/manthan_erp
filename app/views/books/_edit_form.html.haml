@@ -1,0 +1,32 @@
+%form{:class=>"form-horizontal", :ng_submit => "update()"}     
+  .row
+    .form-group
+      = label_tag  "Purchage Date", nil, :class => "form-label col-md-4"
+      .col-sm-4{"ng-controller" => "DatePickerController"}    
+        %input.form-control{"close-text" => "Close", "datepicker-options" => "dateOptions", "datepicker-popup" => "", "is-open" => "opened", "ng-model" => "book.purchased_date", "ng-required" => "true", type: "text", :ng_change => "getEditPurchaseDate()", "ng-bind" => "dt | dt:'yyyy-MM-dd'", "ng-click" => "open($event)"}        
+    .form-group
+      = label_tag  "Book Name", nil, :class => "form-label col-md-4"
+      .col-sm-4        
+        = text_field_tag  "bulk_book[][name]",nil, :class => "form-control", :ng_model => "book.name", :placeholder => "Name"
+    .form-group
+      = label_tag  "ISBN", nil, :class => "form-label col-md-4"
+      .col-sm-4
+        = text_field_tag "bulk_book[][isbn]",nil, :class => 'form-control', :placeholder => "ISBN", :id => "isbn-{{$index}}", :ng_model => "book.isbn"
+    .form-group
+      = label_tag  "Author", nil, :class => "form-label col-md-4"
+      .col-sm-4
+        = text_field_tag "bulk_book[][author]",nil, :class => "form-control" , :placeholder => "Author", :id => "author-{{$index}}", :ng_model => "book.author"
+    .form-group
+      = label_tag  "Year Of Publishing", nil, :class => "form-label col-md-4"
+      .col-sm-4
+        = text_field_tag "bulk_book[][year_of_publishing]",nil, :class => 'form-control', :placeholder => "YearOfPublishing", :id => "year_of_publishing-{{$index}}", :ng_model => "book.year_of_publishing"
+    .form-group
+      = label_tag  "Book Type", nil, :class => "form-label col-md-4"
+      .col-sm-4
+        = text_field_tag "bulk_book[][book_type]",nil, :class => 'form-control', :placeholder => "BookType", :id => "book_type-{{$index}}", :ng_model => "book.book_type"
+      .col-sm-4     
+        = hidden_field_tag "bulk_book[][purchased_date:]","{{dateFormat}}"
+  .row
+    .col-md-7.col-md-offset-4            
+      %button{:type=>"submit", :class=> "btn btn-primary"}=  "Update"
+     

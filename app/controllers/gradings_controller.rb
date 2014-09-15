@@ -24,7 +24,7 @@ class GradingsController < ApplicationController
             @grading_master.grading_desc = t['grading_desc']
             @grading_master.save
           else
-            @grading_master = GradingMaster.new(t)
+            @grading_master = GradingMaster.new(add_grading_params(t))
             @grading_master.save
           end
         end 
@@ -42,6 +42,10 @@ class GradingsController < ApplicationController
         render :json => true
       end
     end
+  end
+
+  def add_grading_params(params)   
+    params.permit(:grading_name, :grading_desc)
   end
 
 end

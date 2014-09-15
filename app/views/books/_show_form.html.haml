@@ -1,0 +1,47 @@
+.row
+  .col-md-1
+  .col-md-10
+    .panel.panel-default
+      .test
+        .col-sm-3
+          .pull-left
+            .input-group
+              %span.input-group-addon
+                = fa_icon "search lg"
+              %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+            %br
+        .col-sm-4
+          %center
+            %h3
+              Books
+        .col-sm-4 
+          - if current_user.librarian?
+            .pull-right
+              = link_to "New Books", "#", :class => "btn btn-primary", :ng_click => "newBook()"
+  .col-md-1
+.row
+  .col-md-1
+  .col-md-10
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr
+          %th Name
+          %th ISBN Number
+          %th Author
+          %th Year Of Publishing
+          %th Purchased Date
+          %th Type
+          %th
+      %tbody
+        %tr{"ng-repeat" => "book in books"}
+          %td 
+            %a{href: "#", "ng-click" =>"editBooks(book)"}
+              {{book.name}} 
+          %td {{book.isbn}}
+          %td {{book.author}}
+          %td {{book.year_of_publishing}}
+          %td {{book.purchased_date}}
+          %td {{book.book_type}}
+          - if current_user.librarian?
+            %td
+              = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(book)"

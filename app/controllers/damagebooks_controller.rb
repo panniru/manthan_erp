@@ -2,6 +2,8 @@ class DamagebooksController < ApplicationController
   load_resource :only => [:show, :update, :edit, :destroy]
   
   def create
+    p params
+    p "=================>"
     @damagebook = Damagebook.new(damagebook_params)
     if @damagebook.save
       flash[:success] = I18n.t :success, :scope => [:damagebook, :create]
@@ -15,16 +17,17 @@ class DamagebooksController < ApplicationController
   end
   
   def index
-    @damagebooks= Damagebook.all
-   
+    @damagebooks= Damagebook.all   
   end
   
   def new
     @damagebook = Damagebook.new
   end
+
   def edit
     @damagebook = Damagebook.find(params[:id])
   end
+
   def update
     @damagebook = Damagebook.find(params[:id])
     if @damagebook.update(damagebook_params)
@@ -35,6 +38,7 @@ class DamagebooksController < ApplicationController
       render "edit"
     end
   end
+
   def destroy
     @damagebook = Damagebook.find(params[:id])    
     if @damagebook.destroy
@@ -52,23 +56,24 @@ class DamagebooksController < ApplicationController
     render :json => damage
   end  
 
-def damagebooks
-  damagebooks = Book.where('isbn = '+"'#{params[:my_Isbn]}'")
-   damagebooks = damagebooks.map do |block|
-     {isbn: block.isbn, name: block.name, author: block.author,book_stage: params[:book_Stage],damage_type: params[:damage_Type],damage_description: params[:damage_Description] }
+  def damagebooks
+    p params 
+    p "================>"
+    damagebooks = Book.where('isbn = '+"'#{params[:my_Isbn]}'")
+    damagebooks = damagebooks.map do |block|
+      {book_id: params[:book_Id], isbn:block.isbn, name: block.name, author: block.author,book_stage: params[:book_Stage],damage_type: params[:damage_Type],damage_description: params[:damage_Description] }
+    end
+    damagebooks.each do |t|
+      @temp=Damagebook.new()
+      @temp.book_id= t[:book_id]
+      @temp.isbn=t[:isbn]     
+      @temp.book_stage=t[:book_stage]
+      @temp.damage_type=t[:damage_type]
+      @temp.damage_description=t[:damage_description]
+      @temp.save
+    end
+    render :json => damagebooks
   end
-  damagebooks.each do |t|
-  @temp=Damagebook.new()
-  @temp.isbn=t[:isbn]
-  @temp.name=t[:name]
-  @temp.author=t[:author]
-  @temp.book_stage=t[:book_stage]
-  @temp.damage_type=t[:damage_type]
-  @temp.damage_description=t[:damage_description]
-  @temp.save
-  end
-  render :json => damagebooks
-end
  
   private
 

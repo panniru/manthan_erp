@@ -97,8 +97,7 @@ ManthanErp::Application.routes.draw do
 
   resources :time_tables  
   resources :books do 
-    collection do 
-      get  'home_index'
+    collection do       
       post 'create_bulk'
     end
   end
@@ -617,6 +616,11 @@ ManthanErp::Application.routes.draw do
       get 'get_student_details'
       get 'get_subject_assessment_criteria'
       post 'save_term_results'
+    end  
+  end
+
+  resources :libraries do   
+    collection do
     end  
   end
   

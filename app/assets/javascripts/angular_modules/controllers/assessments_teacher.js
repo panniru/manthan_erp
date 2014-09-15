@@ -79,8 +79,7 @@
             $scope.cancelMyModal();      
         };
         
-        $scope.saveEditTeacherAssessmentMappings = function(){
-            alert(JSON.stringify($scope.edit_teacher_assessments));
+        $scope.saveEditTeacherAssessmentMappings = function(){            
             assessmentsTeacherService.saveTeacherAssessmentMappings($scope.edit_teacher_assessments)
                 .then(function(result) {                    
                });

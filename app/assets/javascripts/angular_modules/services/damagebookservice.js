@@ -5,12 +5,9 @@
             var url = "/damagebooks/get_book_service_view.json"
             return $http.get(url);
         };
-       
         
         return {
-            getbookServiceView : getbookServiceView,
-           
-           
+            getbookServiceView : getbookServiceView,           
         };
     }]);
 
