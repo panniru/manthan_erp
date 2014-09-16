@@ -254,7 +254,6 @@ end
 
 def seed_student_route_mapping
   unless StudentRouteMapping.first.present?
-
     StudentRouteMapping.create(:id => '10' , :route_id => '18' , :student_master_id => '2',:location_master_id => '10' )
   end
 end

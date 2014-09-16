@@ -20,7 +20,7 @@
     %tbody
       %tr{"ng-repeat" => "route in routes"}
         %td 
-          %a{href: 'routes/{{route.id}}'} {{route.id}}
+          %a{href: '/routes/{{route.id}}'} {{route.id}}
         %td {{route.busno_up}}
         %td {{route.start_location}}
         %td {{route.end_location}}
