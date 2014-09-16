@@ -22,7 +22,7 @@ class AttendanceCtrl
   def teacher_sub_menu
     sub_menu = []
     sub_menu << daily
-    sub_menu << holiday_calendar
+
   end
 
   private

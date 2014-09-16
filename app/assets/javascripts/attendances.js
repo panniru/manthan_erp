@@ -1,10 +1,5 @@
-function myFunction(date){
-    
-    angular.element($('.myFunction')).scope().todayAttendence(date)
-}
-
 $(document).ready(function() { 
-   
+
     var monthNames = [ "January", "February", "March", "April", "May", "June",
                        "July", "August", "September", "October", "November", "December" ]
     var today = new Date();
@@ -17,9 +12,8 @@ $(document).ready(function() {
 	},
        
         select: function(date) {
-           // var checkUrl = "holidaycalendars/holiday_exists.json?date="+dateFormat    
 
-            angular.element($('#myModal')).scope().dailyAttendence(date)
+            angular.element($('#myTable')).scope().dailyAttendence(date)
 
         }            
     });

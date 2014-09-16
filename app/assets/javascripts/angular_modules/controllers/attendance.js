@@ -1,8 +1,19 @@
 (function(angular, app) {
     "use strict";
     app.controller("AttendanceController",["$scope", "attendanceService", function($scope, attendanceService) {
-
-        $scope.submitToggle = true;
+        
+      
+        $scope.list = [];
+        $scope.text = 'hello';
+        $scope.submit = function() {
+            if ($scope.text) {
+                $scope.list.push(this.text);
+                $scope.text = '';
+            }
+           
+        }
+     
+     
         $scope.myShowFormValue = true;
         $scope.myEditFormValue = false;
         
@@ -29,8 +40,7 @@
 
         $scope.dailyAttendence = function(d){
             $scope.myDate = (d.getFullYear() + "-" + (d.getMonth()+1) +"-"+d.getDate()); 
-
-            $('#myModal').modal('show');                
+            alert("You have selected:"+$scope.myDate);
         }
 
         attendanceService.getAttendanceServiceView()
@@ -56,10 +66,15 @@
             }
             attendanceService.saveStudentAttendance($scope.save_attendence_details)
                 .then(function(result) {
-                    $window.location.reload();
-
+                    for(var i=0; i<$scope.save_attendence_details.length; i++){
+                        $scope.students[i]['attendance'] = '';
+                    }
                 });
-            
+        }
+       
+        $scope.goToEdit = function(){
+            $scope.myShowFormValue = false;
+            $scope.myEditFormValue = true;
         };
         
 

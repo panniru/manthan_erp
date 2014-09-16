@@ -165,6 +165,11 @@ def seed_students
 
     StudentMaster.create(:name => "Srikanth", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.last.id, :bus_facility => true ,:section_master_id => '1')
     StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.last.id, :grade_master_id => GradeMaster.first.id, :bus_facility => true, :section_master_id => '1')
+    StudentMaster.create(:name => "Gopika", :grade_master_id => "1")
+    StudentMaster.create(:name => "Priya", :grade_master_id => "1")
+    StudentMaster.create(:name => "Navya", :grade_master_id => "1")
+    StudentMaster.create(:name => "Muralee", :grade_master_id => "1")
+
   end
 end
 
@@ -311,6 +316,8 @@ def seed_faculty
     FacultyMaster.create(:faculty_name => 'PRIYA')
     FacultyMaster.create(:faculty_name => 'NAVYA')
     FacultyMaster.create(:faculty_name => 'UMA')
+    FacultyMaster.create(:user_id => 6, :faculty_name => 'teacher')
+
   end
 end 
 
@@ -327,6 +334,13 @@ def seed_tecaher_grade_mapping
     TeacherGradeMapping.create(:grade_master_id => grademasters[3]['id'], :section_master_id => sectionmasters[2]['id'], :subject_master_id => subjectmasters[1]['id'] , :faculty_master_id => facultymasters[1]['id'])
   end 
 end
+
+def seed_class_teacher_mapping
+  unless ClassTeacherMapping.first.present?
+    ClassTeacherMapping.create(:grade_master_id => '1',:faculty_master_id => '7')
+  end
+end
+
 
 
 def seed_all
@@ -349,7 +363,7 @@ def seed_all
   seed_locations
   seed_new_vehicles
   seed_student_route_mapping
- 
+  seed_class_teacher_mapping
 end
 
 seed_all

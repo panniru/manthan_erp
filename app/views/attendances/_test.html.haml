@@ -1,0 +1,6 @@
+%form{"ng-controller" => "AttendanceController", "ng-submit" => "submit()"}
+  Enter text and hit enter:
+  %input{:name => "text", "ng-model" => "text", :type => "text"}/
+  //%input#submit{:type => "submit", :value => "Submit", :onclick => "javascript:reload()"}/
+  %button#submit{:type => "submit"} Click
+  %pre list={{list}}
