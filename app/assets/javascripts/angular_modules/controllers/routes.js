@@ -69,7 +69,7 @@
 	}
 	
         $scope.submitRoutes = function(){
-	    alert($scope.action)
+	    //alert($scope.action)
 	    if($scope.action === 'edit'){
 		updateRoutes();
 	    }else{
