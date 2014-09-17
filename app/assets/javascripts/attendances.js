@@ -19,6 +19,7 @@ $(document).ready(function() {
                 angular.element($('#myTable')).scope().dailyAttendence(date)
                 alert("You can mark attendance on this day!");
             } else {
+               // $("#attendance_calendar").hide();
                 alert("You can't mark attendance on this day!..");
             }
 

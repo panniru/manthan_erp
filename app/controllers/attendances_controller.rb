@@ -70,8 +70,8 @@ class AttendancesController < ApplicationController
   def index
     if current_user.teacher?
       if(ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
-        
-        render 'index'
+        @attendance = Attendance.active_at_date
+        #render 'index'
         
       end
     end
