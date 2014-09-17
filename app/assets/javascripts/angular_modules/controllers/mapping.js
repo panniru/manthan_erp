@@ -13,6 +13,7 @@
 	    mapService.getMappingServiceView( $scope.location)
 		.then(function(response){
 		    $scope.routes = response.data
+		    
 		});
         }
 	
@@ -23,6 +24,14 @@
 		    $('#myModal').modal('hide');
 		});
 	};
+	
+	$scope.mapStudent = function(student){
+	    alert(student.id)
+	    	.then(function(result) {
+		    $('#myModal').modal('hide');
+		});
+	};
+
 	
     }]);
     
