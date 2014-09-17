@@ -27,7 +27,7 @@
       .row
         .col-sm-1
         .col-sm-1
-          = f.time_field :new_up_route, :class => 'form-control'
+          = f.text_field :new_up_route, :class => 'form-control'
         .col-sm-1
           = f.text_field :new_busno_up ,:class => 'form-control'
         .col-sm-2
@@ -37,7 +37,7 @@
         .col-sm-1
           = f.text_field :new_busno_down ,:class => 'form-control'
         .col-sm-2
-          = f.time_field :time_down ,:class => 'form-control'
+          = f.text_field :time_down ,:class => 'form-control'
     .row
       %center
         = f.submit "save", :class=> "btn btn-primary"

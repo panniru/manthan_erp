@@ -13,6 +13,7 @@
 	    mapService.getMappingServiceView( $scope.location)
 		.then(function(response){
 		    $scope.routes = response.data
+		    
 		});
         }
 	

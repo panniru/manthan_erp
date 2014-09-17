@@ -18,21 +18,17 @@ class Route < ActiveRecord::Base
   end
   
   def update_route(params)
+    p "params"
+    p params
     params[:locations].each do |location_params|
       location = self.locations.find(location_params[:id])
-      if (location_params[:id])
-        location_master_id = location.location_master_id 
-        sequence_no = location.sequence_no 
-      end
-      @new =  Location.new()
-      @new.location_master_id = location_params[:location_master_id]
-      @new.sequence_no = location_params[:sequence_no]
-      @new.save
+      location_master_id = location.location_master_id 
+      sequence_no = location.sequence_no 
     end
     self.busno_up = params[:busno_up]
     self.lpp = params[:lpp]
+    self.update
   end
-  
   
   def start_location
     Location.find(start_point)

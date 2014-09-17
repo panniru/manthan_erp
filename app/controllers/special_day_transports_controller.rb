@@ -65,12 +65,10 @@ class SpecialDayTransportsController < ApplicationController
   end
   
   def update
-    p "=================="
-    p route_params
     @special_day_transports = SpecialDayTransport.find(params[:id])
     respond_to do |format|
       if @special_day_transports.update(route_params)
-        format.html { redirect_to special_day_transports_path, notice: 'Form was successfully updated.' }
+        format.html { redirect_to special_day_transports_path, notice: ' successfully updated.' }
         format.json { render action: 'index', :status => "success" }
       else
         format.html { render action: 'edit' }
