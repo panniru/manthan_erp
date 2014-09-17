@@ -25,6 +25,14 @@
 		});
 	};
 	
+	$scope.mapStudent = function(student){
+	    alert(student.id)
+	    	.then(function(result) {
+		    $('#myModal').modal('hide');
+		});
+	};
+
+	
     }]);
     
 })(angular, myApp);
