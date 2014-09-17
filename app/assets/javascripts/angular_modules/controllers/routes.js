@@ -21,14 +21,12 @@
 	    fetch_bus();
 	    $scope.newRoute = new resourceService.Route({"route_no":"","lpp":"", "busno_up":"",  "locations":[]})
 	    for(var i=0; i<2; i++){
-		alert('newRoute')
-                $scope.newRoute.locations.push({"location_master_id":"" , "sequence_no": ""});
+	        $scope.newRoute.locations.push({"location_master_id":"" , "sequence_no": ""});
             };
             $('#createModal').modal('show')
         }
 	
 	$scope.allStudents = function(route){
-	   
 	    $('#studentModal').modal('show');
 	    routesService.getStudentView(route)
 		.then(function(response){
@@ -45,7 +43,6 @@
 		});
         }
 	$scope.sendMail = function(){
-	   // $('#routeModal').modal('show');
 	    routesService.routeMail($scope.subject, $scope.text)
 		.then(function(response){
 		    $('#myModal').modal('hide');  
@@ -57,7 +54,8 @@
 	   	.then(function(responce){
 		    $scope.routes = resourceService.Route.query()
                     $('#createModal').modal('hide')
-	    	})
+	    	    location.reload();
+		})
 	}
 
 	var updateRoutes = function(){

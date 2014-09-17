@@ -20,6 +20,5 @@
             %td= student.name 
             - if current_user.transport_head?
               %td 
-                = render  :partial => 'modal' , :locals => {:student_id => student.id}
-               
+                = render  :partial => 'modal' , :locals => {:student_id => student.id}               
         
