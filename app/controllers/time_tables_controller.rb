@@ -22,12 +22,7 @@ class TimeTablesController < ApplicationController
   def sectionserviceview
     respond_to do |format|
       format.json do
-        sections = SectionMaster.get_sections_by_role(current_user)
-        #p a        
-        #p "===========>"
-        #sections = SectionMaster.all.map do |section|
-          #{section_master_id: section.id, section_name: section.section_name, grade_master_id: section.grade_master_id }
-        #end
+        sections = SectionMaster.get_sections_by_role(current_user)        
         render :json => sections
       end
     end  
@@ -58,7 +53,7 @@ class TimeTablesController < ApplicationController
             temp.sun_sub=t["sun_sub"]
             temp.save
           else
-            @timetable=TimeTable.new(t)            
+            @timetable=TimeTable.new(add_params(t))            
             @timetable.save
           end
         end
@@ -109,5 +104,9 @@ class TimeTablesController < ApplicationController
         render :json => defaultperiods
       end
     end
+  end
+
+  def add_params(params)
+    params.permit(:academic_year, :grade_master_id, :section_master_id, :period_id, :mon_sub, :tue_sub, :wed_sub, :thu_sub, :fri_sub, :sat_sub, :sun_sub, :st_time, :end_time)
   end
 end
