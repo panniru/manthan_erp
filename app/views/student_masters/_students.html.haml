@@ -13,8 +13,14 @@
         %td= link_to student.name, student_master_path(:id => student,:context => context)
         %td= student.dob
         %td= student.joining_date
-        %td= student.parent.father_name
-        %td= student.grade_master.grade_name
-        %td= student.section_master.section_name
+        %td
+          - if student.parent.present?
+            = student.parent.father_name
+        %td
+          - if student.grade_master.present?
+            = student.grade_master.grade_name
+        %td
+          - if student.section_master.present?
+            = student.section_master.section_name
         %td= student.bus_facility
 
