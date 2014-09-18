@@ -57,26 +57,28 @@
                     = link_to "save", "#", class: "btn btn-primary",   :ng_click => "save()"
                     %br
                     %br
-%br
-%br
-%table#tblData.table.table.striped.table-bordered.table-condensed.table-hover
-  %thead
-    %tr
-      %th ISBN
-      %th NAME 
-      %th AUTHOR
-      %th BLOCKED BY
-      %th 
-  %tbody
-    - @block_books.each do |block_book|
-      %tr
-        %td= block_book.isbn
-        %td= block_book.name
-        %td= block_book.author
-        %td= block_book.blocked_by
-        %td
-         
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), block_book_path(block_book), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+  %br
+  %br  
+  .row
+    %table#tblData.table.table.striped.table-bordered.table-condensed.table-hover
+      %thead
+        %tr
+          %th ISBN
+          %th NAME 
+          %th AUTHOR
+          %th BLOCKED BY
+          %th DELETE
+      %tbody        
+        %tr{"ng-repeat" => "blockBook in blockBooks"}
+          %td {{blockBook.isbn}}
+          %td {{blockBook.name}}
+          %td {{blockBook.author}}
+          %td {{blockBook.blocked_by}}
+          %td
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(blockBook)"
+          
+           
+    
           
 
        

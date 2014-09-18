@@ -96,8 +96,8 @@
                                  "update": { method: "PUT"}
                              }
                             );
-
-        
+        var DamageBook = $resource('/damagebooks/:id.json', {id: '@id'});
+        var BlockBook = $resource('/block_books/:id.json', {id: '@id'});
        
 
         return {
@@ -116,8 +116,9 @@
             Mealname: Mealname,
             Inventory: Inventory,
             CanteenManagement: CanteenManagement,
-	    SpecialDayTransport:SpecialDayTransport
-
+	    SpecialDayTransport:SpecialDayTransport,
+            DamageBook : DamageBook,
+            BlockBook : BlockBook
         };
     }]);
 })(angular, myApp);

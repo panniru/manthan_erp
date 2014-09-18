@@ -70,7 +70,8 @@ ManthanErp::Application.routes.draw do
   resources :damagebooks do
     collection do
       get 'get_book_service_view'
-     post 'damagebooks'
+      post 'damagebooks'
+      get 'get_damage_books'
     end
   end 
   resources :staffs
@@ -507,10 +508,10 @@ ManthanErp::Application.routes.draw do
       get "students"
       post "send_mail"
       get 'all_locations'
-      
+
     end
     member do
-      get 'get_route_locations'
+      get 'locations'
       get "students"
     end
   end
@@ -548,19 +549,7 @@ ManthanErp::Application.routes.draw do
       post "create_bulk"
     end
   end
-  resources :inventories do
-    collection do
-      get "mail"
-      post 'create_bulk'
-    end
-    member  do
-      get 'request_accept'
-      put 'order_placed'
-      put 'rejected'
-      put 'delivered'
-
-    end
-  end
+    resources :inventories
 
   resources :canteenmanagers do
     collection do
@@ -611,7 +600,7 @@ ManthanErp::Application.routes.draw do
       get 'closed_forms'
       end
     end
-
+  resources :attendances
 
   resources :academic_terms do   
     collection do
@@ -636,19 +625,4 @@ ManthanErp::Application.routes.draw do
     end  
   end
   
-
-  resources :attendances do
-    collection do
-      get 'teacher_index'
-      get 'get_students'
-      get 'holidaycalendardata'
-      get 'holiday_date'
-      post 'save_student_attendance'
-      get 'getStudentAndAttendanceView'
-      get 'attendance_date'
-      
-
-    end
-  end
-
 end

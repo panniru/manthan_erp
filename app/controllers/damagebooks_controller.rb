@@ -1,9 +1,7 @@
 class DamagebooksController < ApplicationController
   load_resource :only => [:show, :update, :edit, :destroy]
   
-  def create
-    p params
-    p "=================>"
+  def create    
     @damagebook = Damagebook.new(damagebook_params)
     if @damagebook.save
       flash[:success] = I18n.t :success, :scope => [:damagebook, :create]
@@ -56,9 +54,7 @@ class DamagebooksController < ApplicationController
     render :json => damage
   end  
 
-  def damagebooks
-    p params 
-    p "================>"
+  def damagebooks    
     damagebooks = Book.where('isbn = '+"'#{params[:my_Isbn]}'")
     damagebooks = damagebooks.map do |block|
       {book_id: params[:book_Id], isbn:block.isbn, name: block.name, author: block.author,book_stage: params[:book_Stage],damage_type: params[:damage_Type],damage_description: params[:damage_Description] }
@@ -74,6 +70,13 @@ class DamagebooksController < ApplicationController
     end
     render :json => damagebooks
   end
+
+  def get_damage_books     
+    damage_books = Damagebook.all.map do |damage|
+      {id: damage.id, book_id: damage.book_id, name: damage.book.name, isbn: damage.book.isbn, author: damage.book.author, book_stage: damage.book_stage, damage_type: damage.damage_type, damage_description: damage.damage_description}
+    end 
+    render :json => damage_books
+  end  
  
   private
 
