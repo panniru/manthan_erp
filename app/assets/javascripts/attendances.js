@@ -6,7 +6,7 @@ $(document).ready(function() {
     var day  = date.getDate();
     var month = date.getMonth() + 1;              
     var year =  date.getFullYear();
-    alert(day + '-' + month + '-' + year);
+    //alert(day + '-' + month + '-' + year);
     $('#attendance_calendar').html("");
     $('#attendance_calendar').fullCalendar({ 
         events: '/attendances/holidaycalendardata.json?month='+monthNames[date.getMonth()],
@@ -17,7 +17,7 @@ $(document).ready(function() {
             myDate.setDate(myDate.getDate() + daysToAdd);
             if (date < myDate) {
                 angular.element($('#myTable')).scope().dailyAttendence(date)
-                alert("You can mark attendance on this day!");
+                alert("You can mark attendance on this day!"+date);
             } else {
                // $("#attendance_calendar").hide();
                 alert("You can't mark attendance on this day!..");

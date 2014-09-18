@@ -40,7 +40,7 @@
 
         $scope.dailyAttendence = function(d){
             $scope.myDate = ((d.getDate()) + "-"+ (d.getMonth()+1) + "-" + (d.getFullYear())); 
-            alert("You have selected:"+$scope.myDate);
+
         }
 
         attendanceService.getAttendanceServiceView()
