@@ -16,13 +16,28 @@ class BlockBooksController < ApplicationController
   
   def get_book_service_view
     block = Book.all.map do |block|
-      { isbn: block.isbn , name: block.name,author: block.author}
+      {id: block.id, isbn: block.isbn , name: block.name,author: block.author}
     end
     render :json => block
   end
   
   def index
-    @block_books= BlockBook.all
+    respond_to do |format|
+      format.json do  
+        block_books= BlockBook.all
+        p  block_books
+        p "===######===================>"
+        block_books = block_books.each.map do |block_book|
+          {id: block_book.id, book_id: block_book.book_id, blocked_by: block_book.blocked_by, name: block_book.book.name, isbn: block_book.book.isbn, author: block_book.book.author}
+        end
+        p  block_books
+        p "======================>"
+        render :json => block_books
+      end
+      format.html do
+        @block_books= BlockBook.all
+      end
+    end
   end
 
   def new
@@ -65,13 +80,12 @@ class BlockBooksController < ApplicationController
   def savebooks
     block_books = Book.where('isbn = '+"'#{params[:my_Isbn]}'")
     block_books = block_books.map do |block|
-      {isbn: block.isbn, name: block.name, author: block.author,blocked_by: params[:my_Block] }
+      {book_id: params[:book_Id], isbn: block.isbn, blocked_by: params[:my_Block] }
     end
     block_books.each do |t|
       @temp=BlockBook.new()
       @temp.isbn=t[:isbn]
-      @temp.name=t[:name]
-      @temp.author=t[:author]
+      @temp.book_id = t[:book_id]
       @temp.blocked_by=t[:blocked_by]
       @temp.save
       end

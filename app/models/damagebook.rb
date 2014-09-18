@@ -1,4 +1,3 @@
-class Damagebook < ActiveRecord::Base
-  
+class Damagebook < ActiveRecord::Base   
   belongs_to :book
 end

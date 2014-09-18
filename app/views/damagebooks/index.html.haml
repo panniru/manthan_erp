@@ -72,29 +72,27 @@
                     = link_to "submit", "#", class: "btn btn-primary",   :ng_click => "submit()"
                   %br
                   %br
-%table#tblData.target.table.table-striped.table-condensed.table-bordered
-  %thead
-    %tr
+  .row
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr      
+          %th ISBN
+          %th NAME
+          %th AUTHOR
+          %th BOOK STATUS
+          %th DAMAGE SEVERITY
+          %th A BOUT DAMAGE
+          %th DELETE 
+      %tbody   
+        %tr{"ng-repeat" => "damage_book in damage_books"}   
+          %td {{damage_book.isbn}}
+          %td {{damage_book.name}}
+          %td {{damage_book.author}}
+          %td {{damage_book.book_stage}}
+          %td {{damage_book.damage_type}}
+          %td {{damage_book.damage_description}}
+          %td          
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(damage_book)"
       
-      %th ISBN
-      %th NAME
-      %th AUTHOR
-      %th BOOK STATUS
-      %th DAMAGE SEVERITY
-      %th A BOUT DAMAGE
-      %th DELETE
-      
-      
-  %tbody
-    - @damagebooks.each do |damagebook|
-      %tr   
-        %td= damagebook.isbn
-        %td name
-        %td author
-        %td= damagebook.book_stage
-        %td= damagebook.damage_type
-        %td= damagebook.damage_description
-        %td          
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), damagebook_path(damagebook), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete" 
           
        
