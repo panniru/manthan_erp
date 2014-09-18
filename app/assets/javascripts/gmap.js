@@ -1,4 +1,4 @@
-
+//import    "http://maps.google.com/maps/api/js?sensor=true"
 var directionsDisplay = new google.maps.DirectionsRenderer();
 var directionsService = new google.maps.DirectionsService();
 function calcRoute() {
