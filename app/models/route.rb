@@ -20,14 +20,22 @@ class Route < ActiveRecord::Base
   def update_route(params)
     p "params"
     p params
+    # params[:route].each do |d|
+    #   d.lpp = params[:lpp]
+    #   d.busno_up = params[:busno_up]
+    # end
     params[:locations].each do |location_params|
-      location = self.locations.find(location_params[:id])
-      location_master_id = location.location_master_id 
-      sequence_no = location.sequence_no 
+      if location_params["id"].present?
+        location = self.locations.find(location_params[:id])
+        location.location_master_id = location_params[:location_master_id] 
+        location.sequence_no = location_params[:sequence_no]
+        location.save
+      else
+        locations << Location.new(location_params.permit(:location_master_id, :sequence_no ,:route_id))
+        sorted_locations = self.locations.sort{|l1,l2| l1.sequence_no <=> l2.sequence_no}
+        status = self.update(:start_point => sorted_locations.first.id, :end_point => sorted_locations.last.id)
+      end
     end
-    self.busno_up = params[:busno_up]
-    self.lpp = params[:lpp]
-    self.update
   end
   
   def start_location

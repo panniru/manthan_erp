@@ -114,7 +114,7 @@
    def update
      respond_to do |format|
        format.json do
-         render :json => @route.update_route(params)
+         render :json => {:status => @route.update_route(params)}
        end
        format.html do
        end
@@ -198,7 +198,7 @@
    
    def build_route_from_bulk
      params.require(:locations).select{|locations| location["location_master_id"].present? and route["sequence_no"].present? }.map do |params|
-       location = Location.new(params[:location].permit(:location_master_id, :sequence_no))
+       location = Location.new(params[:location].permit(:location_master_id, :sequence_no , :route_id))
        route = Route.new(params[:route].permit(:route_no, :busno_up))
        route.locations << location
        route

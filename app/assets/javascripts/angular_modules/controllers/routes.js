@@ -21,7 +21,7 @@
 	    fetch_bus();
 	    $scope.newRoute = new resourceService.Route({"route_no":"","lpp":"", "busno_up":"",  "locations":[]})
 	    for(var i=0; i<2; i++){
-	        $scope.newRoute.locations.push({"location_master_id":"" , "sequence_no": ""});
+	        $scope.newRoute.locations.push({"location_master_id":"" , "sequence_no": "" , "route_id" : ""});
             };
             $('#createModal').modal('show')
         }
@@ -54,7 +54,7 @@
 	   	.then(function(responce){
 		    $scope.routes = resourceService.Route.query()
                     $('#createModal').modal('hide')
-	    	    location.reload();
+	    	    window.location.reload();
 		})
 	}
 
@@ -63,7 +63,8 @@
 	   	.then(function(responce){
 		    $scope.routes = resourceService.Route.query()
 		    $('#createModal').modal('hide')
-	    	})
+	    	    window.location.reload();
+		})
 	}
 	
         $scope.submitRoutes = function(){
@@ -75,9 +76,6 @@
 	    }
 	}
 	
-	$scope.busNo = function(){
-	    alert(lpp)
-        }
 	
 	$scope.editRoutes = function(route){
 	    $scope.action = "edit"
@@ -93,7 +91,7 @@
 	
 	$scope.destroy = function(route){
             route.$delete()
-                .then(function(responce){
+	    	.then(function(response){
                     $scope.routes.splice($scope.routes.indexOf(route), 1)
                 })
         };
@@ -101,7 +99,7 @@
         $scope.addMoreterms = function(){
 	    var lnt = parseInt($scope.newRoute.locations.length)
             for(var i=lnt; i< lnt+1; i++){
-                $scope.newRoute.locations.push({"location_master_id":"" ,"sequence_no":""});
+                $scope.newRoute.locations.push({"location_master_id":"" ,"sequence_no":"" , "route_id": ""});
             };
         }
     }]);
