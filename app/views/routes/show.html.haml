@@ -1,27 +1,26 @@
 .row{"ng-controller" => "RouteController"}
-  
   .row
     .col-sm-2
       = label_tag "Route no:", nil, :class => "form-label"
-    .col-sm-2
-      = label_tag @route.id ,nil ,:class => 'form-control'
-    .col-sm-2
+    .col-sm-1
+      = label_tag @route.id 
+    .col-sm-1
       = label_tag "Bus no:", nil, :class => "form-label"
-    .col-sm-2
-      = label_tag @route.busno_up , nil ,:class => 'form-control'
+    .col-sm-1
+      = label_tag @route.busno_up 
     .col-sm-1
       = label_tag "Route:", nil, :class => "form-label"
-    .col-sm-2
-      = label_tag @route.lpp ,nil ,:class => 'form-control'
+    .col-sm-1
+      = label_tag @route.lpp 
   .row
     .col-sm-2
       = label_tag "Starting Point:", nil, :class => "form-label"
-    .col-sm-2
-      = label_tag @route.start_location.location_master.location_name,nil,:class => 'form-control' 
+    .col-sm-3
+      = label_tag @route.start_location.location_master.location_name 
     .col-sm-2
       = label_tag "Ending Point:", nil, :class => "form-label"
-    .col-sm-2
-      = label_tag @route.end_location.location_master.location_name ,nil ,:class => 'form-control'
+    .col-sm-3
+      = label_tag @route.end_location.location_master.location_name 
       %br
       %br
       %br
@@ -41,13 +40,13 @@
                     %tr
                       %th Student id
                       %th Student Name
-                     
+                      
                   %tbody
                     %tr{"ng-repeat" => "student in students"}
                       %td {{student.id}}
                       %td {{student.name}}
-                    %h5 No of children in this route are:  {{students.length}}
-                
+                    %h5 Total:  {{students.length}}
+                    
 
 
   .row
@@ -84,7 +83,7 @@
                   %tr{"ng-repeat" => "location in locations"}
                     %td {{location.id}}
                     %td {{location.name}}
-              %h5 No of children in this location are: {{locations.length}}
+              %h5 Total: {{locations.length}}
               
 
                     

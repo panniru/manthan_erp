@@ -45,7 +45,10 @@
        gon.height = "350px"
        respond_to do |format|   
          format.json do
-           render :json => Route.all
+           routes = @routes.map do |r|
+             {id: r.id ,  busno_up: r.busno_up, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name}
+           end
+           render :json => routes
          end
          format.html do 
            render "index"
@@ -53,15 +56,31 @@
        end
      end
      if current_user.parent?
-       current_user.parent.students.each do |student|
-         studentroutemappings = StudentRouteMapping.where('student_master_id = '+"#{student.id}")
-         studentroutemappings = studentroutemappings.all.map do |route|
-           @route = Route.find(route.route_id)
+       respond_to do |format|   
+         format.json do
+           current_user.parent.students.each do |student|
+             studentroutemappings = StudentRouteMapping.where('student_master_id = '+"#{student.id}")
+             studentroutemappings = studentroutemappings.all.map do |route|
+               p "====================="
+               p route.route_id
+               @routes = Route.where('id = '+"#{route.route_id}")
+               p @routes
+             end
+           end
+           routes = @routes.map do |r|
+             {id: r.id ,  busno_up: r.busno_up, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name}
+           end
+           p "@@@@@@@@@@@@2"
+           p routes
+           render :json => routes
          end
-       end
+         format.html do 
+           render "index"
+         end
+       end  
      end
-   end  
-      
+   end
+   
    def send_mail
      respond_to do |format|
        route_mail= params[:route_mail]
