@@ -24,14 +24,10 @@ class BlockBooksController < ApplicationController
   def index
     respond_to do |format|
       format.json do  
-        block_books= BlockBook.all
-        p  block_books
-        p "===######===================>"
+        block_books= BlockBook.all        
         block_books = block_books.each.map do |block_book|
           {id: block_book.id, book_id: block_book.book_id, blocked_by: block_book.blocked_by, name: block_book.book.name, isbn: block_book.book.isbn, author: block_book.book.author}
-        end
-        p  block_books
-        p "======================>"
+        end        
         render :json => block_books
       end
       format.html do

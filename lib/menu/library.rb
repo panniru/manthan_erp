@@ -7,6 +7,7 @@ class Library
   def admin_sub_menu
     sub_menu = []    
     sub_menu << books
+    sub_menu << request_books_admin
    
 end
   def librarian_sub_menu
@@ -16,18 +17,18 @@ end
     sub_menu << issuing_books
     sub_menu << damage_books
     sub_menu << block_books
-    sub_menu << approval_for_books   
+    sub_menu << request_books_admin
     sub_menu << donate_books
     sub_menu << reports
   end
   def parent_sub_menu
     sub_menu = []
-    sub_menu << request_new_books
+    sub_menu << request_books
     sub_menu
   end
   def teacher_sub_menu
     sub_menu = []
-    sub_menu << suggest_new_books
+    sub_menu << request_books
     sub_menu
   end
   def principal_sub_menu
@@ -57,10 +58,7 @@ end
   end
   def approval_for_books
     MenuItem.new(:label => "Approval For New Book", :klass => "", :icon => "check-square-o  ", :href => "/request_new_books/request_approval")
-  end
-  def approval_books
-    MenuItem.new(:label => "Approval For New Book", :klass => "", :icon => "check-square-o ", :href => "/request_new_books/request_accept")
-    end
+  end 
   def accepted_books
     MenuItem.new(:label => "Accepted Books", :klass => "", :icon => "level-down  ", :href => "/request_new_books/book_accept")
   end
@@ -78,5 +76,17 @@ end
   end
   def reports
     MenuItem.new(:label => "Reports", :klass => "", :icon => "file-image-o  ", :href => "/lib_reports")
+  end
+
+  def request_books
+    MenuItem.new(:label => "Suggest New Book", :klass => "", :icon => "book ", :href => "/request_books")
+  end
+
+  def approval_books
+    MenuItem.new(:label => "Approval For New Book", :klass => "", :icon => "check-square-o ", :href => "/request_books")
+  end  
+
+  def request_books_admin
+    MenuItem.new(:label => "Request Books", :klass => "", :icon => "book ", :href => "/request_books")
   end
 end

@@ -1,0 +1,21 @@
+.row
+  .col-md-1
+  .col-md-10
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr        
+          %th Book Name
+          %th Author Name
+          - if current_user.librarian?
+            %th Status
+            %th Send For Approval
+      %tbody
+        %tr{"ng-repeat" => "request_book in request_books"}
+          %td {{request_book.book_name}}
+          %td {{request_book.author_name}}
+          - if current_user.librarian?
+            %td {{request_book.status}}
+            %td
+              %input{"ng-model" => "book_status", type: "checkbox", "ng-change" => "sendBooksForApproval(book_status,request_book)", "ng-checked" => "book_status"}      
+              {{book_status}}  
+
