@@ -549,7 +549,19 @@ ManthanErp::Application.routes.draw do
       post "create_bulk"
     end
   end
-    resources :inventories
+
+  resources :inventories do
+    collection do
+      get "mail"
+      post 'create_bulk'
+    end
+    member  do
+      get 'request_accept'
+      put 'order_placed'
+      put 'rejected'
+      put 'delivered'
+    end
+  end
 
   resources :canteenmanagers do
     collection do
