@@ -85,7 +85,7 @@ main_menu = []
     main_menu << MenuItem.new(:label => "Defaults", :klass => ContextDetector.mapped_module_name(@controller_name) == "default_master_sub_menu"? "active" :"", :icon => " edit", :href => "/default_masters")
     main_menu << MenuItem.new(:label => "Transport", :klass => ContextDetector.mapped_module_name(@controller_name) == "transport_sub_menu"? "active" :"", :icon => " truck", :href => "/routes")
     main_menu
-    main_menu << MenuItem.new(:label => "Library", :klass => ContextDetector.mapped_module_name(@controller_name) == "library"? "active" :"", :icon => " book", :href => "books/home_index")
+    main_menu << MenuItem.new(:label => "Library", :klass => ContextDetector.mapped_module_name(@controller_name) == "library"? "active" :"", :icon => " book", :href => "/libraries")
     main_menu << MenuItem.new(:label => "Attendance", :klass => ContextDetector.mapped_module_name(@controller_name) == "attendance"? "active" :"", :icon => "building", :href => "/attendances")
 
     main_menu << MenuItem.new(:label => "Canteen Facility", :klass => ContextDetector.mapped_module_name(@controller_name) == "canteen"? "active" :"", :icon => "cutlery", :href => "/holidaycalendars/empty")

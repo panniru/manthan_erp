@@ -1,0 +1,45 @@
+.row
+  .col-md-1
+  .col-md-10
+    .panel.panel-default
+      .test
+        .col-sm-4
+          .pull-left
+            .input-group
+              %span.input-group-addon
+                = fa_icon "search lg"
+              %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+              %br
+        .col-sm-3
+          %center
+            %h4
+              Suggested Books
+        .col-sm-5
+          .pull-right
+            %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Suggest A Book"
+            -if current_user.librarian?
+              = link_to 'Pending Books', pending_request_books_request_books_path(@property),:class => "btn btn-primary"            
+            #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+              .modal-dialog
+                .modal-content
+                  .modal-header
+                    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+                    %h4#myModalLabel.modal-title Suggest A  Book
+                  = form_for RequestBook.new , :html => {:class => "form-horizontal", :role => "form" , :multiple => true} do |f|
+                    .modal-body
+                      .row
+                        .col-sm-6
+                          = f.label "Book Name:", :class => 'control-label'
+                          = f.text_field :book_name,:class => 'form-control'
+                        .col-sm-6
+                        
+                        .col-sm-6
+                          = f.label "Author Name:", :class => 'control-label'
+                          = f.text_field :author_name,:class => 'form-control'
+                        .col-sm-6                       
+                       
+                    .modal-footer
+                      %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close                     
+                      = f.hidden_field :status, :value => "requested"   
+                      = f.hidden_field :user_id, :value => "#{current_user.id}" 
+                      = button_tag "Save", :type => "submit", :class => 'btn btn-primary'

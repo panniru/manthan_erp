@@ -98,6 +98,11 @@
                             );
         var DamageBook = $resource('/damagebooks/:id.json', {id: '@id'});
         var BlockBook = $resource('/block_books/:id.json', {id: '@id'});
+        var RequestBook = $resource('/request_books/:id.json', {id: '@id'},            {
+                                 "bulk": { url: "/special_say_transports/create_bulk", method:'POST'},
+                                 }
+                             );
+
        
 
         return {
@@ -118,7 +123,8 @@
             CanteenManagement: CanteenManagement,
 	    SpecialDayTransport:SpecialDayTransport,
             DamageBook : DamageBook,
-            BlockBook : BlockBook
+            BlockBook : BlockBook,
+            RequestBook : RequestBook
         };
     }]);
 })(angular, myApp);
