@@ -609,6 +609,7 @@ ManthanErp::Application.routes.draw do
     end
   end
 
+
   resources :canteenmanagers do
     collection do
       get "canteenmanagerdata"
@@ -697,7 +698,7 @@ ManthanErp::Application.routes.draw do
       get 'delivered_request_books'
     end  
   end
-    
+
   resources :attendances do
     collection do
       get 'teacher_index'
