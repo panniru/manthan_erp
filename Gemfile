@@ -47,7 +47,7 @@ gem 'roo'
 gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
 
-gem 'cancan'
+gem 'cancancan', '~> 1.9'
 gem 'devise'  
 gem 'delayed_job_active_record'
 gem 'factory_girl_rails'

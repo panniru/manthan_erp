@@ -60,7 +60,7 @@ GEM
     bootstrap-will_paginate (0.0.10)
       will_paginate
     builder (3.2.2)
-    cancan (1.6.10)
+    cancancan (1.9.2)
     capybara (1.1.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -305,7 +305,7 @@ DEPENDENCIES
   anticipate
   bootstrap-sass (~> 3.0.3.0)
   bootstrap-will_paginate
-  cancan
+  cancancan (~> 1.9)
   capybara (~> 1.1.2)
   carmen-rails (~> 1.0.0)
   carrierwave

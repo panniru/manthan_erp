@@ -1,5 +1,5 @@
 class MonthlyPdcAmountsController < ApplicationController
-  
+  authorize_resource
 
   def month_wise_fee_of_student
     student_id = params[:student_id]

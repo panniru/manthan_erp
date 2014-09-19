@@ -1,5 +1,6 @@
 class FeeTypesController < ApplicationController
   load_resource :only => [:show, :update, :edit, :destroy]
+  authorize_resource
   
   def index
     @fee_types = FeeType.paginate(:page => params[:page].present? ? params[:page] : 1)

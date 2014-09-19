@@ -1,5 +1,6 @@
 class TermDefinitionsController < ApplicationController
   load_resource :only => [:show, :update, :edit, :destroy]
+  authorize_resource
   
   def index
     respond_to do |format|
