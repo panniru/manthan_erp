@@ -558,7 +558,6 @@ ManthanErp::Application.routes.draw do
       put 'order_placed'
       put 'rejected'
       put 'delivered'
-
     end
   end
 
