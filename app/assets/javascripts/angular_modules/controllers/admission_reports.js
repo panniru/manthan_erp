@@ -11,7 +11,7 @@
 
         $scope.gridAdmDataPoint = function(item){
             $scope.drilItem = item.series.label
-            $("#admModal").modal('show')
+            $(".admModal").modal('show')
             admService.getAdmissionsOnStatus(item.series.label)
                 .then(function(response){
                     $scope.table_data = response.data;

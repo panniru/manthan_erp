@@ -30,7 +30,7 @@ class AttendancesController < ApplicationController
         holiday_calendar = Holidaycalendar.select(:holiday_date).distinct   
         #holiday_calendar = Holidaycalendar.select(:holiday_date).distinct         
         holiday_calendar = holiday_calendar.map do |calendar|
-          {start: calendar.holiday_date, title: "holiday", description: "holiday", url: "#", holiday_date: calendar.holiday_date}
+          {start: calendar.holiday_date, end: calendar.holiday_date,title: "holiday", description: "holiday", url: "#", holiday_date: calendar.holiday_date}
       end
         render :json => holiday_calendar
       end
