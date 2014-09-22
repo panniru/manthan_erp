@@ -1,22 +1,21 @@
-.panel.panel-default
-  .test
-    .col-sm-3
-      .pull-left
-        .input-group
-          %span.input-group-addon
-            = fa_icon "search lg"
-          %input#search{name: "search", placeholder: "Enter Search Term", type: "text", :class => 'form-control'}/
-          %br
-    .col-sm-6
-      %center
-        %h4
-          Application Forms
-          %br
-          %br
+.row
+  .col-sm-3
+    .pull-left
+      .input-group
+        %span.input-group-addon
+          = fa_icon "search lg"
+        %input#search{name: "search", placeholder: "Enter Search Term", type: "text", :class => 'form-control'}/
+        %br
+  .col-sm-4
+    %center
+      %h4
+        Application Forms
+
+%br
+%br
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
-      %th
       %th Form no
       %th Admission no
       %th Bus Facility
@@ -30,7 +29,6 @@
   %tbody
     - @admissions.each do |admission|
       %tr
-        %td= check_box_tag "admission_ids[]", admission.id 
         %td= link_to "#{admission.form_no}", home_index_admission_path(admission)
         %td= link_to "#{admission.admission_no}", home_index_admission_path(admission)
         %td= admission.bus

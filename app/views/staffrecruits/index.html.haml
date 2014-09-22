@@ -7,6 +7,9 @@
         %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
         %br
   .col-sm-4
+    %center
+      %h4
+        Recruitment
   .col-sm-4
     - if current_user.admin?
       .pull-right
@@ -26,8 +29,8 @@
   %tbody
     - @staffrecruits.each do |staffrecruit|
       %tr
-        %td= link_to "#{staffrecruit.form_no}",homeindex_staffrecruit_path(staffrecruit)
-        %td= staffrecruit.name
+        %td= link_to "#{staffrecruit.id}",homeindex_staffrecruit_path(staffrecruit)
+        %td= staffrecruit.faculty_name
         %td= staffrecruit.dob
         %td= staffrecruit.email
         %td= staffrecruit.mobile_no

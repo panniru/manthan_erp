@@ -1,8 +1,4 @@
-= image_tag "enquiry.png",:width => "100", :height => "100"
-= label_tag "Admission"
- 
-%br
 %span.label.label-primary STEP:1  Enquiry Details
-= label_tag "(All fields are mandatory)"
+(All Fields are Mandatory)
 %center
-  = render :partial => "enquiry", :locals => {:admissions => @admissions}
+  = render :partial => "test", :locals => {:admissions => @admissions}

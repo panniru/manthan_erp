@@ -12,7 +12,7 @@ class StaffReportsController < ApplicationController
       @staffrecruits = Staffrecruit.where(:status => params[:status])
       format.json do
         report_data = @staffrecruits.map do |field|
-          { form_no: field.form_no, name: field.name, post: field.post, mobile: field.mobile_no, email: field.email}
+          { form_no: field.form_no, name: field.faculty_name, post: field.post, mobile: field.mobile_no, email: field.email}
         end
         render :json => report_data
       end
