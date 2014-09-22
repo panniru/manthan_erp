@@ -1,11 +1,10 @@
 .row
-  %center
-    %h3
-      STATUS REPORT
+  %h3
+    STATUS REPORT
 %br
 %br
 .col-md-12{:ng_controller => "AdmissionReportsController", :ng_init => "buildChart()"}
   %center
-    #adm-flot-placeholder{:style => "width:400px;height:320px;"}
+    #adm-flot-placeholder{:style => "width:500px;height:420px;"}
   = render "adm_popup"
 

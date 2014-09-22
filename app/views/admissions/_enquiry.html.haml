@@ -1,212 +1,180 @@
-.row
+.row{"ng-controller" => "AdmissionsController"}
   = form_for @admission, :html => { :class => "form-horizontal", :role => "form" } do |f|
     = render "shared/error_messages", :object => f.object
-    .col-sm-12
-      .form-group
-        .col-sm-3
-          = f.label "Form no:", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :form_no, :class => 'form-control'
-              
-      .form-group
-        .col-sm-3
-          = f.label "Name of the Student:", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :name, :class => 'form-control'
-            
-      .form-group{"ng-controller" => "AdmissionsController"}
-        .col-sm-3
-          = label_tag(:grade,"Admission sought into Class:")
-        .col-sm-3
-          %select{"ng-model" => "myAdmission", "ng-options" => "klass.grade_name for klass in klasses",:class => "form-control",:required => "required"}          
-            %option{style: "display:none", value: ""} Select Grade
+    .row
+      .col-lg-1
+        w
+      .col-lg-5
+        h
+      .col-lg-5
+        k
+      .col-lg-1
+        l
+    .row
+      .col-sm-12
+        .pull-left
+          %span.label.label-danger Student's Details
+        %table.table.table-condensed.table-striped
+          %thead               
+            %tr
+              %th
+                = f.label "Form no:"
+              %th
+                = f.label "form"
+              %th
+              %th
+            %tr
+              %th
+                = f.label "Name:"
+              %th
+                = f.text_field :name
           
-          = f.hidden_field :grade, :value => "{{myAdmission.grade_name}}"
-          = f.hidden_field :grade_master_id, :value => "{{myAdmission.id}}"
+              %th
+                = label_tag(:grade,"Class:")
+              %th
+                %select#admission_grade{"ng-model" => "myAdmission", "ng-options" => "klass.grade_name for klass in klasses",:required => "required"}          
+                  %option{style: "display:none", value: ""} Select Grade
+                    
+                  = f.hidden_field :grade, :value => "{{myAdmission.grade_name}}"
+                  = f.hidden_field :grade_master_id, :value => "{{myAdmission.id}}"
+            %tr      
+              %th
+                = f.label "Date of Birth: "
+              %th
+                = f.text_field :dob, :class => 'datepicker'
+              %th
+                = f.label "Male/Female: "
+              %th
+                = f.select :gender, options_for_select([['Male'],['Female']])
+            %tr
+              %th
+                = f.label "Nationality: "
+              %th
+                = f.country_select :nationality, {object: f.object, prompt: 'Country'}
+              %th
+                = f.label "Language spoken at home: "
+              %th
+                = f.select :language, options_for_select([['Hindi'],['English'],['Tamil'],['Telugu'],['Malayalam'],['Punjabi'],['Marati'],['Urdu']])
+      .col-sm-12
+        .pull-left
+          %span.label.label-danger Contact's Details
+        %table.table.table-condensed
+          %thead
+            %tr
+              %th
+                = f.label "Residential Address"
+              %th
+                = f.text_area :address
+              %th
+                = f.label "Email "
+              %th
+                = f.text_field :email
+            %tr
+              %th
+                = f.label "Landline: "
+              %th
+                = f.text_field :landline
+              %th
+                = f.label "Mobile: "
+              %th
+                = f.text_field :mobile
         
-        .col-sm-3
-          = f.label "Date of Birth: ", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :dob, :class => 'datepicker form-control'
 
-      .form-group
-        .col-sm-3
-          = f.label "Male/Female: ", :class => 'col-sm-3 control-label'
-        .col-sm-3
-          = f.select :gender, options_for_select([['Male'],['Female']])
-        .col-sm-3
-          = f.label "Language spoken at home: ", :class => 'control-label'
-        .col-sm-3
-          = f.select :language, options_for_select([['Hindi'],['English'],['Tamil'],['Telugu'],['Malayalam'],['Punjabi'],['Marati'],['Urdu']])
- 
-      .form-group
-        .col-sm-3
-          = f.label "Nationality: ", :class => 'control-label'
-        .col-sm-3
-          = f.country_select :nationality, {object: f.object, prompt: 'Country'}
-        
-      .form-group
-        .col-sm-3
-          = f.label "Father's Name:", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :father_name, :class => 'form-control'
-        .col-sm-3
-          = f.label "Mother's Name: ", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :mother_name, :class => 'form-control'
-      .form-group
-        .col-sm-3
-          = f.label "Father's Occupation ", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :father_occupation, :class => 'form-control'
-        .col-sm-3
-          = f.label "Mother's Occupation ", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :mother_occupation, :class => 'form-control'
-      .form-group
-        .col-sm-3
-          = f.label "Company's Name: ", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :father_company, :class => 'form-control'
-        .col-sm-3
-          = f.label "Company's Name: ", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :mother_company, :class => 'form-control'
-      .form-group
-        .col-sm-6
-          .form-group
-            = f.label "Education: ", :class => 'col-sm-3 control-label'
-            .col-sm-9
-              .btn-group{"data-toggle" => "buttons-radio"}
-                .row
-                  .col-sm-2
-                    = f.radio_button :father_education, "Upto SSC"
-                  .col-sm-2
-                    %label{for: "upto SSC", :id=>"first"} Upto SSC
-                  .col-sm-2
-                    = f.radio_button :father_education, "Graduate"
-                  .col-sm-2
-                    %label{for: "Graduate",:id=>"second"} Graduate
-                .row
-                  .col-sm-2
-                    = f.radio_button :father_education, "Graduate"
-                  .col-sm-2
-                    %label{for: " PostGraduate",:id=>"third"} PG
-                  .col-sm-2
-                    = f.radio_button :father_education, "Professional(Lawyer, Doctor, MBA, etc.,)"
-                  .col-sm-2
-                    %label{for: "Professional(Lawyer, Doctor, MBA, etc.,)",:id=>"four"} Professional(Lawyer, Doctor, MBA, etc.,)
-                
-        .col-sm-6
-          .form-group
-            = f.label "Education: ", :class => 'col-sm-3 control-label'
-            .col-sm-9
-              .btn-group{"data-toggle" => "buttons-radio"}
-                .row
-                  .col-sm-2
-                    = f.radio_button :mother_education, "Upto SSC"
-                  .col-sm-2
-                    %label{for: "upto SSC", :id=>"first"} Upto SSC
-                  .col-sm-2
-                    = f.radio_button :mother_education, "Graduate"
-                  .col-sm-2
-                    %label{for: "Graduate",:id=>"second"} Graduate
-                .row
-                  .col-sm-2
-                    = f.radio_button :mother_education, "Graduate"
-                  .col-sm-2
-                    %label{for: " PostGraduate",:id=>"third"} PG
-                  .col-sm-2
-                    = f.radio_button :mother_education, "Professional(Lawyer, Doctor, MBA, etc.,)"
-                  .col-sm-2
-                    %label{for: "Professional(Lawyer, Doctor, MBA, etc.,)",:id=>"four"} Professional(Lawyer, Doctor, MBA, etc.,)
-      .form-group
-        .col-sm-3
-          = f.label "Family Income: ", :class => 'control-label'
-           
-        .col-sm-3
-          .btn-group{"data-toggle" => "buttons-radio"}
-            %table
-              %thead
-                %tr
-                  %td
-                    = f.radio_button :income, "less than Rs.20,000 p.m."
-                  %td
-                    %label{for: "Less than Rs.20,000 p.m.", :id=>"first"} Less than Rs.20,000 p.m.
-                %tr
-                  %td
-                    = f.radio_button :income, "Rs.20,000 to Rs.50,000 p.m."
-                  %td
-                    %label{for: "Rs.20,000 to Rs.50,000 p.m.",:id=>"second"} Rs.20,000 to Rs.50,000 p.m.
-                %tr
-                  %td
-                    = f.radio_button :income, "Rs.50,000 to Rs.1,00,000 p.m."
-                  %td
-                    %label{for: "Rs.50,000 to Rs.1,00,000 p.m.",:id=>"third"} Rs.50,000 to Rs.1,00,000p.m.
-                %tr
-                  %td
-                    = f.radio_button :income, "more than Rs. 1,00,000 p.m."
-                  %td
-                    %label{for: "more than Rs. 1,00,000 p.m.",:id=>"four"} More than Rs. 1,00,000 p.m.
-      .form-group
-        .col-sm-3
-          = f.label "Residential Address", :class => 'control-label'
-        .col-sm-3
-          = f.text_area :address, :class => 'form-control'
-        .col-sm-3
-          = f.label "Email ", :class => 'control-label'          
-        .col-sm-3
-          = f.text_field :email, :class => 'form-control'
-      .form-group
-        .col-sm-3
-          = f.label "Landline: ", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :landline, :class => 'form-control'
-        .col-sm-3
-          = f.label "Mobile: ", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :mobile, :class => 'form-control'
-      
-      .form-group
-        .col-sm-3
-          = f.label "Choice of Transport ", :class => 'control-label'
-        .col-sm-3
-          = f.select(:transport, options_for_select([['Private'],['School']]),{:class => 'col-sm-4 form-control'})
-        .col-sm-3
-          = f.label "If yes, stage / required bus stop ", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :busstop, :class => 'form-control'
-      .form-group
-        .col-sm-3
-          = f.label "School in Which Last Studied:", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :last_school, :class => 'form-control'
-        .col-sm-3
-          = f.label "City: ", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :city, :class => 'form-control'
-      .form-group
-        .col-sm-3
-          = f.label "Reasons for Changing:  ", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :changing_reason, :class => 'form-control'
-      .form-group
-        .col-sm-3
-          = f.label "You came to know about our school through:", :class => 'control-label'
-        .col-sm-3
-          = f.select(:know_school, options_for_select([['Friends'],['Advertisements'],['Internet'],['Word of Mouth'],['Parents whose children are studying here']]),{ :class => 'form-control' })
-      .form-group
-        .col-sm-4
-          = f.label "If yes,mention their details ", :class => 'control-label'
-      .form-group
-        .col-sm-3
-          = f.label "Name", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :person, :class => 'form-control'
-        .col-sm-3
-          = f.label "Class", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :pp, :class => 'form-control'
+      .col-sm-12
+        .pull-left
+          %span.label.label-danger Parent's Details
+        %table.table.table-condensed
+          %thead
+            %tr
+              %th        
+                = f.label "Father's Name:"
+              %th
+                = f.text_field :father_name
+              %th
+                = f.label "Mother's Name: "
+              %th
+                = f.text_field :mother_name
+            %tr
+              %th
+                = f.label "Father's Occupation: "
+              %th
+                = f.text_field :father_occupation
+              %th
+                = f.label "Mother's Occupation: "
+              %th
+                = f.text_field :mother_occupation
+            %tr
+              %th
+                = f.label "Company's Name: "
+              %th
+                = f.text_field :father_company
+              %th
+                = f.label "Company's Name: "
+              %th
+                = f.text_field :mother_company
+            %tr
+              %th
+                = f.label "Father's Education: "
+              %th
+                = f.select :father_education, options_for_select([['Upto SSC'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']])
+              %th
+                = f.label "Mother's Education: "
+              %th
+                = f.select :mother_education, options_for_select([['Upto SSC'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']])
+            %tr
+              %th
+                = f.label "Family Income: "
+              %th
+                = f.select :income, options_for_select([['Less than Rs.20,000 p.m.'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']])
+              %th
+              %th
+      .col-sm-12
+        .pull-left
+          %span.label.label-danger Other Details
+        %table.table.table-condensed
+          %thead
+            %tr
+              %th
+                = f.label "Choice of Transport "
+              %th
+                = f.select(:transport, options_for_select([['Private'],['School']]))
+              %th
+                = f.label "Bus stop "
+              %th
+                = f.text_field :busstop
+            %tr
+              %th
+                = f.label "School in Which Last Studied:"
+              %th
+                = f.text_field :last_school
+                  
+              %th
+                = f.label "City: "
+              %th
+                = f.text_field :city
+            %tr
+              %th
+                = f.label "Reasons for Changing:  "
+              %th
+                = f.text_field :changing_reason
+              %th
+                = f.label "You came to know about our school through:"
+              %th
+                = f.select(:know_school, options_for_select([['Friends'],['Advertisements'],['Internet'],['Word of Mouth'],['Parents whose children are studying here']]))
+            %tr
+              
+              %th
+                = f.label "Name"
+              %th
+                = f.text_field :person
+              %th
+                = f.label "Class"
+              %th
+                = f.text_field :pp              
+
+
+
+  
       %center
         
         = f.hidden_field :status, :value => 'Enquiry_Created'

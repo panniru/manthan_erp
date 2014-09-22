@@ -1,11 +1,12 @@
 $(document).ready(function() { 
-   
-    var monthNames = [ "January", "February", "March", "April", "May", "June",
-                       "July", "August", "September", "October", "November", "December" ]
     var date = new Date();
     var day  = date.getDate();
     var month = date.getMonth() + 1;              
     var year =  date.getFullYear();
+
+    var monthNames = [ "January", "February", "March", "April", "May", "June",
+                       "July", "August", "September", "October", "November", "December" ]
+
     //alert(day + '-' + month + '-' + year);
     $('#attendance_calendar').html("");
     $('#attendance_calendar').fullCalendar({ 

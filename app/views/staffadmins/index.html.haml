@@ -1,34 +1,38 @@
 .row
-  .col-sm-6
-    #accordion.panel-group
-      .panel.panel-default
-        .panel-heading
-          %h4.panel-title
-            %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseOne"}
-              Departments & Heads
-              .pull-right
-                = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), new_staffadmin_path, :class => "btn btn-primary btn-sm", :title => "New"
-       
-        #collapseOne.panel-collapse.collapse.in
-          .panel-body
-            %h5
-              %label
-                %table.table.table-bordered
-                  %tbody
-                    %tr
-                      %td{style: "width:40%"} Department
-                      %td{style: "width:40%"} Head
-                      %td{style: "width:10%"} Edit
-                      %td{style: "width:10%"} Delete 
-                      
-                  %tbody
-                    - @staffadmins.each do |staffadmin|
-                      %tr
-                        %td{style: "width:40%"}
-                          = staffadmin.dept
-                        %td{style: "width:40%"}
-                          = staffadmin.head
-                        %td{style: "width:10%"}
-                          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_staffadmin_path(staffadmin), :class => "btn btn-warning btn-sm", :title => "Edit"
-                        %td{style: "width:10%"}
-                          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), staffadmin_path(staffadmin), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+  .col-sm-3
+    .pull-left
+      .input-group
+        %span.input-group-addon
+          = fa_icon "search lg"
+        %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+  .col-sm-4
+    %center
+      %h4
+        Departments & Heads
+  .col-sm-4
+    .pull-right
+      = link_to "Add New", new_staffadmin_path, :class => 'btn btn-primary'
+%br
+%br
+.row
+  .col-sm-11
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr
+          %td{style: "width:40%"} Department
+          %td{style: "width:40%"} Head
+          %td{style: "width:10%"} Edit
+          %td{style: "width:10%"} Delete 
+        
+      %tbody
+        - @staffadmins.each do |staffadmin|
+          %tr
+            %td{style: "width:40%"}
+              = staffadmin.dept
+            %td{style: "width:40%"}
+              = staffadmin.head
+            %td{style: "width:10%"}
+              = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_staffadmin_path(staffadmin), :class => "btn btn-warning btn-sm", :title => "Edit"
+            %td{style: "width:10%"}
+              = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), staffadmin_path(staffadmin), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+ 

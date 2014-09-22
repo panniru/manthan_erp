@@ -1,23 +1,22 @@
-.panel.panel-default
-  .panel-body
-    .col-sm-3
-      .pull-left
-        .input-group
-          %span.input-group-addon
-            = fa_icon "search lg"
-          %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
-          %br
-    .col-sm-4
-      %center
-        %h4
-          Enquiry Forms
-
-    .col-sm-4
-      .pull-right
-        - if current_user.admin?
-          = link_to 'New Enquiry', new_staffrecruit_path, :class => 'btn btn-primary'
-          %br
-          %br
+.row
+  .col-sm-3
+    .pull-left
+      .input-group
+        %span.input-group-addon
+          = fa_icon "search lg"
+        %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+        %br
+  .col-sm-4
+    %center
+      %h4
+        Enquiry Forms
+        
+  .col-sm-4
+    .pull-right
+      - if current_user.admin?
+        = link_to 'New Enquiry', new_staffrecruit_path, :class => 'btn btn-primary'
+%br
+%br
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
@@ -33,7 +32,7 @@
     - @staffrecruits.each do |staffrecruit|
       %tr
         %td= link_to "#{staffrecruit.form_no}", homeindex_staffrecruit_path(staffrecruit)
-        %td= staffrecruit.name
+        %td= staffrecruit.faculty_name
         %td= staffrecruit.education_qualification
         %td= staffrecruit.gender
         %td= staffrecruit.dob

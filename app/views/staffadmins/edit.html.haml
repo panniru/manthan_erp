@@ -6,12 +6,7 @@
         .col-sm-2
           = f.label "Department:", :class => 'control-label'
         .col-sm-3
-          %select{"ng-model" => "staffAdmin", "ng-options" => "faculty.dept for faculty in faculties",:class => "form-control",:required => "required"}          
-            %option{style: "display:none", value: ""} Select Dept
-            
-          = f.hidden_field :dept, :value => "{{staffAdmin.dept}}"
-        
-          
+          = f.text_field :dept, :class => 'form-control'
       .form-group
         .col-sm-2
           = f.label "Lead of Department:", :class => 'control-label'

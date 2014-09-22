@@ -1,38 +1,41 @@
-.panel.panel-default
-  .panel-body
-    .col-sm-3
-      .pull-left
-        .input-group
-          %span.input-group-addon
-            = fa_icon "search lg"
-          %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
-          %br
-    .col-sm-4
-      %center
-        %h4
-          Advertisements
+.row
+  .col-sm-3
+    .pull-left
+      .input-group
+        %span.input-group-addon
+          = fa_icon "search lg"
+        %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+        
+  .col-sm-4
+    %center
+      %h4
+        Advertisements
 
-    .col-sm-4
+  .col-sm-4
     .pull-right
       = link_to "Add New", new_add_path , :class => 'btn btn-primary'
-%table#tblData.target.table.table-striped.table-condensed.table-bordered
-  %thead
-    %tr
-      %th Department
-      %th Post
-      %th Description
-      %th Posted_at
-      %th Edit
-      %th Delete
-  %tbody
-    - @adds.each do |add|
-      %tr
-        %td= add.dept
-        %td= add.title
-        %td= add.description
-        %td= add.created_at
-        %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_add_path(add), :class => "btn btn-warning btn-sm", :title => "Edit"
-        %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), add_path(add), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+%br
+%br
+.row
+  .col-sm-11
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr
+          %th Department
+          %th Post
+          %th Description
+          %th Posted_at
+          %th Edit
+          %th Delete
+      %tbody
+        - @adds.each do |add|
+          %tr
+            %td= add.dept
+            %td= add.title
+            %td= add.description
+            %td= add.created_at
+            %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_add_path(add), :class => "btn btn-warning btn-sm", :title => "Edit"
+            %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), add_path(add), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
           
 	
        

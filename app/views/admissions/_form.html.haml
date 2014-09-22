@@ -11,7 +11,9 @@
           .col-sm-6
             %h5 APPLICATION FORM FOR        
           .col-sm-3
-            = f.text_field :from, :class => 'date-picker-year form-control' 
+            %select#year
+              = f.hidden_field :from
+              
         
     .col-sm-3
       .pull-right

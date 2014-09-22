@@ -3,9 +3,11 @@
     = render "shared/steprecruitment"
     %br
 .row
-  .col-sm-8
+  .col-sm-12
     = render "homeindex"
-  .col-sm-3
+            
+.row  
+  .col-sm-1
     - if current_user.admin?
       = link_to "Close the Form", "#", :class => "change2 btn1 btn btn-danger", :data => {:id => "#{@staffrecruit.id}"}
       #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}

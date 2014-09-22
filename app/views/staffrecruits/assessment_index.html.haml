@@ -1,16 +1,17 @@
-.panel.panel-default
-  .panel-body
-    .col-sm-3
-      .pull-left
-        .input-group
-          %span.input-group-addon
-            = fa_icon "search lg"
-          %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
-          %br
-    .col-sm-6
-      %center
-        %h4
-          Assessment Planned
+.row
+  .col-sm-3
+    .pull-left
+      .input-group
+        %span.input-group-addon
+          = fa_icon "search lg"
+        %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+        %br
+  .col-sm-4
+    %center
+      %h4
+        Assessment Planned
+%br
+%br
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr{style: "width:25%"}
