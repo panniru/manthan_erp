@@ -9,11 +9,13 @@
       .form-group
         %center
           .col-sm-6
-            %h5 APPLICATION FORM FOR        
+            %h5 ACADEMIC YEAR FROM 
           .col-sm-3
             %select#year
               = f.hidden_field :from
-              
+              -
+            %select#year
+              = f.hidden_field :to
         
     .col-sm-3
       .pull-right
