@@ -40,6 +40,6 @@
                        
                     .modal-footer
                       %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close                     
-                      = f.hidden_field :status, :value => "requested"   
+                      = f.hidden_field :status, :value => "Requested"   
                       = f.hidden_field :user_id, :value => "#{current_user.id}" 
                       = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
