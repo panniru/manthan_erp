@@ -1,21 +1,22 @@
-.row
-  = form_for @teacher_leader, :html => { :class => "form-horizontal", :role => "form" } do |f|
-    = render "shared/error_messages", :object => f.object
-    .col-sm-12
-      .form-group
-        .col-sm-2
-          = f.label "Grade", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :klass, :class => 'form-control'
-      .form-group
-        .col-sm-2
-          = f.label "Grade's Lead:", :class => 'control-label'
-        .col-sm-3
-          = f.text_field :faculty_leader, :class => 'form-control'
-      %center
-        
-        = f.submit "Create", :class => 'btn btn-primary'
-
-        
-
-    
+= form_for @teacher_leader, :html => { :class => "form-horizontal", :role => "form" } do |f|
+  .row
+    .row
+      .col-sm-2
+        = f.label "Grade:", :class => 'control-label'
+      .col-sm-3
+        = f.text_field :klass, :class => 'form-control'
+    %br
+    %br
+    .row
+      .col-sm-2
+        = f.label "Lead:", :class => 'control-label'
+      .col-sm-3{"ng-controller" => "StaffadminsController"}
+        %select{"ng-model" => "staffAdmin", "ng-options" => "faculty.faculty_name for faculty in faculties",:class => "form-control",:required => "required"}          
+          %option{style: "display:none", value: ""} Select
+          
+          = f.hidden_field :faculty_leader, :value => "{{staffAdmin.faculty_name}}"
+        %br
+        %br
+    %center
+      = f.submit "Create", :class => 'btn btn-primary'
+      = f.submit "Reset", :type => "reset" , :class => 'btn btn-primary'

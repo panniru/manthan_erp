@@ -141,7 +141,8 @@
         = @admission.pp
 
 .col-sm-3
-  .pull-left
-    - if("#{@admission.status}" == 'Enquiry_Created')
-      = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_admission_path, :class => "btn btn-warning btn-sm", :title => "Edit"
-    = link_to 'Back', home_index_admission_path, :class => 'btn btn-primary'
+  - if current_user.admin?
+    .pull-left
+      - if("#{@admission.status}" == 'Enquiry_Created')
+        = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_admission_path, :class => "btn btn-warning btn-sm", :title => "Edit"
+  = link_to 'Back', home_index_admission_path, :class => 'btn btn-primary'

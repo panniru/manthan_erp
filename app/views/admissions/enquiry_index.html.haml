@@ -24,11 +24,7 @@
       %th Form no
       %th Name
       %th Class
-      %th Gender
-      %th Father's name
-      %th Date of Birth
-      %th Mobile
-      %th E-mail
+      %th Status
         
   %tbody
     - @admissions.each do |admission|
@@ -36,9 +32,5 @@
         %td= link_to "#{admission.form_no}", home_index_admission_path(admission)
         %td= admission.name
         %td= admission.grade
-        %td= admission.gender
-        %td= admission.father_name
-        %td= admission.dob
-        %td= admission.mobile
-        %td= admission.email
+        %td= admission.status
 

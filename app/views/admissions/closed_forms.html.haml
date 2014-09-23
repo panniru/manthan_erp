@@ -16,20 +16,18 @@
 %table#tblData.target.table.table-striped.table-condensed.table-bordered
   %thead
     %tr
-      %th Enquiry Form
-      %th Admission Form
-      %th Student's Name
-      %th Parent's Name
-      %th Parent's Mobile
+      %th Form no
+      %th Name
+      %th Class
+      %th Status
       %th Reason for Closing
         
   %tbody
     - @admissions.each do |admission|
       %tr
         %td= link_to "#{admission.form_no}",home_index_admission_path(admission)
-        %td= link_to "#{admission.admission_no}",home_index_admission_path(admission)
         %td= admission.name
-        %td= admission.father_name
-        %td= admission.mobile
+        %td= admission.grade
+        %td= admission.status
         %td= admission.closestatus
       

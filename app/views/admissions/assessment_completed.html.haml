@@ -17,17 +17,15 @@
   %thead
     %tr
       %th Form no
-      %th Description
-      %th Faculty
-      %th Time
+      %th Name
+      %th Class
       %th Status
         
   %tbody
     - @admissions.each do |admission|
       %tr
         %td= link_to "#{admission.form_no}", home_index_admission_path(admission)
-        %td= admission.title
-        %td= admission.faculty
-        %td= admission.start_time
+        %td= admission.name
+        %td= admission.grade
         %td= admission.status
         
