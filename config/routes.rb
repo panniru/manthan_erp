@@ -612,7 +612,7 @@ ManthanErp::Application.routes.draw do
       get 'closed_forms'
       end
     end
-  resources :attendances
+  
 
   resources :academic_terms do   
     collection do
@@ -637,4 +637,20 @@ ManthanErp::Application.routes.draw do
     end  
   end
   
+
+  resources :attendances do
+    collection do
+      get 'teacher_index'
+      get 'get_students'
+      get 'holidaycalendardata'
+      get 'holiday_date'
+      post 'save_student_attendance'
+      get 'getStudentAndAttendanceView'
+      get 'attendance_date'
+      
+
+    end
+  end
+  
+
 end
