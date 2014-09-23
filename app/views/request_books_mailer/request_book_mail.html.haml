@@ -1,0 +1,20 @@
+Dear vendor,
+.row  
+  %p
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    = @mail_message
+.row  
+  %table{:border => "1"}
+    %thead
+      %th Book Name
+      %th Author Name
+    %tbody
+      - @request_books.each do |book|
+        %tr
+          %td= book['book_name']
+          %td= book['author_name']
+%br
+%br
+Thanks,
+%br
+Admin

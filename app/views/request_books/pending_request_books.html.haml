@@ -6,13 +6,11 @@
         %thead
           %tr        
             %th Book Name
-            %th Author Name
-            - if current_user.librarian?
-              %th Status
+            %th Author Name           
+            %th Status
         %tbody
-          %tr
-            - @pending_request_books.each do |request_book|
-              %td= request_book.book_name
-              %td= request_book.author_name
-              - if current_user.librarian?
-                %td= request_book.status
+        - @pending_request_books.each do |request_book|
+          %tr           
+            %td= request_book.book_name
+            %td= request_book.author_name             
+            %td= request_book.status

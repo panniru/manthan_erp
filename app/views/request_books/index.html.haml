@@ -1,1 +1,27 @@
-admin
+.row{"ng-controller" => "RequestBooksController"} 
+  .row
+    = render 'show_request_books'  
+  .row
+    .modal.fade{ :id => "mailSubjectModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+            %h4.modal-title{ :id => "myModalLabel"} MAIL TO BOOKS VENDOR
+          .modal-body
+            .row
+              .col-md-10
+                .col-md-2
+                  = label_tag "SUBJECT", nil, :class => "form-label"
+                .col-md-10
+                  = text_field_tag "",nil, :class => "form-control", :ng_model => "myMailSubject", :disabled => "disabled"             
+              .col-md-2
+            .row
+              .col-md-10
+                .col-md-2
+                  = label_tag "MESSAGE", nil, :class => "form-label"
+                .col-md-10
+                  = text_area_tag "",nil, :class => "form-control", :ng_model => "myMailMessage"
+                  {{myRequestBooks}}                 
+              .col-md-2{"ng-controller" => "MailingController"}
+                %button{:type => "button", :class=> "btn btn-primary", :ng_click => "requestBooksMail(myMailSubject,myMailMessage,myRequestBooks)"}=  "SEND"

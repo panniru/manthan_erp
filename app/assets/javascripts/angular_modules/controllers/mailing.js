@@ -26,6 +26,18 @@
             });  
             $('#mailSubjectModal').modal('hide'); 
         };
+
+         $scope.requestBooksMail = function(myMailSubject,myMailMessage,myRequestBooks){           
+            $scope.isMailActionFired = true            
+            mailService.requestBooksMail(myMailSubject,myMailMessage,myRequestBooks)
+            .then(function(responce){
+                var alert_msg = '<div class="alert alert-success alert-dismissable">'+
+                    '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
+                    responce.data+'</div>'
+                $("#appAlert").html(alert_msg)
+            });  
+            $('#mailSubjectModal').modal('hide'); 
+        };
         
     }]);
     

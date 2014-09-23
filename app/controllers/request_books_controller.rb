@@ -33,14 +33,34 @@ class RequestBooksController < ApplicationController
   end
 
   def pending_request_books
-    @pending_request_books = RequestBook.get_pending_requests 
-
-    p  @pending_request_books
-    p "=======================>"
-     
+    @pending_request_books = RequestBook.get_pending_requests(current_user)           
   end
-  private 
 
+  def update_request_books_status
+    p request_books = params[:resquest_books_status] 
+    p  "==============>"    
+    request_books.each do |t|  
+      p t
+      p "*********=>"
+      @request_book = RequestBook.find(t['id']) 
+      p @request_book
+      p "*$$$$$$********=>"
+      @request_book.status = t['status']
+      @request_book.save
+    end    
+    render :json => true
+  end
+
+  def request_books_mail_to_vendors
+    respond_to do |format|
+      format.json do          
+        RequestBooksMailer.request_book_mail(params[:myMailSubject], params[:myMailMessage],params[:myRequestBooks], ["muralee@ostryalabs.com"]).deliver
+        render :json=>true
+      end
+    end
+  end
+
+  private 
   def request_book_params
     params.require(:request_book).permit(:book_name, :author_name, :status, :user_id)
   end

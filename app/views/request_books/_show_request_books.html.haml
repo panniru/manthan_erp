@@ -6,16 +6,24 @@
         %tr        
           %th Book Name
           %th Author Name
-          - if current_user.librarian?
+          - if current_user.librarian? or current_user.principal? or current_user.admin? 
             %th Status
-            %th Send For Approval
+            %th 
+              - if current_user.librarian?
+                %button.btn.btn-primary{"ng-click" => "updateBooksStatus('Pending')"}= "Send For Approval"
+              - if current_user.principal?
+                %button.btn.btn-primary{"ng-click" => "updateBooksStatus('Approved')"}= "Approve"
+                %button.btn.btn-primary{"ng-click" => "updateBooksStatus('Rejected')"}= "Reject"
+              - if current_user.admin?
+                %button.btn.btn-primary{"ng-click" => "initiateMail()"}= "Order"
       %tbody
         %tr{"ng-repeat" => "request_book in request_books"}
           %td {{request_book.book_name}}
           %td {{request_book.author_name}}
-          - if current_user.librarian?
+          - if current_user.librarian? or current_user.principal? or current_user.admin? 
             %td {{request_book.status}}
+          - if current_user.librarian? or current_user.principal? or current_user.admin?
             %td
               %input{"ng-model" => "book_status", type: "checkbox", "ng-change" => "sendBooksForApproval(book_status,request_book)", "ng-checked" => "book_status"}      
               {{book_status}}  
-
+         
