@@ -4,6 +4,7 @@ $(document).ready(function() {
     var month = date.getMonth() + 1;              
     var year =  date.getFullYear();
 
+
     var monthNames = [ "January", "February", "March", "April", "May", "June",
                        "July", "August", "September", "October", "November", "December" ]
 
