@@ -1,0 +1,39 @@
+.row{:ng_controller => "AttendanceController"}
+  #week_calendar
+  #weekModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %h3#myModalLabel1 Attendance
+          .modal-body
+            %form.form-horizontal
+              .control-group
+                %label.control-label{:for => "inputAttendance"}
+                .controls
+                  %table#myTable.table.table-bordered.table-condensed.table-striped
+                    %thead
+                      %tr
+                        %th Student's Name
+                        %th 
+                          %label{for: "P", :id => "P"} P
+                        %th
+                          %label{for: "A", :id => "A"} A
+                        %th
+                          %label{for: "L", :id => "L"} L
+                          
+                    %tbody
+                      %tr{"ng-repeat" => "student in students"}
+                        %td
+                          {{student.name}}
+                        %td
+                          %input{:ng_model =>"student['attendance']", type: "radio", value: "P"} 
+                        %td
+                          %input{:ng_model =>"student['attendance']", type: "radio", value: "A"} 
+                        %td
+                          %input{:ng_model =>"student['attendance']", type: "radio", value: "L"} 
+                        
+                          = hidden_field_tag :attendance, :value => "{{student['attendance']}}"
+                  %center
+                    %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveStudentAttendance()", :value => "Submit"}
+            
+  

@@ -668,7 +668,7 @@ ManthanErp::Application.routes.draw do
       post 'save_student_attendance'
       get 'getStudentAndAttendanceView'
       get 'attendance_date'
-      
+      get 'week'
 
     end
   end

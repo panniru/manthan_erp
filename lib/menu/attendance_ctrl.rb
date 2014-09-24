@@ -22,12 +22,15 @@ class AttendanceCtrl
   def teacher_sub_menu
     sub_menu = []
     sub_menu << daily
-
+    sub_menu << week
   end
 
   private
   def daily
     MenuItem.new(:label => "Daily Attendance", :klass => "", :icon => "building", :href => "/attendances" )
+  end
+  def week
+    MenuItem.new(:label => "Weekly Attendance", :klass => "", :icon => "building", :href => "/attendances/week" )
   end
   def holiday_calendar
     MenuItem.new(:label => "Holiday Calendar", :klass => "", :icon => "calendar", :href => "/holidaycalendars" )

@@ -1,8 +1,7 @@
 (function(angular, app) {
     "use strict";
     app.controller("AttendanceController",["$scope", "attendanceService", function($scope, attendanceService) {
-        
-      
+                   
         $scope.list = [];
         $scope.text = 'hello';
         $scope.submit = function() {
@@ -68,6 +67,7 @@
                 .then(function(result) {
                     for(var i=0; i<$scope.save_attendence_details.length; i++){
                         $scope.students[i]['attendance'] = '';
+                        $("#weekModal").modal('hide');
                     }
                 });
         }
