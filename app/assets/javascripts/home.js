@@ -53,18 +53,11 @@ function createAssessment(teacher_leader_id) {
 
     $('.calendar2').html("");
     $('.calendar2').fullCalendar({
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,basicWeek,basicDay',
-            ignoreTimezone: false
-        },
-        
         events: '/admissions.json?teacher_leader_id='+teacher_leader_id,
         
         selectable: true,
         select: function(date) {
-            alert("welcome "+ date);
+        
             $('#selectdate').val(date)
             $('#myModal').modal('show');                
         }
@@ -94,11 +87,3 @@ function createStaffAssessment(staff_admission_id) {
     });
 }
 
-$(document ).ready(function() {
-    var modal = function(){
-        $('body').on('click','.Modal', function(){
-            $('#Modal').modal('show');
-        });
-    }
-    modal();
-});

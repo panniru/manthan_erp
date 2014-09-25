@@ -162,7 +162,7 @@ class AdmissionsController < ApplicationController
     @admission = Admission.find(params[:id])
     respond_to do |format|
       if @admission.update(admission_params)
-        format.html { redirect_to admission_home_admissions_path, notice: 'Admission was successfully updated.' }
+        format.html { redirect_to admission_home_admissions_path, notice: 'Form was successfully updated.' }
         format.json { render action: 'index', :status => "success" }
       else
         format.html { render action: 'edit' }
@@ -187,7 +187,7 @@ class AdmissionsController < ApplicationController
          else
          end
        end
-       format.html { redirect_to admission_home_admissions_path, notice: 'Application form trial was successfully updated.' }
+       format.html { redirect_to admission_home_admissions_path, notice: 'Form was successfully updated.' }
        format.json { render action: 'index', :status => "success" }
      else
        format.html { render action: 'edit' }
@@ -211,7 +211,7 @@ class AdmissionsController < ApplicationController
    @admission = Admission.find(params[:id])
    respond_to do |format|
      if @admission.update(admission_params)
-       format.html { redirect_to admission_home_admissions_path, notice: 'Assessment Planned was successfully updated.' }
+       format.html { redirect_to admission_home_admissions_path, notice: 'Form was successfully updated.' }
        format.json { render action: 'index', :status => "success" }
      else
        format.html { render action: 'edit' }

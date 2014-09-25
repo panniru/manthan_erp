@@ -56,32 +56,41 @@
             - else
               - if current_user.teacher?
                 = link_to raw("<span class= 'fa fa-tasks fa2-2x'></span>"), "#", :class => 'Modal btn1 btn btn-warning1 btn-circle'
-                #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
-                  #Modal.modal-dialog.modal-sm
+                #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1", "data-backdrop" => "static","data-keyboard" => "false"}
+                  .modal-dialog.modal-sm
                     .modal-content
-                      %h4#Modal.modal-title Assessment Review
-                      = form_for @admission do |f|
-                        .modal-body
-                          %table
-                            %thead
-                              %tr
-                                %th{style: "width:20%"} 
-                                  %label{for: "Selected", :id => "first"} Selected
-                                %th
-                                  = f.radio_button :teachercomment, "Selected"
-                                %th{style: "width:20%"} 
-                                  %label{for: "Rejected", :id => "second"} Rejected
-                                %th
-                                  = f.radio_button :teachercomment, "Rejected"
+                      .modal-header
                         .row
-                          .col-sm-4
-                            = f.label "Assessment Review", :class => 'control-label'
-                          .col-sm-3
-                            = f.text_area :comment ,:class => 'col-sm-3 form-control'
-                          
-                        .modal-footer
-                          = f.hidden_field :status,:value => "Assessment_Completed"
-                          = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+                          .pull-left
+                            .col-sm-12
+                              %h4#Modal.modal-title Assessment Review
+                        %hr
+                        %center
+                          = form_for @admission do |f|
+                            .modal-body
+                              .row
+                                %table
+                                  %thead
+                                    %tr
+                                      %th{style: "width:20%"} 
+                                        %label{for: "Selected", :id => "first"} Selected
+                                      %th
+                                        = f.radio_button :teachercomment, "Selected"
+                                      %th{style: "width:20%"} 
+                                        %label{for: "Rejected", :id => "second"} Rejected
+                                      %th
+                                        = f.radio_button :teachercomment, "Rejected"
+                              %br
+                              %br
+                              .row
+                                .col-sm-5
+                                  = f.label "Assessment Review", :class => 'control-label'
+                                .col-sm-4
+                                  = f.text_area :comment ,:class => 'form-control'
+                              = f.hidden_field :status,:value => "Assessment_Completed"
+                              = button_tag "Save", :type => "submit", :class => 'pull-right btn btn-primary'
+                              %br
+                              %br
 
               - else
                 - if current_user.admin? or current_user.principal?
@@ -105,28 +114,38 @@
                 #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1", "data-backdrop" => "static" ,"data-keyboard "=> "false"}
                   .modal-dialog.modal-sm
                     .modal-content
-                      %h4#Modal.modal-title Management Review
-                      = form_for @admission do |f|
-                        .modal-body
-                          %table
-                            %thead
-                              %tr
-                                %th
-                                  %label{for: "Selected", :id => "first"} Selected
-                                  = f.radio_button :result, "Selected"
-                                %th
-                                  %label{for: "Rejected", :id => "second"} Rejected
-                                  = f.radio_button :result, "Rejected"
-                              %tr
-                                %th
+                      .modal-header
+                        .row
+                          .pull-left
+                            .col-sm-12
+                              %h4#Modal.modal-title Management Review
+                        %hr
+                        %center
+                          = form_for @admission do |f|
+                            .modal-body
+                              .row
+                                %table
+                                  %thead
+                                    %tr
+                                      %th{style: "width:20%"}
+                                        %label{for: "Selected", :id => "first"} Selected
+                                      %th
+                                        = f.radio_button :result, "Selected"
+                                      %th{style: "width:20%"}
+                                        %label{for: "Rejected", :id => "second"} Rejected
+                                      %th
+                                        = f.radio_button :result, "Rejected"
+                              %br
+                              %br
+                              .row
+                                .col-sm-5
                                   = f.label "Review Comment", :class => 'control-label'
-                                %th
+                                .col-sm-4
                                   = f.text_area :description ,:class => 'col-sm-3 form-control'
-                                %th
-                                %th
-                        .modal-footer
-                          = f.hidden_field :status,:value => "Management_Reviewed"
-                          = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+                              = f.hidden_field :status,:value => "Management_Reviewed"
+                              = button_tag "Save", :type => "submit", :class => 'pull-right btn btn-primary'
+                              %br
+                              %br
 
               - else
                 - if current_user.admin? or current_user.teacher? or current_user.principal?

@@ -70,10 +70,10 @@
       - if current_user.teacher?
         %button.btn.btn-warning.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"} 
           %span.glyphicon.glyphicon-edit
-        .modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
+        #myModal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
           .modal-dialog.modal-sm
             .modal-content
-              %h4#Modal.modal-title Assessment Plan
+              %h4#myModal.modal-title Assessment Plan
               = form_for @admission do |f|
                 .modal-body
                   %table

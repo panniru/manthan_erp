@@ -1,27 +1,72 @@
 .row
-  .col-sm-6
-    #accordion.panel-group
-      .panel.panel-default
-        .panel-heading
-          %h4.panel-title
-            %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseOne"}
-              Grades & TeacherLeaders
-              .pull-right
-                = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), new_teacher_leader_path, :class => "btn btn-primary btn-sm", :title => "New"
-       
-        #collapseOne.panel-collapse.collapse.in
-          .panel-body
-            %h5
-              %label
-                %table.table.table-bordered
-                  %tbody
-                    - @teacher_leaders.each do |teacher_leader|
-                      %tr
-                        %td{style: "width:40%"}
-                          = teacher_leader.klass
-                        %td{style: "width:40%"}
-                          = teacher_leader.faculty_leader
-                        %td{style: "width:10%"}
-                          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_teacher_leader_path(teacher_leader), :class => "btn btn-warning btn-sm", :title => "Edit"
-                        %td{style: "width:10%"}
-                          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), teacher_leader_path(teacher_leader), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+  .col-sm-3
+    .pull-left
+      .input-group
+        %span.input-group-addon
+          = fa_icon "search lg"
+        %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+        %br
+  .col-sm-4
+    %center
+      %h4
+        Teacher Leaders & Grades
+  
+  .col-sm-4
+    .pull-right
+      - if current_user.admin?
+        = link_to 'Add New', "#", :class => 'Modal btn btn-primary'
+        #Modal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", "data-backdrop" => "static","data-keyboard" => "false"}
+          .modal-dialog
+            .modal-content
+              .modal-header
+                .row
+                  .pull-left
+                    .col-sm-12
+                      %h4#Modal.modal-title Add New
+                %hr
+                %center
+                = form_for TeacherLeader.new, :html => { :class => "form-horizontal", :role => "form" } do |f|
+                  .modal-body
+                    .row
+                      .col-sm-2
+                        = f.label "Grade:", :class => 'control-label'
+                      .col-sm-3
+                        = f.text_field :klass, :class => 'form-control'
+                      .col-sm-2
+                        = f.label "Lead:", :class => 'control-label'
+                      .col-sm-3{"ng-controller" => "StaffadminsController"}
+                        %select{"ng-model" => "staffAdmin", "ng-options" => "faculty.faculty_name for faculty in faculties",:class => "form-control",:required => "required"}          
+                          %option{style: "display:none", value: ""} Select
+                          
+                          = f.hidden_field :faculty_leader, :value => "{{staffAdmin.faculty_name}}"
+                          %br
+                          %br
+                    .pull-right
+                      = f.submit "Create", :class => 'btn btn-primary'
+                      = f.submit "Reset", :type => "reset" , :class => 'btn btn-primary'
+                  %br
+                  %br
+                     
+%br
+%br
+.row
+  .col-sm-8
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr
+          %td Grade
+          %td Name
+          %td
+            
+      %tbody
+        - @teacher_leaders.each do |teacher_leader|
+          %tr
+            %td
+              = teacher_leader.klass
+            %td
+              = teacher_leader.faculty_leader
+            %td
+              %center
+                = link_to raw("<span class='glyphicon glyphicon-edit'></span>"),edit_teacher_leader_path(teacher_leader), :class => "btn btn-warning btn-sm", :title => "Edit"
+               
+                = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), teacher_leader_path(teacher_leader), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
