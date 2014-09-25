@@ -1,4 +1,23 @@
-.row
+.row{"ng-controller" => "RequestBooksController","ng-init" => "pendingRequests()"}
+  .row
+    .col-md-1
+    .col-md-10
+      %table#tblData.target.table.table-striped.table-condensed.table-bordered
+        %thead
+          %tr        
+            %th Book Name
+            %th Author Name           
+            %th Status 
+            %th
+              %button.btn.btn-primary{"ng-click" => "newBook()"}= "Add Book"      
+        %tbody   
+          %tr{"ng-repeat" => "pending_request in pending_requests | filter: {status : 'Delivered'}"}            
+            %td {{pending_request.book_name}}
+            %td {{pending_request.author_name}}            
+            %td {{pending_request.status}} 
+            %td      
+              %input{"ng-model" => "book_status", type: "checkbox", "ng-change" => "sendBooksForApproval(book_status,pending_request)", "ng-checked" => "book_status"} 
+              {{book_status}}
   .row
     .col-md-1
     .col-md-10
@@ -8,9 +27,45 @@
             %th Book Name
             %th Author Name           
             %th Status
-        %tbody
-        - @pending_request_books.each do |request_book|
-          %tr           
-            %td= request_book.book_name
-            %td= request_book.author_name             
-            %td= request_book.status
+            %th
+              %button.btn.btn-primary{"ng-click" => "acceptBooksDeliver('Delivered')"}= "Accespt Delivery"             
+        %tbody   
+          %tr{"ng-repeat" => "pending_request in pending_requests | filter: {status : 'Ordered'}"}            
+            %td {{pending_request.book_name}}
+            %td {{pending_request.author_name}}  
+            %td {{pending_request.status}}
+            %td      
+              %input{"ng-model" => "book_status", type: "checkbox", "ng-change" => "sendBooksForApproval(book_status,pending_request)", "ng-checked" => "book_status"} 
+              {{book_status}}
+
+  .row
+    .col-md-1
+    .col-md-10
+      %table#tblData.target.table.table-striped.table-condensed.table-bordered
+        %thead
+          %tr        
+            %th Book Name
+            %th Author Name           
+            %th Status         
+        %tbody                
+          %tr{"ng-repeat" => "pending_request in pending_requests | filter: {status : 'Approved'}"}            
+            %td {{pending_request.book_name}}
+            %td {{pending_request.author_name}}             
+            %td {{pending_request.status}}
+          %tr{"ng-repeat" => "pending_request in pending_requests | filter: {status : 'Rejected'}"}            
+            %td {{pending_request.book_name}}
+            %td {{pending_request.author_name}}             
+            %td {{pending_request.status}}
+          %tr{"ng-repeat" => "pending_request in pending_requests | filter: {status : 'Pending'}"}            
+            %td {{pending_request.book_name}}
+            %td {{pending_request.author_name}}             
+            %td {{pending_request.status}}
+  .row
+    .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+            %h4.modal-title{ :id => "myModalLabel"} New Book
+          .modal-body
+            = render "books/new_form"
