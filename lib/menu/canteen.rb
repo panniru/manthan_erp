@@ -18,6 +18,7 @@ class Canteen
     sub_menu << daily_meals
     sub_menu << inventory
     sub_menu << inventory_new
+    sub_menu << food_wastage
   end
   
   def parent_sub_menu
@@ -55,8 +56,12 @@ class Canteen
     MenuItem.new(:label => "Inventories", :klass => "", :icon => "cutlery", :href => "/inventories" )
   end
 
-   def inventory_new
+  def inventory_new
     MenuItem.new(:label => "Ordered Inventories", :klass => "", :icon => "cutlery", :href => "/inventories/new" )
-   end
+  end
+
+  def food_wastage
+    MenuItem.new(:label => "Wastage", :klass => "", :icon => "cutlery", :href => "/food_wastages" )
+  end
  
  end

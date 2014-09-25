@@ -27,8 +27,8 @@ $(document).ready(function() {
 	},
        
         select: function(date) {
-	    $('#holiday_date').val(date)
-            //var checkUrl = "holidaycalendars/holiday_exists.json?date="+dateFormat    
+            $('#holiday_date').val(date)
+	    // var checkUrl = "holidaycalendars/holiday_exists.json?date="+dateFormat    
             $('#myModal').modal('show');                
         }            
     });

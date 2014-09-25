@@ -1,0 +1,2 @@
+module FoodWastagesHelper
+end

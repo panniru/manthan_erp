@@ -90,6 +90,17 @@ class InventoriesController < ApplicationController
       end
     end
   end
+
+  def refresh
+    @inventory = Inventory.find(params[:id])
+    respond_to do |format|
+      if @inventory.update(:status => "Pending")
+        format.json { render json: @inventory , :status => "success"}
+      else
+        format.json { render json: @inventory , :status => "failure"}
+      end
+    end
+  end
   
 
 
@@ -109,7 +120,7 @@ class InventoriesController < ApplicationController
   def  build_inventory_from_bulk
     params.require(:bulk_inventory).select{|inventory| inventory["name"].present? and inventory["inventory_type"].present? and inventory["quantity"].present?}.map do |inventory| 
       Inventory.new(inventory.permit(:name, :inventory_type, :quantity)) do |inventory|
-        inventory.status = 'pending';
+        inventory.status = 'Pending';
       end
     end
   end

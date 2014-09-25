@@ -1,0 +1,15 @@
+.row
+  %form{:action => "/food_wastages", :method => "POST" }
+    .col-sm-2
+      %br
+      %h4 
+        %b  Today Wastage:
+    .col-sm-2
+      %br
+      = text_field_tag  "wastage", '', {:class => "form-control", :placeholder => 'in kgs'}
+    .col-sm-2
+      %br
+      %button{:type=>"submit", :class=> "btn btn-primary" }=  "Save" 
+.row{:ng_controller => "CanteensController", :ng_init => "buildPlotChart()"}
+  %center
+    #placeholder123{:style => "width:600px;height:400px;"}

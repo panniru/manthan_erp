@@ -13,7 +13,8 @@
             resourceService.Inventory.bulk({bulk_inventory: $scope.newInventories})          
                 .$promise.then(function(responce){                                
                     $('#createModal').modal('hide')
-                })
+                    window.location.reload();
+		})
         }
 	
 	$scope.addMoreinventories = function(){

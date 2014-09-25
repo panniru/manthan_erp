@@ -12,10 +12,14 @@
         //                             "update": { method: "PUT"}
           //                       }
             //                    );
-        
+        var getFoodWastage = function(){
+            var url = "/food_wastages/get_food_wastage.json"
+            return $http.get(url);
+	};
 
 	return {
-            getMealtypeIdService: getMealtypeIdService
+            getMealtypeIdService: getMealtypeIdService,
+	    getFoodWastage: getFoodWastage
           //  Mealname:  Mealname
         };
         

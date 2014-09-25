@@ -3,32 +3,35 @@
     .col-md-7
       %h3
         = "Daily Meals"
-        .pull-right
-        = link_to "Add Menu", "#", :class => "btn btn-primary", :ng_click => "newMeal()"
+        //.pull-right
+        //= link_to "Add Menu", "#", :class => "btn btn-primary", :ng_click => "newMeal()"
         .pull-left
           .col-sm-10
             %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
               %br
-              %hr
+             
       %table#tblData.target.table.table-striped.table-condensed.table-bordered
         %thead
           %tr
-            %th date
-            %th Mealtype
-            %th Mealname                      
-            %th
+            %th Date
+            %th{"ng-repeat" => "meal in mealtypes"}
+              {{meal.meal_type}}
+             
         %tbody
           - @mealnames.each do |mealname|
             %tr
               %td= mealname.canteen_date
-              %td= mealname.meal_type_id
-              %td= mealname.meal_detail_name            
-              %td
-                = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_mealname_path(mealname), :class => "btn btn-warning btn-sm", :title => "Edit"
-                = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), mealname_path(mealname), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+              %td= mealname.meal_detail_name  
+        
+ 
+        -# %td
+          -# = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_mealname_path(mealname), :class => "btn btn-warning btn-sm", :title => "Edit"
+            -# = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), mealname_path(mealname), :class => "btn btn-danger btn-sm", :data => {:method => 'del
+              ete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
     .col-sm-2
       #canteen_calendar
         = render "form"
+      %h5 *Click on the corressponding date to save the meal
 
   - if current_user.parent?
     .col-sm-7

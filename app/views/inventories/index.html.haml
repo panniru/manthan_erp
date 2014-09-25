@@ -1,7 +1,7 @@
 .col-md-7{"ng-controller" => "InventoriesController"}
-  %h3
-    = " Inventories"
   - if current_user.canteenmanager?
+    %h3
+      = "Inventory"
     .pull-right
       = link_to "Request for Inventory", "#", :class => "btn btn-primary", :ng_click => "newInventory()"
     .pull-left
@@ -34,6 +34,8 @@
               = render "form"
 
   - if current_user.principal?
+    %h3
+      = "Approve Inventory"
     %table#tblData.target.table.table-striped.table-condensed.table-bordered
       %thead
         %tr
@@ -49,10 +51,13 @@
             %td= inv.inventory_type
             %td= inv.quantity
             %th
-              - if(inv.status == 'pending')
+              - if(inv.status == 'Pending')
                 = link_to "Approve", "#", :class => "approve label label-success",:data=> {:id => inv.id}
-                = link_to "reject", "#", :class => "reject label label-danger",:data=> {:id => inv.id}
+                = link_to "Reject", "#", :class => "reject label label-danger",:data=> {:id => inv.id}
+                = link_to "Undo", "#", :class => "undo label label-warning",:data=> {:id => inv.id}
   - if current_user.admin?
+    %h3
+      = "Inventories"
     %table#tblData.target.table.table-striped.table-condensed.table-bordered
       %thead
         %tr

@@ -1,6 +1,7 @@
 class MealnamesController < ApplicationController
- def index
+  def index
     @mealnames = Mealname.all
+    @meal = @mealnames.group_by { "current_date" }
   end
   def new
     @mealnames = Mealname.new
@@ -36,7 +37,7 @@ class MealnamesController < ApplicationController
   end
   
   def mealname_params
-    params.require(:mealnames).permit(:meal_type_id, :meal_detail_name, :canteen_date)
+    params.require(:mealnames).permit(:mealtype_id, :meal_detail_name, :canteen_date)
   end
   def canteenmanagerdata
     respond_to do |format|
@@ -90,8 +91,8 @@ class MealnamesController < ApplicationController
   end
 
   def build_mealname_from_bulk
-    params.require(:bulk_meal).select{|mealname| mealname["meal_type_id"].present? and mealname["meal_detail_name"].present?}.map do |mealname| 
-      Mealname.new(mealname.permit(:meal_type_id, :meal_detail_name)) do |meal|
+    params.require(:bulk_meal).select{|mealname| mealname["mealtype_id"].present? and mealname["meal_detail_name"].present?}.map do |mealname| 
+      Mealname.new(mealname.permit(:mealtype_id, :meal_detail_name)) do |meal|
 
         meal.canteen_date = params[:canteen_date]
       end
