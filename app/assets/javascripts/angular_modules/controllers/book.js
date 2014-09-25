@@ -1,16 +1,17 @@
 (function(angular, app) {
     "use strict";
     app.controller('BooksController',["$scope","resourceService", function($scope, resourceService) {
-        $scope.books = resourceService.Book.query();        
+        $scope.books = resourceService.Book.query(); 
+               
         $scope.getPurchaseDate = function(){           
             $scope.dateFormat = $scope.purchasedDate.getFullYear()+"-"+($scope.purchasedDate.getMonth()+1)+"-"+$scope.purchasedDate.getDate();             
-        }        
+       }        
         $scope.getEditPurchaseDate = function(){          
             $scope.dateFormat = $scope.book.purchased_date.getFullYear()+"-"+($scope.book.purchased_date.getMonth()+1)+"-"+$scope.book.purchased_date.getDate();             
         }
        
         $scope.newBook = function(){           
-            $scope.newBooks = []
+            $scope.newBooks = [];
             for(var i=0; i<3; i++){
                 $scope.newBooks.push({"name": "", "isbn": "", "author": "", "year_of_publishing": "", "book_type": "", "purchased_date": ""});
             };

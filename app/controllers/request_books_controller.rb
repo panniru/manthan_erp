@@ -33,7 +33,27 @@ class RequestBooksController < ApplicationController
   end
 
   def pending_request_books
-    @pending_request_books = RequestBook.get_pending_requests(current_user)           
+    respond_to do |format|
+      format.json do
+        p "*********************=>>>>>>>"
+        @pending_request_books = RequestBook.get_pending_requests(current_user)  
+        render :json => @pending_request_books
+      end
+      format.html do
+        p  "*********************%%%%%%%%>"
+        @pending_request_books = RequestBook.all  
+      end
+    end
+  end
+
+  def delivered_request_books
+    respond_to do |format|
+      format.json do
+        p "*********************=>>>>>>>"
+        @delivered_request_books = RequestBook.get_delivered_requests(current_user)  
+        render :json => @delivered_request_books
+      end      
+    end
   end
 
   def update_request_books_status

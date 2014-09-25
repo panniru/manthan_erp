@@ -18,7 +18,7 @@
           .pull-right
             %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Suggest A Book"
             -if current_user.librarian?
-              = link_to 'Pending Books', pending_request_books_request_books_path(@property),:class => "btn btn-primary"            
+              = link_to 'Pending Books', pending_request_books_request_books_path,:class => "btn btn-primary"            
             #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
               .modal-dialog
                 .modal-content

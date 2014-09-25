@@ -100,6 +100,7 @@ ManthanErp::Application.routes.draw do
   resources :books do 
     collection do       
       post 'create_bulk'
+      post 'add_bulk'
     end
   end
   resources :teaching_plans do
@@ -637,12 +638,13 @@ ManthanErp::Application.routes.draw do
     end  
   end
 
-  resources :request_books do   
+  resources :request_books do 
     collection do
       get 'pending_request_books'
       post 'update_request_books_status'
       get 'request_books_mail_to_vendors'
       post 'request_books_mail_to_vendors'
+      get 'delivered_request_books'
     end  
   end
   
