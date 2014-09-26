@@ -128,7 +128,7 @@
             DamageBook : DamageBook,
             BlockBook : BlockBook,
             RequestBook : RequestBook,
-            DonateBook : DonateBook,
+            DonateBook : DonateBook
         };
     }]);
 })(angular, myApp);

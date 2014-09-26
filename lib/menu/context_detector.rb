@@ -48,7 +48,7 @@ class ContextDetector
     "damagebooks"=> "library",
     "block_books" => "library",
     "request_new_books" => "library",
-    "donation_of_books" => "library",
+    "donate_books" => "library",
     "lib_reports" => "library",
     "request_books" => "library",
     "request_books_admin" => "library",

@@ -72,7 +72,7 @@ end
     MenuItem.new(:label => "Rejected Books", :klass => "", :icon => "level-up ", :href => "/request_new_books/book_reject")
   end
   def donate_books
-    MenuItem.new(:label => "Donate Books", :klass => "", :icon => "cubes  ", :href => "/donation_of_books")
+    MenuItem.new(:label => "Donate Books", :klass => "", :icon => "cubes  ", :href => "/donate_books")
   end
   def reports
     MenuItem.new(:label => "Reports", :klass => "", :icon => "file-image-o  ", :href => "/lib_reports")
