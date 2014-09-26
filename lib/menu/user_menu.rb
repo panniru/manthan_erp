@@ -63,7 +63,6 @@ class UserMenu
   def transport_head_main_menu
     main_menu = []
     main_menu << MenuItem.new(:label => "Fee Management", :klass => ContextDetector.mapped_module_name(@controller_name) == "fee_management"? "active" :"", :icon => "bank", :href => "/")
-    main_menu << MenuItem.new(:label => "Admissions", :klass => ContextDetector.mapped_module_name(@controller_name) == "enquiry_admission"? "active" :"", :icon => "book", :href => "/admissions/admission_home")
     main_menu << MenuItem.new(:label => "Academics", :klass => ContextDetector.mapped_module_name(@controller_name) == "academic"? "active" :"", :icon => "graduation-cap", :href => "/academics")
     main_menu << MenuItem.new(:label => "Results", :klass => ContextDetector.mapped_module_name(@controller_name) == "result"? "active" :"", :icon => "bullhorn", :href => "#")
      main_menu << MenuItem.new(:label => "HRM", :klass => ContextDetector.mapped_module_name(@controller_name) == "hrm"? "active" :"", :icon => "group", :href => "#")
@@ -77,7 +76,6 @@ class UserMenu
   def parent_main_menu
 main_menu = []
     main_menu << MenuItem.new(:label => "Fee Management", :klass => ContextDetector.mapped_module_name(@controller_name) == "fee_management"? "active" :"", :icon => "bank", :href => "/")
-    main_menu << MenuItem.new(:label => "Admissions", :klass => ContextDetector.mapped_module_name(@controller_name) == "enquiry_admission"? "active" :"", :icon => "book", :href => "/admissions/admission_home")
     main_menu << MenuItem.new(:label => "Academics", :klass => ContextDetector.mapped_module_name(@controller_name) == "academic"? "active" :"", :icon => "graduation-cap", :href => "/academics")
     main_menu << MenuItem.new(:label => "Results", :klass => ContextDetector.mapped_module_name(@controller_name) == "result"? "active" :"", :icon => "bullhorn", :href => "#")
     main_menu << MenuItem.new(:label => "HRM", :klass => ContextDetector.mapped_module_name(@controller_name) == "hrm"? "active" :"", :icon => "group", :href => "#")

@@ -1,5 +1,11 @@
 class StaffadminsController < ApplicationController
-  
+  def get_role_and_head
+    role = Staffadmin.all.map do |role|
+      { role_name: role.dept, id: role.id, head: role.head}
+    end
+    render :json => role
+  end
+
   def get_faculty_names
     faculty = FacultyMaster.all.map do |faculty|
       { faculty_name: faculty.faculty_name, post: faculty.post, dept: faculty.dept}

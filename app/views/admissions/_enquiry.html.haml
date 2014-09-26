@@ -139,9 +139,9 @@
               %th
                 = f.select(:transport, options_for_select([['Private'],['School']]))
               %th
-                = f.label "Bus stop "
+                = f.label "Bus stop ", :class => 'textbox'
               %th
-                = f.text_field :busstop
+                = f.text_field :busstop, :class => 'textbox'
             %tr
               %th
                 = f.label "School in Which Last Studied:"
@@ -161,16 +161,10 @@
                 = f.label "You came to know about our school through:"
               %th
                 = f.select(:know_school, options_for_select([['Friends'],['Advertisements'],['Internet'],['Word of Mouth'],['Parents whose children are studying here']]))
-            %tr
-              
-              %th
-                = f.label "Name"
-              %th
-                = f.text_field :person
-              %th
-                = f.label "Class"
-              %th
-                = f.text_field :pp              
+                = f.label "Name", :class => 'textbox1'
+                = f.text_field :person, :class => 'textbox1'
+                = f.label "Class", :class => 'textbox1'
+                = f.text_field :pp, :class => 'textbox1'
 
 
 

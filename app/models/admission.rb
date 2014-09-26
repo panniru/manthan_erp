@@ -1,4 +1,11 @@
 class Admission < ActiveRecord::Base
+  has_one :default_master
+
+  before_save :get_form_no
+
+  def get_form_no
+    
+  end
   belongs_to :parent_master
   belongs_to :student_master
   belongs_to :grade_master

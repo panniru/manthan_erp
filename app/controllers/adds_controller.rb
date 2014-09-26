@@ -2,8 +2,8 @@ class AddsController < ApplicationController
   load_resource :only => [:show, :update, :edit, :destroy]
 
   def get_dept_view
-    add = Staffadmin.all.map do |add|
-      { add_name: add.dept, id: add.id}
+    add = Role.all.map do |add|
+      { role_name: add.role, code: add.code, description: add.description, id: add.id}
     end
     render :json => add
   end

@@ -14,17 +14,18 @@
         = f.hidden_field :post, :value => "{{myPost.post_name}}"
       .col-sm-1
         = f.label "Department:", :class => 'control-label'
-      .col-sm-2
-        %select{"ng-model" => "myHead", "ng-options" => "head.dept for head in heads", :class => "form-control", :required => "required"}
-          %option{style: "display:none", value: ""} Select Head
-      .col-sm-1
-        = f.label "Admin Head:", :class => 'control-label'
-      .col-sm-2
-        %select{"ng-model" => "myHead", "ng-options" => "head.head_name for head in heads", :class => "form-control", :required => "required"}
-          %option{style: "display:none", value: ""} Select Head
-        = f.hidden_field :dept, :value => "{{myHead.dept}}"
-        = f.hidden_field :staffhead, :value => "{{myHead.head_name}}"
-        = f.hidden_field :staff_admission_id, :value => "{{myHead.id}}"
+      .col-sm-2{"ng-controller" => "StaffadminsController"}
+        %select{"ng-model" => "myLead", "ng-options" => "role.role_name for role in roles", :class => "form-control", :required => "required"}
+          %option{style: "display:none", value: ""} Select Role
+          = f.hidden_field :dept, :value => "{{myLead.role_name}}"
+          = f.hidden_field :staffhead, :value => "{{myLead.head}}"
+          = f.hidden_field :role_id, :value => "{{myLead.id}}"
+      -# .col-sm-1
+      -#   = f.label "Admin Head:", :class => 'control-label'
+      -# .col-sm-2{"ng-controller" => "StaffadminsController"}
+      -#   %select{"ng-model" => "myLead", "ng-options" => "role.head for role in roles", :class => "form-control", :required => "required"}
+      -#     %option{style: "display:none", value: ""} Select Head
+      
     .form-group
       .col-sm-3
         = f.label "Name Of The Applicant:", :class => 'control-label'

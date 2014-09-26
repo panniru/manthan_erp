@@ -4,7 +4,7 @@
       .process-row
         .process-step
           - if("#{@admission.status}" == "Enquiry_Created")
-            = link_to raw("<span class= 'fa fa-user fa2-2x'></span>"), enquiry_show_admission_path, :class => "btn btn-danger1 btn-circle"
+            = link_to raw("<span class= 'fa fa-user fa2-2x'></span>"), enquiry_show_admission_path, :class => "btn btn-success1 btn-circle"
             %br
             %span.label.label-default Enquiry Form
             
@@ -16,7 +16,7 @@
         .glyphicon.glyphicon-chevron-right
         .process-step
           - if("#{@admission.status}" == "Application_Created")
-            = link_to raw("<span class= 'fa fa-file-text-o fa2-2x'></span>"), admission_show_admission_path, :class => "btn btn-danger1 btn-circle"
+            = link_to raw("<span class= 'fa fa-file-text-o fa2-2x'></span>"), admission_show_admission_path, :class => "btn btn-success1 btn-circle"
             %br
             %span.label.label-default Application Form
             
@@ -24,13 +24,14 @@
             - if("#{@admission.status}" == "Application_Created" ||"#{@admission.status}" == "Assessment_Planned" || "#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Completed" )
               = link_to raw("<span class= 'fa fa-file-text-o fa1-2x'></span>"), admission_show_admission_path, :class => "btn btn-success1 btn-circle"
             - else
-              = link_to raw("<span class= 'fa fa-file-text-o fa2-2x'></span>"), admission_new_admission_path, :class => "btn btn-warning1 btn-circle"
+              - if("#{@admission.status}" == "Enquiry_Created")
+                = link_to raw("<span class= 'fa fa-file-text-o fa2-2x'></span>"), admission_new_admission_path, :class => "btn btn-danger1 btn-circle"
             %br
             %span.label.label-default Application Form
         .glyphicon.glyphicon-chevron-right
         .process-step
           - if("#{@admission.status}" == "Assessment_Planned")
-            = link_to raw("<span class= 'fa fa-calendar fa2-2x'></span>"), view_assessment_admission_path, :class => "btn btn-danger1 btn-circle"
+            = link_to raw("<span class= 'fa fa-calendar fa2-2x'></span>"), view_assessment_admission_path, :class => "btn btn-success1 btn-circle"
             %br
             %span.label.label-default Assessment Planned
           - else
@@ -38,7 +39,7 @@
               = link_to raw("<span class= 'fa fa-calendar fa1-2x'></span>"), view_assessment_admission_path, :class => "btn btn-success1 btn-circle"
             - else
               - if("#{@admission.status}" == "Application_Created") and current_user.admin?
-                = link_to raw("<span class= 'fa fa-calendar fa2-2x'></span>"), "#", :onclick => "createAssessment('#{@admission.teacher_leader_id}');", :class => 'btn1 btn btn-warning1 btn-circle'
+                = link_to raw("<span class= 'fa fa-calendar fa2-2x'></span>"), "#", :onclick => "createAssessment('#{@admission.teacher_leader_id}');", :class => 'btn1 btn btn-danger1 btn-circle'
               - else
                 - if current_user.teacher? or current_user.principal? or current_user.admin?
                   = link_to raw("<span class= 'fa fa-calendar fa1-2x'></span>"), '#', :class => "btn btn-warning1 btn-circle"
@@ -47,7 +48,7 @@
         .glyphicon.glyphicon-chevron-right
         .process-step
           - if("#{@admission.status}" == "Assessment_Completed")
-            = link_to raw("<span class= 'fa fa-tasks fa2-2x'></span>"), assessment_result_admission_path, :class => "btn btn-danger1 btn-circle"
+            = link_to raw("<span class= 'fa fa-tasks fa2-2x'></span>"), assessment_result_admission_path, :class => "btn btn-success1 btn-circle"
             %br
             %span.label.label-default Assessment Completed
           - else
@@ -55,7 +56,7 @@
               = link_to raw("<span class= 'fa fa-tasks fa1-2x'></span>"), assessment_result_admission_path, :class => "btn btn-success1 btn-circle"
             - else
               - if current_user.teacher?
-                = link_to raw("<span class= 'fa fa-tasks fa2-2x'></span>"), "#", :class => 'Modal btn1 btn btn-warning1 btn-circle'
+                = link_to raw("<span class= 'fa fa-tasks fa2-2x'></span>"), "#", :class => 'Modal btn1 btn btn-danger1 btn-circle'
                 #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1", "data-backdrop" => "static","data-keyboard" => "false"}
                   .modal-dialog.modal-sm
                     .modal-content
@@ -84,7 +85,7 @@
                               %br
                               .row
                                 .col-sm-5
-                                  = f.label "Assessment Review", :class => 'control-label'
+                                  = f.label "Comment", :class => 'control-label'
                                 .col-sm-4
                                   = f.text_area :comment ,:class => 'form-control'
                               = f.hidden_field :status,:value => "Assessment_Completed"
@@ -102,7 +103,7 @@
         .glyphicon.glyphicon-chevron-right      
         .process-step
           - if("#{@admission.status}" == "Management_Reviewed")
-            = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), management_result_admission_path, :class => "btn btn-danger1 btn-circle"
+            = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), management_result_admission_path, :class => "btn btn-success1 btn-circle"
             %br
             %span.label.label-default Management Review
           - else
@@ -110,7 +111,7 @@
               = link_to raw("<span class= 'fa fa-users fa1-2x'></span>"), management_result_admission_path, :class => "btn btn-success1 btn-circle"
             - else
               - if("#{@admission.status}" == "Assessment_Completed") and current_user.principal?
-                = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), "#", :class => 'Modal btn1 btn btn-warning1 btn-circle'
+                = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), "#", :class => 'Modal btn1 btn btn-danger1 btn-circle'
                 #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1", "data-backdrop" => "static" ,"data-keyboard "=> "false"}
                   .modal-dialog.modal-sm
                     .modal-content
@@ -157,12 +158,12 @@
         .glyphicon.glyphicon-chevron-right      
         .process-step
           - if("#{@admission.status}" == "Completed")
-            = link_to raw("<span class= 'fa fa-thumbs-up fa2-2x'></span>"), admission_home_admissions_path, :class => "btn btn-danger1 btn-circle"
+            = link_to raw("<span class= 'fa fa-thumbs-up fa2-2x'></span>"), '#', :class => "btn btn-success1 btn-circle"
             %br
             %span.label.label-default Admission
           - else
             - if("#{@admission.status}" == "Management_Reviewed") and current_user.admin?
-              = link_to raw("<span class= 'fa fa-thumbs-up fa1-2x'></span>"), "#", :class => 'Modal btn1 btn btn-warning1 btn-circle',"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"
+              = link_to raw("<span class= 'fa fa-thumbs-up fa1-2x'></span>"), "#", :class => 'Modal btn1 btn btn-danger1 btn-circle',"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"
               #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
                 .modal-dialog.modal-sm
                   .modal-content

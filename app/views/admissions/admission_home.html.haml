@@ -20,8 +20,6 @@
       %th Admission Form
       %th Student's Name
       %th Grade
-      %th Parent's Name
-      %th Parent's Mobile
       %th Status
         
   %tbody
@@ -31,7 +29,5 @@
         %td= link_to "#{admission.admission_no}",home_index_admission_path(admission)
         %td= admission.name
         %td= admission.grade
-        %td= admission.father_name
-        %td= admission.mobile
         %td= admission.status
       

@@ -1,5 +1,51 @@
 $(document ).ready(function() {
+    $('.textbox1').hide();
+    $('.textbox2').hide();
     
+    $('#admission_bus').change(function() {
+        if ($(this).val() == 't')
+        {
+            $('#admission_transport').show();
+            $('#textbox').show();
+        }
+        else
+        {
+            $('#admission_transport').hide();
+            $('#textbox').hide();
+            
+        }
+                               
+    });
+    $('#admission_transport').change(function() {
+        if ($(this).val() == 'School')
+        {
+            $('.textbox2').show();
+        }
+        else
+        {
+            $('.textbox2').hide();
+        }
+    });
+
+    $('#admission_bus').change(function()  {
+        if ($(this).val() == 'f')
+        {
+            $('.textbox2').hide();
+        }
+    });
+    $('#admission_know_school').change(function() {
+        if ($(this).val() != 'Parents whose children are studying here')
+        {
+            $('.textbox1').hide();
+        }
+        else
+        {
+            $('.textbox1').show();
+        }
+
+    });
+
+
     $('body').on('focus',".datepicker", function(){
         $(this).datepicker({
             changeMonth: true,
