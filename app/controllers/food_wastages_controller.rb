@@ -33,15 +33,14 @@ class FoodWastagesController < ApplicationController
 
   def new
   end
+  
 
   def get_food_wastage
     respond_to do |format|
       @food_wastages = FoodWastage.all
       format.json do
         wastages = @food_wastages.map do |d|
-          
-          current = d.current_date.strftime('%s ').to_i
-                   
+          current = d.current_date.strftime('%s').to_i*1000
           [current, d.wastage]
         end
         render :json => [wastages]
