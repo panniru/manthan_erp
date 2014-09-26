@@ -13,7 +13,7 @@
       %tr
         %th Route No
         %th Bus No
-        %th start point
+        %th Start point
         %th End point
         - if current_user.transport_head?
           %th
@@ -26,8 +26,8 @@
         %td {{route.end_location}}
         - if current_user.transport_head?
           %td
-            = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-sm", :title => "Edit", :ng_click => "editRoutes(route)"
-            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(route)"
+            = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-xs", :title => "Edit", :ng_click => "editRoutes(route)"
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-xs", :title => "Delete", :ng_click => "destroy(route)"
          
       #createModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
         .modal-dialog
@@ -38,15 +38,7 @@
               .modal-body{"ng-controller" => "RouteController"}
                 = render "form1"
               
-        #editModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-          .modal-dialog
-            .modal-content
-              .modal-header
-                %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-                %h4#myModalLabel.modal-title New location            
-              .modal-body
-                = render "form2"
-                      
+                             
   - if current_user.transport_head?        
     .row
       = render "shared/map1"

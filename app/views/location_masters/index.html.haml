@@ -1,14 +1,15 @@
 .row
   .col-sm-3
-    %h3  Locations
+    
   .col-sm-4
   - if current_user.transport_head?
     %br
     = render 'form'
     %br
+    %br
 .row
   .col-sm-5
-    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+    %table.table.table-bordered
       %thead
         %tr
           %th Locations
@@ -20,4 +21,4 @@
             %td= location_master.location_name
             - if current_user.transport_head?
               %td
-                =  link_to raw("<span class='glyphicon glyphicon-trash'></span>"),location_master_path(location_master), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+                =  link_to raw("<span class='glyphicon glyphicon-trash'></span>"),location_master_path(location_master), :class => "btn btn-danger btn-xs", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"

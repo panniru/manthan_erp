@@ -8,7 +8,7 @@
       = render 'modal'
 .row
   .col-sm-10
-    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+    %table.table.table-bordered
       %thead
         %th Bus No
         %th Company 
@@ -31,6 +31,6 @@
             %td= new_vehicle.capacity
             - if current_user.transport_head?
               %td 
-                = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), new_vehicle_path(new_vehicle), :class => "form btn btn-danger",:data => {:method => 'delete' ,:confirm => "Are You Sure to Delete " }
+                = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), new_vehicle_path(new_vehicle), :class => "form btn-xs btn-danger",:data => {:method => 'delete' ,:confirm => "Are You Sure to Delete " }
         
 

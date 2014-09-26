@@ -26,6 +26,17 @@ $(document).ready(function(){
     calcRoute();
     var handler = Gmaps.build('Google');
     handler.buildMap({ internal: {id: 'map'}}, function(){
+	markers = handler.addMarkers([
+	    {
+		
+		"picture": {
+		    "url": "http://www.clipartlord.com/wp-content/uploads/2014/07/school-bus9.png",
+		},
+		"infowindow": "hello!"
+	    }
+	]);
+	handler.bounds.extendWith(markers);
+
 	directionsDisplay.setMap(handler.getMap());
     });
 });

@@ -145,7 +145,7 @@
        format.json do 
          map = StudentRouteMapping.show_all_students(params[:route]).map {|student| student.student_master_id}
          students = StudentMaster.where(:id => map ).each.map do |mapping|
-           {id: mapping.id,  name: mapping.name}
+           {grade: mapping.grade_master.grade_name,  name: mapping.name , section: mapping.section_master.section_name , location: mapping.location_master.location_name}
          end     
          render :json => students
        end
@@ -156,8 +156,10 @@
      respond_to do |format|
        format.json do 
          loc = StudentRouteMapping.show_all_locations(params[:location]).map {|student| student.student_master_id}
+         p "===================="
+         p loc
          locations = StudentMaster.where(:id => loc ).each.map do |mapping|
-           {id: mapping.id,  name: mapping.name}
+           {grade: mapping.grade_master.grade_name,  name: mapping.name , section: mapping.section_master.section_name }
          end     
          render :json => locations
        end
