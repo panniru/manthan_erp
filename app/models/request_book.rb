@@ -21,7 +21,7 @@ class RequestBook < ActiveRecord::Base
 
   def self.get_delivered_requests(current_user)
     if current_user.librarian?
-      @pending_request_books = RequestBook.where('status != '+"'Delivered'")   
+      @pending_request_books = RequestBook.where('status = '+"'Delivered'")   
     end
   end
 

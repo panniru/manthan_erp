@@ -4,7 +4,6 @@
         //alert();
         $scope.AddBook = [];
         $scope.request_books = resourceService.RequestBook.query();
-        delivered_requests
         //alert(JSON.stringify($scope.request_books));
         $scope.request_books_status = [];
         $scope.book_status = "";

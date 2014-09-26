@@ -52,7 +52,10 @@ class RequestBooksController < ApplicationController
         p "*********************=>>>>>>>"
         @delivered_request_books = RequestBook.get_delivered_requests(current_user)  
         render :json => @delivered_request_books
-      end      
+      end  
+      format.html do
+        @delivered_request_books = RequestBook.get_delivered_requests(current_user)  
+      end
     end
   end
 

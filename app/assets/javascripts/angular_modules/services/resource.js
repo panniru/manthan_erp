@@ -101,9 +101,8 @@
         var BlockBook = $resource('/block_books/:id.json', {id: '@id'});
         var RequestBook = $resource('/request_books/:id.json', {id: '@id'},
             {                      "pending_requests": { url: "/request_books/pending_request_books.json", method:'GET', isArray: true},
-                             },
-            {                      "delivered_requests": { url: "/request_books/delivered_request_books.json", method:'GET', isArray: true},
-                             }                 
+                                   "delivered_requests": { url: "/request_books/delivered_request_books.json", method:'GET', isArray: true}
+                             }                                             
                             );
 
        
