@@ -34,13 +34,11 @@ class RequestBooksController < ApplicationController
 
   def pending_request_books
     respond_to do |format|
-      format.json do
-        p "*********************=>>>>>>>"
+      format.json do        
         @pending_request_books = RequestBook.get_pending_requests(current_user)  
         render :json => @pending_request_books
       end
-      format.html do
-        p  "*********************%%%%%%%%>"
+      format.html do       
         @pending_request_books = RequestBook.all  
       end
     end
@@ -48,23 +46,20 @@ class RequestBooksController < ApplicationController
 
   def delivered_request_books
     respond_to do |format|
-      format.json do
-        p "*********************=>>>>>>>"
+      format.json do       
         @delivered_request_books = RequestBook.get_delivered_requests(current_user)  
         render :json => @delivered_request_books
-      end      
+      end 
+      format.html do
+        @delivered_request_books = RequestBook.get_delivered_requests(current_user)  
+      end
     end
   end
 
   def update_request_books_status
-    p request_books = params[:resquest_books_status] 
-    p  "==============>"    
-    request_books.each do |t|  
-      p t
-      p "*********=>"
-      @request_book = RequestBook.find(t['id']) 
-      p @request_book
-      p "*$$$$$$********=>"
+    request_books = params[:resquest_books_status]    
+    request_books.each do |t|      
+      @request_book = RequestBook.find(t['id'])      
       @request_book.status = t['status']
       @request_book.save
     end    

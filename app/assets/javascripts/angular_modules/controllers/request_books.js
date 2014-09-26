@@ -1,11 +1,8 @@
 (function(angular, app) {
     "use strict";
-    app.controller("RequestBooksController",["$scope","resourceService", "requestBooksService", function($scope, resourceService, requestBooksService) {    
-        //alert();
+    app.controller("RequestBooksController",["$scope","resourceService", "requestBooksService", function($scope, resourceService, requestBooksService) {        
         $scope.AddBook = [];
-        $scope.request_books = resourceService.RequestBook.query();
-        delivered_requests
-        //alert(JSON.stringify($scope.request_books));
+        $scope.request_books = resourceService.RequestBook.query();       
         $scope.request_books_status = [];
         $scope.book_status = "";
 
@@ -24,19 +21,14 @@
                         break;
                     }
                 }
-            }
-                      
-            //alert(JSON.stringify($scope.request_books_status));
+            }           
         };
 
-        $scope.updateBooksStatus =  function(book_status){
-            alert(book_status);
-
+        $scope.updateBooksStatus =  function(book_status){            
             for (var i=0; i<$scope.request_books_status.length; i++){ 
                 $scope.request_books_status[i]['status'] = book_status;
             }
-
-            alert(JSON.stringify($scope.request_books_status));
+            
             requestBooksService.updateBooksStatus($scope.request_books_status)      
                 .then(function(result) {
                     
@@ -66,19 +58,15 @@
                     }
                 }
             }            
-            
-            alert(JSON.stringify($scope.myRequestBooks));
             $scope.updateBooksStatus('Ordered');
         };
 
-        $scope.pendingRequests = function(){
-            //alert("hello");
+        $scope.pendingRequests = function(){           
             $scope.pending_requests = resourceService.RequestBook.pending_requests();           
         };
 
         $scope.acceptBooksDeliver = function(book_status){
-            $scope.updateBooksStatus(book_status);
-            //alert("hello");
+            $scope.updateBooksStatus(book_status);           
             $scope.pending_requests = resourceService.RequestBook.pending_requests();           
         };   
 
@@ -88,21 +76,16 @@
             alert(JSON.stringify($scope.pending_requests[0]['id']));
             alert($scope.pending_requests.length);
             alert($scope.request_books_status.length);
-            $scope.moreBooks = true;           
-            
+            $scope.moreBooks = true;            
 
-            for(var i=0; i<$scope.pending_requests.length; i++){
-               // alert("1");
-                for(var j=0; j<$scope.request_books_status.length; j++){                  
-                    //alert($scope.pending_requests[i]['id']);
+            for(var i=0; i<$scope.pending_requests.length; i++){              
+                for(var j=0; j<$scope.request_books_status.length; j++){                   
                     if($scope.pending_requests[i]['id'] == $scope.request_books_status[j]['id']){
                         $scope.newBooks.push({"request_book_id": $scope.pending_requests[i]['id'], "name": $scope.pending_requests[i]['book_name'], "isbn": "", "author": $scope.pending_requests[i]['author_name'], "year_of_publishing": "", "book_type": "", "purchased_date": ""});
                         
                     }   
                 }             
-            }
-            
-            alert(JSON.stringify($scope.newBooks));            
+            }                        
         };
         $scope.msfFun = function(){  alert("dynamic");       };
 

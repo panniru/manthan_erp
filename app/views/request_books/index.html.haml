@@ -21,7 +21,6 @@
                 .col-md-2
                   = label_tag "MESSAGE", nil, :class => "form-label"
                 .col-md-10
-                  = text_area_tag "",nil, :class => "form-control", :ng_model => "myMailMessage"
-                  {{myRequestBooks}}                 
+                  = text_area_tag "",nil, :class => "form-control", :ng_model => "myMailMessage"                                   
               .col-md-2{"ng-controller" => "MailingController"}
                 %button{:type => "button", :class=> "btn btn-primary", :ng_click => "requestBooksMail(myMailSubject,myMailMessage,myRequestBooks)"}=  "SEND"

@@ -78,11 +78,9 @@ class BooksController < ApplicationController
     @book_bulk = build_book_from_bulk
     if !@book_bulk.empty? and @book_bulk.map(&:valid?).all?
       @book_bulk.each(&:save!)
-      p delivered_books = params[:bulk_book]
+      delivered_books = params[:bulk_book]
       delivered_books.each do |delivered_book| 
-        p @d_book = RequestBook.find(delivered_book['request_book_id']).destroy
-        # @d_book.destroy      
-        p "=========***********=============>"
+        p @d_book = RequestBook.find(delivered_book['request_book_id']).destroy        
       end
       flash[:success] = I18n.t :success, :scope => [:book, :create_bulk]
       redirect_to pending_request_books_request_books_path
