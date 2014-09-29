@@ -670,5 +670,10 @@ ManthanErp::Application.routes.draw do
     end
   end
   
+  resources :subject_masters do
+    collection do
+      post 'create_bulk'     
+    end      
+  end
 
 end

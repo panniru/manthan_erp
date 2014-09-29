@@ -1,0 +1,26 @@
+.col-md-12
+  .col-md-1
+  .col-md-10
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr        
+          %th Subject Name
+          %th Edit
+          %th Delete
+      %tbody
+        %tr{"ng-repeat" => "subject in subjects"}
+          %td {{subject.subject_name}}
+          %td 
+            = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-sm", :title => "Edit", :ng_click => "editSubject(subject)"
+          %td           
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteSubject(subject)"
+  .col-md-1
+.col-md-12
+  #myEditModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} Add Subject
+        .modal-body
+          = render "edit_form"

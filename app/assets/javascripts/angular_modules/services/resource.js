@@ -105,6 +105,11 @@
             }    
                                    );
         var DonateBook = $resource('/donate_books/:id.json', {id: '@id'});
+        var SubjectMaster = $resource('/subject_masters/:id.json', {id: '@id'},
+                                    { "bulk": { url: "/subject_masters/create_bulk", method:'POST'},
+                                      "update": { method: "PUT"}
+                                    }  
+                                   );
 
        
 
@@ -128,7 +133,9 @@
             DamageBook : DamageBook,
             BlockBook : BlockBook,
             RequestBook : RequestBook,
-            DonateBook : DonateBook
+            DonateBook : DonateBook,
+            DonateBook : DonateBook,
+            SubjectMaster : SubjectMaster
         };
     }]);
 })(angular, myApp);
