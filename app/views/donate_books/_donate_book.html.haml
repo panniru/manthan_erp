@@ -50,7 +50,7 @@
           %td {{donate_book.grade_name}}
           %td {{donate_book.section_name}}
           %td 
-            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(book)"
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteDonateBook(donate_book)"
             
 .row
   #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
@@ -134,46 +134,55 @@
                 %label_tag{:class => 'control-label'}= "Book Name:"
               .col-sm-4
                 %input{:name => "author", :ng_model => "donate_book.name", :class=>"form-control"}
+            %br
             .row
               .col-sm-4
                 %label_tag{:class => 'control-label'}= "Author:"
               .col-sm-4
                 %input{:ng_model => "donate_book.author", :class=>"form-control"}
+            %br
             .row
               .col-sm-4
                 %label_tag{:class => 'control-label'}= "Isbn:"
               .col-sm-4
                 %input{:ng_model => "donate_book.isbn", :class=>"form-control"}
+            %br
             .row
               .col-sm-4
                 %label_tag{:class => 'control-label'}= "year_of_publishing:"
               .col-sm-4
                 %input{:ng_model => "donate_book.year_of_publishing", :class=>"form-control"}
+            %br
             .row
               .col-sm-4
                 %label_tag{:class => 'control-label'}= "Number_of_copies:"
               .col-sm-4
                 %input{:ng_model => "donate_book.number_of_copies", :class=>"form-control"}
+            %br
             .row
               .col-sm-4
                 %label_tag{:class => 'control-label'}= "Book Type:"
               .col-sm-4
                 %input{:ng_model => "donate_book.book_type", :class=>"form-control"}
+            %br
             .row
               .col-sm-4
                 %label_tag{:class => 'control-label'}= "Date Of Donation:"
               .col-sm-4
                 %input{:ng_model => "donate_book.date_of_donation", :class=>"form-control"}
+            %br
             .row
               .col-sm-4
                 %label_tag{:class => 'control-label'}= "Grade:"
               .col-sm-4
                 %input{:ng_model => "donate_book.grade_name", :class=>"form-control"}
+            %br
             .row
               .col-sm-4
                 %label_tag{:class => 'control-label'}= "Section:"
               .col-sm-4
                 %input{:ng_model => "donate_book.section_name", :class=>"form-control"}
+            %br
             .row
               .col-sm-4
                 %label_tag{:class => 'control-label'}= "Student Name:"

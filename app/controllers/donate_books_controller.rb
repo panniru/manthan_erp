@@ -14,5 +14,41 @@ class DonateBooksController < ApplicationController
       end      
     end
   end
+
+  def update_donate_book
+    @donate_book = params[:donate_book]   
+    if  @donate_book['id'].present?
+      @book = Book.find(@donate_book['book_id'])
+      @book.name = @donate_book['name']
+      @book.isbn = @donate_book['isbn']      
+      @book.author = @donate_book['author']
+      @book.year_of_publishing = @donate_book['year_of_publishing']
+      @book.number_of_copies = @donate_book['number_of_copies']
+      @book.book_type = @donate_book['book_type']
+      @book.save
+      @d_book = DonateBook.find(@donate_book['id'])
+      @d_book.date_of_donation = @donate_book['date_of_donation']
+      @d_book.student_name = @donate_book['student_name']
+      @d_book.grade_name = @donate_book['grade_name']
+      @d_book.section_name = @donate_book['section_name']
+      @d_book.save
+    end
+    render :json => true
+  end
+
+  def delete_donate_book
+    respond_to do |format|
+      format.json do  
+        @donate_book = params[:donate_book]  
+        p  @donate_book['id']
+        p "==============>"
+        if  @donate_book['id'].present?
+          Book.find(@donate_book['book_id']).destroy
+          DonateBook.find(@donate_book['id']).destroy         
+        end       
+        render :json => true
+      end
+    end
+  end
   
 end

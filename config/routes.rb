@@ -664,7 +664,11 @@ ManthanErp::Application.routes.draw do
   end
 
   resources :donate_books do
+    collection do
+      post 'update_donate_book'
+      post 'delete_donate_book'
     end
+  end
   
 
 end
