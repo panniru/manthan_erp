@@ -275,3 +275,12 @@ en:
     update:
       success: " Book has been updated"
       fail: "Book not been updated"
+  guest_management:
+    create:
+      success: "Guest has been saved"
+      fail: "Guest not been saved"
+    destroy:
+      success: "Guest has been deleted"
+      fail: "Guest has not been deleted"
+   
+

@@ -19,6 +19,7 @@ class HrmSubMenu
       sub_menu << accounting
       sub_menu << vendor
       sub_menu << travelling
+      sub_menu << guest
       return sub_menu
     end
     
@@ -56,10 +57,14 @@ class HrmSubMenu
     MenuItem.new(:label => "Accounting", :klass => "", :icon => "table ", :href => "#")
   end  
   def vendor
-    MenuItem.new(:label => "Vendor", :klass => "", :icon => " ", :href => "#")
+    MenuItem.new(:label => "Vendor", :klass => "", :icon => "vine ", :href => "#")
   end
   
   def travelling
     MenuItem.new(:label => "Travelling", :klass => "", :icon => "automobile ", :href => "#")
   end      
+  
+  def guest
+    MenuItem.new(:label => "Guest", :klass => "", :icon => "user-md", :href => "/guest_managements")
+  end
 end

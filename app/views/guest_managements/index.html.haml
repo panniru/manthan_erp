@@ -1,0 +1,28 @@
+.row
+  .col-sm-8
+    %h3  Guest
+  .col-sm-4
+    = link_to "Add New",  new_guest_management_path, :class => "btn btn-primary"
+    %br
+.row
+  .col-sm-9
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Name 
+          %th Phone#
+          %th E-mail
+          %th Person
+          %th purpose  
+          %th
+      %tbody
+        - @guest_managements.each do |guest|
+          %tr
+            %td= guest.guest_name
+            %td= guest.guest_phone
+            %td= guest.guest_email
+            %td= guest.came_to_meet
+            %td= guest.purpose
+            %td 
+              = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), guest_management_path(guest), :class => "form btn btn-danger btn-sm",:data => {:method => 'delete' ,:confirm => "Are You Sure to Delete " }
+            

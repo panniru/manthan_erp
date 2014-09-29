@@ -1,5 +1,10 @@
 ManthanErp::Application.routes.draw do
-
+  
+  resources :guest_managements do
+    collection do
+      get "get_role_view"
+    end
+  end
   get "teaching_plans/new"
   get "teaching_plans/edit"
   get "teaching_plans/index"
