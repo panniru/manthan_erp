@@ -1,5 +1,13 @@
 ManthanErp::Application.routes.draw do
   
+ 
+
+  resources :vendor_managements do
+    collection do
+      get "get_vendor_view"
+    end
+  end
+
   resources :guest_managements do
     collection do
       get "get_role_view"
@@ -680,6 +688,6 @@ ManthanErp::Application.routes.draw do
 
   resources :donate_books do
     end
-  
+  resources :vendor_categories
 
 end

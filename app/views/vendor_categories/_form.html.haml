@@ -1,0 +1,22 @@
+%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add"
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4#myModalLabel.modal-title Vendor
+        = form_for VendorCategory.new , :html => { :class => "form-horizontal", :role => "form"} do |f| 
+          .modal-body
+            .row
+              .col-sm-4
+                = f.label "Category"
+              .col-sm-4
+                = f.text_field "vendor_category", :class => 'form-control'
+                %br
+           
+                 
+            .row
+              .col-sm-10
+              .col-sm-2
+                = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+      

@@ -44,13 +44,6 @@ class GuestManagementsController < ApplicationController
   end
 
 
-  def get_role_view
-    role = FacultyMaster.all.map do |role|
-      { role: role.faculty_name,id: role.id}
-    end
-    render :json => role
-  end
-
   def guest_params
     params.require(:guest_management).permit(:guest_name,:guest_phone,:guest_address,:guest_email,:purpose, :follow_up,:follow_up_date, :came_to_meet)
   end

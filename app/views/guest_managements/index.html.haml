@@ -24,5 +24,5 @@
             %td= guest.came_to_meet
             %td= guest.purpose
             %td 
-              = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), guest_management_path(guest), :class => "form btn btn-danger btn-sm",:data => {:method => 'delete' ,:confirm => "Are You Sure to Delete " }
+              = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), guest_management_path(guest), :class => "form btn-sm btn-danger ",:data => {:method => 'delete' ,:confirm => "Are You Sure to Delete " }
             
