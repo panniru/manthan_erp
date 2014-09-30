@@ -14,12 +14,11 @@
             .then(function(result) {
                 $scope.subjects=result.data;  
                 //alert(JSON.stringify($scope.subjects));
-                //alert(JSON.stringify($scope.subjects));
             });        
         
         gradesSubjectsMapService.getGradesSubjectsServiceView()
             .then(function(result) {
-                $scope.show_subjects=result.data;
+                $scope.show_subjects=result.data;    
                 //alert(JSON.stringify($scope.show_subjects));
             }); 
 
@@ -43,9 +42,8 @@
                         checked_value:"",                            
                     });                    
                 }
-            } 
-            
-            //alert(JSON.stringify($scope.grades_subjects_all));
+            }             
+           
             };
 
         $scope.defaultGadesSubjects = function(){     
@@ -58,9 +56,7 @@
                     subject_masters: [],
                     
                 });
-            }
-            
-            //alert(JSON.stringify($scope.grades_subjects));
+            }           
         };
 
         $scope. createSubjectsMappings = function() {           
@@ -74,20 +70,15 @@
                         $scope.grades_subjects[i]['subject_masters'].push({  
                             
                             id : $scope.show_subjects[j]['id'],
-                            subject_master_id : $scope.show_subjects[j]['subject_master_id'],  
-                            //subject_name : $scope.show_subjects[j]['subject_name'],
-                           
+                            subject_master_id : $scope.show_subjects[j]['subject_master_id'],                           
                         });                                         
                     }
                 }                
-            } 
-
-            //alert(JSON.stringify($scope.grades_subjects));
+            }            
         };        
         
 
-        $scope.editSubjectsMappings = function() {
-            //alert();
+        $scope.editSubjectsMappings = function() {            
             $scope.defaultGradesSubjectsAll();
             $scope.myShowFormValue = "false";
             $scope.myFormValue = "true";
@@ -108,8 +99,7 @@
                         
                     }
                 }
-            }
-            //alert(JSON.stringify($scope.grades_subjects_all));
+            }            
             $scope.createSubjectsMappings();
         };
         
@@ -126,7 +116,7 @@
                     });                      
                 }               
             }
-            //alert(JSON.stringify($scope.save_grades_subjects));
+           
             gradesSubjectsMapService.saveSubjectsMappings($scope.save_grades_subjects)
                 .then(function(result) {
                     
@@ -141,16 +131,11 @@
             
             gradesSubjectsMapService.getGradesSubjectsServiceView()
                 .then(function(result) {
-                    $scope.show_subjects=result.data;
-                    //alert(JSON.stringify($scope.show_subjects));
+                    $scope.show_subjects=result.data;                   
                 });            
         };
 
-        $scope.addSubjects = function(value,grade_master_id,subject){
-           //alert(value);
-            //alert(grade_master_id);
-            //alert(JSON.stringify(subject));
-            
+        $scope.addSubjects = function(value,grade_master_id,subject){          
             for(var i = 0; i < $scope.grades.length; i++)
             {                
                 if ($scope.grades[i]['grade_master_id'] == grade_master_id)
@@ -171,14 +156,11 @@
                         });                       
                     }
                 }
-            }
-            //alert(JSON.stringify($scope.grades_subjects));
+            }            
         };
 
 
 
-
-    }]);    
-    
+    }]);       
 })(angular, myApp);
 
