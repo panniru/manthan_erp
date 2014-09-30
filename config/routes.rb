@@ -647,18 +647,8 @@ ManthanErp::Application.routes.draw do
       post 'request_books_mail_to_vendors'
       get 'delivered_request_books'
     end  
-  end  
-
-  resources :request_books do 
-    collection do
-      get 'pending_request_books'
-      post 'update_request_books_status'
-      get 'request_books_mail_to_vendors'
-      post 'request_books_mail_to_vendors'
-      get 'delivered_request_books'
-    end  
   end
-  
+    
   resources :attendances do
     collection do
       get 'teacher_index'
@@ -674,7 +664,11 @@ ManthanErp::Application.routes.draw do
   end
 
   resources :donate_books do
+    collection do
+      post 'update_donate_book'
+      post 'delete_donate_book'
     end
+  end
   
 
 end

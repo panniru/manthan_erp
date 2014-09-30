@@ -1,0 +1,194 @@
+.row
+  .col-md-1
+  .col-md-10
+    .panel.panel-default
+      .test
+        .col-sm-3
+          .pull-left
+            .input-group
+              %span.input-group-addon
+                = fa_icon "search lg"
+              %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+              %br
+        .col-sm-4
+          %center
+            %h4
+              Donate Book
+        .col-sm-4
+          .pull-right
+            %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Donate Book"
+  .col-md-1
+.row
+  .col-md-1
+  .col-md-10
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr      
+          %th Book Name
+          %th Author Name
+          %th ISBN
+          %th YearOfPublishing
+          %th Number Of Copies
+          %th Book Type
+          %th Donation Date
+          %th Student Name
+          %th Grade
+          %th Section
+          %th Delete
+      %tbody   
+        %tr{"ng-repeat" => "donate_book in donate_books"}
+          %td 
+            %a{href: "#", "ng-click" =>"editDonateBook(donate_book)"}
+              {{donate_book.name}}
+          %td {{donate_book.author}}
+          %td {{donate_book.isbn}}
+          %td {{donate_book.year_of_publishing}}
+          %td {{donate_book.number_of_copies}}
+          %td {{donate_book.book_type}}
+          %td {{donate_book.date_of_donation}}
+          %td {{donate_book.student_name}}
+          %td {{donate_book.grade_name}}
+          %td {{donate_book.section_name}}
+          %td 
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteDonateBook(donate_book)"
+            
+.row
+  #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4#myModalLabel.modal-title Donate Book
+          = form_for Book.new , :html => {:class => "form-horizontal", :role => "form" , :multiple => true} do |f|
+            .modal-body
+              .row
+                .col-sm-4
+                  = f.label "Book Name:", :class => 'control-label'
+                .col-sm-4
+                  = f.text_field :name,:class => 'form-control'
+              %br
+              .row
+                .col-sm-4
+                  = f.label "Author Name:", :class => 'control-label'
+                .col-sm-4
+                  = f.text_field :author,:class => 'form-control'
+              %br
+              .row
+                .col-sm-4
+                  = f.label "ISBN:", :class => 'control-label'
+                .col-sm-4
+                  = f.text_field :isbn,:class => 'form-control'
+              %br
+              .row
+                .col-sm-4
+                  = f.label "Year Of Publishing:", :class => 'control-label'
+                .col-sm-4
+                  = f.text_field :year_of_publishing,:class => 'form-control'
+              %br
+              .row
+                .col-sm-4
+                  = f.label "Number Of Copies:", :class => 'control-label'
+                .col-sm-4
+                  = f.text_field :number_of_copies,:class => 'form-control'
+              %br
+              .row
+                .col-sm-4
+                  = f.label "Book Type:", :class => 'control-label'
+                .col-sm-4
+                  = f.text_field :book_type,:class => 'form-control'
+              %br  
+              .row
+                .col-sm-4
+                  = f.label "Donation Date:", :class => 'control-label'
+                .col-sm-4
+                  = f.text_field :book_type,:class => 'form-control'
+              %br  
+              .row
+                .col-sm-4
+                  = f.label "Grade:", :class => 'control-label'
+                .col-sm-4
+                  %select{"ng-model" => "myGrade", :ng_options => "grade.id as grade.grade_name for grade in grades", :class => "form-control", :name => "grade_master_id"}
+              %br
+              .row
+                .col-sm-4
+                  = f.label "Section:", :class => 'control-label'
+                .col-sm-4
+                  %select{"ng-model" => "mySection", :ng_options => "section.id  as section.section for section in sections | filter: {grade_master_id: myGrade}", :class=>"form-control", :name => "section_master_id"}
+              %br
+              .row
+                .col-sm-4
+                  = f.label "Student Name:", :class => 'control-label'
+            .modal-footer
+              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+              = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+.row
+  #myEditModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4#myModalLabel.modal-title Edit Donate Book          
+          .modal-body
+            .row
+              .col-sm-4
+                %label_tag{:class => 'control-label'}= "Book Name:"
+              .col-sm-4
+                %input{:name => "author", :ng_model => "donate_book.name", :class=>"form-control"}
+            %br
+            .row
+              .col-sm-4
+                %label_tag{:class => 'control-label'}= "Author:"
+              .col-sm-4
+                %input{:ng_model => "donate_book.author", :class=>"form-control"}
+            %br
+            .row
+              .col-sm-4
+                %label_tag{:class => 'control-label'}= "Isbn:"
+              .col-sm-4
+                %input{:ng_model => "donate_book.isbn", :class=>"form-control"}
+            %br
+            .row
+              .col-sm-4
+                %label_tag{:class => 'control-label'}= "year_of_publishing:"
+              .col-sm-4
+                %input{:ng_model => "donate_book.year_of_publishing", :class=>"form-control"}
+            %br
+            .row
+              .col-sm-4
+                %label_tag{:class => 'control-label'}= "Number_of_copies:"
+              .col-sm-4
+                %input{:ng_model => "donate_book.number_of_copies", :class=>"form-control"}
+            %br
+            .row
+              .col-sm-4
+                %label_tag{:class => 'control-label'}= "Book Type:"
+              .col-sm-4
+                %input{:ng_model => "donate_book.book_type", :class=>"form-control"}
+            %br
+            .row
+              .col-sm-4
+                %label_tag{:class => 'control-label'}= "Date Of Donation:"
+              .col-sm-4
+                %input{:ng_model => "donate_book.date_of_donation", :class=>"form-control"}
+            %br
+            .row
+              .col-sm-4
+                %label_tag{:class => 'control-label'}= "Grade:"
+              .col-sm-4
+                %input{:ng_model => "donate_book.grade_name", :class=>"form-control"}
+            %br
+            .row
+              .col-sm-4
+                %label_tag{:class => 'control-label'}= "Section:"
+              .col-sm-4
+                %input{:ng_model => "donate_book.section_name", :class=>"form-control"}
+            %br
+            .row
+              .col-sm-4
+                %label_tag{:class => 'control-label'}= "Student Name:"
+              .col-sm-4
+                %input{:ng_model => "donate_book.student_name", :class=>"form-control"}
+            
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+            = button_tag "Save", :ng_click => "updateDonateBook()", :class => 'btn btn-primary'

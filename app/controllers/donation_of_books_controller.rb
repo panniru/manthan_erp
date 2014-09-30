@@ -14,8 +14,7 @@ class DonationOfBooksController < ApplicationController
   end
   
   def index
-    @donation_of_books= DonationOfBook.all
-   
+    @donation_of_books= DonationOfBook.all   
   end
   def show
   end
