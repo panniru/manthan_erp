@@ -1,8 +1,0 @@
-%form{:id => "myForma", :class=>"form-horizontal", :ng_submit => "updateSubject()"}  
-  .form-group
-    = label_tag  "Subject Name : ", nil, :class => "form-label col-md-4"
-    .col-md-4     
-      = text_field_tag  "bulk_subject[][subject_name]",nil, :class => "form-control", :ng_model => "subject_master.subject_name", :placeholder => "Subject Name"  
-  .row
-    .col-md-5.col-md-offset-3       
-      %button{:type=>"submit", :class=> "btn btn-primary"}=  "Update"

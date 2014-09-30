@@ -2,11 +2,9 @@
     "use strict";
     app.service("subjectMasterService",["$http", function($http) {
         
-        // return {
-        
-        // };
-
-
+        return {        
+        };
 
     }]);
 })(angular, myApp);
+       

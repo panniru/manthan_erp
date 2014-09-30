@@ -20,6 +20,7 @@ class Academic
     sub_menu << academic_terms
     sub_menu << term_results
     sub_menu << subject_masters
+    sub_menu << section_masters
     sub_menu
   end
   def teacher_sub_menu
@@ -103,6 +104,10 @@ class Academic
 
   def subject_masters
     MenuItem.new(:label => "Subject Masters", :klass => "", :icon => "thumbs-up", :href => "/subject_masters")
+  end
+
+  def section_masters
+    MenuItem.new(:label => "Section Masters", :klass => "", :icon => "thumbs-up", :href => "/section_masters")
   end
 
 end

@@ -1,10 +1,8 @@
 (function(angular, app) {
     "use strict";
-    app.controller("SubjectMasterController",["$scope","resourceService", "subjectMasterService", function($scope, resourceService, subjectMasterService) {      
-        //alert();        
+    app.controller("SubjectMasterController",["$scope","resourceService", "subjectMasterService", function($scope, resourceService, subjectMasterService) {         
         $scope.subjects = resourceService.SubjectMaster.query();  
-        $scope.subject_masters = [];
-        //alert(JSON.stringify($scope.subjects));
+        $scope.subject_masters = [];       
 
         $scope.showSubjects = function(){
             $scope.subjects = resourceService.SubjectMaster.query();  
@@ -30,27 +28,12 @@
                     $('#myModal').modal('hide');
                 });
 
-        };
-        
-        $scope.editSubject = function(subject){  
-            $('#myEditModal').modal('show');   
-            $scope.subject_master = subject;           
-        };
-        
-        $scope.updateSubject = function(subject){ 
-            $scope.subject_master.$update()
-                .then(function(responce){
-                    $scope.showSubjects();
-                    $('#myEditModal').modal('hide');   
-                })
-           
-        };
-
+        };        
+       
         $scope.deleteSubject = function(subject){            
             subject.$delete()
                 .then(function(responce){
-                    $scope.showSubjects();
-                    //$scope.subjects.splice($scope.subjects.indexOf(subject), 1)
+                    $scope.showSubjects();                   
                 })
         };
 
