@@ -13,7 +13,7 @@
 %br
 %br
 
-%table#tblData.target.table.table-striped.table-condensed.table-bordered
+%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
   %thead
     %tr
       %th Form no
@@ -25,7 +25,7 @@
   %tbody
     - @admissions.each do |admission|
       %tr
-        %td
+        %td{:style => "width:25%"}
           = link_to "#{admission.form_no}", "#", :class => 'Modal', :data => {:id => "#{@admission.id}"}
           #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1", "data-backdrop" => "static","data-keyboard" => "false"}
             .modal-dialog.modal-sm
@@ -63,8 +63,11 @@
                         = button_tag "Save", :type => "submit", :class => 'pull-right btn btn-primary'
                         %br
                         %br           
-        %td= admission.name
-        %td= admission.grade
-        %td= admission.status
+        %td{:style => "width:25%"}
+          = admission.name
+        %td{:style => "width:25%"}
+          = admission.grade
+        %td{:style => "width:25%"}
+          = admission.status
         
         

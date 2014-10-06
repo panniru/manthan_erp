@@ -12,22 +12,22 @@
         Documents Verified
 %br
 %br
-%table#tblData.target.table.table-striped.table-condensed.table-bordered
+%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
   %thead
-    %tr{style: "width:25%"}
+    %tr
       %th Form no
-      %th Educational Certificates
-      %th Previous Employment Proof
-      %th Salary Slips for previous Months
+      %th Name
+      %th Post
+      %th Status
   %tbody
     - @staffrecruits.each do |staffrecruit|
       %tr
-        %td
+        %td{:style => "width:25%"}
           = link_to "#{staffrecruit.form_no}",homeindex_staffrecruit_path(staffrecruit)
-        %td
-          = link_to "Edu_Certificates", staffrecruit.educational_certificates_url
-        %td
-          = link_to "Previous Employment Proof", staffrecruit.previous_employment_proof_url
-        %td
-          = link_to "Salary slips forprevious Months",staffrecruit.salary_slips_for_previous_months_url
+        %td{:style => "width:25%"}
+          = staffrecruit.faculty_name
+        %td{:style => "width:25%"}
+          = staffrecruit.post
+        %td{:style => "width:25%"}
+          = staffrecruit.status
         

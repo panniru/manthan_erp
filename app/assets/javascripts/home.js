@@ -42,7 +42,6 @@ $(document ).ready(function() {
         {
             $('.textbox1').show();
         }
-
     });
 
 

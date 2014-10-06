@@ -18,7 +18,7 @@
 %br
 %br
 
-%table#tblData.target.table.table-striped.table-condensed.table-bordered
+%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
   %thead
     %tr
       %th Form no
@@ -29,9 +29,13 @@
   %tbody
     - @admissions.each do |admission|
       %tr
-        %td= link_to "#{admission.form_no}", home_index_admission_path(admission)
-        %td= admission.name
-        %td= admission.grade
-        %td= admission.status
+        %td{:style => "width:25%"}
+          = link_to "#{admission.form_no}", home_index_admission_path(admission)
+        %td{:style => "width:25%"}
+          = admission.name
+        %td{:style => "width:25%"}
+          = admission.grade
+        %td{:style => "width:25%"}
+          = admission.status
         
         

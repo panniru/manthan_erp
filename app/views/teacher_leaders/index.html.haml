@@ -50,8 +50,8 @@
 %br
 %br
 .row
-  .col-sm-8
-    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+  .col-sm-12
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
       %thead
         %tr
           %td Grade
@@ -61,11 +61,11 @@
       %tbody
         - @teacher_leaders.each do |teacher_leader|
           %tr
-            %td
+            %td{:style => "width:25%"}
               = teacher_leader.klass
-            %td
+            %td{:style => "width:25%"}
               = teacher_leader.faculty_leader
-            %td
+            %td{:style => "width:25%"}
               %center
                 = link_to raw("<span class='glyphicon glyphicon-edit'></span>"),edit_teacher_leader_path(teacher_leader), :class => "btn btn-warning btn-sm", :title => "Edit"
                

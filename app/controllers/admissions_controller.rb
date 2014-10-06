@@ -102,7 +102,7 @@ class AdmissionsController < ApplicationController
   end
   
   def assessment_index
-    @admission = Admission.new
+    @admission = Admission.new 
     if params[:search].present?
       @admissions = Admission.search(params[:search])
     else

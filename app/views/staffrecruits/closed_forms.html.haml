@@ -13,19 +13,26 @@
 %br
 %br
 
-%table#tblData.target.table.table-striped.table-condensed.table-bordered
+%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
   %thead
     %tr
-      %th Enquiry Form
+      %th Form no
       %th Name
       %th Post
+      %th Status
       %th Reason for Closing
         
   %tbody
     - @staffrecruits.each do |staffrecruit|
       %tr
-        %td= staffrecruit.form_no
-        %td= staffrecruit.name
-        %td= staffrecruit.post
-        %td= staffrecruit.closestatus
+        %td{style: "width:20%"}
+          = staffrecruit.form_no
+        %td{style: "width:20%"}
+          = staffrecruit.name
+        %td{style: "width:20%"}
+          = staffrecruit.post
+        %td{style: "width:20%"}
+          = staffrecruit.status
+        %td{style: "width:20%"}
+          = staffrecruit.closestatus
         
