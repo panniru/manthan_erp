@@ -1,14 +1,6 @@
 
 $(document).ready(function() { 
-<<<<<<< Updated upstream
-=======
 
-    if($(".fc-event").length > 0){
-        $('.fc-event-inner').addClass("fc-state-disabled");
-        alert("Image loaded.");
-    }
-
->>>>>>> Stashed changes
     var monthNames = [ "January", "February", "March", "April", "May", "June",
                        "July", "August", "September", "October", "November", "December" ]
     var view = "holiday";

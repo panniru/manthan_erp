@@ -1,0 +1,21 @@
+#panel
+  #panelCaller
+    .glyphicon.glyphicon-asterisk
+  .list-group
+    %a{"data-parent" => "#accordion", "data-target" => "#collapseOne", "data-toggle" => "collapse"} 
+      .list-group-item.active.glyphicon.glyphicon-cloud{:href => "#"}Fee Management
+    #collapseOne.panel-collapse.collapse
+     
+      %a.list-group-item{:href => "#"} Sub Menu
+      %a.list-group-item{:href => "#"} Sub Menu
+      %a.list-group-item{:href => "#"} Sub Menu
+      %a.list-group-item{:href => "#"} Sub Menu
+    %a{"data-parent" => "#accordion", "data-target" => "#collapseTwo", "data-toggle" => "collapse"} 
+      .list-group-item.active.glyphicon.glyphicon-th{:href => "#"}Admission
+    #collapseTwo.panel-collapse.collapse
+      %a.list-group-item{:href => "#"} Sub Menu
+      %a.list-group-item{:href => "admissions/admission_home"} Sub Menu
+      %a.list-group-item{:href => "#"} Sub Menu
+      %a.list-group-item{:href => "#"} Sub Menu
+  
+ 
