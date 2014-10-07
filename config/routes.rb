@@ -583,7 +583,9 @@ ManthanErp::Application.routes.draw do
 
   resources :inventories do
     collection do
+      get "get_inventory_view"
       get "mail"
+      post "update_inventory_status"
       post 'create_bulk'
     end
     member  do

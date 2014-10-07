@@ -16,7 +16,33 @@ class InventoriesController < ApplicationController
   def new
     @inventories = Inventory.order_placed
   end
- 
+  
+  def get_inventory_view
+    respond_to do |format|
+      format.json do 
+        inv = Inventory.all
+        inventories = inv.each.map do |mapping|
+          { id: mapping.id,inventory_type: mapping.inventory_type, name: mapping.name, quantity: mapping.quantity , status: mapping.status}
+        end     
+        render :json => inventories
+      end
+    end
+  end
+  
+  def update_inventory_status
+    respond_to do |format|
+      format.json do
+        status = params[:status]
+        status.each do |t|      
+          @status = Inventory.find(t['id'])      
+          @status.status = t['status']
+          @status.save
+        end
+        render :json => true    
+      end
+    end
+  end
+  
   def show
     respond_to do |format|
       format.json do

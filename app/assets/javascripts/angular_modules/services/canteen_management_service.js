@@ -17,9 +17,20 @@
             return $http.get(url);
 	};
 
+	var getinventoryView = function(){
+            var url = "/inventories/get_inventory_view.json"
+            return $http.get(url);
+	};
+
+	var updateStatus = function(status){
+            var url = "/inventories/update_inventory_status.json"
+            return $http.post(url, {status: status});
+	};
 	return {
             getMealtypeIdService: getMealtypeIdService,
-	    getFoodWastage: getFoodWastage
+	    getFoodWastage: getFoodWastage,
+	    getinventoryView : getinventoryView,
+	    updateStatus : updateStatus
           //  Mealname:  Mealname
         };
         

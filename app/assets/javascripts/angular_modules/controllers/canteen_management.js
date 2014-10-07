@@ -4,7 +4,7 @@
         $scope.mealtypes = resourceService.Mealtype.query();       
         $scope.newMeal = function(date){
             $scope.newMeals = []
-	    $scope.canteenDate = ((date.getDate()) + "-"+ (date.getMonth()+1) + "-" + (date.getFullYear())); 
+	    $scope.canteenDate = date
             for(var i=0; i<1; i++){
                 $scope.newMeals.push({"meal_type":"", "time" :""});
             };

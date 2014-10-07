@@ -21,7 +21,7 @@
         
         var options = function(){
             var chart_options = {
-                    series: 
+                    series: {
                         pie: {
                             show: true,               
                             label: {
