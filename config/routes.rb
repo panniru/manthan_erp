@@ -306,17 +306,19 @@ ManthanErp::Application.routes.draw do
 
   resources :grades_sections_mappings do
     collection do
-      post "save_sections_mappings"           
+      get "get_grades_sections_service_view"
+      post "save_sections_mappings" 
+      post "save_grades_mappings"         
     end  
   end
 
   resources :grades_subjects_mappings do
     collection do
       get "get_grades_subjects_service_view"
-      post "save_subjects_mappings"     
+      post "save_subjects_mappings" 
+      post "save_grades_mappings"    
     end  
-  end
-  get "/assessment_criterias/sample"
+  end 
   
   resources :assessment_criterias do
     collection do

@@ -6,93 +6,87 @@
 
         gradeService.getGradeServiceView()
             .then(function(result) {
-                $scope.grades=result.data; 
-                //alert(JSON.stringify($scope.grades));
+                $scope.grades=result.data;                 
             });
         
         subjectService.getSubjectServiceView()
             .then(function(result) {
-                $scope.subjects=result.data;  
-                //alert(JSON.stringify($scope.subjects));
+                $scope.subjects=result.data;                
             });        
         
         gradesSubjectsMapService.getGradesSubjectsServiceView()
             .then(function(result) {
-                $scope.show_subjects=result.data;    
-                //alert(JSON.stringify($scope.show_subjects));
-            }); 
+                $scope.show_grades=result.data;               
+            });        
 
-        $scope.defaultGradesSubjectsAll= function(){            
-                $scope.grades_subjects_all = [];         
+        $scope.defaultSubjectsGradesAll= function(){            
+            $scope.subjects_grades_all = [];         
             
-                for(var i = 0; i < $scope.grades.length; i++)
+            for(var i = 0; i < $scope.subjects.length; i++)
             {
-                $scope.grades_subjects_all.push({
-                    grade_master_id: $scope.grades[i]['grade_master_id'],
-                    grade_name: $scope.grades[i]['grade_name'],
-                    subjects: [],
+                $scope.subjects_grades_all.push({
+                    subject_master_id: $scope.subjects[i]['subject_master_id'],
+                    subject_name: $scope.subjects[i]['subject_name'],
+                    grades: [],
                 });
-           
-                for(var j = 0; j < $scope.subjects.length; j++)
+                
+                for(var j = 0; j < $scope.grades.length; j++)
                 {
-                    $scope.grades_subjects_all[i].subjects.push({
+                    $scope.subjects_grades_all[i].grades.push({
                         id: "",
-                        subject_master_id: $scope.subjects[j]['subject_master_id'] ,
-                        text: $scope.subjects[j]['subject_name'] ,                        
+                        grade_master_id: $scope.grades[j]['grade_master_id'] ,
+                        text: $scope.grades[j]['grade_name'] ,                        
                         checked_value:"",                            
                     });                    
                 }
-            }             
-           
-            };
+            }   
+        };
 
-        $scope.defaultGadesSubjects = function(){     
-            $scope.grades_subjects = [];
-
-            for(var i = 0; i < $scope.grades.length; i++)
+        $scope.defaultSubjectsGrades = function(){     
+            $scope.subjects_grades = [];
+            
+            for(var i = 0; i < $scope.subjects.length; i++)
             {
-                $scope.grades_subjects.push({
-                    grade_master_id: $scope.grades[i]['grade_master_id'],
-                    subject_masters: [],
+                $scope.subjects_grades.push({
+                    subject_master_id: $scope.subjects[i]['subject_master_id'],
+                    grade_masters: [],
                     
                 });
             }           
         };
 
-        $scope. createSubjectsMappings = function() {           
-            $scope.defaultGadesSubjects();
+        $scope. createGradesMappings = function() {           
+            $scope.defaultSubjectsGrades();
             
-            for ( var i = 0; i < $scope.grades.length; i++ ){         
-                for ( var j = 0; j < $scope.show_subjects.length; j++ ) {                   
-                    if  ($scope.grades[i]['grade_master_id'] == $scope.show_subjects[j]['grade_master_id'] )
-                    {                 
-                        
-                        $scope.grades_subjects[i]['subject_masters'].push({  
+            for ( var i = 0; i < $scope.subjects.length; i++ ){         
+                for ( var j = 0; j < $scope.show_grades.length; j++ ) {                   
+                    if  ($scope.subjects[i]['subject_master_id'] == $scope.show_grades[j]['subject_master_id'] )
+                    {                             
+                        $scope.subjects_grades[i]['grade_masters'].push({  
                             
-                            id : $scope.show_subjects[j]['id'],
-                            subject_master_id : $scope.show_subjects[j]['subject_master_id'],                           
+                            id : $scope.show_grades[j]['id'],
+                            grade_master_id : $scope.show_grades[j]['grade_master_id'],                           
                         });                                         
                     }
                 }                
             }            
-        };        
-        
+        };   
 
-        $scope.editSubjectsMappings = function() {            
-            $scope.defaultGradesSubjectsAll();
+        $scope.editGradesMappings = function() {            
+            $scope.defaultSubjectsGradesAll();
             $scope.myShowFormValue = "false";
             $scope.myFormValue = "true";
             
-            for ( var i = 0; i < $scope.grades.length; i++ ){         
-                for ( var j = 0; j < $scope.show_subjects.length; j++ ) {                   
-                    if  ($scope.grades[i]['grade_master_id'] == $scope.show_subjects[j]['grade_master_id'] )
+            for ( var i = 0; i < $scope.subjects.length; i++ ){         
+                for ( var j = 0; j < $scope.show_grades.length; j++ ) {                   
+                    if  ($scope.subjects[i]['subject_master_id'] == $scope.show_grades[j]['subject_master_id'] )
                     {
-                        for ( var k = 0; k < $scope.grades_subjects_all[i]['subjects'].length; k++ ) {
+                        for ( var k = 0; k < $scope.subjects_grades_all[i]['grades'].length; k++ ) {
                             
-                            if  ($scope.grades_subjects_all[i]['subjects'][k]['subject_master_id'] == $scope.show_subjects[j]['subject_master_id'] )
+                            if  ($scope.subjects_grades_all[i]['grades'][k]['grade_master_id'] == $scope.show_grades[j]['grade_master_id'] )
                             {
-                                $scope.grades_subjects_all[i]['subjects'][k]['id'] = $scope.show_subjects[j]['id']; 
-                                $scope.grades_subjects_all[i]['subjects'][k]['checked_value'] = true;                              
+                                $scope.subjects_grades_all[i]['grades'][k]['id'] = $scope.show_grades[j]['id']; 
+                                $scope.subjects_grades_all[i]['grades'][k]['checked_value'] = true;                              
                             }    
                             
                         }
@@ -100,59 +94,59 @@
                     }
                 }
             }            
-            $scope.createSubjectsMappings();
+            $scope.createGradesMappings();
         };
-        
-        $scope.saveSubjectsMappings = function() {
-            $scope.save_grades_subjects= [];
-            for(var i = 0; i < $scope.grades_subjects.length; i++)
+
+        $scope.saveGradesMappings = function() {
+            $scope.save_subjects_grades = [];
+            for(var i = 0; i < $scope.subjects_grades.length; i++)
             {               
-                for(var j = 0; j < $scope.grades_subjects[i]['subject_masters'].length; j++)
+                for(var j = 0; j < $scope.subjects_grades[i]['grade_masters'].length; j++)
                 {
-                    $scope.save_grades_subjects.push({
-                        grade_master_id: $scope.grades_subjects[i]['grade_master_id'],                        
-                        id:  $scope.grades_subjects[i]['subject_masters'][j]['id'], 
-                        subject_master_id: $scope.grades_subjects[i]['subject_masters'][j]['subject_master_id'], 
+                    $scope.save_subjects_grades.push({
+                        subject_master_id: $scope.subjects_grades[i]['subject_master_id'],                        
+                        id:  $scope.subjects_grades[i]['grade_masters'][j]['id'], 
+                        grade_master_id: $scope.subjects_grades[i]['grade_masters'][j]['grade_master_id'], 
                     });                      
                 }               
             }
            
-            gradesSubjectsMapService.saveSubjectsMappings($scope.save_grades_subjects)
+            gradesSubjectsMapService.saveGradesMappings($scope.save_subjects_grades)
                 .then(function(result) {
                     
                 }); 
             
-            $scope.showSubjectsMappings();
+            $scope.showGradesMappings();
         };
 
-        $scope.showSubjectsMappings = function(){            
+        $scope.showGradesMappings = function(){            
             $scope.myFormValue = "false";
             $scope.myShowFormValue = "true";
             
             gradesSubjectsMapService.getGradesSubjectsServiceView()
-                .then(function(result) {
-                    $scope.show_subjects=result.data;                   
-                });            
+                .then(function(result) { 
+                    $scope.show_grades=result.data; 
+                }); 
         };
-
-        $scope.addSubjects = function(value,grade_master_id,subject){          
-            for(var i = 0; i < $scope.grades.length; i++)
+        
+        $scope.addGrades = function(value,subject_master_id,grade){          
+            for(var i = 0; i < $scope.subjects.length; i++)
             {                
-                if ($scope.grades[i]['grade_master_id'] == grade_master_id)
+                if ($scope.subjects[i]['subject_master_id'] == subject_master_id)
                 {                    
                     if (!value)
                     {                        
-                        for(var j = $scope.grades_subjects[i]['subject_masters'].length - 1; j >= 0; j--) {
-                            if($scope.grades_subjects[i]['subject_masters'][j]['subject_master_id'] === subject['subject_master_id']) {
-                                $scope.grades_subjects[i]['subject_masters'].splice(j, 1);
+                        for(var j = $scope.subjects_grades[i]['grade_masters'].length - 1; j >= 0; j--) {
+                            if($scope.subjects_grades[i]['grade_masters'][j]['grade_master_id'] === grade['grade_master_id']) {
+                                $scope.subjects_grades[i]['grade_masters'].splice(j, 1);
                             }
                         }
                     } 
                     else
                     {                         
-                        $scope.grades_subjects[i]['subject_masters'].push({
-                            id: subject['id'],
-                            subject_master_id: subject['subject_master_id']
+                        $scope.subjects_grades[i]['grade_masters'].push({
+                            id: grade['id'],
+                            grade_master_id: grade['grade_master_id']
                         });                       
                     }
                 }
@@ -160,7 +154,5 @@
         };
 
 
-
     }]);       
 })(angular, myApp);
-

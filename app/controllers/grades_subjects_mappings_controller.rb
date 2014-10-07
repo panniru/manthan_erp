@@ -9,9 +9,9 @@ class GradesSubjectsMappingsController < ApplicationController
         render :json => grades_subjects
       end
     end
-  end
+  end     
 
-  def save_subjects_mappings
+  def save_grades_mappings
     respond_to do |format|
       format.json do        
         mappings = params[:mappings]        
@@ -28,25 +28,22 @@ class GradesSubjectsMappingsController < ApplicationController
         end
         mappings.each do |t| 
           if t["id"].present?           
-            @subject_master = GradeSubjectMapping.find(t["id"]) 
-            @subject_master.subject_master_id = t['subject_master_id']
-            @subject_master.grade_master_id = t['grade_master_id']
-            @subject_master.save
+            @subject_grade = GradeSubjectMapping.find(t["id"]) 
+            @subject_grade.subject_master_id = t['subject_master_id']
+            @subject_grade.grade_master_id = t['grade_master_id']
+            @subject_grade.save
           else
-            @subject_master=GradeSubjectMapping.new(add_params(t))
-            @subject_master.save
+            @subject_grade=GradeSubjectMapping.new(add_params(t))
+            @subject_grade.save
           end
         end 
         render :json => true
       end
     end
-  end
-
-  def add_params(params)
-    params.permit(:id, :subject_master_id,:grade_master_id)
-  end
+  end  
   
-
-
+  def add_params(params)
+    params.permit(:id, :subject_master_id, :grade_master_id)
+  end
 
 end
