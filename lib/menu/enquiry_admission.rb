@@ -22,13 +22,9 @@ class EnquiryAdmission
 
   def principal_sub_menu
     sub_menu = []
-    sub_menu << view_management_review
     sub_menu << assessment_completed
-    sub_menu << show_assessment_planned
-    sub_menu << show_application_admissions    
-    sub_menu << show_enquiry_admissions
-    sub_menu << selected_students
-    end
+    sub_menu << view_management_review
+  end
   
 
 
@@ -46,7 +42,6 @@ class EnquiryAdmission
  def teacher_sub_menu
    sub_menu = []
    sub_menu << view_schedule
-   sub_menu << assessment_completed
    sub_menu
  end
  

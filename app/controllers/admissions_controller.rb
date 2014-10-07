@@ -25,7 +25,7 @@ class AdmissionsController < ApplicationController
     respond_to do |format|
       if @admission.save 
         format.html { redirect_to admission_home_admissions_path, notice: 'Enquiry was successfully created.' }
-        format.json { render action: 'enquiry_show', :status => "enquiry_created", location: @admission }
+       
       else
         format.html { render action: 'new' }
         format.json { render json: @admission.errors, status: :unprocessable_entity }
@@ -46,10 +46,26 @@ class AdmissionsController < ApplicationController
   end
   
   def admission_home
-    if params[:search].present?
-      @admissions = Admission.search(params[:search])
-    else
-      @admissions = Admission.enquiry_forms_or_application_forms  
+    if current_user.admin?
+      if params[:search].present?
+        @admissions = Admission.search(params[:search])
+      else
+        @admissions = Admission.enquiry_forms_or_application_forms  
+      end
+    end
+   if current_user.teacher?
+     if params[:search].present?
+       @admissions = Admission.search(params[:search])
+     else
+       @admissions = Admission.assessment_planned
+     end
+   end
+    if current_user.principal?
+      if params[:search].present?
+        @admissions = Admission.search(params[:search])
+      else
+        @admissions = Admission.management_review
+      end
     end
   end
   
@@ -86,10 +102,12 @@ class AdmissionsController < ApplicationController
   end
   
   def assessment_index
+    @admission = Admission.new 
     if params[:search].present?
       @admissions = Admission.search(params[:search])
     else
       @admissions = Admission.assessment_planned
+      
     end
   end
   
@@ -270,6 +288,7 @@ class AdmissionsController < ApplicationController
        sm.income = student_obj.income
        sm.landline = student_obj.landline
        sm.transport = student_obj.transport
+       sm.bus_facility = student_obj.bus
        sm.busstop = student_obj.busstop
        sm.last_school = student_obj.last_school
        sm.city = student_obj.city

@@ -304,10 +304,15 @@ end
 
 def seed_default_discount
   unless DefaultMaster.find_by_default_name("discount").present?
-      DefaultMaster.create(:default_name => 'discount',:default_value => '15')
+    DefaultMaster.create(:default_name => 'discount',:default_value => '15')
   end
 end
 
+def seed_default_form_no
+  unless DefaultMaster.find_by_default_name("form_no").present?
+    DefaultMaster.create(:default_name => 'form_no',:default_value => '1001')
+  end
+end
 def seed_faculty
   unless FacultyMaster.first.present?
     FacultyMaster.create(:faculty_name => 'SRIKANTH')
@@ -375,6 +380,7 @@ def seed_all
   seed_subjects
   seed_defaults
   seed_default_discount
+  seed_default_form_no
   seed_faculty
   seed_location_masters
   seed_routes

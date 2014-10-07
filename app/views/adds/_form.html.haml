@@ -4,9 +4,9 @@
     .col-sm-3
       = f.label "Dept:", :class => 'col-sm-3 control-label'
     .col-sm-5
-      %select{"ng-model" => "myLead", "ng-options" => "add.add_name for add in adds", :class => "form-control", :required => "required"}
+      %select{"ng-model" => "myLead", "ng-options" => "add.role_name for add in adds", :class => "form-control", :required => "required"}
         %option{style: "display:none", value: ""} Select Dept
-      = f.hidden_field :dept, :value => "{{myLead.add_name}}"
+      = f.hidden_field :dept, :value => "{{myLead.id}}"
       {{myLead.dept}}
       %br
   .row

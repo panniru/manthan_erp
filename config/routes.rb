@@ -425,6 +425,7 @@ ManthanErp::Application.routes.draw do
   resources :staffadmins do
     collection do
       get 'get_faculty_names'
+      get 'get_role_and_head' 
     end
   end
   resources :admission_reports do
@@ -611,6 +612,7 @@ ManthanErp::Application.routes.draw do
       get 'management_index'
       get 'selected_staffs'
       get 'closed_forms'
+      
       end
     end
   

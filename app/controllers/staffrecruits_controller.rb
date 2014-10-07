@@ -1,4 +1,5 @@
 class StaffrecruitsController < ApplicationController
+ 
   def update_admission
     @staffrecruit = Staffrecruit.find(params[:id])
     respond_to do |format|
@@ -69,7 +70,7 @@ class StaffrecruitsController < ApplicationController
     end
     render :json => subject
   end
-
+  
   def get_klass_view
     klass = TeacherLeader.all.map do |klass|
       { grade_name: klass.klass, id: klass.id }
@@ -129,11 +130,12 @@ class StaffrecruitsController < ApplicationController
  end
  
  def staffrecruit_params
-   params.require(:staffrecruit).permit(:post,:description,:start_time,:end_time,:education_qualification,:educational_certificates,:previous_employment_proof,:salary_slips_for_previous_months, :title,:status,:staff_admission_id,:id,:comments,:staffhead, :final_result,:form_no,:assessment_result,:closestatus,:management_result,:faculty_name,:dob,:subject_master_id,:address,:gender,:email,:mobile_no,:nationality,:klass,:language,:subject,:experience,:expected_salary,:staff_leader_id,:user_id,:dept)
+   params.require(:staffrecruit).permit(:post,:description,:start_time,:end_time,:education_qualification,:educational_certificates,:previous_employment_proof,:salary_slips_for_previous_months, :title,:status,:staff_admission_id,:id,:comments,:staffhead, :final_result,:form_no,:assessment_result,:closestatus,:management_result,:faculty_name,:dob,:subject_master_id,:address,:gender,:email,:mobile_no,:nationality,:klass,:language,:subject,:experience,:expected_salary,:staff_leader_id,:user_id,:dept,:role_id)
  end
  def get_faculty_master(staff_obj)
    FacultyMaster.new do |fm|
      #fm.id = staff_obj.id
+     fm.role_id = staff_obj.role_id
      fm.dept = staff_obj.dept
      fm.faculty_name = staff_obj.faculty_name
      fm.post = staff_obj.post

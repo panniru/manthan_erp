@@ -1,72 +1,7 @@
 .row
-  = render "shared/step"
-  %br
-.row
-  .col-sm-8
-    %table.table-striped.table-condensed
-      %tr
-        %td{style: "width:25%"}
-          %b
-            %span.label.label-info Enquiry #
-        %td{style: "width:25%"}
-          = @admission.form_no
-        %td{style: "width:25%"}
-          %b
-            %span.label.label-info Admission #
-        %td{style: "width:25%"}
-          = @admission.admission_no
-      
-      %tr
-        %td
-          %label{for: "name"} Name
-        %td
-          = @admission.name
-        %td
-          %label{for: "klass"} Class
-        %td
-          = @admission.klass
-      %tr
-        %td
-          %label{for: "dob"} DOB
-        %td
-          = @admission.dob
-        %td
-          %label{for: "gender"} Gender
-        %td
-          = @admission.gender
-  
-      %tr
-        %td
-          %label{for: "father_name"} Father's Name
-        %td
-          = @admission.father_name
-        %td
-          %label{for: "mother_name"} Mother's Name
-        %td
-          = @admission.mother_name
-        
-      %tr
-        %td
-          %label{for: "father_mobile"} Father's Mobile
-        %td
-          = @admission.father_mobile
-        %td
-          %label{for: "mother_mobile"} Mother's Mobile
-        %td
-          = @admission.mother_mobile
-
-      %tr
-        %td
-          %label{for: "father_email"} Father's Email
-        %td
-          = @admission.father_email
-        %td
-          %label{for: "mother_email"} Mother's Email
-        %td
-          = @admission.mother_email
-  - if current_user.admin?
-    .col-sm-1
-      .pull-left
+  .col-sm-12
+    - if current_user.admin? && ("#{@admission.status}" != 'Completed') && ("#{@admission.status}" != 'Management_Reviewed') && ("#{@admission.status}" != 'Assessment_Completed') 
+      .pull-right
         %button.btn.btn-warning.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"} 
           %span.glyphicon.glyphicon-edit
         .modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
@@ -88,34 +23,99 @@
                       = f.text_area :title ,:class => 'form-control'
                   .row
                     .col-sm-3
-                .modal-footer
-                  = f.hidden_field :status,:value => "Assessment_Planned"
-                  = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
-  .col-sm-3
-  
-    - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned'||"#{@admission.status}" == 'Assessment_Completed'||"#{@admission.status}" == 'Management_Reviewed' )
-      - if current_user.admin?
-        = link_to "Close the Form", "#", :class => "change btn1 btn btn-danger",:data=> {:id => "#{@admission.id}"}
-    - else 
-      - if current_user.admin?
-        = link_to "Form Closed", "#", :class => "btn1 btn btn-success",:data=> {:id => "#{@admission.id}"}
-    %br
-    %br
-   
-.row
-  .col-sm-8
-    #accordion.panel-group
-      .panel.panel-default
-        .panel-heading
-          %h4.panel-title
-            %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseOne"}
-              Assessment Plan
-        #collapseOne.panel-collapse.collapse.in
-          .panel-body
-            %b
-              %label.btn.btn-default
-                = @admission.teacher_leader.faculty_leader
+                  .row
+                    .pull-right
+                      = f.hidden_field :status,:value => "Assessment_Planned"
+                      = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
+     
+    - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned'||"#{@admission.status}" == 'Assessment_Completed'||"#{@admission.status}" == 'Management_Reviewed'||"#{@admission.status}" == 'Selected' )
+      .pull-right
+        - if current_user.admin?
+          %button.change.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@admission.id}"}} 
+            %span.glyphicon.glyphicon-ban-circle
+          #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %center
+                    %h4#myModalLabel.modal-title Reason for Closing
+                    = form_for @admission do |f|
+                      .modal-body
+                        .row
+                          .col-sm-1
+                            = f.radio_button :closestatus, "Not upto the mark"
+                          .col-sm-10
+                            = f.label "Not Upto the Mark"
+                        .row
+                          .col-sm-1
+                            = f.radio_button :closestatus, "Financial Crisis"
+                          .col-sm-10
+                            = f.label "Financial Crisis"
+                        .row
+                          .col-sm-1
+                            = f.radio_button :closestatus, "Didn't Pick the Interview Call"
+                          .col-sm-10
+                            = f.label "Didn't Pick the Interview Call"
+                              
+                      .modal-footer
+                        = f.hidden_field :status,:value => "Form_Closed"
+                        = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
+               
+        - else 
+          - if current_user.admin?
+            %button.change.btn.btn-danger.btn-sm 
+              %span.glyphicon.glyphicon-ban-circle
                 
-            .pull-right
-              %label.btn.btn-default
+
+    .container
+      - if("#{@admission.status}" == "Enquiry_Created" ||"#{@admission.status}" == "Application_Created" ||"#{@admission.status}" == "Assessment_Planned" || "#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Selected"|| "#{@admission.status}" == "Completed" )
+        = render "shared/step"
+  
+      %br
+      .row
+        .col-sm-12
+          %table.table-striped.table-condensed{:style => "width:80%"}
+            %tr
+              %td{style: "width:25%"}
+                %b
+                  %span.label.label-info Enquiry #
+              %td{style: "width:25%"}
+                = @admission.form_no
+              %td{style: "width:25%"}
+                %b
+                  %span.label.label-info Admission #
+              %td{style: "width:25%"}
+                = @admission.admission_no
+              
+            %tr
+              %td
+                %label{for: "name"} Name
+              %td
+                = @admission.name
+              %td
+                %label{for: "klass"} Class
+              %td
+                = @admission.grade
+            %tr
+              %td
+                %label{for: "dob"} DOB
+              %td
+                = @admission.dob
+              %td
+                %label{for: "gender"} Gender
+              %td
+                = @admission.gender
+            
+            %tr
+              %td
+                %b
+                  %span.label.label-info Assessment
+            %tr
+              %td
+                %label Interviewer
+              %td
+                = @admission.teacher_leader.faculty_leader
+              %td
+                %label Timings
+              %td
                 = @admission.start_time

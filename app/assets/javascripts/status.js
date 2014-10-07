@@ -10,8 +10,8 @@ $(function() {
             $.cookie('msg', 'str');
         }
 	id =  $(this).data("id");
-	this_klass = $(this)
-	this_klass.removeClass("btn-danger").addClass("btn-success");   	this_klass.text('Form Closed');
+	// this_klass = $(this)
+	// this_klass.removeClass("btn-danger").addClass("btn-success");   	this_klass.text('Form Closed');
         
 	$.ajax({
             
@@ -46,8 +46,8 @@ $(function() {
             $.cookie('msg', 'str');
         }
 	id =  $(this).data("id");
-	this_klass = $(this)
-	this_klass.removeClass("btn-danger").addClass("btn-success");   	this_klass.text('Form Closed');
+	// this_klass = $(this)
+	// this_klass.removeClass("btn-danger").addClass("btn-success");   	this_klass.text('Form Closed');
         
 	$.ajax({
             
@@ -83,8 +83,8 @@ $(function() {
             $.cookie('msg', 'str');
         }
 	id =  $(this).data("id");
-	this_klass = $(this)
-	this_klass.removeClass("btn-danger").addClass("btn-success");   	this_klass.text('Form Closed');
+	// this_klass = $(this)
+	// this_klass.removeClass("btn-danger").addClass("btn-success");   	this_klass.text('Form Closed');
         
 	$.ajax({
             

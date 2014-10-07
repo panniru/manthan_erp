@@ -130,14 +130,23 @@
       .form-group
         .col-sm-3
           .pull-left
-            = f.label "Choice of Transport: ", :class => 'control-label'
+            = f.label "Bus Facility: ", :class => 'control-label'
         .col-sm-3
-          = f.select(:transport, options_for_select([['Private'],['School']]),{:class => 'form-control'})
+          = f.select(:bus, options_for_select([['Yes','t'],['No','f']]),{:class => 'form-control'})
+      .form-group
+        .col-sm-3
+          .pull-left#textbox
+            = f.label "Choice of Transport:", :class => 'control-label'
+        .col-sm-3
+          = f.select :transport, options_for_select([['Private'],['School']])
         .col-sm-3
           .pull-left
-            = f.label "Bus stop: ", :class => 'control-label'
+            = f.label "Bus Stop", :class => 'textbox2'
         .col-sm-3
-          = f.text_field :busstop, :class => 'form-control'
+          = f.text_field :busstop, :class => 'textbox2 form-control'
+        
+          
+        
       .form-group
         .col-sm-3
           .pull-left
@@ -164,14 +173,14 @@
       .form-group
         .col-sm-3
           .pull-left
-            = f.label "Name:", :class => 'control-label'
+            = f.label "Name:", :class => 'textbox1 control-label'
         .col-sm-3
-          = f.text_field :person, :class => 'form-control'
+          = f.text_field :person, :class => 'textbox1 form-control'
         .col-sm-3
           .pull-left
-            = f.label "Class:", :class => 'control-label'
+            = f.label "Class:", :class => 'textbox1 control-label'
         .col-sm-3
-          = f.text_field :pp, :class => 'form-control'
+          = f.text_field :pp, :class => 'textbox1 form-control'
       %center
         
         = f.hidden_field :status, :value => 'Enquiry_Created'

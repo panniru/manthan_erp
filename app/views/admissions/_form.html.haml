@@ -20,7 +20,7 @@
     .col-sm-3
       .pull-right
         .col-sm-4
-          = f.label "branch", :class => 'control-label'          
+          = f.label "Branch:", :class => 'control-label'          
         .col-sm-8
           = f.text_field :branch, :class => 'form-control'
   .row
@@ -31,7 +31,7 @@
           %tbody
             %tr
               %th Admission no:
-              %th= f.text_field :admission_no, :class => 'form-control'
+              %th= @admission.admission_no
               %th Class:
               %td= @admission.grade
     .col-sm-8
@@ -72,141 +72,160 @@
     .col-sm-12
       %h4
         %b
-          TO BE FILLED IN BY THE PARENT / GUARDIAN (IN BLOCK LETTERS)
+          TO BE FILLED IN BY THE PARENT / GUARDIAN 
   .row
     .col-sm-12
       %h5
         %b
-          PERSONAL DETAILS
-          %br 
+          %u
+            PERSONAL DETAILS
+            %br 
   .row    
     .col-sm-12
-      .col-sm-4
+      .col-sm-3
         %b
           Student Name:(As it should appear in Official School Certificates)
-      .col-sm-4
+      .col-sm-3
         = @admission.name
   %br
   .row
     .col-sm-12
-      .col-sm-4
+      .col-sm-3
         %b
           Middle Name:
-      .col-sm-4
+      .col-sm-3
         = f.text_field :middle_name, :class => 'form-control'
-  %br
-  .row
-    .col-sm-12
-      .col-sm-4
+      .col-sm-3
         %b
           Last Name:
-      .col-sm-4
+      .col-sm-3
         = f.text_field :surname, :class => 'form-control'
   %br
   .row
     .col-sm-12
-      .col-sm-4
+      .col-sm-3
         %b
           Date of Birth:
-      .col-sm-4
+      .col-sm-3
         = @admission.dob
-  %br
-  .row
-    .col-sm-12
-      .col-sm-4
+  
+      .col-sm-3
         %b
-          Gender
-      .col-sm-4
+          Gender:
+      .col-sm-3
         = @admission.gender
   %br
   .row
     .col-sm-12
-      .col-sm-4
+      .col-sm-3
         %b
           Nationality:
-      .col-sm-4
+      .col-sm-3
         = @admission.nationality
-  %br
-  .row
-    .col-sm-12
-      .col-sm-4
+  
+      .col-sm-3
         %b
-          Languages spoken at home
-      .col-sm-4
+          Languages spoken at home:
+      .col-sm-3
         = @admission.language
  
   %br
   .row
     .col-sm-12
-      .col-sm-4
+      .col-sm-3
         %b
           Second Language:
-      .col-sm-4
+      .col-sm-3
         = f.select :second_lang, options_for_select([['Hindi'],['English'],['Tamil'],['Telugu'],['Malayalam'],['Urdu'],['Punjabi'],['Marati'],['Kannada'],['Bengali']]),:class => 'form-control' 
- 
-  %br
-  .row
-    .col-sm-12
-      .col-sm-4
-        %b
-          Whether the student will avail Bus Facility?
-      .col-sm-4
-        = f.select :bus, options_for_select([['Yes'],['No']])  
+           
+
   %br
   .row
     .col-sm-12
       %b
-        DETAILS OF PREVIOUS STUDY(IF APPLICABLE)
+        %u
+          DETAILS OF PREVIOUS STUDY(IF APPLICABLE)
   %br
   .row
     .col-sm-12
-      .col-sm-4
-        = label_tag "Name of the School"
-      .col-sm-4
-        %label.btn.btn-default
-          = @admission.last_school
-  %br
-  .row
-    .col-sm-12
-      .col-sm-4
-        = label_tag "Board"
-      .col-sm-4
-        = f.text_field :board, :class => 'form-control'
-        %br
-  .row
-    .col-sm-12
-      .col-sm-4
-        = label_tag "Grade/Standard"
-      .col-sm-4
-        = f.text_field :klass, :class => 'form-control'
-        %br
-  .row
-    .col-sm-12
-      .col-sm-4
-        = label_tag "Medium"
-      .col-sm-4
-        = f.text_field :medium, :class => 'form-control'
-        %br
-  .row
-    .col-sm-12
-      .col-sm-4
-        = label_tag "Year"
-      .col-sm-4
-        = f.text_field :year, :class => 'date-picker-year form-control'
-        %br
-  .row
-    .col-sm-12
-      .col-sm-4
-        = label_tag "Reason for leaving"
-      .col-sm-4
+      .col-sm-3
+        = label_tag "Name of the School:"
+      .col-sm-3
+        = @admission.last_school
+      .col-sm-3
+        = label_tag "Reason for leaving:"
+      .col-sm-3
         = @admission.changing_reason
-  
-    
-   
+  %br
+  .row
+    .col-sm-12
+      .col-sm-3
+        = label_tag "Grade/Standard:"
+      .col-sm-3
+        = f.text_field :klass, :class => 'form-control'
+      .col-sm-3
+        = label_tag "Medium:"
+      .col-sm-3
+        = f.text_field :medium, :class => 'form-control'
+  %br
+  .row
+    .col-sm-12
+      .col-sm-3
+        = label_tag "Year:"
+      .col-sm-3
+        = f.text_field :year, :class => 'date-picker-year form-control'
+
+      .col-sm-3
+        = label_tag "Board:"
+      .col-sm-3
+        = f.text_field :board, :class => 'form-control'
+  %br
+  .row
+    .col-sm-12
+      %h5
+        %b
+          MEDICAL DETAILS 
+  %br
+
+  .row
+    .col-sm-12
+      .col-sm-3
+        %h5
+          %b
+            Blood Group:
+      .col-sm-3
+        = f.select :blood_group, options_for_select([['A+'],['A-'],['B+'],['B-'],['AB+'],['AB-'],['O+'],['O-'],['A1+'],['B1+'],['A1-'],['B1-'],['A1b+'],['A1b-']]),:class => 'form-control' 
+      .col-sm-3
+        %h5
+          %b
+            Any major ailment/allergy that the school should know about:
+      .col-sm-3
+        = f.text_field :allergy, :class => 'form-control'
+  %br
+  .row
+    .col-sm-12
+      %h5
+        %b
+          %u
+            FAMILY DOCTOR DETAILS    (TO BE CONTACTED IN CASE OF AN EMERGENCY)
+  %br
+  .row
+    .col-sm-12
+      .col-sm-3
+        = label_tag "Doctor's Name:"
+      .col-sm-3
+        = f.text_field :doctor_name, :class => 'form-control'
+      .col-sm-3
+        = label_tag "Mobile:"
+      .col-sm-3
+        = f.text_field :doctor_mobile, :class => 'form-control'
+
+  %br
   .row
     .col-sm-12
       %b
-        Proficiency in English Please tick the appropriate 
+        %u
+          PROFICIENCY IN ENGLISH   (PLEASE SELECT THE APPROPRIATE )
   .row
     .col-sm-12
       %table.table.table.bordered
@@ -245,38 +264,11 @@
             %td= f.radio_button :reading, "Fair"
             %td= f.radio_button :reading, "None"
   .row
-    .col-sm-3
-      %h5
-        %b
-          Blood Group
-    .col-sm-3
-      = f.select :blood_group, options_for_select([['A+'],['A-'],['B+'],['B-'],['AB+'],['AB-'],['O+'],['O-'],['A1+'],['B1+'],['A1-'],['B1-'],['A1b+'],['A1b-']]),:class => 'form-control' 
-              
-  .row
-    .col-sm-4
-      %h5
-        %b
-          Any major ailment/allergy that the school should know about:
-    .col-sm-4
-      = f.text_field :allergy, :class => 'form-control'
-  .row
     .col-sm-12
       %h5
         %b
-          Family Doctor details(TO BE CONTACTED IN CASE OF AN EMERGENCY)
-    .col-sm-2
-      = label_tag "Name"
-    .col-sm-2
-      = f.text_field :doctor_name, :class => 'form-control'
-    .col-sm-2
-      = label_tag "Mobile"
-    .col-sm-2
-      = f.text_field :doctor_mobile, :class => 'form-control'
-  .row
-    .col-sm-12
-      %h5
-        %b
-          PARENT'S DETAILS
+          %u
+            PARENTS' DETAILS
     %br
   .row
     .col-sm-12
@@ -290,64 +282,66 @@
               = label_tag "MOTHER"
         %tbody
           %tr
-            %th= label_tag "Name"
+            %th= label_tag "Name:"
             %th= @admission.father_name
             %th= @admission.mother_name
           %tr
-            %th= label_tag "Occupation"
+            %th= label_tag "Occupation:"
             %th= @admission.father_occupation
             %th= @admission.mother_occupation
           %tr
-            %th= label_tag "Education:SSC/Graduate/Post Graduate/Professional(Lawyer,Doctor,MBA,etc.,))"
+            %th= label_tag "Education:"
             %th= @admission.father_education
             %th= @admission.mother_education
           %tr
-            %th= label_tag "Nationality"
+            %th= label_tag "Nationality:"
             %th= @admission.nationality
             %th= @admission.nationality
           %tr
-            %th= label_tag "Religion"
+            %th= label_tag "Religion:"
             %th= f.text_field :father_religion, :class => 'form-control'
             %th= f.text_field :mother_religion, :class => 'form-control'
           %tr
-            %th= label_tag "Home Address"
-            %th= @admission.address
+            %th= label_tag "Home Address:"
+            %th 
             %th= @admission.address
           %tr
-            %th= label_tag "HomeLandline"
+            %th= label_tag "HomeLandline:"
+            %th
             %th= @admission.landline
-            %th= @admission.mobile
+            
           %tr
-            %th= label_tag "Office Address"
+            %th= label_tag "Office Address:"
             %th= f.text_field :father_office_address, :class => 'form-control'
             %th= f.text_field :mother_office_address, :class => 'form-control'
           %tr
-            %th= label_tag "Office Telephone"
+            %th= label_tag "Office Telephone:"
             %th= f.text_field :father_office_telephone, :class => 'form-control'
             %th= f.text_field :mother_office_telephone, :class => 'form-control'
           %tr
-            %th= label_tag "Mobile"
+            %th= label_tag "Mobile:"
             %th= f.text_field :father_mobile, :class => 'form-control'
             %th= f.text_field :mother_mobile, :class => 'form-control'
           %tr
-            %th= label_tag "Email"
+            %th= label_tag "Email:"
             %th= f.text_field :father_email, :class => 'form-control'
             %th= f.text_field :mother_email, :class => 'form-control'
           %tr
-            %th= label_tag "Employer's Name"
+            %th= label_tag "Employer's Name:"
             %th= f.text_field :father_employer, :class => 'form-control'
             %th= f.text_field :mother_employer, :class => 'form-control'
           %tr
-            %th= label_tag "Family Income"
+            %th= label_tag "Family Income:"
             %th
             %th= @admission.income
-              
   .row
     .col-sm-12
       %h5
         %b
-          SIBLING DETAILS 
+          %u
+            SIBLING DETAILS 
   %br
+  
   .row
     .col-sm-12
       %table.table.table.bordered
@@ -355,7 +349,7 @@
           %tr
             %th{style: "width:20%"} 
               = label_tag "Name of the Student"
-            %th{style: "width:10%"} 
+            %th{style: "width:20%"} 
               = label_tag "Age"
             %th{style: "width:20%"} 
               = label_tag "Sex"
@@ -380,15 +374,15 @@
       %br
   .row
     .col-sm-2
-      = label_tag "Name"
+      = label_tag "Name:"
     .col-sm-2
       = f.text_field :guardian_name, :class => 'form-control'
     .col-sm-2
-      = label_tag "Mobile"
+      = label_tag "Mobile:"
     .col-sm-2
       = f.text_field :guardian_mobile, :class => 'form-control'
     .col-sm-2
-      = label_tag "Relationship with the Student"
+      = label_tag "Relationship with the Student:"
     .col-sm-2
       = f.text_field :guardian_relationship, :class => 'form-control'
       
@@ -399,7 +393,7 @@
       //= @admission.faculty
       = f.hidden_field :faculty, :value => @admission.teacher_leader.faculty_leader
       = f.hidden_field :status,:value => "Application_Created"
-      = f.submit "Create", :class => 'btn btn-primary'
+      = f.submit "Update", :class => 'btn btn-primary'
       = f.submit "Reset", :type => "reset" , :class => 'btn btn-primary'
       
     

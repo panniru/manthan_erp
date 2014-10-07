@@ -13,19 +13,21 @@
 %br
 %br
 
-%table#tblData.target.table.table-striped.table-condensed.table-bordered
+%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
   %thead
     %tr
       %th Form no
-      %th Comments
-      %th Description
-      %th Result
+      %th Name
+      %th Post
       %th Status
   %tbody
     - @staffrecruits.each do |staffrecruit|
-      %td= link_to "#{staffrecruit.form_no}",homeindex_staffrecruit_path(staffrecruit)
-      %td= staffrecruit.comments
-      %td= staffrecruit.description
-      %td= staffrecruit.final_result
-      %td= staffrecruit.status
+      %td{:style => "width:95%"}
+        = link_to "#{staffrecruit.form_no}",homeindex_staffrecruit_path(staffrecruit)
+      %td{:style => "width:95%"}
+        = staffrecruit.faculty_name
+      %td{:style => "width:95%"}
+        = staffrecruit.post
+      %td{:style => "width:95%"}
+        = staffrecruit.status
 

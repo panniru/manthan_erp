@@ -6,5 +6,9 @@
             .then(function(result) {
                 $scope.faculties=result.data
             });
+        staffadminsService.getRoleAndHead()
+            .then(function(result) {
+                $scope.roles = result.data
+            });
     }]);
 })(angular, myApp);

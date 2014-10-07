@@ -17,25 +17,27 @@
         = link_to 'New Enquiry', new_staffrecruit_path, :class => 'btn btn-primary'
 %br
 %br
-%table#tblData.target.table.table-striped.table-condensed.table-bordered
+%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
   %thead
     %tr
       %th Form no
       %th Name
-      %th Gender
-      %th Father's name
-      %th Date of Birth
-      %th Mobile
-      %th E-mail
+      %th Qualification
+      %th Post
+      %th Status
         
   %tbody
     - @staffrecruits.each do |staffrecruit|
       %tr
-        %td= link_to "#{staffrecruit.form_no}", homeindex_staffrecruit_path(staffrecruit)
-        %td= staffrecruit.faculty_name
-        %td= staffrecruit.education_qualification
-        %td= staffrecruit.gender
-        %td= staffrecruit.dob
-        %td= staffrecruit.mobile_no
-        %td= staffrecruit.email
+        %td{:style => "width:25%"}
+          = link_to "#{staffrecruit.form_no}", homeindex_staffrecruit_path(staffrecruit)
+        %td{:style => "width:25%"}
+          = staffrecruit.faculty_name
+        %td{:style => "width:25%"}
+          = staffrecruit.education_qualification
+        %td{:style => "width:25%"}
+          = staffrecruit.post
+        %td{:style => "width:25%"}
+          = staffrecruit.status
+        
 
