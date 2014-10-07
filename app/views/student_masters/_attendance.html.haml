@@ -1,0 +1,5 @@
+.col-md-12{:ng_controller => "StudentAttendanceViewerController"}
+  .col-md-5
+    = render "attendance_calendar"
+  .col-md-5{:ng_init => "get_monthly_attendance(#{@student_master.id})"}
+    = render "monthly_attendance"

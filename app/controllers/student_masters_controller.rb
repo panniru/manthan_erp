@@ -1,5 +1,5 @@
 class StudentMastersController < ApplicationController
-  load_resource :only => [:show, :monthly_pdcs, :next_term_fee, :annual_discount_details, :dashboard, :update_address]
+  load_resource :only => [:show, :monthly_pdcs, :next_term_fee, :annual_discount_details, :dashboard, :update_address, :attendance_calendar_for_month, :student_summarized_monthly_report, :transport_details, :change_transport]
   
   def index
     page = params[:page].present? ? params[:page] : 1
@@ -107,5 +107,50 @@ class StudentMastersController < ApplicationController
       end
     end
   end
+
+  def attendance_calendar_for_month
+    respond_to do |format|
+      format.json do
+        render :json => StudentReport::Attendence.new(@student_master).month_report_for_full_calendar(params[:month])
+      end
+    end
+  end
+
+  def student_summarized_monthly_report
+    respond_to do |format|
+      format.json do
+        render :json => StudentReport::Attendence.new(@student_master).student_summarized_monthly_report
+      end
+    end
+  end
+
+  def transport_details
+    respond_to do |format|
+      format.json do
+        if @student_master.bus_facility?
+          @student_route = @student_master.student_route_mapping
+          data = { }
+          if @student_route.present?
+            data = {student_route_id: @student_route.id, location: @student_route.location_master.location_name, route_id: @student_route.route.id, route_no: @student_route.route.route_no, start_location: @student_route.route.start_location_name, end_location: @student_route.route.end_location_name}
+           end
+          render :json => data 
+        else
+          render :json => false
+        end
+      end
+    end
+  end
   
+  def change_transport
+    respond_to do |format|
+      format.json do
+        if @student_master.student_route_mapping.destroy
+          ApprovalMailer.approve_student_route_change(LocationMaster.find(params[:new_location_id]), @student_master).deliver
+          render :json => true
+        else
+          render :json => false
+        end
+      end
+    end
+  end
 end

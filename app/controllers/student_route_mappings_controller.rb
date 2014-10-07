@@ -23,8 +23,6 @@ class StudentRouteMappingsController < ApplicationController
   end
 
   def save_route
-    p "=====================><"
-    p params
     @new=StudentRouteMapping.new()
     @new.route_id = params[:route_id]
     @new.student_master_id = params[:student_master_id]

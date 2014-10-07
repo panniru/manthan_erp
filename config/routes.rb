@@ -224,6 +224,10 @@ ManthanErp::Application.routes.draw do
       get "annual_discount_details"
       get "dashboard"
       put "update_address"
+      get "attendance_calendar_for_month"
+      get "student_summarized_monthly_report"
+      get "transport_details"
+      put "change_transport"
     end
   end
   

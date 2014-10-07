@@ -82,32 +82,50 @@ $(document ).ready(function() {
         angular.element($('#flot-placeholder')).scope().gridDataPoint(item)
         //angular.element($('#flot-placeholder')).scope().gridDataPoint1(item)
     });
-
-    $("#student_attendence_calendar").fullCalendar({
-        events: [
-            {
-                title  : 'event1',
-                start  : '2010-01-01',
-                color: 'red'
-            },
-            {
-                title  : 'event2',
-                start  : '2014-07-05',
-                end    : '2014-07-07',
-                color : 'red'
-            },
-            {
-                title  : 'event3',
-                start  : '2014-07-09T12:30:00',
-                allDay : true // will make the time show
-            }
-        ]
-    })
-
-    
 });
 
-function createAssessment(teacher_leader_id) {
+
+function drawStudentAttendance(studentId){
+    $("#student_attendence_calendar").fullCalendar({
+        events: function( start, end, callback ) {
+            var newMonth = end.getMonth();
+            if(newMonth == 0){
+                newMonth = 12;
+            }
+            var url = "/student_masters/"+studentId+"/attendance_calendar_for_month.json"
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                type: 'GET',
+                data: {
+                    month: newMonth,
+                    year: end.getFullYear()
+                },
+                success: function( response ) {
+                    callback(response);
+                    angular.element($('#student_attendence_calendar')).scope().reflectMonthChange(newMonth);
+                }
+            })
+        },
+        selectable: false,
+        height: '400px',
+        eventRender: function (event, element, monthView){
+            var date = (event.start.getFullYear()+ "-" + (("0" + (event.start.getMonth()+1)).slice(-2)) + "-" + (("0" + event.start.getDate()).slice(-2)))
+            var dayClass = $("td[data-date= '"+date+"']")
+            if(event.title === 'P'){
+                dayClass.addClass('present-class')
+            }else if(event.title === 'A'){
+                dayClass.addClass('absent-class')
+            }else if(event.title === 'L'){
+                dayClass.addClass('leave-class')
+            }else{
+                dayClass.addClass('default-class')
+            } 
+        }
+    })
+}
+
+ function createAssessment(teacher_leader_id) {
 
     $('.calendar2').html("");
     $('.calendar2').fullCalendar({
@@ -121,27 +139,54 @@ function createAssessment(teacher_leader_id) {
         }
     });
 }
-
-
-function createStaffAssessment(staff_admission_id) {
-
-    $('.calendar2').html("");
-    $('.calendar2').fullCalendar({
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,basicWeek,basicDay',
-            ignoreTimezone: false
-        },
+//     $('.calendar2').html("");
+//     $('.calendar2').fullCalendar({
+//         header: {
+//             left: 'prev,next today',
+//             center: 'title',
+//             right: 'month,basicWeek,basicDay',
+//             ignoreTimezone: false
+//         },
         
-        events: '/staffrecruits.json?staff_admission_id='+staff_admission_id,
+//         events: '/admissions.json?teacher_leader_id='+teacher_leader_id,
         
-        selectable: true,
-        select: function(date) {
-            alert("welcome "+ date);
-            $('#selectdate').val(date)
-            $('#myModal').modal('show');                
-        }
-    });
-}
+//         selectable: true,
+//         select: function(date) {
+//             alert("welcome "+ date);
+//             $('#selectdate').val(date)
+//             $('#myModal').modal('show');                
+//         }
+//     });
+// }
 
+
+// function createStaffAssessment(staff_admission_id) {
+
+//     $('.calendar2').html("");
+//     $('.calendar2').fullCalendar({
+//         header: {
+//             left: 'prev,next today',
+//             center: 'title',
+//             right: 'month,basicWeek,basicDay',
+//             ignoreTimezone: false
+//         },
+        
+//         events: '/staffrecruits.json?staff_admission_id='+staff_admission_id,
+        
+//         selectable: true,
+//         select: function(date) {
+//             alert("welcome "+ date);
+//             $('#selectdate').val(date)
+//             $('#myModal').modal('show');                
+//         }
+//     });
+// }
+
+// $(document ).ready(function() {
+//     var modal = function(){
+//         $('body').on('click','.Modal', function(){
+//             $('#Modal').modal('show');
+//         });
+//     }
+//     modal();
+// });

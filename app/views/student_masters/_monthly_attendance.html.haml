@@ -1,0 +1,13 @@
+%table.table.table-bordered.table-hover
+  %thead
+    %th Month
+    %th Present
+    %th Absent
+    %th Leave
+  %tbody
+    %tr{:ng_repeat => "month in month_wise_attendance", :ng_class => "{'success': checkForMatching(month.gmonth)}"}
+      %td {{month.gmonth}}
+      %td {{month.present}}
+      %td {{month.absent}}
+      %td {{month.leave}}
+  

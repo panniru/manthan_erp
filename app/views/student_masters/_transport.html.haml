@@ -1,0 +1,31 @@
+.col-md-8{:ng_controller => "StudentsController",:ng_init => "transport_details(#{@student_master.id})"}
+  .form-group
+    .col-md-4
+      %label Pick up Point
+    .col-md-6
+      %label.form-label= ": {{studentTransport.location}}" 
+  .form-group
+    .col-md-4
+      %label Route No
+    .col-md-6
+      %label.form-label= ": {{studentTransport.route_no}}" 
+  .form-group
+    .col-md-4
+      %label Route Start Point
+    .col-md-6
+      %label.form-label= ": {{studentTransport.start_location}}" 
+  .form-group
+    .col-md-4
+      %label Route End Point
+    .col-md-6
+      %label.form-label= ": {{studentTransport.end_location}}" 
+
+  .col-md-offset-8
+    = link_to "Change Pick up Point", "#", :ng_click => "changeStudentTransport()", :class => "btn btn-sm btn-primary", :ng_hide => "changeEvent"
+  .form-group{:ng_show => "changeEvent"}
+    .col-md-4
+      %label New Pick up Point
+    .col-md-6
+      %select{:ng_model => "newLocation", :ng_options => "loc.location_name for loc in all_locations", :class=>"form-control"}
+    .col-md-2
+      = link_to "Make Request", "#", :ng_click => "updateStudentTransport()", :class => "btn btn-sm btn-primary"

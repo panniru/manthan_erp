@@ -1,0 +1,95 @@
+.row
+  .col-md-6
+    .form-group
+      .col-md-4
+        %label.form-label Father Name
+      .col-md-6
+        %label.form-label= ": #{@student_master.parent.father_name}" 
+    .form-group
+      .col-md-4
+        %label.form-label Father Phone
+      .col-md-6
+        %label.form-label= ": #{@student_master.parent.father_phone}" 
+    .form-group
+      .col-md-4
+        %label.form-label Father Email
+      .col-md-6
+        %label.form-label= ": #{@student_master.parent.father_email}" 
+  .col-md-6
+    .form-group
+      .col-md-4
+        %label.form-label Mother Name
+      .col-md-6
+        %label.form-label= ": #{@student_master.parent.mother_name}" 
+    .form-group
+      .col-md-4
+        %label.form-label Mother Phone
+      .col-md-6
+        %label.form-label= ": #{@student_master.parent.mother_phone}" 
+    .form-group
+      .col-md-4
+        %label.form-label Mother Email
+      .col-md-6
+        %label.form-label= ": #{@student_master.parent.mother_email}" 
+  .col-md-12
+    .pull-right
+      = link_to "Parent Details >>", "#"
+%hr
+.row
+  .col-md-6
+    .form-group
+      .col-md-4
+        %label.form-label Grade
+      .col-md-6
+        %label.form-label= ": #{@student_master.grade_master.grade_name}" 
+    .form-group
+      .col-md-4
+        %label.form-label Section
+      .col-md-6
+        %label.form-label= ": #{@student_master.section_master.section_name}" 
+    .form-group
+      .col-md-4
+        %label.form-label Second Language
+      .col-md-6
+        %label.form-label= ": #{@student_master.second_lang}" 
+    .form-group
+      .col-md-4
+        %label.form-label board
+      .col-md-6
+        %label.form-label= ": #{@student_master.board}" 
+    .form-group
+      .col-md-4
+        %label.form-label Medium
+      .col-md-6
+        %label.form-label= ": #{@student_master.medium}"         
+  .col-md-6
+    .form-group
+      .col-md-4
+        %label.form-label Nationality
+      .col-md-6
+        %label.form-label= ": #{@student_master.nationality}" 
+    .form-group
+      .col-md-4
+        %label.form-label Written
+      .col-md-6
+        %label.form-label= ": #{@student_master.written}" 
+    .form-group
+      .col-md-4
+        %label.form-label Reading
+      .col-md-6
+        %label.form-label= ": #{@student_master.reading}" 
+    .form-group
+      .col-md-4
+        %label.form-label Spoken
+      .col-md-6
+        %label.form-label= ": #{@student_master.spoken}" 
+    .form-group
+      .col-md-4
+        %label.form-label Blood Group
+      .col-md-6
+        %label.form-label= ": #{@student_master.blood_group}"         
+    .form-group
+      .col-md-4
+        %label.form-label Last School
+      .col-md-6
+        %label.form-label= ": #{@student_master.last_school}"         

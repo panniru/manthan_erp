@@ -1,4 +1,4 @@
-.row{:ng_controller => "StudentsController", :ng_init => "student_id = #{@student_master.id}"}
+.row
   .row
     .col-md-8
       .form-group
@@ -28,152 +28,32 @@
           %label.form-label= ": #{@student_master.academic_year}"         
     .col-md-4
       = image_tag "student.ico", :class => "img-rounded"
-
-  %hr
-  .row
-    .col-md-6
-      .form-group
-        .col-md-4
-          %label.form-label Father Name
-        .col-md-6
-          %label.form-label= ": #{@student_master.parent.father_name}" 
-      .form-group
-        .col-md-4
-          %label.form-label Father Phone
-        .col-md-6
-          %label.form-label= ": #{@student_master.parent.father_phone}" 
-      .form-group
-        .col-md-4
-          %label.form-label Father Email
-        .col-md-6
-          %label.form-label= ": #{@student_master.parent.father_email}" 
-    .col-md-6
-      .form-group
-        .col-md-4
-          %label.form-label Mother Name
-        .col-md-6
-          %label.form-label= ": #{@student_master.parent.mother_name}" 
-      .form-group
-        .col-md-4
-          %label.form-label Mother Phone
-        .col-md-6
-          %label.form-label= ": #{@student_master.parent.mother_phone}" 
-      .form-group
-        .col-md-4
-          %label.form-label Mother Email
-        .col-md-6
-          %label.form-label= ": #{@student_master.parent.mother_email}" 
-    .col-md-12
-      .pull-right
-        = link_to "Parent Details >>", "#"
-  %hr
-  .row
-    .col-md-6
-      .form-group
-        .col-md-4
-          %label.form-label Grade
-        .col-md-6
-          %label.form-label= ": #{@student_master.grade_master.grade_name}" 
-      .form-group
-        .col-md-4
-          %label.form-label Section
-        .col-md-6
-          %label.form-label= ": #{@student_master.section_master.section_name}" 
-      .form-group
-        .col-md-4
-          %label.form-label Second Language
-        .col-md-6
-          %label.form-label= ": #{@student_master.second_lang}" 
-      .form-group
-        .col-md-4
-          %label.form-label board
-        .col-md-6
-          %label.form-label= ": #{@student_master.board}" 
-      .form-group
-        .col-md-4
-          %label.form-label Medium
-        .col-md-6
-          %label.form-label= ": #{@student_master.medium}"         
-    .col-md-6
-      .form-group
-        .col-md-4
-          %label.form-label Nationality
-        .col-md-6
-          %label.form-label= ": #{@student_master.nationality}" 
-      .form-group
-        .col-md-4
-          %label.form-label Written
-        .col-md-6
-          %label.form-label= ": #{@student_master.written}" 
-      .form-group
-        .col-md-4
-          %label.form-label Reading
-        .col-md-6
-          %label.form-label= ": #{@student_master.reading}" 
-      .form-group
-        .col-md-4
-          %label.form-label Spoken
-        .col-md-6
-          %label.form-label= ": #{@student_master.spoken}" 
-      .form-group
-        .col-md-4
-          %label.form-label Blood Group
-        .col-md-6
-          %label.form-label= ": #{@student_master.blood_group}"         
-      .form-group
-        .col-md-4
-          %label.form-label Last School
-        .col-md-6
-          %label.form-label= ": #{@student_master.last_school}"         
-
-  .row
-    .col-md-6
-      %h3 
-        Address
-        .pull-right
-          = link_to fa_icon("edit"), "#", :ng_click => "isAddressEdit= true"
-      %hr
-
-      .form-group
-        .col-md-4
-          %label.form-label Line1
-        .col-md-6{:ng_init => "address.address_line1 = '#{@student_master.address_line1}'"} 
-          %input.form-control{:type => "text", :ng_model => "address.address_line1", :ng_show => "isAddressEdit"}
-          %label.form-label{:ng_hide => "isAddressEdit"}= ": {{address.address_line1}}" 
-      .form-group
-        .col-md-4
-          %label.form-label Line2
-        .col-md-6{:ng_init => "address.address_line2 = '#{@student_master.address_line2}'"}
-          %input.form-control{:type => "text", :ng_model => "address.address_line2", :ng_show => "isAddressEdit"}
-          %label.form-label{:ng_hide => "isAddressEdit"}= ": {{address.address_line2}}"  
-
-      .form-group
-        .col-md-4
-          %label.form-label City
-        .col-md-6{:ng_init => "address.city = '#{@student_master.city}'"}
-          %input.form-control{:type => "text", :ng_model => "address.city", :ng_show => "isAddressEdit"}
-          %label.form-label{:ng_hide => "isAddressEdit"}= ": {{address.city}}" 
-
-      .form-group
-        .col-md-4
-          %label.form-label State
-        .col-md-6{:ng_init => "address.state = '#{@student_master.state}'"}
-          %input.form-control{:type => "text", :ng_model => "address.state", :ng_show => "isAddressEdit"}
-          %label.form-label{:ng_hide => "isAddressEdit"}= ": {{address.state}}" 
-
-      .form-group
-        .col-md-4
-          %label.form-label Pin
-        .col-md-6{:ng_init => "address.pin = '#{@student_master.pin}'"}
-          %input.form-control{:type => "text", :ng_model => "address.pin", :ng_show => "isAddressEdit"}
-          %label.form-label{:ng_hide => "isAddressEdit"}= ": {{address.pin}}"         
-
-      .col-md-12
-        .col-md-offset-8
-          = link_to "Save", "#", :ng_click => "updateAddress()", :class => "btn btn-sm btn-primary", :ng_show => "isAddressEdit"
-    .col-md-6
-      %h3 
-        Transport
-        .pull-right
-          = link_to fa_icon("edit"), "#", :ng_click => "editStudentTransport()"
-      %hr
+  .col-md-12
+    %ul.nav.nav-tabs
+      %li.active
+        %a{ :href => "#student_details", :data => { :toggle => "tab"}}
+          Personal Details
+      %li
+        %a{ :href => "#address", :data => { :toggle => "tab"}}
+          Address
+      %li
+        %a{ :href => "#transport", :data => { :toggle => "tab"}}
+          Transport
+      %li
+        %a{ :href => "#academics", :data => { :toggle => "tab"}}
+          Academics
+      %li
+        %a{ :href => "#attendance", :data => { :toggle => "tab"}}
+          Attendance
+    .tab-content
+      %br
+      #student_details.tab-pane.fade.in.active
+        = render "student_details"
+      #address.tab-pane.fade
+        = render "address"
+      #transport.tab-pane.fade
+        = render "transport"
+      #academics.tab-pane.fade
+        = render "academics"
+      #attendance.tab-pane.fade
+        = render "attendance"

@@ -23,11 +23,28 @@
                                  "update_address": { url: "/student_masters/:id/update_address.json", method:'PUT', params: {address: '@address'}},
                              }
                             );
+        var summarized_monthly_attendance = function(student_id){
+            var url = "/student_masters/"+student_id+"/student_summarized_monthly_report.json"
+            return $http.get(url);
+        }
+
+        var transport_details = function(student_id){
+            var url = "/student_masters/"+student_id+"/transport_details.json"
+            return $http.get(url);
+        }
+
+        var change_transport = function(studentId, newLocationId){
+            var url = "/student_masters/"+studentId+"/change_transport.json"
+            return $http.put(url, {new_location_id: newLocationId});
+        }
         
         return {
             student_details : student_details,
             book_issuings : book_issuings,
-            Student : Student
+            Student : Student,
+            summarized_monthly_attendance : summarized_monthly_attendance,
+            transport_details : transport_details,
+            change_transport  : change_transport
         };
         
     }]);

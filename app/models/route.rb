@@ -45,6 +45,15 @@ class Route < ActiveRecord::Base
   def end_location
     Location.find(end_point)
   end
+
+  def start_location_name
+    start_location.location_master.location_name
+  end
+
+  def end_location_name
+    end_location.location_master.location_name
+  end
+ 
   
   def slice_out(bus)
     dead = [ ]

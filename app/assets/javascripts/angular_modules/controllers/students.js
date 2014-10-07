@@ -1,6 +1,6 @@
 (function(angular, app) {
     "use strict";
-    app.controller("StudentsController",["$scope", "studentService", "resourceService", function($scope, studentService, resourceService) {
+    app.controller("StudentsController",["$scope", "studentService", "resourceService", "routesService", function($scope, studentService, resourceService, routesService) {
         $scope.students = []
         $scope.student = {}
         $scope.student_id = ""
@@ -33,12 +33,34 @@
         }
         
         $scope.updateAddress = function(){
-            alert($scope.student_id)
-            console.log($scope.address)
             $scope.isAddressEdit = false
             studentService.Student.update_address({address: $scope.address, id: $scope.student_id})
         }
+
+        $scope.transport_details = function(studentId){
+            $scope.studentId = studentId
+            studentService.transport_details(studentId).then(function(responce) {
+                $scope.studentTransport = responce.data
+            });
+            
+        }
         
+        $scope.changeStudentTransport = function(){
+            $scope.changeEvent = true;
+            routesService.getLocationServiceView()
+		.then(function(result) {
+                    $scope.all_locations =result.data
+		});
+        }
+        
+        $scope.updateStudentTransport = function(){
+            studentService.change_transport($scope.studentId, $scope.newLocation.id).then(function(responce) {
+                $scope.changeEvent = false;
+                alert("Mail Successfully sent")
+            });
+
+        }
+
         
     }]);
     
