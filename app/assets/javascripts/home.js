@@ -45,6 +45,19 @@ $(document ).ready(function() {
     });
 
 
+    $('#guest_management_follow_up').change(function() {
+	if ($(this).val() == 'Yes')
+	{
+	    $('#guest_management_follow_up_date').show();
+	    $('#textbox').show();
+	}
+	else
+	{
+	    $('#guest_management_follow_up_date').hide();
+	    $('#textbox').hide();
+	}
+    });
+
     $('body').on('focus',".datepicker", function(){
         $(this).datepicker({
             changeMonth: true,

@@ -3,6 +3,7 @@ class DefaultMasterSubMenu < Struct.new(:controller)
       sub_menu = []
       sub_menu << parents
       sub_menu << students
+      sub_menu << vendors
     end
     
     def parent_sub_menu
@@ -20,6 +21,9 @@ class DefaultMasterSubMenu < Struct.new(:controller)
 
     def students
       MenuItem.new(:label => "Students", :klass => controller == "student_masters" ? "active" : "", :icon => "user", :href => "/student_masters")
+    end
+    def vendors
+      MenuItem.new(:label => "Vendors", :klass => "", :icon => "vine", :href => "/vendor_categories")
     end
         
     

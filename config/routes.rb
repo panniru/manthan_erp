@@ -1,5 +1,18 @@
 ManthanErp::Application.routes.draw do
+  
+ 
 
+  resources :vendor_managements do
+    collection do
+      get "get_vendor_view"
+    end
+  end
+
+  resources :guest_managements do
+    collection do
+      get "get_role_view"
+    end
+  end
   get "teaching_plans/new"
   get "teaching_plans/edit"
   get "teaching_plans/index"
@@ -685,5 +698,6 @@ ManthanErp::Application.routes.draw do
       post 'create_bulk'     
     end    
   end
+  resources :vendor_categories
 
 end

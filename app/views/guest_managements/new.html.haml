@@ -1,0 +1,61 @@
+.row
+  .col-sm-10
+    %h4 New Guest
+  .col-sm-2
+   
+    %br
+= form_for GuestManagement.new , :html => { :class => "form-horizontal", :role => "form"} do |f| 
+  .row
+    .col-sm-2
+      = f.label "Name"
+    .col-sm-4
+      = f.text_field "guest_name", :class => 'form-control'
+      %br
+    .col-sm-2
+      = f.label "Phone#"
+    .col-sm-4
+      = f.text_field "guest_phone", :class => 'form-control'
+      %br
+  .row
+    .col-sm-2
+      = f.label "E-mail"
+    .col-sm-4
+      = f.text_field "guest_email", :class => 'form-control'
+      %br
+    .col-sm-2
+      = f.label "Address" 
+    .col-sm-4
+      = f.text_area "guest_address", :class => 'form-control'
+      %br
+   
+  .row{"ng-controller" => "StaffadminsController"}
+    .col-sm-2
+      = f.label "Person to meet"
+    .col-sm-4
+      %select{"ng-model" => "staffAdmin", "ng-options" => "faculty.faculty_name for faculty in faculties",:class => "form-control",:required => "required"}
+        %option{style: "display:none", value: ""} Select Name
+        = f.hidden_field :came_to_meet, :value => "{{staffAdmin.faculty_name}}"
+      -# %select{"ng-model" => "role", "ng-options" => " role.role as role.role for role in roles",:class => "form-control",:required => "required", }
+      -#   %option{style: "display:none", value: ""} Select Role
+      %br
+    .col-sm-2
+      = f.label "Purpose"
+    .col-sm-4
+      = f.text_field "purpose", :class => 'form-control'
+      %br
+  .row
+    .col-sm-2
+      = f.label "Follow-up"
+    .col-sm-2
+      = f.select "follow_up" , options_for_select([['Yes'],['No']]) , :class => 'form-control'
+    .col-sm-2
+      .pull-left#textbox
+        = f.label "Date"
+    .col-sm-4
+      = f.text_field "follow_up_date" ,:class => 'datepicker form-control' 
+      %br
+  .row
+    .col-sm-10
+    .col-sm-2
+      = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+

@@ -1,0 +1,29 @@
+.row
+  .col-sm-10
+    %h3  Vendor 
+  .col-sm-2
+    = link_to "Add New",  new_vendor_management_path, :class => "btn btn-primary"
+    %br
+.row
+  .col-sm-11
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Category
+          %th Name
+          %th Phone#
+          %th Mobile#
+          %th Email
+          %th 
+      %tbody
+        - @vendor_managements.each do |vendor|        
+          %tr
+            %td= vendor.vendor_category.vendor_category
+            %td= vendor.vendor_name
+            %td= vendor.vendor_phone
+            %td= vendor.verdor_mobile
+            %td= vendor.vendor_email
+            %td
+              = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), vendor_management_path(vendor), :class => "form btn-sm btn-danger ",:data => {:method => 'delete' ,:confirm => "Are You Sure to Delete " }
+              = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_vendor_management_path(vendor), :class => "form btn-sm btn-warning "
+              

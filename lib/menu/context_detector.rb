@@ -69,7 +69,10 @@ class ContextDetector
     "mealtypes" => "canteen",
     "mealnames" => "canteen",
     "inventories" => "canteen",
-    "attendances" => "attendance_ctrl"
+    "attendances" => "attendance_ctrl",
+    "guest_managements" => "hrm_sub_menu",
+    "vendor_categories" => "default_master_sub_menu",
+    "vendor_managements" => "hrm_sub_menu"
   }
   
   def self.get_context(args)

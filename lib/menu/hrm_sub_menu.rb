@@ -9,9 +9,9 @@ class HrmSubMenu
     p "============="
     p @params
     
-    if @params[:action].present? and @params[:action] != 'index'
-      return student_masters_sub_menu
-    else
+    # if @params[:action].present? and @params[:action] != 'index'
+    #   return student_masters_sub_menu
+    # else
       sub_menu = []
       sub_menu << students
       sub_menu << parents
@@ -19,8 +19,9 @@ class HrmSubMenu
       sub_menu << accounting
       sub_menu << vendor
       sub_menu << travelling
+      sub_menu << guest
       return sub_menu
-    end
+    #end
     
   end
 
@@ -56,10 +57,14 @@ class HrmSubMenu
     MenuItem.new(:label => "Accounting", :klass => "", :icon => "table ", :href => "#")
   end  
   def vendor
-    MenuItem.new(:label => "Vendor", :klass => "", :icon => " ", :href => "#")
+    MenuItem.new(:label => "Vendor", :klass => "", :icon => "vine ", :href => "/vendor_managements")
   end
   
   def travelling
     MenuItem.new(:label => "Travelling", :klass => "", :icon => "automobile ", :href => "#")
   end      
+  
+  def guest
+    MenuItem.new(:label => "Guest", :klass => "", :icon => "user-md", :href => "/guest_managements")
+  end
 end
