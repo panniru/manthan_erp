@@ -2,32 +2,21 @@
   .row
     .col-md-1
     .col-md-4
-      %h4{style: "font-weight: bold"} SUBJECTS FOR GRADES
+      %h4{style: "font-weight: bold"} GRADES FOR SUBJECTS
     .col-md-4
-      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "editSubjectsMappings()", :value => "EDIT"}
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "editGradesMappings()", :value => "EDIT"}
     .col-md-3 
   .row
     .col-md-1
     .col-md-9
-      %table{:class => "table"}
+      %table.target.table.table-striped.table-condensed.table-bordered
         %tr
-          %th GRADE
-          %th SUBJECTS         
-        %tr{"ng-repeat" => "grade in grades"}
-          %td {{grade.grade_name}} 
+          %th SUBJECT
+          %th GRADES         
+        %tr{"ng-repeat" => "subject in subjects | orderBy:'subject_name'"}
+          %td {{subject.subject_name}} 
           %td
-            .col-md-2{"ng-repeat" => "subject in show_subjects |filter : {grade_master_id: grade.grade_master_id}  | orderBy:'subject_name'"}        
-              {{subject.subject_name}}         
-    .col-md-2
-  .row
-    :css
-      table, th, td
-      {
-      border-collapse:collapse;
-      border:5px solid #6aa6d6;
-      }
-      th, td
-      {
-      padding:5px;
-      } 
+            .col-md-2{"ng-repeat" => "grade in show_grades |filter : {subject_master_id: subject.subject_master_id}  | orderBy:'grade_name'"}        
+              {{grade.grade_name}}         
+    .col-md-2  
    

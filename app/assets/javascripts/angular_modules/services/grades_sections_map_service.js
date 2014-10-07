@@ -2,13 +2,19 @@
     "use strict";
     app.service("gradesSectionsMapService",["$http", function($http) {
 
-        var saveSectionsMappings= function(grades_sections){
-            var url = "/grades_sections_mappings/save_sections_mappings.json"
-            return $http.post(url, {mappings: grades_sections});          
+        var getGradesSectionsServiceView = function(){
+            var url = "/grades_sections_mappings/get_grades_sections_service_view.json"
+            return $http.get(url);
+        }; 
+        
+        var saveGradesMappings = function(sections_grades){
+            var url = "/grades_sections_mappings/save_grades_mappings.json"
+            return $http.post(url, {mappings: sections_grades});    
         };
 
         return {
-            saveSectionsMappings : saveSectionsMappings,
+            getGradesSectionsServiceView : getGradesSectionsServiceView,
+            saveGradesMappings : saveGradesMappings
         }  
     }]);   
 

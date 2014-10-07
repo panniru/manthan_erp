@@ -2,18 +2,18 @@
   .row
     .col-md-1
     .col-md-4
-      %h4{style: "font-weight: bold"} SELECT SECTIONS FOR GRADES
+      %h4{style: "font-weight: bold"} SELECT GRADES FOR SUBJECTS SECTIONS
     .col-md-4
-      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveSectionsMappings()", :value => "DONE"}
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveGradesMappings()", :value => "DONE"}
     .col-md-3
      
-  .row{"ng-repeat" => "grade in grades_sections_all"}
+  .row{"ng-repeat" => "section in sections_grades_all | orderBy:'section_name'"}
     .col-md-1
     .col-md-9
-      %h4{style: "font-weight: bold"} {{grade.grade_name}}
-      .col-md-2{"ng-repeat" => "section in grade.sections"}
-        %input{"ng-model" => "section.checked_value", type: "checkbox", "ng-change" => "addSections({{!section.checked_value}},{{grade.grade_master_id}},{{section}})", "ng-checked" => "section.checked_value"}      
-        {{section.text}}        
+      %h4{style: "font-weight: bold"} {{section.section_name}}
+      .col-md-2{"ng-repeat" => "grade in section.grades"}
+        %input{"ng-model" => "grade.checked_value", type: "checkbox", "ng-change" => "addGrades({{!grade.checked_value}},{{section.section_master_id}},{{grade}})", "ng-checked" => "grade.checked_value"}      
+        {{grade.text}}        
     .col-md-2
   
     

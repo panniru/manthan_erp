@@ -40,8 +40,7 @@
                                           "belongs_to_parent": { url: "/student_masters/belongs_to_parent.json", isArray: true}
                                       }
                                     );
-        var GradeMaster = $resource('/grade_masters/:id.json', {id: '@id'});
-        var SectionMaster = $resource('/grade_masters/:grade_master_id/section_masters/:id.json', {id: '@id', grade_master_id: '@grade_master_id'});
+        var GradeMaster = $resource('/grade_masters/:id.json', {id: '@id'});        
         var Book = $resource('/books/:id.json', {id: '@id'}, 
                                        {
                                            "bulk": { url: "/books/create_bulk", method:'POST'},
@@ -105,6 +104,16 @@
             }    
                                    );
         var DonateBook = $resource('/donate_books/:id.json', {id: '@id'});
+        var SubjectMaster = $resource('/subject_masters/:id.json', {id: '@id'},
+                                    { "bulk": { url: "/subject_masters/create_bulk", method:'POST'},
+                                      "update": { method: "PUT"}
+                                    }  
+                                   );
+        var SectionMaster = $resource('/section_masters/:id.json', {id: '@id'},
+                                    { "bulk": { url: "/section_masters/create_bulk", method:'POST'},
+                                      "update": { method: "PUT"}
+                                    }  
+                                   );
 
        
 
@@ -115,8 +124,7 @@
             DefaultMaster : DefaultMaster,
             ApprovalItem : ApprovalItem,
             StudentMaster : StudentMaster,
-            GradeMaster : GradeMaster,
-            SectionMaster : SectionMaster,
+            GradeMaster : GradeMaster,            
             Book : Book,
 	    Route:Route,
             RequestNewBook : RequestNewBook,           
@@ -128,7 +136,9 @@
             DamageBook : DamageBook,
             BlockBook : BlockBook,
             RequestBook : RequestBook,
-            DonateBook : DonateBook
+            DonateBook : DonateBook,
+            SubjectMaster : SubjectMaster,
+            SectionMaster : SectionMaster
         };
     }]);
 })(angular, myApp);

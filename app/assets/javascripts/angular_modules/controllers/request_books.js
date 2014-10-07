@@ -7,6 +7,8 @@
         $scope.book_status = "";
 
         $scope.sendBooksForApproval = function(book_status,request_book){
+            alert(JSON.stringify(book_status));
+            alert(JSON.stringify(request_book));
             if(book_status){               
                 $scope.request_books_status.push({
                     id: request_book.id,
@@ -24,7 +26,7 @@
             }           
         };
 
-        $scope.updateBooksStatus =  function(book_status){            
+        $scope.updateBooksStatus =  function(book_status){             
             for (var i=0; i<$scope.request_books_status.length; i++){ 
                 $scope.request_books_status[i]['status'] = book_status;
             }

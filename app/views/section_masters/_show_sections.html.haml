@@ -1,0 +1,14 @@
+.col-md-12
+  .col-md-1
+  .col-md-10
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr        
+          %th Section Name
+          %th Delete
+      %tbody
+        %tr{"ng-repeat" => "section in sections"}
+          %td {{section.section_name}}         
+          %td           
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteSection(section)"
+  .col-md-1
