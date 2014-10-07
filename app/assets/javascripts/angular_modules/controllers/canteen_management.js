@@ -54,8 +54,11 @@
 		})
         }
 	
-
-
+	canteenManagementService.getmealnameView()
+	    .then(function(response){
+		$scope.meals = response.data
+	    });
+	
 	
         
       //  $scope.edit = function(mealname){

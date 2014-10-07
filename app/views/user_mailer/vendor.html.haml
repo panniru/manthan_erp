@@ -1,17 +1,24 @@
-%html
-  %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-  %body
-  %h4
-    
-    
-    .col-sm-3
-      Name of inventory:
-      = @name
-      %br
-      Type of inventory:
-      = @type
-      %br
-      Quantity :
-      = @quantity
+Dear vendor,
+.row  
+  %p
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+.row  
+  %table{:border => "1"}
+    %thead
+      %th Name
+      %th Type
+      %th Quantity
+    %tbody
+      - @inventories.each do |inv|
+        %tr
+          %td= inv['name']
+          %td= inv['inventory_type']
+          %td= inv['quantity']
+%br
+%br
+Thanks,
+%br
+Admin
+
 
 

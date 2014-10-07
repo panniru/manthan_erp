@@ -2,19 +2,18 @@
     "use strict";
     app.controller('InventoriesController',["$scope","resourceService","canteenManagementService", function($scope, resourceService,canteenManagementService) {
 	//$scope.inventories = resourceService.Inventory.query();    
-        
-	$scope.request_status = [];
+        $scope.request_status = [];
+	
 
 	$scope.newInventory = function(){
 	    $scope.newInventories = []
-            for(var i=0; i<1; i++){
-		$scope.newInventories.push({"name":"", "quantity":"","inventory_type":"", "status":"" });
-	    };
+            $scope.newInventories.push({"name":"", "quantity":"","inventory_type":"", "status":"" });
 	    $('#createModal').modal('show')     
         };
         $scope.submitInventories = function(){                       
             resourceService.Inventory.bulk({bulk_inventory: $scope.newInventories})          
-                .$promise.then(function(responce){                                
+                .$promise.then(function(responce){ 
+                    
                     $('#createModal').modal('hide')
                     window.location.reload();
 		})
@@ -27,7 +26,7 @@
             };
         }
         
-	 $scope.sendForApproval = function(status,inventory){
+	$scope.sendForApproval = function(status,inventory){
 	     if(status){               
                  $scope.request_status.push({
                      id: inventory.id,
@@ -62,24 +61,31 @@
 	};
 	
 	$scope.initiateMail = function(){
-	    alert(term_name)
-            $scope.myRequestBooks = [];
-            $scope.myMailSubject = "Regarding Inventory Order";            
-            alert($scope.newInventories.length)
+	    $scope.isMailActionFired = true            
+	    $scope.myStatus = [];
             for(var i=0; i<$scope.request_status.length; i++){
-		for(var j=0; j<$scope.newInventories.length; j++){
-                    if($scope.request_status[i]['id'] == $scope.newInventories[j]['id']){                        
-                        $scope.myRequestBooks.push({
-                            id: $scope.newInventories[j]['id'],
-                            inventory_type: $scope.newInventories[j]['inventory_type'],
-                            name: $scope.newInventories[j]['name'],
-			    quantity: $scope.newInventories[j]['quantity'],
+		for(var j=0; j<$scope.inventories.length; j++){
+                    if($scope.request_status[i]['id'] == $scope.inventories[j]['id']){                        
+                        $scope.myStatus.push({
+                            id: $scope.inventories[j]['id'],
+                            inventory_type: $scope.inventories[j]['inventory_type'],
+                            name: $scope.inventories[j]['name'],
+			    quantity: $scope.inventories[j]['quantity'],
                         });
-                    }
+		    }
                 }
-            }            
+            }
+	    canteenManagementService.requestInventoryMail($scope.myStatus)
+	    	.then(function(responce){
+                    var alert_msg = '<div class="alert alert-success alert-dismissable">'+
+			'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
+			responce.data+'</div>'
+                    $("#appAlert").html(alert_msg)
+		});  
             $scope.updateStatus('Ordered');
         };
+
+	
         
     }]);
 })(angular, myApp);

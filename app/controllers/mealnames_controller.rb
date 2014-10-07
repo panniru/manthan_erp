@@ -36,6 +36,21 @@ class MealnamesController < ApplicationController
     end
   end
   
+  def get_meal_names
+    respond_to do |format|
+      meal = Mealname.select("canteen_date count(*) as data").group("canteen_date")
+      format.json do 
+        meals = meal.each.map do |mapping|
+          { id: mapping.id, meal_detail_name: mapping.meal_detail_name , canteen_date: mapping.canteen_date}
+        end  
+        p "================="
+        p meals
+        render :json => meals
+      end
+    end
+  end
+  
+
   def mealname_params
     params.require(:mealnames).permit(:mealtype_id, :meal_detail_name, :canteen_date)
   end

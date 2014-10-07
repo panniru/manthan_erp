@@ -578,13 +578,14 @@ ManthanErp::Application.routes.draw do
       get "canteen_date"
       get  "getmealtypeidservice"
       post "create_bulk"
+      get "get_meal_names"
     end
   end
 
   resources :inventories do
     collection do
       get "get_inventory_view"
-      get "mail"
+      post "mail_to_vendors"
       post "update_inventory_status"
       post 'create_bulk'
     end

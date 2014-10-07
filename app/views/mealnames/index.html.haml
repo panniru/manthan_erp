@@ -18,11 +18,11 @@
               {{meal.meal_type}}
              
         %tbody
-          - @mealnames.each do |mealname|
-            %tr
-              %td= mealname.canteen_date
-              %td= mealname.meal_detail_name  
-        
+          //- @mealnames.each do |mealname|
+          %tr{"ng-repeat" => "mealname in meals"}
+            %td {{mealname.canteen_date}}
+            %td {{mealname.meal_detail_name}}
+              
  
         -# %td
           -# = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_mealname_path(mealname), :class => "btn btn-warning btn-sm", :title => "Edit"

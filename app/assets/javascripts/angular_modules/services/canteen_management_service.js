@@ -26,11 +26,25 @@
             var url = "/inventories/update_inventory_status.json"
             return $http.post(url, {status: status});
 	};
+
+	var requestInventoryMail =  function(myRequestBooks){
+	    var url = "/inventories/mail_to_vendors.json"
+            return $http.post(url, {  myRequestBooks: myRequestBooks});
+	    
+	};
+	
+	var getmealnameView =  function(){
+	    var url = "/inventories/get_meal_names.json"
+            return $http.get(url);
+	};
+	
 	return {
             getMealtypeIdService: getMealtypeIdService,
 	    getFoodWastage: getFoodWastage,
 	    getinventoryView : getinventoryView,
-	    updateStatus : updateStatus
+	    updateStatus : updateStatus,
+	    requestInventoryMail : requestInventoryMail,
+	    getmealnameView : getmealnameView
           //  Mealname:  Mealname
         };
         

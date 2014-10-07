@@ -1,6 +1,14 @@
 class InventoriesController < ApplicationController
   def index
-    @inventories = Inventory.all
+    respond_to do |format|
+      format.json do
+        @inventories = Inventory.get_request_by_role(current_user)     
+        render :json => @inventories
+      end
+      format.html do
+        render "index"
+      end
+    end
   end
 
   def create
@@ -20,7 +28,7 @@ class InventoriesController < ApplicationController
   def get_inventory_view
     respond_to do |format|
       format.json do 
-        inv = Inventory.all
+        inv = Inventory.get_request_by_role(current_user)
         inventories = inv.each.map do |mapping|
           { id: mapping.id,inventory_type: mapping.inventory_type, name: mapping.name, quantity: mapping.quantity , status: mapping.status}
         end     
@@ -131,10 +139,14 @@ class InventoriesController < ApplicationController
 
 
   
-  def mail
-    @inventory = Inventory.find(params[:format])
-    UserMailer.vendor(@inventory).deliver
-    redirect_to inventories_path
+  def mail_to_vendors
+    respond_to do |format|
+      format.json do  
+        #@inventory = Inventory.find(params[:format])
+        UserMailer.vendor(params[:myRequestBooks],["navya@ostryalabs.com"]).deliver
+        render :json=>true
+      end
+    end
   end
     
   
