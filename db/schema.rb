@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.string   "middle_name"
     t.string   "name"
     t.string   "klass"
-    t.string   "dob"
+    t.date     "dob"
     t.string   "gender"
     t.string   "nationality"
     t.string   "language"
@@ -205,6 +205,20 @@ ActiveRecord::Schema.define(version: 20140923074130) do
 
   create_table "books", force: true do |t|
     t.string   "name"
+    t.string   "student_attendance"
+    t.date     "attendance_date"
+  end
+
+  create_table "block_books", force: true do |t|
+    t.string   "isbn"
+    t.string   "blocked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "book_id"
+  end
+
+  create_table "books", force: true do |t|
+    t.string   "name"
     t.string   "author"
     t.date     "year_of_publishing"
     t.string   "number_of_copies"
@@ -294,6 +308,17 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.string   "status"
     t.string   "enquiry_no"
   end
+
+  create_table "donate_books", force: true do |t|
+    t.integer  "book_id"
+    t.string   "student_name"
+    t.string   "grade_name"
+    t.string   "section_name"
+    t.date     "date_of_donation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
 
   create_table "donation_of_books", force: true do |t|
     t.string   "book_name"
@@ -386,6 +411,13 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.datetime "updated_at"
   end
 
+  create_table "food_wastages", force: true do |t|
+    t.date     "current_date"
+    t.integer  "wastage"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "forms", force: true do |t|
     t.string   "name"
     t.string   "dob"
@@ -442,6 +474,21 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+
+  create_table "guest_managements", force: true do |t|
+    t.string   "guest_name"
+    t.string   "guest_phone"
+    t.text     "guest_address"
+    t.string   "guest_email"
+    t.string   "purpose"
+    t.string   "follow_up"
+    t.date     "follow_up_date"
+    t.string   "came_to_meet"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
 
   create_table "holidaycalendars", force: true do |t|
     t.date     "holiday_date"
@@ -532,7 +579,7 @@ ActiveRecord::Schema.define(version: 20140923074130) do
   end
 
   create_table "mealnames", force: true do |t|
-    t.string   "meal_type_id"
+    t.integer  "meal_type_id"
     t.string   "meal_detail_name"
     t.date     "canteen_date"
     t.datetime "created_at"
@@ -895,12 +942,12 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.date     "joining_date"
     t.string   "academic_year"
     t.integer  "parent_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "grade_master_id"
-    t.integer  "section_master_id"
-    t.boolean  "bus_facility"
-    t.integer  "branch_id"
+    t.string   "finalresult"
+    t.string   "closestatus"
+    t.string   "description"
+    t.string   "start_time"
+    t.string   "end_time"
+    t.string   "branch"
     t.string   "surname"
     t.string   "second_lang"
     t.string   "board"
@@ -911,15 +958,52 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.string   "spoken"
     t.string   "blood_group"
     t.string   "gender"
-    t.string   "nationality"
     t.string   "language"
-    t.string   "last_school"
-    t.string   "address_line1"
-    t.string   "address_line2"
+    t.string   "admission_no"
+    t.string   "allergy"
+    t.string   "doctor_name"
+    t.string   "doctor_mobile"
+    t.string   "guardian_mobile"
+    t.string   "guardian_name"
+    t.string   "guardian_relationship"
+    t.string   "from"
+    t.string   "to"
+    t.string   "middle_name"
+    t.string   "klass"
+    t.string   "father_name"
+    t.string   "mother_name"
+    t.string   "nationality"
+    t.string   "income"
+    t.text     "address"
+    t.string   "landline"
+    t.string   "mobile"
+    t.string   "email"
+    t.string   "transport"
+    t.string   "busstop"
     t.string   "city"
     t.string   "state"
     t.string   "pin"
     t.string   "form_no"
+    t.string   "changing_reason"
+    t.string   "know_school"
+    t.string   "last_school"
+    t.string   "person"
+    t.string   "pp"
+    t.string   "status"
+    t.string   "sib_name"
+    t.string   "sib_age"
+    t.string   "sib_sex"
+    t.string   "sib_grade"
+    t.string   "sib_school"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "grade_master_id"
+    t.integer  "section_master_id"
+    t.boolean  "bus_facility"
+    t.string   "form_no"
+    t.integer  "location_id"
+    t.integer  "location_master_id"
+
   end
 
   create_table "student_route_mappings", force: true do |t|
@@ -1064,5 +1148,24 @@ ActiveRecord::Schema.define(version: 20140923074130) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "vendor_categories", force: true do |t|
+    t.string   "vendor_category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "vendor_managements", force: true do |t|
+    t.string   "vendor_name"
+    t.integer  "vendor_categories_id"
+    t.string   "vendor_phone"
+    t.string   "vendor_email"
+    t.string   "vendor_alternate_email"
+    t.text     "vendor_address"
+    t.string   "verdor_mobile"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "vendor_category_id"
+  end
 
 end

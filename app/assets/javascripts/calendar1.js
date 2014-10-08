@@ -16,10 +16,10 @@ $(document).ready(function() {
 		for (var i=0; i< date.length;i++)
 		{
                     content_html+= "<tr>";               
-                    content_html+= '<td>mealtype= <a href="/canteenmanagers/'+date[i].id+'">'+date[i].mealtype_id+'</a></td>';
+                    //content_html+= '<td><a "/canteenmanagers/'+date[i].id+'">'+date[i].mealtype.meal_type+'</a></td>';
                     content_html+= "</tr>";
                     content_html+= "<tr>";
-                    content_html+= '<td>mealname= <a href="/canteenmanagers/'+date[i].id+'">'+date[i].meal_detail_name+'</a></td>';
+                    content_html+= '<td> <a "/canteenmanagers/'+date[i].id+'">'+date[i].meal_detail_name+'</a></td>';
                     content_html+= "</tr>";              
 		}                 
 		content_html+= "</tbody></table>";

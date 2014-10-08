@@ -3,9 +3,9 @@ class Inventory < ActiveRecord::Base
     if current_user.admin?
       @inventories = Inventory.where('status = '+"'Approved'")           
     elsif current_user.canteenmanager?
-      @inventories = Inventory.where('status = '+"'Requested'")         
+      @inventories = Inventory.where('status = '+"'Pending'")         
     elsif current_user.principal?
-      @inventories = Inventoy.where('status = '+"'Pending'"+" OR "+'status = '+"'Approved'"+" OR "+'status = '+"'Rejected'")           
+      @inventories = Inventory.where('status = '+"'Pending'"+" OR "+'status = '+"'Approved'"+" OR "+'status = '+"'Rejected'")           
     end		
   end
   # scope :request_pending,lambda{where("status = 'Pending'")}

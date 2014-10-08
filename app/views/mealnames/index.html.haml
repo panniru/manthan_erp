@@ -3,8 +3,6 @@
     .col-md-7
       %h3
         = "Daily Meals"
-        //.pull-right
-        //= link_to "Add Menu", "#", :class => "btn btn-primary", :ng_click => "newMeal()"
         .pull-left
           .col-sm-10
             %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
@@ -19,6 +17,7 @@
              
         %tbody
           //- @mealnames.each do |mealname|
+         
           %tr{"ng-repeat" => "mealname in meals"}
             %td {{mealname.canteen_date}}
             %td {{mealname.meal_detail_name}}

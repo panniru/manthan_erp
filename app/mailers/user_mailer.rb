@@ -9,7 +9,9 @@ class UserMailer < ActionMailer::Base
     mail(to: mails , subject: "New Routes" )
   end
   def vendor(request_books,emails)
-    @request_books = request_books
+    @inventories = request_books
+    p "@@@@@@@@@@@@@@@@@@@@"
+    p @inventories
     mail(to: emails.join(",") , subject: "Deliveries" )
   end
 end

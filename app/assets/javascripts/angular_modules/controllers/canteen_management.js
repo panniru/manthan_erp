@@ -58,6 +58,7 @@
 	    .then(function(response){
 		$scope.meals = response.data
 	    });
+
 	
 	
         

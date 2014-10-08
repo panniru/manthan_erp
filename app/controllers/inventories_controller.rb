@@ -1,14 +1,6 @@
 class InventoriesController < ApplicationController
   def index
-    respond_to do |format|
-      format.json do
-        @inventories = Inventory.get_request_by_role(current_user)     
-        render :json => @inventories
-      end
-      format.html do
-        render "index"
-      end
-    end
+    @inventories = Inventory.all  
   end
 
   def create
@@ -29,10 +21,10 @@ class InventoriesController < ApplicationController
     respond_to do |format|
       format.json do 
         inv = Inventory.get_request_by_role(current_user)
-        inventories = inv.each.map do |mapping|
+        @inventories = inv.each.map do |mapping|
           { id: mapping.id,inventory_type: mapping.inventory_type, name: mapping.name, quantity: mapping.quantity , status: mapping.status}
         end     
-        render :json => inventories
+        render :json => @inventories
       end
     end
   end
@@ -142,8 +134,11 @@ class InventoriesController < ApplicationController
   def mail_to_vendors
     respond_to do |format|
       format.json do  
+        p "==========================="
+        p params[:inventories]
+
         #@inventory = Inventory.find(params[:format])
-        UserMailer.vendor(params[:myRequestBooks],["navya@ostryalabs.com"]).deliver
+        UserMailer.vendor(params[:inventories],["navya@ostryalabs.com"]).deliver
         render :json=>true
       end
     end

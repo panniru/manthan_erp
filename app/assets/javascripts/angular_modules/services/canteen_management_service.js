@@ -27,14 +27,15 @@
             return $http.post(url, {status: status});
 	};
 
-	var requestInventoryMail =  function(myRequestBooks){
+	var requestInventoryMail =  function(inventories){
+	    alert(JSON.stringify(inventories))
 	    var url = "/inventories/mail_to_vendors.json"
-            return $http.post(url, {  myRequestBooks: myRequestBooks});
+            return $http.post(url, { inventories: inventories});
 	    
 	};
 	
 	var getmealnameView =  function(){
-	    var url = "/inventories/get_meal_names.json"
+	    var url = "/mealnames/get_meal_names.json"
             return $http.get(url);
 	};
 	
