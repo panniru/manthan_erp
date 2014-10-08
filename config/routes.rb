@@ -122,6 +122,7 @@ ManthanErp::Application.routes.draw do
   resources :time_tables do
     collection do       
       get "get_sections_for_grade"
+      get "get_subjects_for_grade"
     end 
   end 
 

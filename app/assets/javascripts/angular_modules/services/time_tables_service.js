@@ -47,6 +47,12 @@
             var url = "/time_tables/get_sections_for_grade.json"
             return $http.get(url,{params:{my_Grade: myGrade}});
         };  
+
+        var getSubjectsForGradeService = function(myGrade){
+            var url = "/time_tables/get_subjects_for_grade.json"
+            return $http.get(url,{params:{my_Grade: myGrade}});
+        };  
+    
     
         return {
             getTimeTableServiceView : getTimeTableServiceView,
@@ -57,7 +63,8 @@
             getSubjectServiceView : getSubjectServiceView,
             getGradeServiceView : getGradeServiceView,
             savePeriods : savePeriods,
-            getSectionsForGradeService : getSectionsForGradeService
+            getSectionsForGradeService : getSectionsForGradeService,
+            getSubjectsForGradeService : getSubjectsForGradeService
         };        
     }]);    
 })(angular, myApp);

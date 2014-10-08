@@ -13,9 +13,7 @@ class TimeTablesController < ApplicationController
     respond_to do |format|
       format.json do
         grades = GradeMaster.get_grades_by_role(current_user)
-        render :json => grades  
-        p grades
-        p "===================>"
+        render :json => grades        
       end
     end  
   end
@@ -107,14 +105,20 @@ class TimeTablesController < ApplicationController
     end
   end
 
-  def get_sections_for_grade
+  def get_sections_for_grade    
     grade_sections = GradeSection.where('grade_master_id = '+"'#{params[:my_Grade]}'")
     grade_sections = grade_sections.each.map do |grade_section|
       {id: grade_section.id, grade_master_id: grade_section.grade_master_id, section_master_id: grade_section.section_master_id, section_name: grade_section.section_master.section_name }
-    end
-    p grade_sections
-    p "=========>"    
+    end       
     render  :json => grade_sections
+  end
+
+  def get_subjects_for_grade    
+    grade_subjects = GradeSubjectMapping.where('grade_master_id = '+"'#{params[:my_Grade]}'")
+    grade_subjects = grade_subjects.each.map do |grade_subject|
+      {id: grade_subject.id, grade_master_id: grade_subject.grade_master_id, subject_master_id: grade_subject.subject_master_id, subject_name: grade_subject.subject_master.subject_name }
+    end       
+    render  :json => grade_subjects
   end
 
   def add_params(params)
