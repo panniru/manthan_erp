@@ -1,15 +1,24 @@
 %form{:class=>"form-horizontal", :ng_submit => "submitMeals()" }
-  .form-group{"ng-repeat" => "meal in newMeals"}
-    = label_tag "Meal {{$index+1}}", nil, :class => "form-label col-md-2"
+  .row
+    .col-sm-1
     .col-sm-3
-      = text_field_tag "[meal_type]",nil, :class => 'form-control', :ng_model => "meal.meal_type", :placeholder => "Meal Type"
-    .col-md-3
-      .input-group
-        = text_field_tag "[time]",nil, :class => 'form-control', :ng_model => "meal.time"
-        %span.input-group-addon HH:MM
+      = label_tag "Meal Type", nil, :class => "form-label " 
+    .col-sm-3
+      = label_tag "Time", nil, :class => "form-label col-md-2"
+      
+  .form-group{"ng-repeat" => "meal in newMeals"}
+    .row
+      .col-sm-1
+      .col-sm-3
+        = text_field_tag "[meal_type]",nil, :class => 'form-control', :ng_model => "meal.meal_type", :placeholder => "Meal Type"
+      .col-md-3
+        .input-group
+          = text_field_tag "[time]",nil, :class => 'form-control', :ng_model => "meal.time"
+          %span.input-group-addon HH:MM
    
   .row
-    .col-md-5.col-md-offset-3
+    .col-sm-1
+    .col-sm-6
       %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMoremeals()"}= "More Meal Type"
       %button{:type=>"submit", :class=> "btn btn-primary"}= "Save"
       

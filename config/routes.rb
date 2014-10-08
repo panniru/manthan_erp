@@ -2,6 +2,7 @@ ManthanErp::Application.routes.draw do
   
  
 
+
   resources :vendor_managements do
     collection do
       get "get_vendor_view"
@@ -13,6 +14,15 @@ ManthanErp::Application.routes.draw do
       get "get_role_view"
     end
   end
+
+
+  resources :food_wastages do
+    collection do
+      get "get_food_wastage"
+    end
+  end
+  
+
   get "teaching_plans/new"
   get "teaching_plans/edit"
   get "teaching_plans/index"
@@ -573,12 +583,15 @@ ManthanErp::Application.routes.draw do
       get "canteen_date"
       get  "getmealtypeidservice"
       post "create_bulk"
+      get "get_meal_names"
     end
   end
 
   resources :inventories do
     collection do
-      get "mail"
+      get "get_inventory_view"
+      post "mail_to_vendors"
+      post "update_inventory_status"
       post 'create_bulk'
     end
     member  do
@@ -586,6 +599,7 @@ ManthanErp::Application.routes.draw do
       put 'order_placed'
       put 'rejected'
       put 'delivered'
+      put 'refresh'
     end
   end
 

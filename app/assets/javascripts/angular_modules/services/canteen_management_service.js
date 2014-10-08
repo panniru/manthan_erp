@@ -12,10 +12,40 @@
         //                             "update": { method: "PUT"}
           //                       }
             //                    );
-        
+        var getFoodWastage = function(){
+            var url = "/food_wastages/get_food_wastage.json"
+            return $http.get(url);
+	};
 
+	var getinventoryView = function(){
+            var url = "/inventories/get_inventory_view.json"
+            return $http.get(url);
+	};
+
+	var updateStatus = function(status){
+            var url = "/inventories/update_inventory_status.json"
+            return $http.post(url, {status: status});
+	};
+
+	var requestInventoryMail =  function(inventories){
+	    alert(JSON.stringify(inventories))
+	    var url = "/inventories/mail_to_vendors.json"
+            return $http.post(url, { inventories: inventories});
+	    
+	};
+	
+	var getmealnameView =  function(){
+	    var url = "/mealnames/get_meal_names.json"
+            return $http.get(url);
+	};
+	
 	return {
-            getMealtypeIdService: getMealtypeIdService
+            getMealtypeIdService: getMealtypeIdService,
+	    getFoodWastage: getFoodWastage,
+	    getinventoryView : getinventoryView,
+	    updateStatus : updateStatus,
+	    requestInventoryMail : requestInventoryMail,
+	    getmealnameView : getmealnameView
           //  Mealname:  Mealname
         };
         

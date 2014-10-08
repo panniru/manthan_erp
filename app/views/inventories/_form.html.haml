@@ -1,18 +1,24 @@
 %form{:class=>"form-horizontal", :ng_submit => "submitInventories()" }
-  .form-group{"ng-repeat" => "item in newInventories"}
-    = label_tag "Inventory {{$index+1}}", nil, :class => "form-label col-md-2"
+  .row
     .col-sm-3
-      = text_field_tag "[name]",nil, :class => 'form-control', :ng_model => "item.name", :placeholder => "Name"
-    .col-sm-3      
-      = text_field_tag "[quantity]",nil, :class => 'form-control', :ng_model => "item.quantity", :placeholder => "Quantity"
-    .col-sm-3     
-      = text_field_tag "[inventory_type]",nil, :class => 'form-control', :ng_model => "item.inventory_type", :placeholder => "Type"
-      %br  
+      = label_tag "Name", nil, :class => "form-label"
+    .col-sm-3
+      = label_tag "Quantity", nil, :class => "form-label"
+    .col-sm-3
+      = label_tag "Type", nil, :class => "form-label"
+  .form-group{"ng-repeat" => "item in newInventories"}
+    .row
+      .col-sm-3
+        = text_field_tag "[name]",nil, :class => 'form-control', :ng_model => "item.name", :placeholder => "Name"
+      .col-sm-3      
+        = text_field_tag "[quantity]",nil, :class => 'form-control', :ng_model => "item.quantity", :placeholder => "Quantity"
+      .col-sm-3     
+        = text_field_tag "[inventory_type]",nil, :class => 'form-control', :ng_model => "item.inventory_type", :placeholder => "Type"
+         
    
   .row
     .col-md-3
-    .col-md-3
-      %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMoreinventories()"}= "More Inventories"
+      %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMoreinventories()"}= "Add Inventory"
     .col-md-3
       %button{:type=>"submit", :class=> "btn btn-primary"}= "Send for Approval"
       //%input{:name => "status", :value => "pending", :type => "hidden", :ng_model => "item.status"}

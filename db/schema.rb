@@ -396,6 +396,13 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.datetime "updated_at"
   end
 
+  create_table "food_wastages", force: true do |t|
+    t.date     "current_date"
+    t.integer  "wastage"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "forms", force: true do |t|
     t.string   "name"
     t.string   "dob"
@@ -983,6 +990,26 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.integer  "section_master_id"
     t.boolean  "bus_facility"
     t.string   "form_no"
+    t.string   "changing_reason"
+    t.string   "know_school"
+    t.string   "last_school"
+    t.string   "person"
+    t.string   "pp"
+    t.string   "status"
+    t.string   "sib_name"
+    t.string   "sib_age"
+    t.string   "sib_sex"
+    t.string   "sib_grade"
+    t.string   "sib_school"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "grade_master_id"
+    t.integer  "section_master_id"
+    t.boolean  "bus_facility"
+    t.string   "form_no"
+    t.integer  "location_id"
+    t.integer  "location_master_id"
+
   end
 
   create_table "student_route_mappings", force: true do |t|

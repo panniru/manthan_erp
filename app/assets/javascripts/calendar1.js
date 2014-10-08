@@ -5,6 +5,8 @@ $(document).ready(function() {
     $('#canteen_calendar').fullCalendar({
 	events: '/mealnames/canteenmanagerdata.json?month='+monthNames[today.getMonth()],
 	selectable: true,
+	
+		
 	eventMouseover: function(date, event, view) {        
             var url = "/mealnames/canteen_date.json?date="+date.canteen_date         
             var curr_object = $(this) 
@@ -14,10 +16,10 @@ $(document).ready(function() {
 		for (var i=0; i< date.length;i++)
 		{
                     content_html+= "<tr>";               
-                    content_html+= '<td>mealtype= <a href="/canteenmanagers/'+date[i].id+'">'+date[i].meal_type_id+'</a></td>';
+                    //content_html+= '<td><a "/canteenmanagers/'+date[i].id+'">'+date[i].mealtype.meal_type+'</a></td>';
                     content_html+= "</tr>";
                     content_html+= "<tr>";
-                    content_html+= '<td>mealname= <a href="/canteenmanagers/'+date[i].id+'">'+date[i].meal_detail_name+'</a></td>';
+                    content_html+= '<td> <a "/canteenmanagers/'+date[i].id+'">'+date[i].meal_detail_name+'</a></td>';
                     content_html+= "</tr>";              
 		}                 
 		content_html+= "</tbody></table>";
@@ -25,9 +27,16 @@ $(document).ready(function() {
             });
 	},
 	
-	select: function(date) {          
-            
-            angular.element($('#createModal')).scope().newMeal(date)
+	select: function(date) { 
+            var myDate = new Date();
+            var daysToAdd = 0;
+            myDate.setDate(myDate.getDate() + daysToAdd);
+            if (date > myDate) {
+                angular.element($('#createModal')).scope().newMeal(date)
+	    }
+	    else 
+		{ alert('You Cannot Enter Meals For Past Day')}
+            //angular.element($('#createModal')).scope().newMeal(date)
 	} 
 	
     });

@@ -1,4 +1,5 @@
 $(function() {
+   
     $(".change ").on("click", function(event) {	
         if($.cookie('msg') != null && $.cookie('msg') != "")
         {

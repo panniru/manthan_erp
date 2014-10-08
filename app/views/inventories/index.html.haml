@@ -1,75 +1,42 @@
-.col-md-7{"ng-controller" => "InventoriesController"}
-  %h3
-    = " Inventories"
-  - if current_user.canteenmanager?
-    .pull-right
-      = link_to "Request for Inventory", "#", :class => "btn btn-primary", :ng_click => "newInventory()"
-    .pull-left
-      .col-sm-10
-        %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
-          %br
-      
-    %table#tblData.target.table.table-striped.table-condensed.table-bordered
-      %thead
-        %tr
-          %th Name
-          %th Type
-          %th Quantity
-          %th status
+.row
+  %h3 Inventory
+.col-md-9{"ng-controller" => "InventoriesController"}
+  .col-sm-10
+    //- if @inventories.length != 0
           
-      %tbody
-        - @inventories.each do |inv|
-          %tr
-            %td= inv.name
-            %td= inv.inventory_type
-            %td= inv.quantity
-            %td= inv.status
-      .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
-        .modal-dialog
-          .modal-content
-            .modal-header
-              %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
-              %h4.modal-title{ :id => "myModalLabel"} Inventories
-            .modal-body
-              = render "form"
-
-  - if current_user.principal?
     %table#tblData.target.table.table-striped.table-condensed.table-bordered
       %thead
-        %tr
-          %th Name
+        %tr        
           %th Type
-          %th Quantity
-          %th 
-      
-      %tbody
-        - @inventories.request_pending.each do |inv|
-          %tr
-            %td= inv.name
-            %td= inv.inventory_type
-            %td= inv.quantity
-            %th
-              - if(inv.status == 'pending')
-                = link_to "Approve", "#", :class => "approve label label-success",:data=> {:id => inv.id}
-                = link_to "reject", "#", :class => "reject label label-danger",:data=> {:id => inv.id}
-  - if current_user.admin?
-    %table#tblData.target.table.table-striped.table-condensed.table-bordered
-      %thead
-        %tr
           %th Name
-          %th Type
           %th Quantity
-          %th Vendor
-      
+          %th Status
+          - if current_user.principal? or current_user.admin? 
+            %th 
+              - if current_user.principal?
+                %button.btn.btn-primary{"ng-click" => "updateStatus('Approved')"}= "Approve"
+                %button.btn.btn-primary{"ng-click" => "updateStatus('Rejected')"}= "Reject"
+              - if current_user.admin?
+                %button.btn.btn-primary{"ng-click" => "initiateMail()"}= "Order"
       %tbody
-        - @inventories.request_approved.each do |inv|
-          %tr
-            %td= inv.name
-            %td= inv.inventory_type
-            %td= inv.quantity
+        %tr{"ng-repeat" => "inventory in inventories"}
+          %td {{inventory.inventory_type}}
+          %td {{inventory.name}}
+          %td {{inventory.quantity}}
+          - if current_user.canteenmanager? or current_user.principal? or current_user.admin? 
+            %td {{inventory.status}}
+          - if  current_user.principal? or current_user.admin?
             %td
-              = link_to "place order", mail_inventories_path(inv), :class => "order label label-success",:data=> {:id => inv.id}
-              
-                
-
-              
+              %input{"ng-model" => "status", type: "checkbox", "ng-change" => "sendForApproval(status,inventory)", "ng-checked" => "status"}
+              //{{status}}
+        .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+          .modal-dialog
+            .modal-content
+              .modal-header
+                %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+                %h4.modal-title{ :id => "myModalLabel"} Inventories
+              .modal-body
+                = render "form"
+  .col-sm-2
+    - if current_user.canteenmanager?
+      %button.btn.btn-primary{"ng-click" => "newInventory()"}= "Send For Approval"

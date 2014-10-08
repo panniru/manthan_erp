@@ -1,5 +1,4 @@
 function myFunction(date){
-    
     angular.element($('.myFunction')).scope().dailyAttendence(date)
 }
 $(document).ready(function() { 

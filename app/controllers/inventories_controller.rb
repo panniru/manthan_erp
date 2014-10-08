@@ -1,6 +1,6 @@
 class InventoriesController < ApplicationController
   def index
-    @inventories = Inventory.all
+    @inventories = Inventory.all  
   end
 
   def create
@@ -16,7 +16,33 @@ class InventoriesController < ApplicationController
   def new
     @inventories = Inventory.order_placed
   end
- 
+  
+  def get_inventory_view
+    respond_to do |format|
+      format.json do 
+        inv = Inventory.get_request_by_role(current_user)
+        @inventories = inv.each.map do |mapping|
+          { id: mapping.id,inventory_type: mapping.inventory_type, name: mapping.name, quantity: mapping.quantity , status: mapping.status}
+        end     
+        render :json => @inventories
+      end
+    end
+  end
+  
+  def update_inventory_status
+    respond_to do |format|
+      format.json do
+        status = params[:status]
+        status.each do |t|      
+          @status = Inventory.find(t['id'])      
+          @status.status = t['status']
+          @status.save
+        end
+        render :json => true    
+      end
+    end
+  end
+  
   def show
     respond_to do |format|
       format.json do
@@ -90,14 +116,32 @@ class InventoriesController < ApplicationController
       end
     end
   end
+
+  def refresh
+    @inventory = Inventory.find(params[:id])
+    respond_to do |format|
+      if @inventory.update(:status => "Pending")
+        format.json { render json: @inventory , :status => "success"}
+      else
+        format.json { render json: @inventory , :status => "failure"}
+      end
+    end
+  end
   
 
 
   
-  def mail
-    @inventory = Inventory.find(params[:format])
-    UserMailer.vendor(@inventory).deliver
-    redirect_to inventories_path
+  def mail_to_vendors
+    respond_to do |format|
+      format.json do  
+        p "==========================="
+        p params[:inventories]
+
+        #@inventory = Inventory.find(params[:format])
+        UserMailer.vendor(params[:inventories],["navya@ostryalabs.com"]).deliver
+        render :json=>true
+      end
+    end
   end
     
   
@@ -109,7 +153,7 @@ class InventoriesController < ApplicationController
   def  build_inventory_from_bulk
     params.require(:bulk_inventory).select{|inventory| inventory["name"].present? and inventory["inventory_type"].present? and inventory["quantity"].present?}.map do |inventory| 
       Inventory.new(inventory.permit(:name, :inventory_type, :quantity)) do |inventory|
-        inventory.status = 'pending';
+        inventory.status = 'Pending';
       end
     end
   end

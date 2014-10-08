@@ -19,7 +19,7 @@ $(function() {
     $(".order ").on("click", function(event) {
 	id = $(this).data("id");
 	this_klass = $(this)
-	this_klass.text('order placed');
+	this_klass.text('Order Placed');
 	$.ajax({
 	    url: "/inventories/"+id+"/order_placed.json",
 	    type: 'PUT',
@@ -61,7 +61,22 @@ $(function() {
 	});
     });
     
-
+    $(".undo ").on("click", function(event) {	
+	id = $(this).data("id");
+	this_klass = $(this)
+	this_klass.removeClass("label-warning").addClass("label-success");
+	this_klass.text('Undo');
+	$.ajax({
+	    url: "/inventories/"+id+"/refresh.json",
+	    type: 'PUT',
+	    data: "status=success",
+	    success: function(data) {
+		window.location.reload();
+				     
+		this_klass.removeClass("label-warning").addClass("label-success");
+	    }
+	});
+    });
     
 
 
