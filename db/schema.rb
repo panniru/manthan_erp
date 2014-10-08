@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20140923074130) do
+ActiveRecord::Schema.define(version: 20140929141109) do
 
 
   # These are extensions that must be enabled in order to support this database
@@ -207,6 +206,7 @@ ActiveRecord::Schema.define(version: 20140923074130) do
 
   create_table "books", force: true do |t|
     t.string   "name"
+    t.string   "isbn"
     t.string   "author"
     t.date     "year_of_publishing"
     t.string   "number_of_copies"
@@ -215,7 +215,6 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.datetime "updated_at"
     t.string   "year"
     t.string   "book_type"
-    t.string   "isbn"
     t.string   "book_status"
   end
 
@@ -297,6 +296,15 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.string   "enquiry_no"
   end
 
+  create_table "donate_books", force: true do |t|
+    t.integer  "book_id"
+    t.string   "student_name"
+    t.string   "grade_name"
+    t.string   "section_name"
+    t.date     "date_of_donation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "donation_of_books", force: true do |t|
     t.string   "book_name"
@@ -309,7 +317,6 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.string   "grade"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "student_master_id"
   end
 
   create_table "events", force: true do |t|
@@ -423,6 +430,13 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.datetime "updated_at"
   end
 
+  create_table "grade_sections", force: true do |t|
+    t.integer  "section_master_id"
+    t.integer  "grade_master_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "grade_subject_mappings", force: true do |t|
     t.integer  "subject_master_id"
     t.integer  "grade_master_id"
@@ -442,6 +456,19 @@ ActiveRecord::Schema.define(version: 20140923074130) do
   create_table "grading_masters", force: true do |t|
     t.string   "grading_name"
     t.string   "grading_desc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "guest_managements", force: true do |t|
+    t.string   "guest_name"
+    t.string   "guest_phone"
+    t.text     "guest_address"
+    t.string   "guest_email"
+    t.string   "purpose"
+    t.string   "follow_up"
+    t.date     "follow_up_date"
+    t.string   "came_to_meet"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -535,7 +562,7 @@ ActiveRecord::Schema.define(version: 20140923074130) do
   end
 
   create_table "mealnames", force: true do |t|
-    t.string   "meal_type_id"
+    t.integer  "meal_type_id"
     t.string   "meal_detail_name"
     t.date     "canteen_date"
     t.datetime "created_at"
@@ -768,7 +795,6 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.string   "section_name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "grade_master_id"
   end
 
   create_table "special_day_transports", force: true do |t|
@@ -1101,5 +1127,24 @@ ActiveRecord::Schema.define(version: 20140923074130) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "vendor_categories", force: true do |t|
+    t.string   "vendor_category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "vendor_managements", force: true do |t|
+    t.string   "vendor_name"
+    t.integer  "vendor_categories_id"
+    t.string   "vendor_phone"
+    t.string   "vendor_email"
+    t.string   "vendor_alternate_email"
+    t.text     "vendor_address"
+    t.string   "verdor_mobile"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "vendor_category_id"
+  end
 
 end

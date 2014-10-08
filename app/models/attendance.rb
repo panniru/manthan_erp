@@ -1,5 +1,5 @@
 class Attendance < ActiveRecord::Base
-  
+  belongs_to :student_master
   scope :active_at_date, lambda { where("attendance_date < :date and attendance_date > :date", date: Date.today )}
   scope :belongs_to_month, lambda{|month| where("to_char(attendance_date, 'FMMM') = ?", month.to_s)}
   
