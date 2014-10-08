@@ -70,12 +70,9 @@ class ContextDetector
     "mealnames" => "canteen",
     "inventories" => "canteen",
     "attendances" => "attendance_ctrl",
-<<<<<<< HEAD
     "guest_managements" => "hrm_sub_menu",
     "vendor_categories" => "default_master_sub_menu",
-    "vendor_managements" => "hrm_sub_menu"
-=======
->>>>>>> date issue in food_wastage
+    "vendor_managements" => "hrm_sub_menu",
     "food_wastages" => "canteen"
   }
   
