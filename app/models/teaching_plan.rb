@@ -12,7 +12,7 @@ class TeachingPlan < ActiveRecord::Base
 
   def self.student_teaching_plan(student, date)
     data = {}
-    TeachingPlan.includes(:subject_master).select("teaching_plans.id", "teaching_plans.plan_month", "teaching_plans.teaching_date", "teaching_plans.subject_master_id", "subject_masters.subject_name").belongs_to_student(student).dated_on(date).order("teaching_plans.teaching_date DESC").group_by{|t| t.teaching_date}.each do |key, plans| 
+    TeachingPlan.joins(:subject_master).select("teaching_plans.id", "teaching_plans.plan_month", "teaching_plans.teaching_date", "teaching_plans.subject_master_id", "subject_masters.subject_name").belongs_to_student(student).dated_on(date).order("teaching_plans.teaching_date DESC").group_by{|t| t.teaching_date}.each do |key, plans| 
       attrs = plans.map{|plan| plan.attributes.merge!(:subject_name => plan.subject_master.subject_name)}
       data[key.to_s] = attrs
     end

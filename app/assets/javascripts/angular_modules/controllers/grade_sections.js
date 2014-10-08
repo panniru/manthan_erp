@@ -5,7 +5,10 @@
         $scope.section = ""
         $scope.grades = resourceService.GradeMaster.query();
         $scope.fetchSections = function(){
-            $scope.sections = resourceService.SectionMaster.query({grade_master_id: $scope.grade.id});
+            $scope.grade.$sections()
+                .then(function(responce){
+                  $scope.sections = responce.sections;  
+                })
         }
     }]);
 })(angular, myApp);

@@ -334,7 +334,6 @@ DEPENDENCIES
   launchy
   mail
   nested_form!
-  numbers_and_words
   oj
   oj_mimic_json
   paranoia (~> 2.0)

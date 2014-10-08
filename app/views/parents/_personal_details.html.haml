@@ -1,0 +1,24 @@
+.col-md-6
+  .form-group
+    .col-md-4
+      %label.form-label Guardian Name
+    .col-md-6
+      %label.form-label= ": #{@parent.guardian_name}" 
+  .form-group
+    .col-md-4
+      %label.form-label Email
+    .col-md-6
+      %label.form-label= ": #{@parent.guardian_email}" 
+  .form-group
+    .col-md-4
+      %label.form-label Phone
+    .col-md-6
+      %label.form-label= ": #{@parent.guardian_phone}" 
+  .form-group
+    .col-md-4
+      %label.form-label Address
+    .col-md-6
+      %label.form-label= ": #{@parent.address}" 
+.col-md-6
+  %parent_children{:parent_id => "#{@parent.id}", :editable => "false"}
+

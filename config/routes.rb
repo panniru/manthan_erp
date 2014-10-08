@@ -250,6 +250,7 @@ ManthanErp::Application.routes.draw do
     collection do
       get "pay"
       get "transaction_types"
+      get "student_transactions"
     end
     member do
       get "pending_pdcs"
@@ -315,6 +316,9 @@ ManthanErp::Application.routes.draw do
   get "/parent_payment_transactions/admin_transactions"
 
   resources :grade_masters do
+    member do
+      get "sections"
+    end
     resources :section_masters
   end
 

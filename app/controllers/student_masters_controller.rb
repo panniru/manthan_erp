@@ -70,7 +70,7 @@ class StudentMastersController < ApplicationController
   end
 
   def belongs_to_parent
-    @parent = current_user.parent
+    @parent = Parent.find(params[:parent_id])
     respond_to do |format|
       format.json do
         render :json => StudentMastersDecorator.decorate_collection(@parent.students)

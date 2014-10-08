@@ -5,21 +5,6 @@
 #collapse-div0
 
   .col-md-6{:ng_controller => "PaymentTransactionsController", :ng_init => "getParentPaymentTransactions('#{@parent_payment_master.id}')"}
-    .panel.panel-default
-      .panel-heading
-        Transactions
-      %table.table.table-bordered.table-striped.table-hover
-        %thead
-          %th Transaction Date
-          %th Amount
-          %th Type
-          %th Particulars
-        %tbody
-          %tr{"ng-repeat" => "transaction in parent_payment_transactions"}
-            %td {{transaction.transaction_date}}
-            %td {{transaction.amount_in_rupees}}
-            %td {{transaction.transaction_type}}
-            %td {{transaction.particulars}}
-            
+    = render "transaction_history_elements"      
   .col-md-6{:ng_controller => "MonthlyPdcsController", :ng_init => "submitted_pdcs('#{@parent_payment_master.id}')"}
     = render "submitted_pdc"

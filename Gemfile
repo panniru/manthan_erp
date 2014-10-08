@@ -25,7 +25,6 @@ gem 'angular-rails-templates'
 gem 'angular-ui-bootstrap-rails', '~> 0.11.0'
 
 gem 'font-awesome-rails'                
-gem 'numbers_and_words'
 
 group :assets do
   gem 'uglifier', '>= 1.3.0'

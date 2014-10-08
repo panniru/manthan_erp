@@ -11,7 +11,7 @@
                 )
         }
         $scope.reflectMonthChange = function(month){
-            $scope.activeMonth = angular.fromJson(angular.toJson(MONTH_NAME_CONSTS[month-1]))
+            $scope.activeMonth = MONTH_NAME_CONSTS[month-1]
             $scope.$apply()
         }
         

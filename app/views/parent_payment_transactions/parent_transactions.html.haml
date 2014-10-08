@@ -1,22 +1,7 @@
 .col-md-12{:ng_controller => "PaymentTransactionsController", :ng_init => "parentTransactions()"}
-  %parent_childrens{ :parent_id => "#{current_user.id}"}
+  %parent_children{ :parent_id => "#{current_user.parent.try(:id)}", :editable => 'true'}
   
   .col-md-12
     %h3 Transactions
     %hr
-    %table.table.table-bordered.table-striped.table-hover
-      %thead
-        %th Transaction Date
-        %th Amount
-        %th Type
-        %th Particulars
-        %th Status
-      %tbody
-        %tr{"ng-repeat" => "transaction in filtered_payment_transactions"}
-          %td {{transaction.transaction_date}}
-          %td {{transaction.amount_in_rupees}}
-          %td {{transaction.transaction_type}}
-          %td {{transaction.particulars}}
-          %td {{transaction.status}}
-  
-    
+    = render "parent_payment_transactions/shared/transactions"

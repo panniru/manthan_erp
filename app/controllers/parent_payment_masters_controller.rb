@@ -112,6 +112,16 @@ class ParentPaymentMastersController < ApplicationController
       end
     end
   end
+
+  def student_transactions
+    @parent_payment_master = ParentPaymentMaster.find_by_student_id(params[:student_id])
+    respond_to do |format|
+      format.json do
+        data = @parent_payment_master.present? ? @parent_payment_master.parent_payment_transactions.map{|transaction| transaction.attributes} : []
+        render :json => data
+      end
+    end
+  end
   
 
 

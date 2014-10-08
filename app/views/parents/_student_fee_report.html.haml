@@ -1,0 +1,6 @@
+.col-md-6
+  %h4 Fee Structure
+  %grade_fee_details{ :student_id => "#{student.id}"}
+.col-md-6{:ng_controller => "PaymentStudentTransactionsController", :ng_init => "getStudentPaymentTransactions('#{student.id}')"}
+  %h4 Transactions
+  = render "parent_payment_transactions/shared/transactions"

@@ -1,5 +1,6 @@
 class GradeMaster < ActiveRecord::Base
   has_many :section_masters
+  has_many :grade_sections
 
   def self.get_grades_by_role(current_user)    
 

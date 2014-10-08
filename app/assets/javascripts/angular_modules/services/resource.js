@@ -40,7 +40,11 @@
                                           "belongs_to_parent": { url: "/student_masters/belongs_to_parent.json", isArray: true}
                                       }
                                     );
-        var GradeMaster = $resource('/grade_masters/:id.json', {id: '@id'});        
+        var GradeMaster = $resource('/grade_masters/:id.json', {id: '@id'},
+                                    {
+                                        "sections": {url: "/grade_masters/:id/sections.json", id: '@id', method: "GET", isArray: false}
+                                    }
+                                   );        
         var Book = $resource('/books/:id.json', {id: '@id'}, 
                                        {
                                            "bulk": { url: "/books/create_bulk", method:'POST'},

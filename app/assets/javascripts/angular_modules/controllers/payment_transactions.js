@@ -38,10 +38,18 @@
                 }
             })
         }
-
-        $scope.students = resourceService.StudentMaster.belongs_to_parent()
     }]);
 
-    
+    app.controller("PaymentStudentTransactionsController",["$scope","paymentService", function($scope, paymentService) {
+        $scope.getStudentPaymentTransactions = function(studentId){
+            paymentService.student_transactions(studentId)
+                .then(function(response){
+                    $scope.filtered_payment_transactions = response.data;
+                });
+        }
+
+
+    }]);
+
     
 })(angular, myApp);

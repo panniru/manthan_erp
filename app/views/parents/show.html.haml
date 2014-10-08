@@ -1,22 +1,49 @@
-.page-header
-  %h3
-    = @parent.name
-    .pull-right
-      - if can?:create, :Student
-        = link_to "Edit", edit_parent_path(@parent), :class => "btn btn-success"
-        = link_to "Delete", parent_path(@parent), :class => "btn btn-danger", :data => {:confirm => "Are You Sure?", :method => :delete}
-.col-md-12
-  %table.table.table-bordered
-    %thead
-      %th Roll Number
-      %th Name
-      %th Course
-      %th Semester
-      %th Email
-    %tbody
-      %tr
-        %td= @parent.roll_number
-        %td= @parent.name
-        %td= @parent.course_name
-        %td= @parent.semester
-        %td= @parent.user.try(:email)
+.row
+  .col-md-6
+    .form-group
+      .col-md-4
+        %label.form-label Father Name
+      .col-md-6
+        %label.form-label= ": #{@parent.father_name}" 
+    .form-group
+      .col-md-4
+        %label.form-label Email
+      .col-md-6
+        %label.form-label= ": #{@parent.father_email}" 
+    .form-group
+      .col-md-4
+        %label.form-label Phone
+      .col-md-6
+        %label.form-label= ": #{@parent.father_phone}" 
+  .col-md-6
+    .form-group
+      .col-md-4
+        %label.form-label Mother Name
+      .col-md-6
+        %label.form-label= ": #{@parent.mother_name}" 
+    .form-group
+      .col-md-4
+        %label.form-label Email
+      .col-md-6
+        %label.form-label= ": #{@parent.mother_email}" 
+    .form-group
+      .col-md-4
+        %label.form-label Phone
+      .col-md-6
+        %label.form-label= ": #{@parent.mother_phone}" 
+  .col-md-12
+    %ul.nav.nav-tabs
+      %li.active
+        %a{ :href => "#parent_details", :data => { :toggle => "tab"}}
+          Personal Details
+      - @parent.students.each_with_index do |student, index|
+        %li
+          %a{ :href => "#student#{index}", :data => { :toggle => "tab"}, :rel => "studentTransactionTab"}
+            = "#{student.name} Fee Details"
+    .tab-content
+      #parent_details.tab-pane.fade.in.active
+        %br
+        = render "personal_details"
+      - @parent.students.each_with_index do |student, index|
+        %div.tab-pane.fade{:id => "student#{index}"}
+          = render :partial => "student_fee_report", :locals => {:student => student}

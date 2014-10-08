@@ -36,6 +36,12 @@
             return $http.get(url)
         }
 
+        var student_transactions = function(studentId){
+            var url = "/parent_payment_masters/student_transactions.json"
+            return $http.get(url, {params: {student_id: studentId}})
+        }
+        
+
         return {
             student_current_term_fee : student_current_term_fee,
             student_monthly_pdcs : student_monthly_pdcs,
@@ -43,7 +49,8 @@
             parent_payment_transactions : parent_payment_transactions,
             transactionTypes : transactionTypes,
             supportedBanks : supportedBanks,
-            parent_transactions : parent_transactions
+            parent_transactions : parent_transactions,
+            student_transactions : student_transactions
         };
         
     }]);
