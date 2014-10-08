@@ -1,15 +1,15 @@
 (function(angular, app) {
     "use strict";
-    app.controller('GradesSubjectsMappingController',["$scope", "gradeService", "subjectService", "gradesSubjectsMapService", function($scope, gradeService, subjectService, gradesSubjectsMapService) {  
+    app.controller('GradesSubjectsMappingController',["$scope", "timeTableService", "gradesSubjectsMapService", function($scope, timeTableService, gradesSubjectsMapService) {  
         $scope.myShowFormValue = "true";
         $scope.FormValue = "false";
 
-        gradeService.getGradeServiceView()
+        timeTableService.getGradeServiceView()
             .then(function(result) {
                 $scope.grades=result.data;                 
             });
         
-        subjectService.getSubjectServiceView()
+        timeTableService.getSubjectServiceView()
             .then(function(result) {
                 $scope.subjects=result.data;                
             });        

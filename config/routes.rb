@@ -109,7 +109,12 @@ ManthanErp::Application.routes.draw do
   #get "/teaching_plans/gradeserviceview"
   #get "/teaching_plans/sectionserviceview"
 
-  resources :time_tables  
+  resources :time_tables do
+    collection do       
+      get "get_sections_for_grade"
+    end 
+  end 
+
   resources :books do 
     collection do       
       post 'create_bulk'

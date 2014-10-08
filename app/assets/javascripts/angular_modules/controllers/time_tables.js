@@ -1,34 +1,32 @@
 (function(angular, app) {
     "use strict";
-    app.controller('GradeController',["$scope","gradeService","sectionService","subjectService","timeTableService",function($scope,gradeService,sectionService,subjectService,timeTableService) {       
-        gradeService.getGradeServiceView()
+    app.controller('TimeTablesController',["$scope", "timeTableService",function($scope,timeTableService) {       
+        timeTableService.getGradeServiceView()
             .then(function(result) {
-                $scope.grades=result.data
+                $scope.grades=result.data; 
             });
 
         $scope.getSections = function (){
-            sectionService.getSectionServiceView()
+            timeTableService.getSectionsForGradeService($scope.myGrade)
                 .then(function(result) {
-                    $scope.sections=result.data                    
+                    $scope.sections=result.data;
                 });
         };       
         
-        subjectService.getSubjectServiceView()
+        timeTableService.getSubjectServiceView()
             .then(function(result) {
-                $scope.subjects=result.data
-                
+                $scope.subjects=result.data                
             });
-
+        
         timeTableService.getDefaultPeriodsServiceView()
             .then(function(result) {
                 $scope.no_of_periods = result.data
             });
-
+        
         timeTableService.getTimeTableServiceView()
-            .then(function(result) {
-               
+            .then(function(result) {               
             });
-               
+        
         $scope.addPeriods = function (){             
             $scope.myShowValue="false"
             $scope.myValue="true"           
@@ -68,7 +66,7 @@
                 });              
             }
            
-            gradeService.savePeriods($scope.save_timeperiods)
+            timeTableService.savePeriods($scope.save_timeperiods)
                 .then(function(result) {
                    
                 });
@@ -92,21 +90,16 @@
                         $scope.myValue="false"
                         $scope.myShowValue="true"                   
                         $scope.getPeriods($scope.myGrade,$scope.mySection);
-                    }
-                    
-                   
+                    }                   
                 });
         };
 
         $scope.getPeriods = function(grade,section){
-
             timeTableService.getPeriods(grade,section)
                 .then(function(result) {  
                     $scope.timeperiods=result.data                  
-                        $scope.myShowValue="true"
-                   
-                });
-            
+                        $scope.myShowValue="true";                   
+                });            
         };
 
         $scope.editPeriods = function(){ 

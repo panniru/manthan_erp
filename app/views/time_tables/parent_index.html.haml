@@ -1,8 +1,8 @@
-.row{"ng-controller" => "GradeController","ng-init" => "getSections()"}
-  %div{"ng-repeat" =>"section  in sections"} 
+.row{"ng-controller" => "TimeTablesController"}
+  %div{"ng-repeat" =>"grade in grades"} 
     .row
       .col-md-12
-        %h4{style: "font-weight: bold"} NAME: {{section.student_name}} GRADE: {{section.grade_name}} SECTION: {{section.section_name}}
+        %h4{style: "font-weight: bold"} NAME: {{grade.student_name}} GRADE: {{grade.grade_name}} SECTION: {{grade.section_name}}
       .row       
-        %div{"ng-controller" => "GradeController","ng-init" => "getPeriods(section.grade_master_id,section.section_master_id)"}
+        %div{"ng-controller" => "TimeTablesController","ng-init" => "getPeriods(grade.grade_master_id,grade.section_master_id)"}
           = render 'show_periods'

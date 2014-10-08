@@ -9,9 +9,9 @@ class GradeMaster < ActiveRecord::Base
       end
 
     elsif current_user.role.role == "parent"     
-      parents_students = StudentMaster.where('parent_id = '+"#{current_user.parent.id}")      
+      parents_students = StudentMaster.where('parent_id = '+"#{current_user.parent.id}")  
       parents_students_grades = parents_students.all.map do |student|
-          {grade_master_id: student.grade_master_id, grade_name: student.grade_master.grade_name, student_name: student.name}       
+          {grade_master_id: student.grade_master_id, grade_name: student.grade_master.grade_name, section_master_id: student.section_master_id,  section_name: student.section_master.section_name, student_name: student.name}       
       end
          
     elsif current_user.role.role == "teacher"
