@@ -1,4 +1,14 @@
 class AttendancesController < ApplicationController
+  def dates
+    if current_user.teacher?
+      if(ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
+        att_Date = Attendance.all.map do |att_Date|
+          {   att_Date:  att_Date.attendance_date, attendance:  att_Date.attendance, student_name:  att_Date.student_master.name}
+        end
+      end
+      render :json =>  att_Date
+    end
+  end
    def save_student_attendance
      params[:attendence_details].each do |t|
        @temp = Attendance.new(add_attendance_params(t))
@@ -9,20 +19,6 @@ class AttendancesController < ApplicationController
      end
      render :json => true
    end
-  # def save_today_student_attendance
-    
-  #    params[:attendence_details].each do |t|
-  #      @temp = Attendance.new(add_attendance_params(t))
-  #      @temp.student_master_id = t[:student_master_id]
-  #      @temp.attendance = t[:attendance]
-  #      @temp.attendance_date = t[:attendance_date]
-  #      @temp.save
-  #    end
-  #    redirect_to attendances_path
-  #  end
-
-
-
 
   def holidaycalendardata
     respond_to do |format|

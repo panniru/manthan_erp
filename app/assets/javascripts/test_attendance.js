@@ -1,7 +1,6 @@
 $(document).ready(function() { 
     var monthNames = [ "January", "February", "March", "April", "May", "June",
                        "July", "August", "September", "October", "November", "December" ]
-    var view = "holiday";
     var date = new Date();
     var day  = date.getDate();
     var month = date.getMonth() + 1;              
@@ -36,7 +35,7 @@ $(document).ready(function() {
             }
             else {
                 //Put code here to do things if no events on a day
-                alert('There are no events on this day');
+    
             }
         },
         select: function(date) {
