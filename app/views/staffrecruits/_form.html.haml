@@ -19,7 +19,7 @@
           %option{style: "display:none", value: ""} Select Post
         = f.hidden_field :post, :value => "{{myPost.post_name}}"
       .col-sm-3
-        = f.label "Department:", :class => 'control-label'
+        = f.label "Role:", :class => 'control-label'
       .col-sm-3
         %select{"ng-model" => "myLead", "ng-options" => "role.role_name for role in roles", :class => " form-control", :required => "required"}
           %option{style: "display:none", value: ""} Select Role
@@ -92,17 +92,17 @@
       .col-sm-3
         = f.label "Experience:", :class => 'control-label'
       .col-sm-3
-        = f.select :experience, options_for_select([['0-1 year'],['1-2 years'],['2-3 years'],['3-4 years'],['4-5 years'],['5-6 years']]), :class => 'form-control'
+        = f.select(:experience, options_for_select([['0-1 year'],['1-2 years'],['2-3 years'],['3-4 years'],['4-5 years'],['5-6 years']]),{:include_blank => '-Select-'})
      
     .form-group
       .col-sm-3
         = f.label "Expected Salary:", :class => 'control-label'
       .col-sm-3
-        = f.select :expected_salary, options_for_select([['10000'],['10000-20000'],['20000-30000'],['30000']]), :class => 'span3 form-control'
+        = f.select(:expected_salary, options_for_select([['10000'],['10000-20000'],['20000-30000'],['30000']]),{:include_blank => '-Select-'})
       .col-sm-3
         = f.label "Education Qualification:", :class => 'control-label'
       .col-sm-3
-        = f.select :education_qualification, options_for_select([['M.Sc(B.Ed)'],['M.A'],['M.Sc'],['Graduation'],['MBA'],['MCA']])
+        = f.select(:education_qualification, options_for_select([['M.Sc(B.Ed)'],['M.A'],['M.Sc'],['Graduation'],['MBA'],['MCA']]),{:include_blank => '-Select-'})
       
         
       
