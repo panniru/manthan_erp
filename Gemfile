@@ -52,7 +52,7 @@ gem 'devise'
 gem 'delayed_job_active_record'
 gem 'factory_girl_rails'
 gem 'jquery-turbolinks', '~> 0.2.1'
-gem 'fullcalendar-rails', '1.6.4.0'
+gem 'fullcalendar-rails', '1.6.1.0'
 gem 'jbuilder', '~> 1.2'
 gem 'carmen-rails', '~> 1.0.0'
 

@@ -1,25 +1,48 @@
 = form_for @staffrecruit, :html => { :class => "form-horizontal", :role => "form"} do |f|
   .row
   .col-sm-12
-    .form-group{"ng-controller" => "StaffAdmissionsController"}
-      .col-sm-1
+    .form-group
+      .col-sm-3
         = f.label "Form_No:", :class => 'control-label'
-      .col-sm-2
+      .col-sm-3
         = f.text_field :form_no,:class => 'form-control'
-      .col-sm-1
+      .col-sm-3
+        = f.label "Name Of The Applicant:", :class => 'control-label'
+      .col-sm-3
+        = f.text_field :faculty_name,:class => 'form-control'
+
+    .form-group{"ng-controller" => "StaffadminsController"}
+      .col-sm-3
         = f.label "Post:", :class => 'control-label'
-      .col-sm-2{"ng-controller" => "StaffsController"}
-        %select{"ng-model" => "myPost", "ng-options" => "post.post_name for post in posts", :class => "form-control", :required => "required"}
+      .col-sm-3
+        %select{"ng-model" => "myPost", "ng-options" => "post.post_name for post in posts", :class => "staffrecruit_post form-control", :required => "required"}
           %option{style: "display:none", value: ""} Select Post
         = f.hidden_field :post, :value => "{{myPost.post_name}}"
-      .col-sm-1
-        = f.label "Department:", :class => 'control-label'
-      .col-sm-2{"ng-controller" => "StaffadminsController"}
-        %select{"ng-model" => "myLead", "ng-options" => "role.role_name for role in roles", :class => "form-control", :required => "required"}
+      .col-sm-3
+        = f.label "Role:", :class => 'control-label'
+      .col-sm-3
+        %select{"ng-model" => "myLead", "ng-options" => "role.role_name for role in roles", :class => " form-control", :required => "required"}
           %option{style: "display:none", value: ""} Select Role
           = f.hidden_field :dept, :value => "{{myLead.role_name}}"
           = f.hidden_field :staffhead, :value => "{{myLead.head}}"
           = f.hidden_field :role_id, :value => "{{myLead.id}}"
+    .form-group{"ng-controller" => "StaffadminsController"}
+      .col-sm-3
+        = f.label "Preferred Class:", :class => 'staffrecruit_klass control-label'
+      .col-sm-3
+        %select{"ng-model" => "myPreferredClass", "ng-options" => "klass.grade_name for klass in klasses",:class => "staffrecruit_klass form-control",:required => "required"}          
+          %option{style: "display:none", value: ""} Select Grade
+          
+        = f.hidden_field :klass, :value => "{{myPreferredClass.grade_name}}"
+    
+      .col-sm-3
+        = f.label "Preferred Subject:", :class => 'staffrecruit_subject control-label'
+      .col-sm-3
+        %select{"ng-model" => "myPreferredSubject", "ng-options" => "subject.subject_name for subject in subjects",:class => "staffrecruit_subject form-control",:required => "required"}          
+          %option{style: "display:none", value: ""} Select Subject
+          
+        = f.hidden_field :subject, :value => "{{myPreferredSubject.subject_name}}"
+
       -# .col-sm-1
       -#   = f.label "Admin Head:", :class => 'control-label'
       -# .col-sm-2{"ng-controller" => "StaffadminsController"}
@@ -28,13 +51,14 @@
       
     .form-group
       .col-sm-3
-        = f.label "Name Of The Applicant:", :class => 'control-label'
-      .col-sm-3
-        = f.text_field :faculty_name,:class => 'form-control'
-      .col-sm-3
         = f.label "Date Of Birth:", :class => 'control-label'
       .col-sm-3
         = f.text_field :dob,:class => 'datepicker form-control'
+      .col-sm-3
+        = f.label "Nationality:", :class => 'control-label'
+      .col-sm-3
+        = f.country_select :nationality, {object: f.object, prompt: 'India'} 
+      
       
     .form-group
       .col-sm-3
@@ -58,47 +82,27 @@
         = f.label "Address:", :class => 'control-label'
       .col-sm-3
         = f.text_area :address, :class => 'form-control'
+
     .form-group
-      .col-sm-3
-        = f.label "Nationality:", :class => 'control-label'
-      .col-sm-3
-        = f.country_select :nationality, {object: f.object, prompt: 'Country'} 
-      
-    .form-group{"ng-controller" => "KlassController"}
-      .col-sm-3
-        = f.label "Preferred Class:", :class => 'control-label'
-      .col-sm-3
-        %select{"ng-model" => "myRecruitment", "ng-options" => "klass.grade_name for klass in klasses",:class => "form-control",:required => "required"}          
-          %option{style: "display:none", value: ""} Select Grade
-          
-        = f.hidden_field :klass, :value => "{{myRecruitment.grade_name}}"
       .col-sm-3
         = f.label "Known Languages:", :class => 'control-label'
       .col-sm-3
         = f.text_field :language, :class => 'form-control'
-    .form-group{"ng-controller" => "RecruitmentsController"}
-      .col-sm-3
-        = f.label "Preferred Subject:", :class => 'control-label'
-      .col-sm-3
-        %select{"ng-model" => "myRecruitment", "ng-options" => "subject.subject_name for subject in subjects",:class => "form-control",:required => "required"}          
-          %option{style: "display:none", value: ""} Select Subject
-          
-        = f.hidden_field :subject, :value => "{{myRecruitment.subject_name}}"
         
       .col-sm-3
-        = f.label "Experience in Teaching:", :class => 'control-label'
+        = f.label "Experience:", :class => 'control-label'
       .col-sm-3
-        = f.select :experience, options_for_select([['0-1 year'],['1-2 years'],['2-3 years'],['3-4 years'],['4-5 years'],['5-6 years']]), :class => 'form-control'
+        = f.select(:experience, options_for_select([['0-1 year'],['1-2 years'],['2-3 years'],['3-4 years'],['4-5 years'],['5-6 years']]),{:include_blank => '-Select-'})
      
     .form-group
       .col-sm-3
         = f.label "Expected Salary:", :class => 'control-label'
       .col-sm-3
-        = f.select :expected_salary, options_for_select([['10000'],['10000-20000'],['20000-30000'],['30000']]), :class => 'span3 form-control'
+        = f.select(:expected_salary, options_for_select([['10000'],['10000-20000'],['20000-30000'],['30000']]),{:include_blank => '-Select-'})
       .col-sm-3
         = f.label "Education Qualification:", :class => 'control-label'
       .col-sm-3
-        = f.select :education_qualification, options_for_select([['M.Sc(B.Ed)'],['M.A'],['M.Sc'],['Graduation'],['MBA'],['MCA']])
+        = f.select(:education_qualification, options_for_select([['M.Sc(B.Ed)'],['M.A'],['M.Sc'],['Graduation'],['MBA'],['MCA']]),{:include_blank => '-Select-'})
       
         
       
