@@ -1,23 +1,8 @@
 $(document ).ready(function() {
     $('.textbox1').hide();
-    $('.textbox2').hide();
     
     $('#admission_bus').change(function() {
         if ($(this).val() == 't')
-        {
-            $('#admission_transport').show();
-            $('#textbox').show();
-        }
-        else
-        {
-            $('#admission_transport').hide();
-            $('#textbox').hide();
-            
-        }
-                               
-    });
-    $('#admission_transport').change(function() {
-        if ($(this).val() == 'School')
         {
             $('.textbox2').show();
         }
@@ -27,12 +12,7 @@ $(document ).ready(function() {
         }
     });
 
-    $('#admission_bus').change(function()  {
-        if ($(this).val() == 'f')
-        {
-            $('.textbox2').hide();
-        }
-    });
+    
     $('#admission_know_school').change(function() {
         if ($(this).val() != 'Parents whose children are studying here')
         {
@@ -139,54 +119,27 @@ function drawStudentAttendance(studentId){
         }
     });
 }
-//     $('.calendar2').html("");
-//     $('.calendar2').fullCalendar({
-//         header: {
-//             left: 'prev,next today',
-//             center: 'title',
-//             right: 'month,basicWeek,basicDay',
-//             ignoreTimezone: false
-//         },
-        
-//         events: '/admissions.json?teacher_leader_id='+teacher_leader_id,
-        
-//         selectable: true,
-//         select: function(date) {
-//             alert("welcome "+ date);
-//             $('#selectdate').val(date)
-//             $('#myModal').modal('show');                
-//         }
-//     });
-// }
 
 
-// function createStaffAssessment(staff_admission_id) {
-
-//     $('.calendar2').html("");
-//     $('.calendar2').fullCalendar({
-//         header: {
-//             left: 'prev,next today',
-//             center: 'title',
-//             right: 'month,basicWeek,basicDay',
-//             ignoreTimezone: false
-//         },
+function createStaffAssessment(staff_admission_id) {
+    $('.calendar2').html("");
+    $('.calendar2').fullCalendar({
+        events: '/staffrecruits.json?staff_admission_id='+staff_admission_id,
         
-//         events: '/staffrecruits.json?staff_admission_id='+staff_admission_id,
-        
-//         selectable: true,
-//         select: function(date) {
-//             alert("welcome "+ date);
-//             $('#selectdate').val(date)
-//             $('#myModal').modal('show');                
-//         }
-//     });
-// }
+        selectable: true,
+        select: function(date) {
+            $('#selectdate').val(date)
+            $('#myModal').modal('show');                
+        }
+    });
+}
 
-// $(document ).ready(function() {
-//     var modal = function(){
-//         $('body').on('click','.Modal', function(){
-//             $('#Modal').modal('show');
-//         });
-//     }
-//     modal();
-// });
+
+$(document ).ready(function() {
+     var modal = function(){
+         $('body').on('click','.Modal', function(){
+             $('#Modal').modal('show');
+         });
+     }
+     modal();
+});

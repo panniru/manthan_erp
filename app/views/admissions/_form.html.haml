@@ -136,7 +136,7 @@
         %b
           Second Language:
       .col-sm-3
-        = f.select :second_lang, options_for_select([['Hindi'],['English'],['Tamil'],['Telugu'],['Malayalam'],['Urdu'],['Punjabi'],['Marati'],['Kannada'],['Bengali']]),:class => 'form-control' 
+        = f.select(:second_lang, options_for_select([['Hindi'],['English'],['Tamil'],['Telugu'],['Malayalam'],['Urdu'],['Punjabi'],['Marati'],['Kannada'],['Bengali']]),{:include_blank => '-Select-' })
            
 
   %br
@@ -194,7 +194,7 @@
           %b
             Blood Group:
       .col-sm-3
-        = f.select :blood_group, options_for_select([['A+'],['A-'],['B+'],['B-'],['AB+'],['AB-'],['O+'],['O-'],['A1+'],['B1+'],['A1-'],['B1-'],['A1b+'],['A1b-']]),:class => 'form-control' 
+        = f.select(:blood_group, options_for_select([['A+'],['A-'],['B+'],['B-'],['AB+'],['AB-'],['O+'],['O-'],['A1+'],['B1+'],['A1-'],['B1-'],['A1b+'],['A1b-']]),{:include_blank => '-Select-' })
       .col-sm-3
         %h5
           %b
@@ -361,7 +361,7 @@
           %tr
             %td= f.text_field :sib_name, :class => 'form-control'
             %td= f.text_field :sib_age, :class => 'form-control'
-            %td= f.select :sib_sex, options_for_select([['Male'],['Female']]), :class => 'form-control'
+            %td= f.select(:sib_sex, options_for_select([['Male'],['Female']]),{:include_blank => '-Select-' })
             %td= f.text_field :sib_grade, :class => 'form-control'
             %td= f.text_field :sib_school, :class => 'form-control'
           

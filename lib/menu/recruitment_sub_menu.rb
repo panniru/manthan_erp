@@ -19,17 +19,13 @@ class RecruitmentSubMenu < Struct.new(:controller)
   def teacher_sub_menu
     sub_menu = []
     sub_menu << view_schedule
-    sub_menu << assessment_completed
   end
   
   def principal_sub_menu
     sub_menu = []
     sub_menu << senior_management_review
     sub_menu << assessment_completed
-    sub_menu << assessment_planned
-    sub_menu << documentation_verification
-    sub_menu << enquiry_form
-    
+       
   end
 
   private 

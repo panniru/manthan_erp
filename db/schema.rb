@@ -11,7 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20140923074130) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +60,7 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.string   "middle_name"
     t.string   "name"
     t.string   "klass"
-    t.string   "dob"
+    t.date     "dob"
     t.string   "gender"
     t.string   "nationality"
     t.string   "language"
@@ -294,6 +296,7 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.string   "status"
     t.string   "enquiry_no"
   end
+
 
   create_table "donation_of_books", force: true do |t|
     t.string   "book_name"
@@ -865,6 +868,7 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.integer  "faculty_master_id"
     t.integer  "user_id"
     t.string   "dept"
+    t.integer  "role_id"
   end
 
   create_table "staffs", force: true do |t|
@@ -895,12 +899,12 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.date     "joining_date"
     t.string   "academic_year"
     t.integer  "parent_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "grade_master_id"
-    t.integer  "section_master_id"
-    t.boolean  "bus_facility"
-    t.integer  "branch_id"
+    t.string   "finalresult"
+    t.string   "closestatus"
+    t.string   "description"
+    t.string   "start_time"
+    t.string   "end_time"
+    t.string   "branch"
     t.string   "surname"
     t.string   "second_lang"
     t.string   "board"
@@ -911,14 +915,47 @@ ActiveRecord::Schema.define(version: 20140923074130) do
     t.string   "spoken"
     t.string   "blood_group"
     t.string   "gender"
-    t.string   "nationality"
     t.string   "language"
-    t.string   "last_school"
-    t.string   "address_line1"
-    t.string   "address_line2"
+    t.string   "admission_no"
+    t.string   "allergy"
+    t.string   "doctor_name"
+    t.string   "doctor_mobile"
+    t.string   "guardian_mobile"
+    t.string   "guardian_name"
+    t.string   "guardian_relationship"
+    t.string   "from"
+    t.string   "to"
+    t.string   "middle_name"
+    t.string   "klass"
+    t.string   "father_name"
+    t.string   "mother_name"
+    t.string   "nationality"
+    t.string   "income"
+    t.text     "address"
+    t.string   "landline"
+    t.string   "mobile"
+    t.string   "email"
+    t.string   "transport"
+    t.string   "busstop"
     t.string   "city"
     t.string   "state"
     t.string   "pin"
+    t.string   "changing_reason"
+    t.string   "know_school"
+    t.string   "last_school"
+    t.string   "person"
+    t.string   "pp"
+    t.string   "status"
+    t.string   "sib_name"
+    t.string   "sib_age"
+    t.string   "sib_sex"
+    t.string   "sib_grade"
+    t.string   "sib_school"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "grade_master_id"
+    t.integer  "section_master_id"
+    t.boolean  "bus_facility"
     t.string   "form_no"
   end
 

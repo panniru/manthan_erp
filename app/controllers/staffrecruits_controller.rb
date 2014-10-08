@@ -1,5 +1,8 @@
 class StaffrecruitsController < ApplicationController
- 
+  def enquiry_show
+    @staffrecruit = Staffrecruit.find(params[:id])
+  end
+
   def update_admission
     @staffrecruit = Staffrecruit.find(params[:id])
     respond_to do |format|
@@ -63,6 +66,28 @@ class StaffrecruitsController < ApplicationController
   def upload_document
     @staffrecruit = Staffrecruit.find(params[:id])
   end
+  def get_klass_view
+    klass = TeacherLeader.all.map do |klass|
+      { grade_name: klass.klass,faculty_name: klass.faculty_leader, id: klass.id}
+    end
+    render :json => klass
+  end
+  
+  def get_head_view
+    head = Staffadmin.all.map do |head|
+      { head_name: head.head,dept: head.dept,id: head.id}
+    end
+    render :json => head
+  end
+
+  
+  def get_post_view
+    post = Add.all.map do |post|
+      { post_name: post.title,id: post.id}
+    end
+    render :json => post
+  end
+  
 
   def get_subject_view
     subject = SubjectMaster.all.map do |subject|
@@ -70,13 +95,7 @@ class StaffrecruitsController < ApplicationController
     end
     render :json => subject
   end
-  
-  def get_klass_view
-    klass = TeacherLeader.all.map do |klass|
-      { grade_name: klass.klass, id: klass.id }
-    end
-    render :json => klass
-  end
+
   def document_verification
     @staffrecruit = Staffrecruit.find(params[:id])
   end
@@ -85,10 +104,26 @@ class StaffrecruitsController < ApplicationController
   end
  
   def index
-    if params[:staff_admission_id].present?
-      @staffrecruits = Staffrecruit.where(:staff_admission_id => params[:staff_admission_id])
-    else
-      @staffrecruits = Staffrecruit.application_forms
+    if current_user.admin?
+      if params[:staff_admission_id].present?
+        @staffrecruits = Staffrecruit.where(:staff_admission_id => params[:staff_admission_id])
+      else
+        @staffrecruits = Staffrecruit.application_forms
+      end
+    end
+    if current_user.teacher?
+      if params[:staff_admission_id].present?
+        @staffrecruits = Staffrecruit.where(:staff_admission_id => params[:staff_admission_id])
+      else
+        @staffrecruits = Staffrecruit.assessment_planned
+      end
+    end
+    if current_user.principal?
+      if params[:staff_admission_id].present?
+        @staffrecruits = Staffrecruit.where(:staff_admission_id => params[:staff_admission_id])
+      else
+        @staffrecruits = Staffrecruit.assessment_completed
+      end
     end
   end
   def create

@@ -39,12 +39,12 @@
           .pull-left
             = f.label "Male/Female: ", :class => ' control-label'
         .col-sm-3
-          = f.select :gender, options_for_select([['Male'],['Female']])
+          = f.select(:gender, options_for_select([['Male'],['Female']]),{:include_blank => '-Select-' })
         .col-sm-3
           .pull-left
             = f.label "Language spoken at home: ", :class => 'control-label'
         .col-sm-3
-          = f.select :language, options_for_select([['Hindi'],['English'],['Tamil'],['Telugu'],['Malayalam'],['Punjabi'],['Marati'],['Urdu']])
+          = f.select(:language, options_for_select([['Hindi'],['English'],['Tamil'],['Telugu'],['Malayalam'],['Punjabi'],['Marati'],['Urdu']]),{:include_blank => '-Select-' })
  
       .form-group
         .col-sm-3
@@ -57,7 +57,7 @@
           .pull-left
             = f.label "Family Income: ", :class => 'control-label'
         .col-sm-3
-          = f.select :income, options_for_select([['Less than Rs.20,000 p.m.'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']])
+          = f.select(:income, options_for_select([['Less than Rs.20,000 p.m.'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']]),{:include_blank => '-Select-' })
         
         
       .form-group
@@ -98,12 +98,12 @@
           .pull-left
             = f.label "Father's Education: ", :class => 'control-label'
         .col-sm-3
-          = f.select :father_education, options_for_select([['Upto SSC'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']])
+          = f.select(:father_education,options_for_select([['Upto SSC'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']]),{:include_blank => '-Select-' })
         .col-sm-3
           .pull-left
             = f.label "Mother's Education: ", :class => 'control-label'
         .col-sm-3
-          = f.select :mother_education, options_for_select([['Upto SSC'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']])
+          = f.select(:mother_education, options_for_select([['Upto SSC'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']]),{:include_blank => '-Select-' })
       .form-group
         .col-sm-3
           .pull-left
@@ -132,16 +132,10 @@
           .pull-left
             = f.label "Bus Facility: ", :class => 'control-label'
         .col-sm-3
-          = f.select(:bus, options_for_select([['Yes','t'],['No','f']]),{:class => 'form-control'})
-      .form-group
-        .col-sm-3
-          .pull-left#textbox
-            = f.label "Choice of Transport:", :class => 'control-label'
-        .col-sm-3
-          = f.select :transport, options_for_select([['Private'],['School']])
+          = f.select(:bus, options_for_select([['Yes','t'],['No','f']]),{:class => 'form-control'},{:include_blank => '-Select-' })
         .col-sm-3
           .pull-left
-            = f.label "Bus Stop", :class => 'textbox2'
+            = f.label "Bus Stop:", :class => 'textbox2'
         .col-sm-3
           = f.text_field :busstop, :class => 'textbox2 form-control'
         
@@ -169,7 +163,7 @@
           .pull-left
             = f.label "Know about our school through:", :class => 'control-label'
         .col-sm-3
-          = f.select(:know_school, options_for_select([['Friends'],['Advertisements'],['Internet'],['Word of Mouth'],['Parents whose children are studying here']]),{ :class => 'form-control' })
+          = f.select(:know_school, options_for_select([['Friends'],['Advertisements'],['Internet'],['Word of Mouth'],['Parents whose children are studying here']]),{:include_blank => '-Select-' })
       .form-group
         .col-sm-3
           .pull-left

@@ -13,6 +13,7 @@ class Staffrecruit < ActiveRecord::Base
   scope :application_forms, lambda{where("status = 'Application_Created' or status = 'Document_Verified' or status = 'Assessment_Planned'or status = 'Assessment_Completed' or status = 'Management_Reviewed' or status = 'Selected'")}
   scope :closed_forms,lambda{where("status = 'Form_Closed' or final_result = 'Rejected'")}
   scope :document_verified,lambda{where("status = 'Document_Verified'")}
+  scope :assessment_planned,lambda{where("status = 'Assessment_Planned'")}  
   scope :assessment_completed,lambda{where("status = 'Assessment_Completed'")}
   scope :management_review,lambda{where("status = 'Management_Reviewed'")}
   scope :selected_staffs,lambda{where("final_result = 'Selected' and status != 'Form_Closed'")}
