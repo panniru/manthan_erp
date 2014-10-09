@@ -1,5 +1,5 @@
 .col-md-12{:ng_controller => "PaymentTransactionsController", :ng_init => "parentTransactions()"}
-  %parent_children{ :parent_id => "#{current_user.parent.try(:id)}", :editable => 'true'}
+  %parent_children{ :parent_id => "#{current_user.parent.try(:id)}", :editable => 'true', :checked_item => "checked_item(student)"}
   
   .col-md-12
     %h3 Transactions

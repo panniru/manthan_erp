@@ -730,5 +730,10 @@ ManthanErp::Application.routes.draw do
     end    
   end
   resources :vendor_categories
-
+ 
+  resources :faculty_masters do
+    member do
+      get "dashboard"
+    end
+  end
 end

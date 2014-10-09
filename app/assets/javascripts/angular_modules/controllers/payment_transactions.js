@@ -18,6 +18,7 @@
         }
 
         $scope.checked_item = function(student){
+
             if($("#student-"+student.id).is(':checked')){
                 $scope.selectedStudents.push(student.id)
             }else{

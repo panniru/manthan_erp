@@ -5,11 +5,14 @@
             restrict: 'E',
             scope: {
                 parentId: '=',
-                editable: '='
+                editable: '=',
+                checked_item: "&checkedItem"
             },
             controller: ["$scope", "resourceService", function($scope, resourceService){
-                console.log($scope.editable)
                 $scope.students = resourceService.StudentMaster.belongs_to_parent({parent_id: $scope.parentId })
+                $scope.mark_item = function(student){
+                    $scope.checked_item({student: student})
+                }
             }],
             templateUrl: 'parent_children.html'
         };

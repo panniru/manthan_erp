@@ -9,8 +9,8 @@
     %tbody
       %tr{:ng_repeat => "student in students"}
         %td{:ng_show => "editable"}   
-          %input{:type => "checkbox", :ng_click => "$parent.checked_item(student)", :id => "student-{{student.id}}"}
-        %td {{student.name }} {{editable}}  
+          %input{:type => "checkbox", :ng_click => "mark_item(student)", :id => "student-{{student.id}}"}
+        %td {{student.name }}
         %td {{ student.grade }}
         %td {{ student.section }}
         %td {{ student.academic_year }}

@@ -15,7 +15,6 @@ class FacultyMaster < ActiveRecord::Base
       faulty_names = FacultyMaster.where('id = '+"#{current_user.faculty_master.id}").all.map do |faculty|
         {faculty_master_id: faculty.id, faculty_name: faculty.name}
       end
-     
     end
   end
      

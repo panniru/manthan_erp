@@ -1,0 +1,50 @@
+.row
+  .col-md-8
+    .form-group
+      .col-md-4
+        %label.form-label Name
+      .col-md-6
+        %label.form-label= ": #{@faculty_master.faculty_name}" 
+    .form-group
+      .col-md-4
+        %label.form-label Email
+      .col-md-6
+        %label.form-label= ": #{@faculty_master.email}" 
+    .form-group
+      .col-md-4
+        %label.form-label Mobile
+      .col-md-6
+        %label.form-label= ": #{@faculty_master.mobile_no}" 
+  .col-md-4
+    = image_tag "student.ico", :class => "img-rounded"
+.col-md-12
+  %ul.nav.nav-tabs
+    %li.active
+      %a{ :href => "#personal_details", :data => { :toggle => "tab"}}
+        Personal Details
+    %li
+      %a{ :href => "#address", :data => { :toggle => "tab"}}
+        Address
+    %li
+      %a{ :href => "#transport", :data => { :toggle => "tab"}}
+        Transport
+    %li
+      %a{ :href => "#timeTable", :data => { :toggle => "tab"}}
+        Time Table
+    %li
+      %a{ :href => "#attendance", :data => { :toggle => "tab"}}
+        Attendance
+    %li
+      %a{ :href => "#payroll", :data => { :toggle => "tab"}}
+        Payroll
+
+  .tab-content
+    %br
+    #personal_details.tab-pane.fade.in.active
+      = render "personal_details"
+    #address.tab-pane.fade
+    #transport.tab-pane.fade
+    #timeTable.tab-pane.fade
+    #attendance.tab-pane.fade
+    #payroll.tab-pane.fade
+
