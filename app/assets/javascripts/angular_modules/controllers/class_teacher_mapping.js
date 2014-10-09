@@ -1,6 +1,107 @@
 (function(angular, app) {
     "use strict";
-    app.controller('ClassTeacherMappingController',["$scope", "classTeacherService", "teachersService", function($scope, classTeacherService, teachersService) { 
+    app.controller('ClassTeacherMappingController',["$scope", "timeTableService", "classTeacherService", "teachersService", function($scope, timeTableService,  classTeacherService, teachersService) { 
+        
+        timeTableService.getGradeServiceView()
+            .then(function(result) {
+                $scope.grades=result.data; 
+            });
+
+        $scope.showClassTeacherMappings  = function (){             
+            classTeacherService.getClassTeacherMappings($scope.myGrade)
+                .then(function(result) {                   
+                    $scope.mappings = result.data;
+                    //alert(JSON.stringify($scope.mappings));
+                });   
+            
+        };
+
+        $scope.editMapping = function (mapping){
+            $scope.mapping = mapping; 
+            $scope.getGradeSectionsFaculties();
+            $('#myEditModal').modal('show');                       
+        };
+
+        $scope.addMapping = function (mapping){
+            $scope.mapping = mapping; 
+            $('#myModal').modal('show');                
+        };
+
+        $scope.getGradeSectionsFaculties = function (){ 
+            timeTableService.getSectionsForGradeService($scope.mapping['grade_master_id'])
+                .then(function(result) {
+                    $scope.sections=result.data;
+                    alert(JSON.stringify($scope.sections));
+                });
+            
+            classTeacherService.getGradeWiseFacultyNames($scope.mapping['grade_master_id'])
+                .then(function(result) {                     
+                    $scope.faculty_names = result.data;
+                    alert(JSON.stringify($scope.faculty_names));
+                });
+        }; 
+        
+        
+        $scope.deleteMappingsA =  function($index){ 
+            alert();
+            $scope.delete_mappping_id = $scope.mappings[$index]['id']
+
+            classTeacherService.deleteMappings($scope.delete_mappping_id)
+                .then(function(result) {
+                    
+                });   
+        };
+        
+        $scope.saveMapping = function(){          
+            classTeacherService.saveMappings($scope.mapping)
+                .then(function(result) {
+                    
+                });  
+        };
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         $scope.showMappings  = function (grade_id){                   
             $scope.myGrade = grade_id             

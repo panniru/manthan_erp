@@ -50,5 +50,92 @@
  
   .row{"ng-show" => "myShowFormValue"} 
     = render "show_form" 
+  .row
+    .col-md-1
+    .col-md-10
+      .col-md-2 
+      .col-md-8
+        .col-md-6 
+          .col-md-12
+            = label_tag(:grade, "Select Grade") 
+          .form-group.col-md-12
+            %select{"ng-model" => "myGrade", "ng-options" => "grade.grade_master_id as grade.grade_name for grade in grades | orderBy:'grade_name'", :ng_change => "showClassTeacherMappings()",:class => "form-control",:required => "required"}          
+              %option{style: "display:none", value: ""} Select Grade  
+
+        .col-md-2
+          %input{:type => "button", :class => "btn btn-primary", "ng-click" => "addMapping({})", :value => "ADD"}
+      
+    .col-md-1
+  .row
+    .col-md-1
+    .col-md-8
+      %table{:class => "table"}
+        %tr       
+          %th GRADE
+          %th SECTION
+          %th TEACHER
+          %th EDIT
+          %th DELETE          
+        %tr{"ng-repeat" => "mapping in mappings| orderBy:'id'"}        
+          %td {{mapping['grade_name']}}
+          %td {{mapping['section_name']}}          
+          %td {{mapping['faculty_name']}}   
+          %td
+            = link_to raw("<span class='glyphicon glyphicon-pencil'></span>"),"#", :class => "btn btn-warning btn-sm", :title => "EDIT", :ng_click => "editMapping(mapping)"
+          %td          
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteMappingsA($index)"
+  .row
+    #myEditModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+            %h4.modal-title{ :id => "myModalLabel"} Edit Mapping
+          .modal-body
+            .row
+              {{mapping}}
+              {{sections}}
+              {{faculty_names}}
+            %table.table-striped.table-condensed.table-bordered
+              %thead            
+                %th GRADE
+                %th SECTION
+                %th TEACHER  
+              %tbody
+                %tr
+                  %td 
+                    %select{"ng-model" => "mapping.grade_master_id", "ng-options" => "grade.grade_master_id as grade.grade_name for grade in grades ",:class => "form-control","ng-change" => "getGradeSectionsFaculties()"}
+                  %td
+                    %select{"ng-model" => "mapping.section_master_id", "ng-options" => "section.section_master_id as section.section_name for section  in sections ",:class => "form-control"}        
+                  %td
+                    %select{"ng-model" => "mapping.faculty_master_id", "ng-options" => "faculty.faculty_master_id as faculty.faculty_name for faculty in faculty_names",:class => "form-control"} 
+            .row
+              .col-md-2
+                %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveEditMappings()"}=  "SAVE"
+
     
   
+  .row
+    #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+            %h4.modal-title{ :id => "myModalLabel"} Add Mapping
+          .modal-body
+            %table.table-striped.table-condensed.table-bordered
+              %thead            
+                %th GRADE
+                %th SECTION
+                %th TEACHER  
+              %tbody
+                %tr
+                  %td 
+                    %select{"ng-model" => "mapping.grade_master_id", "ng-options" => "grade.grade_master_id as grade.grade_name for grade in grades ",:class => "form-control","ng-change" => "getGradeSectionsFaculties()"}
+                  %td
+                    %select{"ng-model" => "mapping.section_master_id", "ng-options" => "section.section_master_id as section.section_name for section  in sections ",:class => "form-control"}  
+                  %td
+                    %select{"ng-model" => "mapping.faculty_master_id", "ng-options" => "faculty.faculty_master_id as faculty.faculty_name for faculty in faculty_names",:class => "form-control"} 
+            .row
+              .col-md-2
+                %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveMapping()"}=  "SAVE"
