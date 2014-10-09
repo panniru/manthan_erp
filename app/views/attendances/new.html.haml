@@ -1,0 +1,33 @@
+.row
+  .col-sm-8{:ng_controller => "AttendanceController"}
+    %body{:onload => "myFunction()"}
+      %table.table.table-bordered.table-condensed.table-striped
+        %thead
+          %tr
+            %th Student's Name
+            %th 
+              %label{for: "P", :id => "P"} P
+            %th
+              %label{for: "A", :id => "A"} A
+            %th
+              %label{for: "L", :id => "L"} L
+        %tbody
+          %tr{"ng-repeat" => "student in students"}
+            %td
+              {{student.name}}
+            %td
+              %input{:ng_model =>"student['attendance']", type: "radio", value: "P"} 
+            %td
+              %input{:ng_model =>"student['attendance']", type: "radio", value: "A"} 
+            %td
+              %input{:ng_model =>"student['attendance']", type: "radio", value: "L"} 
+              = hidden_field_tag :attendance, :value => "{{student['attendance']}}"
+            
+      %center
+        %input{:type => "button", :class => "myFunction btn btn-primary", "ng-click" => "saveStudentAttendance()", :value => "Submit", "ng-model" => "date"}
+            
+  
+
+  .col-sm-4{:ng_controller => "AttendanceController"}
+    #attendance_calendar
+    = render "form"

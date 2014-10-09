@@ -1,0 +1,41 @@
+class RemoveFieldsFromStudentMaster < ActiveRecord::Migration
+  def change
+    remove_column :student_masters, :academic_year, :string
+    remove_column :student_masters, :finalresult, :string
+    remove_column :student_masters, :closestatus, :string
+    remove_column :student_masters, :description, :string
+    remove_column :student_masters, :start_time, :string
+    remove_column :student_masters, :end_time, :string
+    remove_column :student_masters, :from, :string
+    remove_column :student_masters, :to, :string
+    remove_column :student_masters, :busstop, :string
+    remove_column :student_masters, :status, :string
+    remove_column :student_masters, :board, :string
+    remove_column :student_masters, :medium, :string
+    remove_column :student_masters, :year, :string
+    remove_column :student_masters, :written, :string
+    remove_column :student_masters, :reading, :string
+    remove_column :student_masters, :spoken, :string
+    remove_column :student_masters, :klass, :string
+    remove_column :student_masters, :father_name, :string
+    remove_column :student_masters, :mother_name, :string
+    remove_column :student_masters, :income, :string
+    remove_column :student_masters, :address, :text
+    remove_column :student_masters, :landline, :string
+    remove_column :student_masters, :mobile, :string
+    remove_column :student_masters, :email, :string
+    remove_column :student_masters, :transport, :string
+    remove_column :student_masters, :city, :string
+    remove_column :student_masters, :changing_reason, :string
+    remove_column :student_masters, :know_school, :string
+    remove_column :student_masters, :last_school, :string
+    remove_column :student_masters, :person, :string
+    remove_column :student_masters, :pp, :string
+    remove_column :student_masters, :sib_name, :string
+    remove_column :student_masters, :sib_age, :string
+    remove_column :student_masters, :sib_sex, :string
+    remove_column :student_masters, :sib_grade, :string
+    remove_column :student_masters, :sib_school, :string
+    remove_column :student_masters, :form_no, :string
+  end
+end

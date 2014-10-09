@@ -707,7 +707,7 @@ ManthanErp::Application.routes.draw do
       get 'getStudentAndAttendanceView'
       get 'attendance_date'
       get 'week'
-      get 'dates'
+      get 'attendance_on_date'
     end
   end
 
