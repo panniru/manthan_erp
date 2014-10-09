@@ -89,3 +89,4 @@ end
 
 # 
 gem 'composite_primary_keys'
+gem 'rails_12factor'
