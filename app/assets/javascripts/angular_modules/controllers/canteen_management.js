@@ -4,6 +4,8 @@
         $scope.mealtypes = resourceService.Mealtype.query();       
         $scope.newMeal = function(date){
             $scope.newMeals = []
+	    alert(date)
+	    //var dateFormat = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()
 	    $scope.canteenDate = date
             for(var i=0; i<1; i++){
                 $scope.newMeals.push({"meal_type":"", "time" :""});
@@ -21,7 +23,6 @@
                             canteen_date: "",
                         });
                     }
-               //     alert(JSON.stringify($scope.mealnames));
                 });      
             $('#createModal').modal('show')
         };
@@ -57,6 +58,7 @@
 	canteenManagementService.getmealnameView()
 	    .then(function(response){
 		$scope.meals = response.data
+		
 	    });
 
 	

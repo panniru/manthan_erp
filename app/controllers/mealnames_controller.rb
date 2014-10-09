@@ -1,11 +1,12 @@
 class MealnamesController < ApplicationController
   def index
     @mealnames = Mealname.all
-    @meal = @mealnames.group_by { "current_date" }
   end
+
   def new
     @mealnames = Mealname.new
   end
+
   def create   
     @mealnames = Mealname.new(mealname_params)
     if @mealnames.save
@@ -15,6 +16,7 @@ class MealnamesController < ApplicationController
       #render "new"
     end
   end
+
   def show
     @mealnames = Mealname.all
   end
@@ -39,16 +41,10 @@ class MealnamesController < ApplicationController
   def get_meal_names
     respond_to do |format|
       format.json do 
-        meal = Mealname.all
-        #select("canteen_date, count(*) as data").group("canteen_date")
-        meals = meal.each.map do |mapping|
-          { id: mapping.id, meal_detail_name: mapping.meal_detail_name , canteen_date: mapping.canteen_date}
-        end  
-        render :json => meals
-      end
+        render :json => Mealname.date_wise_meals
+        end
     end
   end
-  
 
   def mealname_params
     params.require(:mealnames).permit(:mealtype_id, :meal_detail_name, :canteen_date)
@@ -69,12 +65,12 @@ class MealnamesController < ApplicationController
   def canteen_date
     respond_to do |format|
       format.json do
+        p "11111111111"
+        p params[:date]
         canteen_date = Mealname.where("canteen_date = '#{params[:date]}'")
         canteen_date = canteen_date.map do |canteen|
           {id: canteen.canteen_date, meal_type_id: canteen.meal_type_id, meal_detail_name: canteen.meal_detail_name }
         end    
-        p"=============="
-        p canteen_date
         render :json => canteen_date
       end
     end
@@ -107,12 +103,8 @@ class MealnamesController < ApplicationController
   def build_mealname_from_bulk
     params.require(:bulk_meal).select{|mealname| mealname["mealtype_id"].present? and mealname["meal_detail_name"].present?}.map do |mealname| 
       Mealname.new(mealname.permit(:mealtype_id, :meal_detail_name)) do |meal|
-
         meal.canteen_date = params[:canteen_date]
       end
     end
-    
   end
-  
-  
 end

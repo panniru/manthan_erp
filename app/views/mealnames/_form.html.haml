@@ -4,17 +4,18 @@
       .modal-header
         %h4#myModalLabel.modal-title Daily Meals
         %form{:class=>"form-horizontal", :ng_submit => "submitMenus()"}
+          %hr
           .modal-body
             .row
               .col-md-4                  
                 = label_tag "Date"
               .col-sm-4
-                = text_field_tag :canteen_date, "{{canteenDate}}", :class => 'form-control ', :id => "canteen_date", :readonly => true;                   
+                = text_field_tag :canteen_date, "{{canteenDate}}", :class => 'form-control ', :id => "canteen_date" ,:readonly => true;                  
                 %br
             .row{:ng_repeat => "meal in mealnames"}
               .col-sm-4
 
-                %h3 
+                %h4 
                   %b {{meal.meal_type}}
               .col-sm-4
                 = text_field_tag "",nil, :class => 'form-control', :ng_model => "meal['meal_detail_name']", :placeholder => "Meal Name"
@@ -24,10 +25,10 @@
                 
                 
                 
-                
-          .modal-footer
-            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
-            = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+            %center   
+              .row
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
+                = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
  
 
    

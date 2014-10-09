@@ -78,15 +78,14 @@
 	   
 	    canteenManagementService.requestInventoryMail($scope.myStatus)
 	    	.then(function(responce){
-                    alert('cont')
-		    var alert_msg = '<div class="alert alert-success alert-dismissable">'+
+                    var alert_msg = '<div class="alert alert-success alert-dismissable">'+
 			'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
 			responce.data+'</div>'
                     $("#appAlert").html(alert_msg)
 		});  
             $scope.updateStatus('Ordered');
         };
-
+	
 	
         
     }]);
