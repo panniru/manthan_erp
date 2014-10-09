@@ -36,7 +36,8 @@
                     $scope.check_teachers_grades_mapping = result.data                    
                     if ($scope.check_teachers_grades_mapping == 0)
                     {
-                        $scope.addMappings();
+                        $scope.mappings = [];
+                        $scope.addMapping();
                     }
                     else
                     {                          
@@ -48,14 +49,19 @@
                 });
         };
         
-        $scope.addMapping = function (mapping){ 
+        $scope.addMapping = function (mapping){
+            $scope.sections = [];
+            $scope.subjects = [];
             $('#myModal').modal('show');
             $scope.mapping = mapping;  
         };
 
-        $scope.editMapping = function (mapping){ 
-            $('#myEditModal').modal('show');
-            $scope.mapping = mapping;             
+        $scope.editMapping = function (mapping){
+            $scope.sections = [];
+            $scope.subjects = [];
+            $scope.mapping = mapping; 
+            $scope.getSectionsSubjects();
+            $('#myEditModal').modal('show');                       
         };
 
         $scope.saveMappings = function(){           

@@ -34,8 +34,12 @@
         .modal-content
           .modal-header
             %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
-            %h4.modal-title{ :id => "myModalLabel"} Add Section
+            %h4.modal-title{ :id => "myModalLabel"} Edit Mapping
           .modal-body
+            .row
+              {{mapping}}
+              {{sections}}
+              {{subjects}}
             %table.table-striped.table-condensed.table-bordered
               %thead            
                 %th GRADE
@@ -45,6 +49,7 @@
                 %tr
                   %td 
                     %select{"ng-model" => "mapping.grade_master_id", "ng-options" => "grade.grade_master_id as grade.grade_name for grade in grades ",:class => "form-control","ng-change" => "getSectionsSubjects()"}
+                    {{mapping.grade_master_id}}
                   %td
                     %select{"ng-model" => "mapping.section_master_id", "ng-options" => "section.section_master_id as section.section_name for section  in sections ",:class => "form-control"}        
                   %td
