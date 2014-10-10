@@ -56,37 +56,35 @@ class ClassTeacherMappingsController < ApplicationController
         
         teachersgrademappings = teachersgrademappings.all.map do |mapping|
           {id: mapping.id, faculty_master_id: mapping.faculty_master_id, faculty_name: mapping.faculty_master.faculty_name}
-          end               
+        end               
         t = teachersgrademappings.uniq { |h| h[:faculty_master_id] }        
         render :json =>t        
       end
     end
-
-    def save_mappings
-      respond_to do |format|
-        format.json do  
-          p params[:mappings]
-          p "================>"
-          params[:mappings].each do |t| 
-            p t 
-            p "@@@@@@@@@@@=>"
-            if t.id.present?              
-              temp = ClassTeacherMapping.find(t["id"])
-              temp.grade_master_id = t["grade_master_id"]
-              temp.section_master_id = t["section_master_id"]
-              temp.faculty_master_id = t["faculty_master_id"]    
-              temp.save
-            else              
-              @mapping = ClassTeacherMapping.new(add_params(t))
-              @mapping.save
-            end
-          end
-          render :json => true
-        end
-      end
-    end
   end
 
+  def save_mappings
+    respond_to do |format|
+      format.json do  
+        mappings = params[:mappings]
+        p mappings 
+        mappings.each do |map|
+          if  map[:id].present?    
+            temp = ClassTeacherMapping.find(map[:id])
+            temp.grade_master_id = map["grade_master_id"]
+            temp.section_master_id = map["section_master_id"]
+            temp.faculty_master_id = map["faculty_master_id"]    
+            temp.save  
+          else              
+            @mapping = ClassTeacherMapping.new(add_params(map))
+            @mapping.save
+          end
+        end
+          p "================>"             
+        render :json => true
+      end
+    end
+  end  
 
   def deletemappings
     respond_to do |format|

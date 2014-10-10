@@ -2,19 +2,16 @@
     "use strict";
     app.service("classTeacherService",["$http", function($http) {
         var getClassTeacherMappings = function(myGrade){
-            //alert("h");
             var url = "/class_teacher_mappings/get_class_teacher_mappings.json"
             return $http.get(url, {params:{my_Grade: myGrade}}); 
         };        
 
         var getGradeWiseMappings = function(myGrade){
-            //alert("h");
             var url = "/class_teacher_mappings/get_grade_wise_mappings.json"
             return $http.get(url, {params:{my_Grade: myGrade}}); 
         };
 
         var getGradeWiseFacultyNames  = function(myGrade){
-            //alert("h");
             var url = "/class_teacher_mappings/get_grade_wise_faculty_names.json"
             return $http.get(url, {params:{my_Grade: myGrade}}); 
         };
@@ -31,7 +28,6 @@
         };
         
         var checkForTeacherMapping = function(faculty_ids){
-            //alert("h");
             var url = "/class_teacher_mappings/check_for_teacher_mapping.json"
             return $http.get(url); 
         }; 
@@ -42,12 +38,7 @@
             getGradeWiseFacultyNames : getGradeWiseFacultyNames,
             saveMappings : saveMappings,
             deleteMappings : deleteMappings,
-            checkForTeacherMapping : checkForTeacherMapping
-            
+            checkForTeacherMapping : checkForTeacherMapping            
         }
-
-
     }]);
-
-
 })(angular, myApp);
