@@ -1,45 +1,18 @@
-.row{"ng-controller" => "TermResultsController"} 
+.row{"ng-controller" => "TermResultsController"}
   .row
     .col-md-1
     .col-md-10
-      %table{:class => "table"}
-        %tr
-          %th TERM         
-          %th FROM DATE 
-          %th TO DATE 
-          %th STATUS
-          - @academic_terms.each do |academic_term|
-            %tr
-              %td
-                %a{href: "#", "ng-click" =>"initiateMail('#{academic_term.term_name}')"}= academic_term.term_name     
-              %td= academic_term.from_date                     
-              %td= academic_term.to_date 
-              %td
+      .col-md-3
+        %a{href: "#", :class => "btn btn-primary", :title => "Trigger Term Results", "ng-click" => "showTrigger()"} TRIGGER
+      .col-md-3
+        %a{href: "#", :class => "btn btn-primary", :title => "Show Term results", "ng-click" => "showShow()"} SHOW
     .col-md-1
-  .row
-    .modal.fade{ :id => "mailSubjectModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
-      .modal-dialog
-        .modal-content
-          .modal-header
-            %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
-            %h4.modal-title{ :id => "myModalLabel"} MAIL TO ALL FACULTY MEMBERS
-          .modal-body
-            .row
-              .col-md-10
-                .col-md-2
-                  = label_tag "SUBJECT", nil, :class => "form-label"
-                .col-md-10
-                  = text_field_tag "",nil, :class => "form-control", :ng_model => "myMailSubject", :disabled => "disabled"             
-              .col-md-2
-            .row
-              .col-md-10
-                .col-md-2
-                  = label_tag "MESSAGE", nil, :class => "form-label"
-                .col-md-10
-                  = text_area_tag "",nil, :class => "form-control", :ng_model => "myMailMessage"
-              .col-md-2{"ng-controller" => "MailingController"}
-                %button{:type => "button", :class=> "btn btn-primary", :ng_click => "termResultsMail(myMailSubject,myMailMessage)"}=  "SEND"
-            
+  %br
+  %br  
+  .row{"ng-show" => "showTriggerForm"}
+    = render "principal_trigger_form"
+  .row{"ng-show" => "showShowForm"}   
+    = render "principal_show_form"           
 
 
 

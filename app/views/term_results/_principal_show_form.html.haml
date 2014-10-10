@@ -1,0 +1,40 @@
+.row  
+  .row
+    .col-md-1
+    .col-md-10
+      .col-md-3
+        = label_tag(:grade, "SELECT GRADE-SECTION")      
+        %select{"ng-model" => "studentGradeSection", "ng-options" => "mapping as mapping.student_grade_section for mapping  in grades_sections | orderBy:'grade_master_id'", "ng-change" => "getGradeSectionStudents()", :class => "form-control", :href => "#"}   
+          %option{style: "display:none", value: ""} select grade - section  
+        //{{studentGradeSection}}
+    .col-md-1
+  %br
+  %br
+  .row
+    .col-md-1
+    .col-md-10
+      %table.table.table-bordered.table-striped.table-hover
+        %thead
+          %th STUDENT NAME 
+          - @academic_terms.each do |academic_term|
+            %th TERM  
+        %tbody
+          %tr{"ng-repeat" => "student in students"}
+            %td {{student.student_name}}        
+            %td{"ng-repeat" => "academic_term in academic_terms | orderBy: 'term_name'"}
+              %a{href: "#", "ng-click" =>"showStudentTermResults(academic_term,student)"} {{academic_term.term_name}}
+    .col-md-1  
+  %br
+  %br
+  .row{"ng-show" => "student_Result"}
+    .col-md-1
+    .col-md-10
+      .row{"ng-repeat" => "grade_subject in grade_subjects"}
+        %h4 {{grade_subject.subject_name}}
+        %table.table.table-bordered.table-striped.table-hover
+          %thead{"ng-repeat" => "mapping in subject_wise_criteria"}
+            %tr{"ng-repeat" => "mappinga in mapping.assessment_criteria |filter:{subject_master_id : grade_subject.subject_master_id}"}
+              %td {{mappinga.subject_criteria}}                       
+              %td{"ng-repeat" => "term_result in term_results | filter: {assessment_criteria_id : mappinga.id}"}
+                {{term_result.grading_name}} 
+    .col-md-1 

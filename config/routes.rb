@@ -679,9 +679,15 @@ ManthanErp::Application.routes.draw do
       get 'get_student_details'
       get 'get_subject_assessment_criteria'
       post 'save_term_results'
+      get 'get_grades_sections'
+      get 'get_grade_subjects'
+      get 'get_student_term_results'
+      get 'teacher_index'
+      get 'principal_index'
+      get 'class_teacher_show'
     end  
   end
-  
+
   resources :libraries do   
     collection do
     end  

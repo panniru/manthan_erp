@@ -68,10 +68,7 @@
             }) 
              . when('/assessment_results/students_show_form', {
                 templateUrl: 'academics/assessment_results/students_show_form.html'               
-            }) 
-
-
-        
+            })         
            
     }]);
 })(angular, myApp);
