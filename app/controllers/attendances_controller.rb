@@ -3,13 +3,8 @@ class AttendancesController < ApplicationController
   def attendance_on_date
     respond_to do |format|
       format.json do
-        attendances = Attendance.where("attendance_date = #{params[:date]}")
-        attendances = attendances.map do |attendance|
-          date = attendance.attendance_date.strftime("%Y/%m/%d") 
-          {date: date, attendance: attendance.attendance, name: attendance.student_master.name}
-        end
-        render :json => attendances
-        p attendances
+        render :json => StudentReport::Attendence.students_attendance_on_date(params[:date], current_user.faculty_master)
+        p params[:date]
       end
     end
   end
@@ -67,11 +62,7 @@ class AttendancesController < ApplicationController
   end
 
   def index
-    if Attendance.where("attendance_date = #{params[:date]}")
-      render 'index'
-    else
-      render 'new'
-    end
+   
   end
   
     def get_students

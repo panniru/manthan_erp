@@ -21,7 +21,27 @@ module StudentReport
     def student_summarized_monthly_report
       Attendance.student_summarized_monthly_report(@student.id)
     end
-
+    
+    def self.students_attendance_on_date(date, faculty)
+      attendances = Attendance.on_date(date).taken_by_faculty(faculty.id)
+      data = []
+      
+      if attendances.count > 0
+        data = attendances.map do |attendance|
+          {date: date, attendance: attendance.attendance, student_name: attendance.student_master.name}
+        end
+      else
+        section_master = ClassTeacherMapping.show_all_students(faculty.id).first.try(:section_master)
+        date = Date.today
+        if section_master.present?
+          data = section_master.students.map do |student|
+            {date: date, attendance: "", student_name: student.name, student_id: student.id}
+          end
+        end
+      end
+      data
+    end
+    
     private
     
     def fetch_month_data(month)
@@ -43,7 +63,4 @@ module StudentReport
       end
     end
   end
-  
-
-  
 end
