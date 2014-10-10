@@ -1,5 +1,5 @@
 .row{"ng-controller" => "CanteensController"}
-  - if current_user.canteenmanager?
+  - if current_user.canteenmanager? or current_user.admin?
     .col-md-7
       %h3
         = "Daily Meals"
@@ -16,20 +16,20 @@
               {{meal.meal_type}}
              
         %tbody
-          //- @mealnames.each do |mealname|
-         
-          %tr{"ng-repeat" => "mealname in meals"}
-            %td {{mealname.canteen_date}}
-            %td {{mealname.meal_detail_name}}
+          %tr{"ng-repeat" => "(date, meals) in meals"}
+            %td {{date}}
+            %td{"ng-repeat" => "meal in mealtypes"}= "{{meals[meal.meal_type]}}"
               
  
         -# %td
           -# = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_mealname_path(mealname), :class => "btn btn-warning btn-sm", :title => "Edit"
             -# = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), mealname_path(mealname), :class => "btn btn-danger btn-sm", :data => {:method => 'del
               ete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+ 
     .col-sm-2
       #canteen_calendar
-        = render "form"
+        - if current_user.canteenmanager?
+          = render "form"
       %h5 *Click on the corressponding date to save the meal
 
   - if current_user.parent?
@@ -38,28 +38,4 @@
         = "Daily Meals"
         #canteen_calendar
           
-  - if current_user.admin?
-    .col-sm-7
-      %h3
-        = "Daily Meals"
-        %hr
-      %table#tblData.target.table.table-striped.table-condensed.table-bordered
-        %thead
-          %tr
-            %th date
-            %th Mealtype
-            %th mealname          
-    
-            
-        %tbody
-          - @mealnames.each do |mealname|
-            %tr
-              %td= mealname.canteen_date
-              %td= mealname.meal_type_id
-              %td= mealname.meal_detail_name
-    
-             
-  .col-sm-2
-    #canteen_calendar
-      
-      
+ 

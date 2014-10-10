@@ -1,9 +1,13 @@
-function myFunction(date){
-    angular.element($('.myFunction')).scope().dailyAttendence(date)
-}
+
 $(document).ready(function() { 
-    var today = new Date();
-  
+
+
+    if($(".fc-event").length > 0){
+        $('.fc-event-inner').addClass("fc-state-disabled");
+        alert("Image loaded.");
+    }
+
+
     var monthNames = [ "January", "February", "March", "April", "May", "June",
                        "July", "August", "September", "October", "November", "December" ]
     $('#attendance_calendar').html("");
@@ -38,8 +42,6 @@ $(document).ready(function() {
                 }     
             });
         }
-         
-        
     });
 });
 

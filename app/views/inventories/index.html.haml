@@ -23,12 +23,11 @@
           %td {{inventory.inventory_type}}
           %td {{inventory.name}}
           %td {{inventory.quantity}}
-          - if current_user.canteenmanager? or current_user.principal? or current_user.admin? 
-            %td {{inventory.status}}
+          %td {{inventory.status}}
           - if  current_user.principal? or current_user.admin?
             %td
               %input{"ng-model" => "status", type: "checkbox", "ng-change" => "sendForApproval(status,inventory)", "ng-checked" => "status"}
-              //{{status}}
+                //{{status}}
         .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
           .modal-dialog
             .modal-content
@@ -40,3 +39,31 @@
   .col-sm-2
     - if current_user.canteenmanager?
       %button.btn.btn-primary{"ng-click" => "newInventory()"}= "Send For Approval"
+.col-md-9{"ng-controller" => "InventoriesController"}
+  .row
+    .col-sm-10
+      - if current_user.canteenmanager?
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"}
+                Delivered Inventory
+          #collapseOne.panel-collapse.collapse
+            .panel-body
+              %table.table.table-bordered
+                %thead
+                  %tr        
+                    %th Type
+                    %th Name
+                    %th Quantity
+                    %th Status
+                    %th  
+                      %button.btn.btn-primary{"ng-click" => "updateStatus('Delivered')"}= "Delivered"
+                %tbody
+                  %tr{"ng-repeat" => "inventory in inventories| filter:status = 'Ordered'"}
+                    %td {{inventory.inventory_type}}
+                    %td {{inventory.name}}
+                    %td {{inventory.quantity}}
+                    %td {{inventory.status}}
+                    %td
+                      %input{"ng-model" => "status", type: "checkbox", "ng-change" => "sendForApproval(status,inventory)", "ng-checked" => "status"}

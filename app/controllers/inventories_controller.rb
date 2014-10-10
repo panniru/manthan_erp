@@ -17,6 +17,8 @@ class InventoriesController < ApplicationController
     @inventories = Inventory.order_placed
   end
   
+ 
+  
   def get_inventory_view
     respond_to do |format|
       format.json do 

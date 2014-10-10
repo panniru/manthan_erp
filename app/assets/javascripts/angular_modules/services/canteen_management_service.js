@@ -28,7 +28,6 @@
 	};
 
 	var requestInventoryMail =  function(inventories){
-	    alert(JSON.stringify(inventories))
 	    var url = "/inventories/mail_to_vendors.json"
             return $http.post(url, { inventories: inventories});
 	    

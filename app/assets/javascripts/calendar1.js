@@ -26,11 +26,19 @@ $(document).ready(function() {
 		curr_object.popover({html:true,title:event.title,placement:'top',container:'body', content: content_html}).popover('show');
             });
 	},
+
+
+	
+
 	
 	select: function(date) { 
-            var myDate = new Date();
+	   
+	    var myDate = new Date();
+	    var day  = date.getDate();
+	    var month = date.getMonth() + 1;              
+	    var year =  date.getFullYear();
             var daysToAdd = 0;
-            myDate.setDate(myDate.getDate() + daysToAdd);
+           
             if (date > myDate) {
                 angular.element($('#createModal')).scope().newMeal(date)
 	    }
