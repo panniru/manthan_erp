@@ -64,9 +64,13 @@ class ClassTeacherMappingsController < ApplicationController
 
     def save_mappings
       respond_to do |format|
-        format.json do          
+        format.json do  
+          p params[:mappings]
+          p "================>"
           params[:mappings].each do |t| 
-            if t["id"].present?              
+            p t 
+            p "@@@@@@@@@@@=>"
+            if t.id.present?              
               temp = ClassTeacherMapping.find(t["id"])
               temp.grade_master_id = t["grade_master_id"]
               temp.section_master_id = t["section_master_id"]
