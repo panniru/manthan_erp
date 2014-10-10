@@ -1,9 +1,9 @@
 (function(angular, app) {
     "use strict";
-    app.controller('AssessmentCriteriaController',["$scope", "assessmentCriteriaService", "subjectService", "gradeService", function($scope, assessmentCriteriaService, subjectService, gradeService) {
+    app.controller('AssessmentCriteriaController',["$scope", "assessmentCriteriaService", 'timeTableService', function($scope, assessmentCriteriaService, timeTableService) {
         $scope.myShowIndexValue= true;       
 
-        gradeService.getGradeServiceView()
+        timeTableService.getGradeServiceView()
             .then(function(result) {
                 $scope.grades=result.data
             });
@@ -45,10 +45,11 @@
         };
 
         $scope.showAssessmentsCriteriaMappings = function()
-        {
-            $scope.myShowFormValue = "false";
-            $scope.myFormValue = "false";
-            myShowIndexValue= true;
+        { 
+            $scope.myShowIndexValue= true;
+            $scope.myShowFormValue = true;
+            $scope.myFormValue = "false";           
+            $scope.getAssessmentsCriteriaMappings($scope.myGrade);
         };
 
         $scope.editAssessmentCriteriaMappings = function()
@@ -57,7 +58,7 @@
             $scope.checked_value = false;
             $scope.grades_all = $scope.grades;
             $scope.assessment_grades=[];
-            subjectService.getSubjectServiceView()
+            timeTableService.getSubjectServiceView()
                 .then(function(result) {
                     $scope.subjects=result.data;                     
                 }); 
@@ -117,9 +118,8 @@
             $scope.delete_mappping_id = assessment_id
             assessmentCriteriaService.deleteAssessmentCriteriaMappings($scope.delete_mappping_id)
                 .then(function(result) {
-                    
+                    $scope.showAssessmentsCriteriaMappings();                                                
                 }); 
-            $scope.getAssessmentsCriteriaMappings($scope.myGrade);            
         }; 
     }]);    
     
