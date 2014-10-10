@@ -1,6 +1,11 @@
 (function(angular, app) {
     "use strict";
     app.service("attendanceService",["$http", function($http) {
+        var getAttendanceOnDate = function(date){
+            var url = "/attendances/attendance_on_date.json?date="+date
+            return $http.get(url);
+        };
+
         var getAttendanceServiceView = function(date){
             var url = "/attendances/get_students.json"
             return $http.get(url);
@@ -16,6 +21,7 @@
         };
 
         return {
+            getAttendanceOnDate : getAttendanceOnDate,
             getAttendanceServiceView : getAttendanceServiceView,
             saveStudentAttendance : saveStudentAttendance,
             getStudentAndAttendanceView : getStudentAndAttendanceView,

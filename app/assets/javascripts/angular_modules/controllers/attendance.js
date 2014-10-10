@@ -11,7 +11,10 @@
             }
            
         }
-     
+        attendanceService.getAttendanceOnDate()
+	    .then(function(response){
+		$scope.attendances = response.data
+	    });
      
         $scope.myShowFormValue = true;
         $scope.myEditFormValue = false;
@@ -21,9 +24,10 @@
         $scope.datesToFilter = function()
         {
             indexedDates = [];
-            return $scope.attendances;
+            return $scope.save_attendance_details;
         }
         $scope.filterDates = function(attendance) {
+            
             var dateIsNew = indexedDates.indexOf(attendance.attendance_date) == -1;
             if(dateIsNew) {
                 indexedDates.push(attendance.attendance_date);
@@ -39,11 +43,9 @@
 
         $scope.dailyAttendence = function(date){
             var date = new Date();
-            alert('ang c');
             $scope.date = ((date.getDate()) + "-"+ (date.getMonth()+1) + "-" + (date.getFullYear())); 
 
         }
-
         attendanceService.getAttendanceServiceView()
             .then(function(result) {
                  //alert(JSON.stringify(result.data));
