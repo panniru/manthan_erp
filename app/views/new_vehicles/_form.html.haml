@@ -22,14 +22,14 @@
       .col-sm-4
         = f.label "Purchase"
       .col-sm-2
-        = f.select "purchase_option" , options_for_select([['Own'],['Lease']])
+        = f.select "purchase_option" , options_for_select([['Own'],['Lease']]), :class => 'form-control'
         %br
         %br
     .row
       .col-sm-4
         = f.label "Purchase Date"
       .col-sm-3
-        = f.text_field "purchase_option_date", :class => 'datepicker'
+        = f.text_field "purchase_option_date", :class => 'datepicker form-control'
         %br
         %br
     .row

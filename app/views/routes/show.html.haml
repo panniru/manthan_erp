@@ -21,11 +21,6 @@
       = label_tag "Ending Point:", nil, :class => "form-label"
     .col-sm-3
       = label_tag @route.end_location.location_master.location_name 
-      %br
-      %br
-      %br
-  .row
-    .col-sm-2
     .col-sm-2
       = link_to "Students", "#", :class => "btn btn-primary" , :ng_click => "allStudents(#{@route.id})"
       #studentModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}

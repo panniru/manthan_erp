@@ -13,10 +13,15 @@
        gmap_data = Gmaps4rails.build_markers(locations) do |location, marker|
          marker.lat location.location_master.latitude
          marker.lng location.location_master.longitude
+         marker.picture({
+                          :url => "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|00D900" ,
+                          :width   => 40,
+                          :height  => 40
+                        })
        end
        gon.gmap_data = gmap_data.to_json
-       gon.width = "750px"
-       gon.height = "350px"
+       gon.width = "400px"
+       gon.height = "300px"
        respond_to do |format|   
          format.json do
            routes = @routes.map do |r|
