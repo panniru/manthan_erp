@@ -144,7 +144,6 @@ def seed_grades
     GradeMaster.create(:grade_name => '5')
     GradeMaster.create(:grade_name => '6')
     GradeMaster.create(:grade_name => '7')
-    GradeMaster.create(:grade_name => '7')
     GradeMaster.create(:grade_name => '8')
     GradeMaster.create(:grade_name => '9')
     GradeMaster.create(:grade_name => '10')  
@@ -161,10 +160,10 @@ end
 def seed_students
   student = StudentMaster.first
   unless student.present?
-    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.first.id, :bus_facility => true, :section_master_id => '1')
+    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :parent_id => Parent.first.id, :grade_master_id => GradeMaster.first.id, :bus_facility => true, :section_master_id => '1')
 
-    StudentMaster.create(:name => "Srikanth", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.first.id, :grade_master_id => GradeMaster.last.id, :bus_facility => true ,:section_master_id => '1')
-    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :academic_year => "#{DateTime.now.year}-#{DateTime.now.year+1}", :parent_id => Parent.last.id, :grade_master_id => GradeMaster.first.id, :bus_facility => true, :section_master_id => '1')
+    StudentMaster.create(:name => "Srikanth", :dob => "17-06-1989", :joining_date => DateTime.now, :parent_id => Parent.first.id, :grade_master_id => GradeMaster.last.id, :bus_facility => true ,:section_master_id => '1')
+    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :grade_master_id => GradeMaster.first.id, :bus_facility => true, :section_master_id => '1')
     StudentMaster.create(:name => "Gopika", :grade_master_id => "1")
     StudentMaster.create(:name => "Priya", :grade_master_id => "1")
     StudentMaster.create(:name => "Navya", :grade_master_id => "1")
@@ -366,6 +365,35 @@ def seed_special_day_transport
   end
 end
 
+def seed_sections
+  unless SectionMaster.first.present?
+    SectionMaster.create(:section_name => 'A')
+    SectionMaster.create(:section_name => 'B')
+    SectionMaster.create(:section_name => 'C')
+    SectionMaster.create(:section_name => 'D')
+    SectionMaster.create(:section_name => 'E')
+    SectionMaster.create(:section_name => 'F')
+    SectionMaster.create(:section_name => 'G')
+    SectionMaster.create(:section_name => 'H')
+    SectionMaster.create(:section_name => 'I')
+    SectionMaster.create(:section_name => 'J')
+    SectionMaster.create(:section_name => 'K')
+    SectionMaster.create(:section_name => 'L')  
+  end
+end
+
+def seed_gradings
+  unless GradingMaster.first.present?
+    GradingMaster.create(:grading_name => 'A+', :grading_desc => 'Outstanding')
+    GradingMaster.create(:grading_name => 'A', :grading_desc => 'Excellent')
+    GradingMaster.create(:grading_name => 'B', :grading_desc => 'Very Good')
+    GradingMaster.create(:grading_name => 'B-', :grading_desc => 'Good')
+    GradingMaster.create(:grading_name => 'C', :grading_desc => 'Pass')
+    GradingMaster.create(:grading_name => 'F', :grading_desc => 'Fail')
+    GradingMaster.create(:grading_name => 'NA', :grading_desc => 'Not Appeared')
+  end
+end
+  
 def seed_all
   seed_role
   seed_user   
@@ -389,9 +417,8 @@ def seed_all
   seed_student_route_mapping
   seed_class_teacher_mapping
   seed_special_day_transport
-
-  
-
+  seed_sections
+  seed_gradings
 end
 
 seed_all

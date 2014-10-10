@@ -79,8 +79,7 @@ class ClassTeacherMappingsController < ApplicationController
             @mapping = ClassTeacherMapping.new(add_params(map))
             @mapping.save
           end
-        end
-          p "================>"             
+        end            
         render :json => true
       end
     end
