@@ -3,177 +3,187 @@
     = render "shared/error_messages", :object => f.object
     .col-sm-12
       .form-group
-        .col-sm-3
+        .col-sm-2
           .pull-left
             = f.label "Form no:", :class => 'control-label'
             
-        .col-sm-3
+        .col-sm-2
           = f.text_field :form_no, :class => 'form-control'
-              
+        .col-sm-2
    
-        .col-sm-3
+        .col-sm-2
           .pull-left
             = f.label "Name of the Student:", :class => 'control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :name, :class => 'form-control'
             
       .form-group{"ng-controller" => "AdmissionsController"}
-        .col-sm-3
+        .col-sm-2
           .pull-left
-            = label_tag(:grade,"Admission sought into Class:")
-        .col-sm-3
+            = label_tag(:grade,"Class:")
+        .col-sm-2
           %select{"ng-model" => "myAdmission", "ng-options" => "klass.grade_name for klass in klasses",:class => "form-control",:required => "required"}          
             %option{style: "display:none", value: ""} Select Grade
           
           = f.hidden_field :grade, :value => "{{myAdmission.grade_name}}"
           = f.hidden_field :grade_master_id, :value => "{{myAdmission.id}}"
-        
-        .col-sm-3
+        .col-sm-2
+        .col-sm-2
           .pull-left
             = f.label "Date of Birth: ", :class => 'control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :dob, :class => 'datepicker form-control'
 
       .form-group
-        .col-sm-3
+        .col-sm-2
           .pull-left
             = f.label "Male/Female: ", :class => ' control-label'
-        .col-sm-3
-          = f.select(:gender, options_for_select([['Male'],['Female']]),{:include_blank => '-Select-' })
-        .col-sm-3
+        .col-sm-2
+          = f.select(:gender, options_for_select([['Male'],['Female']]),{:include_blank => '-Select-' }, :class => 'admission')
+        .col-sm-2
+        .col-sm-2
           .pull-left
-            = f.label "Language spoken at home: ", :class => 'control-label'
-        .col-sm-3
-          = f.select(:language, options_for_select([['Hindi'],['English'],['Tamil'],['Telugu'],['Malayalam'],['Punjabi'],['Marati'],['Urdu']]),{:include_blank => '-Select-' })
- 
+            = f.label "Mother Tongue:", :class => 'control-label'
+        .col-sm-2
+          = f.select :language, options_from_collection_for_select(LanguageList::COMMON_LANGUAGES, "name", "name"),{:include_blank => '-Select-'}, :class => 'admission'
+        
       .form-group
-        .col-sm-3
+        .col-sm-2
           .pull-left
             = f.label "Nationality: ", :class => 'control-label'
-        .col-sm-3
-          = f.country_select :nationality, {object: f.object, prompt: 'India'}
-
-        .col-sm-3
+        .col-sm-2
+          = f.country_select :nationality, {object: f.object, prompt: 'India'}, :class => 'admission'
+        .col-sm-2
+        .col-sm-2
           .pull-left
             = f.label "Family Income: ", :class => 'control-label'
-        .col-sm-3
-          = f.select(:income, options_for_select([['Less than Rs.20,000 p.m.'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']]),{:include_blank => '-Select-' })
+        .col-sm-2
+          = f.select(:income, options_for_select([['Less than Rs.20,000 p.m.'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']]),{:include_blank => '-Select-' }, :class => 'admission')
         
         
       .form-group
-        .col-sm-3
+        .col-sm-2
           .pull-left
             = f.label "Father's Name:", :class => 'control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :father_name, :class => 'form-control'
-        .col-sm-3
+        .col-sm-2
+        .col-sm-2
           .pull-left
             = f.label "Mother's Name: ", :class => 'control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :mother_name, :class => 'form-control'
       .form-group
-        .col-sm-3
+        .col-sm-2
           .pull-left
             = f.label "Father's Occupation: ", :class => 'control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :father_occupation, :class => 'form-control'
-        .col-sm-3
+        .col-sm-2
+        .col-sm-2
           .pull-left
             = f.label "Mother's Occupation: ", :class => 'control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :mother_occupation, :class => 'form-control'
       .form-group
-        .col-sm-3
+        .col-sm-2
           .pull-left
             = f.label "Company's Name: ", :class => 'control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :father_company, :class => 'form-control'
-        .col-sm-3
+        .col-sm-2
+        .col-sm-2
           .pull-left
             = f.label "Company's Name: ", :class => 'control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :mother_company, :class => 'form-control'
       .form-group
-        .col-sm-3
+        .col-sm-2
           .pull-left
             = f.label "Father's Education: ", :class => 'control-label'
-        .col-sm-3
-          = f.select(:father_education,options_for_select([['Upto SSC'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']]),{:include_blank => '-Select-' })
-        .col-sm-3
+        .col-sm-2
+          = f.select(:father_education,options_for_select([['Upto SSC'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']]),{:include_blank => '-Select-' }, :class => 'admission')
+        .col-sm-2
+        .col-sm-2
           .pull-left
             = f.label "Mother's Education: ", :class => 'control-label'
-        .col-sm-3
-          = f.select(:mother_education, options_for_select([['Upto SSC'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']]),{:include_blank => '-Select-' })
+        .col-sm-2
+          = f.select(:mother_education, options_for_select([['Upto SSC'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']]),{:include_blank => '-Select-' }, :class => 'admission')
       .form-group
-        .col-sm-3
+        .col-sm-2
           .pull-left
             = f.label "Residential Address:", :class => 'control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_area :address, :class => 'form-control'
-        .col-sm-3
+        .col-sm-2
+        .col-sm-2
           .pull-left
             = f.label "Email: ", :class => 'control-label'          
-        .col-sm-3
+        .col-sm-2
           = f.text_field :email, :class => 'form-control'
       .form-group
-        .col-sm-3
+        .col-sm-2
           .pull-left
             = f.label "Landline: ", :class => 'control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :landline, :class => 'form-control'
-        .col-sm-3
+        .col-sm-2
+        .col-sm-2
           .pull-left
             = f.label "Mobile: ", :class => 'control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :mobile, :class => 'form-control'
       
       .form-group
-        .col-sm-3
+        .col-sm-2
           .pull-left
             = f.label "Bus Facility: ", :class => 'control-label'
-        .col-sm-3
-          = f.select(:bus, options_for_select([['Yes','t'],['No','f']]),{:class => 'form-control'},{:include_blank => '-Select-' })
-        .col-sm-3
+        .col-sm-2
+          = f.select(:bus, options_for_select([['Yes','t'],['No','f']]),{:include_blank => '-Select-' },:class => 'admission')
+        .col-sm-2
+        .col-sm-2
           .pull-left
             = f.label "Bus Stop:", :class => 'textbox2'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :busstop, :class => 'textbox2 form-control'
         
           
         
       .form-group
-        .col-sm-3
+        .col-sm-2
           .pull-left
-            = f.label "School in Which Last Studied:", :class => 'control-label'
-        .col-sm-3
+            = f.label "Previous School :", :class => 'control-label'
+        .col-sm-2
           = f.text_field :last_school, :class => 'form-control'
-        .col-sm-3
+        .col-sm-2
+        .col-sm-2
           .pull-left
             = f.label "City: ", :class => 'control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :city, :class => 'form-control'
       .form-group
-        .col-sm-3
+        .col-sm-2
           .pull-left
             = f.label "Reasons for Changing:  ", :class => 'control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :changing_reason, :class => 'form-control'
- 
-        .col-sm-3
+        .col-sm-2
+        .col-sm-2
           .pull-left
             = f.label "Know about our school through:", :class => 'control-label'
-        .col-sm-3
-          = f.select(:know_school, options_for_select([['Friends'],['Advertisements'],['Internet'],['Word of Mouth'],['Parents whose children are studying here']]),{:include_blank => '-Select-' })
+        .col-sm-2
+          = f.select(:know_school, options_for_select([['Friends'],['Advertisements'],['Internet'],['Word of Mouth'],['Parents whose children are studying here']]),{:include_blank => '-Select-' }, :class => 'admission')
       .form-group
-        .col-sm-3
+        .col-sm-2
           .pull-left
             = f.label "Name:", :class => 'textbox1 control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :person, :class => 'textbox1 form-control'
-        .col-sm-3
+        .col-sm-2
+        .col-sm-2
           .pull-left
             = f.label "Class:", :class => 'textbox1 control-label'
-        .col-sm-3
+        .col-sm-2
           = f.text_field :pp, :class => 'textbox1 form-control'
       %center
         

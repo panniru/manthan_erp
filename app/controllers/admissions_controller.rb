@@ -102,7 +102,8 @@ class AdmissionsController < ApplicationController
   end
   
   def assessment_index
-    @admission = Admission.new 
+    p params
+    @admission = Admission.new
     if params[:search].present?
       @admissions = Admission.search(params[:search])
     else
@@ -250,59 +251,23 @@ class AdmissionsController < ApplicationController
  end
  def get_student_master(student_obj)
      StudentMaster.new do |sm|
-       sm.admission_no = student_obj.admission_no
-       sm.name = student_obj.name
-       sm.branch = student_obj.branch
-       sm.description = student_obj.description
-       sm.start_time = student_obj.start_time
-       sm.end_time = student_obj.end_time
-       sm.surname = student_obj.surname
-       sm.second_lang = student_obj.second_lang
-       sm.board = student_obj.board
-       sm.medium = student_obj.medium
-       sm.year = student_obj.year
-       sm.written = student_obj.written
-       sm.spoken = student_obj.spoken
-       sm.reading = student_obj.reading
-       sm.blood_group = student_obj.blood_group
-       sm.finalresult = student_obj.finalresult
-       sm.form_no = student_obj.form_no
-       sm.guardian_relationship = student_obj.guardian_relationship
-       sm.guardian_name = student_obj.guardian_name
-       sm.closestatus = student_obj.closestatus
-       sm.dob = student_obj.dob
-       sm.address = student_obj.address
-       sm.gender = student_obj.gender
-       sm.email = student_obj.email
-       sm.mobile = student_obj.mobile
-       sm.nationality = student_obj.nationality
-       sm.klass = student_obj.klass
-       sm.language = student_obj.language
-       sm.allergy = student_obj.allergy
-       sm.doctor_name = student_obj.doctor_name
-       sm.doctor_mobile = student_obj.doctor_mobile
-       sm.from = student_obj.from
-       sm.to = student_obj.to
-       sm.father_name = student_obj.father_name
-       sm.mother_name = student_obj.mother_name
-       sm.income = student_obj.income
-       sm.landline = student_obj.landline
-       sm.transport = student_obj.transport
-       sm.bus_facility = student_obj.bus
-       sm.busstop = student_obj.busstop
-       sm.last_school = student_obj.last_school
-       sm.city = student_obj.city
-       sm.changing_reason = student_obj.changing_reason
-       sm.know_school = student_obj.know_school
-       sm.person = student_obj.person
-       sm.pp = student_obj.pp
-       sm.status = student_obj.status
-       sm.sib_name = student_obj.sib_name
-       sm.sib_age = student_obj.sib_age
-       sm.sib_sex = student_obj.sib_sex
-       sm.sib_grade = student_obj.grade
-       sm.sib_school = student_obj.sib_school
-       sm.grade_master_id = student_obj.grade_master_id
+     sm.admission_no = student_obj.admission_no
+     sm.name = student_obj.name
+     sm.branch = student_obj.branch
+     sm.surname = student_obj.surname
+     sm.second_lang = student_obj.second_lang
+     sm.blood_group = student_obj.blood_group
+     sm.guardian_relationship = student_obj.guardian_relationship
+     sm.guardian_name = student_obj.guardian_name
+     sm.dob = student_obj.dob
+     sm.gender = student_obj.gender
+     sm.nationality = student_obj.nationality
+     sm.language = student_obj.language
+     sm.allergy = student_obj.allergy
+     sm.doctor_name = student_obj.doctor_name
+     sm.doctor_mobile = student_obj.doctor_mobile
+     sm.bus_facility = student_obj.bus
+     sm.grade_master_id = student_obj.grade_master_id
      end 
  end
 
