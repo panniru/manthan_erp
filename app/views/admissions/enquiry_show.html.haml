@@ -1,7 +1,10 @@
 .row
+  .pull-right
+    = link_to 'Back', home_index_admission_path, :class => 'btn btn-primary'
   %h4
     ENQUIRY DETAILS
-.col-sm-9
+
+.col-sm-11
   %table.table-striped.table-condensed
     %tr
       %td{style: "width:25%"}
@@ -140,9 +143,10 @@
       %td        
         = @admission.pp
 
-.col-sm-3
+.col-sm-1
   - if current_user.admin?
     .pull-left
       - if("#{@admission.status}" == 'Enquiry_Created')
         = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_admission_path, :class => "btn btn-warning btn-sm", :title => "Edit"
-  = link_to 'Back', home_index_admission_path, :class => 'btn btn-primary'
+
+

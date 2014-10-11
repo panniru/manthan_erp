@@ -37,6 +37,7 @@
                         %h4#Modal.modal-title Assessment Review
                
                 %center
+                  = admission.id
                   = form_for @admission do |f|
                     .modal-body
                       .row
@@ -60,6 +61,7 @@
                                 = f.text_area :comment ,:class => 'form-control'
                               %th
                         = f.hidden_field :status,:value => "Assessment_Completed"
+                        = f.hidden_field :id, :value => "#{admission.id}"
                         = button_tag "Save", :type => "submit", :class => 'pull-right btn btn-primary'
                         %br
                         %br           
