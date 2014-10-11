@@ -1,7 +1,7 @@
 class LocationMastersController < ApplicationController
   
   def index
-    @location_master = LocationMaster.all
+    @location_master = LocationMaster.order('location_name ASC')
   end
 
   def show

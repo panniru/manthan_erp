@@ -13,10 +13,15 @@
        gmap_data = Gmaps4rails.build_markers(locations) do |location, marker|
          marker.lat location.location_master.latitude
          marker.lng location.location_master.longitude
+         marker.picture({
+                          :url => "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|00D900" ,
+                          :width   => 40,
+                          :height  => 40
+                        })
        end
        gon.gmap_data = gmap_data.to_json
-       gon.width = "750px"
-       gon.height = "350px"
+       gon.width = "400px"
+       gon.height = "300px"
        respond_to do |format|   
          format.json do
            routes = @routes.map do |r|
@@ -45,7 +50,10 @@
        gon.height = "350px"
        respond_to do |format|   
          format.json do
-           render :json => Route.all
+           routes = @routes.map do |r|
+             {id: r.id ,  busno_up: r.busno_up, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name}
+           end
+           render :json => routes
          end
          format.html do 
            render "index"
@@ -53,15 +61,31 @@
        end
      end
      if current_user.parent?
-       current_user.parent.students.each do |student|
-         studentroutemappings = StudentRouteMapping.where('student_master_id = '+"#{student.id}")
-         studentroutemappings = studentroutemappings.all.map do |route|
-           @route = Route.find(route.route_id)
+       respond_to do |format|   
+         format.json do
+           current_user.parent.students.each do |student|
+             studentroutemappings = StudentRouteMapping.where('student_master_id = '+"#{student.id}")
+             studentroutemappings = studentroutemappings.all.map do |route|
+               p "====================="
+               p route.route_id
+               @routes = Route.where('id = '+"#{route.route_id}")
+               p @routes
+             end
+           end
+           routes = @routes.map do |r|
+             {id: r.id ,  busno_up: r.busno_up, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name}
+           end
+           p "@@@@@@@@@@@@2"
+           p routes
+           render :json => routes
          end
-       end
+         format.html do 
+           render "index"
+         end
+       end  
      end
-   end  
-      
+   end
+   
    def send_mail
      respond_to do |format|
        route_mail= params[:route_mail]
@@ -126,7 +150,7 @@
        format.json do 
          map = StudentRouteMapping.show_all_students(params[:route]).map {|student| student.student_master_id}
          students = StudentMaster.where(:id => map ).each.map do |mapping|
-           {id: mapping.id,  name: mapping.name}
+           {grade: mapping.grade_master.grade_name,  name: mapping.name , section: mapping.section_master.section_name , location: mapping.location_master.location_name}
          end     
          render :json => students
        end
@@ -137,8 +161,10 @@
      respond_to do |format|
        format.json do 
          loc = StudentRouteMapping.show_all_locations(params[:location]).map {|student| student.student_master_id}
+         p "===================="
+         p loc
          locations = StudentMaster.where(:id => loc ).each.map do |mapping|
-           {id: mapping.id,  name: mapping.name}
+           {grade: mapping.grade_master.grade_name,  name: mapping.name , section: mapping.section_master.section_name }
          end     
          render :json => locations
        end

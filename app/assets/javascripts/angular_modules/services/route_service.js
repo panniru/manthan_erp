@@ -25,13 +25,19 @@
 	    var url = "/routes/"+routeId+"/get_route_locations.json"
 	    return $http.get(url);
 	};
+	var getVendorName = function(){
+            var url = "/new_vehicles/get_vendor_name.json"
+            return $http.get(url);
+	};
+
         return {
             getLocationServiceView : getLocationServiceView,
 	    routeMail : routeMail,
 	    getBusServiceView : getBusServiceView,
 	    getStudentView : getStudentView,
 	    getLocationView : getLocationView,
-	    getRouteLocation :getRouteLocation
-        };
+	    getRouteLocation :getRouteLocation,
+            getVendorName : getVendorName
+	};
     }]);
 })(angular, myApp);

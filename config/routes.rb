@@ -156,8 +156,11 @@ ManthanErp::Application.routes.draw do
     end
   end
   
-  resources :new_vehicles 
-  
+  resources :new_vehicles do
+    collection do
+      get 'get_vendor_name'
+    end
+  end
   resources :forms do
     member do
       get 'home_index'
@@ -554,6 +557,7 @@ ManthanErp::Application.routes.draw do
     member do
       get 'locations'
       get "students"
+      get "get_route_locations"
     end
   end
   
@@ -608,6 +612,7 @@ ManthanErp::Application.routes.draw do
       put 'refresh'
     end
   end
+
 
   resources :canteenmanagers do
     collection do
@@ -703,7 +708,7 @@ ManthanErp::Application.routes.draw do
       get 'delivered_request_books'
     end  
   end
-    
+
   resources :attendances do
     collection do
       get 'teacher_index'

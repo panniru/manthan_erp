@@ -31,6 +31,7 @@
             %td= new_vehicle.capacity
             - if current_user.transport_head?
               %td 
-                = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), new_vehicle_path(new_vehicle), :class => "form btn btn-danger",:data => {:method => 'delete' ,:confirm => "Are You Sure to Delete " }
+                = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_new_vehicle_path(new_vehicle), :class => "btn-sm btn-warning btn-sm", :title => "Edit"
+                = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), new_vehicle_path(new_vehicle), :class => "form btn-sm btn-danger",:data => {:method => 'delete' ,:confirm => "Are You Sure to Delete " }
         
 

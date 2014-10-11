@@ -1,14 +1,14 @@
 .row
   .col-sm-3
-    %h3  Mapping Routes
+    %h3  Route Allotment
   .col-sm-4
-.row
+.row{"ng-controller" => "Mapping1Controller"}
   .col-sm-6
     %table#tblData.target.table.table-striped.table-condensed.table-bordered
       %thead
         %tr
-          %th student id
-          %th student name
+          %th Student id
+          %th Student name
           - if current_user.transport_head?
             %th
               %br
@@ -21,4 +21,6 @@
             - if current_user.transport_head?
               %td 
                 = render  :partial => 'modal' , :locals => {:student_id => student.id}               
-        
+               
+                      
+                        

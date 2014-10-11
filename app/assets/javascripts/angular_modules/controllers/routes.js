@@ -15,6 +15,11 @@
 		});
 	}
 	
+	routesService.getVendorName()
+	    .then(function(result) {
+		$scope.vendors = result.data
+	    });
+
 	$scope.defineNew = function(){
 	    $scope.action = "new"
 	    fetch_locations();

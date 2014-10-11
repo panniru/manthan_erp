@@ -20,9 +20,9 @@ class Route < ActiveRecord::Base
   def update_route(params)
     p "params"
     p params
-    # params[:route].each do |d|
-    #   d.lpp = params[:lpp]
-    #   d.busno_up = params[:busno_up]
+    # params[:route].each do |route_params| 
+    #   params[:lpp] = route_params[:lpp]
+    #   route.busno_up = route_params[:busno_up]
     # end
     params[:locations].each do |location_params|
       if location_params["id"].present?

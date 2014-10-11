@@ -40,7 +40,14 @@ class NewVehiclesController < ApplicationController
     @new_vehicle = NewVehicle.find(params[:id])
   end
   
-   def vehicle_params
+  def get_vendor_name
+    vendor = VendorManagement.all.map do |vendor|
+      {id: vendor.id , vendor_name: vendor.vendor_name}
+    end
+    render :json => vendor
+  end
+
+  def vehicle_params
     params.require(:new_vehicle).permit(:make_of_bus,:model_no,:year_of_manufacture,:purchase_option,:purchase_option_date,:capacity)
   end
 end

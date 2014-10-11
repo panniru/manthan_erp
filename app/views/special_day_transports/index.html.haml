@@ -1,13 +1,13 @@
 .row
   .col-sm-3
-    %h3  Special Routes
+    %h3  Special Day Transport
   .col-sm-6
   - if current_user.transport_head?
     = link_to "Add New",  new_special_day_transport_path, :class => "btn btn-primary"
     %br
 .row
   .col-sm-6
-    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+    %table.table.table-bordered
       %thead
         %tr
           %th Occations 
