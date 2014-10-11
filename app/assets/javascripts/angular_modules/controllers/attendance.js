@@ -2,20 +2,7 @@
     "use strict";
     app.controller("AttendanceController",["$scope", "attendanceService", function($scope, attendanceService) {
                    
-        $scope.list = [];
-        $scope.text = 'hello';
-        $scope.submit = function() {
-            if ($scope.text) {
-                $scope.list.push(this.text);
-                $scope.text = '';
-            }
-           
-        }
-        attendanceService.getAttendanceOnDate()
-	    .then(function(response){
-		$scope.attendances = response.data
-	    });
-     
+       
         $scope.myShowFormValue = true;
         $scope.myEditFormValue = false;
         
@@ -43,7 +30,7 @@
 
         $scope.dailyAttendence = function(date){
             var date = new Date();
-            $scope.date = ((date.getDate()) + "-"+ (date.getMonth()+1) + "-" + (date.getFullYear())); 
+            $scope.date = ((date.getDate()) + "/"+ (date.getMonth()+1) + "/" + (date.getFullYear())); 
 
         }
         attendanceService.getAttendanceServiceView()
@@ -84,6 +71,11 @@
             $scope.myShowFormValue = false;
             $scope.myEditFormValue = true;
         };
+
+        $scope.reflectStudents = function(students){
+            $scope.attendances = students;
+            $scope.$apply();
+        }
         
 
     }]);

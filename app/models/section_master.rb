@@ -1,5 +1,6 @@
 class SectionMaster < ActiveRecord::Base
   belongs_to :grade_master
+  has_many :students, :class_name => "StudentMaster"
 
   def self.get_sections_by_role(current_user)    
 

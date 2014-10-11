@@ -1,10 +1,7 @@
 .row{:ng_controller => "AttendanceController"}
   .col-sm-4
     #attendance_calendar
-  
-
-
-  .col-sm-4
+  .col-sm-6
     %b 
     %table.table.table-condensed.table-striped.table-bordered
       %thead
@@ -15,5 +12,5 @@
       %tbody
         %tr{"ng-repeat" => "attendance in attendances"}
           %td {{attendance.date}}
-          %td {{attendance.name}}
+          %td {{attendance.student_name}}
           %td {{attendance.attendance}}
