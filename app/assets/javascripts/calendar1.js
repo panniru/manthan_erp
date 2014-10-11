@@ -4,6 +4,7 @@ $(document).ready(function() {
     var today = new Date();
     $('#canteen_calendar').fullCalendar({
 	events: '/mealnames/canteenmanagerdata.json?month='+monthNames[today.getMonth()],
+	height: '300px',
 	selectable: true,
 	
 		
@@ -34,13 +35,32 @@ $(document).ready(function() {
 	select: function(date) { 
 	   
 	    var myDate = new Date();
-	    var day  = date.getDate();
-	    var month = date.getMonth() + 1;              
-	    var year =  date.getFullYear();
-            var daysToAdd = 0;
+	    var day = myDate.getDate();
+            var month = myDate.getMonth() + 1;
+            var year = myDate.getFullYear();
+            if (day < 10) {
+                day = "0" + day;
+            }
+            if (month < 10) {
+                month = "0" + month;
+            }
+            var date_in = (day + "/" + month + "/" + year);
+            
+	    var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            if (day < 10) {
+                day = "0" + day;
+            }
+            if (month < 10) {
+                month = "0" + month;
+            }
+            var date_inn = (day + "/" + month + "/" + year);
+            
            
-            if (date > myDate) {
-                angular.element($('#createModal')).scope().newMeal(date)
+            
+            if (date_inn > date_in) {
+                angular.element($('#createModal')).scope().newMeal(date_inn)
 	    }
 	    else 
 		{ alert('You Cannot Enter Meals For Past Day')}
