@@ -1,6 +1,6 @@
 (function(angular, app) {
     "use strict";
-    app.controller('AssessmentsController', ["$scope", "assessmentsService", "gradeService", "sectionService", function($scope, assessmentsService, gradeService, sectionService) {        
+    app.controller('AssessmentsController', ["$scope", "assessmentsService", "timeTableService", function($scope, assessmentsService, timeTableService) {        
         assessmentsService.getAssessmentTypesService()
             .then(function(result) {                 
                 $scope.assessment_types = result.data;                
@@ -31,10 +31,9 @@
             });
 
             assessmentsService.saveAssessmentTypeMappings($scope.save_assessment_types)
-                .then(function(result) {                    
-                });
-
-            $scope.showAssessmentTypeMappings();     
+                .then(function(result) {  
+                    $scope.showAssessmentTypeMappings();     
+                });          
         };
 
         $scope.deleteAssessmentTypeMappings = function(assessment_type){           
@@ -55,7 +54,7 @@
                 $scope.assessment_grade_mappings = result.data;                
             });
         
-        gradeService.getGradeServiceView()
+        timeTableService.getGradeServiceView()
             .then(function(result) {
                 $scope.grades=result.data;               
             });
@@ -115,16 +114,15 @@
             }
             
             assessmentsService.saveAssessmentGradeMappings($scope.save_assessment_grade_mappings)
-                .then(function(result) {                    
-                });
-            
-            $scope.showAssessmentGradeMappings(); 
+                .then(function(result) {    
+                    $scope.showAssessmentGradeMappings(); 
+                });           
         };
         //ADMIN VIEW OF ASSESSMNETS
-        $scope.getSections = function (){
-            sectionService.getSectionServiceView()
+        $scope.getSections = function (myGrade){
+            timeTableService.getSectionsForGradeService(myGrade)
                 .then(function(result) {
-                    $scope.sections=result.data                    
+                    $scope.sections=result.data;
                 });
         };  
 

@@ -1,22 +1,18 @@
 (function(angular, app) {
     "use strict";
     app.controller('TeachersTimeTablesController',["$scope","teachersService","timeTableService",function($scope,teachersService,timeTableService) {
-        //alert("hello");
-        
+                
         teachersService.getFacultyNamesServiceView()
             .then(function(result) {
                 $scope.faculty_names=result.data;    
-                //alert(JSON.stringify($scope.faculty_names));
             });
         timeTableService.getDefaultPeriodsServiceView()
             .then(function(result) {
                 $scope.no_of_periods = result.data;
-                //alert(JSON.stringify($scope.no_of_periods));
             });
         teachersService.getFacultyGradeSectionsServiceView()
             .then(function(result) {
-                $scope.faculty_grade_sections = result.data;   
-                alert(JSON.stringify($scope.faculty_grade_sections));
+                $scope.faculty_grade_sections = result.data; 
             });       
         
         $scope.showTimeTable = function(){            

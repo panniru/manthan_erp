@@ -19,7 +19,7 @@
 
         assessmentResultsService.getTeacherAssessmentsService()
             .then(function(result){               
-                $scope.teacher_assessments = result.data;                
+                $scope.teacher_assessments = result.data;
             });
         
         $scope.buildEeditAssessmentResults = function(assessment){            

@@ -11,7 +11,7 @@ class AssessmentsController < ApplicationController
   def get_teacher_grade_mappings     
     respond_to do |format|
       format.json do
-        teachersgrademappings = TeacherGradeMapping.where('faculty_master_id = '+"'#{current_user.faculty_master.id}'")   
+        teachersgrademappings = TeacherGradeMapping.where('faculty_master_id = '+"'#{current_user.faculty_master.id}'") 
         teachersgrademappings = teachersgrademappings.all.map do |mapping|
           if  (mapping.subject_master_id.present?)
             sub_name = mapping.subject_master.subject_name

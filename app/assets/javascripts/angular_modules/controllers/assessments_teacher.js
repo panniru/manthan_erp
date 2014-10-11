@@ -1,6 +1,6 @@
 (function(angular, app) {
     "use strict";
-    app.controller('AssessmentsTeacherController', ["$scope", "$location",  "assessmentsTeacherService", "teachersGradesService", "gradeService", "sectionService","assessmentsService", function($scope, $location , assessmentsTeacherService, teachersGradesService, gradeService, sectionService, assessmentsService) { 
+    app.controller('AssessmentsTeacherController', ["$scope", "$location",  "assessmentsTeacherService", "teachersGradesService", "timeTableService", "assessmentsService", function($scope, $location , assessmentsTeacherService, teachersGradesService, timeTableService, assessmentsService) { 
 
         $('#assessments_calendar').fullCalendar({            
             selectable: true,
@@ -8,8 +8,8 @@
                 $scope.dateFormat = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();               
                 $('#myModal').modal('show');                
             }            
-        });
-       
+        });        
+                
         assessmentsTeacherService.getTeacherGradeMappings()
             .then(function(result) {               
                 $scope.mappings = result.data;   
@@ -25,14 +25,14 @@
                     });
                 }               
             });
-       
+   
         assessmentsService.getAssessmentTypesService()
-            .then(function(result) {                 
-                $scope.assessment_types = result.data;                 
+            .then(function(result) { 
+                $scope.assessment_types = result.data;           
             });  
-      
+        
         $scope.getSections = function (){
-            sectionService.getSectionServiceView()
+            timeTableService.getSectionServiceView()
                 .then(function(result) {
                     $scope.sections=result.data;                   
                 });
@@ -72,11 +72,10 @@
             });
 
            assessmentsTeacherService.saveTeacherAssessmentMappings($scope.save_teacher_assessments)
-             .then(function(result) {                    
-            });  
-
-            $scope.showTeacherAssessmentMappings();
-            $scope.cancelMyModal();      
+             .then(function(result) {   
+                $scope.showTeacherAssessmentMappings();
+                $scope.cancelMyModal();                   
+            });      
         };
         
         $scope.saveEditTeacherAssessmentMappings = function(){            
