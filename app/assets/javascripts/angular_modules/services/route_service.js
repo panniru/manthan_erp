@@ -29,7 +29,10 @@
             var url = "/new_vehicles/get_vendor_name.json"
             return $http.get(url);
 	};
-
+	var deleteRoutes = function(route){
+	    var url = "/routes/delete_routes.json"
+	    return $http.post(url, {route : route}); 
+	}
         return {
             getLocationServiceView : getLocationServiceView,
 	    routeMail : routeMail,
@@ -37,7 +40,8 @@
 	    getStudentView : getStudentView,
 	    getLocationView : getLocationView,
 	    getRouteLocation :getRouteLocation,
-            getVendorName : getVendorName
+            getVendorName : getVendorName,
+	    deleteRoutes : deleteRoutes
 	};
     }]);
 })(angular, myApp);

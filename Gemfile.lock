@@ -135,6 +135,8 @@ GEM
     fssm (0.2.10)
     fullcalendar-rails (1.6.1.0)
     geocoder (1.2.4)
+    geocomplete_rails (1.6.3)
+      railties (>= 3.1)
     gmaps4rails (2.1.2)
     gon (5.1.2)
       actionpack (>= 2.3.0)
@@ -323,6 +325,7 @@ DEPENDENCIES
   font-awesome-rails
   fullcalendar-rails (= 1.6.1.0)
   geocoder
+  geocomplete_rails
   gmaps4rails (~> 2.1.2)
   gon
   haml-rails

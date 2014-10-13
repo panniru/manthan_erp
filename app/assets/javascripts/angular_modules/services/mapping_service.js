@@ -9,9 +9,14 @@
 	    var url = "/student_route_mappings/save_route.json"
             return $http.post(url,{route_id: route.id , student_master_id : student_master_id , location_master_id : location});
         };
+	var getStudentView = function(){
+	    var url = "/student_route_mappings/get_student_view.json"
+            return $http.get(url);
+	};
 	return {
             getMappingServiceView : getMappingServiceView,
-	    saveRoute : saveRoute
+	    saveRoute : saveRoute,
+	    getStudentView : getStudentView
         };
     }]);
 })(angular, myApp);

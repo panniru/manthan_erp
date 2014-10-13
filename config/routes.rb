@@ -43,6 +43,7 @@ ManthanErp::Application.routes.draw do
   resources :student_route_mappings do
     collection do
       get "get_route_view"
+      get "get_student_view"
       post "save_route"
     end
     member do
