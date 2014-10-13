@@ -77,7 +77,10 @@
         }
         $scope.getStudent = function(assess){
             $scope.assess = assess
-                         
+            // attendanceService.getModalServiceView()
+            //     .then(function(result) {
+                    $('#getModal').modal('hide');  
+		//});
         }
 
         $scope.goToEdit = function(){

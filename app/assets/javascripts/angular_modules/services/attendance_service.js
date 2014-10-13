@@ -27,13 +27,15 @@
             var url = "/attendances/getStudentAndAttendanceView.json"
             return $http.get(url);
         };
+      //  var getModalServiceView = 
 
         return {
             getAttendanceOnDate : getAttendanceOnDate,
             getAttendanceServiceView : getAttendanceServiceView,
             saveStudentAttendance : saveStudentAttendance,
             getStudentAndAttendanceView : getStudentAndAttendanceView,
-            getStudentAssessment : getStudentAssessment
+            getStudentAssessment : getStudentAssessment,
+        //    getModalServiceView : getModalServiceView
 
         };
     }]);
