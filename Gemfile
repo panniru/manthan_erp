@@ -8,6 +8,7 @@ gem 'rails', '~> 4.1.4'
 
 gem "geocoder"
 gem 'gmaps4rails', '~> 2.1.2'
+gem 'geocomplete_rails'
 gem 'carrierwave'
 gem 'gon'
 gem 'rails3-jquery-autocomplete'

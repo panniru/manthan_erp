@@ -1,26 +1,66 @@
 .row
   .col-sm-3
     %h3  Route Allotment
-  .col-sm-4
+  .col-sm-2
+    %br
+    %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
+    %br
 .row{"ng-controller" => "Mapping1Controller"}
   .col-sm-6
     %table#tblData.target.table.table-striped.table-condensed.table-bordered
       %thead
         %tr
-          %th Student id
           %th Student name
+          %th Class
+          %th Section
           - if current_user.transport_head?
             %th
               %br
       
       %tbody
-        - StudentMaster.has_bus_facility.has_no_route.all.each do |student| 
-          %tr
-            %td= student.id
-            %td= student.name 
-            - if current_user.transport_head?
-              %td 
-                = render  :partial => 'modal' , :locals => {:student_id => student.id}               
-               
-                      
+        %tr{"ng-repeat" => "student in students"}
+          %td {{student.name}}
+          %td {{student.grade}}
+          %td {{student.section}}
+          - if current_user.transport_head?
+            %td
+              = link_to "allot", "#", :class => "btn btn-primary","ng-click" => "mapStudent(student.id)"
+    .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+            %h4#createModal.modal-title Route
+          .modal-body
+            %form
+              .row
+                .col-sm-4
+                  = label_tag "Nearest Location"
+                .col-sm-3
+                  %select{"ng-model" => "location", "ng-options" => "var.id as var.location_name for var in all_locations",:class => "form-control",:required => "required", }
+                    %option{style: "display:none", value: ""} Select Location
+                    = hidden_field_tag :location_master_id, :value => "{{location}}"
+                .col-sm-3
+                  %button{:type => "button", :class=> "btn btn-primary", :ng_click => "nearRoutes()"}= "Search"
+                  
+              .row
+                %br
+                %br
+                %table.table.table-bordered
+                  %thead
+                    %tr
+                      %th Route No
+                      %th Bus No
+                      %th
+                  %tbody
+                    %tr{"ng-repeat" => "route in routes"}
+                      %td {{route.id}}
+                      %td {{route.busno_up}}
+                      %td
+                        %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveRoute(route,location,student_id)"}= "allot"            
+              
+                
+                        
+
+                           
                         

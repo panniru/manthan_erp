@@ -31,6 +31,13 @@ class StudentRouteMappingsController < ApplicationController
     render :json =>  true
   end
   
+  def get_student_view
+    student = StudentMaster.has_bus_facility.has_no_route.all.map do |student|
+      {name: student.name,id: student.id , grade: student.grade_master.grade_name , section: student.section_master.section_name }
+    end
+    render :json => student
+  end
+  
 
   private
   

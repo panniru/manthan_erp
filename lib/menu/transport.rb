@@ -3,7 +3,7 @@ class Transport
   def initialize(args)
     @controller = args[:controller]
   end
-
+  
 
   def admin_sub_menu
     sub_menu = []

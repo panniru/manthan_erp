@@ -14,10 +14,12 @@
          marker.lat location.location_master.latitude
          marker.lng location.location_master.longitude
          marker.picture({
-                          :url => "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|00D900" ,
+                          :url => "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" ,
                           :width   => 40,
-                          :height  => 40
+                          :height  => 40,
+                          
                         })
+         
        end
        gon.gmap_data = gmap_data.to_json
        gon.width = "400px"
@@ -172,8 +174,7 @@
    end
    
        
-   def students
-   end
+  
      
    def destroy
      if @route.destroy

@@ -83,6 +83,7 @@
 	
 	
 	$scope.editRoutes = function(route){
+	    $scope.route = route
 	    $scope.action = "edit"
 	    fetch_bus();
 	    fetch_locations();
@@ -99,7 +100,7 @@
 	    	.then(function(response){
                     $scope.routes.splice($scope.routes.indexOf(route), 1)
                 })
-        };
+	};
 
         $scope.addMoreterms = function(){
 	    var lnt = parseInt($scope.newRoute.locations.length)
