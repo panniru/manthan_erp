@@ -13,26 +13,31 @@
         = link_to 'New Enquiry', enquiry_new_admissions_path, :class => 'btn btn-primary'
 %br
 %br
-%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
+%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:100%"}
   %thead
     %tr
-      %th Enquiry Form
-      %th Admission Form
-      %th Student's Name
-      %th Grade
-      %th Status
+      %th{style: "width:20%"}
+        Enquiry Form
+      %th{style: "width:20%"}
+        Admission Form
+      %th{style: "width:20%"}
+        Student's Name
+      %th{style: "width:20%"}
+        Grade
+      %th{style: "width:20%"}
+        Status
         
   %tbody
     - @admissions.each do |admission|
       %tr
-        %td{style: "width:20%"}
+        %td
           = link_to "#{admission.form_no}",home_index_admission_path(admission)
-        %td{style: "width:20%"}
+        %td
           = link_to "#{admission.admission_no}",home_index_admission_path(admission)
-        %td{style: "width:20%"}
+        %td
           = admission.name
-        %td{style: "width:20%"}
+        %td
           = admission.grade
-        %td{style: "width:20%"}
+        %td
           = admission.status
       
