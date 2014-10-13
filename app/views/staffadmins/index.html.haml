@@ -16,23 +16,23 @@
 %br
 .row
   .col-sm-11
-    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
       %thead
         %tr
-          %td{style: "width:40%"} Department
-          %td{style: "width:40%"} Head
-          %td{style: "width:10%"} Edit
-          %td{style: "width:10%"} Delete 
+          %td{style: "width:20%"} Department
+          %td{style: "width:20%"} Head
+          %td{style: "width:20%"} Edit
+          %td{style: "width:20%"} Delete 
         
       %tbody
         - @staffadmins.each do |staffadmin|
           %tr
-            %td{style: "width:40%"}
+            %td
               = staffadmin.dept
-            %td{style: "width:40%"}
+            %td
               = staffadmin.head
-            %td{style: "width:10%"}
+            %td
               = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_staffadmin_path(staffadmin), :class => "btn btn-warning btn-sm", :title => "Edit"
-            %td{style: "width:10%"}
+            %td
               = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), staffadmin_path(staffadmin), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
  

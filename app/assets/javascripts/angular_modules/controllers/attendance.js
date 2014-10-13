@@ -49,6 +49,7 @@
                 }
                 
             });
+        
         $scope.saveStudentAttendance = function(){
             
             for(var i=0; i<$scope.save_attendence_details.length; i++){
@@ -66,12 +67,23 @@
                     }
                 });
         }
-       
+        attendanceService.getStudentAssessment()
+            .then(function(result) {
+                $scope.ass = result.data;
+            });
+      
+        $scope.getModal = function(id){
+            $('#getModal').modal('show');
+        }
+        $scope.getStudent = function(assess){
+            $scope.assess = assess
+                         
+        }
+
         $scope.goToEdit = function(){
             $scope.myShowFormValue = false;
             $scope.myEditFormValue = true;
         };
-
         $scope.reflectStudents = function(students){
             $scope.attendances = students;
             $scope.$apply();

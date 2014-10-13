@@ -1,176 +1,177 @@
 .row
   %h4
-    APPLICATION DETAILS
+    %center
+      APPLICATION DETAILS
+      - if("#{@admission.status}" == 'Application_Created')
+        = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_application_admission_path, :class => "btn btn-warning btn-sm", :title => "Edit"
+.row
+  .col-sm-11
+    %table.table-striped.table-condensed{style: "width:100%"}
+      %tr
+        %td{style: "width:25%"}
+          %b 
+            %span.label.label-danger Student's Details
+        %td{style: "width:25%"}
+          
+        %td{style: "width:25%"}
+          %b
+            %span.label.label-success Parent's Details
+        %td{style: "width:25%"}
+      %tr
+        %td
+          %label{for: "admission_no"} Admission no
+        %td
+          = @admission.admission_no
+        %td
+          %label{for: "father_office_address"} Father's Office Address
+        %td
+          = @admission.father_office_address
+      %tr
+        %td
+          %label{for: "name"} Branch
+        %td
+          = @admission.branch
+        %td
+          %label{for: "mother_office_address"} Mother's Office Address
+        %td
+          = @admission.mother_office_address
+      %tr
+        %td
+          %label{for: "surname"} Surname
+        %td
+          = @admission.surname
+        %td
+          %label{for: "father_mobile"} Father's Mobile
+        %td
+          = @admission.father_mobile
+      %tr    
+        %td
+          %label{for: "second_lang"} Second lang
+        %td
+          = @admission.second_lang
+        %td
+          %label{for: "mother_mobile"} Mother's Mobile
+        %td
+          = @admission.mother_mobile
+      %tr
+        %td
+          %label{for: "board"} Board
+        %td
+          = @admission.board
+        %td
+          %label{for: "father_religion"} Father's Religion
+        %td
+          = @admission.father_religion
+      %tr
+        %td
+          %label{for: "grade"} Grade
+        %td
+          = @admission.klass
+        %td
+          %label{for: "mother_religion"} Mother's Religion
+        %td
+          = @admission.mother_religion
+      %tr   
+        %td
+          %label{for: "medium"} Medium
+        %td
+          = @admission.medium
+        %td
+          %label{for: "father_email"} Father's Email
+        %td
+          = @admission.father_email
+      %tr   
+        %td
+          %label{for: "year"} Year
+        %td
+          = @admission.year
+        %td
+          %label{for: "mother_email"} Mother's Email
+        %td
+          = @admission.mother_email
+      %tr   
+        %td
+          %label{for: "written"} Written
+        %td
+          = @admission.written
+        %td
+          %label{for: "father_employer"} Father's Employer
+        %td
+          = @admission.father_employer
+      %tr   
+        %td
+          %label{for: "reading"} Reading
+        %td
+          = @admission.reading
+        %td
+          %label{for: "mother_employer"} Mother's Employer
+        %td
+          = @admission.mother_employer
+      %tr   
+        %td
+          %label{for: "spoken"} Spoken
+        %td
+          = @admission.spoken
+        %td
+          %label{for: "father_office_telephone"} Father's Office Telephone
+        %td
+          = @admission.father_office_telephone
+      %tr   
+        %td
+          %label{for: "middle_name"} Middle Name
+        %td
+          = @admission.middle_name
+        %td
+          %label{for: "mother_office_telephone"} Mother's Office Telephone
+        %td
+          = @admission.mother_office_telephone
+      %tr
+        %td{style: "width:25%"}
+          %b 
+            %span.label.label-primary Medical Details
+        %td{style: "width:25%"}
 
-.col-sm-9
-  %table.table-striped.table-condensed
-    %tr
-      %td{style: "width:25%"}
-        %b 
-          %span.label.label-danger Student's Details
-      %td{style: "width:25%"}
+        %td{style: "width:25%"}
+          %b
+            %span.label.label-warning Other Details
+        %td{style: "width:25%"}
+      %tr
+        %td
+          %label{for: "blood_group"} Blood Group
+        %td
+          = @admission.blood_group
+        %td
+          %label{for: "guardian_name"} Guardian's name
+        %td
+          = @admission.guardian_name
+      %tr
+        %td
+          %label{for: "allergy"} Allergy
+        %td
+          = @admission.allergy
+        %td
+          %label{for: "guardian_mobile"} Guardian's Mobile
+        %td
+          = @admission.guardian_mobile
+      %tr
+        %td
+          %label{for: "doctor_name"} Doctor's Name
+        %td
+          = @admission.doctor_name
+        %td
+          %label{for: "guardian_relationship"} Guardian's Relationship
+        %td
+          = @admission.guardian_relationship
+      %tr
+        %td
+          %label{for: "doctor_mobile"} Doctor's Mobile
+        %td
+          = @admission.doctor_mobile
+        %td
+          %label{for: "from"} Admission
+        %td
+          = @admission.from
         
-      %td{style: "width:25%"}
-        %b
-          %span.label.label-success Parent's Details
-      %td{style: "width:25%"}
-    %tr
-      %td
-        %label{for: "admission_no"} Admission no
-      %td
-        = @admission.admission_no
-      %td
-        %label{for: "father_office_address"} Father's Office Address
-      %td
-        = @admission.father_office_address
-    %tr
-      %td
-        %label{for: "name"} Branch
-      %td
-        = @admission.branch
-      %td
-        %label{for: "mother_office_address"} Mother's Office Address
-      %td
-        = @admission.mother_office_address
-    %tr
-      %td
-        %label{for: "surname"} Surname
-      %td
-        = @admission.surname
-      %td
-        %label{for: "father_mobile"} Father's Mobile
-      %td
-        = @admission.father_mobile
-    %tr    
-      %td
-        %label{for: "second_lang"} Second lang
-      %td
-        = @admission.second_lang
-      %td
-        %label{for: "mother_mobile"} Mother's Mobile
-      %td
-        = @admission.mother_mobile
-    %tr
-      %td
-        %label{for: "board"} Board
-      %td
-        = @admission.board
-      %td
-        %label{for: "father_religion"} Father's Religion
-      %td
-        = @admission.father_religion
-    %tr
-      %td
-        %label{for: "grade"} Grade
-      %td
-        = @admission.klass
-      %td
-        %label{for: "mother_religion"} Mother's Religion
-      %td
-        = @admission.mother_religion
-    %tr   
-      %td
-        %label{for: "medium"} Medium
-      %td
-        = @admission.medium
-      %td
-        %label{for: "father_email"} Father's Email
-      %td
-        = @admission.father_email
-    %tr   
-      %td
-        %label{for: "year"} Year
-      %td
-        = @admission.year
-      %td
-        %label{for: "mother_email"} Mother's Email
-      %td
-        = @admission.mother_email
-    %tr   
-      %td
-        %label{for: "written"} Written
-      %td
-        = @admission.written
-      %td
-        %label{for: "father_employer"} Father's Employer
-      %td
-        = @admission.father_employer
-    %tr   
-      %td
-        %label{for: "reading"} Reading
-      %td
-        = @admission.reading
-      %td
-        %label{for: "mother_employer"} Mother's Employer
-      %td
-        = @admission.mother_employer
-    %tr   
-      %td
-        %label{for: "spoken"} Spoken
-      %td
-        = @admission.spoken
-      %td
-        %label{for: "father_office_telephone"} Father's Office Telephone
-      %td
-        = @admission.father_office_telephone
-    %tr   
-      %td
-        %label{for: "middle_name"} Middle Name
-      %td
-        = @admission.middle_name
-      %td
-        %label{for: "mother_office_telephone"} Mother's Office Telephone
-      %td
-        = @admission.mother_office_telephone
-    %tr
-      %td{style: "width:25%"}
-        %b 
-          %span.label.label-primary Medical Details
-      %td{style: "width:25%"}
-        
-      %td{style: "width:25%"}
-        %b
-          %span.label.label-warning Other Details
-      %td{style: "width:25%"}
-    %tr
-      %td
-        %label{for: "blood_group"} Blood Group
-      %td
-        = @admission.blood_group
-      %td
-        %label{for: "guardian_name"} Guardian's name
-      %td
-        = @admission.guardian_name
-    %tr
-      %td
-        %label{for: "allergy"} Allergy
-      %td
-        = @admission.allergy
-      %td
-        %label{for: "guardian_mobile"} Guardian's Mobile
-      %td
-        = @admission.guardian_mobile
-    %tr
-      %td
-        %label{for: "doctor_name"} Doctor's Name
-      %td
-        = @admission.doctor_name
-      %td
-        %label{for: "guardian_relationship"} Guardian's Relationship
-      %td
-        = @admission.guardian_relationship
-    %tr
-      %td
-        %label{for: "doctor_mobile"} Doctor's Mobile
-      %td
-        = @admission.doctor_mobile
-      %td
-        %label{for: "from"} Admission
-      %td
-        = @admission.from
-   
-.col-sm-3
-  .pull-left
-    - if("#{@admission.status}" == 'Application_Created')
-      = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_application_admission_path, :class => "btn btn-warning btn-sm", :title => "Edit"
-    = link_to 'Back', home_index_admission_path, :class => 'btn btn-primary'
+  .col-sm-1
+    .pull-left
+      = link_to 'Back', home_index_admission_path, :class => 'btn btn-primary'

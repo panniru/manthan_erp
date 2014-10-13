@@ -525,6 +525,8 @@ ManthanErp::Application.routes.draw do
     end
     
     collection do
+      get 'get_update'
+      get 'get_assessment_students'
       get "get_status_view"
       get "enquiry_index"
       get "admission_index"

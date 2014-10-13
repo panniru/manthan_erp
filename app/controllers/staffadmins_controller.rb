@@ -7,7 +7,7 @@ class StaffadminsController < ApplicationController
   end
 
   def get_faculty_names
-    faculty = FacultyMaster.all.map do |faculty|
+    faculty = Staffrecruit.where("final_result = 'Selected'").map do |faculty|
       { faculty_name: faculty.faculty_name, post: faculty.post, dept: faculty.dept}
     end
     render :json => faculty

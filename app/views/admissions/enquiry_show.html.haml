@@ -1,152 +1,158 @@
 .row
-  .pull-right
-    = link_to 'Back', home_index_admission_path, :class => 'btn btn-primary'
   %h4
-    ENQUIRY DETAILS
-
-.col-sm-11
-  %table.table-striped.table-condensed
-    %tr
-      %td{style: "width:25%"}
-        %b 
-          %span.label.label-danger General Information
-      %td{style: "width:25%"}
-        
-      %td{style: "width:25%"}
-        %b
-          %span.label.label-success Parent's Details
-      %td{style: "width:25%"}
-    %tr
-      %td
-        %label{for: "form_no"} Form no:
-      %td
-        = @admission.form_no
-      %td
-        %label{for: "father_name"} Father's Name:
-      %td
-        = @admission.father_name
-    %tr
-      %td
-        %label{for: "name"} Name:
-      %td
-        = @admission.name
-      %td
-        %label{for: "mother_name"} Mother's Name:
-      %td
-        = @admission.mother_name
-    %tr
-      %td
-        %label{for: "klass"} Class:
-      %td
-        = @admission.grade
-      %td
-        %label{for: "father_occupation"} Father's Occupation:
-      %td
-        = @admission.father_occupation
-    %tr    
-      %td
-        %label{for: "gender"} Male/Female:
-      %td
-        = @admission.gender
-      %td
-        %label{for: "mother_occupation"} Mother's Occupation:
-      %td
-        = @admission.mother_occupation
-    %tr
-      %td
-        %label{for: "language"} Language spoken at home:
-      %td
-        = @admission.language
-      %td
-        %label{for: "father_education"} Father's Education:
-      %td
-        = @admission.father_education
-    %tr
-      %td
-        %label{for: "dob"} Date of Birth:
-      %td
-        = @admission.dob
-      %td
-        %label{for: "mother_education"} Mother's Education:
-      %td
-        = @admission.mother_education
-    %tr   
-      %td
-        %label{for: "nationality"} Nationality:
-      %td
-        = @admission.nationality
-      %td
-        %label{for: "income"} Family Income:
-      %td
-        = @admission.income
-    %tr
-      %td
-        %b
-          %span.label.label-primary Contact Details
-      %td
-      %td
-        %b
-          %span.label.label-warning Additional Information
-      %td
-    %tr
-      %td
-        %label{for: "address"} Residential Address:
-      %td
-        = @admission.address
-      %td
-        %label{for: "last_school"} School in which last Studied:
-      %td
-        = @admission.last_school
-    %tr
-      %td
-        %label{for: "landline"} Landline:
-      %td
-        = @admission.landline
-      %td
-        %label{for: "city"} City:
-      %td             
-        = @admission.city
-    %tr
-      %td
-        %label{for: "mobile"} Mobile:
-      %td
-        = @admission.mobile
-      %td
-        %label{for: "Reasons for Changing"} Reasons for Changing:
-      %td
-        = @admission.changing_reason
-    %tr
-      %td
-        %label{for: "email"} Email:
-      %td
-        = @admission.email
-      %td      
-        %label{for: "You came to know about our school through"} You came to know about our school through:
-      %td 
-        = @admission.know_school
-    %tr
-      %td         
-        %label{for: "transport"} Choice of Transport:
-      %td     
-        = @admission.transport
-      %td
-        %label{for: "person"} Name:
-      %td             
-        = @admission.person
-    %tr
-      %td 
-        %label{for: "busstop"} Busstop:
-      %td
-        = @admission.busstop
-      %td     
-        %label{for: "class"} Class:
-      %td        
-        = @admission.pp
-
-.col-sm-1
-  - if current_user.admin?
-    .pull-left
+    %center
+      ENQUIRY DETAILS
       - if("#{@admission.status}" == 'Enquiry_Created')
         = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_admission_path, :class => "btn btn-warning btn-sm", :title => "Edit"
+.row
+  .col-sm-11
+    %table.table-striped.table-condensed
+      %tr
+        %td{style: "width:25%"}
+          %b 
+            %span.label.label-danger General Information
+        %td{style: "width:25%"}
+
+        %td{style: "width:25%"}
+          %b
+            %span.label.label-success Parent's Details
+        %td{style: "width:25%"}
+      %tr
+        %td
+          %label{for: "form_no"} Form no:
+        %td
+          = @admission.form_no
+        %td
+          %label{for: "father_name"} Father's Name:
+        %td
+          = @admission.father_name
+      %tr
+        %td
+          %label{for: "name"} Name:
+        %td
+          = @admission.name
+          = @admission.middle_name
+          = @admission.surname
+        %td
+          %label{for: "mother_name"} Mother's Name:
+        %td
+          = @admission.mother_name
+      %tr
+        %td
+          %label{for: "klass"} Class:
+        %td
+          = @admission.grade
+        %td
+          %label{for: "father_occupation"} Father's Occupation:
+        %td
+          = @admission.father_occupation
+      %tr    
+        %td
+          %label{for: "gender"} Male/Female:
+        %td
+          = @admission.gender
+        %td
+          %label{for: "mother_occupation"} Mother's Occupation:
+        %td
+          = @admission.mother_occupation
+      %tr
+        %td
+          %label{for: "language"} Language spoken at home:
+        %td
+          = @admission.language
+        %td
+          %label{for: "father_education"} Father's Education:
+        %td
+          = @admission.father_education
+      %tr
+        %td
+          %label{for: "dob"} Date of Birth:
+        %td
+          = @admission.dob
+        %td
+          %label{for: "mother_education"} Mother's Education:
+        %td
+          = @admission.mother_education
+      %tr   
+        %td
+          %label{for: "nationality"} Nationality:
+        %td
+          = @admission.nationality
+        %td
+          %label{for: "income"} Family Income:
+        %td
+          = @admission.income
+      %tr
+        %td
+          %b
+            %span.label.label-primary Contact Details
+        %td
+        %td
+          %b
+            %span.label.label-warning Additional Information
+        %td
+      %tr
+        %td
+          %label{for: "address"} Address
+        %td
+          = @admission.address_line1
+          ,
+          = @admission.address_line2
+          ,
+          = @admission.city
+          ,
+          = @admission.pin
+        %td
+          %label{for: "last_school"} School in which last Studied:
+        %td
+          = @admission.last_school
+      %tr
+        %td
+          %label{for: "landline"} Landline:
+        %td
+          = @admission.landline
+        %td
+          %label{for: "city"} Previous City:
+        %td             
+          = @admission.previous_city
+      %tr
+        %td
+          %label{for: "mobile"} Mobile:
+        %td
+          = @admission.mobile
+        %td
+          %label{for: "Reasons for Changing"} Reasons for Changing:
+        %td
+          = @admission.changing_reason
+      %tr
+        %td
+          %label{for: "email"} Email:
+        %td
+          = @admission.email
+        %td      
+          %label{for: "You came to know about our school through"} You came to know about our school through:
+        %td 
+          = @admission.know_school
+      %tr
+        %td         
+          %label{for: "transport"} Choice of Transport:
+        %td     
+          = @admission.transport
+        %td
+          %label{for: "person"} Name:
+        %td             
+          = @admission.person
+      %tr
+        %td 
+          %label{for: "busstop"} Busstop:
+        %td
+          = @admission.busstop
+        %td     
+          %label{for: "class"} Class:
+        %td        
+          = @admission.pp
+
+  .col-sm-1
+    = link_to 'Back', home_index_admission_path, :class => 'btn btn-primary'    
 
 

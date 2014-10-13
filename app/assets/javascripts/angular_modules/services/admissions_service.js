@@ -5,8 +5,9 @@
             var url = "/admissions/get_klass_view.json"
             return $http.get(url);
         };
+
         return {
-            getKlassServiceView : getKlassServiceView
+            getKlassServiceView : getKlassServiceView,
         };
     }]);
 })(angular, myApp);

@@ -112,15 +112,39 @@
       .form-group
         .col-sm-2
           .pull-left
-            = f.label "Residential Address:", :class => 'control-label'
+            = f.label "Address Line1:", :class => 'control-label'
         .col-sm-2
-          = f.text_area :address, :class => 'form-control'
+          = f.text_field :address_line1, :class => 'form-control'
         .col-sm-2
+        .col-sm-2
+          .pull-left
+            = f.label "Address Line2:", :class => 'control-label'
+        .col-sm-2
+          = f.text_area :address_line2, :class => 'form-control'
+      .form-group
+        .col-sm-2
+          .pull-left
+            = f.label "City:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :city, :class => 'form-control'
+        .col-sm-2
+        .col-sm-2
+          .pull-left
+            = f.label "Pin:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :pin, :class => 'form-control'
+
+      .form-group
         .col-sm-2
           .pull-left
             = f.label "Email: ", :class => 'control-label'          
         .col-sm-2
           = f.text_field :email, :class => 'form-control'
+
+        .col-sm-2
+        .col-sm-2
+        .col-sm-2
+
       .form-group
         .col-sm-2
           .pull-left
@@ -147,8 +171,6 @@
         .col-sm-2
           = f.text_field :busstop, :class => 'textbox2 form-control'
         
-          
-        
       .form-group
         .col-sm-2
           .pull-left
@@ -158,9 +180,9 @@
         .col-sm-2
         .col-sm-2
           .pull-left
-            = f.label "City: ", :class => 'control-label'
+            = f.label "Previous City: ", :class => 'control-label'
         .col-sm-2
-          = f.text_field :city, :class => 'form-control'
+          = f.text_field :previous_city, :class => 'form-control'
       .form-group
         .col-sm-2
           .pull-left
@@ -172,7 +194,7 @@
           .pull-left
             = f.label "Know about our school through:", :class => 'control-label'
         .col-sm-2
-          = f.select(:know_school, options_for_select([['Friends'],['Advertisements'],['Internet'],['Word of Mouth'],['Parents whose children are studying here']]),{:include_blank => '-Select-' }, :class => 'admission')
+          = f.select(:know_school, options_for_select(['Friends','Advertisements','Internet','Word of Mouth','Parents whose children are studying here'],['Parents whose children are studying here']),{object: f.object, }, :class => 'admission')
       .form-group
         .col-sm-2
           .pull-left

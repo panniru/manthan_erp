@@ -14,6 +14,7 @@ class StudentMaster < ActiveRecord::Base
   has_one :parent_payment_master, :foreign_key => :student_id
   has_many :issuings
   has_many :donation_of_books
+  has_one :admission
   has_many :attendances, :dependent => :destroy
   has_one :student_route_mapping, :dependent => :destroy
   scope :ids_in_list, lambda{|ids| where("id in ?", ids)}

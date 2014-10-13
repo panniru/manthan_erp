@@ -21,7 +21,6 @@
     %table#tblData.target.table.table-striped.table-condensed.table-bordered
       %thead
         %tr
-          %th Department
           %th Post
           %th Description
           %th Posted_at
@@ -30,7 +29,6 @@
       %tbody
         - @adds.each do |add|
           %tr
-            %td= add.dept
             %td= add.title
             %td= add.description
             %td= add.created_at

@@ -12,64 +12,53 @@
         Assessment Planned
 %br
 %br
-
-%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
-  %thead
-    %tr
-      %th Form no
-      %th Name
-      %th Class
-      %th Status
-      
-        
-  %tbody
-    - @admissions.each do |admission|
+.row{"ng-controller" => "AttendanceController"}
+  %table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
+    %thead
       %tr
-        %td{:style => "width:25%"}
-          = link_to "#{admission.form_no}", "#", :class => 'Modal', :data => {:id => "#{@admission.id}"}
-          #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1", "data-backdrop" => "static","data-keyboard" => "false"}
+        %th Form no
+        %th Name
+        %th Class
+        %th Status
+               
+    %tbody
+      %tr{"ng-repeat" => "assess in ass"}
+        %td{:style => "width:20%"}
+          %a{:href => "", "ng-click" => "getModal(assess.id)"} 
+            {{assess.form_no}}
+          #getModal.modal.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
             .modal-dialog.modal-sm
               .modal-content
                 .modal-header
                   .row
                     .pull-left
                       .col-sm-12
-                        %h4#Modal.modal-title Assessment Review
-               
-                %center
-                  = admission.id
-                  = form_for @admission do |f|
-                    .modal-body
-                      .row
-                        %table
-                          %thead
-                            %tr
-                              %th
-                              %th{style: "width:20%"} 
-                                = f.radio_button :teachercomment, "Selected"
-                                %label{for: "Selected", :id => "first"} Selected
-                              
-                              %th{style: "width:20%"} 
-                                = f.radio_button :teachercomment, "Rejected"
-                                %label{for: "Rejected", :id => "second"} Rejected
-                              %th
-                            %tr
-                              %th
-                              %th
-                                = f.label "Comment", :class => 'control-label'
-                              %th
-                                = f.text_area :comment ,:class => 'form-control'
-                              %th
-                        = f.hidden_field :status,:value => "Assessment_Completed"
-                        = f.hidden_field :id, :value => "#{admission.id}"
-                        = button_tag "Save", :type => "submit", :class => 'pull-right btn btn-primary'
-                        %br
-                        %br           
-        %td{:style => "width:25%"}
-          = admission.name
-        %td{:style => "width:25%"}
-          = admission.grade
-        %td{:style => "width:25%"}
-          = admission.status
-        
-        
+                        %h4#getModal.modal-title Assessment Review
+                       
+                .modal-body
+                  %form{:class => "form-horizontal"}
+                    .row
+                      .col-sm-2
+                        Result
+                      .col-sm-6
+                        %input{:ng_model => "assess.teachercomment", type: 'radio', :value => 'Selected'} Selected
+                        %input{:ng_model => "assess.teachercomment", type: 'radio', :value => 'Rejected'} Rejected
+                        = hidden_field_tag :teachercomment, :value => "{{assess.teachercomment}}"
+                    .row
+                      .col-sm-2
+                        Comment
+                      .col-sm-6
+                        %input{:ng_model => "assess.comment", type: 'text'}
+                        = hidden_field_tag :comment, :value => "{{assess.comment}}"
+                    .row
+                      .pull-right
+                        %input{:type => "button",:class => "btn btn-primary", "ng-click" => "getStudent(assess)", :value => "Update"}
+                    .row
+                      {{assess}}
+
+        %td{:style => "width:20%"}
+          {{assess.name}}
+        %td{:style => "width:20%"}
+          {{assess.grade}}
+        %td{:style => "width:20%"}
+          {{assess.status}}

@@ -8,6 +8,9 @@
           .modal-dialog
             .modal-content
               .modal-header
+                %button.close{"data-dismiss" => "modal", :type => "button"}
+                  %span{"aria-hidden" => "true"} &times;
+                  %span.sr-only Close
                 %center
                   %h4#myModalLabel.modal-title Reason for Closing
                   = form_for @admission do |f|

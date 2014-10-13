@@ -6,5 +6,6 @@
             .then(function(result) {
                 $scope.klasses=result.data
             });
+        
         }]);
 })(angular, myApp);

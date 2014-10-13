@@ -1,6 +1,5 @@
 $(document ).ready(function() {
-    $('.textbox1').hide();
-    
+        
     $('#admission_bus').change(function() {
         if ($(this).val() == 't')
         {
