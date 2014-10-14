@@ -19,8 +19,8 @@ class ApprovalItemsController < ApplicationController
     respond_to do |format|
       format.json do
         if @approval_item.approve(current_user)
-          principal = User.find_by_role_id(Role.find_by_code('principal'))
-          FeeAlertsMailer.approved_mail(GradeFeeGrid.new, TermFeeGrid.new, MonthlyPdcGrid.new, current_user, principal).deliver
+          # principal = User.find_by_role_id(Role.find_by_code('principal'))
+          # FeeAlertsMailer.approved_mail(GradeFeeGrid.new, TermFeeGrid.new, MonthlyPdcGrid.new, current_user, principal).deliver
           render :json => @approval_item
         end
       end
