@@ -18,7 +18,8 @@ class StudentMaster < ActiveRecord::Base
   has_many :attendances, :dependent => :destroy
   has_one :student_route_mapping, :dependent => :destroy
   scope :ids_in_list, lambda{|ids| where("id in ?", ids)}
-  scope :has_no_route , lambda{where("id not in (?)", StudentRouteMapping.all.map(&:student_master_id))} 
+  scope :has_no_route , lambda{where("id not in (?)", StudentRouteMapping.all.map(&:student_master_id))}
+  
   scope :has_bus_facility , lambda{where(:bus_facility => true)} 
   
   def grade_bucket_id

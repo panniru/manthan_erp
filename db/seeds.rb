@@ -164,10 +164,10 @@ def seed_students
 
     StudentMaster.create(:name => "Srikanth", :dob => "17-06-1989", :joining_date => DateTime.now, :parent_master_id => Parent.first.id, :grade_master_id => GradeMaster.last.id, :bus_facility => true ,:section_master_id => '1')
     StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :grade_master_id => GradeMaster.first.id, :bus_facility => true, :section_master_id => '1')
-    StudentMaster.create(:name => "Gopika", :grade_master_id => "1")
-    StudentMaster.create(:name => "Priya", :grade_master_id => "1")
-    StudentMaster.create(:name => "Navya", :grade_master_id => "1")
-    StudentMaster.create(:name => "Muralee", :grade_master_id => "1")
+    StudentMaster.create(:name => "Gopika", :grade_master_id => "1",:bus_facility => true, :section_master_id => '2')
+    StudentMaster.create(:name => "Priya", :grade_master_id => "1",:bus_facility => true, :section_master_id => '2')
+    StudentMaster.create(:name => "Navya", :grade_master_id => "1",:bus_facility => true, :section_master_id => '3')
+    StudentMaster.create(:name => "Muralee", :grade_master_id => "1",:bus_facility => true, :section_master_id => '1')
 
   end
 end
@@ -218,10 +218,10 @@ end
 
 def seed_new_vehicles
   unless NewVehicle.first.present?
-  NewVehicle.create(:id => '10',:model_no => 'AT5678',:make_of_bus =>  'TAYOTA',:year_of_manufacture => '2011',:purchase_option => 'Own',:purchase_option_date => '5/6/2011',:capacity => '50' )
-  NewVehicle.create(:id => '12',:model_no => 'AT5678',:make_of_bus =>  'TAYOTA',:year_of_manufacture => '2011',:purchase_option =>  'Own',:purchase_option_date => '5/6/2011',:capacity => '50' )
-  NewVehicle.create(:id => '13',:model_no => 'TR879',:make_of_bus =>  'TAYOTA',:year_of_manufacture => '2000',:purchase_option =>  'Lease',:purchase_option_date => '5/6/2011',:capacity => '50' ) 
-    NewVehicle.create(:id => '14',:model_no => 'VB879',:make_of_bus =>  'TAYOTA',:year_of_manufacture => '2000',:purchase_option =>  'Lease',:purchase_option_date => '5/6/2011',:capacity => '50' ) 
+  NewVehicle.create(:id => '10',:model_no => 'AT5678',:make_of_bus =>  'TOYOTA',:year_of_manufacture => '2011',:purchase_option => 'Own',:purchase_option_date => '5/6/2011',:capacity => '50' )
+  NewVehicle.create(:id => '12',:model_no => 'AT5678',:make_of_bus =>  'TOYOTA',:year_of_manufacture => '2011',:purchase_option =>  'Own',:purchase_option_date => '5/6/2011',:capacity => '50' )
+  NewVehicle.create(:id => '13',:model_no => 'TR879',:make_of_bus =>  'TOYOTA',:year_of_manufacture => '2000',:purchase_option =>  'Lease',:purchase_option_date => '5/6/2011',:capacity => '50' ) 
+    NewVehicle.create(:id => '14',:model_no => 'VB879',:make_of_bus =>  'TOYOTA',:year_of_manufacture => '2000',:purchase_option =>  'Lease',:purchase_option_date => '5/6/2011',:capacity => '50' ) 
   end
 end
 

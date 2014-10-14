@@ -3,7 +3,7 @@
    
    def index
      @student_route_mappings = StudentRouteMapping.where(:route_id => params[:route_id]).count
-     if current_user.transport_head? 
+     if current_user.transport_head?  or current_user.admin? 
        @routes=  Route.all
        @locations = Location.all
        locations = []
@@ -36,32 +36,9 @@
          end
        end
      end
-     if current_user.admin? 
-       @routes =  Route.all
-       @locations = Location.all
-       locations = []
-       Route.all.each do |route| 
-         locations.concat(route.locations)
-       end
-       gmap_data = Gmaps4rails.build_markers(locations) do |location, marker|
-         marker.lat location.location_master.latitude
-         marker.lng location.location_master.longitude
-       end
-       gon.gmap_data = gmap_data.to_json
-       gon.width = "750px"
-       gon.height = "350px"
-       respond_to do |format|   
-         format.json do
-           routes = @routes.map do |r|
-             {id: r.id ,  busno_up: r.busno_up, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name}
-           end
-           render :json => routes
-         end
-         format.html do 
-           render "index"
-         end
-       end
-     end
+    
+      
+      
      if current_user.parent?
        respond_to do |format|   
          format.json do
@@ -77,8 +54,6 @@
            routes = @routes.map do |r|
              {id: r.id ,  busno_up: r.busno_up, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name}
            end
-           p "@@@@@@@@@@@@2"
-           p routes
            render :json => routes
          end
          format.html do 
@@ -152,7 +127,7 @@
        format.json do 
          map = StudentRouteMapping.show_all_students(params[:route]).map {|student| student.student_master_id}
          students = StudentMaster.where(:id => map ).each.map do |mapping|
-           {grade: mapping.grade_master.grade_name,  name: mapping.name , section: mapping.section_master.section_name , location: mapping.location_master.location_name}
+           {grade: mapping.grade_master.grade_name,  name: mapping.name , section: mapping.section_master.section_name }
          end     
          render :json => students
        end
@@ -163,8 +138,6 @@
      respond_to do |format|
        format.json do 
          loc = StudentRouteMapping.show_all_locations(params[:location]).map {|student| student.student_master_id}
-         p "===================="
-         p loc
          locations = StudentMaster.where(:id => loc ).each.map do |mapping|
            {grade: mapping.grade_master.grade_name,  name: mapping.name , section: mapping.section_master.section_name }
          end     
@@ -173,16 +146,20 @@
      end
    end
    
-       
-  
-     
    def destroy
-     if @route.destroy
-       flash[:success] = I18n.t :success, :scope => [:route ,:destroy]
-     else
-       flash.now[:fail] = I18n.t :fail, :scope => [:route, :destroy]
+     respond_to do |format|
+       format.json do
+         render :json => @route.destroy
+       end
+       format.html do
+         if @route.destroy
+           flash[:success] = I18n.t :success, :scope => [:route ,:destroy]
+         else
+           flash.now[:fail] = I18n.t :fail, :scope => [:route, :destroy]
+         end
+         redirect_to routes_path
+       end
      end
-     redirect_to routes_path
    end
    
    def create

@@ -1,8 +1,9 @@
 %form{:class=>"form-horizontal", :ng_submit => "submitRoutes( )" }
   .row
-    .col-sm-4
-      = select_tag "lpp" , options_for_select([['Up Route'],['Down Route ']]) ,"ng-model" => "newRoute.lpp", :class => 'form-control'
-      //%button{:type => "button", :class=> "btn btn-primary", :ng_click => "busNo(lpp)"}=  "search"
+    .col-sm-2
+      = label_tag "Route", nil, :class => "form-label"
+    .col-sm-3
+      = select_tag "lpp" , options_for_select([['Up Route'],['Down Route ']]) ,"ng-model" => "newRoute.lpp",:class => 'form-control'
     .col-sm-2
       = label_tag "Busno", nil, :class => "form-label"
     .col-sm-3

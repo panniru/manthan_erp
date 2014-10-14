@@ -33,11 +33,25 @@ class StudentRouteMappingsController < ApplicationController
   
   def get_student_view
     student = StudentMaster.has_bus_facility.has_no_route.all.map do |student|
+      p "========================"
+      p student
       {name: student.name,id: student.id , grade: student.grade_master.grade_name , section: student.section_master.section_name }
     end
     render :json => student
   end
-  
+
+  def destroy
+    @student_route_mapping = StudentRouteMapping.find(params[:id])
+    if @student_route_mapping.destroy
+      flash[:success] = I18n.t :success, :scope => [:student_route_mapping ,:destroy]
+    else
+      flash.now[:fail] = I18n.t :fail, :scope => [:student_route_mapping, :destroy]
+    end
+    redirect_to student_route_mappings_path
+  end
+   
+
+
 
   private
   

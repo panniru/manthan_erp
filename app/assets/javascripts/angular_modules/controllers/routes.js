@@ -99,7 +99,7 @@
             route.$delete()
 	    	.then(function(response){
                     $scope.routes.splice($scope.routes.indexOf(route), 1)
-                })
+		});
 	};
 
         $scope.addMoreterms = function(){
