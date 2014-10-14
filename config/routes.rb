@@ -1,8 +1,5 @@
 ManthanErp::Application.routes.draw do
   
- 
-
-
   resources :vendor_managements do
     collection do
       get "get_vendor_view"
@@ -488,7 +485,7 @@ ManthanErp::Application.routes.draw do
   get "/fee_reports", to: "fee_reports#index"
   get "/fee_reports/payment_status_report", to: "fee_reports#payment_status_report"
   get "/fee_reports/payment_type_details", to: "fee_reports#payment_type_details"
-  root to: "home#index"
+  #root to: "home#index"
 
   resources :assessments do
     collection do
@@ -744,6 +741,7 @@ ManthanErp::Application.routes.draw do
       post 'create_bulk'     
     end    
   end
+  
   resources :vendor_categories
  
   resources :faculty_masters do
@@ -751,4 +749,11 @@ ManthanErp::Application.routes.draw do
       get "dashboard"
     end
   end
+
+  get "role_menu_mappings/roles"
+  get "role_menu_mappings/map"
+  get "role_menu_mappings/list_mapping"
+  post "role_menu_mappings/save_mapping"
+  get "home" => "home#index"
+  
 end

@@ -364,6 +364,40 @@ def seed_gradings
   end
 end
   
+def seed_main_menu
+  MainMenu.where(:main_menu_name => "fee_management").first_or_create!(:main_menu_name => "fee_management", :icon_class => "bank", :url => "/home")
+  MainMenu.where(:main_menu_name => "attendance").first_or_create!(:main_menu_name => "attendance", :icon_class => "building", :url => "/admissions/admission_home")
+  MainMenu.where(:main_menu_name => "hrm").first_or_create!(:main_menu_name => "hrm", :icon_class => "group", :url => "/home?context=HRM")
+end
+
+def fee_management_sub_menu
+  fee_management = MainMenu.where(:main_menu_name => "fee_management").first
+  SubMenu.where(:sub_menu_name => "fee_types").first_or_create!(:sub_menu_name => "fee_types", :icon_class => "tasks", :main_menu_id => fee_management.id, :url => "/fee_types")
+  SubMenu.where(:sub_menu_name => "fee_grade_buckets").first_or_create!(:sub_menu_name => "fee_grade_buckets", :icon_class => "codepen", :main_menu_id => fee_management.id, :url => "/fee_grade_buckets")
+  SubMenu.where(:sub_menu_name => "term_definitions").first_or_create!(:sub_menu_name => "term_definitions", :icon_class => "cubes", :main_menu_id => fee_management.id, :url => "/term_definitions")
+  SubMenu.where(:sub_menu_name => "post_dated_cheques").first_or_create!(:sub_menu_name => "post_dated_cheques", :icon_class => "calendar-o", :main_menu_id => fee_management.id, :url => "/post_dated_cheques")
+  SubMenu.where(:sub_menu_name => "fee_structure").first_or_create!(:sub_menu_name => "fee_structure", :icon_class => "calendar-o", :main_menu_id => fee_management.id, :url => "/grade_wise_fees")
+  SubMenu.where(:sub_menu_name => "pay_fee").first_or_create!(:sub_menu_name => "pay_fee", :icon_class => "inr", :main_menu_id => fee_management.id, :url => "/parent_payment_masters")
+  SubMenu.where(:sub_menu_name => "cheques").first_or_create!(:sub_menu_name => "cheques", :icon_class => "money", :main_menu_id => fee_management.id, :url => "/parent_cheques")
+  SubMenu.where(:sub_menu_name => "transactions").first_or_create!(:sub_menu_name => "transactions", :icon_class => "suitcase", :main_menu_id => fee_management.id, :url => "/parent_payment_transactions/parent_transactions")
+  SubMenu.where(:sub_menu_name => "approvals").first_or_create!(:sub_menu_name => "approvals", :icon_class => "check", :main_menu_id => fee_management.id, :url => "/approval_items")
+  SubMenu.where(:sub_menu_name => "jobs").first_or_create!(:sub_menu_name => "jobs", :icon_class => "envelop-o", :main_menu_id => fee_management.id, :url => "/job_runs")
+  SubMenu.where(:sub_menu_name => "reports").first_or_create!(:sub_menu_name => "reports", :icon_class => "file-photo-o", :main_menu_id => fee_management.id, :url => "/fee_reports")
+end
+
+def hrm_sub_menu
+  hrm_main_menu = MainMenu.where(:main_menu_name => "hrm").first
+  SubMenu.where(:sub_menu_name => "students").first_or_create!(:sub_menu_name => "students", :icon_class => "fema;e", :main_menu_id => hrm_main_menu.id, :url => "/student_masters?context=HRM")
+  SubMenu.where(:sub_menu_name => "parents").first_or_create!(:sub_menu_name => "parents", :icon_class => "user", :main_menu_id => hrm_main_menu.id, :url => "/parents?context=HRM")
+  SubMenu.where(:sub_menu_name => "teachers").first_or_create!(:sub_menu_name => "teachers", :icon_class => "users", :main_menu_id => hrm_main_menu.id, :url => "/faculty_masters")
+  SubMenu.where(:sub_menu_name => "vendors").first_or_create!(:sub_menu_name => "vendors", :icon_class => "vine", :main_menu_id => hrm_main_menu.id, :url => "/vendor_managements")
+
+  SubMenu.where(:sub_menu_name => "guest").first_or_create!(:sub_menu_name => "guest", :icon_class => "user-md", :main_menu_id => hrm_main_menu.id, :url => "/guest_managements")
+  SubMenu.where(:sub_menu_name => "travelling").first_or_create!(:sub_menu_name => "travelling", :icon_class => "automobile", :main_menu_id => hrm_main_menu.id, :url => "#")
+  SubMenu.where(:sub_menu_name => "accounting").first_or_create!(:sub_menu_name => "accounting", :icon_class => "table", :main_menu_id => hrm_main_menu.id, :url => "#")
+
+end
+
 def seed_all
   seed_role
   seed_user   
@@ -387,6 +421,9 @@ def seed_all
   seed_special_day_transport
   seed_sections
   seed_gradings
+  seed_main_menu
+  fee_management_sub_menu
+  hrm_sub_menu
 end
 
 seed_all

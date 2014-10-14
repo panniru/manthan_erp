@@ -2,9 +2,10 @@
   .container-fluid
     .col-md-offset-2.col-md-10
       %ul.nav.navbar-nav
-        - main_menu_list.each do |menu_item|
-          %li{:class => menu_item.klass}
-            %a{:href => menu_item.href}
-              = fa_icon "#{menu_item.icon} 2x", :class => "menu-icon"
+        -#- main_menu_list.each do |menu_item|
+        - session[:user_main_menu].each do |menu_item|
+          %li{:class => "#{menu_item.id.to_s == session[:active_main_menu_id] ? "active" : ""}"}
+            %a{:href => "#{menu_item.url}?m_m_id=#{menu_item.id}"}
+              = fa_icon "#{menu_item.icon_class} 2x", :class => "menu-icon"
               %span.menu-text
-                = menu_item.label
+                = menu_item.main_menu_name.titleize

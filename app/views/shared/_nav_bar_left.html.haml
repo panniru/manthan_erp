@@ -3,9 +3,9 @@
     #wrapper
       #sidebar-wrapper
         %ul.sidebar-nav
-          - sub_menu.each do |sub_menu_item|
-            %li{:class => sub_menu_item.klass}
-              %a{:href => sub_menu_item.href}
-                = fa_icon sub_menu_item.icon
+          - RoleMenuMapper.new(current_user.role).user_sub_menu(session[:active_main_menu_id]).each do |sub_menu_item|
+            %li{:class => "#{sub_menu_item.id.to_s == session[:active_sub_menu_id] ? "active" : ""}"}
+              %a{:href => "#{sub_menu_item.url}?s_m_id=#{sub_menu_item.id}"}
+                = fa_icon sub_menu_item.icon_class
                 %span
-                  = sub_menu_item.label
+                  = sub_menu_item.sub_menu_name

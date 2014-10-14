@@ -1,0 +1,38 @@
+.col-md-12{:ng_controller => "RoleMenuMappingsController", :ng_init => "getRoles()"}
+  .container
+    %form{:class => "form-inline", :ng_submit => "list_mapping()", :action => "#"}
+      .form-group.col-md-3
+        %label{:class=> "form-label col-md-4"} Role
+        .col-md-6
+          %select{:ng_model => "role", :ng_options => "r.role for r in roles", :class=>"form-control"}
+      .col-md-3
+        = submit_tag "Get Mapping", :name => nil, :class => "btn-primary btn"
+
+  %br
+  .col-md-12{:ng_show => "menus"}
+    .col-md-offset-11
+      = link_to "Edit", "#",:class => "btn-primary btn", :ng_hide => "isEdit", :ng_click => "isEdit = true"
+    %table.table.table-hovered
+      %thead
+        %th Assigned
+        %th Main Menu
+        %th Priority
+        %th Sub Menu
+      %tbody
+        %tr{:ng_repeat => "menu in menus"}
+          %td 
+            %input{:type => "checkbox", :ng_model => "menu.is_assigned", :ng_disabled => "!isEdit", :ng_change => "checkSubMenu(menu)"}
+          %td 
+            %label {{menu.main_menu_name}}
+          %td
+            %select{:ng_options => "n as n for n in priority_count", :class => "form-control", :ng_disabled => "!isEdit", :ng_model => "menu.priority"}
+              {{priority_count}}
+          %td 
+            .col-md-12
+              .col-md-4{:ng_repeat => "sub_menu in menu.sub_menus"}
+                %input{:type => "checkbox", :ng_model => "sub_menu.is_assigned", :ng_disabled => "!isEdit"}
+                %label {{sub_menu.sub_menu_name}}
+      
+  .col-md-offset-6{:ng_show => "isEdit"}
+    = link_to "Cancel", "#", :class => "btn btn-warning", :ng_click => "isEdit = false"
+    = link_to "Save", "#", :class => "btn btn-success", :ng_click => "saveMapping()"

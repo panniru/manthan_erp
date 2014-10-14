@@ -20,8 +20,9 @@ module ApplicationHelper
   end
 
   def sub_menu
-    user_menu = UserMenu.new(current_user, ContextDetector.get_context(:key => controller.controller_name, :context => params[:context], :params => params))
-    user_menu.sub_menu
+    RoleMenuMapper.new(current_user.role).user_sub_menu(session[:active_main_menu_id])
+    # user_menu = UserMenu.new(current_user, ContextDetector.get_context(:key => controller.controller_name, :context => params[:context], :params => params))
+    # user_menu.sub_menu
   end
 
   def user_menu

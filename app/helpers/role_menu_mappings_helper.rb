@@ -1,0 +1,2 @@
+module RoleMenuMappingsHelper
+end
