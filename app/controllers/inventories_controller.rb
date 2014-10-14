@@ -1,24 +1,5 @@
 class InventoriesController < ApplicationController
-  def index
-    @inventories = Inventory.all  
-  end
-
-  def create
-
-  end
-
-  def edit
-  end
-
-  def destroy
-  end
-
-  def new
-    @inventories = Inventory.order_placed
-  end
-  
  
-  
   def get_inventory_view
     respond_to do |format|
       format.json do 
@@ -66,80 +47,10 @@ class InventoriesController < ApplicationController
     end
   end
 
-  def request_accept
-    @inventory = Inventory.find(params[:id])
-    if @inventory.update(:status => "Accepted" )
-      render action: 'request_accept'
-    else
-      render json: @inventory.errors
-    end
-  end
-
-  def update
-    @inventory = Inventory.find(params[:id])
-    respond_to do |format|
-      if @inventory.update(:status => "Approved")
-        format.json { render json: @inventory , :status => "success"}
-      else
-        format.json { render json: @inventory , :status => "failure"}
-      end
-    end
-  end
-
-  def order_placed
-    @inventory = Inventory.find(params[:id])
-    respond_to do |format|
-      if @inventory.update(:status => "Order placed")
-        format.json { render json: @inventory , :status => "success"}
-      else
-        format.json { render json: @inventory , :status => "failure"}
-      end
-    end
-  end
-
-  def rejected
-    @inventory = Inventory.find(params[:id])
-    respond_to do |format|
-      if @inventory.update(:status => "Rejected")
-        format.json { render json: @inventory , :status => "success"}
-      else
-        format.json { render json: @inventory , :status => "failure"}
-      end
-    end
-  end
-
-  def delivered
-    @inventory = Inventory.find(params[:id])
-    respond_to do |format|
-      if @inventory.update(:status => "Delivered")
-        format.json { render json: @inventory , :status => "success"}
-      else
-        format.json { render json: @inventory , :status => "failure"}
-      end
-    end
-  end
-
-  def refresh
-    @inventory = Inventory.find(params[:id])
-    respond_to do |format|
-      if @inventory.update(:status => "Pending")
-        format.json { render json: @inventory , :status => "success"}
-      else
-        format.json { render json: @inventory , :status => "failure"}
-      end
-    end
-  end
-  
-
-
   
   def mail_to_vendors
     respond_to do |format|
       format.json do  
-        p "==========================="
-        p params[:inventories]
-
-        #@inventory = Inventory.find(params[:format])
         UserMailer.vendor(params[:inventories],["navya@ostryalabs.com"]).deliver
         render :json=>true
       end

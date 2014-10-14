@@ -6,9 +6,9 @@
     .col-sm-2
       = text_field_tag  "[date]", '', {:class => "datepicker form-control", :placeholder => 'Date'}
     .col-sm-1
-      = label_tag "Occation", nil, :class => "form-label"
+      = label_tag "Occasion", nil, :class => "form-label"
     .col-sm-2
-      = text_field_tag  "occation", '', {:class => "form-control", :placeholder => 'Occation'}
+      = text_field_tag  "occation", '', {:class => "form-control", :placeholder => 'Occasion'}
     .col-sm-2
       
     .col-sm-3
@@ -17,15 +17,11 @@
       %br
       
   .row
-    .col-sm-2
+    .col-sm-3
     .col-sm-5
       %h4 PickUp Details
     .col-sm-4
-      %h4 DropDown Details
-    
-
-      
- 
+      %h4 Drop Details
   .row
     .col-sm-1
     .col-sm-10
@@ -33,27 +29,23 @@
         %thead
           %tr
             %th Location 
-            %th Route
+            %th Route no up
             %th Time pickup
-            %th Route no Up
-            %th Bus no Up
-            %th Time Drop
             %th Route no Down
-            %th Bus no Down
-            
+            %th Time Drop
+                        
         %tbody 
           - @locations.each do |location|
             %tr
               %td= location.location_master.location_name
               = hidden_field_tag "bulk_save[][location_master_id]",'', :value => location.location_master.id
-              %td= location.route_id
-              = hidden_field_tag "bulk_save[][route_id]",'', :value => location.route_id
+              %td= text_field_tag "location.route_id" , '', {:class => "form-control", :placeholder => 'Up Routeno#'}
+              //= hidden_field_tag "bulk_save[][route_id]",'', :value => location.route_id
               %td= text_field_tag "bulk_save[][time_up]", '', {:class => "form-control", :placeholder => 'Pick up Time'}
-              %td= text_field_tag "bulk_save[][new_up_route]", '', {:class => "form-control", :placeholder => 'UP Routeno#'}
-              %td= text_field_tag "bulk_save[][new_busno_up]", '', {:class => "form-control", :placeholder => 'UP Busno#'}
-              %td= text_field_tag "bulk_save[][time_down]", '', {:class => "form-control", :placeholder => 'Time Drop'}
               %td= text_field_tag "bulk_save[][new_down_route]", '', {:class => "form-control", :placeholder => 'Down Routeno#'}
-              %td= text_field_tag "bulk_save[][new_busno_down]", '', {:class => "form-control", :placeholder => 'Down Busno#'}
+              %td= text_field_tag "bulk_save[][time_down]", '', {:class => "form-control", :placeholder => 'Time Drop'}
+              
+              
              
   .row
     %center

@@ -1,5 +1,6 @@
 class Route < ActiveRecord::Base
-  has_many :locations
+  has_many :student_route_mappings , :dependent => :destroy 
+  has_many :locations , :dependent => :destroy
   has_many :location_masters
   accepts_nested_attributes_for :locations
   attr_accessor :text ,:subject

@@ -10,7 +10,7 @@
     %table#tblData.target.table.table-striped.table-condensed.table-bordered
       %thead
         %tr
-          %th Student name
+          %th Student Name
           %th Class
           %th Section
           - if current_user.transport_head?
@@ -24,7 +24,7 @@
           %td {{student.section}}
           - if current_user.transport_head?
             %td
-              = link_to "allot", "#", :class => "btn btn-primary","ng-click" => "mapStudent(student.id)"
+              = link_to "Allot", "#", :class => "btn btn-primary","ng-click" => "mapStudent(student.id)"
     .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
       .modal-dialog
         .modal-content

@@ -1,7 +1,7 @@
 %h3 Special Day
 .row
-  .col-sm-2
-  .col-sm-5
+  .col-sm-4
+  .col-sm-4
     %h4 PickUp Details
   .col-sm-4
     %h4 DropDown Details
@@ -14,28 +14,20 @@
         .col-sm-1
         .col-sm-1
           = f.label "Route No"
-        .col-sm-1
-          = f.label "Bus No"
         .col-sm-2
           = f.label "time"
         .col-sm-2
           = f.label "Route No"
-        .col-sm-1
-          = f.label "Bus No"
         .col-sm-2
           = f.label "time"
       .row
         .col-sm-1
         .col-sm-1
           = f.text_field :new_up_route, :class => 'form-control'
-        .col-sm-1
-          = f.text_field :new_busno_up ,:class => 'form-control'
         .col-sm-2
           = f.text_field :time_up ,:class => 'form-control'
         .col-sm-2
           = f.text_field :new_down_route, :class => 'form-control'
-        .col-sm-1
-          = f.text_field :new_busno_down ,:class => 'form-control'
         .col-sm-2
           = f.text_field :time_down ,:class => 'form-control'
     .row

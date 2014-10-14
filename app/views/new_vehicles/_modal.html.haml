@@ -5,6 +5,7 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
         %h4#myModalLabel.modal-title New Bus
+        %hr
         = form_for NewVehicle.new , :html => { :class => "form-horizontal", :role => "form"} do |f| 
           .modal-body
             .row
@@ -51,7 +52,6 @@
                 = f.text_field "capacity", :class => 'form-control'
                 %br
             .row
-              .col-sm-10
-              .col-sm-2
+              %center
                 = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
           

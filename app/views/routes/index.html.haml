@@ -35,6 +35,7 @@
             .modal-header
               %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
               %h4#myModalLabel.modal-title New Route            
+              %hr
               .modal-body{"ng-controller" => "RouteController"}
                 = render "form1"
               

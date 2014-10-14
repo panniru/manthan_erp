@@ -1,7 +1,7 @@
 ManthanErp::Application.routes.draw do
-  
- 
+  get 'locations/index'
 
+  get 'locations/create'
 
   resources :vendor_managements do
     collection do
@@ -45,9 +45,6 @@ ManthanErp::Application.routes.draw do
       get "get_route_view"
       get "get_student_view"
       post "save_route"
-    end
-    member do
-      get "modal"
     end
   end
   
@@ -377,8 +374,7 @@ ManthanErp::Application.routes.draw do
   
   resources :location_masters
 
-  resources :new_vehicles
-
+  
   resources :recruitments do
     member do
       
@@ -552,7 +548,6 @@ ManthanErp::Application.routes.draw do
       get "get_location_view"
       get "get_bus_no"
       get "all_students"
-      get "students"
       post "send_mail"
       get 'all_locations'
 
@@ -606,13 +601,6 @@ ManthanErp::Application.routes.draw do
       post "mail_to_vendors"
       post "update_inventory_status"
       post 'create_bulk'
-    end
-    member  do
-      get 'request_accept'
-      put 'order_placed'
-      put 'rejected'
-      put 'delivered'
-      put 'refresh'
     end
   end
 
