@@ -17,6 +17,6 @@ class AddFieldsToAdmission < ActiveRecord::Migration
     add_column :teacher_leaders, :grade_master_id, :integer
     add_column :teacher_leaders, :section_master_id, :integer
     add_column :admissions, :section_master_id, :integer
-    add_column :faculty_masters, :post, :string
+    
   end
 end
