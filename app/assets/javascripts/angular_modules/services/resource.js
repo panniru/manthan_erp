@@ -52,6 +52,15 @@
                                            "add_bulk": { url: "/books/add_bulk", method:'POST'},
                                        }
                             );
+
+        var Assess = $resource('/admissions/:id.json', {id: '@id'},
+                               {
+                                   "update": {method: "PUT"}
+                               }
+                              );
+
+
+
         var RequestNewBook = $resource('/request_new_books/:id.json', {id: '@id'},
                              {
                                  "bulk": { url: "/request_new_books/create_bulk", method:'POST'},
@@ -130,6 +139,7 @@
             StudentMaster : StudentMaster,
             GradeMaster : GradeMaster,            
             Book : Book,
+            Assess : Assess,
 	    Route:Route,
             RequestNewBook : RequestNewBook,           
             Mealtype: Mealtype,

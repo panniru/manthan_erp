@@ -15,7 +15,6 @@
 //= require bootstrap
 //= require underscore
 //= require gmaps/google
-//= require geocomplete
 //= require fullcalendar
 //= require jquery.timepicker.js
 //= require jquery.turbolinks

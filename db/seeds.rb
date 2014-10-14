@@ -393,7 +393,14 @@ def seed_teacher_leader
     
   end
 end
-
+def seed_attendances
+  unless Attendance.first.present?
+    Attendance.create(:student_master_id => '1',:attendance => 'P', :attendance_date => '2014-10-14')
+    Attendance.create(:student_master_id => '2',:attendance => 'A', :attendance_date => '2014-10-14')
+    Attendance.create(:student_master_id => '1',:attendance => 'L', :attendance_date => '2014-10-06')
+    Attendance.create(:student_master_id => '2',:attendance => 'P', :attendance_date => '2014-10-16')
+  end
+end
 def seed_all
   seed_role
   seed_user   
@@ -419,6 +426,7 @@ def seed_all
   seed_gradings
   seed_admissions
   seed_teacher_leader
+  seed_attendances
 end
 
 seed_all

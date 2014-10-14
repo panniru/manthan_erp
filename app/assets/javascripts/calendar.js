@@ -42,24 +42,24 @@ $(document).ready(function() {
         //teaching_plans: '/teaching_plans.json' // put your options and callbacks here
     });
 
-    $('#calendar3').fullCalendar({
+    // $('#calendar3').fullCalendar({
         
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,basicWeek,basicDay',
-            ignoreTimezone: false
-        },
+    //     header: {
+    //         left: 'prev,next today',
+    //         center: 'title',
+    //         right: 'month,basicWeek,basicDay',
+    //         ignoreTimezone: false
+    //     },
         
-        events: '/admissions.json',
+    //     events: '/admissions.json',
         
-        selectable: true,
-        select: function(date) {
-            alert("welcome "+ date);
-            $('#selectdate').val(date)
-            $('#myModal').modal('show');                
-        }
-    });
+    //     selectable: true,
+    //     select: function(date) {
+    //         alert("welcome "+ date);
+    //         $('#selectdate').val(date)
+    //         $('#myModal').modal('show');                
+    //     }
+    // });
     
     var monthNames = [ "January", "February", "March", "April", "May", "June",
                        "July", "August", "September", "October", "November", "December" ]

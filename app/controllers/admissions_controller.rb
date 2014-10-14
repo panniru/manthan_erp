@@ -21,6 +21,7 @@ class AdmissionsController < ApplicationController
           a = TeacherLeader.where(:faculty_master_id => pa).map{|student| student.grade_master_id}
           b = "Assessment_Planned"
           ass = Admission.where(:grade_master_id => a, :status => b).each.map do |mapping|
+            
             {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment}
           end
           render :json => ass
@@ -36,14 +37,27 @@ class AdmissionsController < ApplicationController
   end
   
   def index
-    if params[:teacher_leader_id].present?
-      @admissions = Admission.where(:teacher_leader_id => params[:teacher_leader_id])
-    else
-      @admissions = Admission.all
-      #respond_to do |format|
+    # if params[:teacher_leader_id].present?
+    #   @admissions = Admission.where(:teacher_leader_id => params[:teacher_leader_id])
+    # else
+      
+      respond_to do |format|
       # format.html
-      # format.json { render :json => @admission}
+       format.json do
+        if(TeacherLeader.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
+          pa = "#{current_user.faculty_master.id}"
+          a = TeacherLeader.where(:faculty_master_id => pa).map{|student| student.grade_master_id}
+          b = "Assessment_Planned"
+          ass = Admission.where(:grade_master_id => a, :status => b).each.map do |mapping|
+            {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: "Assessment_Completed", comment: mapping.comment, teachercomment: mapping.teachercomment}
+          end
+          render :json => ass
+        end
+        # @admissions = Admission.all
+        # render :json => @admissions
+      end
     end
+   # end                         
   end
   
   def create
@@ -130,7 +144,7 @@ class AdmissionsController < ApplicationController
   
   def assessment_index
     p params
-    @admission = Admission.new
+ 
     if params[:search].present?
       @admissions = Admission.search(params[:search])
     else
@@ -219,7 +233,15 @@ class AdmissionsController < ApplicationController
   
  def update
    p "-======================="
-   @admission = Admission.find(params[:id])
+  
+    @admission = Admission.find(params[:id])
+ #   if @admission.update(admission_params)
+ #     flash[:success] = I18n.t :success, :scope => [:admission, :update]
+ #     redirect_to admission_home_admissions_path
+ #   else
+ #     render 'enquiry_new'
+ #   end
+ # end
    respond_to do |format|
      if @admission.update!(admission_params)
        if @admission.finalresult == "Selected"

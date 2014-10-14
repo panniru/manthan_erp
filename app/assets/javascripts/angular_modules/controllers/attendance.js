@@ -1,7 +1,7 @@
 (function(angular, app) {
     "use strict";
-    app.controller("AttendanceController",["$scope", "attendanceService", function($scope, attendanceService) {
-                   
+    app.controller("AttendanceController",["$scope", "attendanceService", "resourceService", function($scope, attendanceService, resourceService) {
+        $scope.assesses = resourceService.Assess.query();        
        
         $scope.myShowFormValue = true;
         $scope.myEditFormValue = false;
@@ -72,11 +72,27 @@
                 $scope.ass = result.data;
             });
       
-        $scope.getModal = function(id){
+        $scope.getModal = function(assess){
+            $scope.assess = assess;
             $('#getModal').modal('show');
+        };
+
+        $scope.update = function(){
+            var assess = $scope.assess;
+            assess.$update()
+                .then(function(responce){
+                })
+            $('#getModal').modal('hide');
+            $scope.showModal();
+        };
+        
+
+        $scope.showModal = function(){
+            $scope.assesses = resourceService.Assess.query();
         }
+
         $scope.getStudent = function(assess){
-            $scope.assess = assess
+            $scope.assess = assess;
             // attendanceService.getModalServiceView()
             //     .then(function(result) {
                     $('#getModal').modal('hide');  
