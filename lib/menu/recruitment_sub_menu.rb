@@ -13,6 +13,7 @@ class RecruitmentSubMenu < Struct.new(:controller)
     sub_menu << advertisements
     sub_menu << show_closed_forms
     sub_menu << admin_settings
+    sub_menu << close_form_settings
     sub_menu << reports
   end
   
@@ -67,6 +68,9 @@ class RecruitmentSubMenu < Struct.new(:controller)
   end
   def admin_settings
     MenuItem.new(:label => "Admin Settings", :klass => "", :icon => "wrench", :href => "/staffadmins" )
+  end
+  def close_form_settings
+    MenuItem.new(:label => "Form Settings", :klass => "", :icon => "wrench", :href => "/statuses" )
   end
   def reports
     MenuItem.new(:label => "Reports", :klass => "", :icon => "print", :href => "/staff_reports" )

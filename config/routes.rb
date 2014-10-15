@@ -2,7 +2,7 @@ ManthanErp::Application.routes.draw do
   get 'locations/index'
 
   get 'locations/create'
-
+  
   resources :vendor_managements do
     collection do
       get "get_vendor_view"
@@ -522,7 +522,7 @@ ManthanErp::Application.routes.draw do
     end
     
     collection do
-      get 'get_update'
+      get 'get_close_status'
       get 'get_assessment_students'
       get "get_status_view"
       get "enquiry_index"
@@ -739,4 +739,5 @@ ManthanErp::Application.routes.draw do
       get "dashboard"
     end
   end
+  resources :statuses
 end

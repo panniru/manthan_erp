@@ -1,0 +1,42 @@
+.row
+  .col-sm-3
+    .pull-left
+      .input-group
+        %span.input-group-addon
+          = fa_icon "search lg"
+        %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+        %br
+  .col-sm-4
+    %center
+      %h3
+        Reasons for Closing
+  .col-sm-4 
+    - if current_user.admin?
+      .pull-right
+        = link_to "Add New", "#", :class => "btn btn-primary", :ng_click => "newReasons()"
+       
+
+%br
+%br
+.row
+  .col-sm-12
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:100%"}
+      %thead
+        %tr
+          %th
+            %center
+              Reason for Closing
+          - if current_user.admin?
+            %th
+              %center
+                Edit
+      
+      %tbody
+        %tr{"ng-repeat" => "reason in reasons"}
+          %td
+            %a{href: "#", "ng-click" => "editReasons(reason)"}
+              {{reason.reason}}
+          - if current_user.admin?
+            %td
+              %center
+                = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(reason)"

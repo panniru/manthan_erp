@@ -2,7 +2,6 @@ class TeacherLeadersController < ApplicationController
  def create
    @teacher_leader = TeacherLeader.new(teacher_leader_params)
    if @teacher_leader.save
-      flash[:success] = I18n.t :success, :scope => [:teacher_leader, :create]
      redirect_to teacher_leaders_path
     else
       render "new"
@@ -29,21 +28,15 @@ class TeacherLeadersController < ApplicationController
   def update
     @teacher_leader = TeacherLeader.find(params[:id])
     if @teacher_leader.update(teacher_leader_params)
-      flash[:success] = I18n.t :success, :scope => [:teacher_leader, :update]
       redirect_to teacher_leaders_path
     else
-      flash.now[:fail] = I18n.t :fail, :scope => [:teacher_leader, :update]
       render "edit"
     end
   end
 
   def destroy
     @teacher_leader = TeacherLeader.find(params[:id])    
-    if @teacher_leader.destroy
-      flash[:success] = I18n.t :success, :scope => [:teacher_leader, :destroy]
-    else
-      flash.now[:fail] = I18n.t :fail, :scope => [:teacher_leader, :destroy]
-    end
+    @teacher_leader.destroy
     redirect_to teacher_leaders_path
   end
 

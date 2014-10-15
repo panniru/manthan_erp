@@ -2,6 +2,12 @@
     "use strict";
     app.controller('StaffadminsController',["$scope", "staffadminsService",function($scope,staffadminsService) {
         $scope.myLead = 'teaching';
+        
+        staffadminsService.getCloseStatus()
+            .then(function(result) {
+                $scope.reasons = result.data
+            });
+
         staffadminsService.getStaffadminServiceView()
             .then(function(result) {
                 $scope.faculties=result.data

@@ -11,7 +11,13 @@ class AdmissionsController < ApplicationController
   #     end
   #   end
   # end
-  
+  def get_close_status
+    reasons = Status.all.map do |reason|
+      { reason: reason.reason, id: reason.id}
+    end
+    render :json => reasons
+  end
+
   def get_assessment_students
     
     respond_to do |format|
@@ -49,7 +55,7 @@ class AdmissionsController < ApplicationController
           a = TeacherLeader.where(:faculty_master_id => pa).map{|student| student.grade_master_id}
           b = "Assessment_Planned"
           ass = Admission.where(:grade_master_id => a, :status => b).each.map do |mapping|
-            {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: "Assessment_Completed", comment: mapping.comment, teachercomment: mapping.teachercomment}
+            {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment}
           end
           render :json => ass
         end

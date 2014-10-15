@@ -1,27 +1,19 @@
-.pull-right
-  = render 'form'
-%br
-%br
-%table#tblData.target.table.table-striped.table-condensed.table-bordered
-  %thead
-    %tr
-      %th
-        %center
-          Reason for Closing
-      %th
-        %center
-          Edit
-      %th
-        %center
-          Delete
-  %tbody
-    - @statuses.each do |status|
-      %tr
-        %td
-          = status.reason
-        %td
-          %center
-            = link_to raw("<span class='glyphicon glyphicon-edit'></span>"),edit_status_path(status), :class => "btn btn-warning btn-sm", :title => "Edit"
-        %td
-          %center
-            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), status_path(status), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+.row{"ng-controller" => "CloseController"}
+  .row
+    = render 'show'
+  .modal.fade{ :id => "create", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} Reason
+        .modal-body
+          = render "form"
+  .modal.fade{ :id => "edit", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} Edit 
+        .modal-body
+          = render 'edit'

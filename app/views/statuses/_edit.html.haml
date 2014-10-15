@@ -1,13 +1,12 @@
-%form{:class => "form-horizontal", :ng_submit => "save()"}
+%form{:class => "form-horizontal", :ng_submit => "update()"}
   .row
     .form-group
+      .col-sm-3
+        = label_tag "Reason"
       .col-sm-4
-        = label_tag "Reasons"
-      .col-sm-4
-        %input{:ng_model => "reason.reason", :type => 'text'}
+        %input{:ng_model => "reason.reason", :type => 'text'} 
         = hidden_field_tag :reason, :value => '{{reason.reason}}'
   .row
     .pull-right
       = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
                 
-

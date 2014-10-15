@@ -58,8 +58,11 @@
                                    "update": {method: "PUT"}
                                }
                               );
-
-
+        var Reason = $resource('/statuses/:id.json', {id: '@id'},
+                               {
+                                   "update": {method: "PUT"}
+                               }
+                              );
 
         var RequestNewBook = $resource('/request_new_books/:id.json', {id: '@id'},
                              {
@@ -141,6 +144,7 @@
             Book : Book,
             Assess : Assess,
 	    Route:Route,
+            Reason : Reason, 
             RequestNewBook : RequestNewBook,           
             Mealtype: Mealtype,
             Mealname: Mealname,

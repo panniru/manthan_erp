@@ -1,6 +1,11 @@
 (function(angular, app) {
     "use strict";
     app.service("staffadminsService",["$http", function($http) {
+        var getCloseStatus = function(){
+            var url = "/admissions/get_close_status.json"
+            return $http.get(url);
+        };
+        
         var getStaffadminServiceView = function(){
             var url = "/staffadmins/get_faculty_names.json"
             return $http.get(url);
@@ -29,6 +34,7 @@
 
 
         return {
+            getCloseStatus : getCloseStatus,
             getStaffadminServiceView : getStaffadminServiceView,
             getRoleAndHead : getRoleAndHead,
             getPostServiceView : getPostServiceView,
