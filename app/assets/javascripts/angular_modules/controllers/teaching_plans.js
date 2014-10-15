@@ -6,35 +6,49 @@
         $scope.myGrade_Section_Subject = ""
         teachersService.getFacultyNamesServiceView()
             .then(function(result) {
-               // alert(JSON.stringify(result.data));
-                $scope.faculty_names=result.data                
+               //alert(JSON.stringify(result.data));
+                $scope.faculty_names= result.data               
             });
-        teachingPlanService.getFacultyIdService()
-            .then(function(result) {
-                $scope.faculty_id = result.data
-                $scope.grades_sections_subjects = []
-                teachingPlanService.getGradesSectionSubjectService($scope.faculty_id)                
-                    .then(function(result) {
-                       // alert(JSON.stringify(result.data));
-                        $scope.grades_sections_subjects =result.data
-                    });
-                
-            });      
+        $scope.getFacultyId = function(){
+            teachingPlanService.getFacultyIdService()
+                .then(function(result) {
+                    $scope.myTeacher = result.data[0]['id'];
+                    $scope.grades_sections_subjects = []
+                    teachingPlanService.getGradesSectionSubjectService($scope.myTeacher)                
+                        .then(function(result) {
+                            //alert(JSON.stringify(result.data));
+                            $scope.grades_sections_subjects =result.data
+                        });
+                    
+                });    
+        };  
+
+        $scope.getFacultyGradeSectionSubject = function(){
+            teachingPlanService.getGradesSectionSubjectService($scope.myTeacher)                
+                .then(function(result) {
+                    //alert(JSON.stringify(result.data));
+                    $scope.grades_sections_subjects =result.data
+                });            
+        }; 
      
         $scope.months = []       
         teachingPlanService.getMonthlyCalendarService()
             .then(function(result) {                         
                 $scope.months = result.data
+                //alert(JSON.stringify(result.data));
             });
        
         
         
-        var drawCalander = function(month, faculty_master_id,grade_master_id,section_master_id,subject_master_id){
+        var drawCalander = function(month, faculty_master_id){
+            //alert("in draw calendar");
             //alert('drawCalander------'+faculty_master_id)
             $('#calendar1').html("");
             var grade_master_id = $("#grade_master_id").val()            
             var section_master_id = $("#section_master_id").val()           
-            var subject_master_id = $("#subject_master_id").val()            
+            var subject_master_id = $("#subject_master_id").val()  
+            //alert(grade_master_id+"--"+section_master_id+"--"+subject_master_id+"--"+JSON.stringify($scope.faculty_id));
+            //alert(faculty_master_id);
             var student_id = typeof $scope.student_master_id  == 'undefined' ? "" : $scope.student_master_id
            // var grade_id = typeof $scope.grade_master_id == 'undefined' ? "" : :scope.grade_master_id
            // var section_id = typeof $scope.section_master_id == 'undefined' ? "" : :scope.section_master_id
@@ -90,13 +104,23 @@
             teachingPlanService.getMonthDataService(month, $scope.myTeacher, $scope.myGrade_Section_Subject, $scope.student_master_id)
                 .then(function(result) { 
                     $scope.monthData = result.data
+                    // alert("1")
+                    // alert(JSON.stringify(month));
+                    // alert($scope.myTeacher);
                     if (!implicit){
+                        // alert("2")
+                        // alert(JSON.stringify(month));
+                        // alert($scope.myTeacher);
                         drawCalander(month, $scope.myTeacher)
                     }
                 });
         }     
         
         $scope.viewPlan= function(){
+            //alert();
+            //alert(JSON.stringify($scope.current_month));
+            //alert($scope.myTeacher);
+            //$scope.myTeacher = $scope.faculty_id;
             $scope.getMonthData($scope.current_month, true)
             drawCalander($scope.current_month, $scope.myTeacher)
         };

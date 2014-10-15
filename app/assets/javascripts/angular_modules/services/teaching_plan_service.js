@@ -67,15 +67,13 @@
     	    getGradeServiceMapView : getGradeServiceMapView,
             getFacultyIdService : getFacultyIdService,
             getGradesSectionsService : getGradesSectionsService,
-            getSectionServiceMapView : getSectionServiceMapView ,
-            getGradesSectionSubjectService : getGradesSectionSubjectService ,
+            getSectionServiceMapView : getSectionServiceMapView,
+            getGradesSectionSubjectService : getGradesSectionSubjectService,
             getMonthlyCalendarService : getMonthlyCalendarService,
             getMonthDataService :  getMonthDataService,                
             student_teaching_plans : student_teaching_plans,
             getFacultyNamesServiceView :  getFacultyNamesServiceView,
             getFacultyDatesService : getFacultyDatesService
-
-        }; 
-        
+        };         
     }]);   
 })(angular, myApp);

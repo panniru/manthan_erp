@@ -1,7 +1,16 @@
 class TeachingPlansController < ApplicationController
+  
   def index
+    if current_user.admin?
+      render "index"    
+    elsif  current_user.teacher?
+      render "teacher_index"
+    elsif  current_user.parent?
+      render "parent_index"
+    end        
     # @teaching_plans = TeachingPlan.all  
   end
+  
   def calendardata   
     # @teaching_plans = TeachingPlan.first
     respond_to do |format|
@@ -33,7 +42,7 @@ class TeachingPlansController < ApplicationController
           {start: teach.teaching_date, title: "Plan", description: "Plan", url: "#", teaching_date: teach.teaching_date}
         end
         #p calendar_date
-       # p "++++++++++++++++++++++"
+        # p "++++++++++++++++++++++"
         render :json => calendar_date
       end      
     end
@@ -42,9 +51,11 @@ class TeachingPlansController < ApplicationController
   def new
     @teaching_plan = TeachingPlan.new
   end
+
   def edit
     @teaching_plan = TeachingPlan.find(params[:id])
   end
+
   def update
     @teaching_plan = TeachingPlan.find(params[:id])
     if @teaching_plan.update(teachingplan_params)
@@ -55,6 +66,7 @@ class TeachingPlansController < ApplicationController
       render "edit"
     end
   end
+
   def show
     @teaching_plan = TeachingPlan.find(params[:id])
   end
@@ -70,10 +82,10 @@ class TeachingPlansController < ApplicationController
       elsif current_user.teacher?
         faculty_master_id  = (params[:teaching_plan][:faculty_master_id])        
         @teaching_plan.faculty_master_id = faculty_master_id
-       # p (params[:teaching_plan][:faculty_master_id])
-       # p "**********"
-       # p faculty_master_id
-       # p "&&&&&&&&&&&&&&&&&&"
+        # p (params[:teaching_plan][:faculty_master_id])
+        # p "**********"
+        # p faculty_master_id
+        # p "&&&&&&&&&&&&&&&&&&"
         if @teaching_plan.save        
           format.html { redirect_to @teaching_plan, notice: 'Plan was successfully created.' }
           format.json { render action: 'show', status: :created, location: @teaching_plan }
@@ -84,6 +96,7 @@ class TeachingPlansController < ApplicationController
       end
     end
   end
+
   def teachingplan_params
     params.require(:teaching_plan).permit(:grade_master_id, :section_master_id,:teaching_date,:plan_month,:faculty_master_id,:subject_master_id )
   end
@@ -96,6 +109,8 @@ class TeachingPlansController < ApplicationController
         faculty = faculty.map do |fac|
           {id: fac.id}
         end       
+        p faculty
+        p "!!!!!!!!!!!!!!!!!!!!!!!===>"
         render :json => faculty
       end
     end
@@ -173,6 +188,9 @@ class TeachingPlansController < ApplicationController
   def getmonthdataservice
     respond_to do |format|
       format.json do
+        p params
+        p "===================>"
+        
         month_date = []
         if current_user.admin?
           if params[:faculty_master_id].present?          
@@ -180,7 +198,7 @@ class TeachingPlansController < ApplicationController
             month_date =  TeachingPlan.belongs_to_faculty(params[:faculty_master_id]).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month].strip}'")
           else
             month_date = TeachingPlan.where("trim(to_char(teaching_date, 'Month')) = '#{params[:month].strip}'")
-           # month_date =  TeachingPlan.all            
+            # month_date =  TeachingPlan.all            
           end
         elsif current_user.parent?
           if params[:student_master_id].present?
@@ -190,6 +208,7 @@ class TeachingPlansController < ApplicationController
             month_date = TeachingPlan.belongs_to_grade(current_user.parent.student_grade_ids).belongs_to_section(current_user.parent.student_section_ids).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month]}'").distinct         
           end
         elsif current_user.teacher?
+          p "%%%%%%%%%%%%%%%% =======>"
           month_date =  TeachingPlan.belongs_to_faculty(current_user.faculty_master.id).where("trim(to_char(teaching_date, 'Month')) = '#{params[:month].strip}'")
         end
         if params[:grade_master_id].present? and params[:section_master_id].present? and params[:subject_master_id].present?
@@ -198,57 +217,66 @@ class TeachingPlansController < ApplicationController
         month_date = month_date.map do |teach|
           {date: teach.teaching_date, plan_month: teach.plan_month, grade_Section_subject: teach.grade_master.grade_name+"-"+ teach.section_master.section_name+"-"+teach.subject_master.subject_name, :id => teach.id, faculty_master_id: teach.faculty_master_id}
         end  
+        p month_date
+        p "**************==========>"
         render :json => month_date
-       # p month_date
-       # p "#$#$#$#$#$#$#$#$#$#"
+        # p month_date
+        # p "#$#$#$#$#$#$#$#$#$#"
       end
     end
   end
   
   def student_teaching_plans
     respond_to do |format|
-        format.json do
-          @student = StudentMaster.find(params[:student_id])
-          render :json => TeachingPlan.student_teaching_plan(@student, params[:dated_on])
-        end
-      end
-    end
-    
-    
-    
-    def getfacultydatesservice
-      respond_to do |format|
-        format.json do
-          faculty_dates = []
-          if current_user.admin?
-            faculty_dates = TeachersTimeTable.all
-          elsif current_user.teacher?
-            faculty_dates = TeachersTimeTable.where('faculty_master_id = '+"faculty_master_id")    
-            faculty_dates = faculty_dates.map do |teach|
-              {faculty_master_id: teach.faculty_master_id, period_id: teach.period_id}
-            end
-          end       
-        #  p faculty_dates
-        #  p "@@@@@@@@@@@@@@@@"
-          render :json => faculty_dates
-        end
-      end
-    end
-    def plan_exists
-      respond_to do |format|
-        format.json do
-          day = Date.parse(params[:date]).strftime("%a").downcase
-          faculty_master_id = params[:faculty_master_id]
-          section_master = SectionMaster.find(params[:section_master_id])
-        #  p section_master
-         # p "#$#$#$#$#"
-          grade_section_param = "#{section_master.grade_master.grade_name}- #{section_master.section_name}"
-          render :json => TeachersTimeTable.belongs_to_faculty_master(faculty_master_id).dynamic_day_on_grade_section(day, grade_section_param).count
-         # p grade_section_param
-        #  p "hhhhhhhhhhhhhhhhhhhhhh"
-          
-        end
+      format.json do
+        @student = StudentMaster.find(params[:student_id])
+        render :json => TeachingPlan.student_teaching_plan(@student, params[:dated_on])
       end
     end
   end
   
+  
+  
+  def getfacultydatesservice
+    respond_to do |format|
+      format.json do
+        faculty_dates = []
+        if current_user.admin?
+          faculty_dates = TeachersTimeTable.all
+        elsif current_user.teacher?
+          faculty_dates = TeachersTimeTable.where('faculty_master_id = '+"faculty_master_id")    
+          faculty_dates = faculty_dates.map do |teach|
+            {faculty_master_id: teach.faculty_master_id, period_id: teach.period_id}
+          end
+        end       
+        #  p faculty_dates
+        #  p "@@@@@@@@@@@@@@@@"
+        render :json => faculty_dates
+      end
+    end
+  end
+  
+  def plan_exists
+    respond_to do |format|
+      format.json do
+        p params 
+        p "(((((((((=========>"
+        day = Date.parse(params[:date]).strftime("%a").downcase
+        faculty_master_id = params[:faculty_master_id]
+        # grade_section = GradeSection.find(params[:section_master_id].to_i)
+        grade = GradeMaster.find(params[:grade_master_id].to_i)
+        section = SectionMaster.find(params[:section_master_id].to_i)
+        p grade
+        p section
+        p "#$#$#$#$#"
+        grade_section_param = "#{grade.grade_name}- #{section.section_name}"
+        p grade_section_param
+        p "==================>"
+        render :json => TeachersTimeTable.belongs_to_faculty_master(faculty_master_id).dynamic_day_on_grade_section(day, grade_section_param).count
+        # p grade_section_param
+        #  p "hhhhhhhhhhhhhhhhhhhhhh"
+        
+      end
+    end
+  end
+end

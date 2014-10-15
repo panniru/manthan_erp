@@ -67,6 +67,7 @@ $(document).ready(function() {
     $('#calendar1').html("");
     $('#calendar1').fullCalendar({ 
         events: '/teaching_plans/calendardata.json?month='+monthNames[today.getMonth()],
+        height: '300px',
         selectable: true,
         eventMouseover: function(data, event, view) {
             var url = "/teaching_plans/teaching_date.json?date="+data.teaching_date
