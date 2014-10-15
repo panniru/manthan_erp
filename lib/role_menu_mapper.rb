@@ -27,10 +27,8 @@ class RoleMenuMapper
   end
 
   def user_sub_menu(main_menu_id)
-    p "main_menu============================="
-    p main_menu_id
     #if main_menu.sub_menu_role_mappings.present?
-      MainMenu.find(main_menu_id).sub_menu_role_mappings.belongs_to_role(@role).map(&:sub_menu) 
+    main_menu_id.present? ? MainMenu.find(main_menu_id).sub_menu_role_mappings.belongs_to_role(@role).map(&:sub_menu) : []
     #else
     #  []
    # end

@@ -1,11 +1,13 @@
 .row
   .col-md-12
-    #wrapper
-      #sidebar-wrapper
-        %ul.sidebar-nav
-          - RoleMenuMapper.new(current_user.role).user_sub_menu(session[:active_main_menu_id]).each do |sub_menu_item|
-            %li{:class => "#{sub_menu_item.id.to_s == session[:active_sub_menu_id] ? "active" : ""}"}
-              %a{:href => "#{sub_menu_item.url}?s_m_id=#{sub_menu_item.id}"}
-                = fa_icon sub_menu_item.icon_class
-                %span
-                  = sub_menu_item.sub_menu_name
+    #panel
+      #panelCaller
+        .glyphicon.glyphicon-asterisk
+      %ul.sidebar-nav
+        - RoleMenuMapper.new(current_user.role).user_sub_menu(session[:active_main_menu_id]).each do |sub_menu_item|
+          %li{:class => "#{sub_menu_item.id.to_s == session[:active_sub_menu_id] ? "active" : ""}"}
+            %a{:href => "#{sub_menu_item.url}?s_m_id=#{sub_menu_item.id}"}
+              = fa_icon sub_menu_item.icon_class
+              %span
+                = sub_menu_item.sub_menu_name.titleize
+                

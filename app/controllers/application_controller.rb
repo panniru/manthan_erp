@@ -50,13 +50,14 @@ class ApplicationController < ActionController::Base
   
   def after_sign_in_path_for(resource)
     if current_user.present? and session[:user_main_menu].nil?
-      session[:user_main_menu] = RoleMenuMapper.new(current_user.role).user_main_menu
+      session[:user_main_menu] = RoleMenuMapper.new(current_user.role).user_main_menu || []
     end
     if session[:active_main_menu_id].nil?
-      session[:active_main_menu_id] = session[:user_main_menu].first.id
+      session[:active_main_menu_id] = session[:user_main_menu].first.try(:id)
       session[:active_sub_menu_id] = nil
     end
-    session[:previous_url] || session[:user_main_menu].first.url
+    root_path = session[:user_main_menu].first.try(:url)
+    session[:previous_url] || root_path.nil? ? "/home" : root_path
   end
 
   def render *args
