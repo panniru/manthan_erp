@@ -27,11 +27,14 @@
                 %center
                 = form_for TeacherLeader.new, :html => { :class => "form-horizontal", :role => "form" } do |f|
                   .modal-body
-                    .row
+                    .row{"ng-controller" => "AdmissionsController"}
                       .col-sm-2
                         = f.label "Grade:", :class => 'control-label'
                       .col-sm-3
-                        = f.text_field :klass, :class => 'form-control'
+                        %select{"ng-model" => "myAdmission", "ng-options" => "klass.grade_name for klass in klasses",:class => "form-control",:required => "required"}          
+                          %option{style: "display:none", value: ""} Select Grade
+                          
+                          = f.hidden_field :klass, :value => "{{myAdmission.grade_name}}"
                       .col-sm-2
                         = f.label "Lead:", :class => 'control-label'
                       .col-sm-3{"ng-controller" => "StaffadminsController"}

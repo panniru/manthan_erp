@@ -44,6 +44,7 @@ class ContextDetector
     "documentuploaders" => "recruitment_sub_menu",
     "interviewschedulers" => "recruitment_sub_menu",
     "staffadmins" => "recruitment_sub_menu",
+    "statuses" => "enquiry_admission",
     "libraries" => "library",
     "books" => "library",
     "issuings" => "library",

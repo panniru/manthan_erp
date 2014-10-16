@@ -393,12 +393,37 @@ def seed_teacher_leader
     
   end
 end
+
+def seed_staffrecruits
+  unless Staffrecruit.first.present?
+    Staffrecruit.create(:form_no => '1234', :faculty_name => 'Gopika', :post => 'teaching', :dept => 'teacher', :staffhead => 'Arun', :role_id => '6', :klass => 'PP1', :subject => 'PHYSICS', :dob => '1978-02-21', :nationality => 'IN', :gender => 'Female', :email => 'gopika@ostryalabs.com', :mobile_no => '9999988888', :address => '301,Sai Residency,Kothaguda', :language => 'Malayalam', :experience => '5-6 years', :expected_salary => '30000', :education_qualification => 'MCA', :status => 'Application_Created')
+  end
+end
+
+def seed_staffadmin
+  unless Staffadmin.first.present?
+    Staffadmin.create(:dept => 'teaching', :head => 'Arun')
+    Staffadmin.create(:dept => 'sports', :head => 'Srikanth')
+    Staffadmin.create(:dept => 'transport', :head => 'Navya')
+    Staffadmin.create(:dept => 'finearts', :head => 'Priya')
+    Staffadmin.create(:dept => 'extra-curricular', :head => 'Muralee')
+  end
+end
+
 def seed_attendances
   unless Attendance.first.present?
     Attendance.create(:student_master_id => '1',:attendance => 'P', :attendance_date => '2014-10-14')
     Attendance.create(:student_master_id => '2',:attendance => 'A', :attendance_date => '2014-10-14')
     Attendance.create(:student_master_id => '1',:attendance => 'L', :attendance_date => '2014-10-06')
     Attendance.create(:student_master_id => '2',:attendance => 'P', :attendance_date => '2014-10-16')
+  end
+end
+
+def seed_close_status
+  unless Status.first.present?
+    Status.create(:reason => 'Not Fit')
+    Status.create(:reason => 'Didnt Pick Interview Call')
+    Status.create(:reason => 'Financial Crisis')
   end
 end
 def seed_all
@@ -427,6 +452,9 @@ def seed_all
   seed_admissions
   seed_teacher_leader
   seed_attendances
+  seed_staffrecruits
+  seed_staffadmin
+  seed_close_status
 end
 
 seed_all

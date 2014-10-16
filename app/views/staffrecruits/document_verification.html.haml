@@ -2,6 +2,10 @@
   .pull-right
     - if("#{@staffrecruit.status}" == 'Application_Created'||"#{@staffrecruit.status}" == 'Document_Verified'||"#{@staffrecruit.status}" == 'Assessment_Planned'||"#{@staffrecruit.status}" == 'Assessment_Completed'||"#{@staffrecruit.status}" == 'Management_Reviewed'||"#{@staffrecruit.status}" == 'Selected' )
       - if current_user.admin?
+        - if("#{@staffrecruit.status}" == 'Document_Verified')
+          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_document_staffrecruit_path, :class => 'btn btn-warning btn-sm', :title => 'Edit'
+
+
         %button.change.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@staffrecruit.id}"}} 
           %span.glyphicon.glyphicon-ban-circle
         #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
@@ -32,10 +36,10 @@
                       = f.hidden_field :status,:value => "Form_Closed"
                       = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
                       
-      - else 
-        - if current_user.admin?
-          %button.change.btn.btn-danger.btn-sm 
-            %span.glyphicon.glyphicon-ban-circle
+      -# - else 
+      -#   - if current_user.admin?
+      -#     %button.change.btn.btn-danger.btn-sm 
+      -#       %span.glyphicon.glyphicon-ban-circle
                   
 
   .container
