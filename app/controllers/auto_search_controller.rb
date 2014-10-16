@@ -2,6 +2,11 @@ class AutoSearchController < ApplicationController
 
   autocomplete :book, :isbn, :full => true, :extra_data => [:name]
 
+  autocomplete :location_master, :location_name, :full => true 
+  
+  autocomplete :student_master, :name, :full => true 
+  
+
   def autocomplete_student_by_name
     term = params[:term]
     students = Student.where("lower(form_no) ILIKE '%#{term}%' OR lower(name) ILIKE '%#{term}%'").order(:name)

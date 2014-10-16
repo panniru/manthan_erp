@@ -1,6 +1,6 @@
 class StudentRouteMappingsController < ApplicationController
   def index
-    @student_route_mappings = StudentRouteMapping.all
+    @student_route_mappings = StudentRouteMapping.all.paginate(:page => params[:page], :per_page => 10)
     @student_masters = StudentMaster.select('DISTINCT id')
     @routes = Route.select('DISTINCT id')
   end

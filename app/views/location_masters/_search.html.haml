@@ -1,0 +1,9 @@
+= form_tag location_masters_path, :method => 'get' , :class => "form-inline" do
+  .form-group
+    .row
+      .col-md-6
+        = autocomplete_field_tag :location_name,'', auto_search_autocomplete_location_master_location_name_path,:placeholder => "Location Name", :class => 'form-control',:id_element => "#search"
+        = hidden_field_tag :search, :id => "search"
+      .col-md-6
+        = submit_tag "Search", :name => nil, :class => "btn-primary btn"
+        

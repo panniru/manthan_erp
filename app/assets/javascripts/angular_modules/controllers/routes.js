@@ -36,7 +36,6 @@
 	    routesService.getStudentView(route)
 		.then(function(response){
 		    $scope.students = response.data
-		   
 		});
 	    
         }

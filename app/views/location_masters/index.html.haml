@@ -1,10 +1,14 @@
 .row
   .col-sm-3
-    
+    = render "search"
   .col-sm-4
   - if current_user.transport_head?
     %br
-    = render 'form'
+    .col-sm-2
+      // = autocomplete_field_tag :location_name, params[:location_name], auto_search_autocomplete_location_master_location_name_path,{class: "search-query form-control", placeholder: "Location Name...", type: "search"}
+    .col-sm-1
+    .col-sm-3
+      = render 'form'
     %br
     %br
 .row
@@ -22,3 +26,7 @@
             - if current_user.transport_head?
               %td
                 =  link_to raw("<span class='glyphicon glyphicon-trash'></span>"),location_master_path(location_master), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+.row
+  .col-sm-3
+  .col-sm-2
+  = will_paginate @location_master, param_name: "page", previous_label: h("<"), next_label: h(">")
