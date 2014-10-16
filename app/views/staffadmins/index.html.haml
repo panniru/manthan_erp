@@ -7,8 +7,8 @@
         %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
   .col-sm-4
     %center
-      %h4
-        Departments & Heads
+      %h3
+        Roles & Heads
   .col-sm-4
     .pull-right
       = link_to "Add New", new_staffadmin_path, :class => 'btn btn-primary'
@@ -19,7 +19,7 @@
     %table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
       %thead
         %tr
-          %td{style: "width:20%"} Department
+          %td{style: "width:20%"} Role
           %td{style: "width:20%"} Head
           %td{style: "width:20%"} Edit
           %td{style: "width:20%"} Delete 

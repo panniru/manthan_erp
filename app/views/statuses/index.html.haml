@@ -1,6 +1,7 @@
 .row{"ng-controller" => "CloseController"}
-  .row
-    = render 'show'
+  .col-sm-12
+    %center
+      = render 'show'
   .modal.fade{ :id => "create", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
     .modal-dialog
       .modal-content

@@ -633,6 +633,9 @@ ManthanErp::Application.routes.draw do
   
   resources :staffrecruits do
     member do
+      get 'edit_assessment'
+      get 'edit_document'
+      get 'edit_enquiry'
       get 'enquiry_show'
       get 'upload_document'
       put 'update_admission'

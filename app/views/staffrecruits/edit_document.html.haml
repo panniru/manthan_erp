@@ -2,8 +2,8 @@
   .pull-right
     - if("#{@staffrecruit.status}" == 'Application_Created'||"#{@staffrecruit.status}" == 'Document_Verified'||"#{@staffrecruit.status}" == 'Assessment_Planned'||"#{@staffrecruit.status}" == 'Assessment_Completed'||"#{@staffrecruit.status}" == 'Management_Reviewed'||"#{@staffrecruit.status}" == 'Selected' )
       - if current_user.admin?
-        - if("#{@staffrecruit.status}" == 'Assessment_Planned')
-          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), '#', :onclick => "createStaffAssessment('#{@staffrecruit.staff_admission_id}');",:class => 'btn btn-warning btn-sm', :title => 'Edit'
+        - if("#{@staffrecruit.status}" == 'Document_Verified')
+          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_document_staffrecruit_path, :class => 'btn btn-warning btn-sm', :title => 'Edit'
 
         %button.change.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@staffrecruit.id}"}} 
           %span.glyphicon.glyphicon-ban-circle
@@ -36,9 +36,9 @@
                       = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
                       
       - else 
-        - if current_user.admin?
-          %button.change.btn.btn-danger.btn-sm 
-            %span.glyphicon.glyphicon-ban-circle
+        -# - if current_user.admin?
+        -#   %button.change.btn.btn-danger.btn-sm 
+        -#     %span.glyphicon.glyphicon-ban-circle
                   
 
   .container
@@ -76,57 +76,33 @@
               %label{for: "gender"} Gender
             %td
               = @staffrecruit.gender
-          %tr
-            %td
-              %b
-                %span.label.label-info Assessment
-          %tr
-            %td
-              %label Interviewer
-            %td
-              = @staffrecruit.staffhead
-            %td
-              %label Timings
-            %td
-              = @staffrecruit.start_time
-          %tr
-            %td
-              %label Description
-            %td
-              = @staffrecruit.title
+            
+
 .row
-  .pull-left
-    .calendar2
-    #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-      .modal-dialog
-        .modal-content
-          .modal-header
-            .row
-              .pull-left
-                %h4#myModalLabel.modal-title Assessment Plan
-            %hr
-            = form_for @staffrecruit do |f|
-              .modal-body
-                .row
-                  .col-sm-3
-                    = f.label "Interviewer", :class => 'col-sm-3 control-label'
-                  .col-sm-5
-                    = @staffrecruit.staffhead
-                    %br
-                    %br
-                .row
-                  .col-sm-3
-                    = f.label "Time", :class => 'col-sm-3 control-label'
-                  .col-sm-5
-                    = f.time_field :start_time ,:class => 'form-control'
-                    %br
-                .row
-                  .col-sm-3
-                    = f.label "Description", :class => 'col-sm-3 control-label'              
-                  .col-sm-5
-                    = f.text_area :title ,:class => 'form-control'
-             
-                = f.hidden_field :status,:value => "Assessment_Planned"
-                = button_tag "Save", :type => "submit", :class => ' pull-right btn btn-primary' 
-                %br
-                %br
+  .col-sm-10
+    .panel.panel-default
+      %h4.panel-heading
+        Document Uploader
+      = form_for @staffrecruit do |f|
+        %table
+          %thead
+            %td
+              = f.label "Educational Certificates", :class => 'control-label'
+            %td
+              = f.label "Previous Employment Proof"
+            %td
+              = f.label "Salary slips for previous months"
+            %td
+
+          %tbody
+            %td
+              = f.file_field :educational_certificates
+            %td
+              = f.file_field :previous_employment_proof
+            %td
+              = f.file_field :salary_slips_for_previous_months
+            %td
+                      
+              = f.hidden_field :status, :value => 'Document_Verified'
+              = f.submit "Upload", :class => 'btn btn-primary'
+   

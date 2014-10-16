@@ -17,6 +17,7 @@ class EnquiryAdmission
     sub_menu << selected_students
     sub_menu << show_closed_forms
     sub_menu << teacher_settings
+    sub_menu << close_form_settings
     sub_menu << reports
   end
 
@@ -86,6 +87,10 @@ class EnquiryAdmission
   def teacher_settings
     MenuItem.new(:label => "TeacherLeader Settings", :klass => "", :icon => "wrench", :href => "/teacher_leaders" )
   end
+  def close_form_settings
+    MenuItem.new(:label => "Form Settings", :klass => "", :icon => "wrench", :href => "/statuses" )
+  end
+
   def reports
     MenuItem.new(:label => "Reports", :klass => "", :icon => "print", :href => "/admission_reports" )
   end

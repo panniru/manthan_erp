@@ -1,4 +1,7 @@
 class StaffrecruitsController < ApplicationController
+  #-----------index
+  
+  #-----index
   def enquiry_show
     @staffrecruit = Staffrecruit.find(params[:id])
   end
@@ -19,7 +22,7 @@ class StaffrecruitsController < ApplicationController
   end
 
   def enquiry_index
-    @staffrecruits = Staffrecruit.all
+    @staffrecruits = Staffrecruit.application_created
   end
   
   def update
@@ -112,11 +115,27 @@ class StaffrecruitsController < ApplicationController
       end
     end
     if current_user.teacher?
-      if params[:staff_admission_id].present?
-        @staffrecruits = Staffrecruit.where(:staff_admission_id => params[:staff_admission_id])
-      else
-        @staffrecruits = Staffrecruit.assessment_planned
+      respond_to do |format|
+        # format.html
+        format.json do
+          if(TeacherLeader.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
+            pa = "#{current_user.faculty_master.id}"
+            a = TeacherLeader.where(:faculty_master_id => pa).map{|student| student.grade_master_id}
+            b = "Assessment_Planned"
+            ass = Admission.where(:grade_master_id => a, :status => b).each.map do |mapping|
+              {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment}
+            end
+            render :json => ass
+          end
+          # @admissions = Admission.all
+          # render :json => @admissions
+        end
       end
+      # if params[:staff_admission_id].present?
+      #   @staffrecruits = Staffrecruit.where(:staff_admission_id => params[:staff_admission_id])
+      # else
+      #   @staffrecruits = Staffrecruit.assessment_planned
+      # end
     end
     if current_user.principal?
       if params[:staff_admission_id].present?
@@ -144,6 +163,18 @@ class StaffrecruitsController < ApplicationController
     @staffrecruit = Staffrecruit.find(params[:id])
   end
   
+  def edit_enquiry
+    @staffrecruit = Staffrecruit.find(params[:id])
+  end
+  
+  def edit_document
+    @staffrecruit = Staffrecruit.find(params[:id])
+  end
+  
+  def edit_assessment
+    @staffrecruit = Staffrecruit.find(params[:id])
+  end
+
   def show
     @staffrecruit = Staffrecruit.find(params[:id])
   end

@@ -11,7 +11,6 @@ class AddsController < ApplicationController
   def create
     @add = Add.new(add_params)
     if @add.save
-      flash[:success] = I18n.t :success, :scope => [:add, :create]
       redirect_to adds_path
     else
       render "new"
@@ -36,21 +35,15 @@ class AddsController < ApplicationController
   def update
     @add = Add.find(params[:id])
     if @add.update(add_params)
-      flash[:success] = I18n.t :success, :scope => [:add, :update]
       redirect_to adds_path
     else
-      flash.now[:fail] = I18n.t :fail, :scope => [:add, :update]
       render "edit"
     end
   end
 
   def destroy
     @add = Add.find(params[:id])    
-    if @add.destroy
-      flash[:success] = I18n.t :success, :scope => [:add, :destroy]
-    else
-      flash.now[:fail] = I18n.t :fail, :scope => [:add, :destroy]
-    end
+    @add.destroy
     redirect_to adds_path
   end
 

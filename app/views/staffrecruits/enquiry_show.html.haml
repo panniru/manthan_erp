@@ -2,6 +2,10 @@
   .pull-right
     - if("#{@staffrecruit.status}" == 'Application_Created'||"#{@staffrecruit.status}" == 'Document_Verified'||"#{@staffrecruit.status}" == 'Assessment_Planned'||"#{@staffrecruit.status}" == 'Assessment_Completed'||"#{@staffrecruit.status}" == 'Management_Reviewed'||"#{@staffrecruit.status}" == 'Selected' )
       - if current_user.admin?
+        - if("#{@staffrecruit.status}" == 'Application_Created')
+          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_enquiry_staffrecruit_path, :class => 'btn btn-warning btn-sm', :title => 'Edit'
+
+
         %button.change.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@staffrecruit.id}"}} 
           %span.glyphicon.glyphicon-ban-circle
         #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
@@ -32,14 +36,12 @@
                       = f.hidden_field :status,:value => "Form_Closed"
                       = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
                       
-      - else 
-        - if current_user.admin?
-          %button.change.btn.btn-danger.btn-sm 
-            %span.glyphicon.glyphicon-ban-circle
-                  
-
+      -# - else 
+      -#   - if current_user.admin?
+      -#     %button.change.btn.btn-danger.btn-sm 
+      -#       %span.glyphicon.glyphicon-ban-circle
   .container
-    - if("#{@staffrecruit.status}" == "Enquiry_Created" ||"#{@staffrecruit.status}" == "Application_Created" ||"#{@staffrecruit.status}" == "Assessment_Planned" || "#{@staffrecruit.status}" == "Assessment_Completed" || "#{@staffrecruit.status}" == "Management_Reviewed" ||  "#{@staffrecruit.status}" == "Selected"|| "#{@staffrecruit.status}" == "Completed" )
+    - if("#{@staffrecruit.status}" == "Document_Verified" ||"#{@staffrecruit.status}" == "Application_Created" ||"#{@staffrecruit.status}" == "Assessment_Planned" || "#{@staffrecruit.status}" == "Assessment_Completed" || "#{@staffrecruit.status}" == "Management_Reviewed" ||  "#{@staffrecruit.status}" == "Selected"|| "#{@staffrecruit.status}" == "Completed" )
       = render "shared/steprecruitment"
   
     %br
@@ -52,13 +54,15 @@
                 %span.label.label-info Enquiry #
             %td{style: "width:25%"}
               = @staffrecruit.form_no
-         
-            
-          %tr
             %td
               %label{for: "name"} Name
             %td
               = @staffrecruit.faculty_name
+          %tr
+            %td
+              %label{for: "educational_qualification"} Educational Qualification
+            %td
+              = @staffrecruit.education_qualification
             %td
               %label{for: "post"} Post
             %td
@@ -78,16 +82,25 @@
             %td
               = @staffrecruit.mobile_no
             %td
+              %label{for: "email"} Email
+            %td
+              = @staffrecruit.email
+          %tr
+            %td
               %label{for: "Address"} Address
             %td
               = @staffrecruit.address
-          %tr
             %td
               %label{for: "nationality"} Nationality
             %td
               = @staffrecruit.nationality
+          %tr
             %td
-              %label{for: "preferred subject"} Preferred Class
+              %label{for: "preferred Class"} Preferred Class
+            %td
+              = @staffrecruit.klass
+            %td
+              %label{for: "preferred subject"} Preferred Subject
             %td
               = @staffrecruit.subject
           %tr
@@ -99,13 +112,7 @@
               %label{for: "expected_salary"} Expected Salary
             %td
               = @staffrecruit.expected_salary
-          %tr
-            %td
-              %label{for: "educational_qualification"} Educational Qualification
-            %td
-              = @staffrecruit.education_qualification
-            %td
-            %td
+            
             
 
 
