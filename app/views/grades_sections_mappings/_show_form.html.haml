@@ -16,6 +16,6 @@
         %tr{"ng-repeat" => "section in sections | orderBy:'section_name'"}
           %td {{section.section_name}} 
           %td
-            .col-md-1{"ng-repeat" => "grade in show_grades |filter :  {section_master_id: section.section_master_id}  | orderBy:'grade_name'"}        
+            .col-md-1{"ng-repeat" => "grade in show_grades |filter :  {section_master_id: section.section_master_id} : true| orderBy:'grade_name'"}        
               {{grade.grade_name}}        
     .col-md-2

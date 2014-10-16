@@ -10,9 +10,13 @@
   .row{"ng-repeat" => "subject in subjects_grades_all | orderBy:'subject_name'"}
     .col-md-1
     .col-md-9
-      %h4{style: "font-weight: bold"} {{subject.subject_name}}
+      .row
+        .col-md-2
+          %h4{style: "font-weight: bold"} {{subject.subject_name}}
+          %input{"ng-model" => "checked_all", type: "checkbox", "ng-change" => "addAllGrades({{!checked_all}},{{subject.subject_master_id}},{{subject.grades}},subject)", "ng-checked" => "checked_all"}
+          All
       .col-md-2{"ng-repeat" => "grade in subject.grades  | orderBy:'text'"}
         %input{"ng-model" => "grade.checked_value", type: "checkbox", "ng-change" => "addGrades({{!grade.checked_value}},{{subject.subject_master_id}},{{grade}})", "ng-checked" => "grade.checked_value"}      
         {{grade.text}}        
-    .col-md-2
+      .col-md-2
   

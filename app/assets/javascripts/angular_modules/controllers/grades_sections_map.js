@@ -155,10 +155,35 @@
             }            
         };
 
+         $scope.addAllGrades = function(value,section_master_id,grades,section){ 
+             $scope.section = section; 
+            for(var i = 0; i < $scope.sections.length; i++)
+            {                
+                if ($scope.sections[i]['section_master_id'] == section_master_id)
+                {                    
+                    if (!value)
+                    {          
+                        alert();
+                        $scope.sections_grades[i]['grade_masters'] = [];
+                        for(var k = 0; k <grades.length; k++){
+                            $scope.section['grades'][k]['checked_value'] = false;
+                        };                       
+                    } 
+                    else
+                    {      
+                        for(var k = 0; k <grades.length; k++){
+                            $scope.sections_grades[i]['grade_masters'].push({
+                                id: grades[k]['id'],
+                                grade_master_id: grades[k]['grade_master_id']                                 
+                            });
+                            $scope.section['grades'][k]['checked_value'] = "true";                             
+                        }                                             
+                    }
+                }
+            }            
+        };
+
         
-        
-    }]);
-    
-    
+    }]);    
 })(angular, myApp);
 

@@ -1,8 +1,13 @@
 (function(angular, app) {
     "use strict";
-    app.controller('GradesSubjectsMappingController',["$scope", "timeTableService", "gradesSubjectsMapService", function($scope, timeTableService, gradesSubjectsMapService) {  
-        $scope.myShowFormValue = "true";
-        $scope.FormValue = "false";
+    app.controller('GradesSubjectsMappingController',["$scope", "timeTableService", "gradesSubjectsMapService", function($scope, timeTableService, gradesSubjectsMapService) {         
+
+        var initiateForm = function(){
+            $scope.myShowFormValue = "true";
+            $scope.FormValue = "false";
+            $scope.checked_all;
+        };
+        initiateForm();
 
         timeTableService.getGradeServiceView()
             .then(function(result) {
@@ -11,12 +16,12 @@
         
         timeTableService.getSubjectServiceView()
             .then(function(result) {
-                $scope.subjects=result.data;                
+                $scope.subjects=result.data;  
             });        
         
         gradesSubjectsMapService.getGradesSubjectsServiceView()
             .then(function(result) {
-                $scope.show_grades=result.data;               
+                $scope.show_grades=result.data; 
             });        
 
         $scope.defaultSubjectsGradesAll= function(){            
@@ -129,7 +134,7 @@
                 }); 
         };
         
-        $scope.addGrades = function(value,subject_master_id,grade){          
+        $scope.addGrades = function(value,subject_master_id,grade){
             for(var i = 0; i < $scope.subjects.length; i++)
             {                
                 if ($scope.subjects[i]['subject_master_id'] == subject_master_id)
@@ -143,7 +148,7 @@
                         }
                     } 
                     else
-                    {                         
+                    {                
                         $scope.subjects_grades[i]['grade_masters'].push({
                             id: grade['id'],
                             grade_master_id: grade['grade_master_id']
@@ -153,6 +158,33 @@
             }            
         };
 
-
+        $scope.addAllGrades = function(value,subject_master_id,grades,subject){   
+            $scope.subject= subject;    
+            for(var i = 0; i < $scope.subjects.length; i++){                
+                if ($scope.subjects[i]['subject_master_id'] == subject_master_id)
+                {                    
+                    if (!value)
+                    {       
+                        $scope.subjects_grades[i]['grade_masters'] = [];
+                        for(var k = 0; k <grades.length; k++){
+                            $scope.subject['grades'][k]['checked_value'] = false;
+                        };
+                        
+                    } 
+                    else
+                    {    
+                        for(var k = 0; k <grades.length; k++){
+                              $scope.subjects_grades[i]['grade_masters'].push({
+                                  id: grades[k]['id'],
+                                  grade_master_id: grades[k]['grade_master_id']                                 
+                              });
+                              $scope.subject['grades'][k]['checked_value'] = "true";                             
+                        }                          
+                    }                     
+                }
+            }   
+        };         
+        
+        
     }]);       
 })(angular, myApp);
