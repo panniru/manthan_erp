@@ -5,7 +5,6 @@
         var initiateForm = function(){
             $scope.myShowFormValue = "true";
             $scope.FormValue = "false";
-            $scope.checked_all;
         };
         initiateForm();
 

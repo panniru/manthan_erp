@@ -13,13 +13,26 @@ class SectionMastersController < ApplicationController
   end
 
   def create_bulk   
-    @section_bulk = build_section_from_bulk
-    if !@section_bulk.empty? and @section_bulk.map(&:valid?).all?
-      @section_bulk.each(&:save!)
-      flash[:success] = I18n.t :success, :scope => [:section_master, :create_bulk]
-      redirect_to section_masters_path
-    else
-      flash[:fail] = I18n.t :fail, :scope => [:section_master, :create_bulk]
+    respond_to do |format|    
+      format.json do 
+        @section_bulk = build_section_from_bulk
+        if !@section_bulk.empty? and @section_bulk.map(&:valid?).all?
+          @section_bulk.each(&:save!)
+          flash[:success] = I18n.t :success, :scope => [:section_master, :create_bulk]
+          render :json=>["success"]
+        else
+          @emessages = @section_bulk.each.map do |t|
+            if !t.errors.empty?
+              @error_messages = t.errors.full_messages
+              @error_messages= @error_messages.each.map do |t1|
+                {error: t1} 
+              end
+              {subject_name: t.section_name,error: @error_messages}
+            end
+          end   
+          render :json => @emessages
+        end  
+      end
     end    
   end
 

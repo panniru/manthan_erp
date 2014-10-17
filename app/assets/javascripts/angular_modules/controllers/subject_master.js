@@ -20,12 +20,20 @@
                 $scope.addSubject(); 
             } 
         };
-
+        
         $scope.submitSubjects = function(){          
             resourceService.SubjectMaster.bulk({bulk_subject: $scope.subject_masters})
-                .$promise.then(function(responce){
-                    $scope.showSubjects();
-                    $('#myModal').modal('hide');
+                .$promise.then(function(response){
+                    if(response[0] == "success"){
+                        alert("Bulk Subjects Added Successfully");
+                        $scope.showSubjects();
+                        $('#myModal').modal('hide');
+                        $scope.showErrorMessage = false;
+                    }
+                    else
+                    {
+                        $scope.showErrorMessage = true;
+                    }
                 });
 
         };        

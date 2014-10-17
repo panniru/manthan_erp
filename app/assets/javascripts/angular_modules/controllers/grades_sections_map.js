@@ -1,9 +1,11 @@
 (function(angular, app) {
     "use strict";
     app.controller('GradesSectionsMappingController',["$scope", "timeTableService","gradesSectionsMapService", function($scope, timeTableService, gradesSectionsMapService) {  
-        //alert();
-        $scope.myShowFormValue = "true";
-        $scope.FormValue = "false";
+        var initiateForm = function(){
+            $scope.myShowFormValue = "true";
+            $scope.FormValue = "false";
+        };
+        initiateForm();
        
         timeTableService.getSectionServiceView()
             .then(function(result) {
@@ -163,7 +165,6 @@
                 {                    
                     if (!value)
                     {          
-                        alert();
                         $scope.sections_grades[i]['grade_masters'] = [];
                         for(var k = 0; k <grades.length; k++){
                             $scope.section['grades'][k]['checked_value'] = false;

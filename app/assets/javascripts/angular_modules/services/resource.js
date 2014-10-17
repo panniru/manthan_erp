@@ -121,12 +121,12 @@
                                    );
         var DonateBook = $resource('/donate_books/:id.json', {id: '@id'});
         var SubjectMaster = $resource('/subject_masters/:id.json', {id: '@id'},
-                                    { "bulk": { url: "/subject_masters/create_bulk", method:'POST'},
+                                    { "bulk": { url: "/subject_masters/create_bulk.json", method:'POST', isArray: true},
                                       "update": { method: "PUT"}
                                     }  
                                    );
         var SectionMaster = $resource('/section_masters/:id.json', {id: '@id'},
-                                    { "bulk": { url: "/section_masters/create_bulk", method:'POST'},
+                                    { "bulk": { url: "/section_masters/create_bulk.json", method:'POST', isArray: true},
                                       "update": { method: "PUT"}
                                     }  
                                    );

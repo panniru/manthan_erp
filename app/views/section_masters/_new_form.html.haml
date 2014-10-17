@@ -3,6 +3,8 @@
     = label_tag  "Section Name : ", nil, :class => "form-label col-md-4"
     .col-md-4     
       = text_field_tag  "bulk_section[][section_name]",nil, :class => "form-control", :ng_model => "section_master.section_name", :placeholder => "Section Name" 
+    .col-md-4{"ng-show"=>"showErrorMessage"}
+      error
   .row
     .col-md-5.col-md-offset-3      
       %button{:ng_disabled => "moreSections", :type => "button", :class=> "btn btn-primary", :ng_click => "addMoreSections()"}=  "More Sections"

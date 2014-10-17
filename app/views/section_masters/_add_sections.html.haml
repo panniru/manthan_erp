@@ -1,18 +1,9 @@
 .col-md-12
-  .col-md-1
-  .col-md-10
-    .panel.panel-default
-      .test
-        .col-md-4        
-          .pull-left
-            %h3
-              Section Masters
-        .col-md-4  
-        .col-md-4
-          .pull-right
-            %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal","ng-click" => "addSection()"}= "Add Sections"
-  .col-md-1
-
+  .col-md-7
+    %h3
+      Section Masters
+    .pull-right
+      %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal","ng-click" => "addSection()"}= "Add Sections"
 .col-md-12
   #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
     .modal-dialog

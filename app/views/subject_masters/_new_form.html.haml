@@ -1,8 +1,12 @@
 %form{:id => "myForma", :class=>"form-horizontal", :ng_submit => "submitSubjects()"}  
-  .form-group{"ng-repeat" => "subject_master in subject_masters"}   
-    = label_tag  "Subject Name : ", nil, :class => "form-label col-md-4"
+  .form-group{"ng-repeat" => "subject_master in subject_masters"}
+    %lablel{:class => "form-label col-md-3"} 
+      %b
+        Subject Name
     .col-md-4     
       = text_field_tag  "bulk_subject[][subject_name]",nil, :class => "form-control", :ng_model => "subject_master.subject_name", :placeholder => "Subject Name" 
+    .col-md-4{"ng-show"=>"showErrorMessage"}
+      error
   .row
     .col-md-5.col-md-offset-3      
       %button{:ng_disabled => "moreSubjects", :type => "button", :class=> "btn btn-primary", :ng_click => "addMoreSubjects()"}=  "More Subjects"

@@ -23,19 +23,29 @@
 
         $scope.submitSections = function(){          
             resourceService.SectionMaster.bulk({bulk_section: $scope.section_masters})
-                .$promise.then(function(responce){
-                    $scope.showSections();
-                    $('#myModal').modal('hide');
+                .$promise.then(function(response){
+                    if(response[0] == "success"){
+                        alert("Bulk Sections Added Successfully");
+                        $scope.showSections();
+                        $('#myModal').modal('hide');
+                        $scope.showErrorMessage = false;
+                    }
+                    else
+                    {
+                        $scope.showErrorMessage = true;
+                    }                   
                 });
-
         };
       
-        $scope.deleteSection = function(section){            
-            section.$delete()
-                .then(function(responce){
-                    $scope.showSections();                   
-                })
+        $scope.deleteSection = function(section){   
+            if(confirm("Are you sure want to delete")){
+                section.$delete()
+                    .then(function(responce){
+                        $scope.showSections();                   
+                    })
+            }else{
+                $('#myModal').modal('hide');
+            }          
         };
-
     }]);
 })(angular, myApp)
