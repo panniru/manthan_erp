@@ -3,7 +3,7 @@
     %h3  Route Allotment
   .col-sm-2
     %br
-    %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
+    = autocomplete_field_tag :name, params[:name], auto_search_autocomplete_student_master_name_path,{class: "search-query form-control", placeholder: "Student Name...", type: "search"}
     %br
 .row{"ng-controller" => "Mapping1Controller"}
   .col-sm-6
@@ -25,6 +25,7 @@
           - if current_user.transport_head?
             %td
               = link_to "Allot", "#", :class => "btn btn-primary","ng-click" => "mapStudent(student.id)"
+  
     .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
       .modal-dialog
         .modal-content

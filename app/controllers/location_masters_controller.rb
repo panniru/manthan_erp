@@ -1,7 +1,7 @@
 class LocationMastersController < ApplicationController
   
   def index
-    @location_master = LocationMaster.order('location_name ASC')
+    @location_master = LocationMaster.order('location_name ASC').paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

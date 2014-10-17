@@ -26,7 +26,6 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
         %h4#myModalLabel.modal-title New Location
-        %hr
       = form_for LocationMaster.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
         .modal-body
           .row

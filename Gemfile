@@ -5,12 +5,13 @@ gem 'jquery-timepicker-rails'
 gem 'language_list', '~> 1.0.0'
 gem 'jquery-cookie-rails', '~> 1.3.1.1'
 gem 'rails', '~> 4.1.4'
-
+gem 'columnizer', '~> 0.0.4'
 gem "geocoder"
 gem 'gmaps4rails', '~> 2.1.2'
 gem 'geocomplete_rails'
 gem 'carrierwave'
 gem 'gon'
+
 gem 'rails3-jquery-autocomplete'
 gem 'pg_search'
 gem 'jquery-ui-rails', '4.1.0'

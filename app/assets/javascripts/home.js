@@ -1,5 +1,6 @@
 $(document ).ready(function() {
-        
+   
+    
     $('#admission_bus').change(function() {
         if ($(this).val() == 't')
         {
