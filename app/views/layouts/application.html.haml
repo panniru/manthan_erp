@@ -2,11 +2,11 @@
 %html{ "ng-app" => 'myApp'}    
   %head
     %title Manthan
+    = include_gon(:init => true) 
     = javascript_include_tag "application"
     = javascript_include_tag "//www.google.com/jsapi", "chartkick"
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
     
-    = include_gon 
     = csrf_meta_tags
 
   %body

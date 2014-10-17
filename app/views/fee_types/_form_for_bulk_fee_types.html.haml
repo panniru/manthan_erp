@@ -1,8 +1,10 @@
-%form{:class=> "form-horizantal", :ng_submit => "create()", :id => "createFeeTypes"}
+%form{:class=> "form-horizantal", :ng_submit => "create(feeTypeForm.$valid)", :id => "createFeeTypes", :form => "feeTypeForm"}
   .col-md-12.form-group{"ng-repeat" => "fee_type in new_fee_types"}
     = label_tag "Fee Type {{$index+1}}", nil, :class => "control-label col-md-4"
     .col-md-5
-      = text_field_tag "bulk_fee_types[][fee_type]",nil, :class => "form-control", :ng_model => "fee_type['fee_type']"
+      = text_field_tag "bulk_fee_types[][fee_type]",nil, :class => "form-control", :ng_model => "fee_type['fee_type']", :ng_pattern => "/[a-z][A-Z]/", :name => "feeType{{$index}}"
+      %p{ :ng_show => "feeTypeForm['feeType{{$index}}'].$invalid && !feeTypeForm['feeType{{$index}}'].$pristine"} Fee Type Invalid
+      {{feeTypeForm['feeType$index'].$invalid}}
   .row
     .col-md-5.col-md-offset-3
       %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"

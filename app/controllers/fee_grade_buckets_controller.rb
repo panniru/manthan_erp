@@ -76,10 +76,7 @@ class FeeGradeBucketsController < ApplicationController
       @fee_grade_bucket_bulk = build_fee_grade_bucket_bulk
       format.json do
         status = nil
-        if !@fee_grade_bucket_bulk.empty? and @fee_grade_bucket_bulk.map(&:valid?).all?
-          status = @fee_grade_bucket_bulk.map(&:save!)
-          GradeBucketMapping.generate_mapping
-        end
+        status = (!@fee_grade_bucket_bulk.empty? and FeeGradeBucket.save_bulk(@fee_grade_bucket_bulk))
         render :json => status
       end
       format.html do
@@ -111,6 +108,11 @@ class FeeGradeBucketsController < ApplicationController
       end
     end
   end
+
+  def destroy_all
+    FeeGradeBucket.destroy_all
+    redirect_to fee_grade_buckets_path
+  end
   
   private
 
@@ -127,7 +129,7 @@ class FeeGradeBucketsController < ApplicationController
       if fee_grade_bucket[:id].present?
         @fee_grade_bucket_obj = FeeGradeBucket.find(fee_grade_bucket[:id])
         fee_grade_bucket.each do |key, val|
-          @fee_grade_bucket_obj.send(key+"=", val) if fee_grade_bucket_obj.attributes.include?(key)
+          @fee_grade_bucket_obj.send(key+"=", val) if @fee_grade_bucket_obj.attributes.include?(key)
         end
         @fee_grade_bucket_obj
       else

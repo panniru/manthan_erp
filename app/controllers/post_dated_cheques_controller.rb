@@ -89,6 +89,12 @@ class PostDatedChequesController < ApplicationController
   def new
      @post_dated_cheques = PostDatedCheque.new
   end
+
+  def destroy_all
+    PostDatedCheque.destroy_all
+    redirect_to post_dated_cheques_path
+  end
+    
   
   private
   

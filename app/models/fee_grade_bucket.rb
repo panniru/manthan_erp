@@ -1,6 +1,15 @@
 class FeeGradeBucket < ActiveRecord::Base
   has_many :grade_wise_fees, :dependent => :destroy
+  has_many :grade_bucket_mappings, :dependent => :destroy
   
+
+  def self.save_bulk(fee_grade_buckets)
+    return false unless fee_grade_buckets.map(&:valid?).all?
+    ActiveRecord::Base.transaction do
+      fee_grade_buckets.map(&:save!)
+      GradeBucketMapping.generate_mapping
+    end
+  end
   
   def self.find_grade_bucket_by_grade(grade)
     #if is_number?(grade)

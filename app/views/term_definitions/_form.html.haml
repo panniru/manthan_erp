@@ -1,15 +1,19 @@
-%form{:class=>"form-horizontal", :ng_submit => "submitTermDefinitions()"}
+%form{:class=>"form-horizontal", :ng_submit => "submitTermDefinitions()", :noValidate => "", :name => "termDefinationForm"}
   .form-group{"ng-repeat" => "term_definition in newTermDefinitions"}
     = label_tag  "Term {{$index+1}}", nil, :class => "form-label col-md-2"
     .col-md-3   
       = text_field_tag  "bulk_term[][term_definition]",nil, :class => "form-control", :ng_model => "term_definition.term_definition", :placeholder => "Term Name"
+      %p{:ng_show => "newTermDefinitionErrors[$index].term_definition"} {{newTermDefinitionErrors[$index].term_definition.join(",")}}
     .col-sm-3
-      = text_field_tag "bulk_term[][termdate]",nil, :class => 'datepicker form-control', :placeholder => "Term Date", :id => "date-{{$index}}", :ng_model => "term_definition.termdate"
+      = text_field_tag "bulk_term[][termdate]",nil, :class => 'academicDatepicker form-control', :placeholder => "Term Date", :id => "date-{{$index}}", :ng_model => "term_definition.termdate"
+      %p{:ng_show => "newTermDefinitionErrors[$index].termdate"} {{newTermDefinitionErrors[$index].termdate.join(",")}}
     .col-md-3
       .input-group
-        = text_field_tag "bulk_term[][amount_per]",nil, :class => "form-control" , :placeholder => "Amount Percent", :id => "amount-{{$index}}", :ng_model => "term_definition['amount_per']", :ng_model => "term_definition.amount_per"
+        = text_field_tag "bulk_term[][amount_per]",nil, :class => "form-control" , :placeholder => "Amount% ", :id => "amount-{{$index}}", :ng_model => "term_definition.amount_per"
         %span.input-group-addon %
-     
+      %p{:ng_show => "newTermDefinitionErrors[$index].amount_per"} {{newTermDefinitionErrors[$index].amount_per.join(",")}}
+  .col-md-offset-6
+    %p{:ng_show => "invalidTotal"} Total Amount Percentage is Not 100
   .row
     .col-md-5.col-md-offset-3
       %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addMoreterms()"}=  "More terms"

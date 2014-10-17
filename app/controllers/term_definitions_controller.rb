@@ -5,7 +5,7 @@ class TermDefinitionsController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        @term_definitions = TermDefinition.paginate(:page => params[:page].present? ? params[:page] : 1)
+        @term_definitions = TermDefinition.paginate(:page => params[:page].present? ? params[:page] : 1).order("termdate DESC")
         render :json => @term_definitions 
       end
       format.html do
@@ -69,6 +69,12 @@ class TermDefinitionsController < ApplicationController
       end
     end
   end
+  
+  def destroy_all
+    TermDefinition.destroy_all
+    redirect_to term_definitions_path
+  end
+
   
   private
   

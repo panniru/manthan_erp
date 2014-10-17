@@ -13,9 +13,11 @@
         }
 
         $scope.addMoreBuckets = function(){
-            var prev_len = $scope.newFeeGradeBuckets.length
-            addBuckets(3);
-            $scope.gradeChangeActionTo(prev_len-1)
+            if(!isLastGradeMatched()){
+                var prev_len = $scope.newFeeGradeBuckets.length
+                addBuckets(3);
+                $scope.gradeChangeActionTo(prev_len-1)
+            }
         }
         
         var addBuckets = function(count){
@@ -25,24 +27,34 @@
         }
 
         $scope.editGradeBuckets = function(){
-            $scope.newFeeGradeBuckets = $scope.feeGradeBuckets;
+            $scope.newFeeGradeBuckets = angular.copy($scope.feeGradeBuckets);
             load_grades();
             $('#createModal').modal('show');
         }
 
         var load_grades = function(){
-            gradeService.allGrades()
-                .then(function(responce){
-                    $scope.grades = responce.data
-                    angular.forEach($scope.newFeeGradeBuckets, function(value){
-                        value.grade_from = parseInt(value.grade_from)
-                        value.grade_to = parseInt(value.grade_to)
-                        value.optionsFrom = $scope.grades
-                        value.optionsTo = $scope.grades
-                    })
+            if(typeof $scope.grades != 'undefined' && $scope.grades.length > 0){
+                angular.forEach($scope.newFeeGradeBuckets, function(value){
+                    value.grade_from = parseInt(value.grade_from)
+                    value.grade_to = parseInt(value.grade_to)
+                    value.optionsFrom = $scope.grades
+                    value.optionsTo = $scope.grades
                 });
+            }else{
+                gradeService.allGrades()
+                    .then(function(responce){
+                        $scope.grades = responce.data
+                        angular.forEach($scope.newFeeGradeBuckets, function(value){
+                            value.grade_from = parseInt(value.grade_from)
+                            value.grade_to = parseInt(value.grade_to)
+                            value.optionsFrom = $scope.grades
+                            value.optionsTo = $scope.grades
+                        })
+                    });
+            }
+            
         }
-
+        
         $scope.submitGradeBuckets = function(){
             angular.forEach($scope.newFeeGradeBuckets, function(bucket){
                 delete bucket["optionsFrom"]
@@ -53,9 +65,13 @@
                     .$promise.then(function(responce){
                         $scope.feeGradeBuckets = gradeBucketService.FeeGradeBucket.query()
                         $('#createModal').modal('hide')
-                    })
+                    }, function(error){
+                        alert(error.status +": " +error.statusText )
+                        load_grades();
+                    });
             }else{
-                alert("All the grades are not included")
+                alert("Invalid grade buckets. Please verify..!!")
+                load_grades();
             }
             
         };
@@ -109,12 +125,38 @@
         };
 
         var isFormValid = function(){
+            deleteEmptyGrades();
+            for(var i= 0; i <  $scope.newFeeGradeBuckets.length ; i++){
+                if(!($scope.isValidFromOption(i) && $scope.isValidToOption(i))){
+                    return false;
+                }
+            }
+            return isLastGradeMatched()
+        }
+
+        var isLastGradeMatched = function(){
             var gradeBucket = $scope.newFeeGradeBuckets[$scope.newFeeGradeBuckets.length-1]
             if(gradeBucket.grade_to != null){
                 return gradeBucket.grade_to === $scope.grades[$scope.grades.length-1].id
             }else{
                 return gradeBucket.grade_from === $scope.grades[$scope.grades.length-1].id
             }
+
+        }
+
+        var deleteEmptyGrades = function(){
+            var invalidIndeces = []
+            for(var i= 0; i <  $scope.newFeeGradeBuckets.length ; i++){
+                if($scope.newFeeGradeBuckets[i].grade_from == null ||
+                    angular.equals($scope.newFeeGradeBuckets[i].grade_to,NaN )  ||
+                   $scope.newFeeGradeBuckets[i].grade_to == null ||
+                   angular.equals($scope.newFeeGradeBuckets[i].grade_to,NaN )){
+                    invalidIndeces.push($scope.newFeeGradeBuckets[i])
+                };
+            }
+            angular.forEach(invalidIndeces, function(grade){
+                $scope.newFeeGradeBuckets.splice($scope.newFeeGradeBuckets.indexOf(grade), 1)
+            });
         }
     }]);
 	

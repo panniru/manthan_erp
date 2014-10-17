@@ -2,8 +2,9 @@
   %h3 
     = "Grade Buckets"
     .pull-right
-      = link_to "New Fee Buckets", "#", :class => "btn btn-primary", :ng_click => "newGradeBuckets()", :ng_disabled => "#{fee_items_can_be_manipulate?}"
-      = link_to "Edit Fee Buckets", "#", :class => "btn btn-primary", :ng_click => "editGradeBuckets()"
+      = link_to "New", "#", :class => "btn btn-primary", :ng_click => "newGradeBuckets()", :ng_disabled => "#{fee_items_can_be_manipulate?} || feeGradeBuckets.length > 0"
+      = link_to "Edit", "#", :class => "btn btn-primary", :ng_click => "editGradeBuckets()"
+      = link_to "Delete All", destroy_all_fee_grade_buckets_path, :class => "btn btn-danger", :ng_disabled => "#{fee_items_can_be_manipulate?}", :data => {:method => "DELETE", :confirm => "Are you to delete all fee grade buckets ?"}
   %hr
 
   %table.table.table-bordered
@@ -11,12 +12,12 @@
       %tr
         %th From
         %th To
-        %th
+        -#%th
     %tbody
       %tr{"ng-repeat" => "feeGradeBucket in feeGradeBuckets"}
         %td {{feeGradeBucket.grade_from_name}}
         %td {{feeGradeBucket.grade_to_name}}
-        %td
+        -#%td
           -#= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), "#", :class => "btn btn-warning btn-sm", :title => "Edit", :ng_click => "update(feeGradeBucket)", :ng_disabled => "#{fee_items_can_be_manipulate?}"
           = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(feeGradeBucket)", :ng_disabled => "#{fee_items_can_be_manipulate?}"
 

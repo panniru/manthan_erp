@@ -10,8 +10,7 @@ gem "geocoder"
 gem 'gmaps4rails', '~> 2.1.2'
 gem 'geocomplete_rails'
 gem 'carrierwave'
-gem 'gon'
-
+gem 'gon', '~> 5.2.0'
 gem 'rails3-jquery-autocomplete'
 gem 'pg_search'
 gem 'jquery-ui-rails', '4.1.0'

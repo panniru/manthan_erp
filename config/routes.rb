@@ -188,11 +188,13 @@ ManthanErp::Application.routes.draw do
     collection do
       post "create_bulk"
       get "all_grades"
+      delete "destroy_all"
     end
   end
   resources :term_definitions do
     collection do
       post "create_bulk"
+      delete "destroy_all"
     end
   end
   
@@ -226,6 +228,7 @@ ManthanErp::Application.routes.draw do
   resources :post_dated_cheques do
     collection do
       post "create_bulk"
+      delete "destroy_all"
     end
   end
   

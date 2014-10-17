@@ -28,6 +28,8 @@ class ApplicationController < ActionController::Base
     @breadcrumbs = [] unless @breadcrumbs.present?
     Breadcrumb.new(@breadcrumbs, request).push_element
     session[:breadcrumbs] = @breadcrumbs
+    gon.academicYearFrom = "2013"
+    gon.academicYearTo = "2014"
   end
 
 end
