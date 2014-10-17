@@ -1,6 +1,7 @@
 class SectionMaster < ActiveRecord::Base
   belongs_to :grade_master
   has_many :students, :class_name => "StudentMaster"
+  validates :section_name, uniqueness: true
 
   def self.get_sections_by_role(current_user)    
 
