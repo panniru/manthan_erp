@@ -1,0 +1,13 @@
+%form{:class => "form-horizontal", :ng_submit => "updateresult()"}
+  .row
+    .col-sm-2
+      = label_tag "Result"
+    .col-sm-6
+      %input{:ng_model => "assessment.final_result", type: 'radio', :value => 'Selected'} Selected
+      %input{:ng_model => "assessment.final_result", type: 'radio', :value => 'Rejected'} Rejected
+      = hidden_field_tag :assessment_result, :value => "{{assessment.final_result}}"
+      
+  .row
+    .pull-right
+      = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+                

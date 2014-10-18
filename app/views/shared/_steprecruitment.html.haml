@@ -139,7 +139,7 @@
           - if("#{@staffrecruit.status}" == "Selected")
             = link_to raw("<span class= 'fa fa-thumbs-up fa2-2x'></span>"), staffrecruits_path, :class => "btn btn-success1 btn-circle"
             %br
-            %span.label.label-default Admission
+            %span.label.label-default Recruitment
           - else
             - if("#{@staffrecruit.status}" == "Management_Reviewed") and current_user.admin?
               = link_to raw("<span class= 'fa fa-thumbs-up fa2-2x'></span>"), "#", :class => 'Modal btn1 btn btn-danger1 btn-circle',"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"

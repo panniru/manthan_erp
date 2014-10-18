@@ -1,7 +1,12 @@
 (function(angular, app) {
     "use strict";
     app.controller("AssessmentController",["$scope", "resourceService","assessService", function($scope, resourceService,  assessService) {
-       
+        assessService.getAssessmentStaff()
+            .then(function(result) {
+                $scope.ass = result.data
+            });
+        
+        
         $scope.ass = resourceService.Assess.query();
         $scope.getModal = function(assess){
             $scope.assess = assess;

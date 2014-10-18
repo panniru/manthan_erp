@@ -638,6 +638,7 @@ ManthanErp::Application.routes.draw do
   
   resources :staffrecruits do
     member do
+      get 'recruited_form'
       get 'edit_assessment'
       get 'edit_document'
       get 'edit_enquiry'
@@ -651,6 +652,8 @@ ManthanErp::Application.routes.draw do
       get 'management_result'
     end
     collection do
+      get 'get_staff_assessment'
+      get 'get_assessment_staff'
       get 'reports'
       get 'get_subject_view'
       get 'get_klass_view'

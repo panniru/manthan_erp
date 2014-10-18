@@ -9,6 +9,7 @@
           %select{"ng-model" => "myLead", "ng-options" => "add.role_name for add in adds", :class => "form-control", :required => "required"}
             %option{style: "display:none", value: ""} Select Role
             = f.hidden_field :id, :value => "{{myLead.id}}"
+            = f.hidden_field :role_id, :value => "{{myLead.id}}"
             = f.hidden_field :dept, :value => "{{myLead.role_name}}"
             {{myLead.dept}}
           
@@ -20,6 +21,7 @@
             %option{style: "display:none", value: ""} Select Staff
             
           = f.hidden_field :head, :value => "{{staffAdmin.faculty_name}}"
+          = f.hidden_field :faculty_master_id, :value => "{{staffAdmin.id}}"
       %center
         
         = f.submit "Create", :class => 'btn btn-primary'

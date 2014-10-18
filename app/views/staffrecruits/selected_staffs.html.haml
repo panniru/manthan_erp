@@ -25,15 +25,12 @@
     - @staffrecruits.each do |staffrecruit|
       %tr
         %td{:style => "width:25%"}
-          = link_to "#{staffrecruit.form_no}", homeindex_staffrecruit_path(staffrecruit)
+          = link_to "#{staffrecruit.form_no}", recruited_form_staffrecruit_path(staffrecruit)
         %td{:style => "width:25%"}
-          = staffrecruit.name
+          = staffrecruit.faculty_name
         %td{:style => "width:25%"}
-          = staffrecruit.education_qualification
+          = staffrecruit.post
         %td{:style => "width:25%"}
-          = staffrecruit.gender
-        %td= staffrecruit.post
-        %td= staffrecruit.comments
-        %td= staffrecruit.description
-        %td= staffrecruit.final_result
+          = staffrecruit.status
+        
 

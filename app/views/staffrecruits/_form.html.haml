@@ -28,6 +28,7 @@
           = f.hidden_field :dept, :value => "{{myLead.role_name}}"
           = f.hidden_field :staffhead, :value => "{{myLead.head}}"
           = f.hidden_field :role_id, :value => "{{myLead.id}}"
+          = f.hidden_field :user_id, :value => "{{myLead.role_id}}"
     .form-group{"ng-controller" => "StaffadminsController"}
       .col-sm-2
         = f.label "Preferred Class:", :class => 'staffrecruit_klass control-label'

@@ -23,7 +23,6 @@ class RecruitmentSubMenu < Struct.new(:controller)
   
   def principal_sub_menu
     sub_menu = []
-    sub_menu << senior_management_review
     sub_menu << assessment_completed
        
   end
