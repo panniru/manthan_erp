@@ -1,10 +1,26 @@
 class Route < ActiveRecord::Base
+  belongs_to :new_vehicle
   has_many :student_route_mappings , :dependent => :destroy 
   has_many :locations , :dependent => :destroy
   has_many :location_masters
   accepts_nested_attributes_for :locations
   attr_accessor :text ,:subject
+  scope :show_route_locations, lambda{|route_id| where(:route_id => route_id ).select(:id,:location_master_id, :sequence_no)}
+
+  def student_length
+    route = self.id
+    map = StudentRouteMapping.show_all_students(route).map {|student| student.student_master_id}
+    return map.length
+  end
   
+  def bus_capacity
+    route = self.id
+    map = StudentRouteMapping.show_all_students(route).map {|student| student.student_master_id}
+    capacity =  NewVehicle.capacity_bus(self.busno_up).map {|cap| cap.capacity} 
+    length = capacity.first - map.length
+    return length
+  end
+
   def save_route(location_params)
     location_params.each do |location|
       locations << Location.new(location.permit(:location_master_id, :sequence_no))

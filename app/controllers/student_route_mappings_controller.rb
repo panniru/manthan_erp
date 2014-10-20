@@ -7,7 +7,10 @@ class StudentRouteMappingsController < ApplicationController
   
   def get_route_view
     routes = Location.equals_to_location_master(params[:id]).map {|location| location.route}
-    render :json => routes
+    route = routes.map do |r|
+      {id: r.id ,  busno_up: r.busno_up, student_length: r.bus_capacity }
+    end
+    render :json => route
   end
   
   def create
@@ -33,8 +36,6 @@ class StudentRouteMappingsController < ApplicationController
   
   def get_student_view
     student = StudentMaster.has_bus_facility.has_no_route.all.map do |student|
-      p "========================"
-      p student
       {name: student.name,id: student.id , grade: student.grade_master.grade_name , section: student.section_master.section_name }
     end
     render :json => student

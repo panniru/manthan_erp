@@ -52,11 +52,13 @@
                     %tr
                       %th Route No
                       %th Bus No
+                      %th Available Seats
                       %th
                   %tbody
                     %tr{"ng-repeat" => "route in routes"}
                       %td {{route.id}}
                       %td {{route.busno_up}}
+                      %td {{route.student_length}}
                       %td
                         %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveRoute(route,location,student_id)"}= "allot"            
               
