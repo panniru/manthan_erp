@@ -7,8 +7,8 @@
       .col-sm-2
         = f.text_field :form_no,:class => 'form-control'
       .col-sm-2
-      .col-sm-2
-        = f.label "Name Of The Applicant:", :class => 'control-label'
+      .col-sm-2.required
+        = f.label "Name:", :class => 'control-label'
       .col-sm-2
         = f.text_field :faculty_name,:class => 'form-control'
 
@@ -53,19 +53,19 @@
       -#     %option{style: "display:none", value: ""} Select Head
       
     .form-group
-      .col-sm-2
+      .col-sm-2.required
         = f.label "Date Of Birth:", :class => 'control-label'
       .col-sm-2
         = f.text_field :dob,:class => 'datepicker form-control'
       .col-sm-2
-      .col-sm-2
+      .col-sm-2.required
         = f.label "Nationality:", :class => 'control-label'
       .col-sm-2
         = f.country_select :nationality, {:include_blank => '-Select-'}, :class => 'staffrecruit'
       
       
     .form-group
-      .col-sm-2
+      .col-sm-2.required
         = f.label "Gender:", :class => 'control-label'
       .col-sm-2
         = f.radio_button :gender, 'Female'
@@ -77,18 +77,18 @@
         = f.radio_button :gender, 'Others'
         = f.label :"others"
       .col-sm-2
-      .col-sm-2
+      .col-sm-2.required
         = f.label "Email:", :class => 'control-label'
       .col-sm-2
         = f.text_field :email, :class => 'form-control'
       
     .form-group
-      .col-sm-2
+      .col-sm-2.required
         = f.label "Mobile No:", :class => 'control-label'
       .col-sm-2
         = f.text_field :mobile_no, :class => 'form-control'
       .col-sm-2
-      .col-sm-2
+      .col-sm-2.required
         = f.label "Address:", :class => 'control-label'
       .col-sm-2
         = f.text_area :address, :class => 'form-control'
@@ -110,8 +110,8 @@
       .col-sm-2
         = f.select(:expected_salary, options_for_select([['10000'],['10000-20000'],['20000-30000'],['30000']]),{:include_blank => '-Select-'}, :class => 'staffrecruit')
       .col-sm-2
-      .col-sm-2
-        = f.label "Education Qualification:", :class => 'control-label'
+      .col-sm-2.required
+        = f.label "Qualification:", :class => 'control-label'
       .col-sm-2
         = f.select(:education_qualification, options_for_select([['M.Sc(B.Ed)'],['M.A'],['M.Sc'],['Graduation'],['MBA'],['MCA']]),{:include_blank => '-Select-'}, :class => 'staffrecruit')
       
