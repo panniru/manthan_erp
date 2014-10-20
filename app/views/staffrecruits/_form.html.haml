@@ -16,7 +16,7 @@
       .col-sm-2
         = f.label "Post:", :class => 'control-label'
       .col-sm-2
-        %select{"ng-model" => "myPost", "ng-options" => "post.post_name for post in posts", :class => "staffrecruit_post form-control", :required => "required"}
+        %select{"ng-model" => "myPost","ng-hide" => "teaching", "ng-options" => "post.post_name for post in posts", :class => "staffrecruit_post form-control", :required => "required"}
           %option{style: "display:none", value: ""} Select Post
         = f.hidden_field :post, :value => "{{myPost.post_name}}"
       .col-sm-2
@@ -33,7 +33,7 @@
       .col-sm-2
         = f.label "Preferred Class:", :class => 'staffrecruit_klass control-label'
       .col-sm-2
-        %select{"ng-model" => "myPreferredClass", "ng-options" => "klass.grade_name for klass in klasses",:class => "staffrecruit_klass form-control",:required => "required"}          
+        %select{"ng-model" => "myPreferredClass","ng-hide" => "teaching", "ng-options" => "klass.grade_name for klass in klasses",:class => "staffrecruit_klass form-control",:required => "required"}          
           %option{style: "display:none", value: ""} Select Grade
           
         = f.hidden_field :klass, :value => "{{myPreferredClass.grade_name}}"
@@ -41,7 +41,7 @@
       .col-sm-2
         = f.label "Preferred Subject:", :class => 'staffrecruit_subject control-label'
       .col-sm-2
-        %select{"ng-model" => "myPreferredSubject", "ng-options" => "subject.subject_name for subject in subjects",:class => "staffrecruit_subject form-control",:required => "required"}          
+        %select{"ng-model" => "myPreferredSubject","ng-hide" => "teaching", "ng-options" => "subject.subject_name for subject in subjects",:class => "staffrecruit_subject form-control",:required => "required"}          
           %option{style: "display:none", value: ""} Select Subject
           
         = f.hidden_field :subject, :value => "{{myPreferredSubject.subject_name}}"

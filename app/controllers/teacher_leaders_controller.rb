@@ -13,7 +13,7 @@ class TeacherLeadersController < ApplicationController
   end
 
   def index
-    @teacher_leaders= TeacherLeader.all
+    @teacher_leaders= TeacherLeader.all.order('id ASC')
     
   end
   

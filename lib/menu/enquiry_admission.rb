@@ -24,7 +24,6 @@ class EnquiryAdmission
   def principal_sub_menu
     sub_menu = []
     sub_menu << assessment_completed
-    sub_menu << view_management_review
   end
   
 

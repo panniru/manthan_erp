@@ -1,68 +1,11 @@
-.row
-  .col-sm-3
-    .pull-left
-      .input-group
-        %span.input-group-addon
-          = fa_icon "search lg"
-        %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
-        %br
-  .col-sm-4
-    %center
-      %h4
-        Assessment Planned
-%br
-%br
-.row{"ng-controller" => "AssessmentController"}
-  %table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
-    %thead
-      %tr
-        %th Form no
-        %th Name
-        %th Class
-        %th Status
-               
-    %tbody
-      %tr{"ng-repeat" => "assess in ass"}
-        %td{:style => "width:20%"}
-          %a{:href => "", "ng-click" => "getModal(assess)"} 
-            {{assess.form_no}}
-          #getModal.modal.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
-            .modal-dialog.modal-sm
-              .modal-content
-                .modal-header
-                  .row
-                    .pull-left
-                      .col-sm-12
-                        %h4#getModal.modal-title Assessment Review
-                       
-                .modal-body
-                  
-                  %form{:class => "form-horizontal", :ng_submit => "submit()"}
-                    .row
-                      .col-sm-2
-                        Result
-                      .col-sm-6
-                        %input{:ng_model => "assess.teachercomment", type: 'radio', :value => 'Selected'} Selected
-                        %input{:ng_model => "assess.teachercomment", type: 'radio', :value => 'Rejected'} Rejected
-                        = hidden_field_tag :teachercomment, :value => "{{assess.teachercomment}}"
-                    .row
-                      .col-sm-2
-                        Comment
-                      .col-sm-6
-                        %input{:ng_model => "assess.comment", type: 'text'}
-                        = hidden_field_tag :comment, :value => "{{assess.comment}}"
-                        = hidden_field_tag :status, :value => "Assessment_Completed"
-                    .row
-                      .pull-right
-                        %input{:type => "submit",:class => "btn btn-primary", :value => "Update"}
-                    -# .row
-                    -#   {{ass}}
-                    -#   {{assess}}
-                      
-
-        %td{:style => "width:20%"}
-          {{assess.name}}
-        %td{:style => "width:20%"}
-          {{assess.grade}}
-        %td{:style => "width:20%"}
-          {{assess.status}}
+.row{"ng-controller" => "StudentAssessmentController"}
+  .col-sm-12
+    = render 'showplan'
+  .modal.fade{:id => "editplan", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true", "data-backdrop" => "static","data-keyboard" => "false"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{:class => "close", "data-dismiss" => "modal", "aria-hidden" => "true"} &times;
+          %h4.modal-title{:id => "myModalLabel"} Assessment Completion
+        .modal-body
+          = render 'editplan'

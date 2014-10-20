@@ -283,8 +283,9 @@
             %th= @admission.mother_education
           %tr
             %th= label_tag "Nationality:"
-            %th= @admission.nationality
-            %th= @admission.nationality
+            //%th= f.select :father_nationality, options_for_select(Carmen::Country.named("India").subregions.to_a.collect{ |x| [x.name] })
+            %th= f.country_select :father_nationality, {object: f.object, :include_blank => '-Select-',iso_codes: true}, :class => 'staffrecruit_drop'
+            %th= f.country_select :mother_nationality, {object: f.object, :include_blank => '-Select-'}, :class => 'staffrecruit_drop'
           %tr
             %th= label_tag "Religion:"
             %th= f.text_field :father_religion, :class => 'form-control'
@@ -354,6 +355,9 @@
                 = f.radio_button :sib_sex1, "Male"
                 %label{for: "female", :id => "second"} Female
                 = f.radio_button :sib_sex1, "Female"
+                %label{for: "others", :id => "others"} Others
+                = f.radio_button :sib_sex1, "Others"
+
             %td= f.text_field :sib_grade1, :class => 'form-control'
             %td= f.text_field :sib_school1, :class => 'form-control'
           %tr
@@ -365,6 +369,9 @@
                 = f.radio_button :sib_sex2, "Male"
                 %label{for: "female", :id => "fourth"} Female
                 = f.radio_button :sib_sex2, "Female"
+                %label{for: "others", :id => "sixth"} Others
+                = f.radio_button :sib_sex2, "Others"
+
             %td= f.text_field :sib_grade2, :class => 'form-control'
             %td= f.text_field :sib_school2, :class => 'form-control'
           

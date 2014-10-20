@@ -1,0 +1,35 @@
+.row
+  .col-sm-3
+    .pull-left
+      .input-group
+        %span.input-group-addon
+          = fa_icon "search lg"
+        %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+        %br
+  .col-sm-4
+    %center
+      %h3
+        Assessment Completed
+%br
+%br
+
+%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
+  %thead
+    %tr
+      %th Form no
+      %th Name
+      %th Grade
+      %th Status
+        
+  %tbody
+    %tr{"ng-repeat" => "assessment in assessments"}
+      %td{:style => "width:20%"}
+        %a{href: '#', "ng-click" => "editAssessments(assessment)"}
+          {{assessment.form_no}}
+      %td{:style => "width:20%"}
+        {{assessment.name}}
+      %td{:style => "width:20%"}
+        {{assessment.grade}}
+      %td{:style => "width:20%"}
+        {{assessment.status}}
+        

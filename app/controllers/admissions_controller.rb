@@ -43,29 +43,53 @@ class AdmissionsController < ApplicationController
   end
   
   def index
-    # if params[:teacher_leader_id].present?
-    #   @admissions = Admission.where(:teacher_leader_id => params[:teacher_leader_id])
-    # else
-      
+    if current_user.admin?
+      if params[:teacher_leader_id].present?
+        @admissions = Admission.where(:teacher_leader_id => params[:teacher_leader_id])
+      else
+        @admissions = Admission.enquiry_forms_or_application_forms  
+      end
+      @admissions = Admission.enquiry_forms_or_application_forms  
       respond_to do |format|
-      # format.html
-       format.json do
-        if(TeacherLeader.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
-          pa = "#{current_user.faculty_master.id}"
-          a = TeacherLeader.where(:faculty_master_id => pa).map{|student| student.grade_master_id}
-          b = "Assessment_Planned"
-          ass = Admission.where(:grade_master_id => a, :status => b).each.map do |mapping|
-            {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment}
-          end
-          render :json => ass
+        format.json do
+          @admissions = Admission.management_review
+          render :json =>  @admissions
         end
-        # @admissions = Admission.all
-        # render :json => @admissions
+        format.html do
+          render 'admission_home'
+        end
       end
     end
-   # end                         
+
+    if current_user.teacher?
+      @admissions = Admission.assessment_planned
+      respond_to do |format|
+        format.json do
+          @admissions = Admission.assessment_planned
+          render :json => @admissions
+        end
+        format.html do 
+          render "admission_home"
+        end
+      end
+    end
+
+    
+    if current_user.principal?
+      @admissions = Admission.assessment_completed
+      respond_to do |format|
+        format.json do
+          @admissions = Admission.assessment_completed
+          render :json => @admissions
+        end
+        format.html do
+          render "admission_home"
+        end
+      end
+    end
   end
-  
+
+          
   def create
     @admission = Admission.new(admission_params)
     @admission.teacher_leader = TeacherLeader.where(:klass => admission_params[:grade]).first
@@ -303,7 +327,7 @@ class AdmissionsController < ApplicationController
  end
  
  def admission_params
-   params.require(:admission).permit(:admission_no,:branch,:surname,:second_lang,:board,:grade,:medium,:year,:written,:spoken,:reading,:blood_group,:allergy,:doctor_name,:doctor_mobile,:guardian_name,:guardian_mobile,:guardian_relationship,:from,:to,:avatar,:father_office_address,:mother_office_address,:father_office_telephone,:mother_office_telephone,:father_mobile,:mother_mobile,:father_religion,:mother_religion,:father_employer,:mother_employer,:father_email,:mother_email,:sib_name1,:sib_age1,:sib_sex1,:sib_grade1,:sib_school1,:sib_name2,:sib_age2,:sib_sex2,:sib_grade2,:sib_school2,:bus,:form_no, :middle_name,:name,:klass, :dob,:gender,:nationality,:language,:father_name,:mother_name,:father_occupation,:mother_occupation,:father_company,:mother_company,:father_education, :mother_education,:income,:address_line1, :address_line2, :previous_city, :pin, :landline,:mobile,:email,:transport, :busstop,:last_school, :city, :changing_reason, :know_school,:person, :pp,:status,:closestatus,:title, :description, :staff, :grade, :start_time, :end_time, :grade_master_id,:teacher_leader_id,:faculty,:comment, :result,:teachercomment,:finalresult)
+   params.require(:admission).permit(:admission_no,:branch,:surname,:second_lang,:board,:grade,:medium,:year,:written,:spoken,:reading,:blood_group,:allergy,:doctor_name,:doctor_mobile,:guardian_name,:guardian_mobile,:guardian_relationship,:from,:to,:avatar,:father_office_address,:mother_office_address,:father_office_telephone,:mother_office_telephone,:father_mobile,:mother_mobile,:father_religion,:mother_religion,:father_employer,:mother_employer,:father_email,:mother_email,:sib_name1,:sib_age1,:sib_sex1,:sib_grade1,:sib_school1,:sib_name2,:sib_age2,:sib_sex2,:sib_grade2,:sib_school2,:bus,:form_no, :middle_name,:name,:klass, :dob,:gender,:nationality,:language,:father_name,:mother_name,:father_occupation,:mother_occupation,:father_company,:mother_company,:father_education, :mother_education,:income,:address_line1, :address_line2, :previous_city, :pin, :landline,:mobile,:email,:transport, :busstop,:last_school, :city, :changing_reason, :know_school,:person, :pp,:status,:closestatus,:title, :description, :staff, :grade, :start_time, :end_time, :grade_master_id,:teacher_leader_id,:faculty,:comment, :result,:teachercomment,:finalresult, :father_nationality, :mother_nationality)
  end
  def get_student_master(student_obj)
      StudentMaster.new do |sm|
@@ -345,6 +369,8 @@ class AdmissionsController < ApplicationController
      sm.mother_occupation = student_obj.mother_occupation
      sm.father_religion = student_obj.father_religion
      sm.mother_religion = student_obj.mother_religion
+     sm.father_nationality = student_obj.father_nationality
+     sm.mother_nationality = student_obj.mother_nationality
      sm.father_company = student_obj.father_company
      sm.mother_company = student_obj.mother_company
      sm.father_education = student_obj.father_education

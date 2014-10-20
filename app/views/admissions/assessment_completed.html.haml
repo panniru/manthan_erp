@@ -1,35 +1,11 @@
-.row
-  .col-sm-3
-    .pull-left
-      .input-group
-        %span.input-group-addon
-          = fa_icon "search lg"
-        %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}/
-        %br
-  .col-sm-4
-    %center
-      %h4
-        Assessment Completed
-%br
-%br
-
-%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
-  %thead
-    %tr
-      %th Form no
-      %th Name
-      %th Class
-      %th Status
-        
-  %tbody
-    - @admissions.each do |admission|
-      %tr
-        %td{:style => "width:25%"}
-          = link_to "#{admission.form_no}", home_index_admission_path(admission)
-        %td{:style => "width:25%"}
-          = admission.name
-        %td{:style => "width:25%"}
-          = admission.grade
-        %td{:style => "width:25%"}
-          = admission.status
-        
+.row{"ng-controller" => "StudentAssessmentController"}
+  .col-sm-12
+    = render 'showass'
+  .modal.fade{:id => "editass", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true", "data-backdrop" => "static","data-keyboard" => "false"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{:class => "close", "data-dismiss" => "modal", "aria-hidden" => "true"} &times;
+          %h4.modal-title{:id => "myModalLabel"} Management Review
+        .modal-body
+          = render 'editass'
