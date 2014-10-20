@@ -6,6 +6,8 @@ class AutoSearchController < ApplicationController
   
   autocomplete :student_master, :name, :full => true 
   
+ 
+  
 
   def autocomplete_student_by_name
     term = params[:term]

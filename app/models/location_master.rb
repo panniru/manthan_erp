@@ -1,5 +1,5 @@
 class LocationMaster < ActiveRecord::Base
- 
+  
   before_destroy :cleanup
   geocoded_by :location_name  
   after_validation :geocode

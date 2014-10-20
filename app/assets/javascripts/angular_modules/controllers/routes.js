@@ -30,15 +30,16 @@
             };
             $('#createModal').modal('show')
         }
-	
+
 	$scope.allStudents = function(route){
 	    $('#studentModal').modal('show');
 	    routesService.getStudentView(route)
 		.then(function(response){
 		    $scope.students = response.data
+		    $scope.studentsLength = $scope.students.length 
 		});
-	    
-        }
+	}
+
 	$scope.allLocations = function(location){
 	    $('#indexModal').modal('show');
 	    routesService.getLocationView(location)

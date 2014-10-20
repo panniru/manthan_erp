@@ -27,7 +27,7 @@
        respond_to do |format|   
          format.json do
            routes = @routes.map do |r|
-             {id: r.id ,  busno_up: r.busno_up, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name}
+             {id: r.id ,  busno_up: r.busno_up, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name , student_length: r.student_length }
            end
            render :json => routes
          end
@@ -52,7 +52,7 @@
              end
            end
            routes = @routes.map do |r|
-             {id: r.id ,  busno_up: r.busno_up, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name}
+             {id: r.id ,  busno_up: r.busno_up, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name }
            end
            render :json => routes
          end
@@ -127,8 +127,6 @@
        format.json do 
          map = StudentRouteMapping.show_all_students(params[:route]).map {|student| student.student_master_id}
          students = StudentMaster.where(:id => map ).each.map do |mapping|
-           p "========================"
-           p mapping.section_master_id
            {grade: mapping.grade_master.grade_name,  name: mapping.name , section: mapping.section_master.section_name }
          end     
          render :json => students
