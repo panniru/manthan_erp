@@ -396,17 +396,14 @@ end
 
 def seed_staffrecruits
   unless Staffrecruit.first.present?
-    Staffrecruit.create(:form_no => '1234', :faculty_name => 'Gopika', :post => 'teaching', :dept => 'teacher', :staffhead => 'Arun', :role_id => '6', :klass => 'PP1', :subject => 'PHYSICS', :dob => '1978-02-21', :nationality => 'IN', :gender => 'Female', :email => 'gopika@ostryalabs.com', :mobile_no => '9999988888', :address => '301,Sai Residency,Kothaguda', :language => 'Malayalam', :experience => '5-6 years', :expected_salary => '30000', :education_qualification => 'MCA', :status => 'Application_Created')
+    Staffrecruit.create(:form_no => '1234', :faculty_name => 'Gopika', :post => 'teaching', :dept => 'teacher', :staffhead => 'Arun', :role_id => '6', :klass => 'PP1', :subject => 'PHYSICS', :dob => '1978-02-21', :nationality => 'IN', :gender => 'Female', :email => 'gopika@ostryalabs.com', :mobile_no => '9999988888', :address => '301,Sai Residency,Kothaguda', :language => 'Malayalam', :experience => '5-6 years', :expected_salary => '30000', :education_qualification => 'MCA', :status => 'Application_Created', :user_id => '6')
   end
 end
 
 def seed_staffadmin
   unless Staffadmin.first.present?
-    Staffadmin.create(:dept => 'teaching', :head => 'Arun')
-    Staffadmin.create(:dept => 'sports', :head => 'Srikanth')
-    Staffadmin.create(:dept => 'transport', :head => 'Navya')
-    Staffadmin.create(:dept => 'finearts', :head => 'Priya')
-    Staffadmin.create(:dept => 'extra-curricular', :head => 'Muralee')
+    Staffadmin.create(:dept => 'teacher', :head => 'teacher', :faculty_master_id => '7', :role_id => '6')
+    
   end
 end
 

@@ -1,14 +1,14 @@
 class StaffadminsController < ApplicationController
   def get_role_and_head
     role = Staffadmin.all.map do |role|
-      { role_name: role.dept, id: role.id, head: role.head}
+      { role_name: role.dept, id: role.id, head: role.head ,role_id: role.role_id, faculty_master_id: role.faculty_master_id}
     end
     render :json => role
   end
 
   def get_faculty_names
-    faculty = Staffrecruit.where("final_result = 'Selected'").map do |faculty|
-      { faculty_name: faculty.faculty_name, post: faculty.post, dept: faculty.dept}
+    faculty = FacultyMaster.all.map do |faculty|
+      {id: faculty.id, faculty_name: faculty.faculty_name, post: faculty.post, dept: faculty.dept}
     end
     render :json => faculty
   end
@@ -17,12 +17,11 @@ class StaffadminsController < ApplicationController
   def create
     @staffadmin = Staffadmin.new(staffadmin_params)
     if @staffadmin.save
-      flash[:success] = I18n.t :success, :scope => [:staffadmin, :create]
       redirect_to staffadmins_path
     else
       render "new"
     end
-  end
+  end 
   
   def show
     @staffadmin = Staffadmin.find(params[:id])    
@@ -43,27 +42,21 @@ class StaffadminsController < ApplicationController
   def update
     @staffadmin = Staffadmin.find(params[:id])
     if @staffadmin.update(staffadmin_params)
-      flash[:success] = I18n.t :success, :scope => [:staffadmin, :update]
       redirect_to staffadmins_path
     else
-      flash.now[:fail] = I18n.t :fail, :scope => [:staffadmin, :update]
       render "edit"
     end
   end
 
   def destroy
     @staffadmin = Staffadmin.find(params[:id])    
-    if @staffadmin.destroy
-      flash[:success] = I18n.t :success, :scope => [:staffadmin, :destroy]
-    else
-      flash.now[:fail] = I18n.t :fail, :scope => [:staffadmin, :destroy]
-    end
+    @staffadmin.destroy
     redirect_to staffadmins_path
   end
 
   private
   def staffadmin_params
-    params.require(:staffadmin).permit(:dept,:head,:add_id,:title,:post_role)
+    params.require(:staffadmin).permit(:dept,:head,:add_id,:title,:post_role, :faculty_master_id, :role_id)
   end
 
 end

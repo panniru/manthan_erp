@@ -1,35 +1,11 @@
-.row
-  .col-sm-3
-    .pull-left
-      .input-group
-        %span.input-group-addon
-          = fa_icon "search lg"
-        %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}/
-        %br
-  .col-sm-4
-    %center
-      %h3
-        Assessment Completed
-%br
-%br
-
-%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
-  %thead
-    %tr
-      %th Form no
-      %th Name
-      %th Post
-      %th Status
-        
-  %tbody
-    - @staffrecruits.each do |staffrecruit|
-      %tr
-        %td{:style => "width:95%"}
-          = link_to "#{staffrecruit.form_no}",homeindex_staffrecruit_path(staffrecruit)
-        %td{:style => "width:95%"}
-          = staffrecruit.faculty_name
-        %td{:style => "width:95%"}
-          = staffrecruit.post
-        %td{:style => "width:95%"}
-          = staffrecruit.status
-       
+.row{"ng-controller" => "StaffAssessmentController"}
+  .col-sm-12
+    = render 'show'
+  .modal.fade{:id => "edit", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true", "data-backdrop" => "static","data-keyboard" => "false"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{:class => "close", "data-dismiss" => "modal", "aria-hidden" => "true"} &times;
+          %h4.modal-title{:id => "myModalLabel"} Management Review
+        .modal-body
+          = render 'edit'

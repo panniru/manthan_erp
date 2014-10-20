@@ -1,7 +1,9 @@
 class StaffrecruitsController < ApplicationController
-  #-----------index
-  
-  #-----index
+ 
+  def recruited_form
+    @staffrecruit = Staffrecruit.find(params[:id])
+  end
+
   def enquiry_show
     @staffrecruit = Staffrecruit.find(params[:id])
   end
@@ -9,11 +11,10 @@ class StaffrecruitsController < ApplicationController
   def update_admission
     @staffrecruit = Staffrecruit.find(params[:id])
     respond_to do |format|
-      if  @staffrecruit.update(:status => "Form_Closed")
-        format.json { render action: 'index', :status => "success" }
-      else
-        format.json { render json: @staffrecruit.errors, :status => "failure" }
-      end
+      @staffrecruit.update(staffrecruit_params)
+      format.html { 
+        redirect_to staffrecruits_path
+      }
     end
   end
 
@@ -105,7 +106,36 @@ class StaffrecruitsController < ApplicationController
   def view_assessment
     @staffrecruit = Staffrecruit.find(params[:id])
   end
- 
+  def get_assessment_staff
+    respond_to do |format|
+      format.json do
+        if(Staffadmin.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
+          pa = "#{current_user.faculty_master.id}"
+          p pa
+          a = Staffadmin.where(:faculty_master_id => pa).map{|staff| staff.role_id}
+          b = "Assessment_Planned"
+          ass = Staffrecruit.where(:role_id => a , :status => b).each.map do |mapping|
+            {id: mapping.id, name: mapping.faculty_name, form_no: mapping.form_no, status: mapping.status, assessment_result: mapping.assessment_result, comments: mapping.comments}
+          end
+        end
+        render :json => ass
+      end
+    end
+  end
+
+  def get_staff_assessment
+    respond_to do |format|
+      format.json do
+        @staffrecruits = Staffrecruit.assessment_completed
+        render :json => @staffrecruits
+      end
+      format.html do 
+        render "assessment_completed_index"
+      end
+    end
+  end
+
+
   def index
     if current_user.admin?
       if params[:staff_admission_id].present?
@@ -113,38 +143,46 @@ class StaffrecruitsController < ApplicationController
       else
         @staffrecruits = Staffrecruit.application_forms
       end
-    end
-    if current_user.teacher?
-      # respond_to do |format|
-      #   # format.html
-      #   format.json do
-      #     if(TeacherLeader.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
-      #       pa = "#{current_user.faculty_master.id}"
-      #       a = TeacherLeader.where(:faculty_master_id => pa).map{|student| student.grade_master_id}
-      #       b = "Assessment_Planned"
-      #       ass = Admission.where(:grade_master_id => a, :status => b).each.map do |mapping|
-      #         {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment}
-      #       end
-      #       render :json => ass
-      #     end
-      #     # @admissions = Admission.all
-      #     # render :json => @admissions
-      #   end
-      # end
-      if params[:staff_admission_id].present?
-        @staffrecruits = Staffrecruit.where(:staff_admission_id => params[:staff_admission_id])
-      else
-        @staffrecruits = Staffrecruit.assessment_planned
+      @staffrecruits = Staffrecruit.application_forms
+      respond_to do |format|
+        format.json do
+          @staffrecruits = Staffrecruit.management_review
+          render :json => @staffrecruits
+        end
+        format.html do 
+          render "index"
+        end
       end
     end
+    
+    if current_user.teacher?
+      @staffrecruits = Staffrecruit.assessment_planned
+      respond_to do |format|
+        format.json do
+          @staffrecruits = Staffrecruit.assessment_planned
+          render :json => @staffrecruits
+        end
+        format.html do 
+          render "index"
+        end
+      end
+    end
+
     if current_user.principal?
-      if params[:staff_admission_id].present?
-        @staffrecruits = Staffrecruit.where(:staff_admission_id => params[:staff_admission_id])
-      else
-        @staffrecruits = Staffrecruit.assessment_completed
+      @staffrecruits = Staffrecruit.assessment_completed
+    respond_to do |format|
+      format.json do
+          @staffrecruits = Staffrecruit.assessment_completed
+        render :json => @staffrecruits
+      end
+      format.html do 
+        render "index"
+        end
       end
     end
   end
+ 
+  
   def create
     @staffrecruit = Staffrecruit.new(staffrecruit_params)
     respond_to do |format|
@@ -205,36 +243,15 @@ class StaffrecruitsController < ApplicationController
      fm.dept = staff_obj.dept
      fm.faculty_name = staff_obj.faculty_name
      fm.post = staff_obj.post
-     fm.description = staff_obj.description
-     fm.start_time = staff_obj.start_time
-     fm.end_time = staff_obj.end_time
-     fm.education_qualification = staff_obj.education_qualification
-     fm.educational_certificates = staff_obj.educational_certificates
-     fm.previous_employment_proof = staff_obj.previous_employment_proof
-     fm.salary_slips_for_previous_months = staff_obj.salary_slips_for_previous_months
-     fm.title = staff_obj.title
-     fm.status = staff_obj.status
-     fm.staff_admission_id = staff_obj.staff_admission_id
-     fm.comments = staff_obj.comments
-     fm.staffhead = staff_obj.staffhead
-     fm.final_result = staff_obj.final_result
-     fm.form_no = staff_obj.form_no
-     fm.assessment_result = staff_obj.assessment_result
-     fm.management_result = staff_obj.management_result
-     fm.closestatus = staff_obj.closestatus
-     fm.dob = staff_obj.dob
-     fm.subject_master_id = staff_obj.subject_master_id
      fm.address = staff_obj.address
+     fm.education_qualification = staff_obj.education_qualification
      fm.gender = staff_obj.gender
      fm.email = staff_obj.email
      fm.mobile_no = staff_obj.mobile_no
      fm.nationality = staff_obj.nationality
-     fm.klass = staff_obj.klass
      fm.language = staff_obj.language
-     fm.subject = staff_obj.subject
-     fm.experience = staff_obj.experience
-     fm.expected_salary = staff_obj.expected_salary
-     fm.staff_leader_id = staff_obj.staff_leader_id
+     fm.primary_subject = staff_obj.subject
+     fm.past_experience = staff_obj.experience
      fm.user_id = staff_obj.user_id
    end 
  end

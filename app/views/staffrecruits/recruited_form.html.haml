@@ -1,0 +1,172 @@
+.row
+  %center
+    %h3
+      Staff Information
+.pull-right
+  = link_to "Back", selected_staffs_staffrecruits_path, :class => 'btn btn-primary'
+
+.row
+  .col-sm-12
+    .row
+      .col-sm-12
+        %table.table-striped.table-condensed{:style => "width:90%"}
+          %tr
+            %td{style: "width:25%"}
+              %b
+                %span.label.label-danger Enquiry Details
+            %td{style: "width:25%"}
+            %td{style: "width:25%"}
+              %b
+                %span.label.label-danger Document Details
+            %td{style: "width:25%"}
+          %tr
+            %td
+              %label Form no
+            %td
+              = @staffrecruit.form_no
+            %td
+              %label Education Certificates
+            %td
+              = link_to "Edu_Certificates", @staffrecruit.educational_certificates_url
+          %tr
+            %td
+              %label Name
+            %td
+              = @staffrecruit.faculty_name
+            %td
+              %label Previous Employment Proof
+            %td
+              = link_to "Previous Employment Proof", @staffrecruit.previous_employment_proof_url
+
+          %tr
+            %td
+              %label{for: "educational_qualification"} Educational Qualification
+            %td
+              = @staffrecruit.education_qualification
+            %td
+              %label Salary Slips for Previous Months
+            %td
+              = link_to "Salary slips for previous Months",@staffrecruit.salary_slips_for_previous_months_url
+          %tr
+            %td
+              %label Post
+            %td
+              = @staffrecruit.post
+            %td
+              %b
+                %span.label.label-danger Assessment Details
+            %td
+
+          %tr
+            %td
+              %label{for: "experience"} Experience
+            %td
+              = @staffrecruit.experience
+            %td
+              %label Interviewer
+            %td
+              = @staffrecruit.staffhead
+
+          %tr
+            %td
+              %label{for: "dob"} DOB
+            %td
+              = @staffrecruit.dob
+            %td
+              %label Timings
+            %td
+              = @staffrecruit.start_time
+
+          %tr
+            %td
+              %label{for: "gender"} Gender
+            %td
+              = @staffrecruit.gender
+            %td
+              %label Description
+            %td
+              = @staffrecruit.title
+
+          %tr
+            %td
+              %label{for: "mobile_no"} Mobile No
+            %td
+              = @staffrecruit.mobile_no
+            %td
+              %b
+                %span.label.label-danger Assessment Result
+            %td
+
+          %tr
+            %td
+              %label{for: "email"} Email
+            %td
+              = @staffrecruit.email
+            %td
+              %label Recommended
+            %td
+              = @staffrecruit.assessment_result
+
+          %tr
+            %td
+              %label{for: "Address"} Address
+            %td
+              = @staffrecruit.address
+            %td
+              %label Reason
+            %td
+              = @staffrecruit.comments
+
+
+          %tr
+            %td
+              %label{for: "nationality"} Nationality
+            %td
+              = @staffrecruit.nationality
+            %td
+              %b
+                %span.label.label-danger Management Result
+            %td
+
+          %tr
+            %td
+              %label{for: "preferred Class"} Preferred Class
+            %td
+              = @staffrecruit.klass
+            %td
+              %label Result
+            %td
+              = @staffrecruit.management_result
+
+          %tr
+            %td
+              %label{for: "preferred subject"} Preferred Subject
+            %td
+              = @staffrecruit.subject
+            %td
+              %label Review Comment
+            %td
+              = @staffrecruit.description
+
+          %tr
+            %td
+              %label{for: "expected_salary"} Expected Salary
+            %td
+              = @staffrecruit.expected_salary
+              
+            %td
+              %b
+                %span.label.label-danger Staff Recruitment
+            %td
+
+          %tr
+            %td
+            %td
+            %td
+              %label Final Result
+            %td
+              = @staffrecruit.final_result
+                
+
+            
+

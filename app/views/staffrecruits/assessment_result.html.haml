@@ -1,65 +1,107 @@
+.row
+  .pull-right
+    - if("#{@staffrecruit.status}" == 'Application_Created'||"#{@staffrecruit.status}" == 'Document_Verified'||"#{@staffrecruit.status}" == 'Assessment_Planned'||"#{@staffrecruit.status}" == 'Assessment_Completed'||"#{@staffrecruit.status}" == 'Management_Reviewed'||"#{@staffrecruit.status}" == 'Selected' )
+      - if current_user.admin?
+        - if("#{@staffrecruit.status}" == 'Assessment_Planned')
+          = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), '#', :onclick => "createStaffAssessment('#{@staffrecruit.staff_admission_id}');",:class => 'btn btn-warning btn-sm', :title => 'Edit'
 
-.row
-  .col-sm-12
-    = render "shared/steprecruitment"
+        %button#change2.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@staffrecruit.id}"}} 
+          %span.glyphicon.glyphicon-ban-circle
+        #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", "data-backdrop" => "static","data-keyboard" => "false"}
+          .modal-dialog
+            .modal-content
+              .modal-header
+                %center
+                  %h4#myModalLabel.modal-title Reason for Closing
+                  = form_for @staffrecruit do |f|
+                    .modal-body
+                      .row{"ng-controller"=>"StaffadminsController"}
+                        .row
+                          .col-sm-3
+                            = label_tag :closestatus
+                          .col-sm-6
+                            %select{"ng-model" => "myClose", "ng-options" => "reason.reason for reason in reasons", :class => 'form-control'}
+                              %option{style: "display:none", value: ""} Reason for Closing
+                        .row
+                          .pull-right
+                            = f.hidden_field :closestatus, :value => "{{myClose.reason}}"
+                            = f.hidden_field :status,:value => "Form_Closed"
+                            = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
+
+      - else 
+        - if current_user.admin?
+          %button.change.btn.btn-danger.btn-sm 
+            %span.glyphicon.glyphicon-ban-circle
+                  
+
+  .container
+    - if("#{@staffrecruit.status}" == "Document_Verified" ||"#{@staffrecruit.status}" == "Application_Created" ||"#{@staffrecruit.status}" == "Assessment_Planned" || "#{@staffrecruit.status}" == "Assessment_Completed" || "#{@staffrecruit.status}" == "Management_Reviewed" ||  "#{@staffrecruit.status}" == "Selected"|| "#{@staffrecruit.status}" == "Completed" )
+      = render "shared/steprecruitment"
+  
     %br
-.row
-  .col-sm-8
-    = render "homeindex"
-  .col-sm-3
-    - if current_user.admin?
-      = link_to "Close the Form", "#", :class => "change2 btn1 btn btn-danger", :data => {:id => "#{@staffrecruit.id}"}
-      #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-        .modal-dialog
-          .modal-content
-            .modal-header
-              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-              %center
-                %h4#mypopModal.modal-title Reason for Closing
-            = form_for @staffrecruit do |f|
-              .modal-body
-                .row
-                  .col-sm-1
-                    = f.radio_button :closestatus, "Not upto the mark"
-                  .col-sm-10
-                    = f.label "Not Upto the Mark"
-                .row
-                  .col-sm-1
-                    = f.radio_button :closestatus, "Financial Crisis"
-                  .col-sm-10
-                    = f.label "Financial Crisis"
-                .row
-                  .col-sm-1
-                    = f.radio_button :closestatus, "Didn't Pick the Interview Call"
-                  .col-sm-10
-                    = f.label "Didn't Pick the Interview Call"
-                                 
-              .modal-footer
-                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
-                = f.hidden_field :status,:value => "Form_Closed"
-                = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
-   
-%br
-%br
-.row
-  .col-sm-8
-    #accordion.panel-group
-      .panel.panel-default
-        .panel-heading
-          %h4.panel-title
-            %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseOne"}
-              Assessment Result
-        #collapseOne.panel-collapse.collapse.in
-          .panel-body
-            %b
-              %label.btn.btn-default 
-                Assessment was conducted by
-                = @staffrecruit.staffhead
-            .pull-right
-              %label.btn.btn-default
-                Recommended:
-                = @staffrecruit.assessment_result
-                %br
-                Reason:
-                = @staffrecruit.comments
+    .row
+      .col-sm-12
+        %table.table-striped.table-condensed{:style => "width:80%"}
+          %tr
+            %td{style: "width:25%"}
+              %b
+                %span.label.label-info Enquiry #
+            %td{style: "width:25%"}
+              = @staffrecruit.form_no
+            %td
+            %td
+            
+          %tr
+            %td
+              %label{for: "name"} Name
+            %td
+              = @staffrecruit.faculty_name
+            %td
+              %label{for: "post"} Post
+            %td
+              = @staffrecruit.post
+          %tr
+            %td
+              %label{for: "dob"} DOB
+            %td
+              = @staffrecruit.dob
+            %td
+              %label{for: "gender"} Gender
+            %td
+              = @staffrecruit.gender
+          %tr
+            %td
+              %b
+                %span.label.label-info Assessment
+          %tr
+            %td
+              %label Interviewer
+            %td
+              = @staffrecruit.staffhead
+            %td
+              %label Timings
+            %td
+              = @staffrecruit.start_time
+          %tr
+            %td
+              %label Description
+            %td
+              = @staffrecruit.title
+          %tr
+            %td
+              %b
+                %span.label.label-info Assessment Result
+            %td
+            %td
+            %td
+
+          %tr
+            %td
+              %label Recommended
+            %td
+              = @staffrecruit.assessment_result
+            %td
+              %label Reason
+            %td
+              = @staffrecruit.comments
                 

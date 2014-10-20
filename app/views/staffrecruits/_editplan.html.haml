@@ -1,0 +1,23 @@
+%form{:class => "form-horizontal", :ng_submit => "planupdate()"}
+  .row
+    .col-sm-4
+      = label_tag "Recommended"
+    .col-sm-6
+      %input{:ng_model => "assessment.assessment_result", type: 'radio', :value => 'Selected'} Selected
+      %input{:ng_model => "assessment.assessment_result", type: 'radio', :value => 'Rejected'} Rejected
+      = hidden_field_tag :assessment_result, :value => "{{assessment.assessment_result}}"
+      
+  .row
+    .col-sm-4
+      = label_tag "Comment"
+    .col-sm-6
+      %input{:ng_model => "assessment.comments", :type => 'text', :class => 'form-control'} 
+      = hidden_field_tag :comments, :value => '{{assessment.comments}}'
+  .row
+    %input{"ng-model" => "assessment.status", :type => "hidden", :value => 'Assessment_Completed'}
+    = hidden_field_tag :status, :value => '{{assessment.status}}'
+    
+  .row
+    .pull-right
+      = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+                

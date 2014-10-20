@@ -2,9 +2,9 @@
   .pull-right
     - if("#{@staffrecruit.status}" == 'Application_Created'||"#{@staffrecruit.status}" == 'Document_Verified'||"#{@staffrecruit.status}" == 'Assessment_Planned'||"#{@staffrecruit.status}" == 'Assessment_Completed'||"#{@staffrecruit.status}" == 'Management_Reviewed'||"#{@staffrecruit.status}" == 'Selected' )
       - if current_user.admin?
-        %button.change.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@staffrecruit.id}"}} 
+        %button#change2.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@staffrecruit.id}"}} 
           %span.glyphicon.glyphicon-ban-circle
-        #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+        #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", "data-backdrop" => "static","data-keyboard" => "false"}
           .modal-dialog
             .modal-content
               .modal-header
@@ -12,25 +12,18 @@
                   %h4#myModalLabel.modal-title Reason for Closing
                   = form_for @staffrecruit do |f|
                     .modal-body
-                      .row
-                        .col-sm-1
-                          = f.radio_button :closestatus, "Not upto the mark"
-                        .col-sm-10
-                          = f.label "Not Upto the Mark"
-                      .row
-                        .col-sm-1
-                          = f.radio_button :closestatus, "Financial Crisis"
-                        .col-sm-10
-                          = f.label "Financial Crisis"
-                      .row
-                        .col-sm-1
-                          = f.radio_button :closestatus, "Didn't Pick the Interview Call"
-                        .col-sm-10
-                          = f.label "Didn't Pick the Interview Call"
-                              
-                    .modal-footer
-                      = f.hidden_field :status,:value => "Form_Closed"
-                      = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
+                      .row{"ng-controller"=>"StaffadminsController"}
+                        .row
+                          .col-sm-3
+                            = label_tag :closestatus
+                          .col-sm-6
+                            %select{"ng-model" => "myClose", "ng-options" => "reason.reason for reason in reasons", :class => 'form-control'}
+                              %option{style: "display:none", value: ""} Reason for Closing
+                        .row
+                          .pull-right
+                            = f.hidden_field :closestatus, :value => "{{myClose.reason}}"
+                            = f.hidden_field :status,:value => "Form_Closed"
+                            = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
                       
       - else 
         - if current_user.admin?

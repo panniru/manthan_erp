@@ -54,34 +54,8 @@
               = link_to raw("<span class= 'fa fa-tasks fa1-2x'></span>"), assessment_result_staffrecruit_path, :class => "btn btn-success1 btn-circle"
             - else
               - if current_user.teacher?
-                = link_to raw("<span class= 'fa fa-tasks fa2-2x'></span>"), "#", :class => 'Modal btn1 btn btn-danger1 btn-circle'
-                #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
-                  #Modal.modal-dialog.modal-sm
-                    .modal-content
-                      %h4#Modal.modal-title Assessment Review
-                      = form_for @staffrecruit do |f|
-                        .modal-body
-                          %table
-                            %thead
-                              %tr
-                                %th{style: "width:20%"} 
-                                  %label{for: "Selected", :id => "first"} Selected
-                                %th
-                                  = f.radio_button :assessment_result, "Selected"
-                                %th{style: "width:20%"} 
-                                  %label{for: "Rejected", :id => "second"} Rejected
-                                %th
-                                  = f.radio_button :assessment_result, "Rejected"
-                        .row
-                          .col-sm-4
-                            = f.label "Assessment Review", :class => 'control-label'
-                          .col-sm-3
-                            = f.text_area :comments,:class => 'col-sm-3 form-control'
-                          
-                        .modal-footer
-                          = f.hidden_field :status,:value => "Assessment_Completed"
-                          = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
-
+                = link_to raw("<span class= 'fa fa-tasks fa2-2x'></span>"), "#", :class => 'btn1 btn btn-danger1 btn-circle'
+                
               - else
                 - if current_user.admin? or current_user.principal?
                   = link_to raw("<span class= 'fa fa-tasks fa2-2x'></span>"), '#', :class => "btn btn-warning1 btn-circle"
@@ -100,33 +74,8 @@
               = link_to raw("<span class= 'fa fa-users fa1-2x'></span>"), management_result_staffrecruit_path, :class => "btn btn-success1 btn-circle"
             - else
               - if("#{@staffrecruit.status}" == "Assessment_Completed") and current_user.principal?
-                = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), "#", :class => 'Modal btn1 btn btn-danger1 btn-circle'
-                #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1", "data-backdrop" => "static" ,"data-keyboard "=> "false"}
-                  .modal-dialog.modal-sm
-                    .modal-content
-                      %h4#Modal.modal-title Management Review
-                      = form_for @staffrecruit do |f|
-                        .modal-body
-                          %table
-                            %thead
-                              %tr
-                                %th
-                                  %label{for: "Selected", :id => "first"} Selected
-                                  = f.radio_button :management_result, "Selected"
-                                %th
-                                  %label{for: "Rejected", :id => "second"} Rejected
-                                  = f.radio_button :management_result, "Rejected"
-                              %tr
-                                %th
-                                  = f.label "Review Comment", :class => 'control-label'
-                                %th
-                                  = f.text_area :description ,:class => 'col-sm-3 form-control'
-                                %th
-                                %th
-                        .modal-footer
-                          = f.hidden_field :status,:value => "Management_Reviewed"
-                          = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
-
+                = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), "#", :class => 'btn1 btn btn-danger1 btn-circle'
+                
               - else
                 - if current_user.admin? or current_user.teacher? or current_user.principal?
                   = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), '#', :class => "btn btn-warning1 btn-circle"
@@ -139,33 +88,10 @@
           - if("#{@staffrecruit.status}" == "Selected")
             = link_to raw("<span class= 'fa fa-thumbs-up fa2-2x'></span>"), staffrecruits_path, :class => "btn btn-success1 btn-circle"
             %br
-            %span.label.label-default Admission
+            %span.label.label-default Recruitment
           - else
             - if("#{@staffrecruit.status}" == "Management_Reviewed") and current_user.admin?
-              = link_to raw("<span class= 'fa fa-thumbs-up fa2-2x'></span>"), "#", :class => 'Modal btn1 btn btn-danger1 btn-circle',"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"
-              #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
-                .modal-dialog.modal-sm
-                  .modal-content
-                    %h4#Modal.modal-title Admission
-                    = form_for @staffrecruit do |f|
-                      .modal-body
-                        %center
-                          %table
-                            %thead
-                              %tr
-                                %th{style: "width:20%"} 
-                                  %label{for: "Selected", :id => "first"} Selected
-                                %th
-                                  = f.radio_button :final_result, "Selected"
-                                %th{style: "width:20%"} 
-                                  %label{for: "Rejected", :id => "second"} Rejected
-                                %th
-                                  = f.radio_button :final_result, "Rejected"
-                          
-                      .modal-footer
-                        = f.hidden_field :status,:value => "Completed"
-                        %center
-                          = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+              = link_to raw("<span class= 'fa fa-thumbs-up fa2-2x'></span>"), "#", :class => 'btn1 btn btn-danger1 btn-circle',"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"
             - else
               = link_to raw("<span class= 'fa fa-thumbs-up fa2-2x'></span>"), "#", :class => 'btn1 btn btn-warning1 btn-circle'
               

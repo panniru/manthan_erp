@@ -1,4 +1,13 @@
 class Staffrecruit < ActiveRecord::Base
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  validates :mobile_no, format: { with: /\d{3}-\d{3}-\d{4}/, message: ":Enter correct format(XXX-XXX-XXXX)" }
+  validates :faculty_name, presence: true
+  validates :nationality, presence: true
+  validates :dob, presence: true
+  validates :address, presence: true
+  validates :gender, presence: true
+  validates :education_qualification, presence: true
+  
   belongs_to :staff_admission, :foreign_key => 'staff_admission_id'
   belongs_to :faculty_master
   scope :search, lambda {|id| where(:id => id)}

@@ -58,6 +58,16 @@
                                    "update": {method: "PUT"}
                                }
                               );
+
+        var Recruitment = $resource('/staffrecruits/:id.json', {id: '@id'},
+                                   {
+                                       "update": {method: "PUT"}
+
+                                   }
+                                  );
+
+
+
         var Reason = $resource('/statuses/:id.json', {id: '@id'},
                                {
                                    "update": {method: "PUT"}
@@ -143,6 +153,7 @@
             GradeMaster : GradeMaster,            
             Book : Book,
             Assess : Assess,
+            Recruitment : Recruitment,
 	    Route:Route,
             Reason : Reason, 
             RequestNewBook : RequestNewBook,           

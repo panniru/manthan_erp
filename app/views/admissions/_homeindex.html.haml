@@ -23,8 +23,7 @@
                             %select{"ng-model" => "myClose", "ng-options" => "reason.reason for reason in reasons", :class => 'form-control'}
                               %option{style: "display:none", value: ""} Reason for Closing
 
-                        .row
-                          {{myClose.reason}}
+                      
                         .row
                           .pull-right
                             = f.hidden_field :closestatus, :value => "{{myClose.reason}}"
