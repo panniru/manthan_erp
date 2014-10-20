@@ -1,3 +1,11 @@
+- if current_user.canteenmanager?
+  %ul.nav.nav-tabs{:role => "tablist"}
+    %li
+      %a{:href => "/inventories"} Inventory
+    %li
+      %a{:href => "/inventories/new"} Deliveries
+
+ 
 .row
   %h3 Inventory
 .col-md-9{"ng-controller" => "InventoriesController"}
@@ -36,34 +44,7 @@
                 %h4.modal-title{ :id => "myModalLabel"} Inventories
               .modal-body
                 = render "form"
-  .col-sm-2
-    - if current_user.canteenmanager?
-      %button.btn.btn-primary{"ng-click" => "newInventory()"}= "Send For Approval"
-.col-md-9{"ng-controller" => "InventoriesController"}
-  .row
-    .col-sm-10
+  .col-sm-2g
+    %center
       - if current_user.canteenmanager?
-        .panel.panel-default
-          .panel-heading
-            %h4.panel-title
-              %a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"}
-                Delivered Inventory
-          #collapseOne.panel-collapse.collapse
-            .panel-body
-              %table.table.table-bordered
-                %thead
-                  %tr        
-                    %th Type
-                    %th Name
-                    %th Quantity
-                    %th Status
-                    %th  
-                      %button.btn.btn-primary{"ng-click" => "updateStatus('Delivered')"}= "Delivered"
-                %tbody
-                  %tr{"ng-repeat" => "inventory in inventories| filter:status = 'Ordered'"}
-                    %td {{inventory.inventory_type}}
-                    %td {{inventory.name}}
-                    %td {{inventory.quantity}}
-                    %td {{inventory.status}}
-                    %td
-                      %input{"ng-model" => "status", type: "checkbox", "ng-change" => "sendForApproval(status,inventory)", "ng-checked" => "status"}
+        %button.btn.btn-primary{"ng-click" => "newInventory()"}= "Send For Approval"

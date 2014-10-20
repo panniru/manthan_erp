@@ -21,6 +21,29 @@ class MealnamesController < ApplicationController
     @mealnames = Mealname.all
   end
 
+  def meal_names(date)
+    respond_to do |format|
+      format.json do
+        meals = Mealnames.on_date(date)
+        data = []
+        if meals.count > 0
+          data = meals.map do |meal|
+            {date: date, meal_name: meal.meal_detail_name }
+          end
+        else
+          section_master = ClassTeacherMapping.show_all_students(faculty.id).first.try(:section_master)
+          date = Date.today
+          if section_master.present?
+            data = section_master.students.map do |student|
+              {date: date, meal_name: ""}
+            end
+          end
+        end
+        render json: => data
+      end
+    end
+  end
+
   def destroy
     @mealnames = Mealname.find(params[:id])    
     respond_to do |format|
@@ -42,7 +65,7 @@ class MealnamesController < ApplicationController
     respond_to do |format|
       format.json do 
         render :json => Mealname.date_wise_meals
-        end
+      end
     end
   end
 

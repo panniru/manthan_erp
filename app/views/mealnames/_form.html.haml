@@ -2,6 +2,7 @@
   .modal-dialog
     .modal-content
       .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
         %h4#myModalLabel.modal-title Daily Meals
         %form{:class=>"form-horizontal", :ng_submit => "submitMenus()"}
           %hr
@@ -21,14 +22,9 @@
                 = text_field_tag "",nil, :class => 'form-control', :ng_model => "meal['meal_detail_name']", :placeholder => "Meal Name"
                 = hidden_field_tag :meal_type_id, :value => "{{meal.mealtype_id}}"
                 = hidden_field_tag :meal_detail_name, :value => "{{meal.meal_detail_name}}"              
-                
-                
-                
-                
-            %center   
-              .row
-                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button",:class => 'btn btn-primary'} Close
-                = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+          %center  
+            .row
+              = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
  
 
    

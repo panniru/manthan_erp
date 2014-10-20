@@ -9,12 +9,7 @@ class Inventory < ActiveRecord::Base
     end		
   end
 
-  
-  
-  
-
-
-  # scope :request_pending,lambda{where("status = 'Pending'")}
-  # scope :request_approved,lambda{where("status = 'Approved'")}
-  # scope :order_placed,lambda{where("status = 'Order placed'")}
+  validates_uniqueness_of :name, presence: true
+  validates :quantity, :numericality => { :greater_than => 0 }
+  validates :inventory_type, presence: true
 end

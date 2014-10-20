@@ -1,33 +1,37 @@
-.col-md-7{"ng-controller" => "CanteensController"}
-  %h3
-    = "Meal Types"
-    .pull-right
+.col-sm-12{"ng-controller" => "CanteensController"}
+  .row
+    .col-sm-2
+      %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
+    .col-sm-2
+    .col-sm-3
+      %h3  Meal Types
+    .col-sm-3
       = link_to "Add Meal Type", "#", :class => "btn btn-primary", :ng_click => "newMeal()"
-    .pull-left
-      .col-sm-10
-        %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
-        %br
+      %br
   %br
-    - if @mealtypes.length != 0
-      %table#tblData.target.table.table-striped.table-condensed.table-bordered
-        %thead
-          %tr
-            %th Meal Type
-            %th Time       
-            %th
-        %tbody
-          - @mealtypes.each do |meal_type|
+  .row
+    .col-sm-2
+    .col-sm-7
+      - if @mealtypes.length != 0
+        %table#tblData.target.table.table-striped.table-condensed.table-bordered
+          %thead
             %tr
-              %td= meal_type.meal_type
-              %td= meal_type.time          
-              %td
-                = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_mealtype_path(meal_type), :class => "btn btn-warning btn-sm", :title => "Edit"
-                = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), mealtype_path(meal_type), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+              %th Meal Type
+              %th Time       
+              %th
+          %tbody
+            - @mealtypes.each do |meal_type|
+              %tr
+                %td= meal_type.meal_type
+                %td= meal_type.time          
+                %td
+                  = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_mealtype_path(meal_type), :class => "btn btn-warning btn-sm", :title => "Edit"
+                  = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), mealtype_path(meal_type), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
   .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
     .modal-dialog
       .modal-content
         .modal-header
-          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
           %h4.modal-title{ :id => "myModalLabel"} Meal Types
         .modal-body
           = render "form"
