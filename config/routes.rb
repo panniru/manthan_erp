@@ -650,6 +650,7 @@ ManthanErp::Application.routes.draw do
       get 'view_assessment'
       get 'assessment_result'
       get 'management_result'
+      get 'update_admission'
     end
     collection do
       get 'get_staff_assessment'

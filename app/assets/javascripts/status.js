@@ -96,7 +96,7 @@ $(function() {
 	      	alert("");
 		if (status == "Form Closed")
 		{
-                    alert("");
+                    
                     this_klass.text('Form Closed');
                     
                 }

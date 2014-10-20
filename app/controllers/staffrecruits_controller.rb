@@ -11,11 +11,10 @@ class StaffrecruitsController < ApplicationController
   def update_admission
     @staffrecruit = Staffrecruit.find(params[:id])
     respond_to do |format|
-      if  @staffrecruit.update(:status => "Form_Closed")
-        format.json { render action: 'index', :status => "success" }
-      else
-        format.json { render json: @staffrecruit.errors, :status => "failure" }
-      end
+      @staffrecruit.update(staffrecruit_params)
+      format.html { 
+        redirect_to staffrecruits_path
+      }
     end
   end
 

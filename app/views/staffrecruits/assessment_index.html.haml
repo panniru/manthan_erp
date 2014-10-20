@@ -1,7 +1,7 @@
 .row{"ng-controller" => "StaffAssessmentController"}
   .col-sm-12
     = render 'showplan'
-  .modal.fade{:id => "editplan", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+  .modal.fade{:id => "editplan", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true", "data-backdrop" => "static","data-keyboard" => "false"}
     .modal-dialog
       .modal-content
         .modal-header

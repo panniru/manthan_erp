@@ -1,5 +1,5 @@
 = form_for @staffrecruit, :html => { :class => "form-horizontal", :role => "form"} do |f|
-  .row
+  = render "shared/error_messages", :object => f.object
   .col-sm-12
     .form-group
       .col-sm-2

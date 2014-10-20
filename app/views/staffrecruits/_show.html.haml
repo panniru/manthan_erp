@@ -23,13 +23,13 @@
         
   %tbody
     %tr{"ng-repeat" => "assessment in assessments"}
-      %td
+      %td{:style => "width:20%"}
         %a{href: '#', "ng-click" => "editAssessments(assessment)"}
           {{assessment.form_no}}
-      %td
+      %td{:style => "width:20%"}
         {{assessment.faculty_name}}
-      %td
+      %td{:style => "width:20%"}
         {{assessment.post}}
-      %td
+      %td{:style => "width:20%"}
         {{assessment.status}}
         

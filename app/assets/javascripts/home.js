@@ -1,5 +1,11 @@
 $(document ).ready(function() {
-   
+
+
+        $('#change2').click(function() {
+        $('#mypopModal').modal('show');
+    });
+    
+
     
     $('#admission_bus').change(function() {
         if ($(this).val() == 't')
