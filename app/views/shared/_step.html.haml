@@ -6,151 +6,81 @@
           - if("#{@admission.status}" == "Enquiry_Created")
             = link_to raw("<span class= 'fa fa-user fa2-2x'></span>"), enquiry_show_admission_path, :class => "btn btn-success1 btn-circle"
             %br
-            %span.label.label-default Enquiry Form
+            %span.label.label-success Enquiry Form
             
           - else
             - if("#{@admission.status}" == "Application_Created" ||"#{@admission.status}" == "Assessment_Planned" || "#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Completed" )
               = link_to raw("<span class= 'fa fa-user fa1-2x'></span>"), enquiry_show_admission_path, :class => "btn btn-success1 btn-circle"
             %br
-            %span.label.label-default Enquiry Form
+            %span.label.label-success Enquiry Form
         .glyphicon.glyphicon-chevron-right
         .process-step
           - if("#{@admission.status}" == "Application_Created")
             = link_to raw("<span class= 'fa fa-file-text-o fa2-2x'></span>"), admission_show_admission_path, :class => "btn btn-success1 btn-circle"
             %br
-            %span.label.label-default Application Form
+            %span.label.label-success Application Form
             
-          - else
-            - if("#{@admission.status}" == "Application_Created" ||"#{@admission.status}" == "Assessment_Planned" || "#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Completed" )
-              = link_to raw("<span class= 'fa fa-file-text-o fa1-2x'></span>"), admission_show_admission_path, :class => "btn btn-success1 btn-circle"
-            - else
-              - if("#{@admission.status}" == "Enquiry_Created")
-                = link_to raw("<span class= 'fa fa-file-text-o fa2-2x'></span>"), admission_new_admission_path, :class => "btn btn-danger1 btn-circle"
+          - elsif("#{@admission.status}" == "Application_Created" ||"#{@admission.status}" == "Assessment_Planned" || "#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Completed" )
+            
+            = link_to raw("<span class= 'fa fa-file-text-o fa1-2x'></span>"), admission_show_admission_path, :class => "btn btn-success1 btn-circle"
+
+
             %br
-            %span.label.label-default Application Form
+            %span.label.label-success Application Form
+
+          - elsif("#{@admission.status}" == "Enquiry_Created")
+            = link_to raw("<span class= 'fa fa-file-text-o fa2-2x'></span>"), admission_new_admission_path, :class => "btn btn-danger1 btn-circle"
+            %br
+            %span.label.label-warning Application Form
+
+
         .glyphicon.glyphicon-chevron-right
         .process-step
           - if("#{@admission.status}" == "Assessment_Planned")
             = link_to raw("<span class= 'fa fa-calendar fa2-2x'></span>"), view_assessment_admission_path, :class => "btn btn-success1 btn-circle"
             %br
-            %span.label.label-default Assessment Planned
-          - else
-            - if("#{@admission.status}" == "Assessment_Planned" || "#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Completed" )
-              = link_to raw("<span class= 'fa fa-calendar fa1-2x'></span>"), view_assessment_admission_path, :class => "btn btn-success1 btn-circle"
-            - else
-              - if("#{@admission.status}" == "Application_Created") and current_user.admin?
-                = link_to raw("<span class= 'fa fa-calendar fa2-2x'></span>"), "#", :onclick => "createAssessment('#{@admission.teacher_leader_id}');", :class => 'btn1 btn btn-danger1 btn-circle'
-              - else
-                - if current_user.teacher? or current_user.principal? or current_user.admin?
-                  = link_to raw("<span class= 'fa fa-calendar fa1-2x'></span>"), '#', :class => "btn btn-warning1 btn-circle"
+            %span.label.label-success Assessment Planned
+          - elsif("#{@admission.status}" == "Assessment_Planned" || "#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Completed" )
+            = link_to raw("<span class= 'fa fa-calendar fa1-2x'></span>"), view_assessment_admission_path, :class => "btn btn-success1 btn-circle"
+            %br
+            %span.label.label-success Assessment Planned
+
+          - elsif("#{@admission.status}" == "Application_Created") and current_user.admin?
+            = link_to raw("<span class= 'fa fa-calendar fa2-2x'></span>"), "#", :onclick => "createAssessment('#{@admission.teacher_leader_id}');", :class => 'btn1 btn btn-danger1 btn-circle'
+            %br
+            %span.label.label-warning Assessment Planned
+          - elsif current_user.teacher? or current_user.principal? or current_user.admin?
+            = link_to raw("<span class= 'fa fa-calendar fa1-2x'></span>"), '#', :class => "btn btn-warning1 btn-circle"
             %br
             %span.label.label-default Assessment Planned
         .glyphicon.glyphicon-chevron-right
         .process-step
-          - if("#{@admission.status}" == "Assessment_Completed")
+          - if("#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Completed")
             = link_to raw("<span class= 'fa fa-tasks fa2-2x'></span>"), assessment_result_admission_path, :class => "btn btn-success1 btn-circle"
             %br
-            %span.label.label-default Assessment Completed
-          - else
-            - if("#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Completed" )
-              = link_to raw("<span class= 'fa fa-tasks fa1-2x'></span>"), assessment_result_admission_path, :class => "btn btn-success1 btn-circle"
-            - else
-              - if current_user.teacher?
-                = link_to raw("<span class= 'fa fa-tasks fa2-2x'></span>"), "#", :class => 'Modal btn1 btn btn-danger1 btn-circle'
-                #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1", "data-backdrop" => "static","data-keyboard" => "false"}
-                  .modal-dialog.modal-sm
-                    .modal-content
-                      .modal-header
-                        .row
-                          .pull-left
-                            .col-sm-12
-                              %h4#Modal.modal-title Assessment Review
-                        %hr
-                        %center
-                          = form_for @admission do |f|
-                            .modal-body
-                              .row
-                                %table
-                                  %thead
-                                    %tr
-                                      %th{style: "width:20%"} 
-                                        %label{for: "Selected", :id => "first"} Selected
-                                      %th
-                                        = f.radio_button :teachercomment, "Selected"
-                                      %th{style: "width:20%"} 
-                                        %label{for: "Rejected", :id => "second"} Rejected
-                                      %th
-                                        = f.radio_button :teachercomment, "Rejected"
-                              %br
-                              %br
-                              .row
-                                .col-sm-5
-                                  = f.label "Comment", :class => 'control-label'
-                                .col-sm-4
-                                  = f.text_area :comment ,:class => 'form-control'
-                              = f.hidden_field :status,:value => "Assessment_Completed"
-                              = button_tag "Save", :type => "submit", :class => 'pull-right btn btn-primary'
-                              %br
-                              %br
-
-              - else
-                - if current_user.admin? or current_user.principal?
-                  = link_to raw("<span class= 'fa fa-tasks fa2-2x'></span>"), '#', :class => "btn btn-warning1 btn-circle"
-
+            %span.label.label-success Assessment Completed
+          
+          - elsif current_user.teacher?
+            = link_to raw("<span class= 'fa fa-tasks fa2-2x'></span>"), "#", :class => 'btn1 btn btn-danger1 btn-circle'
+            %br
+            %span.label.label-warning Assessment Completed
+          - elsif current_user.admin? or current_user.principal?
+            = link_to raw("<span class= 'fa fa-tasks fa2-2x'></span>"), '#', :class => "btn btn-warning1 btn-circle"
             %br
             %span.label.label-default Assessment Completed
           
         .glyphicon.glyphicon-chevron-right      
         .process-step
-          - if("#{@admission.status}" == "Management_Reviewed")
+          - if("#{@admission.status}" == "Management_Reviewed"||  "#{@admission.status}" == "Completed")
             = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), management_result_admission_path, :class => "btn btn-success1 btn-circle"
             %br
-            %span.label.label-default Management Review
-          - else
-            - if("#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Completed" )
-              = link_to raw("<span class= 'fa fa-users fa1-2x'></span>"), management_result_admission_path, :class => "btn btn-success1 btn-circle"
-            - else
-              - if("#{@admission.status}" == "Assessment_Completed") and current_user.principal?
-                = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), "#", :class => 'Modal btn1 btn btn-danger1 btn-circle'
-                #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1", "data-backdrop" => "static" ,"data-keyboard "=> "false"}
-                  .modal-dialog.modal-sm
-                    .modal-content
-                      .modal-header
-                        .row
-                          .pull-left
-                            .col-sm-12
-                              %h4#Modal.modal-title Management Review
-                        %hr
-                        %center
-                          = form_for @admission do |f|
-                            .modal-body
-                              .row
-                                %table
-                                  %thead
-                                    %tr
-                                      %th{style: "width:20%"}
-                                        %label{for: "Selected", :id => "first"} Selected
-                                      %th
-                                        = f.radio_button :result, "Selected"
-                                      %th{style: "width:20%"}
-                                        %label{for: "Rejected", :id => "second"} Rejected
-                                      %th
-                                        = f.radio_button :result, "Rejected"
-                              %br
-                              %br
-                              .row
-                                .col-sm-5
-                                  = f.label "Review Comment", :class => 'control-label'
-                                .col-sm-4
-                                  = f.text_area :description ,:class => 'col-sm-3 form-control'
-                              = f.hidden_field :status,:value => "Management_Reviewed"
-                              = button_tag "Save", :type => "submit", :class => 'pull-right btn btn-primary'
-                              %br
-                              %br
-
-              - else
-                - if current_user.admin? or current_user.teacher? or current_user.principal?
-                  = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), '#', :class => "btn btn-warning1 btn-circle"
+            %span.label.label-success Management Review
+          - elsif("#{@admission.status}" == "Assessment_Completed") and current_user.principal?
+            = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), "#", :class => 'btn1 btn btn-danger1 btn-circle'
+            %br
+            %span.label.label-warning Management Review
+          - elsif current_user.admin? or current_user.teacher? or current_user.principal?
+            = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), '#', :class => "btn btn-warning1 btn-circle"
 
             %br
             %span.label.label-default Management Reviewed
@@ -160,35 +90,12 @@
           - if("#{@admission.status}" == "Completed")
             = link_to raw("<span class= 'fa fa-thumbs-up fa2-2x'></span>"), '#', :class => "btn btn-success1 btn-circle"
             %br
-            %span.label.label-default Admission
+            %span.label.label-success Admission
+          - elsif("#{@admission.status}" == "Management_Reviewed") and current_user.admin?
+            = link_to raw("<span class= 'fa fa-thumbs-up fa1-2x'></span>"), "#", :class => 'btn1 btn btn-danger1 btn-circle',"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"
+            %br
+            %span.label.label-warning Admission
           - else
-            - if("#{@admission.status}" == "Management_Reviewed") and current_user.admin?
-              = link_to raw("<span class= 'fa fa-thumbs-up fa1-2x'></span>"), "#", :class => 'Modal btn1 btn btn-danger1 btn-circle',"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"
-              #Modal.modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
-                .modal-dialog.modal-sm
-                  .modal-content
-                    %h4#Modal.modal-title Admission
-                    = form_for @admission do |f|
-                      .modal-body
-                        %center
-                          %table
-                            %thead
-                              %tr
-                                %th{style: "width:20%"} 
-                                  %label{for: "Selected", :id => "first"} Selected
-                                %th
-                                  = f.radio_button :finalresult, "Selected"
-                                %th{style: "width:20%"} 
-                                  %label{for: "Rejected", :id => "second"} Rejected
-                                %th
-                                  = f.radio_button :finalresult, "Rejected"
-                          
-                      .modal-footer
-                        = f.hidden_field :status,:value => "Completed"
-                        %center
-                          = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
-            - else
-              = link_to raw("<span class= 'fa fa-thumbs-up fa2-2x'></span>"), "#", :class => 'btn1 btn btn-warning1 btn-circle'
-              
+            = link_to raw("<span class= 'fa fa-thumbs-up fa2-2x'></span>"), "#", :class => 'btn1 btn btn-warning1 btn-circle'
             %br
             %span.label.label-default Admission

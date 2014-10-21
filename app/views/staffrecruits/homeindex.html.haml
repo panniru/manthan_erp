@@ -2,7 +2,7 @@
   .pull-right
     - if("#{@staffrecruit.status}" == 'Application_Created'||"#{@staffrecruit.status}" == 'Document_Verified'||"#{@staffrecruit.status}" == 'Assessment_Planned'||"#{@staffrecruit.status}" == 'Assessment_Completed'||"#{@staffrecruit.status}" == 'Management_Reviewed'||"#{@staffrecruit.status}" == 'Selected' )
       - if current_user.admin?
-        %button#change2.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@staffrecruit.id}"}} 
+        %button#change2.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@staffrecruit.id}"}, :title => 'close'} 
           %span.glyphicon.glyphicon-ban-circle
         #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", "data-backdrop" => "static","data-keyboard" => "false"}
           .modal-dialog

@@ -2,7 +2,7 @@
   .pull-right
     - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned'||"#{@admission.status}" == 'Assessment_Completed'||"#{@admission.status}" == 'Management_Reviewed'||"#{@admission.status}" == 'Selected' )
       - if current_user.admin?
-        %button.change.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@admission.id}"}} 
+        %button.change.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@admission.id}"}, :title => 'close'} 
           %span.glyphicon.glyphicon-ban-circle
         #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
           .modal-dialog

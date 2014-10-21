@@ -1,11 +1,23 @@
 class Admission < ActiveRecord::Base
-  has_one :default_master
-
-  before_save :get_form_no
-
-  def get_form_no
+ 
+  def self.get_no
     
+    if Admission.exists?(&:form_no)
+      no = Admission.all.map(&:form_no).last
+      nos = no.to_i
+      nos +=1
+      p nos
+      return nos
+    else
+      form123 = DefaultMaster.get_form_no.map(&:default_value).first
+      form1234 = form123.to_i
+      p "1111111111111"
+      p form1234
+      return form1234
+    end
   end
+
+  has_one :default_master
   belongs_to :parent_master
   belongs_to :student_master
   belongs_to :grade_master
@@ -26,4 +38,6 @@ class Admission < ActiveRecord::Base
       find(:all)
     end
   end
+  
+
 end

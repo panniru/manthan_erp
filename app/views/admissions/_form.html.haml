@@ -283,8 +283,8 @@
             %th= @admission.mother_education
           %tr
             %th= label_tag "Nationality:"
-            %th= f.text_field :father_nationality, :class => 'form-control'
-            %th= f.text_field :mother_nationality, :class => 'form-control'
+            %th= f.country_select :father_nationality, {object: f.object, :include_blank => '-Select-',iso_codes: true}, :class => 'staffrecruit_drop'
+            %th= f.country_select :mother_nationality, {object: f.object, :include_blank => '-Select-'}, :class => 'staffrecruit_drop'
           %tr
             %th= label_tag "Religion:"
             %th= f.text_field :father_religion, :class => 'form-control'

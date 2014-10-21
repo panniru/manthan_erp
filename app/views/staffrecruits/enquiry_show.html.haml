@@ -6,7 +6,7 @@
           = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_enquiry_staffrecruit_path, :class => 'btn btn-warning btn-sm', :title => 'Edit'
 
 
-        %button#change2.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@staffrecruit.id}"}} 
+        %button#change2.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@staffrecruit.id}"}, :title => 'close'} 
           %span.glyphicon.glyphicon-ban-circle
         #mypopModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", "data-backdrop" => "static","data-keyboard" => "false"}
           .modal-dialog

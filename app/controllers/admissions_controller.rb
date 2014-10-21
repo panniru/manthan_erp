@@ -92,6 +92,7 @@ class AdmissionsController < ApplicationController
           
   def create
     @admission = Admission.new(admission_params)
+    @admission.form_no = Admission.get_no
     @admission.teacher_leader = TeacherLeader.where(:klass => admission_params[:grade]).first
     respond_to do |format|
       if @admission.save 
@@ -135,7 +136,7 @@ class AdmissionsController < ApplicationController
       if params[:search].present?
         @admissions = Admission.search(params[:search])
       else
-        @admissions = Admission.management_review
+        @admissions = Admission.assessment_completed
       end
     end
   end
