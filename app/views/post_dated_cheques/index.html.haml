@@ -3,8 +3,8 @@
     = "Post Dated Cheques"
     .pull-right
       = link_to "New PDCs", "#", :class => "btn btn-primary", :ng_click => "newPostDatedCheque()", :ng_disabled => "#{fee_items_can_be_manipulate?} || postDatedCheques.length"
-      = link_to "Edit PDCs", "#", :class => "btn btn-primary", :ng_click => "editPostDatedCheques()", :ng_disabled => "#{MonthlyPdcAmount.fee_structure_defined?}"
-      = link_to "Delete All", destroy_all_post_dated_cheques_path, :class => "btn btn-danger", :ng_disabled => "#{fee_items_can_be_manipulate?}", :data => {:method => "DELETE", :confirm => "Are you to delete all PDCs ?"}
+      = link_to "Edit PDCs", "#", :class => "btn btn-primary", :ng_click => "editPostDatedCheques()", :ng_disabled => "#{MonthlyPdcAmount.fee_structure_defined? || fee_structure_defined?}"
+      = link_to "Delete All", destroy_all_post_dated_cheques_path, :class => "btn btn-danger", :ng_disabled => "#{fee_items_can_be_manipulate?|| fee_structure_defined?}", :data => {:method => "DELETE", :confirm => "Are you to delete all PDCs ?"}
   %hr
   %table.table.table-bordered
     %thead

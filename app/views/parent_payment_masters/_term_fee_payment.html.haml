@@ -1,5 +1,5 @@
 .col-md-12{:ng_init => "getNextTerm()"}
-  %form{:class => "form-horizantal", :ng_show => "parent_payment_transaction"}
+  %form{:class => "form-horizantal", :ng_submit => "submitTermFee()"}
     .form-group
       %label.control-label.col-md-4 Term
       .col-sm-6
@@ -11,7 +11,7 @@
     .form-group
       %label{:class => "control-label col-md-4"} Transaction Type  
       .col-md-6
-        %select.form-control{:ng_model =>"parent_payment_transaction.transaction_type", :ng_options => "transaction.value as transaction.text for transaction in transactionTypes" , :ng_change => "is_cheque_payment = parent_payment_transaction.transaction_type == 'cheque' ? true : false"}
+        %select.form-control{:ng_model =>"parent_payment_transaction.transaction_type", :ng_options => "transaction.value as transaction.text for transaction in transactionTypes" , :ng_change => "is_cheque_payment = !is_cheque_payment"}
 
     #chqueDetailDiv{:ng_show => "is_cheque_payment"}
       .form-group
@@ -31,4 +31,5 @@
         .col-md-6
           %input{:type => "text", :class => "datepicker form-control", :ng_model => "parent_payment_transaction.parent_cheque.cheque_date", :id => "parentChequeDate"}
     .col-md-8.pull-right.button-page-bottom
-      %button{ :type => "submit", :class => 'btn btn-primary', :ng_hide => "$parent.submitted", :ng_click => "submitTermFee()"} Submit
+      %button{ :type => "submit", :class => 'btn btn-primary', :ng_show => "$parent.typeInitiated", :ng_hide => "$parent.submitted"} Submit
+

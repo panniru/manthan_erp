@@ -3,8 +3,8 @@
     = "Terms"
     .pull-right
       = link_to "New Terms", "#", :class => "btn btn-primary", :ng_click => "newTermDefinition()", :ng_disabled => "#{fee_items_can_be_manipulate?} || termDefinitions.length"
-      = link_to "Edit Term", "#", :class => "btn btn-primary", :ng_click => "editTermDefinitions()", :ng_disabled => "#{TermWiseGradeFee.fee_structure_defined?}"
-      = link_to "Delete All", destroy_all_term_definitions_path, :class => "btn btn-danger", :ng_disabled => "#{fee_items_can_be_manipulate?}", :data => {:method => "DELETE", :confirm => "Are you to delete all terms ?"}
+      = link_to "Edit Term", "#", :class => "btn btn-primary", :ng_click => "editTermDefinitions()", :ng_disabled => "#{TermWiseGradeFee.fee_structure_defined? || fee_structure_defined?}"
+      = link_to "Delete All", destroy_all_term_definitions_path, :class => "btn btn-danger", :ng_disabled => "#{fee_items_can_be_manipulate? || fee_structure_defined?}", :data => {:method => "DELETE", :confirm => "Are you to delete all terms ?"}
   %hr
   %table.table.table-bordered
     %thead

@@ -8,7 +8,7 @@
     = render "transactions_history"
     
 - unless @parent_payment_master.annual_payment? or @parent_payment_master.monthly_payment?    
-  .col-md-12{:ng_controller => "PaymentsController", :ng_init => "student_id = '#{@parent_payment_master.student_id}'"}
+  .col-md-12{:ng_controller => "PaymentsController", :ng_init => "student_id = '#{@parent_payment_master.student_id}'; parent_payment_master_id = '#{@parent_payment_master.id}'"}
     %h4.panel-title 
       = "Fee Payment"
     %hr

@@ -1,0 +1,33 @@
+.col-md-12{:ng_init => "buildAcknowledgement()"}
+  %table.table.table-bordered.table-striped.table-hover
+    %thead
+      %th S.No
+      %th Particulars
+      %th Amount
+    %tbody
+      %tr{:ng_repeat => "fta in parent_payment_transaction.fee_type_contribution_amounts"}
+        %td {{$index+1}}
+        %td {{fta.fee_type}}
+        %td {{fta.amount}}
+      %tr
+        %th
+        %th Total
+        %th {{parent_payment_transaction.amount_in_rupees }}
+.col-md-8
+  .col-md-6
+    %label Pay Mode
+    %label {{parent_payment_transaction.transaction_type}}
+  .col-md-6
+    %label Bank
+    %label {{parent_payment_transaction.bank_name}}
+  .col-md-6
+    %label Cheque Number
+    %label {{parent_payment_transaction.cheque_number}}
+  .col-md-6
+    %label Particulars
+    %label {{parent_payment_transaction.particulars}}
+      
+.col-md-12
+  .col-md-offset-4
+    %a{:href =>"/parent_payment_masters/{{parent_payment_master_id}}/parent_payment_transactions/{{parent_payment_transaction.id}}/print.pdf", :target => "_blank", :class => "btn btn-primary"} Print
+    %a{:href => "/parent_payment_masters", :class => "btn btn-success"} Home

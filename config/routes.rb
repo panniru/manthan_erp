@@ -265,11 +265,12 @@ ManthanErp::Application.routes.draw do
       get "cleared_pdcs"
       get "payment_transactions"
       get "submitted_pdcs"
+      get "print"
     end
     resources :parent_payment_transactions do
       member do
         get "print"
-        
+        get "in_detail"
       end
     end
   end
@@ -330,7 +331,7 @@ ManthanErp::Application.routes.draw do
     resources :section_masters
   end
 
-  resources :parents do
+  resources :parent_masters do
     collection do
       get "new_upload"
       post "upload"

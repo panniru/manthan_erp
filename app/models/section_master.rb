@@ -11,7 +11,7 @@ class SectionMaster < ActiveRecord::Base
       end
 
     elsif current_user.role.role == "parent"     
-      parents_students = StudentMaster.where('parent_id = '+"#{current_user.parent.id}")      
+      parents_students = StudentMaster.where('parent_master_id = '+"#{current_user.parent.id}")      
       parents_students_grades = parents_students.all.map do |student|
         {section_master_id: student.section_master_id, section_name: student.section_master.section_name, grade_master_id: student.section_master.grade_master_id, student_name: student.name}       
       end

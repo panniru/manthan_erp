@@ -1,32 +1,34 @@
-.col-md-8{:ng_init => "annaul_discount_details()"}
-  .form-group
-    .col-md-4
-      %label{:class => "control-label"} Amount   
-    .col-md-6
-      %input{:type => "text", :class => "col-md-6 form-control", :readonly => true, :ng_model => "discount.amount_to_be_paid"}
-  .form-group
-    %label{:class => "control-label col-md-4"} Transaction Type  
-    .col-md-6
-      %select.form-control{ :name => "", :ng_model =>"selected_transaction_type", :ng_options => "transaction.value as transaction.text for transaction in transactionTypes" , :ng_change => "transactionTypeChange(selected_transaction_type)"}
-      %input{:type => "hidden", :ng_value => "selected_transaction_type" , :name => "[parent_payment_master][parent_payment_transactions][0][transaction_type]"}
-        %input{:type => "hidden", :ng_value => "discount.amount_to_be_paid" , :name => "[parent_payment_master][parent_payment_transactions][0][amount_in_rupees]"}
-          %input{:type => "hidden", :value => "Annual Fee" , :name => "[parent_payment_master][parent_payment_transactions][0][particulars]"}
-  
-  #chqueDetailDiv{:ng_show => "is_cheque_payment"}
+.col-md-8{:ng_init => "getDiscount()"}
+  %form{:class => "form-horizantal", :ng_show => "parent_payment_transaction"}
     .form-group
-      %label{:class => "control-label col-md-4"} Cheque Number
+      .col-md-4
+        %label{:class => "control-label"} Amount   
       .col-md-6
-        %input{:type => "text", :class => "form-control", :name => "[parent_payment_master][parent_payment_transactions][0][parent_cheque][cheque_number]"}
+        %input{:type => "text", :class => "col-md-6 form-control", :readonly => true, :ng_model => "parent_payment_transaction.amount_in_rupees"}
     .form-group
-      %label{:class => "control-label col-md-4"} Bank
+      %label{:class => "control-label col-md-4"} Transaction Type  
       .col-md-6
-        %select.form-control{ :name => "", :ng_model =>"selected_bank", :ng_options => "bank.value as bank.text for bank in supportedBanks"}
-        %input{:type => "hidden", :ng_value => "selected_bank" , :name => "[parent_payment_master][parent_payment_transactions][0][parent_cheque][bank_name]"}
-    .form-group
-      %label{:class => "control-label col-md-4"} IFSC Code
-      .col-md-6
-        %input{:type => "text", :class => "form-control", :name => "[parent_payment_master][parent_payment_transactions][0][parent_cheque][ifsc_code]"}
-    .form-group
-      %label{:class => "control-label col-md-4"} Cheque Date
-      .col-md-6
-        %input{:type => "text", :class => "datepicker form-control", :name => "[parent_payment_master][parent_payment_transactions][0][parent_cheque][cheque_date]"}
+        %select.form-control{:ng_model =>"parent_payment_transaction.transaction_type", :ng_options => "transaction.value as transaction.text for transaction in transactionTypes" , :ng_change => "is_cheque_payment = parent_payment_transaction.transaction_type == 'cheque' ? true : false"}
+
+    #chqueDetailDiv{:ng_show => "is_cheque_payment"}
+      .form-group
+        %label{:class => "control-label col-md-4"} Cheque Number
+        .col-md-6
+          %input{:type => "text", :class => "form-control", :ng_model => "parent_payment_transaction.parent_cheque.cheque_number"}
+      .form-group
+        %label{:class => "control-label col-md-4"} Bank
+        .col-md-6
+          %select.form-control{ :name => "", :ng_model =>"parent_payment_transaction.parent_cheque.bank_name", :ng_options => "bank.value as bank.text for bank in supportedBanks"}
+      .form-group
+        %label{:class => "control-label col-md-4"} IFSC Code
+        .col-md-6
+          %input{:type => "text", :class => "form-control", :ng_model => "parent_payment_transaction.parent_cheque.ifsc_code"}
+      .form-group
+        %label{:class => "control-label col-md-4"} Cheque Date
+        .col-md-6
+          %input{:type => "text", :class => "datepicker form-control", :ng_model => "parent_payment_transaction.parent_cheque.cheque_date", :id => "parentChequeDate"}
+  .col-md-8.pull-right.button-page-bottom
+    %button{ :type => "submit", :class => 'btn btn-primary', :ng_show => "$parent.typeInitiated", :ng_hide => "$parent.submitted", :ng_click => "submitAnnualFee()"} Submit
+-# .col-mg-12{:ng_hide => "parent_payment_transaction"}
+-#   %h4
+-#     No Fee Is Pending

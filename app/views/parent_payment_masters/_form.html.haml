@@ -1,15 +1,12 @@
-= form_for @parent_payment_master, :html => {:class => "form-horizontal", :role => "form"} do |f|
-  = render "shared/error_messages", :object => f.object
+%form{:class => "form-horizontal", :role => "form", :ng_submit => "doPayment()", :action => "#"}
+  .row{:ng_show => "errors"}
+    .alert.alert-danger{:ng_repeat => "(key, value) in errors"} {{key}} : {{value.join(",")}}
   - PaymentType.all.order("code").each do |type|
     .form-group.col-md-3
-      = f.radio_button :payment_type_id, type.id, :class => "col-md-2",:ng_click => "go('#{type.code}', '#{f.object.student_id}')", :ng_disabled => "#{current_user.parent? and type.code == 'monthly'}"
-      = f.label "#{type.code}", :class => 'col-md-6 control-label'
-  = f.hidden_field :student_id, :ng_model => "student_id"
+      = radio_button_tag :payment_type_id, type.id, "", :class => "col-md-2", :ng_click => "go('#{type.code}', '#{@parent_payment_master.student_id}')", :ng_disabled => "#{current_user.parent? and type.code == 'monthly'}", :ng_model => "payment_type_id", :ng_disabled => "submitted"
+      %label.font-mid-17= "#{type.code.titleize}"
+
+  = hidden_field_tag :student_id, "",:ng_model => "student_id"
   .col-md-9
     %div{"ng-view" => true }
 
-  .col-md-8.pull-right
-    - unless current_user.parent?
-      = f.submit "Do Payment", :class => 'btn btn-primary', :ng_show => "typeInitiated"
-    - else
-      = f.submit "Pay Online", :class => 'btn btn-primary', :ng_show => "typeInitiated"

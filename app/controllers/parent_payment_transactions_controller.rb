@@ -1,5 +1,5 @@
 class ParentPaymentTransactionsController < ApplicationController
-  load_resource :only => [:print]
+  load_resource :only => [:print, :in_detail]
   before_action :load_parent_payment_master
 
 
@@ -57,7 +57,23 @@ class ParentPaymentTransactionsController < ApplicationController
     end  
   end
 
-  
+  def in_detail
+    respond_to do |format|
+      format.json do
+        @parent_payment_transaction = ParentPaymentTransactionsDecorator.decorate(@parent_payment_transaction)
+        data = {
+          fee_type_contribution_amounts: @parent_payment_transaction.fee_type_contribution_amounts,
+          transaction_type: @parent_payment_transaction.transaction_type,
+          bank_name: @parent_payment_transaction.bank_name,
+          cheque_number: @parent_payment_transaction.cheque_number,
+          particulars: @parent_payment_transaction.particulars,
+          id: @parent_payment_transaction.id,
+          amount_in_rupees: @parent_payment_transaction.amount_in_rupees
+        }
+        render :json => data
+      end
+    end
+  end
   
   private 
   

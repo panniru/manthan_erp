@@ -20,9 +20,9 @@
           %td {{item.academic_year}}
           %td {{item.approved_user}}
           %td 
-            %a{:href => "#", :ng_class => "{'label label-danger': item.status == 'pending', 'label label-success': item.status == 'approved' }", :ng_click => "approve(item)", :ng_disabled => "item.status == 'approved'", :ng_show => "item.status != 'rejected'"}
+            %a{:href => "#", :class => "font-mid",:ng_class => "{'label label-danger': item.status == 'pending', 'label label-success': item.status == 'approved' }", :ng_click => "approve(item)", :ng_disabled => "item.status == 'approved'", :ng_show => "item.status != 'rejected'"}
               {{item.status == 'pending' ? 'Approve' : 'Approved' }}
             &nbsp;&nbsp;&nbsp
-            %a{:href => "#", :ng_class => "{'label label-info': item.status != 'rejected', 'label label-default': item.status == 'rejected' }", :ng_click => "reject(item)", :ng_disabled => "item.status == 'rejected'"}
+            %a{:href => "#", :class => "font-mid", :ng_class => "{'label label-info': item.status != 'rejected', 'label label-danger': item.status == 'rejected' }", :ng_click => "reject(item)", :ng_disabled => "item.status == 'rejected'"}
               {{item.status == 'rejected' ? 'Rejected' : 'Reject' }}
               

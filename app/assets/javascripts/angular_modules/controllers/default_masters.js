@@ -10,24 +10,37 @@
         }
 
         $scope.submitForm = function(){
-            $scope.defaultMaster.$save()
-                .then(function(responce){
-                    $scope.defaultMasters = resourceService.DefaultMaster.query();
-                    $('#createModal').modal('hide')
-                })
+            if(validate($scope.defaultMaster)){
+                $scope.defaultMaster.$save()
+                    .then(function(responce){
+                        $scope.defaultMasters = resourceService.DefaultMaster.query();
+                        $('#createModal').modal('hide')
+                    })
+            }
         };
 
         $scope.update = function(){
             $scope.isNew = false;
-            $scope.defaultMaster.$update()
-                .then(function(responce){
-                    $scope.defaultMasters = resourceService.DefaultMaster.query();
-                    $('#createModal').modal('hide')
-                })
+            if(validate($scope.defaultMaster)){
+                $scope.defaultMaster.$update()
+                    .then(function(responce){
+                        $scope.defaultMasters = resourceService.DefaultMaster.query();
+                        $('#createModal').modal('hide')
+                    })
+            }
         };
+
+        var validate = function(dafaultMaster){
+            if(dafaultMaster.default_name === 'discount' && dafaultMaster.default_value > 100){
+                $scope.defaultValueError = "Invalid Default Value"
+                return false;
+            }
+            return true;
+        }
         
         $scope.edit = function(defaultMaster){
-            $scope.defaultMaster = defaultMaster
+            $scope.defaultValueError = null
+            $scope.defaultMaster = angular.copy(defaultMaster)
             $('#createModal').modal('show')
         };
         

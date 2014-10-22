@@ -1,13 +1,6 @@
-= form_for @parent_payment_master, :html => { :class => "form-horizontal", :role => "form", :method => "put" } do |f|
-  = render "shared/error_messages", :object => f.object
-  - if @parent_payment_master.monthly_payment? 
-    = render :file =>"app/assets/javascripts/templates/month_fee_payment"
-  - elsif @parent_payment_master.term_wise_payment? 
-    = render :file =>"app/assets/javascripts/templates/term_fee_payment"
-      
-  .col-md-8.pull-right
-    - unless current_user.parent?
-      = f.submit "Do Payment", :class => 'btn btn-primary'
-    - else
-      = f.submit "Pay Online", :class => 'btn btn-primary'
-
+%form{:class => "form-horizontal", :role => "form"}
+  .row{:ng_show => "errors"}
+    .alert.alert-danger{:ng_repeat => "(key, value) in errors"} {{value.join(",")}}
+  - if @parent_payment_master.term_wise_payment? 
+    .col-md-12{:ng_init => "routeToTermFee()"}
+      %div{"ng-view" => true }

@@ -1,25 +1,29 @@
-.col-md-12{:ng_init => "month_fee_payment_details()"}
-  .col-md-12{:ng_show => "monthlyFees.length"}
-    .pull-right
-      %span{:ng_click => "applyforAllMonths()", :class => "label label-success", :style => "cursor: pointer;", :ng_show => "checkfirstFilled()"} Apply To All
-    %table.table.table-bordered
-      %thead
-        %th Month
-        %th Amount
-        %th Cheque #
-        %th{:style => "width: 30%;"} Bank
-        %th IFSC
-      %tbody
-        %tr{"ng-repeat" => "month in monthlyFees" }
-          %td
-            %input{:type => "text", :class => "form-control", :ng_model => "month.month", :readonly => true}
-            %input{:type => "hidden", :ng_value => "month.post_dated_cheque_id" , :name => "[parent_payment_master][parent_payment_transactions][{{$index}}][parent_cheque][post_dated_cheque_id]"}
-          %td
-            %input{:type => "text", :class => "form-control", :ng_model => "month.amount_in_rupees", :readonly => true, :name => "[parent_payment_master][parent_payment_transactions][{{$index}}][amount_in_rupees]"}
-          %td
-            %input{ :type => "text",:class => "form-control", :placeholder => "Check Number/Details", :name => "[parent_payment_master][parent_payment_transactions][{{$index}}][parent_cheque][cheque_number]", :ng_model => "month.cheque_number"}
-          %td
-            %select.form-control{ :name => "", :ng_options => "bank.value as bank.text for bank in supportedBanks", :ng_model => "month.bank_name"}
-            %input{:type => "hidden", :ng_value => "month.bank_name" , :name => "[parent_payment_master][parent_payment_transactions][{{$index}}][parent_cheque][bank_name]"}
-          %td
-            %input{:type => "text", :class => "form-control", :name => "[parent_payment_master][parent_payment_transactions][{{$index}}][parent_cheque][ifsc_code]", :ng_model => "month.ifsc_code"}
+.col-md-12{:ng_init => "getPdcs()"}
+  %form{:ng_submit => "submitPdcs()"}
+    .col-md-12{:ng_show => "monthlyFees.length"}
+      .pull-right
+        %span{:ng_click => "applyforAllMonths()", :class => "label label-success", :style => "cursor: pointer;", :ng_show => "checkfirstFilled()", :ng_hide => "$parent.submitted"} Apply To All
+      %table.table.table-bordered
+        %thead
+          %th Date
+          %th Amount
+          %th Cheque #
+          %th{:style => "width: 30%;"} Bank
+          %th IFSC
+        %tbody
+          %tr{"ng-repeat" => "month in monthlyFees" }
+            %td
+              %input{:type => "text", :class => "form-control", :ng_model => "month.cheque_date", :readonly => true}
+              %input{:type => "hidden", :ng_value => "month.post_dated_cheque_id", :ng_disabled => "$parent.submitted"}
+            %td
+              %input{:type => "text", :class => "form-control", :ng_model => "month.amount_in_rupees", :readonly => true, :ng_disabled => "$parent.submitted"}
+            %td
+              %input{ :type => "text",:class => "form-control", :placeholder => "Check Number/Details", :ng_model => "month.cheque_number", :ng_disabled => "submitted"}
+            %td
+              %select.form-control{ :name => "", :ng_options => "bank.value as bank.text for bank in supportedBanks", :ng_model => "month.bank_name", :ng_disabled => "$parent.submitted"}
+            %td
+              %input{:type => "text", :class => "form-control", :ng_model => "month.ifsc_code", :ng_disabled => "$parent.submitted"}
+      .col-md-8.pull-right.button-page-bottom
+        %button{ :type => "submit", :class => 'btn btn-primary', :ng_show => "$parent.typeInitiated", :ng_hide => "$parent.submitted"} Submit
+        %a{:href => "/parent_payment_masters/{{$parent.parent_payment_master_id}}/print.pdf", :target => "_blank", :class => "btn btn-primary", :ng_show => "$parent.submitted"} Print
+

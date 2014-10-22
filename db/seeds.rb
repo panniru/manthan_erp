@@ -152,23 +152,17 @@ end
 
 
 def seed_parents
-  Parent.first_or_create(:father_name => "Raghu", :mother_name => "Janaki", :father_email => "navya@ostryalabs.com", :mother_email => "navya@ostryalabs.com", :user_id => User.find_by_role_id(Role.find_by_code("parent")).id)
-  Parent.create(:father_name => "Ramu", :mother_name => "Jani", :father_email => "shanmugapriya@ostryalabs.com", :mother_email => "navya@ostryalabs.com", :user_id => User.find_by_role_id(Role.find_by_code("parent")).id)
-  Parent.create(:father_name => "Raju", :mother_name => "Janu", :father_email => "umarani@ostryalabs.com", :mother_email => "navya@ostryalabs.com", :user_id => User.find_by_role_id(Role.find_by_code("parent")).id)
+  ParentMaster.first_or_create(:father_name => "Raghu", :mother_name => "Janaki", :father_email => "navya@ostryalabs.com", :mother_email => "navya@ostryalabs.com", :user_id => User.find_by_role_id(Role.find_by_code("parent")).id)
+  ParentMaster.create(:father_name => "Ramu", :mother_name => "Jani", :father_email => "shanmugapriya@ostryalabs.com", :mother_email => "navya@ostryalabs.com", :user_id => User.find_by_role_id(Role.find_by_code("parent")).id)
+  ParentMaster.create(:father_name => "Raju", :mother_name => "Janu", :father_email => "umarani@ostryalabs.com", :mother_email => "navya@ostryalabs.com", :user_id => User.find_by_role_id(Role.find_by_code("parent")).id)
 end
 
 def seed_students
   student = StudentMaster.first
   unless student.present?
-    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :parent_master_id => Parent.first.id, :grade_master_id => GradeMaster.first.id, :bus_facility => true, :section_master_id => '1')
-
-    StudentMaster.create(:name => "Srikanth", :dob => "17-06-1989", :joining_date => DateTime.now, :parent_master_id => Parent.first.id, :grade_master_id => GradeMaster.last.id, :bus_facility => true ,:section_master_id => '1')
-    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :grade_master_id => GradeMaster.first.id, :bus_facility => true, :section_master_id => '1')
-    StudentMaster.create(:name => "Gopika", :grade_master_id => "1",:bus_facility => true, :section_master_id => '2')
-    StudentMaster.create(:name => "Priya", :grade_master_id => "1",:bus_facility => true, :section_master_id => '2')
-    StudentMaster.create(:name => "Navya", :grade_master_id => "1",:bus_facility => true, :section_master_id => '3')
-    StudentMaster.create(:name => "Muralee", :grade_master_id => "1",:bus_facility => true, :section_master_id => '1')
-
+    StudentMaster.create(:name => "Sankl", :dob => "17-06-1989", :joining_date => DateTime.now, :parent_master_id => ParentMaster.first.id, :grade_master_id => GradeMaster.first.id, :bus_facility => true, :section_master_id => '1')
+    
+    StudentMaster.create(:name => "Srikanth", :dob => "17-06-1989", :joining_date => DateTime.now, :parent_master_id => ParentMaster.first.id, :grade_master_id => GradeMaster.last.id, :bus_facility => true ,:section_master_id => '1')
   end
 end
 

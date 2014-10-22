@@ -7,9 +7,9 @@
             return $http.get(url);
         };
         
-        var createBulkFeeTypes = function(serailized_form){
-            var url = "/fee_types/create_bulk.json?"+serailized_form
-            return $http.post(url);
+        var createBulkFeeTypes = function(fee_types){
+            var url = "/fee_types/create_bulk.json?"
+            return $http.post(url, {bulk_fee_types: fee_types});
         };
         
         var updateFeetype = function(fee_type){

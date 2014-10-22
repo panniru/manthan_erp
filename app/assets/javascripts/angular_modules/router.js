@@ -3,13 +3,20 @@
     app.config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider) {
         $routeProvider
             .when('/annual_payment', {
-                "templateUrl": 'annual_fee_payment.html'
+                controller: "AnnualFeePayamentsController", 
+                templateUrl: 'annual_fee_payment.html'
             })
             .when('/term_wise_payment', {
-                "templateUrl": 'term_fee_payment.html'
+                controller: "TermFeePayamentsController", 
+                templateUrl: 'term_fee_payment.html'
             })
             .when('/monthly_payment', {
-                "templateUrl": 'month_fee_payment.html'
+                controller: "MonthFeePayamentsController", 
+                templateUrl: 'month_fee_payment.html'
+            })
+            .when('/trans_acknowledgement/:id', {
+                controller: "TransAcknowledgementController", 
+                templateUrl: 'trans_acknowledgement.html'
             })
        // $locationProvider.html5Mode(true);
             . when('/assessments', {

@@ -17,9 +17,8 @@ class StudentMastersController < ApplicationController
   def show
     respond_to do |format|
       format.json do
-        render :json => StudentMastersDecorator.decorate(@student_master)
+        render :json => {:id => @student_master.id, :name => @student_master.name , :joining_date => @student_master.joining_date, :grade => @student_master.grade, :section => @student_master.section, :academic_year => session[:academic_year], :dob => @student_master.dob}
       end
-      
       format.html do
         render "show"
       end
@@ -36,7 +35,7 @@ class StudentMastersController < ApplicationController
           monthly_pdcs = []
         else
           monthly_pdcs = MonthlyPdcAmount.belongs_to_fee_grade_bucket(@student_master.grade_bucket_id).map do |pdc_amount|
-            {:post_dated_cheque_id => pdc_amount.post_dated_cheque_id, :month => pdc_amount.post_dated_cheque.month, :amount_in_rupees => s_f_c.applicable_month_fee(pdc_amount), :cheque_number => nil, :clearence_date => nil }
+            {:post_dated_cheque_id => pdc_amount.post_dated_cheque_id, :month => pdc_amount.post_dated_cheque.date, :amount_in_rupees => s_f_c.applicable_month_fee(pdc_amount), :cheque_number => nil, :clearence_date => nil }
           end
         end
         render :json => monthly_pdcs
@@ -70,7 +69,7 @@ class StudentMastersController < ApplicationController
   end
 
   def belongs_to_parent
-    @parent = Parent.find(params[:parent_id])
+    @parent = ParentMaster.find(params[:parent_id])
     respond_to do |format|
       format.json do
         render :json => StudentMastersDecorator.decorate_collection(@parent.students)

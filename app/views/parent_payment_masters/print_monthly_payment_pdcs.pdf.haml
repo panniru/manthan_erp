@@ -1,0 +1,6 @@
+= wicked_pdf_stylesheet_link_tag 'bootstrap'
+.row
+  .col-xs-6
+    = render :partial => "parent_payment_masters/print_pdc_content", :handlers => [:pdf, :haml]
+  .col-xs-6
+    = render :partial => "parent_payment_masters/print_pdc_content", :handlers => [:pdf, :haml]

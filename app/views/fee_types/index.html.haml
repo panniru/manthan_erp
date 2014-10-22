@@ -1,4 +1,4 @@
-.col-md-7{"ng-controller" => "FeeTypesController"}
+.col-md-7{"ng-controller" => "FeeTypesController", :ng_init => "index()"}
   %h3 
     = "FeeTypes"
     .pull-right
@@ -10,7 +10,7 @@
         %td {{fee_type.fee_type}}
         %td
           = link_to fa_icon("edit"), "#", :class => "btn btn-warning", :ng_click => "edit(fee_type)", :ng_disabled => "#{fee_items_can_be_manipulate?}"
-          = link_to fa_icon("trash-o"), "#", :class => "btn btn-danger", :ng_click => "destroy(fee_type)", :ng_disabled => "#{fee_items_can_be_manipulate?}"
+          = link_to fa_icon("trash-o"), "#", :class => "btn btn-danger", :ng_click => "destroy(fee_type)", :ng_disabled => "#{fee_items_can_be_manipulate? || fee_structure_defined?}"
             
 
         

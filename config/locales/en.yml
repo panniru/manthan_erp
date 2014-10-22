@@ -213,6 +213,8 @@ en:
     upload:
       success: "Students has been uploaded"
       fail: "Students has not been uploaded"
+    search:
+      not_found: "Student not found"
   book:
     create:
       success: "book has been saved"
@@ -301,5 +303,12 @@ en:
     destroy:
       success: "vendor has been deleted"
       fail: "vendor has not been deleted"
-   
+  approval_items:
+    fee_structure:
+      pending: "Payament cannot be intitiated. Fee strucure has not been approved"
 
+  parent_payment_masters:
+    cheque:
+      cheque_exists: "Cheque Number %{cheque_number} having bank  %{bank_name} already exists"
+
+  

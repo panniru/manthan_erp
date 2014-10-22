@@ -24,7 +24,7 @@ class ParentPaymentTransactionsDecorator < ApplicationDecorator
     end
   end
 
-  def ref_no
+  def cheque_number
     if transaction_type == "cheque"
       parent_cheque.cheque_number
     else

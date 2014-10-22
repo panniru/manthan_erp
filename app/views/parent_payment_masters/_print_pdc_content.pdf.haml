@@ -1,0 +1,24 @@
+= render "shared/brand_header", :handlers => [:pdf, :haml]        
+.col-md-4
+  %table.table
+    %tr
+      %th Date:
+      %td= Date.today.strftime("%d-%m-%Y")
+%label Cheques Recieved
+%table.table.table-bordered
+  %thead
+    %th Date
+    %th Amount
+    %th Cheque #
+    %th Bank
+    %th IFSC
+  %tbody
+    - @parent_payment_master.parent_payment_transactions.each do |transaction|
+      %tr
+        %td= transaction.parent_cheque.post_dated_cheque.date
+        %td= transaction.amount_in_rupees
+        %td= transaction.parent_cheque.cheque_number
+        %td= transaction.parent_cheque.bank_name
+        %td= transaction.parent_cheque.ifsc_code
+        
+      

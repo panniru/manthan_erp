@@ -1,6 +1,9 @@
 class ParentPaymentMaster < ActiveRecord::Base
   validates :payment_type_id, :presence => true
-  belongs_to :parent 
+  validates :parent_master_id, :presence => true
+  validates :student_id, :presence => true
+  
+  belongs_to :parent, :class_name => "ParentMaster", foreign_key: "parent_master_id"
   belongs_to :student, :class_name => "StudentMaster"
   belongs_to :payment_type
   has_many :parent_payment_transactions

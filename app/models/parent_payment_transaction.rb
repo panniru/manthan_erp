@@ -1,8 +1,11 @@
 class ParentPaymentTransaction < ActiveRecord::Base
   belongs_to :parent_payment_master
   has_one :parent_cheque
-  has_one :term_definition, :foreign_key => :term_definition_id
+  belongs_to :term_definition
   has_one :payment_receipt
+  
+  validates :transaction_type, :presence => true
+  validates :amount_in_rupees, :presence => true
   
   accepts_nested_attributes_for :parent_cheque
   
@@ -14,16 +17,18 @@ class ParentPaymentTransaction < ActiveRecord::Base
   scope :transaction_on_or_after, lambda{|transaction_date| where("transaction_date >= ?", transaction_date.strftime('%Y-%m-%d'))}
   
   scope :multi_search_parent_student, lambda { |term|
-    where_clause = "lower(student_masters.name) ILIKE '%#{term.downcase}%' OR lower(parents.father_name) ILIKE '%#{term.downcase}%' OR lower(parents.mother_name) ILIKE '%#{term.downcase}%'"
-    includes(parent_payment_master: [:parent, :student]).where(where_clause)
+    where_clause = "lower(student_masters.name) ILIKE '%#{term.downcase}%' OR lower(parent_masters.father_name) ILIKE '%#{term.downcase}%' OR lower(parent_masters.mother_name) ILIKE '%#{term.downcase}%'"
+    joins(parent_payment_master: [:parent, :student]).where(where_clause)
   }
 
-  
+  def self.transactions_on_cheque(cheque_no, bank)
+    self.cheque_type_transactions.includes(:parent_cheque).where(parent_cheques: { cheque_number:  cheque_no.to_s, bank_name: bank})
+  end
 
   
   def fee_type_contribution_amounts
     parent_payment_master.fee_type_contribution_percentages.map do |fee_type|
-      amount = (self.amount_in_rupees * (fee_type[:contribution_percent]/100))
+      amount = (self.amount_in_rupees * (fee_type[:contribution_percent]/100)).round #(2)
       {:fee_type_id => fee_type[:fee_type_id], :fee_type => fee_type[:fee_type], :amount => amount}
     end
   end
@@ -40,12 +45,8 @@ class ParentPaymentTransaction < ActiveRecord::Base
   def cash_payment?
     transaction_type == 'cash'
   end
-
+  
   def cheque_payment?
     transaction_type == 'cheque'
   end
-
-  
-  
-  
 end

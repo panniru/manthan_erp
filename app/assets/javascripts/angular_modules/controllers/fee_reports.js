@@ -5,6 +5,7 @@
         $scope.grades = resourceService.GradeMaster.query();
 
         $scope.buildChart = function(){
+            $scope.chartShown = true;
             feeReportService.payment_status_report($scope.grade)
                 .then(function(response){
                     var count_chart_data= []

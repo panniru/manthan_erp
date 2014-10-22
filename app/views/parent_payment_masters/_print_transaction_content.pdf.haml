@@ -35,23 +35,25 @@
 .col-md-12
   .col-xs-6
     %label Pay Mode :
-    %label= @parent_payment_transaction.transaction_type
-  .col-xs-6
-    .col-md-6
+    %label= @parent_payment_transaction.transaction_type.titleize
+  - if @parent_payment_transaction.cheque_payment?
+    .col-xs-6
       %label Bank :
       %label= @parent_payment_transaction.bank_name
+    .col-xs-6
+      %label Cheque Number :
+      %label= @parent_payment_transaction.cheque_number
   .col-xs-6
-    .col-md-6
-      %label Ref No :
-      %label= @parent_payment_transaction.ref_no
-  .col-xs-6
-    .col-md-6
-      %label Fee Mode :
-      %label= @parent_payment_master.payment_code
+    %label Fee Mode :
+    %label= @parent_payment_master.payment_code.titleize
+  - if @parent_payment_master.term_wise_payment?
+    .col-xs-6
+      %label Term :
+      %label= @parent_payment_transaction.term_definition.term_definition.titleize
 
 .col-xs-12
   .col-xs-6
     %label Fee for The Academic Year
-  
+    %label= session[:academic_year]
 
   

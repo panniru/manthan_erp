@@ -10,6 +10,10 @@ class ApprovalItem < ActiveRecord::Base
     User.find(defined_by).user_id if defined_by.present?
   end
 
+  def self.fee_structure_approved?
+    self.fee_structure_type.first.try(:status) == "approved"
+  end
+
   def approve(current_user)
     self.status = "approved"
     self.approved_by = current_user.id

@@ -1,14 +1,14 @@
 .colmd-10{:ng_controller => "ParentChequesController"}
   %form{:method => 'get' , :class => "form-inline", :name => "parentChequesSearchForm", :action => "/parent_payment_transactions/admin_transactions"}
     .form-group
-      %input{:type => "text", :class=>"form-control", :placeholder => "Father/ Mother/ Student Name", :name => "search_term"}
+      %input{:type => "text", :class=>"form-control", :placeholder => "Father/ Mother/ Student Name", :name => "search_term", :value => "#{params[:search_term]}"}
     .form-group
       %select{:ng_model => "status", :ng_options => "st.value as st.text for st in status_type", :class=>"form-control", :placeholder => "Status"}
         %option{:value => ""} 
       %input{:type => "hidden", :name => "status", :value => "{{status}}"}
     .form-group{:ng_show => "status == 'cleared'"}
-      %input{:type => "text", :class=>"form-control datepicker", :placeholder => "From Date", :name => "from_date"}
+      %input{:type => "text", :class=>"form-control datepicker", :placeholder => "From Date", :name => "from_date", :value => "#{params[:from_date]}"}
     .form-group
-      %input{:type => "text", :class=>"form-control datepicker", :placeholder => "To Date", :name => "to_date"}
+      %input{:type => "text", :class=>"form-control datepicker", :placeholder => "To Date", :name => "to_date", :value => "#{params[:to_date]}"}
     .form-group
       = submit_tag "Go", :name => nil, :class => "btn-primary btn"

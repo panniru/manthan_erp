@@ -1,5 +1,5 @@
 class ParentPaymentMastersController < ApplicationController
-  load_resource :only => [:new, :pending_pdcs, :cleared_pdcs, :update, :payment_transactions, :submitted_pdcs]
+  load_resource :only => [:new, :pending_pdcs, :cleared_pdcs, :update, :payment_transactions, :submitted_pdcs, :print]
 
   def index
     if current_user.parent?
@@ -18,47 +18,63 @@ class ParentPaymentMastersController < ApplicationController
   end
  
   def create
-    unless current_user.parent?
-      @parent_payment_master = ParentPaymentMaster.new(parent_payment_master_params)
-      @parent_payment_master.parent = @parent_payment_master.student.parent
-      payment_creation_service = PaymentCreationService.new(@parent_payment_master, params[:parent_payment_master], DateTime.now)
-      if payment_creation_service.save
-        @parent_payment_transaction = @parent_payment_master.parent_payment_transactions.last
-        @parent_payment_transaction = ParentPaymentTransactionsDecorator.decorate(@parent_payment_transaction)
-        render "acknowledgement"
-      else
-        render "new"
+    respond_to do |format|
+      format.json do
+        unless current_user.parent?
+          @parent_payment_master = ParentPaymentMaster.new(parent_payment_master_params)
+          @parent_payment_master.parent = @parent_payment_master.student.parent
+          payment_creation_service = PaymentCreationService.new(@parent_payment_master, params[:parent_payment_master], DateTime.now)
+          if payment_creation_service.save
+            render :json => {status: true, :parent_payment_master_id => payment_creation_service.parent_payment_master.id, :last_transaction_id => payment_creation_service.last_transaction.id} #"acknowledgement"
+          else
+            render :json => {status: false, errors: payment_creation_service.errors}
+          end
+        else
+          render "payment_gateway"
+        end
       end
-    else
-      render "payment_gateway"
     end
   end
 
   def update
-    unless current_user.parent?
-      payment_creation_service = PaymentCreationService.new(@parent_payment_master, params[:parent_payment_master], DateTime.now)
-      if payment_creation_service.save
-        @parent_payment_transaction = @parent_payment_master.parent_payment_transactions.last
-        @parent_payment_transaction = ParentPaymentTransactionsDecorator.decorate(@parent_payment_transaction)
-        render "acknowledgement"
-      else
-        render "edit"
+    respond_to do |format|
+      format.json do
+        unless current_user.parent?
+          payment_creation_service = PaymentCreationService.new(@parent_payment_master, params[:parent_payment_master], DateTime.now)
+          if payment_creation_service.save
+            render :json => {status: true, :parent_payment_master_id => payment_creation_service.parent_payment_master.id, :last_transaction_id => payment_creation_service.last_transaction.id} #"acknowledgement"
+            
+          else
+            render :json => {status: false, errors: payment_creation_service.errors}
+          end
+        else
+          render "payment_gateway"
+        end
       end
-    else
-      render "payment_gateway"
     end
   end
 
   def pay
-    @parent_payment_master = ParentPaymentMaster.find_by_student_id(params[:student_id])
-    if @parent_payment_master.present?
-      render "edit"
+    @student_master = StudentMaster.where(:id => params[:student_id]).first if params[:student_id].present? 
+    if @student_master.present?
+      if ApprovalItem.fee_structure_approved?
+        @parent_payment_master = ParentPaymentMaster.find_by_student_id(@student_master.id)
+        if @parent_payment_master.present?
+          render "edit"
+        else
+          @parent_payment_master = ParentPaymentMaster.new_student_payment_master(@student_master.id)
+          render "new"
+        end
+      else
+        flash[:fail] = I18n.t :pending, :scope => [:approval_items, :fee_structure]
+        redirect_to parent_payment_masters_path
+      end
     else
-      @parent_payment_master = ParentPaymentMaster.new_student_payment_master(params[:student_id])
-      render "new"
+      flash[:fail] = I18n.t :not_found, :scope => [:student_master, :search]
+      redirect_to parent_payment_masters_path
     end
   end
-
+  
   def pending_pdcs
     respond_to do |format|
       format.json do
@@ -123,7 +139,25 @@ class ParentPaymentMastersController < ApplicationController
     end
   end
   
-
+  def print
+    respond_to do |format|
+      format.pdf do
+        @payment_receipt = PaymentReceipt.new(:branch_abbr => "T", :receipt_date => DateTime.now)
+        if @payment_receipt.save!
+          render :pdf => "Reciept ",
+          :template => 'parent_payment_masters/print_monthly_payment_pdcs',
+          :formats => [:pdf, :haml],
+          :orientation => 'Landscape',
+          :page_size  => 'A4',
+          :margin => {:top => '8mm',
+            :bottom => '8mm',
+            :left => '14mm',
+            :right => '14mm'}
+        end
+      end
+    end
+  end
+  
 
   private
   def parent_payment_master_params

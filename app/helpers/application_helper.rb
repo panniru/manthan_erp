@@ -31,6 +31,10 @@ module ApplicationHelper
   def fee_items_can_be_manipulate?
     @value ||= !ApprovalItem.fee_can_be_edit?
   end
+
+  def fee_structure_defined?
+    @value ||= GradeWiseFee.fee_structure_defined?
+  end
   
   
 

@@ -6,7 +6,7 @@ class StudentMaster < ActiveRecord::Base
   #validates :section_master_id, :presence => true
   #validates :joining_date, :presence => true
 
-  belongs_to :parent
+  belongs_to :parent, :class_name => "ParentMaster" , :foreign_key => :parent_master_id
   belongs_to :student_route_mapping
   belongs_to :grade_master
   belongs_to :section_master
@@ -30,5 +30,16 @@ class StudentMaster < ActiveRecord::Base
     return self.bus_facility? if fee_type == "Bus Fee" 
     true
   end
+
+  def grade
+    grade_master.present? ? grade_master.grade_name : nil
+  end
+  
+  def section
+    section_master.present? ? section_master.section_name : nil
+  end
+
+  
+
 
 end
