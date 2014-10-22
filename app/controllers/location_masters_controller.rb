@@ -1,10 +1,11 @@
 class LocationMastersController < ApplicationController
   
   def index
+   
     if  params[:id].present?
-      @location_master = LocationMaster.where(id: params[:id]).paginate(:page => params[:page], :per_page => 7)
+      @location_master = LocationMaster.where(id: params[:id]).paginate(:page => params[:page], :per_page => 14, :total_entries => LocationMaster.count)
     else
-      @location_master = LocationMaster.order('location_name ASC').paginate(:page => params[:page], :per_page => 7)
+      @location_master = LocationMaster.order('location_name ASC').paginate(:page => params[:page], :per_page => 14, :total_entries => LocationMaster.count)
     end
   end
   
@@ -30,11 +31,12 @@ class LocationMastersController < ApplicationController
     if @location_master.destroy
       flash[:success] = I18n.t :success, :scope => [:location_master ,:destroy]
     else
-      flash[:alert] = "First delete the corresponding Route of this Location"
+      flash[:alert] = "Delete the corresponding Route of this Location"
     end
     redirect_to location_masters_path
   end
-  
+
+
   def location_params
     location_params = params.require(:location_master).permit( :location_name , :index)
   end

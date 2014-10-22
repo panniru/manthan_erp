@@ -90,8 +90,9 @@
    end
    
    def get_bus_no
-     var = NewVehicle.all.map do |var|
-       {id: var.id}
+     @new_vehicles = NewVehicle.all
+     var = @new_vehicles.map do |r|
+       {id: r.bus}
      end
      render :json => var
    end

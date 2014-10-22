@@ -1,12 +1,15 @@
 class Route < ActiveRecord::Base
-  belongs_to :new_vehicle
+  has_many :new_vehicle, :dependent => :destroy 
   has_many :student_route_mappings , :dependent => :destroy 
   has_many :locations , :dependent => :destroy
   has_many :location_masters
   accepts_nested_attributes_for :locations
   attr_accessor :text ,:subject
   scope :show_route_locations, lambda{|route_id| where(:route_id => route_id ).select(:id,:location_master_id, :sequence_no)}
-
+  scope :up_route ,  where(lpp: 'Up route')
+  scope :down_route ,  where(lpp: 'Down route')
+  
+  
   def student_length
     route = self.id
     map = StudentRouteMapping.show_all_students(route).map {|student| student.student_master_id}
