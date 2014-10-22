@@ -10,6 +10,7 @@ class GuestManagementsController < ApplicationController
 
   def create 
     @guest_management = GuestManagement.new(guest_params)
+    @guest_management.came_to_meet =  params[:faculty_name] 
     if @guest_management.save
       redirect_to  guest_managements_path
     else

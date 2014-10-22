@@ -1,6 +1,8 @@
 class AutoSearchController < ApplicationController
 
   autocomplete :book, :isbn, :full => true, :extra_data => [:name]
+  
+  autocomplete :faculty_master, :faculty_name, :full => true 
 
   autocomplete :location_master, :location_name, :full => true 
   

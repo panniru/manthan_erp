@@ -27,6 +27,7 @@ class VendorManagementsController < ApplicationController
       render "new"
     end
   end
+
   def destroy
     @vendor_management = VendorManagement.find(params[:id])
     if @vendor_management.destroy
@@ -49,7 +50,7 @@ class VendorManagementsController < ApplicationController
   end
 
   def vendor_params
-    params.require(:vendor_management).permit(:vendor_category_id, :vendor_name,:vendor_phone, :vendor_address, :vendor_alternate_email, :vendor_email , :verdor_mobile)
+    params.require(:vendor_management).permit(:vendor_category_id,:contact_name, :vendor_name,:vendor_phone, :vendor_address, :vendor_alternate_email, :vendor_email , :verdor_mobile)
   end
 
 end
