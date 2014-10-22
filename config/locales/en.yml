@@ -77,6 +77,14 @@ en:
     destroy:
       success: "Location has been deleted"
       fail: "Location has not been deleted"
+  vendor_category:
+    create:
+      success: "New Vendor Category Created"
+      fail: "Can't Create Vendor Category"
+    destroy:
+      success: "Vendor category has been deleted"
+      fail: "Vendor Category has not been deleted"
+
   post_dated_cheque:
     create:
       success: "cheque has been saved"
@@ -286,5 +294,12 @@ en:
     destroy:
       success: "Guest has been deleted"
       fail: "Guest has not been deleted"
+  vendor_management:
+    create:
+      success: "vendor has been saved"
+      fail: "vendor not been saved"
+    destroy:
+      success: "vendor has been deleted"
+      fail: "vendor has not been deleted"
    
 

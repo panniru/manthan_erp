@@ -5,6 +5,7 @@
    
     %br
 = form_for GuestManagement.new , :html => { :class => "form-horizontal", :role => "form"} do |f| 
+  = render "shared/error_messages", :object => f.object
   .row
     .col-sm-2
       = f.label "Name"
@@ -28,15 +29,17 @@
       = f.text_area "guest_address", :class => 'form-control'
       %br
    
-  .row{"ng-controller" => "StaffadminsController"}
+  .row
     .col-sm-2
       = f.label "Person to meet"
     .col-sm-4
-      %select{"ng-model" => "staffAdmin", "ng-options" => "faculty.faculty_name for faculty in faculties",:class => "form-control",:required => "required"}
-        %option{style: "display:none", value: ""} Select Name
-        = f.hidden_field :came_to_meet, :value => "{{staffAdmin.faculty_name}}"
-      -# %select{"ng-model" => "role", "ng-options" => " role.role as role.role for role in roles",:class => "form-control",:required => "required", }
-      -#   %option{style: "display:none", value: ""} Select Role
+      = autocomplete_field_tag :faculty_name,
+      '',
+      auto_search_autocomplete_faculty_master_faculty_name_path,
+      :placeholder => "Faculty Name", :class => 'form-control',
+        :required => true,
+        :id_element => "#id"
+      = hidden_field_tag :came_to_meet, :value => 'faculty_name' 
       %br
     .col-sm-2
       = f.label "Purpose"
