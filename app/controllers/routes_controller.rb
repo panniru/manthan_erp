@@ -90,11 +90,14 @@
    end
    
    def get_bus_no
-     var = NewVehicle.all.map do |var|
-       {id: var.id}
+     @new_vehicles = NewVehicle.bus_up
+     var = @new_vehicles.map do |r|
+       {id: r}
      end
      render :json => var
    end
+
+     
    
    def show
      @route = Route.find(params[:id])

@@ -7,8 +7,11 @@ class LocationMaster < ActiveRecord::Base
   validates_uniqueness_of  :location_name, :presence => true
   belongs_to :route
   belongs_to :locations
+  scope :greater, -> { where("id.count > ?", "7") }
+  scope :less, -> { where("id.count < ?", "7") }
+  scope :odd, -> { where("id % 2 = ?", "0") }
+  scope :even, -> { where("id % 2 = ?", "1") }
   
-
   
 
   def cleanup

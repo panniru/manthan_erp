@@ -5,8 +5,8 @@ class CreateRoutes < ActiveRecord::Migration
       t.string :no_of_stops
       t.string :lpp
       t.string :distance
-      t.string :busno_up
-      t.string :busno_down
+      t.integer :busno_up
+      t.integer :busno_down
       t.integer :no_of_children
       t.integer :sequence_no
 

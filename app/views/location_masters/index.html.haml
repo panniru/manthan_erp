@@ -21,13 +21,28 @@
           - if current_user.transport_head?
             %th
       %tbody
-        - @location_master.each do |location_master|
+        - @location_master.even.each do |location_master|
           %tr
             %td= location_master.location_name
             - if current_user.transport_head?
               %td
                 =  link_to raw("<span class='glyphicon glyphicon-trash'></span>"),location_master_path(location_master), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+  .col-sm-5
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr
+          %th Locations
+          - if current_user.transport_head?
+            %th
+      %tbody
+        - @location_master.odd.each do |location_master|
+          %tr
+            %td= location_master.location_name
+            - if current_user.transport_head?
+              %td
+                =  link_to raw("<span class='glyphicon glyphicon-trash'></span>"),location_master_path(location_master), :class => "btn btn-danger btn-sm", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+
 .row
   .col-sm-3
   .col-sm-2
-  = will_paginate @location_master, param_name: "page", previous_label: h("<"), next_label: h(">")
+  = will_paginate @location_master, param_name: "page", previous_label: h("<"), next_label: h(">") , count: "page" 
