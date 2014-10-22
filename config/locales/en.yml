@@ -235,6 +235,10 @@ en:
     update:
       success: " Issuing has been updated"
       fail: "Issuing not been updated"
+  inventories:
+    create_bulk:
+      success: "Approval Sent"
+      fail: "Can't Send for Approval"
   damagebook:
     create:
       success: "Damage has been saved"

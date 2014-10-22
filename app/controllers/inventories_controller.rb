@@ -1,4 +1,23 @@
 class InventoriesController < ApplicationController
+  def index
+    @inventories = Inventory.all  
+  end
+
+  def create
+
+  end
+
+  def edit
+  end
+
+  def destroy
+  end
+
+  def new
+    
+  end
+  
+
  
   def get_inventory_view
     respond_to do |format|

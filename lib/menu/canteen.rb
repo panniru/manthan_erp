@@ -34,9 +34,6 @@ class Canteen
 
   private
   
-  
- 
-  
   def meal_types
     MenuItem.new(:label => "Meal Types", :klass => "", :icon => "cutlery", :href => "/mealtypes") 
   end

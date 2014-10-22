@@ -60,7 +60,7 @@ $(document).ready(function() {
            
             
             if (date_inn > date_in) {
-                angular.element($('#createModal')).scope().newMeal(date_inn)
+		angular.element($('#createModal')).scope().newMeal(date_inn)
 	    }
 	    else 
 		{ alert('You Cannot Enter Meals For Past Day')}

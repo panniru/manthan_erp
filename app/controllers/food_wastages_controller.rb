@@ -15,7 +15,7 @@ class FoodWastagesController < ApplicationController
     @new =  FoodWastage.new(:current_date => current_date)
     @new.wastage = params[:wastage]
     @new.save
-    redirect_to new_food_wastage_path
+    redirect_to food_wastages_path
   end
   
   def update

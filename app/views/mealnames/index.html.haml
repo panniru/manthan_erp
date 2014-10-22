@@ -30,7 +30,8 @@
       #canteen_calendar
         - if current_user.canteenmanager?
           = render "form"
-      %h5 *Click on the corressponding date to save the meal
+    
+        %h5 *Click on the corressponding date to save the meal
 
   - if current_user.parent?
     .col-sm-7

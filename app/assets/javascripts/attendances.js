@@ -1,4 +1,3 @@
-
 $(document).ready(function() { 
 
 
@@ -12,6 +11,7 @@ $(document).ready(function() {
     var monthNames = [ "January", "February", "March", "April", "May", "June",
                        "July", "August", "September", "October", "November", "December" ]
     $('#attendance_calendar').html("");
+    var today = new Date();
     $('#attendance_calendar').fullCalendar({ 
         events: '/attendances/holidaycalendardata.json?month='+monthNames[today.getMonth()],
         height: '300px',
