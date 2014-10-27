@@ -39,7 +39,7 @@ class MealnamesController < ApplicationController
             end
           end
         end
-        render json: => data
+        render json: data
       end
     end
   end
