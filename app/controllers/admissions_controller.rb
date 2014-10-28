@@ -1,23 +1,5 @@
 class AdmissionsController < ApplicationController
- 
-
-  # def get_update
-  #   p params
-  #   params[:admissions].each do |admission_params|
-  #     if admission_params["id"].present?
-  #       admission = self.admissions.find(admission_params[:id])
-  #       admission.comment = admission_params[:comment]
-  #       admission.save
-  #     end
-  #   end
-  # end
-  def get_close_status
-    reasons = Status.all.map do |reason|
-      { reason: reason.reason, id: reason.id}
-    end
-    render :json => reasons
-  end
-
+  
   def get_assessment_students
     
     respond_to do |format|
@@ -25,7 +7,7 @@ class AdmissionsController < ApplicationController
         if(TeacherLeader.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
           pa = "#{current_user.faculty_master.id}"
           a = TeacherLeader.where(:faculty_master_id => pa).map{|student| student.grade_master_id}
-          b = "Assessment_Planned"
+          b = "Assessment Planned"
           ass = Admission.where(:grade_master_id => a, :status => b).each.map do |mapping|
             
             {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment}
@@ -35,6 +17,15 @@ class AdmissionsController < ApplicationController
       end
     end
   end
+
+  def get_close_status
+    reasons = Status.all.map do |reason|
+      { reason: reason.reason, id: reason.id}
+    end
+    render :json => reasons
+  end
+
+ 
   def get_klass_view
     klass = TeacherLeader.all.map do |klass|
       { grade_name: klass.klass,faculty_name: klass.faculty_leader, id: klass.id}
@@ -93,6 +84,7 @@ class AdmissionsController < ApplicationController
   def create
     @admission = Admission.new(admission_params)
     @admission.form_no = Admission.get_no
+    @admission.admission_no = Admission.get_no
     @admission.teacher_leader = TeacherLeader.where(:klass => admission_params[:grade]).first
     respond_to do |format|
       if @admission.save 
@@ -142,6 +134,10 @@ class AdmissionsController < ApplicationController
   end
   
   def home_index
+    @admission = Admission.find(params[:id])
+  end
+
+  def close_index
     @admission = Admission.find(params[:id])
   end
   
@@ -264,15 +260,7 @@ class AdmissionsController < ApplicationController
   
  def update
    p "-======================="
-  
-    @admission = Admission.find(params[:id])
- #   if @admission.update(admission_params)
- #     flash[:success] = I18n.t :success, :scope => [:admission, :update]
- #     redirect_to admission_home_admissions_path
- #   else
- #     render 'enquiry_new'
- #   end
- # end
+   @admission = Admission.find(params[:id])
    respond_to do |format|
      if @admission.update!(admission_params)
        if @admission.finalresult == "Selected"

@@ -2,7 +2,8 @@
     "use strict";
     app.controller('StudentAssessmentController',["$scope","resourceService", function($scope, resourceService) {
         
- $scope.assessments = resourceService.Assess.query(); 
+        
+        $scope.assessments = resourceService.Assess.query(); 
 	$scope.editAssessments = function(assessment){
 	    $scope.assessment = assessment
 	    $('#editass').modal('show');
@@ -10,7 +11,7 @@
 
 
         $scope.update = function(){
-            $scope.assessment.status = 'Management_Reviewed';
+            $scope.assessment.status = 'Management Reviewed';
           //  alert($scope.assessment.status)
             $scope.assessment.$update()
                 .then(function(response){                  
@@ -27,7 +28,7 @@
 
 
         $scope.planupdate = function(){
-            $scope.assessment.status = 'Assessment_Completed';
+            $scope.assessment.status = 'Assessment Completed';
             //alert($scope.assessment.status)
             $scope.assessment.$update()
                 .then(function(response){                  

@@ -2,16 +2,13 @@
   = render "shared/error_messages", :object => f.object
   .col-sm-12
     .form-group
-      .col-sm-2
-        = f.label "Form_No:", :class => 'control-label'
-      .col-sm-2
-        = f.text_field :form_no,:class => 'form-control'
-      .col-sm-2
       .col-sm-2.required
         = f.label "Name:", :class => 'control-label'
       .col-sm-2
         = f.text_field :faculty_name,:class => 'form-control'
-
+      .col-sm-2
+      .col-sm-2
+      .col-sm-2
     .form-group{"ng-controller" => "StaffadminsController"}
       .col-sm-2
         = f.label "Post:", :class => 'control-label'
@@ -119,5 +116,5 @@
       
   .row
     %center
-      = f.hidden_field :status,:value => "Application_Created"
+      = f.hidden_field :status,:value => "Application Created"
       = button_tag "Create", :type => "submit", :class => 'btn btn-primary'

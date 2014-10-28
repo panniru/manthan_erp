@@ -1,6 +1,6 @@
 .row
   .pull-right
-    - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned'||"#{@admission.status}" == 'Assessment_Completed'||"#{@admission.status}" == 'Management_Reviewed'||"#{@admission.status}" == 'Selected' )
+    - if("#{@admission.status}" == 'Enquiry Created'||"#{@admission.status}" == 'Application Created'||"#{@admission.status}" == 'Assessment Planned'||"#{@admission.status}" == 'Assessment Completed'||"#{@admission.status}" == 'Management Reviewed'||"#{@admission.status}" == 'Selected' )
       - if current_user.admin?
         %button.change.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@admission.id}"}, :title => 'close'} 
           %span.glyphicon.glyphicon-ban-circle
@@ -37,7 +37,7 @@
                   
 
   .container
-    - if("#{@admission.status}" == "Enquiry_Created" ||"#{@admission.status}" == "Application_Created" ||"#{@admission.status}" == "Assessment_Planned" || "#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Selected"|| "#{@admission.status}" == "Completed" )
+    - if("#{@admission.status}" == "Enquiry Created" ||"#{@admission.status}" == "Application Created" ||"#{@admission.status}" == "Assessment Planned" || "#{@admission.status}" == "Assessment Completed" || "#{@admission.status}" == "Management Reviewed" ||  "#{@admission.status}" == "Selected"|| "#{@admission.status}" == "Completed" )
       = render "shared/step"
   
     %br
@@ -107,7 +107,7 @@
                   .col-sm-5
                     = f.text_area :title ,:class => 'form-control'
              
-                = f.hidden_field :status,:value => "Assessment_Planned"
+                = f.hidden_field :status,:value => "Assessment Planned"
                 = button_tag "Save", :type => "submit", :class => ' pull-right btn btn-primary' 
                 %br
                 %br

@@ -26,7 +26,7 @@
     - @admissions.each do |admission|
       %tr
         %td{:style => "width:20%"}
-          = link_to "#{admission.form_no}",home_index_admission_path(admission)
+          = link_to "#{admission.form_no}",close_index_admission_path(admission)
         %td{:style => "width:20%"}
           = admission.name
         %td{:style => "width:20%"}

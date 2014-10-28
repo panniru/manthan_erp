@@ -1,8 +1,8 @@
 .row
   .pull-right
-    - if("#{@staffrecruit.status}" == 'Application_Created'||"#{@staffrecruit.status}" == 'Document_Verified'||"#{@staffrecruit.status}" == 'Assessment_Planned'||"#{@staffrecruit.status}" == 'Assessment_Completed'||"#{@staffrecruit.status}" == 'Management_Reviewed'||"#{@staffrecruit.status}" == 'Selected' )
+    - if("#{@staffrecruit.status}" == 'Application Created'||"#{@staffrecruit.status}" == 'Document Verified'||"#{@staffrecruit.status}" == 'Assessment Planned'||"#{@staffrecruit.status}" == 'Assessment Completed'||"#{@staffrecruit.status}" == 'Management Reviewed'||"#{@staffrecruit.status}" == 'Selected' )
       - if current_user.admin?
-        - if("#{@staffrecruit.status}" == 'Document_Verified')
+        - if("#{@staffrecruit.status}" == 'Document Verified')
           = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_document_staffrecruit_path, :class => 'btn btn-warning btn-sm', :title => 'Edit'
 
         %button.change.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@staffrecruit.id}"}} 
@@ -32,7 +32,7 @@
                           = f.label "Didn't Pick the Interview Call"
                               
                     .modal-footer
-                      = f.hidden_field :status,:value => "Form_Closed"
+                      = f.hidden_field :status,:value => "Form Closed"
                       = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
                       
       - else 
@@ -42,7 +42,7 @@
                   
 
   .container
-    - if("#{@staffrecruit.status}" == "Document_Verified" ||"#{@staffrecruit.status}" == "Application_Created" ||"#{@staffrecruit.status}" == "Assessment_Planned" || "#{@staffrecruit.status}" == "Assessment_Completed" || "#{@staffrecruit.status}" == "Management_Reviewed" ||  "#{@staffrecruit.status}" == "Selected"|| "#{@staffrecruit.status}" == "Completed" )
+    - if("#{@staffrecruit.status}" == "Document Verified" ||"#{@staffrecruit.status}" == "Application Created" ||"#{@staffrecruit.status}" == "Assessment Planned" || "#{@staffrecruit.status}" == "Assessment Completed" || "#{@staffrecruit.status}" == "Management Reviewed" ||  "#{@staffrecruit.status}" == "Selected"|| "#{@staffrecruit.status}" == "Completed" )
       = render "shared/steprecruitment"
   
     %br
@@ -103,6 +103,6 @@
               = f.file_field :salary_slips_for_previous_months
             %td
                       
-              = f.hidden_field :status, :value => 'Document_Verified'
+              = f.hidden_field :status, :value => 'Document Verified'
               = f.submit "Upload", :class => 'btn btn-primary'
    

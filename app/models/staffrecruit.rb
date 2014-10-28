@@ -1,6 +1,21 @@
 class Staffrecruit < ActiveRecord::Base
+
+  def self.getno
+    if Staffrecruit.exists?(&:form_no)
+      no = Staffrecruit.all.map(&:form_no).last
+      nos = no.to_i
+      nos +=1
+      return nos
+      else
+      form123 = DefaultMaster.get_form_no.map(&:default_value).first
+      form1234 = form123.to_i
+      return form1234
+    end
+  end
+
+
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-  validates :mobile_no, format: { with: /\d{3}-\d{3}-\d{4}/, message: ":Enter correct format(XXX-XXX-XXXX)" }
+  validates :mobile_no, format: { with: /\d{10}/, message: ":Enter correct format(XXXXXXXXXX)" }
   validates :faculty_name, presence: true
   validates :nationality, presence: true
   validates :dob, presence: true
@@ -19,14 +34,14 @@ class Staffrecruit < ActiveRecord::Base
     end
   end
   
-  scope :application_forms, lambda{where("status = 'Application_Created' or status = 'Document_Verified' or status = 'Assessment_Planned'or status = 'Assessment_Completed' or status = 'Management_Reviewed' or status = 'Selected'")}
-  scope :closed_forms,lambda{where("status = 'Form_Closed' or final_result = 'Rejected'")}
-  scope :application_created,lambda{where("status = 'Application_Created'")}
-  scope :document_verified,lambda{where("status = 'Document_Verified'")}
-  scope :assessment_planned,lambda{where("status = 'Assessment_Planned'")}  
-  scope :assessment_completed,lambda{where("status = 'Assessment_Completed'")}
-  scope :management_review,lambda{where("status = 'Management_Reviewed'")}
-  scope :selected_staffs,lambda{where("final_result = 'Selected' and status != 'Form_Closed'")}
+  scope :application_forms, lambda{where("status = 'Application Created' or status = 'Document Verified' or status = 'Assessment Planned'or status = 'Assessment Completed' or status = 'Management Reviewed' or status = 'Selected'")}
+  scope :closed_forms,lambda{where("status = 'Form Closed' or final_result = 'Rejected'")}
+  scope :application_created,lambda{where("status = 'Application Created'")}
+  scope :document_verified,lambda{where("status = 'Document Verified'")}
+  scope :assessment_planned,lambda{where("status = 'Assessment Planned'")}  
+  scope :assessment_completed,lambda{where("status = 'Assessment Completed'")}
+  scope :management_review,lambda{where("status = 'Management Reviewed'")}
+  scope :selected_staffs,lambda{where("final_result = 'Selected' and status != 'Form Closed'")}
   mount_uploader :educational_certificates, EducationalCertificatesUploader# Teprevious_employment_proof, 
   mount_uploader :previous_employment_proof,PreviousEmploymentProofUploader
   mount_uploader :salary_slips_for_previous_months, SalarySlipsForPreviousMonthsUploader

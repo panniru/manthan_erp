@@ -1,6 +1,6 @@
 .row
   .col-sm-12
-    - if current_user.admin? && ("#{@admission.status}" != 'Completed') && ("#{@admission.status}" != 'Management_Reviewed') && ("#{@admission.status}" != 'Assessment_Completed') 
+    - if current_user.admin? && ("#{@admission.status}" != 'Completed') && ("#{@admission.status}" != 'Management Reviewed') && ("#{@admission.status}" != 'Assessment Completed') 
       .pull-right
         %button.btn.btn-warning.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"} 
           %span.glyphicon.glyphicon-edit
@@ -25,10 +25,10 @@
                     .col-sm-3
                   .row
                     .pull-right
-                      = f.hidden_field :status,:value => "Assessment_Planned"
+                      = f.hidden_field :status,:value => "Assessment Planned"
                       = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
      
-    - if("#{@admission.status}" == 'Enquiry_Created'||"#{@admission.status}" == 'Application_Created'||"#{@admission.status}" == 'Assessment_Planned'||"#{@admission.status}" == 'Assessment_Completed'||"#{@admission.status}" == 'Management_Reviewed'||"#{@admission.status}" == 'Selected' )
+    - if("#{@admission.status}" == 'Enquiry Created'||"#{@admission.status}" == 'Application Created'||"#{@admission.status}" == 'Assessment Planned'||"#{@admission.status}" == 'Assessment Completed'||"#{@admission.status}" == 'Management Reviewed'||"#{@admission.status}" == 'Selected' )
       .pull-right
         - if current_user.admin?
           %button.change.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@admission.id}"}, :title => 'close'} 
@@ -52,7 +52,7 @@
                           .row
                             .pull-right
                               = f.hidden_field :closestatus, :value => "{{myClose.reason}}"
-                              = f.hidden_field :status,:value => "Form_Closed"
+                              = f.hidden_field :status,:value => "Form Closed"
                               = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
                
         - else 
@@ -62,7 +62,7 @@
                 
 
     .container
-      - if("#{@admission.status}" == "Enquiry_Created" ||"#{@admission.status}" == "Application_Created" ||"#{@admission.status}" == "Assessment_Planned" || "#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Selected"|| "#{@admission.status}" == "Completed" )
+      - if("#{@admission.status}" == "Enquiry Created" ||"#{@admission.status}" == "Application Created" ||"#{@admission.status}" == "Assessment Planned" || "#{@admission.status}" == "Assessment Completed" || "#{@admission.status}" == "Management Reviewed" ||  "#{@admission.status}" == "Selected"|| "#{@admission.status}" == "Completed" )
         = render "shared/step"
   
       %br

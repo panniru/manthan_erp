@@ -3,24 +3,24 @@
     .process
       .process-row
         .process-step
-          - if("#{@admission.status}" == "Enquiry_Created")
+          - if("#{@admission.status}" == "Enquiry Created")
             = link_to raw("<span class= 'fa fa-user fa2-2x'></span>"), enquiry_show_admission_path, :class => "btn btn-success1 btn-circle"
             %br
             %span.label.label-success Enquiry Form
             
           - else
-            - if("#{@admission.status}" == "Application_Created" ||"#{@admission.status}" == "Assessment_Planned" || "#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Completed" )
+            - if("#{@admission.status}" == "Application Created" ||"#{@admission.status}" == "Assessment Planned" || "#{@admission.status}" == "Assessment Completed" || "#{@admission.status}" == "Management Reviewed" ||  "#{@admission.status}" == "Completed" )
               = link_to raw("<span class= 'fa fa-user fa1-2x'></span>"), enquiry_show_admission_path, :class => "btn btn-success1 btn-circle"
             %br
             %span.label.label-success Enquiry Form
         .glyphicon.glyphicon-chevron-right
         .process-step
-          - if("#{@admission.status}" == "Application_Created")
+          - if("#{@admission.status}" == "Application Created")
             = link_to raw("<span class= 'fa fa-file-text-o fa2-2x'></span>"), admission_show_admission_path, :class => "btn btn-success1 btn-circle"
             %br
             %span.label.label-success Application Form
             
-          - elsif("#{@admission.status}" == "Application_Created" ||"#{@admission.status}" == "Assessment_Planned" || "#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Completed" )
+          - elsif("#{@admission.status}" == "Application Created" ||"#{@admission.status}" == "Assessment Planned" || "#{@admission.status}" == "Assessment Completed" || "#{@admission.status}" == "Management Reviewed" ||  "#{@admission.status}" == "Completed" )
             
             = link_to raw("<span class= 'fa fa-file-text-o fa1-2x'></span>"), admission_show_admission_path, :class => "btn btn-success1 btn-circle"
 
@@ -28,7 +28,7 @@
             %br
             %span.label.label-success Application Form
 
-          - elsif("#{@admission.status}" == "Enquiry_Created")
+          - elsif("#{@admission.status}" == "Enquiry Created")
             = link_to raw("<span class= 'fa fa-file-text-o fa2-2x'></span>"), admission_new_admission_path, :class => "btn btn-danger1 btn-circle"
             %br
             %span.label.label-warning Application Form
@@ -36,16 +36,16 @@
 
         .glyphicon.glyphicon-chevron-right
         .process-step
-          - if("#{@admission.status}" == "Assessment_Planned")
+          - if("#{@admission.status}" == "Assessment Planned")
             = link_to raw("<span class= 'fa fa-calendar fa2-2x'></span>"), view_assessment_admission_path, :class => "btn btn-success1 btn-circle"
             %br
             %span.label.label-success Assessment Planned
-          - elsif("#{@admission.status}" == "Assessment_Planned" || "#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Completed" )
+          - elsif("#{@admission.status}" == "Assessment Planned" || "#{@admission.status}" == "Assessment Completed" || "#{@admission.status}" == "Management Reviewed" ||  "#{@admission.status}" == "Completed" )
             = link_to raw("<span class= 'fa fa-calendar fa1-2x'></span>"), view_assessment_admission_path, :class => "btn btn-success1 btn-circle"
             %br
             %span.label.label-success Assessment Planned
 
-          - elsif("#{@admission.status}" == "Application_Created") and current_user.admin?
+          - elsif("#{@admission.status}" == "Application Created") and current_user.admin?
             = link_to raw("<span class= 'fa fa-calendar fa2-2x'></span>"), "#", :onclick => "createAssessment('#{@admission.teacher_leader_id}');", :class => 'btn1 btn btn-danger1 btn-circle'
             %br
             %span.label.label-warning Assessment Planned
@@ -55,7 +55,7 @@
             %span.label.label-default Assessment Planned
         .glyphicon.glyphicon-chevron-right
         .process-step
-          - if("#{@admission.status}" == "Assessment_Completed" || "#{@admission.status}" == "Management_Reviewed" ||  "#{@admission.status}" == "Completed")
+          - if("#{@admission.status}" == "Assessment Completed" || "#{@admission.status}" == "Management Reviewed" ||  "#{@admission.status}" == "Completed")
             = link_to raw("<span class= 'fa fa-tasks fa2-2x'></span>"), assessment_result_admission_path, :class => "btn btn-success1 btn-circle"
             %br
             %span.label.label-success Assessment Completed
@@ -71,11 +71,11 @@
           
         .glyphicon.glyphicon-chevron-right      
         .process-step
-          - if("#{@admission.status}" == "Management_Reviewed"||  "#{@admission.status}" == "Completed")
+          - if("#{@admission.status}" == "Management Reviewed"||  "#{@admission.status}" == "Completed")
             = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), management_result_admission_path, :class => "btn btn-success1 btn-circle"
             %br
             %span.label.label-success Management Review
-          - elsif("#{@admission.status}" == "Assessment_Completed") and current_user.principal?
+          - elsif("#{@admission.status}" == "Assessment Completed") and current_user.principal?
             = link_to raw("<span class= 'fa fa-users fa2-2x'></span>"), "#", :class => 'btn1 btn btn-danger1 btn-circle'
             %br
             %span.label.label-warning Management Review
@@ -91,7 +91,7 @@
             = link_to raw("<span class= 'fa fa-thumbs-up fa2-2x'></span>"), '#', :class => "btn btn-success1 btn-circle"
             %br
             %span.label.label-success Admission
-          - elsif("#{@admission.status}" == "Management_Reviewed") and current_user.admin?
+          - elsif("#{@admission.status}" == "Management Reviewed") and current_user.admin?
             = link_to raw("<span class= 'fa fa-thumbs-up fa1-2x'></span>"), "#", :class => 'btn1 btn btn-danger1 btn-circle',"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"
             %br
             %span.label.label-warning Admission

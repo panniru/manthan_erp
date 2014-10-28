@@ -2,7 +2,7 @@
   %h4
     %center
       APPLICATION DETAILS
-      - if("#{@admission.status}" == 'Application_Created')
+      - if("#{@admission.status}" == 'Application Created')
         = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_application_admission_path, :class => "btn btn-warning btn-sm", :title => "Edit"
 .row
   .col-sm-11

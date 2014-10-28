@@ -13,9 +13,7 @@
     .col-sm-6
       %input{:ng_model => "assessment.comments", :type => 'text', :class => 'form-control'} 
       = hidden_field_tag :comments, :value => '{{assessment.comments}}'
-  .row
-    %input{"ng-model" => "assessment.status", :type => "hidden", :value => 'Assessment_Completed'}
-    = hidden_field_tag :status, :value => '{{assessment.status}}'
+  
     
   .row
     .pull-right

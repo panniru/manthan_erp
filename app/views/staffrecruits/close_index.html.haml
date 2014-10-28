@@ -1,0 +1,74 @@
+.row
+  .col-sm-12
+    %table.table-striped.table-condensed{:style => "width:100%"}
+      %tr
+        %td{style: "width:20%"}
+          %b
+            %span.label.label-info Enquiry #
+        %td{style: "width:20%"}
+          = @staffrecruit.form_no
+        %td{style: "width:10%"}        
+        %td{style: "width:20%"}        
+          %label{for: "name"} Name
+        %td{style: "width:20%"}        
+          = @staffrecruit.faculty_name
+      %tr
+        %td
+          %label{for: "educational_qualification"} Educational Qualification
+        %td
+          = @staffrecruit.education_qualification
+        %td
+        %td
+          %label{for: "post"} Post
+        %td
+          = @staffrecruit.post
+      %tr
+        %td
+          %label{for: "dob"} DOB
+        %td
+          = @staffrecruit.dob
+        %td
+        %td
+          %label{for: "gender"} Gender
+        %td
+          = @staffrecruit.gender
+      %tr
+        %td
+          %label{for: "mobile_no"} Mobile No
+        %td
+          = @staffrecruit.mobile_no
+        %td
+        %td
+          %label{for: "email"} Email
+        %td
+          = @staffrecruit.email
+      %tr
+        %td
+          %label{for: "Address"} Address
+        %td
+          = @staffrecruit.address
+        %td
+        %td
+          %label{for: "nationality"} Nationality
+        %td
+          = @staffrecruit.nationality
+      %tr
+        %td
+          %label{for: "preferred Class"} Preferred Class
+        %td
+          = @staffrecruit.klass
+        %td
+        %td
+          %label{for: "preferred subject"} Preferred Subject
+        %td
+          = @staffrecruit.subject
+      %tr
+        %td
+          %label{for: "experience_in_teaching"} Experience in Teaching
+        %td
+          = @staffrecruit.experience
+        %td
+        %td
+          %label{for: "expected_salary"} Expected Salary
+        %td
+          = @staffrecruit.expected_salary

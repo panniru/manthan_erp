@@ -1,6 +1,6 @@
 .row
   .pull-right
-    - if("#{@staffrecruit.status}" == 'Application_Created'||"#{@staffrecruit.status}" == 'Document_Verified'||"#{@staffrecruit.status}" == 'Assessment_Planned'||"#{@staffrecruit.status}" == 'Assessment_Completed'||"#{@staffrecruit.status}" == 'Management_Reviewed'||"#{@staffrecruit.status}" == 'Selected' )
+    - if("#{@staffrecruit.status}" == 'Application Created'||"#{@staffrecruit.status}" == 'Document Verified'||"#{@staffrecruit.status}" == 'Assessment Planned'||"#{@staffrecruit.status}" == 'Assessment Completed'||"#{@staffrecruit.status}" == 'Management Reviewed'||"#{@staffrecruit.status}" == 'Selected' )
       - if current_user.admin?
         %button#change2.btn.btn-danger.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal",:data=> {:id => "#{@staffrecruit.id}"}, :title => 'close'} 
           %span.glyphicon.glyphicon-ban-circle
@@ -22,7 +22,7 @@
                         .row
                           .pull-right
                             = f.hidden_field :closestatus, :value => "{{myClose.reason}}"
-                            = f.hidden_field :status,:value => "Form_Closed"
+                            = f.hidden_field :status,:value => "Form Closed"
                             = button_tag "Save", :type => "submit", :class => 'btn btn-primary' 
                       
       - else 
@@ -32,7 +32,7 @@
                   
 
   .container
-    - if("#{@staffrecruit.status}" == "Document_Verified" ||"#{@staffrecruit.status}" == "Application_Created" ||"#{@staffrecruit.status}" == "Assessment_Planned" || "#{@staffrecruit.status}" == "Assessment_Completed" || "#{@staffrecruit.status}" == "Management_Reviewed" ||  "#{@staffrecruit.status}" == "Selected"|| "#{@staffrecruit.status}" == "Completed" )
+    - if("#{@staffrecruit.status}" == "Document Verified" ||"#{@staffrecruit.status}" == "Application Created" ||"#{@staffrecruit.status}" == "Assessment Planned" || "#{@staffrecruit.status}" == "Assessment Completed" || "#{@staffrecruit.status}" == "Management Reviewed" ||  "#{@staffrecruit.status}" == "Selected"|| "#{@staffrecruit.status}" == "Completed" )
       = render "shared/steprecruitment"
   
     %br
@@ -99,7 +99,7 @@
                   .col-sm-5
                     = f.text_area :title ,:class => 'form-control'
              
-                = f.hidden_field :status,:value => "Assessment_Planned"
+                = f.hidden_field :status,:value => "Assessment Planned"
                 = button_tag "Save", :type => "submit", :class => ' pull-right btn btn-primary' 
                 %br
                 %br

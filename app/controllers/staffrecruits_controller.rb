@@ -1,5 +1,10 @@
 class StaffrecruitsController < ApplicationController
  
+  def close_index
+    @staffrecruit = Staffrecruit.find(params[:id])
+  end
+  
+
   def recruited_form
     @staffrecruit = Staffrecruit.find(params[:id])
   end
@@ -27,10 +32,11 @@ class StaffrecruitsController < ApplicationController
   end
   
   def update
+    p '2222222222222222222222'
     @staffrecruit = Staffrecruit.find(params[:id])
     respond_to do |format|
       if @staffrecruit.update!(staffrecruit_params)
-        if @staffrecruit.final_result == "Selected"
+        if @staffrecru.final_result == "Selected"
           new_faculty_master = get_faculty_master(@staffrecruit)
           if new_faculty_master.valid?
             new_faculty_master.save!
@@ -51,12 +57,29 @@ class StaffrecruitsController < ApplicationController
   def document_index
     @staffrecruits = Staffrecruit.document_verified
   end
+
   def assessment_index
-    @staffrecruits =  Staffrecruit.where("status = 'Assessment_Planned'").order("staffhead")
+    respond_to do |format|
+      format.json do
+        if(Staffadmin.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
+          pa = "#{current_user.faculty_master.id}"
+          p pa
+          a = Staffadmin.where(:faculty_master_id => pa).map{|staff| staff.role_id}
+          b = "Assessment Planned"
+          ass = Staffrecruit.where(:user_id => a , :status => b).each.map do |mapping|
+            {id: mapping.id, faculty_name: mapping.faculty_name, form_no: mapping.form_no, status: mapping.status, assessment_result: mapping.assessment_result, comments: mapping.comments, post: mapping.post}
+          end
+        end
+        render :json => ass
+      end
+      format.html{}
+    end
   end
+  
   def assessment_completed_index
     @staffrecruits =  Staffrecruit.assessment_completed
   end
+  
   def management_index
     @staffrecruits=  Staffrecruit.management_review
   end
@@ -113,9 +136,9 @@ class StaffrecruitsController < ApplicationController
           pa = "#{current_user.faculty_master.id}"
           p pa
           a = Staffadmin.where(:faculty_master_id => pa).map{|staff| staff.role_id}
-          b = "Assessment_Planned"
-          ass = Staffrecruit.where(:role_id => a , :status => b).each.map do |mapping|
-            {id: mapping.id, name: mapping.faculty_name, form_no: mapping.form_no, status: mapping.status, assessment_result: mapping.assessment_result, comments: mapping.comments}
+          b = "Assessment Planned"
+          ass = Staffrecruit.where(:user_id => a , :status => b).each.map do |mapping|
+            {id: mapping.id, faculty_name: mapping.faculty_name, form_no: mapping.form_no, status: mapping.status, assessment_result: mapping.assessment_result, comments: mapping.comments, post: mapping.post}
           end
         end
         render :json => ass
@@ -185,6 +208,7 @@ class StaffrecruitsController < ApplicationController
   
   def create
     @staffrecruit = Staffrecruit.new(staffrecruit_params)
+    @staffrecruit.form_no = Staffrecruit.getno
     respond_to do |format|
       if @staffrecruit.save 
         format.html { redirect_to staffrecruits_path, notice: 'Form was successfully created.' }

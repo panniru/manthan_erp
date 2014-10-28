@@ -510,6 +510,7 @@ ManthanErp::Application.routes.draw do
   
   resources :admissions do
     member do
+      get 'close_index'
       get 'enquiry_show'
       get 'admission_show'
       get 'admission_new'
@@ -640,6 +641,7 @@ ManthanErp::Application.routes.draw do
   
   resources :staffrecruits do
     member do
+      get 'close_index'
       get 'recruited_form'
       get 'edit_assessment'
       get 'edit_document'

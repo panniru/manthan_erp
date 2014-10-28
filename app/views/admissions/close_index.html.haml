@@ -1,12 +1,6 @@
 .row
-  %h4
-    %center
-      ENQUIRY DETAILS
-      - if("#{@admission.status}" == 'Enquiry Created')
-        = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_admission_path, :class => "btn btn-warning btn-sm", :title => "Edit"
-.row
-  .col-sm-11
-    %table.table-striped.table-condensed
+  .col-sm-12
+    %table.table-striped.table-condensed{:style => "width:80%"}
       %tr
         %td{style: "width:25%"}
           %b 
@@ -151,8 +145,4 @@
           %label{for: "class"} Class:
         %td        
           = @admission.pp
-
-  .col-sm-1
-    = link_to 'Back', home_index_admission_path, :class => 'btn btn-primary'    
-
 
