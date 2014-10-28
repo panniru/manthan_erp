@@ -22,7 +22,17 @@
           %tr{"ng-repeat" => "route in routes"}
             %td 
               %a{href: '/routes/{{route.id}}'} {{route.id}}
-            %td {{route.busno_up}}
+              {{route.lpp}}
+              %div{"ng-if" => "route.lpp == 'Down Route' "}
+                = link_to raw("<span class= 'fa fa-level-down '></span>"), '#', :class => "btn btn-warning btn-xs"
+              %div{"ng-if" => "route.lpp != 'Down Route' "}
+                = link_to raw("<span class= 'fa fa-level-up '></span>"), '#', :class => "btn btn-success btn-xs"
+               
+            %td 
+              %div{"ng-if" => "route.lpp == 'Down Route' "}
+                {{route.busno_down}}
+              %div{"ng-if" => "route.lpp != 'Down Route' "}
+                {{route.busno_up}}
             %td {{route.start_location}}
             %td {{route.end_location}}
             %td {{route.student_length}}

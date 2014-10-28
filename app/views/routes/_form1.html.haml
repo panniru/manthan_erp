@@ -3,21 +3,28 @@
     .col-sm-2
       = label_tag "Route", nil, :class => "form-label"
     .col-sm-3
-      = select_tag "lpp" , options_for_select([['Up Route'],['Down Route ']]) ,"ng-model" => "newRoute.lpp",:class => 'form-control'
+      = select_tag "lpp" , options_for_select([['Up Route'],['Down Route ']]) ,"ng-model" => "newRoute.lpp",:class => 'form-control', "ng-change" => "busno(newRoute.lpp)"
     .col-sm-2
       = label_tag "Busno", nil, :class => "form-label"
     .col-sm-3
-      %select{"ng-model" => "newRoute.busno_up", "ng-options" => "var.id as var.id  for var in bus",:class => "form-control",:required => "required", :options_manager => "" , :index => "{{$index}}"}
-        %option{style: "display:none", value: ""} Bus No
-        = hidden_field_tag :busno_up, :value => ""
-        %br
-        %br
+      %div1{"ng-show" => "isEven(myNumber)"}
+        %select{"ng-model" => "newRoute.busno_up", "ng-options" => "var.id as var.id  for var in bus_up",:class => "form-control"}
+          %option{style: "display:none", value: ""} Bus No
+          = hidden_field_tag :busno_up, :value => ""
+          %br
+          %br
+      %div2{"ng-show" => "!isEven(myNumber)"}
+        %select{"ng-model" => "newRoute.busno_down", "ng-options" => "var.id as var.id  for var in bus_down",:class => "form-control"}
+          %option{style: "display:none", value: ""} Bus No
+          = hidden_field_tag :busno_down, :value => ""
+          %br
+          %br
       
   .form-group{"ng-repeat" => "location in newRoute.locations"}
     .row
       = label_tag "stop  {{$index+1}}", nil, :class => "form-label col-md-2"
       .col-md-5
-        %select{"ng-model" => "location.location_master_id", "ng-options" => "var.id as var.location_name for var in all_locations",:class => "form-control",:required => "required", }
+        %select{"ng-model" => "location.location_master_id", "ng-options" => "var.id as var.location_name for var in all_locations",:class => "form-control",:required => "required" }
           %option{style: "display:none", value: ""} Select Location
       .col-sm-3
         .input-group

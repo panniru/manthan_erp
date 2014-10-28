@@ -27,7 +27,7 @@
        respond_to do |format|   
          format.json do
            routes = @routes.map do |r|
-             {id: r.id ,  busno_up: r.busno_up, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name , student_length: r.student_length }
+             {id: r.id , lpp: r.lpp,  busno_up: r.busno_up, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name , student_length: r.student_length }
            end
            render :json => routes
          end
@@ -89,8 +89,16 @@
      render :json => var
    end
    
-   def get_bus_no
+   def get_bus_no_up
      @new_vehicles = NewVehicle.bus_up
+     var = @new_vehicles.map do |r|
+       {id: r}
+     end
+     render :json => var
+   end
+   
+   def get_bus_no_down
+     @new_vehicles = NewVehicle.bus_down
      var = @new_vehicles.map do |r|
        {id: r}
      end
@@ -168,7 +176,7 @@
    def create
      respond_to do |format|
        @route= Route.new(route_params)
-       status = @route.save_route(params[:locations])
+       status = @route.save_route(params)
        format.json do
          render :json => status
        end
@@ -200,13 +208,13 @@
    private
       
    def route_params
-     route_params = params.require(:route).permit(:route_no , :busno_up, :lpp)
+     route_params = params.require(:route).permit(:route_no , :busno_up, :lpp , :busno_down)
    end
    
    def build_route_from_bulk
      params.require(:locations).select{|locations| location["location_master_id"].present? and route["sequence_no"].present? }.map do |params|
        location = Location.new(params[:location].permit(:location_master_id, :sequence_no , :route_id))
-       route = Route.new(params[:route].permit(:route_no, :busno_up))
+       route = Route.new(params[:route].permit(:route_no, :busno_up , :busno_down))
        route.locations << location
        route
      end
