@@ -20,19 +20,21 @@
               %th
         %tbody
           %tr{"ng-repeat" => "route in routes"}
-            %td 
-              %a{href: '/routes/{{route.id}}'} {{route.id}}
-              {{route.lpp}}
-              %div{"ng-if" => "route.lpp == 'Down Route' "}
-                = link_to raw("<span class= 'fa fa-level-down '></span>"), '#', :class => "btn btn-warning btn-xs"
-              %div{"ng-if" => "route.lpp != 'Down Route' "}
-                = link_to raw("<span class= 'fa fa-level-up '></span>"), '#', :class => "btn btn-success btn-xs"
+            %td
+              .col-md-3
+                %a{href: '/routes/{{route.id}}'} {{route.id}}
+              .col-md-3
+                %div{"ng-if" => "route.lpp == 'Up Route' "}
+                  = link_to raw("<span class= 'fa fa-arrow-up '></span>"), '#', :title => "Up Route"
+                %div{"ng-if" => "route.lpp != 'Up Route' "}
+                  = link_to raw("<span class= 'fa fa-arrow-down '></span>"), '#', :title => "Down Route" 
+                
                
             %td 
-              %div{"ng-if" => "route.lpp == 'Down Route' "}
-                {{route.busno_down}}
-              %div{"ng-if" => "route.lpp != 'Down Route' "}
+              %div{"ng-if" => "route.lpp == 'Up Route' "}
                 {{route.busno_up}}
+              %div{"ng-if" => "route.lpp != 'Up Route' "}
+                {{route.busno_down}}
             %td {{route.start_location}}
             %td {{route.end_location}}
             %td {{route.student_length}}
