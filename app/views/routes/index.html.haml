@@ -20,9 +20,21 @@
               %th
         %tbody
           %tr{"ng-repeat" => "route in routes"}
+            %td
+              .col-md-3
+                %a{href: '/routes/{{route.id}}'} {{route.id}}
+              .col-md-3
+                %div{"ng-if" => "route.lpp == 'Up Route' "}
+                  = link_to raw("<span class= 'fa fa-arrow-up '></span>"), '#', :title => "Up Route"
+                %div{"ng-if" => "route.lpp != 'Up Route' "}
+                  = link_to raw("<span class= 'fa fa-arrow-down '></span>"), '#', :title => "Down Route" 
+                
+               
             %td 
-              %a{href: '/routes/{{route.id}}'} {{route.id}}
-            %td {{route.busno_up}}
+              %div{"ng-if" => "route.lpp == 'Up Route' "}
+                {{route.busno_up}}
+              %div{"ng-if" => "route.lpp != 'Up Route' "}
+                {{route.busno_down}}
             %td {{route.start_location}}
             %td {{route.end_location}}
             %td {{route.student_length}}

@@ -240,10 +240,10 @@ end
 
 def seed_routes
   unless Route.first.present?
-    Route.create(:id => '18' ,  :busno_up => '13' , :lpp => 'Up route', :gmaps => '' , :start_point => '25' , :end_point => '26' )
-    Route.create(:id => '19' , :busno_up => '10' ,  :lpp => 'Up route' , :gmaps => '' , :start_point => '30' , :end_point => '29' )
-    Route.create(:id => '20' ,  :busno_up => '12' , :lpp => 'Down route', :gmaps => '' , :start_point => '32' , :end_point => '35' )
-    Route.create(:id => '21' ,  :busno_up => '14' , :lpp => 'Down route',  :gmaps => '' , :start_point => '36' , :end_point => '37' )
+    Route.create(:id => '18' ,  :busno_up => '13' , :lpp => 'Up Route', :gmaps => '' , :start_point => '25' , :end_point => '26' )
+    Route.create(:id => '19' , :busno_up => '10' ,  :lpp => 'Up Route' , :gmaps => '' , :start_point => '30' , :end_point => '29' )
+    Route.create(:id => '20' ,  :busno_up => '12' , :lpp => 'Down Route', :gmaps => '' , :start_point => '32' , :end_point => '35' )
+    Route.create(:id => '21' ,  :busno_up => '14' , :lpp => 'Down Route',  :gmaps => '' , :start_point => '36' , :end_point => '37' )
   
   end
 end
@@ -417,6 +417,8 @@ def seed_close_status
     Status.create(:reason => 'Financial Crisis')
   end
 end
+
+
 def seed_all
   seed_role
   seed_user   

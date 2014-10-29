@@ -5,8 +5,12 @@
             var url = "/routes/get_location_view.json"
             return $http.get(url);
         };
-	var getBusServiceView = function(){
-            var url = "/routes/get_bus_no.json"
+	var getBusUpServiceView = function(){
+            var url = "/routes/get_bus_no_up.json"
+            return $http.get(url);
+	};
+	var getBusDownServiceView = function(){
+            var url = "/routes/get_bus_no_down.json"
             return $http.get(url);
 	};
 	var getStudentView = function(route){
@@ -36,7 +40,8 @@
         return {
             getLocationServiceView : getLocationServiceView,
 	    routeMail : routeMail,
-	    getBusServiceView : getBusServiceView,
+	    getBusUpServiceView : getBusUpServiceView,
+	    getBusDownServiceView : getBusDownServiceView,
 	    getStudentView : getStudentView,
 	    getLocationView : getLocationView,
 	    getRouteLocation :getRouteLocation,

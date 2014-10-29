@@ -8,10 +8,17 @@
                     $scope.all_locations =result.data
 		});
 	}
-	var fetch_bus = function(){
-	    routesService.getBusServiceView()
+	var fetch_bus_up = function(){
+	    routesService.getBusUpServiceView()
 		.then(function(result) {
-		    $scope.bus =result.data
+		    $scope.bus_up =result.data
+		});
+	}
+
+	var fetch_bus_down = function(){
+	    routesService.getBusDownServiceView()
+		.then(function(result) {
+		    $scope.bus_down =result.data
 		});
 	}
 	
@@ -23,8 +30,9 @@
 	$scope.defineNew = function(){
 	    $scope.action = "new"
 	    fetch_locations();
-	    fetch_bus();
-	    $scope.newRoute = new resourceService.Route({"route_no":"","lpp":"", "busno_up":"",  "locations":[]})
+	    fetch_bus_up();
+	    fetch_bus_down();
+	    $scope.newRoute = new resourceService.Route({"route_no":"","lpp":"", "busno_up":"","busno_down":"",  "locations":[]})
 	    for(var i=0; i<2; i++){
 	        $scope.newRoute.locations.push({"location_master_id":"" , "sequence_no": "" , "route_id" : ""});
             };
@@ -94,14 +102,23 @@
 		    $('#createModal').modal('show')
 		});
 	}
+	$scope.busno = function(selected_value){
+	    $scope.isEven = function(value) {
+		if (selected_value == 'Up Route')
+		    return true;
+		else 
+		    return false;
+	    };
+	}
 	
+
 	$scope.destroy = function(route){
             route.$delete()
 	    	.then(function(response){
                     $scope.routes.splice($scope.routes.indexOf(route), 1)
 		});
 	};
-
+	
         $scope.addMoreterms = function(){
 	    var lnt = parseInt($scope.newRoute.locations.length)
             for(var i=lnt; i< lnt+1; i++){

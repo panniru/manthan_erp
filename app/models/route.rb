@@ -1,5 +1,5 @@
 class Route < ActiveRecord::Base
-  has_many :new_vehicle, :dependent => :destroy 
+  has_many :new_vehicle 
   has_many :student_route_mappings , :dependent => :destroy 
   has_many :locations , :dependent => :destroy
   has_many :location_masters
@@ -25,16 +25,31 @@ class Route < ActiveRecord::Base
   end
 
   def save_route(location_params)
-    location_params.each do |location|
+    location_params[:locations].each do |location|
       locations << Location.new(location.permit(:location_master_id, :sequence_no))
     end
     status = false
     ActiveRecord::Base.transaction do
       status = self.save!
-      sorted_locations = self.locations.sort{|l1,l2| l1.sequence_no <=> l2.sequence_no}
-      status = self.update(:start_point => sorted_locations.first.id, :end_point => sorted_locations.last.id)
+      @sorted_locations = self.locations.sort{|l1,l2| l1.sequence_no <=> l2.sequence_no}
+      status = self.update(:start_point => @sorted_locations.first.id, :end_point => @sorted_locations.last.id)
+    end
+    if  (location_params[:lpp] == 'Down Route')
+      locations << Location.new({:location_master_id => '10', :sequence_no => sequence_no_last })
+    else
+      locations << Location.new({:location_master_id => '10', :sequence_no => sequence_no_first })
     end
     status
+  end
+  
+  def sequence_no_last
+    @sorted_locations = self.locations.sort{|l1,l2| l1.sequence_no <=> l2.sequence_no}
+    @sorted_locations.last.sequence_no+1
+  end
+
+  def sequence_no_first
+    @sorted_locations = self.locations.sort{|l1,l2| l1.sequence_no <=> l2.sequence_no}
+    @sorted_locations.first.sequence_no-1
   end
   
   def update_route(params)

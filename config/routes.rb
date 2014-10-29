@@ -554,7 +554,8 @@ ManthanErp::Application.routes.draw do
     collection do
       post "create_bulk"
       get "get_location_view"
-      get "get_bus_no"
+      get "get_bus_no_up"
+      get "get_bus_no_down"
       get "all_students"
       post "send_mail"
       get 'all_locations'
