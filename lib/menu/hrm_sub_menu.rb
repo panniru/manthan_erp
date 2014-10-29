@@ -6,8 +6,6 @@ class HrmSubMenu
   end
   
   def admin_sub_menu
-    p "============="
-    p @params
     
     # if @params[:action].present? and @params[:action] != 'index'
     #   return student_masters_sub_menu
@@ -46,7 +44,7 @@ class HrmSubMenu
   end
 
   def parents
-    MenuItem.new(:label => "Parent", :klass => "", :icon => "user ", :href => "/parents?context=HRM")
+    MenuItem.new(:label => "Parent", :klass => "", :icon => "user ", :href => "/parent_masters?context=HRM")
   end
 
   def teachers

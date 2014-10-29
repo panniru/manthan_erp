@@ -3,34 +3,34 @@
     .form-group
       .col-md-4
         %label.form-label Line1
-      .col-md-6{:ng_init => "address.address_line1 = '#{@student_master.address_line1}'"} 
+      .col-md-6{:ng_init => "address.address_line1 = '#{@student_master.parent.address_line1}'"} 
         %input.form-control{:type => "text", :ng_model => "address.address_line1", :ng_show => "isAddressEdit"}
         %label.form-label{:ng_hide => "isAddressEdit"}= ": {{address.address_line1}}" 
     .form-group
       .col-md-4
         %label.form-label Line2
-      .col-md-6{:ng_init => "address.address_line2 = '#{@student_master.address_line2}'"}
+      .col-md-6{:ng_init => "address.address_line2 = '#{@student_master.parent.address_line2}'"}
         %input.form-control{:type => "text", :ng_model => "address.address_line2", :ng_show => "isAddressEdit"}
         %label.form-label{:ng_hide => "isAddressEdit"}= ": {{address.address_line2}}"  
 
     .form-group
       .col-md-4
         %label.form-label City
-      .col-md-6{:ng_init => "address.city = '#{@student_master.city}'"}
+      .col-md-6{:ng_init => "address.city = '#{@student_master.parent.city}'"}
         %input.form-control{:type => "text", :ng_model => "address.city", :ng_show => "isAddressEdit"}
         %label.form-label{:ng_hide => "isAddressEdit"}= ": {{address.city}}" 
 
     .form-group
       .col-md-4
         %label.form-label State
-      .col-md-6{:ng_init => "address.state = '#{@student_master.state}'"}
+      .col-md-6{:ng_init => "address.state = '#{@student_master.parent.state}'"}
         %input.form-control{:type => "text", :ng_model => "address.state", :ng_show => "isAddressEdit"}
         %label.form-label{:ng_hide => "isAddressEdit"}= ": {{address.state}}" 
 
     .form-group
       .col-md-4
         %label.form-label Pin
-      .col-md-6{:ng_init => "address.pin = '#{@student_master.pin}'"}
+      .col-md-6{:ng_init => "address.pin = '#{@student_master.parent.pin}'"}
         %input.form-control{:type => "text", :ng_model => "address.pin", :ng_show => "isAddressEdit"}
         %label.form-label{:ng_hide => "isAddressEdit"}= ": {{address.pin}}"         
 
