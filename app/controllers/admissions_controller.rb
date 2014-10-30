@@ -85,6 +85,7 @@ class AdmissionsController < ApplicationController
     @admission = Admission.new(admission_params)
     @admission.form_no = Admission.get_no
     @admission.admission_no = Admission.get_no
+    
     @admission.teacher_leader = TeacherLeader.where(:klass => admission_params[:grade]).first
     respond_to do |format|
       if @admission.save 
@@ -261,6 +262,11 @@ class AdmissionsController < ApplicationController
  def update
    p "-======================="
    @admission = Admission.find(params[:id])
+   @admission.from = Admission.get_date
+   @test = Admission.get_date
+   p @test
+   
+   
    respond_to do |format|
      if @admission.update!(admission_params)
        if @admission.finalresult == "Selected"

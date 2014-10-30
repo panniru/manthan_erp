@@ -8,15 +8,10 @@
     .col-sm-6
       .form-group
         %center
-          .col-sm-6
-            %h5 ACADEMIC YEAR FROM 
+          .col-sm-5
+            %h5 ACADEMIC YEAR FROM
           .col-sm-3
-            %select#year
-              = f.hidden_field :from
-              -
-            %select#year
-              = f.hidden_field :to
-        
+            = f.select(:from, Admission::get_date)
     .col-sm-3
       .pull-right
         .col-sm-4

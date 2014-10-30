@@ -1,10 +1,16 @@
 class Admission < ActiveRecord::Base
-
+  def self.get_date
+    a = (Date.today.year..Date.today.year+1).map{|year| "#{year} - #{year+1}"}
+    @test = a
+    return @test
+  end
 
   def self.get_no
     
     if Admission.exists?(&:form_no)
-      no = Admission.all.map(&:form_no).last
+      no = Admission.maximum(:form_no)
+      p "1"
+      p no
       nos = no.to_i
       nos +=1
       p nos

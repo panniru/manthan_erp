@@ -8,15 +8,11 @@
     .col-sm-6
       .form-group
         %center
-          .col-sm-6
-            %h5 ACADEMIC YEAR FROM 
+          .col-sm-5
+            %h5 ACADEMIC YEAR FROM
           .col-sm-3
-            %select#year
-              = f.hidden_field :from
-              -
-            %select#year
-              = f.hidden_field :to
-        
+            = f.select(:from, Admission::get_date)
+            
     .col-sm-3
       .pull-right
         .col-sm-4
@@ -24,7 +20,7 @@
         .col-sm-8
           = f.text_field :branch, :class => 'form-control'
   .row
-    .col-sm-4
+    .col-sm-4 
       .pull-left
         = label_tag "for Office use only"
         %table.table.table.bordered
