@@ -5,13 +5,15 @@ class Academic
   end
   
   def admin_sub_menu
-    sub_menu = []    
+    sub_menu = []  
+    sub_menu << section_masters  
     sub_menu << grades_sections_mappings
+    sub_menu << subject_masters
     sub_menu << grades_subjects_mappings
     sub_menu << time_tables
     sub_menu << teacher_grade_mappings
-    sub_menu << class_teacher_mappings
     sub_menu << teacher_timetables
+    sub_menu << class_teacher_mappings
     sub_menu << teaching_plans
     sub_menu << assessment_criteria
     sub_menu << grading
@@ -19,8 +21,6 @@ class Academic
     sub_menu << assessment_results
     sub_menu << academic_terms
     sub_menu << term_results
-    sub_menu << subject_masters
-    sub_menu << section_masters
     sub_menu
   end
   def teacher_sub_menu

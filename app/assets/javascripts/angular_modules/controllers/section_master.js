@@ -3,6 +3,7 @@
     app.controller("SectionMasterController",["$scope","resourceService", "sectionMasterService", function($scope, resourceService, subjectMasterService) {      
         $scope.sections = resourceService.SectionMaster.query();  
         $scope.section_masters = [];
+        $scope.error_messages = [];
 
         $scope.showSections = function(){
             $scope.sections = resourceService.SectionMaster.query();  
@@ -31,8 +32,9 @@
                         $scope.showErrorMessage = false;
                     }
                     else
-                    {
-                        $scope.showErrorMessage = true;
+                    {  
+                        $scope.error_messages = response;             
+                        $scope.showErrorMessage = false;
                     }                   
                 });
         };
