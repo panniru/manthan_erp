@@ -110,12 +110,16 @@
             $scope.showMappings();
         };
         
-        $scope.getGradeWiseMappings= function(){
+        $scope.getGradeWiseMappings = function(){
             teachersGradesService.getGradeWiseMappings($scope.myGrade,$scope.mySection)
                 .then(function(result) {  
                     $scope.mappings = result.data                  
                 }); 
             $scope.myShowGradeWiseFormValue = "true" 
+        };
+
+        $scope.cancelMappings = function(){
+            $('#myModal').modal('hide');   
         };
         
         

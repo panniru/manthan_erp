@@ -38,11 +38,15 @@
 
         };        
        
-        $scope.deleteSubject = function(subject){            
-            subject.$delete()
-                .then(function(responce){
-                    $scope.showSubjects();                   
-                })
+        $scope.deleteSubject = function(subject){       
+            if(confirm("Are you sure want to delete")){
+                subject.$delete()
+                    .then(function(responce){
+                        $scope.showSubjects();                   
+                    })
+            }else{
+                $('#myModal').modal('hide');
+            }     
         };
 
     }]);

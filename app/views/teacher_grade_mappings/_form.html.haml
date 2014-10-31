@@ -37,7 +37,8 @@
                   %td
                     %select{"ng-model" => "mapping['subject_master_id']", "ng-options" => "subject.subject_master_id as subject.subject_name for subject in subjects",:class => "form-control"} 
                       %option{value: ""}
+            %br
             .row
-              .col-md-2
+              .col-md-5.col-md-offset-3   
                 %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveMappings()"}=  "SAVE"
                         
