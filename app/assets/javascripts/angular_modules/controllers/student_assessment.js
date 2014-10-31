@@ -1,6 +1,11 @@
 (function(angular, app) {
     "use strict";
-    app.controller('StudentAssessmentController',["$scope","resourceService", function($scope, resourceService) {
+    app.controller('StudentAssessmentController',["$scope","resourceService","staffassessmentService", function($scope, resourceService, staffassessmentService) {
+
+        // staffassessmentService.getAssessmentStudent()
+        //     .then(function(result) {
+        //         $scope.assessments = result.data
+        //     });
         
         
         $scope.assessments = resourceService.Assess.query(); 
@@ -28,6 +33,7 @@
 
 
         $scope.planupdate = function(){
+            alert()
             $scope.assessment.status = 'Assessment Completed';
             //alert($scope.assessment.status)
             $scope.assessment.$update()

@@ -36,7 +36,7 @@ class StaffrecruitsController < ApplicationController
     @staffrecruit = Staffrecruit.find(params[:id])
     respond_to do |format|
       if @staffrecruit.update!(staffrecruit_params)
-        if @staffrecru.final_result == "Selected"
+        if @staffrecruit.final_result == "Selected"
           new_faculty_master = get_faculty_master(@staffrecruit)
           if new_faculty_master.valid?
             new_faculty_master.save!
@@ -59,6 +59,7 @@ class StaffrecruitsController < ApplicationController
   end
 
   def assessment_index
+    p "111111111111111"
     respond_to do |format|
       format.json do
         if(Staffadmin.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
@@ -69,10 +70,12 @@ class StaffrecruitsController < ApplicationController
           ass = Staffrecruit.where(:user_id => a , :status => b).each.map do |mapping|
             {id: mapping.id, faculty_name: mapping.faculty_name, form_no: mapping.form_no, status: mapping.status, assessment_result: mapping.assessment_result, comments: mapping.comments, post: mapping.post}
           end
+          render :json => ass
+          p ass
         end
-        render :json => ass
       end
-      format.html{}
+      format.html
+      {}
     end
   end
   
@@ -179,17 +182,34 @@ class StaffrecruitsController < ApplicationController
     end
     
     if current_user.teacher?
-      @staffrecruits = Staffrecruit.assessment_planned
       respond_to do |format|
         format.json do
-          @staffrecruits = Staffrecruit.assessment_planned
-          render :json => @staffrecruits
+          if(Staffadmin.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
+            pa = "#{current_user.faculty_master.id}"
+            p pa
+            a = Staffadmin.where(:faculty_master_id => pa).map{|staff| staff.role_id}
+            b = "Assessment Planned"
+            ass = Staffrecruit.where(:user_id => a , :status => b).each.map do |mapping|
+              {id: mapping.id, faculty_name: mapping.faculty_name, form_no: mapping.form_no, status: mapping.status, assessment_result: mapping.assessment_result, comments: mapping.comments, post: mapping.post}
+            end
+            render :json => ass
+            p ass
+          end
         end
-        format.html do 
-          render "index"
-        end
+        format.html{}
       end
     end
+     #  @staffrecruits = Staffrecruit.assessment_planned
+    #   respond_to do |format|
+    #     format.json do
+    #       @staffrecruits = Staffrecruit.assessment_planned
+    #       render :json => @staffrecruits
+    #     end
+    #     format.html do 
+    #       render "index"
+    #     end
+    #   end
+    # end
 
     if current_user.principal?
       @staffrecruits = Staffrecruit.assessment_completed

@@ -5,8 +5,14 @@
             var url = "/staffrecruits/get_assessment_staff.json"
             return $http.get(url);
         };
+
+        var getAssessmentStudent = function(){
+            var url = "/admissions/get_assessment_students.json"
+            return $http.get(url);
+        };
         return {
-            getAssessmentStaff : getAssessmentStaff
+            getAssessmentStaff : getAssessmentStaff,
+            getAssessmentStudent : getAssessmentStudent
         };
         
     }]);

@@ -1,13 +1,13 @@
 (function(angular, app) {
     "use strict";
-    app.controller('StaffAssessmentController',["$scope","resourceService", "staffassessmentService",function($scope, resourceService, staffassessmentService) {
+    app.controller('StaffAssessmentController',["$scope","resourceService",function($scope, resourceService) {
         
-        staffassessmentService.getAssessmentStaff()
-            .then(function(result) {
-                $scope.assessments = result.data
-            });
+        // staffassessmentService.getAssessmentStaff()
+        //     .then(function(result) {
+        //         $scope.assessments = result.data
+        //     });
        
-        
+        $scope.assessments = resourceService.Recruitment.query(); 
 	$scope.editAssessments = function(assessment){
 	    $scope.assessment = assessment
 	    $('#edit').modal('show');

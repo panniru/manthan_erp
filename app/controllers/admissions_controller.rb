@@ -1,7 +1,6 @@
 class AdmissionsController < ApplicationController
-  
-  def get_assessment_students
-    
+
+  def assessment_index
     respond_to do |format|
       format.json do
         if(TeacherLeader.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
@@ -9,11 +8,30 @@ class AdmissionsController < ApplicationController
           a = TeacherLeader.where(:faculty_master_id => pa).map{|student| student.grade_master_id}
           b = "Assessment Planned"
           ass = Admission.where(:grade_master_id => a, :status => b).each.map do |mapping|
-            
             {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment}
           end
           render :json => ass
+          p ass
         end
+      end
+      format.html
+      {}
+    end
+  end
+  
+
+  def get_assessment_students
+    respond_to do |format|
+      format.json do
+        if(TeacherLeader.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
+          pa = "#{current_user.faculty_master.id}"
+          a = TeacherLeader.where(:faculty_master_id => pa).map{|student| student.grade_master_id}
+          b = "Assessment Planned"
+          ass = Admission.where(:grade_master_id => a, :status => b).each.map do |mapping|
+            {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment}
+          end
+        end
+          render :json => ass
       end
     end
   end
@@ -53,17 +71,34 @@ class AdmissionsController < ApplicationController
     end
 
     if current_user.teacher?
-      @admissions = Admission.assessment_planned
       respond_to do |format|
         format.json do
-          @admissions = Admission.assessment_planned
-          render :json => @admissions
+          if(TeacherLeader.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
+            pa = "#{current_user.faculty_master.id}"
+            a = TeacherLeader.where(:faculty_master_id => pa).map{|student| student.grade_master_id}
+            b = "Assessment Planned"
+            ass = Admission.where(:grade_master_id => a, :status => b).each.map do |mapping|
+              {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment}
+            end
+            render :json => ass
+            p ass
+          end
         end
-        format.html do 
-          render "admission_home"
-        end
+        format.html
+        {}
       end
     end
+    #   @admissions = Admission.assessment_planned
+    #   respond_to do |format|
+    #     format.json do
+    #       @admissions = Admission.assessment_planned
+    #       render :json => @admissions
+    #     end
+    #     format.html do 
+    #       render "admission_home"
+    #     end
+    #   end
+    # end
 
     
     if current_user.principal?
@@ -170,17 +205,6 @@ class AdmissionsController < ApplicationController
     end
   end
   
-  def assessment_index
-    p params
- 
-    if params[:search].present?
-      @admissions = Admission.search(params[:search])
-    else
-      @admissions = Admission.assessment_planned
-      
-    end
-  end
-  
   def management_index
     if params[:search].present?
       @admissions = Admission.search(params[:search])
@@ -262,11 +286,9 @@ class AdmissionsController < ApplicationController
  def update
    p "-======================="
    @admission = Admission.find(params[:id])
-   @admission.from = Admission.get_date
-   @test = Admission.get_date
-   p @test
-   
-   
+   # @admission.from = Admission.get_date
+   # @test = Admission.get_date
+   # p @test
    respond_to do |format|
      if @admission.update!(admission_params)
        if @admission.finalresult == "Selected"

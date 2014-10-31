@@ -18,7 +18,7 @@
 %br
 .row
   .col-sm-11
-    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => 'width: 100%'}
       %thead
         %tr
           %th Post
@@ -29,11 +29,16 @@
       %tbody
         - @adds.each do |add|
           %tr
-            %td= add.title
-            %td= add.description
-            %td= add.created_at
-            %td= link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_add_path(add), :class => "btn btn-warning btn-sm", :title => "Edit"
-            %td= link_to raw("<span class='glyphicon glyphicon-trash'></span>"), add_path(add), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
+            %td{:style => 'width: 20%'}
+              = add.title
+            %td{:style => 'width: 30%'}
+              = add.description
+            %td{:style => 'width: 20%'}
+              = add.created_at
+            %td{:style => 'width: 10%'}
+              = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_add_path(add), :class => "btn btn-warning btn-sm", :title => "Edit"
+            %td{:style => 'width: 10%'}
+              = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), add_path(add), :class => "btn btn-danger btn-sm", :data => {:method => 'delete' , :confirm => "Are You Sure to Delete ?"}, :title => "Delete"
           
 	
        
