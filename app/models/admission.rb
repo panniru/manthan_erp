@@ -1,8 +1,32 @@
 class Admission < ActiveRecord::Base
+
+  validates :name, presence: true
+  validates :dob, presence: true
+  validates :gender, presence: true
+  validates :nationality, presence: true
+  validates :income, presence: true
+  validates :father_name, presence: true
+  validates :mother_name, presence: true
+  validates :father_occupation, presence: true
+  validates :address_line1, presence: true
+  validates :address_line2, presence: true
+  validates :city, presence: true
+  validates_format_of :email, :with  => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  validates :mobile, format: { with: /\d{10}/, message: ":Enter correct format(XXXXXXXXXX)" }
+  validates :language, presence: true
+  validates :bus, presence: true
+  validates :know_school, presence: true
+  
   def self.get_date
     a = (Date.today.year..Date.today.year+1).map{|year| "#{year} - #{year+1}"}
     @test = a
     return @test
+  end
+
+  def self.get_year_of_study
+    a = (Date.today.year-1..Date.today.year).map{|year|"#{year-1} - #{year}"}
+    b = a
+    return b
   end
 
   def self.get_no

@@ -153,7 +153,7 @@
             %th
               = label_tag "Year:"
             %th
-              = f.text_field :year, :class => 'date-picker-year form-control'
+              = f.select(:year, Admission::get_year_of_study)
             %th
               = label_tag "Board:"
             %th

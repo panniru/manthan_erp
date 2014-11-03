@@ -1,5 +1,39 @@
 class StaffrecruitsController < ApplicationController
- 
+  
+  def recruitment_home
+    if current_user.admin?
+      if params[:search].present?
+        @staffrecruits = Staffrecruit.search(params[:search])
+      else
+        @staffrecruits = Staffrecruit.application_forms  
+      end
+    end
+    if current_user.teacher?
+      if params[:search].present?
+        @staffrecruits = Staffrecruit.search(params[:search])
+      else
+        @staffrecruits = Staffrecruit.assessment_planned
+      end
+    end
+    if current_user.principal?
+      if params[:search].present?
+        @staffrecruits = Staffrecruit.search(params[:search])
+      else
+        @staffrecruits = Staffrecruit.assessment_completed
+      end
+    end
+  end
+  
+  def admin_management_index
+    @staffrecruits = Staffrecruit.management_review
+  end
+  def assess_completed_index
+    @staffrecruits = Staffrecruit.assessment_completed
+  end
+  def assess_index
+    @staffrecruits = Staffrecruit.assessment_planned
+  end
+
   def close_index
     @staffrecruit = Staffrecruit.find(params[:id])
   end
@@ -43,7 +77,7 @@ class StaffrecruitsController < ApplicationController
           else
           end
         end
-        format.html { redirect_to staffrecruits_path, notice: 'Form was successfully updated.' }
+        format.html { redirect_to recruitment_home_staffrecruits_path, notice: 'Form was successfully updated.' }
         format.json { render action: 'index', :status => "success" }
       else
         format.html { render action: 'edit' }
@@ -163,25 +197,39 @@ class StaffrecruitsController < ApplicationController
 
 
   def index
+    @staffrecruits = Staffrecruit.management_review
+    respond_to do |format|
+      format.json do
+        @staffrecruits = Staffrecruit.management_review
+        render :json => @staffrecruits
+      end
+      format.html do 
+        render "index"
+      end
+    end
+  
+      
     if current_user.admin?
       if params[:staff_admission_id].present?
         @staffrecruits = Staffrecruit.where(:staff_admission_id => params[:staff_admission_id])
       else
         @staffrecruits = Staffrecruit.application_forms
       end
-      @staffrecruits = Staffrecruit.application_forms
-      respond_to do |format|
-        format.json do
-          @staffrecruits = Staffrecruit.management_review
-          render :json => @staffrecruits
-        end
-        format.html do 
-          render "index"
-        end
-      end
     end
+      # @staffrecruits = Staffrecruit.application_forms
+    #   respond_to do |format|
+    #     format.json do
+    #       @staffrecruits = Staffrecruit.management_review
+    #       render :json => @staffrecruits
+    #     end
+    #     format.html do 
+    #       render "index"
+    #     end
+    #   end
+    # end
     
     if current_user.teacher?
+      @staffrecruits = Staffrecruit.assessment_planned
       respond_to do |format|
         format.json do
           if(Staffadmin.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
@@ -231,7 +279,7 @@ class StaffrecruitsController < ApplicationController
     @staffrecruit.form_no = Staffrecruit.getno
     respond_to do |format|
       if @staffrecruit.save 
-        format.html { redirect_to staffrecruits_path, notice: 'Form was successfully created.' }
+        format.html { redirect_to recruitment_home_staffrecruits_path, notice: 'Form was successfully created.' }
       else
         format.html { render action: 'new' }
       end
@@ -265,7 +313,7 @@ class StaffrecruitsController < ApplicationController
     @staffrecruit = Staffrecruit.find(params[:id])
     @staffrecruit.destroy
     respond_to do |format|
-      format.html { redirect_to staffrecruits_path }
+      format.html { redirect_to recruitment_home_staffrecruits_path }
     end
   end
  def homeindex

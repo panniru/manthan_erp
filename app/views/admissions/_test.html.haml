@@ -4,7 +4,7 @@
     .col-sm-12
       .form-group
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Name of the Student:", :class => 'control-label'
         .col-sm-2
           = f.text_field :name, :class => 'form-control'
@@ -13,7 +13,7 @@
         .col-sm-2            
       .form-group{"ng-controller" => "AdmissionsController"}
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = label_tag(:grade,"Class:")
         .col-sm-2
           %select{"ng-model" => "myAdmission", "ng-options" => "klass.grade_name for klass in klasses",:class => "form-control",:required => "required"}          
@@ -23,54 +23,62 @@
           = f.hidden_field :grade_master_id, :value => "{{myAdmission.id}}"
         .col-sm-2
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Date of Birth: ", :class => 'control-label'
         .col-sm-2
           = f.text_field :dob, :class => 'datepicker form-control'
 
       .form-group
         .col-sm-2
-          .pull-left
-            = f.label "Male/Female: ", :class => ' control-label'
-        .col-sm-2
-          = f.select(:gender, options_for_select([['Male'],['Female']]),{:include_blank => '-Select-' }, :class => 'admission')
-        .col-sm-2
-        .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Mother Tongue:", :class => 'control-label'
         .col-sm-2
           = f.select :language, options_from_collection_for_select(LanguageList::COMMON_LANGUAGES, "name", "name"),{:include_blank => '-Select-'}, :class => 'admission'
+
+        .col-sm-2
+        .col-sm-2
+          .pull-left.required
+            = f.label "Gender:", :class => 'control-label'
+        .col-sm-2
+          = f.radio_button :gender, 'Female'
+          = f.label :"female"
+          = f.radio_button :gender, 'Male'
+          = f.label :"male"
+          %br
+          = f.radio_button :gender, 'Others'
+          = f.label :"others"
+
         
       .form-group
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Nationality: ", :class => 'control-label'
         .col-sm-2
           = f.country_select :nationality, {object: f.object, :include_blank => '-Select-'}, :class => 'admission'
           
         .col-sm-2
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Family Income: ", :class => 'control-label'
         .col-sm-2
-          = f.select(:income, options_for_select([['Less than Rs.20,000 p.m.'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']]),{:include_blank => '-Select-' }, :class => 'admission')
+          = f.select(:income, options_for_select([['Less than Rs.20,000 p.m.'],['Rs. 20,000 p.m. - Rs. 50,000 p.m.'],['Rs. 50,000 p.m. - Rs. 1,00,000 p.m.'],['greater than 1 lakh']]),{:include_blank => '-Select-' }, :class => 'admission')
         
         
       .form-group
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Father's Name:", :class => 'control-label'
         .col-sm-2
           = f.text_field :father_name, :class => 'form-control'
         .col-sm-2
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Mother's Name: ", :class => 'control-label'
         .col-sm-2
           = f.text_field :mother_name, :class => 'form-control'
       .form-group
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Father's Occupation: ", :class => 'control-label'
         .col-sm-2
           = f.text_field :father_occupation, :class => 'form-control'
@@ -82,7 +90,7 @@
           = f.text_field :mother_occupation, :class => 'form-control'
       .form-group
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Company's Name: ", :class => 'control-label'
         .col-sm-2
           = f.text_field :father_company, :class => 'form-control'
@@ -106,32 +114,32 @@
           = f.select(:mother_education, options_for_select([['Upto SSC'],['Graduate'],['Post Graduate'],['Professional(Lawyer, Doctor, MBA, etc.,)']]),{:include_blank => '-Select-' }, :class => 'admission')
       .form-group
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Address Line1:", :class => 'control-label'
         .col-sm-2
           = f.text_field :address_line1, :class => 'form-control'
         .col-sm-2
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Address Line2:", :class => 'control-label'
         .col-sm-2
           = f.text_area :address_line2, :class => 'form-control'
       .form-group
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "City:", :class => 'control-label'
         .col-sm-2
           = f.text_field :city, :class => 'form-control'
         .col-sm-2
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Pin:", :class => 'control-label'
         .col-sm-2
           = f.text_field :pin, :class => 'form-control'
 
       .form-group
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Email: ", :class => 'control-label'          
         .col-sm-2
           = f.text_field :email, :class => 'form-control'
@@ -148,17 +156,17 @@
           = f.text_field :landline, :class => 'form-control'
         .col-sm-2
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Mobile: ", :class => 'control-label'
         .col-sm-2
           = f.text_field :mobile, :class => 'form-control'
       
       .form-group
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Bus Facility: ", :class => 'control-label'
         .col-sm-2
-          = f.select(:bus, options_for_select([['Yes','t'],['No','f']]),{:include_blank => '-Select-' },:class => 'admission')
+          = f.select(:bus, options_for_select([['Yes','t'],['No','f']]))
         .col-sm-2
         .col-sm-2
           .pull-left
@@ -186,7 +194,7 @@
           = f.text_field :changing_reason, :class => 'form-control'
         .col-sm-2
         .col-sm-2
-          .pull-left
+          .pull-left.required
             = f.label "Know about our school through:", :class => 'control-label'
         .col-sm-2
           = f.select(:know_school, options_for_select(['Friends','Advertisements','Internet','Word of Mouth','Parents whose children are studying here'],['Parents whose children are studying here']),{object: f.object, }, :class => 'admission')

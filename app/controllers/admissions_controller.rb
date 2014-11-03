@@ -1,6 +1,15 @@
 class AdmissionsController < ApplicationController
-
+  def admin_management_index
+    @admissions = Admission.management_review
+  end
+  def assess_completed_index
+    @admissions = Admission.assessment_completed
+  end
+  def assess_index
+    @admissions = Admission.assessment_planned
+  end
   def assessment_index
+    if current_user.teacher?
     respond_to do |format|
       format.json do
         if(TeacherLeader.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
@@ -17,7 +26,11 @@ class AdmissionsController < ApplicationController
       format.html
       {}
     end
+    else
+      @admissions = Admission.assessment_planned
+    end
   end
+  
   
 
   def get_assessment_students
@@ -58,18 +71,24 @@ class AdmissionsController < ApplicationController
       else
         @admissions = Admission.enquiry_forms_or_application_forms  
       end
-      @admissions = Admission.enquiry_forms_or_application_forms  
-      respond_to do |format|
-        format.json do
-          @admissions = Admission.management_review
-          render :json =>  @admissions
-        end
-        format.html do
-          render 'admission_home'
-        end
-      end
     end
-
+      # @admissions = Admission.enquiry_forms_or_application_forms
+    #   if Admission.where(:status => "Assessment Planned")
+    #     @admissions = Admission.assessment_planned
+    #     respond_to do |format|
+    #       format.json do
+    #         @admissions = Admission.assessment_planned
+    #         render :json => @admissions
+    #       end
+    #       format.html do 
+    #         render "admission_home"
+    #       end
+    #     end
+    #   end
+    #   if Admission.where(:status => 'Management Reviewed')
+    #     @admissions = Admission.management_review
+    #   end
+    # end
     if current_user.teacher?
       respond_to do |format|
         format.json do
@@ -88,18 +107,7 @@ class AdmissionsController < ApplicationController
         {}
       end
     end
-    #   @admissions = Admission.assessment_planned
-    #   respond_to do |format|
-    #     format.json do
-    #       @admissions = Admission.assessment_planned
-    #       render :json => @admissions
-    #     end
-    #     format.html do 
-    #       render "admission_home"
-    #     end
-    #   end
-    # end
-
+  
     
     if current_user.principal?
       @admissions = Admission.assessment_completed
@@ -120,7 +128,6 @@ class AdmissionsController < ApplicationController
     @admission = Admission.new(admission_params)
     @admission.form_no = Admission.get_no
     @admission.admission_no = Admission.get_no
-    
     @admission.teacher_leader = TeacherLeader.where(:klass => admission_params[:grade]).first
     respond_to do |format|
       if @admission.save 

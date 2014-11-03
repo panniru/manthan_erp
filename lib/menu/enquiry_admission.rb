@@ -11,9 +11,9 @@ class EnquiryAdmission
     sub_menu << home
     sub_menu << show_enquiry_admissions
     sub_menu << show_application_admissions    
-    sub_menu << show_assessment_planned
-    sub_menu << assessment_completed
-    sub_menu << view_management_review
+    sub_menu << show_admin_assess_planned
+    sub_menu << show_admin_assess_completed
+    sub_menu << management_review
     sub_menu << selected_students
     sub_menu << show_closed_forms
     sub_menu << teacher_settings
@@ -59,6 +59,12 @@ class EnquiryAdmission
   def show_assessment_planned
     MenuItem.new(:label => "Assessment Planned ", :klass => "", :icon => "book", :href => "/admissions/assessment_index" )
   end
+  def show_admin_assess_planned
+    MenuItem.new(:label => "Assessment Planned ", :klass => "", :icon => "book", :href => "/admissions/assess_index" )
+  end
+  def show_admin_assess_completed
+    MenuItem.new(:label => "Assessment Completed ", :klass => "", :icon => "tasks", :href => "/admissions/assess_completed_index" )
+  end
   def view_schedule
     MenuItem.new(:label => "View Schedule", :klass => "", :icon => "book", :href => "/admissions/assessment_index" )
   end
@@ -66,7 +72,7 @@ class EnquiryAdmission
     MenuItem.new(:label => "Assessment Completed", :klass => "", :icon => "sliders", :href => "/admissions/assessment_completed" )
   end
   def management_review
-    MenuItem.new(:label => "Management Review", :klass => "", :icon => "book", :href => "/admissions/assessment_index" )
+    MenuItem.new(:label => "Management Review", :klass => "", :icon => "calendar", :href => "/admissions/admin_management_index" )
   end
   def show_closed_forms
     MenuItem.new(:label => "Closed Forms", :klass => "", :icon => "ban", :href => "/admissions/closed_forms" )
@@ -87,7 +93,7 @@ class EnquiryAdmission
     MenuItem.new(:label => "TeacherLeader Settings", :klass => "", :icon => "wrench", :href => "/teacher_leaders" )
   end
   def close_form_settings
-    MenuItem.new(:label => "Form Settings", :klass => "", :icon => "wrench", :href => "/statuses" )
+    MenuItem.new(:label => "Form Settings", :klass => "", :icon => "cogs", :href => "/statuses" )
   end
 
   def reports

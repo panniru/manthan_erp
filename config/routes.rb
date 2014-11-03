@@ -530,6 +530,9 @@ ManthanErp::Application.routes.draw do
     end
     
     collection do
+      get 'admin_management_index'
+      get 'assess_completed_index'
+      get 'assess_index'
       get 'get_close_status'
       get 'get_assessment_students'
       get "get_status_view"
@@ -658,6 +661,10 @@ ManthanErp::Application.routes.draw do
       get 'update_admission'
     end
     collection do
+      get 'recruitment_home'
+      get 'admin_management_index'
+      get 'assess_completed_index'
+      get 'assess_index'
       get 'get_staff_assessment'
       get 'get_assessment_staff'
       get 'reports'

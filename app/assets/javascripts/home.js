@@ -1,10 +1,10 @@
 $(document ).ready(function() {
-        $('#change2').click(function() {
+    $('#change2').click(function() {
         $('#mypopModal').modal('show');
     });
     
-
-    $('.textbox1').hide();
+    
+    $('.textbox1').show();
     
     $('#admission_bus').change(function() {
         if ($(this).val() == 't')
