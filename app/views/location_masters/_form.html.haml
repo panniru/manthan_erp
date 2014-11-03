@@ -1,24 +1,3 @@
--# %script{:src => "http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"}
--# %script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"}
--# %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New Location"
--# #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
--#   .modal-dialog
--#     .modal-content
--#       .modal-header
--#         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
--#         %h4#myModalLabel.modal-title New Location
--#         = form_for LocationMaster.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
--#           .modal-body
--#             .row
--#               %input#geo{:placeholder => "Type business name/address", :size => "70", :type => "text"}/
--#               %input#find{:type => "button", :value => "Find"}/
--#               .map_canvas
--#                 .details
--#                   %div
--#                     = f.label :name
--#                     %br
--#                     = f.text_field :location_name, { :geo => "name", class: "form-control"}
--#                     %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"
 %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New Location"
 #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
@@ -35,3 +14,9 @@
               = f.text_field "location_name", :class => "form-control"
             .col-sm-2
               %button{:type=>"submit", :class=> "btn btn-primary"}= "Save"
+-# %html
+-#   %head
+-#     %script{:src => "https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places", :type => "text/javascript"}
+-#   Enter Address:
+-#   %input#autocomplete{:type => "text" , :name => "location_name"}
+-#     %button{:controller => "location_master", :type =>"submit", :class => "btn btn-primary"}= "Save"

@@ -1,0 +1,13 @@
+= form_tag student_route_mappings_path, :method => 'get' , :class => "form-inline" do
+  .row{"ng-controller" => "Mapping1Controller"}
+    .col-sm-5
+      = autocomplete_field_tag :name,
+      '',
+      auto_search_autocomplete_student_master_name_path,
+      :placeholder => "Student Name", :class => 'form-control',
+        :required => true,
+        :id_element => "#id"
+      = hidden_field_tag :id, :id => "id"
+    .col-sm-6
+      = link_to "Search", "#", :class => "btn btn-primary","ng-click" => "searchStudents(id)"
+  

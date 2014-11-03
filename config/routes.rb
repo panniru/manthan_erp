@@ -42,7 +42,9 @@ ManthanErp::Application.routes.draw do
   
   resources :student_route_mappings do
     collection do
-      get "get_route_view"
+      get "get_search_students"
+      get "get_up_route_view"
+      get "get_down_route_view"
       get "get_student_view"
       post "save_route"
     end
@@ -760,6 +762,14 @@ ManthanErp::Application.routes.draw do
 
   resources :vendor_categories
   
-  
+  resources :student_route_mappings do
+    collection do
+      get "get_search_students"
+      get "get_up_route_view"
+      get "get_down_route_view"
+      get "get_student_view"
+      post "save_route"
+    end
+  end
 
 end

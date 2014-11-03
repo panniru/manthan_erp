@@ -4,7 +4,9 @@ class NewVehicle < ActiveRecord::Base
   scope :capacity_bus, lambda{|id| where(:id => id ).select(:id,:capacity)}
   scope :no_buses_up, lambda{where("id not in (?)", Route.all.map(&:busno_up).select(&:present?) )}
   scope :no_buses_down, lambda{where("id not in (?)", Route.all.map(&:busno_down).select(&:present?) )}
-  
+
+ 
+
   def self.bus_up
     if (no_buses_up.length == 0 )
       map = NewVehicle.all.map{|bus| bus.id}
