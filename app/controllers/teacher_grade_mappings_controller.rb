@@ -16,9 +16,9 @@ class TeacherGradeMappingsController < ApplicationController
           if t["id"].present?
             p t["id"]
             temp = TeacherGradeMapping.find(t["id"])
-            temp.grade_master_id = t["grade_master_id"].to_i
-            temp.section_master_id = t["section_master_id"].to_i
-            temp.subject_master_id = t["subject_master_id"].to_i     
+            temp.grade_master_id = t["grade_master_id"]
+            temp.section_master_id = t["section_master_id"]
+            temp.subject_master_id = t["subject_master_id"]     
             temp.save
           else
             @timetable = TeacherGradeMapping.new(add_params(t))

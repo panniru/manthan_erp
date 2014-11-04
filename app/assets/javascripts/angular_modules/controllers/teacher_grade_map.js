@@ -2,6 +2,12 @@
     "use strict";
     app.controller('TeacherGradeMapController', ["$scope", "teachersGradesService", "teachersService", "timeTableService", function($scope, teachersGradesService, teachersService, timeTableService) {
         
+        var initiateForm = function(){
+            $scope.myShowFormValue = false;
+        };
+        initiateForm();
+
+        
         teachersService.getFacultyNamesServiceView()
             .then(function(result) {
                 $scope.faculty_names = result.data                
@@ -30,7 +36,14 @@
                 });
         }; 
         
+        $scope.getSectionsSubjectsInEdit = function(){  
+            $scope.getSectionsSubjects();
+            $scope.mapping.section_master_id = "";
+            $scope.mapping.subject_master_id = "";
+         };
+        
         $scope.showMappings = function(){  
+            $scope.myShowFormValue = true;
             teachersGradesService.checkTeachersGradesMapping($scope.myTeacher)
                 .then(function(result) {
                     $scope.check_teachers_grades_mapping = result.data                    
@@ -76,7 +89,6 @@
                     subject_master_id: $scope.mapping.subject_master_id,
                 }); 
             }
-            
             teachersGradesService.saveMappings($scope.save_mappings)
                 .then(function(result) {
                     $('#myModal').modal('hide');   
@@ -92,22 +104,23 @@
                 grade_master_id:  $scope.mapping.grade_master_id,
                 section_master_id: $scope.mapping.section_master_id,
                 subject_master_id: $scope.mapping.subject_master_id,
-            }); 
-           
+            });
             teachersGradesService.saveMappings($scope.save_mappings)
                 .then(function(result) {
                     $('#myEditModal').modal('hide');
                     $scope.showMappings();
-                });           
+                });  
         };
        
-        $scope.deleteMappings =  function($index){            
-            $scope.delete_Mappping_id = $scope.mappings[$index]['id']
-            teachersGradesService.deleteMappings($scope.delete_Mappping_id)
-                .then(function(result) {
-                    
-                }); 
-            $scope.showMappings();
+        $scope.deleteMappings =  function($index){  
+            if(confirm("Are you sure want to delete")){
+                $scope.delete_Mappping_id = $scope.mappings[$index]['id']
+                teachersGradesService.deleteMappings($scope.delete_Mappping_id)
+                    .then(function(result) {   
+                        $scope.showMappings();
+                    });                 
+            }else{
+            }
         };
         
         $scope.getGradeWiseMappings = function(){

@@ -1,1 +1,16 @@
-
+.row
+  .col-md-1
+  .col-md-8
+    %table.table-striped.table-condensed.table-bordered
+      %tr       
+        %th SECTION
+        %th TEACHER
+        %th EDIT
+        %th DELETE          
+      %tr{"ng-repeat" => "mapping in mappings| orderBy:'section_name'"}        
+        %td {{mapping['section_name']}}          
+        %td {{mapping['faculty_name']}}   
+        %td
+          = link_to raw("<span class='glyphicon glyphicon-pencil'></span>"),"#", :class => "btn btn-warning btn-sm", :title => "EDIT", :ng_click => "editMapping(mapping)"
+        %td          
+          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteMappingsA($index)"

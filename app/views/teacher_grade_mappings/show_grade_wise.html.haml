@@ -24,7 +24,7 @@
   .row
     .col-md-1
     .col-md-8{"ng-show" => "myShowGradeWiseFormValue"}
-      %table{:class => "table"}
+      %table.table-striped.table-condensed.table-bordered
         %tr          
           %th GRADE
           %th SECTION
@@ -35,16 +35,5 @@
           %td {{mapping['section_name']}}          
           %td {{mapping['subject_name']}}
           %td {{mapping['faculty_name']}}          
-    .col-md-2     
-  .row
-    :css
-      table, th, td
-      {
-      border-collapse:collapse;
-      border:5px solid #6aa6d6;
-      }
-      th, td
-      {
-      padding:5px;
-      } 
+    .col-md-2
   

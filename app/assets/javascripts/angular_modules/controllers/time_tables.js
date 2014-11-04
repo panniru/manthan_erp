@@ -6,17 +6,22 @@
                 $scope.grades=result.data; 
             });
 
-        $scope.getSections = function (){
+        $scope.getSectionsGrades = function (){
             timeTableService.getSectionsForGradeService($scope.myGrade)
                 .then(function(result) {
                     $scope.sections=result.data;
                 });
+
+            timeTableService.getSubjectsForGradeService($scope.myGrade)
+                .then(function(result) {
+                    $scope.subjects=result.data;
+                });
         };       
         
-        timeTableService.getSubjectServiceView()
-            .then(function(result) {
-                $scope.subjects=result.data                
-            });
+        //timeTableService.getSubjectServiceView()
+            //.then(function(result) {
+                //$scope.subjects=result.data                
+            //});
         
         timeTableService.getDefaultPeriodsServiceView()
             .then(function(result) {
