@@ -8,14 +8,12 @@
       = label_tag "Busno", nil, :class => "form-label"
     .col-sm-3
       %div1{"ng-show" => "isEven(myNumber)"}
-        %select{"ng-model" => "newRoute.busno_up", "ng-options" => "var.id as var.id  for var in bus_up",:class => "form-control"}
-          %option{style: "display:none", value: ""} Bus No
+        %select{"ng-model" => "newRoute.busno_up", "ng-options" => "up.id as up.id  for up in bus_up",:class => "form-control"}
           = hidden_field_tag :busno_up, :value => ""
           %br
           %br
       %div2{"ng-show" => "!isEven(myNumber)"}
-        %select{"ng-model" => "newRoute.busno_down", "ng-options" => "var.id as var.id  for var in bus_down",:class => "form-control"}
-          %option{style: "display:none", value: ""} Bus No
+        %select{"ng-model" => "newRoute.busno_down", "ng-options" => "down.id as down.id  for down in bus_down ",:class => "form-control"}
           = hidden_field_tag :busno_down, :value => ""
           %br
           %br

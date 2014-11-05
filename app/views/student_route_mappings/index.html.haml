@@ -1,12 +1,14 @@
 .row
   .col-sm-3
     %h3  Route Allotment
-  .col-sm-2
-    %br
-    = autocomplete_field_tag :name, params[:name], auto_search_autocomplete_student_master_name_path,{class: "search-query form-control", placeholder: "Student Name...", type: "search"}
-    %br
-.row{"ng-controller" => "Mapping1Controller"}
   .col-sm-6
+    %br
+    = render "search"
+    %br
+.row{"ng-controller" => "Mapping1Controller",  "ng-init" => "getStudents(page)"}
+  .col-md-3.col-md-offset-6
+    %my-pagination{:from => "from_index", :to => "to_index", :total=> "total_entries", :action => "getStudents(page)"}
+  .col-md-6
     %table#tblData.target.table.table-striped.table-condensed.table-bordered
       %thead
         %tr
@@ -34,6 +36,7 @@
             %h4#createModal.modal-title Route
           .modal-body
             %form
+              %h4 Up Route
               .row
                 .col-sm-4
                   = label_tag "Nearest Location"
@@ -53,16 +56,49 @@
                       %th Route No
                       %th Bus No
                       %th Available Seats
+                      %th Route
                       %th
+                        
                   %tbody
                     %tr{"ng-repeat" => "route in routes"}
                       %td {{route.id}}
                       %td {{route.busno_up}}
                       %td {{route.student_length}}
+                      %td {{route.lpp}}
                       %td
-                        %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveRoute(route,location,student_id)"}= "allot"            
-              
-                
+                        %button{:ng_disabled =>"Disabled" , :ng_model => "Disabled" ,:type => "button", :class=> "btn btn-primary", :ng_click => "saveRoute(route,location,student_id)"}= "allot"            
+              %hr
+              %h4 Down Route
+              .row
+                .col-sm-4
+                  = label_tag "Nearest Location"
+                .col-sm-3
+                  %select{"ng-model" => "route.location", "ng-options" => "var.id as var.location_name for var in all_locations",:class => "form-control",:required => "required" }
+                    %option{style: "display:none", value: ""} Select Location
+                    = hidden_field_tag :location_master_id, :value => "{{route.location}}"
+                .col-sm-3
+                  %button{:type => "button", :class=> "btn btn-primary", :ng_click => "nearDownRoutes()"}= "Search"
+                  
+              .row
+                %br
+                %br
+                %table.table.table-bordered
+                  %thead
+                    %tr
+                      %th Route No
+                      %th Bus No
+                      %th Available Seats
+                      %th Route
+                      %th
+                        
+                  %tbody
+                    %tr{"ng-repeat" => "route in route"}
+                      %td {{route.id}}
+                      %td {{route.busno_down}}
+                      %td {{route.student_length}}
+                      %td {{route.lpp}}
+                      %td
+                        %button{:ng_disabled =>"isDisabled" , :ng_model => "isDisabled" ,:type => "button", :class=> "btn btn-primary", :ng_click => "saveRoute(route,location,student_id)"}= "allot"            
                         
 
                            

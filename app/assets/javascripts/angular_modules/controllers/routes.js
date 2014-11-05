@@ -2,6 +2,7 @@
     "use strict";
     app.controller("RouteController", ["$scope","resourceService","routesService", function($scope, resourceService, routesService ) {
 	$scope.routes = resourceService.Route.query();
+	
 	var fetch_locations = function(){
 	    routesService.getLocationServiceView()
 		.then(function(result) {
@@ -75,6 +76,7 @@
 	    $scope.newRoute.$update()
 	   	.then(function(responce){
 		    $scope.routes = resourceService.Route.query()
+		    alert($scope.routes)
 		    $('#createModal').modal('hide')
 	    	    window.location.reload();
 		})
@@ -91,14 +93,16 @@
 	
 	
 	$scope.editRoutes = function(route){
-	    $scope.route = route
+	    $scope.newRoute = angular.copy(route)
+	    
 	    $scope.action = "edit"
-	    fetch_bus();
+	    fetch_bus_up();
+	    fetch_bus_down();
 	    fetch_locations();
 	    routesService.getRouteLocation(route.id)
 		.then(function(response){
-		    route.locations = response.data
-		    $scope.newRoute = route
+		    $scope.newRoute.locations = response.data
+		    alert(JSON.stringify($scope.newRoute))
 		    $('#createModal').modal('show')
 		});
 	}

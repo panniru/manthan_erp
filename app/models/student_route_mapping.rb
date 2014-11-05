@@ -11,11 +11,4 @@ class StudentRouteMapping < ActiveRecord::Base
     map = StudentRouteMapping.show_all_students(route).map {|student| student.student_master_id}
     return map.length
   end
-
-  def bus_capacity
-    route = self.id
-    p "44444444"
-    p route
-    
-  end
 end

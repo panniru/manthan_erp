@@ -6,8 +6,6 @@ class Route < ActiveRecord::Base
   accepts_nested_attributes_for :locations
   attr_accessor :text ,:subject
   scope :show_route_locations, lambda{|route_id| where(:route_id => route_id ).select(:id,:location_master_id, :sequence_no)}
-  scope :up_route ,  where(lpp: 'Up route')
-  scope :down_route ,  where(lpp: 'Down route')
   
   
   def student_length
@@ -16,11 +14,23 @@ class Route < ActiveRecord::Base
     return map.length
   end
   
-  def bus_capacity
+  def bus_capacity_up
     route = self.id
-    map = StudentRouteMapping.show_all_students(route).map {|student| student.student_master_id}
-    capacity =  NewVehicle.capacity_bus(self.busno_up).map {|cap| cap.capacity} 
-    length = capacity.first - map.length
+    mapping = StudentRouteMapping.show_all_students(route).map {|student| student.student_master_id}
+    capacity =  NewVehicle.capacity_bus(self.busno_up).map {|cap| cap.capacity}
+    p "1111111111111"
+    p capacity.first
+    length = capacity.first - mapping.length
+    p "22222222222"
+    p length
+    return length
+  end
+
+  def bus_capacity_down
+    route = self.id
+    mapping = StudentRouteMapping.show_all_students(route).map {|student| student.student_master_id}
+    capacity =  NewVehicle.capacity_bus(self.busno_down).map {|cap| cap.capacity}
+    length = capacity.first - mapping.length
     return length
   end
 

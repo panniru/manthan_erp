@@ -27,7 +27,7 @@
        respond_to do |format|   
          format.json do
            routes = @routes.map do |r|
-             {id: r.id , lpp: r.lpp,  busno_up: r.busno_up, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name , student_length: r.student_length }
+             {id: r.id , lpp: r.lpp,  busno_up: r.busno_up, busno_down: r.busno_down, start_location: r.start_location.location_master.location_name , end_location: r.end_location.location_master.location_name , student_length: r.student_length }
            end
            render :json => routes
          end
