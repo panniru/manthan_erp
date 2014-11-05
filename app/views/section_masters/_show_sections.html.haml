@@ -6,7 +6,7 @@
           %th Section Name
           %th Delete
       %tbody
-        %tr{"ng-repeat" => "section in sections"}
+        %tr{"ng-repeat" => "section in sections | orderBy:'section_name'"}
           %td {{section.section_name}}         
           %td           
             = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteSection(section)"

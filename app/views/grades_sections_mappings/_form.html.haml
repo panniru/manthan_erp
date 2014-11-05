@@ -4,6 +4,7 @@
     .col-md-4
       %h4{style: "font-weight: bold"} SELECT GRADES FOR SUBJECTS SECTIONS
     .col-md-4
+      = link_to 'CANCEL', grades_sections_mappings_path,:class => 'btn btn-primary' 
       %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveGradesMappings()", :value => "DONE"}
     .col-md-3
      

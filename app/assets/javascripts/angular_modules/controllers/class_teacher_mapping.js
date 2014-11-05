@@ -1,6 +1,12 @@
 (function(angular, app) {
     "use strict";
     app.controller('ClassTeacherMappingController',["$scope", "timeTableService", "classTeacherService", "teachersService", function($scope, timeTableService,  classTeacherService, teachersService) { 
+
+        var initiateForm = function(){
+            $scope.myFormValue = true;
+            $scope.myShowFormValue = false;           
+        };
+        initiateForm();
         
         timeTableService.getGradeServiceView()
             .then(function(result) {
@@ -11,7 +17,16 @@
             classTeacherService.getClassTeacherMappings($scope.myGrade)
                 .then(function(result) {                   
                     $scope.mappings = result.data;
-                });             
+                    if(result.data.length>0){
+                        $scope.myShowFormValue = true; 
+                        $scope.showAddButton = true;   
+                    } 
+                    else{
+                        $scope.myShowFormValue = false;   
+                        $scope.showAddButton = true;  
+                    }
+                });    
+           
         };
 
         $scope.editMapping = function (mapping){
@@ -49,7 +64,6 @@
         
         $scope.saveMapping = function(){
             $scope.save_mapping = [];
-            //alert();
             
             $scope.save_mapping.push({
                 id: $scope.mapping.id,
@@ -57,6 +71,7 @@
                 section_master_id:  $scope.mapping.section_master_id,
                 faculty_master_id:  $scope.mapping.faculty_master_id
             });
+            
             classTeacherService.saveMappings($scope.save_mapping)
                 .then(function(result) {
                     $('#myModal').modal('hide');  

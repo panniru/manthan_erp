@@ -1,7 +1,7 @@
 .row
   .col-md-1
   .col-md-8
-    %table{:class => "table"}
+    %table.table-striped.table-condensed.table-bordered
       %tr       
         %th GRADE
         %th SECTION
@@ -16,19 +16,10 @@
           = link_to raw("<span class='glyphicon glyphicon-pencil'></span>"),"#", :class => "btn btn-warning btn-sm", :title => "EDIT", :ng_click => "editMapping(mapping)"
         %td          
           = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteMappings($index)"
+  .col-md-2
+    %input{:type => "button", :class => "btn btn-primary", "ng-click" => "addMapping({})", :value => "ADD"}
 
-.row
-  :css
-    table, th, td
-    {
-    border-collapse:collapse;
-    border:5px solid #6aa6d6;
-    }
-    th, td
-    {
-    padding:5px;
-    } 
-  .col-md-12
+    .col-md-12
     #myEditModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
       .modal-dialog
         .modal-content
@@ -36,10 +27,6 @@
             %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
             %h4.modal-title{ :id => "myModalLabel"} Edit Mapping
           .modal-body
-            .row
-              {{mapping}}
-              {{sections}}
-              {{subjects}}
             %table.table-striped.table-condensed.table-bordered
               %thead            
                 %th GRADE
@@ -48,12 +35,12 @@
               %tbody
                 %tr
                   %td 
-                    %select{"ng-model" => "mapping.grade_master_id", "ng-options" => "grade.grade_master_id as grade.grade_name for grade in grades ",:class => "form-control","ng-change" => "getSectionsSubjects()"}
-                    {{mapping.grade_master_id}}
+                    %select{"ng-model" => "mapping.grade_master_id", "ng-options" => "grade.grade_master_id as grade.grade_name for grade in grades ",:class => "form-control","ng-change" => "getSectionsSubjectsInEdit()"}
                   %td
-                    %select{"ng-model" => "mapping.section_master_id", "ng-options" => "section.section_master_id as section.section_name for section  in sections ",:class => "form-control"}        
+                    %select{"ng-model" => "mapping.section_master_id", "ng-options" => "section.section_master_id as section.section_name for section  in sections | orderBy: 'section_name'",:class => "form-control"}        
                   %td
-                    %select{"ng-model" => "mapping.subject_master_id", "ng-options" => "subject.subject_master_id as subject.subject_name for subject in subjects",:class => "form-control"} 
+                    %select{"ng-model" => "mapping.subject_master_id", "ng-options" => "subject.subject_master_id as subject.subject_name for subject in subjects | orderBy: 'subject_name'",:class => "form-control"}  
+            %br
             .row
-              .col-md-2
+              .col-md-5.col-md-offset-3   
                 %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveEditMappings()"}=  "SAVE"

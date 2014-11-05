@@ -4,5 +4,10 @@ class TeacherGradeMapping < ActiveRecord::Base
   belongs_to  :subject_master
   belongs_to  :faculty_master
 
+  validates :faculty_master_id, presence: true, allow_nil: false, allow_blank: false
+  validates :grade_master_id, presence: true, allow_nil: false, allow_blank: false
+  validates :section_master_id, presence: true, allow_nil: false, allow_blank: false
+  validates :subject_master_id, presence: true, allow_nil: false, allow_blank: false  
+
   scope :belongs_to_faculty, lambda{|faculty| where(:faculty_master_id => faculty)}
 end
