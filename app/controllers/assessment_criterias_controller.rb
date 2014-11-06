@@ -1,4 +1,13 @@
 class AssessmentCriteriasController < ApplicationController
+
+  def index
+    if current_user.admin?
+      render "index"      
+    elsif  current_user.teacher?
+      render "teacher_index"
+    end 
+  end
+
   def get_assessment_criteria_service
     respond_to do |format|
       format.json do       
@@ -34,6 +43,18 @@ class AssessmentCriteriasController < ApplicationController
         render :json => true
       end
     end
+  end
+
+  def get_grade_subject_service
+    teacher_grade_subjects =  TeacherGradeMapping.select(:grade_master_id,:subject_master_id).distinct.where('faculty_master_id = '+"#{current_user.faculty_master.id}").all.map do |teacher|
+        {grade_master_id: teacher.grade_master_id, grade_name: teacher.grade_master.grade_name, subject_master_id: teacher.subject_master_id, subject_name: teacher.subject_master.subject_name}
+      end
+      render :json => teacher_grade_subjects
+  end
+
+  def get_assessment_criteria
+    subjects_assessment_criteria = AssessmentCriteria.where('grade_master_id = '+"#{params[:my_Grade]}"+" AND "+'subject_master_id = '+"#{params[:my_Subject]}")   
+    render :json => subjects_assessment_criteria
   end
 
   def add_params(params)   

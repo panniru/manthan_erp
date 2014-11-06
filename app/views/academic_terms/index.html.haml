@@ -39,9 +39,11 @@
                 .col-sm-3
                   = label_tag(:term_name, "Term Name") 
                   = text_field_tag "",nil, :class => "form-control",:ng_model => "save_academic_term.term_name" ,:placeholder => ""       
-                .col-sm-3
-                  = label_tag(:from_date, "From-Date") 
-                  = text_field_tag "",nil, :class => "form-control",:ng_model => "save_academic_term.from_date" ,:placeholder => ""
+                .col-sm-3{"ng-controller" => "DatePickerController"}   
+                  .form-group
+                    = label_tag(:from_date, "From-Date") 
+                    %input.form-control{"close-text" => "Close", "datepicker-options" => "dateOptions", "datepicker-popup" => "", "is-open" => "opened", "ng-model" => "$parent.someDate", "ng-required" => "true", type: "text", "ng-bind" => "dt | dt:'yyyy-MM-dd'", "ng-click" => "open($event)","ng-change" => "getSomeDate()"}
+                    {{someDate}}
                 .col-sm-3
                   = label_tag(:to_date, "To-Date") 
                   = text_field_tag "",nil, :class => "form-control",:ng_model => "save_academic_term.to_date" ,:placeholder => ""

@@ -1,5 +1,9 @@
 .row{"ng-controller" => "TeacherGradeMapController"}
   .row
+    .form-group
+      .col-xs-12.col-sm-12    
+        = link_to 'Back', teacher_grade_mappings_path,:class => 'btn btn-primary'
+  .row
     .col-md-2     
     .col-md-8
       .col-md-4 
@@ -12,11 +16,11 @@
         .col-md-12
           = label_tag(:section, "Select Section")
         .form-group.col-md-12
-          %select{"ng-model" => "mySection", "ng-options" =>"section.section_master_id as section.section_name for section  in sections | filter : {grade_master_id: myGrade}",:class => "form-control"} 
+          %select{"ng-model" => "mySection", "ng-options" =>"section.section_master_id as section.section_name for section  in sections | filter : {grade_master_id: myGrade}",:class => "form-control"}
             %option{value: ""}
       .col-md-4
         = submit_tag("SHOW",{class: "btn btn-primary", :ng_click => "getGradeWiseMappings()"})
-        = link_to 'SHOW GRADE-WISE', teacher_grade_mappings_path,:class => 'btn btn-primary' 
+             
     .col-md-2
   .row
     .col-md-1

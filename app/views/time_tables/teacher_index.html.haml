@@ -1,8 +1,10 @@
 .row{"ng-controller" => "TimeTablesController"}
   %div{"ng-repeat" =>"grade  in grades"} 
     .row
-      .col-md-12
-        %h4{style: "font-weight: bold"} NAME: {{grade.faculty_name}} GRADE: {{grade.grade_name}} SECTION: {{grade.section_name}}
+      .col-md-1
+      .col-md-11
+        %h4{style: "font-weight: bold"} CLASS TEACHER : {{grade.faculty_name}} &nbsp &nbsp &nbsp GRADE : {{grade.grade_name}}  &nbsp &nbsp &nbsp SECTION : {{grade.section_name}}
+    .row
       .col-md-12    
         %div{"ng-init" => "getPeriods(grade.grade_master_id,grade.section_master_id)"}
           = render 'show_periods'

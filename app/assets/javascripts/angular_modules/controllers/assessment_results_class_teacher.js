@@ -5,10 +5,10 @@
             .then(function(result){               
                 $scope.teacher_assessments = result.data;                 
             });
-        gradeService.getGradeServiceView()
-            .then(function(result) {
-                $scope.grades=result.data;               
-            });
+        // gradeService.getGradeServiceView()
+        //     .then(function(result) {
+        //         $scope.grades=result.data;               
+        //     });
         
        
 

@@ -1,6 +1,13 @@
 (function(angular, app) {
     "use strict";
-    app.controller('AcademicTermsController', ["$scope", "academicTermsService", function($scope, academicTermsService) {        
+    app.controller('AcademicTermsController', ["$scope", "academicTermsService", function($scope, academicTermsService) { 
+        
+        $scope.getSomeDate = function(){         
+            //alert();
+            $scope.dateFormat = $scope.someDate.getFullYear()+"-"+($scope.someDate.getMonth()+1)+"-"+$scope.someDate.getDate(); 
+            alert($scope.dateFormat);
+        }     
+      
         academicTermsService.getAcademicTermsService()
             .then(function(result) {                     
                 $scope.academic_terms = result.data;                

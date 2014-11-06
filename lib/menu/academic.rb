@@ -28,6 +28,7 @@ class Academic
     sub_menu << time_tables
     sub_menu << teacher_timetables 
     sub_menu << teaching_plans
+    sub_menu << assessment_criteria
     sub_menu << assessments
     sub_menu << assessment_results
     sub_menu << term_results
