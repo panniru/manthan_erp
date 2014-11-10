@@ -16,6 +16,8 @@ class IssuingsController < ApplicationController
   end
   
   def index
+    p params
+    p "=============================>"
     #@students =  StudentMaster.all
 
      @students  = StudentMaster.where("grade_master_id = :grade_master_id AND section_master_id = :section_master_id", {grade_master_id: params[:grade_master_id], section_master_id: params[:section_master_id]})
@@ -38,14 +40,15 @@ class IssuingsController < ApplicationController
   def new
     @issuing = Issuing.new
   end
-  def sectionserviceview
+
+  def grade_section_service
     respond_to do |format|
       format.json do
-        get_sections = SectionMaster.all.map do |section|
-          {section: section.section_name, id: section.id, grade_master_id: section.grade_master_id }
-        end
-       
-        render :json => get_sections
+        grade_sections = GradeSection.where('grade_master_id = '+"'#{params[:my_Grade]}'")
+        grade_sections = grade_sections.each.map do |grade_section|
+          {id: grade_section.id, grade_master_id: grade_section.grade_master_id, section_master_id: grade_section.section_master_id, section_name: grade_section.section_master.section_name }
+        end       
+        render  :json => grade_sections
       end
     end  
   end

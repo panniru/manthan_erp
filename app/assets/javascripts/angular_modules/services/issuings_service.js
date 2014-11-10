@@ -6,17 +6,15 @@
             return $http.get(url);
         };
         
-        
-        var getSectionServiceView = function(){
-            var url = "/issuings/sectionserviceview.json"
-            return $http.get(url);
+        var getGradeSectionServiceView = function(myGrade){
+            alert(myGrade)
+            var url = "/issuings/grade_section_service.json"
+            return $http.get(url,{params : {my_Grade : myGrade}});
         }; 
-       
         
         return {
             getGradeServiceView : getGradeServiceView,
-            getSectionServiceView : getSectionServiceView
-            
+            getGradeSectionServiceView : getGradeSectionServiceView,           
         };
         
     }]);

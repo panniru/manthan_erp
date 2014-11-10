@@ -19,7 +19,7 @@
     .form-group
       = label_tag  "Year Of Publishing", nil, :class => "form-label col-md-4"
       .col-sm-4
-        = text_field_tag "bulk_book[][year_of_publishing]",nil, :class => 'form-control', :placeholder => "YearOfPublishing", :id => "year_of_publishing-{{$index}}", :ng_model => "book.year_of_publishing"
+        = text_field_tag "bulk_book[][year_of_publishing]",nil, :class => 'date-picker-year form-control', :placeholder => "YearOfPublishing", :id => "year_of_publishing-{{$index}}", :ng_model => "book.year_of_publishing"
     .form-group
       = label_tag  "Book Type", nil, :class => "form-label col-md-4"
       .col-sm-4

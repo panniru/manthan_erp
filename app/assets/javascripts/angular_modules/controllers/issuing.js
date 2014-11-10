@@ -9,13 +9,17 @@
                 $scope.grades=result.data                
             });
         
-        $scope.map_sections = []
-        issuingService.getSectionServiceView()
-            .then(function(result) {                
-                $scope.sections=result.data
-            });
-       
-}]);
-    
+        $scope.map_sections = [];
+ 
+        $scope.getGradeSections = function(){      
+            issuingService.getGradeSectionServiceView($scope.myGrade)
+                .then(function(result) {                
+                    $scope.sections=result.data
+                    alert(JSON.stringify($scope.sections));
+                });
+        };
+
+
+}]);    
 })(angular, myApp);        
 

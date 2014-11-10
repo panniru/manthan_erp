@@ -87,7 +87,7 @@ ManthanErp::Application.routes.draw do
     collection do
       get "student_book_issuings"
       get 'gradeserviceview'
-      get 'sectionserviceview'
+      get 'grade_section_service'
     end
   end
   resources :damagebooks do

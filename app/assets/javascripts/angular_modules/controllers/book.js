@@ -1,19 +1,28 @@
 (function(angular, app) {
     "use strict";
     app.controller('BooksController',["$scope","resourceService", function($scope, resourceService) {
-        $scope.books = resourceService.Book.query(); 
-        $scope.delivered_requests = resourceService.RequestBook.delivered_requests(); 
+        
+        var initiateForm = function(){
+            $scope.books = resourceService.Book.query(); 
+            $scope.delivered_requests = resourceService.RequestBook.delivered_requests(); 
+        };
+        initiateForm();
                
-        $scope.getPurchaseDate = function(){           
+        $scope.getPurchaseDate = function(){ 
+            alert();
             $scope.dateFormat = $scope.purchasedDate.getFullYear()+"-"+($scope.purchasedDate.getMonth()+1)+"-"+$scope.purchasedDate.getDate();             
         }     
    
-        $scope.getEditPurchaseDate = function(){          
-            $scope.dateFormat = $scope.book.purchased_date.getFullYear()+"-"+($scope.book.purchased_date.getMonth()+1)+"-"+$scope.book.purchased_date.getDate();             
+        $scope.getEditPurchaseDate = function(){ 
+            alert();
+            $scope.dateFormat = $scope.book.purchased_date.getFullYear()+"-"+($scope.book.purchased_date.getMonth()+1)+"-"+$scope.book.purchased_date.getDate();  
+            //alert($scope.dateFormat);
+            
         }
        
         $scope.newBook = function(){             
             $scope.newBooks = [];
+            $scope.getPurchaseDate = "";
 
             if($scope.delivered_requests.length){
                 $scope.moreBooks = true;   
@@ -60,6 +69,7 @@
             book.$delete()
                 .then(function(responce){
                     $scope.books.splice($scope.books.indexOf(book), 1)
+                    $scope.showBooks();
                 })
         };  
         
