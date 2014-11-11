@@ -9,7 +9,8 @@
     .form-group.col-md-3
       %label{:class=> "form-label col-md-4"} Section
       .col-sm-6
-        %select{"ng-model" => "mySection", :ng_options => "section.id  as section.section_name for section in sections | filter: {grade_master_id: myGrade}", :class=>"form-control", :name => "section_master_id"}
+        %select{"ng-model" => "mySection", :ng_options => "section.section_master_id  as section.section_name for section in sections | filter: {grade_master_id: myGrade}", :class=>"form-control", :name => "section_master_id"}
+        {{mySection}}
         
     .col-md-4
       %input#grade_master_id{:name => "grade_master_id", :type => "hidden", :value => "{{myGrade}}"}

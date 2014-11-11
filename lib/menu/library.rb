@@ -8,6 +8,7 @@ class Library
     sub_menu = []    
     sub_menu << books
     sub_menu << request_books_admin
+    sub_menu << grade_books
    
 end
   def librarian_sub_menu
@@ -89,4 +90,8 @@ end
   def request_books_admin
     MenuItem.new(:label => "Request Books", :klass => "", :icon => "book ", :href => "/request_books")
   end
+
+  def grade_books
+    MenuItem.new(:label => "GradeBooks", :klass => "", :icon => "check-square-o ", :href => "/grade_books")
+  end  
 end

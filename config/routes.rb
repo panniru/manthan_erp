@@ -781,4 +781,11 @@ ManthanErp::Application.routes.draw do
     end
   end
 
+  resources :grade_books do 
+    collection do
+      get "get_grades_service"
+      get "get_grade_books_service"
+    end
+  end
+
 end

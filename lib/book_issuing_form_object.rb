@@ -49,7 +49,7 @@ class BookIssuingFormObject
   end
 
   def book_count(grade)
-    2
+    3
   end
   
   def self.build_collection(students)
