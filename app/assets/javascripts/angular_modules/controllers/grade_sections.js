@@ -7,6 +7,10 @@
                 $scope.sections = responce.sections;  
             });
         }
+        $scope.emitState = function(){
+            $scope.$emit('gradeMaster', $scope.grade.id)
+            $scope.$emit('sectionMaster', $scope.section.id)
+        }
     }]);
 })(angular, myApp);
 

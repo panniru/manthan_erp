@@ -3,8 +3,13 @@
     = image_tag "logo.png", :align => 'left', :class => "img-rounded", :style => "margin-left:33px;" 
   .pull-right
     %ul.nav.navbar-nav
+      %li{:ng_controller => "HomeController", :ng_init => "userUnReadMails()"}
+        %a.alertClass{:href => "/communication_mails", :style => "color: whitesmoke;"}
+          %span.fa-stack.fa-lg
+            %i.fa.fa-bell-o.fa-stack-2x
+            %i.fa.fa-stack-1x {{unreadMails}}
       - if current_user.present?
-        %li.droupdown
+        %li.dropdown
           %a{:href => "#", :class => "dropdown-toggle", :data => {:toggle => "dropdown"}}
             = image_tag "test_thumb.jpg", :align => 'left', :class => "img-circle", :height => "30px", :width => "30px"
             User

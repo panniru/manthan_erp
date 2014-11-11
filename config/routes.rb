@@ -108,6 +108,7 @@ ManthanErp::Application.routes.draw do
   get 'auto_search/student_name_by_grade_and_section'
   get 'auto_search/autocomplete_book_isbn'
   get 'auto_search/autocomplete_staff_grade'
+  get 'auto_search/autocomplete_user_email'
   get "time_tables/gradeserviceview"
   get "time_tables/sectionserviceview"
   get "/time_tables/subjectserviceview"
@@ -781,4 +782,15 @@ ManthanErp::Application.routes.draw do
     end
   end
 
+  resources :communication_mails do
+    collection do
+      post "send_mail"
+      get "unread"
+    end
+    member do
+      get "mail_detail"
+      post "reply"
+      put "mark_as_read"
+    end
+  end
 end

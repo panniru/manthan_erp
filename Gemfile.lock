@@ -50,6 +50,8 @@ GEM
     angularjs-rails (1.2.18)
     anticipate (0.1.1)
     arel (5.0.1.20140414130214)
+    autosize-rails (1.18.8)
+      rails (>= 3.1)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -308,6 +310,7 @@ DEPENDENCIES
   angular-ui-bootstrap-rails (~> 0.11.0)
   angularjs-rails (= 1.2.18)
   anticipate
+  autosize-rails (~> 1.18.8)
   bootstrap-sass (~> 3.0.3.0)
   bootstrap-will_paginate
   cancancan (~> 1.9)

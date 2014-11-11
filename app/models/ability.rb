@@ -13,13 +13,15 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.parent?
-      can :manage, [MonthlyPdcAmount, ParentPaymentMaster, ParentPaymentTransaction]
+      can :manage, [MonthlyPdcAmount, ParentPaymentMaster, ParentPaymentTransaction, CommunicationMail]
       can :read, [GradeWiseFee, TermWiseGradeFee, MonthlyPdcAmount]
     elsif user.accountant?
       can :manage, [GradeWiseFee, TermWiseGradeFee, MonthlyPdcAmount, ParentPaymentMaster, ParentCheque, ParentPaymentTransaction, ApprovalItem]
       can :read, [JobRun, FeeReports]
     elsif user.principal?
       can :read, :all
+    else
+      can :manage, [CommunicationMail]
     end
   end
   

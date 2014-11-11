@@ -1,0 +1,22 @@
+.col-md-10{:ng_controller => "CommunicationMailsController", :ng_init => "fetchMails(1)"}
+  .col-md-5.col-md-offset-7
+    .col-md-6
+      %my-pagination{:from => "from_index", :to => "to_index", :current_page => "current_page", :total=> "total_entries", :action => "fetchMails(page)"}
+    .col-md-5
+      %select{:ng_model => "filter_by", :ng_options => "f.name for f in FILTERS", :class=>"form-control", :ng_change => "fetchMails(1)"}
+  %table.table.table-hover
+    %thead
+      %th From
+      %th Description
+      %th Date
+    %tbody
+      %tr{:ng_repeat => "mail in mails", :class => "message-row", :ng_click => "showMail(mail)"}
+        %td{:ng_class => "{'bold-font': !mail.red}"}
+          %span= "{{mail.from.name}}"
+          %span{:ng_show => "mail.msg_count_in_conversation > 1"}= " ({{mail.msg_count_in_conversation}})"
+        %td 
+          %span{:ng_class => "{'bold-font': !mail.red}"}= "{{mail.subject | limitTo:50}}"
+          %span= "-{{mail.content | limitTo:25}}"
+        %td{:ng_class => "{'bold-font': !mail.red}"}= "{{mail.latest_mail_date}}"
+    
+  = render "conversation"

@@ -19,7 +19,9 @@ class StudentMaster < ActiveRecord::Base
   has_one :student_route_mapping, :dependent => :destroy
   scope :ids_in_list, lambda{|ids| where("id in ?", ids)}
   scope :has_no_route , lambda{where("id not in (?)", StudentRouteMapping.all.map(&:student_master_id))}
-  
+  scope :belongs_to_grade_master, lambda{|grade_master| where("grade_master_id = ?",  grade_master)}
+  scope :belongs_to_section_master, lambda{|section_master| where("section_master_id = ?",  section_master)}
+
   scope :has_bus_facility , lambda{where(:bus_facility => true)} 
   
   def grade_bucket_id

@@ -7,9 +7,14 @@ class AutoSearchController < ApplicationController
   autocomplete :location_master, :location_name, :full => true 
   
   autocomplete :student_master, :name, :full => true 
+  #autocomplete :user, :email, :full => true , :extra_data => [:user_id], :display_value => :auto_complete_user_mail_display
   
  
-  
+  def autocomplete_user_email
+    term = params[:term]
+    users = User.where(:role_id => current_user.can_mail_to).where("lower(email) ILIKE '%#{term}%' OR lower(user_id) ILIKE '%#{term}%'").order(:email)
+    render :json => users.map { |user| {:id => user.id, :label => "#{user.name} - #{user.email}", :value => user.name} }
+  end
 
   def autocomplete_student_by_name
     term = params[:term]

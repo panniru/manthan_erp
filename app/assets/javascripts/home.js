@@ -1,4 +1,6 @@
 $(document ).ready(function() {
+    $('textarea').autosize();
+
     $('#change2').click(function() {
         $('#mypopModal').modal('show');
     });

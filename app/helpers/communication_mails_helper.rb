@@ -1,0 +1,2 @@
+module CommunicationMailsHelper
+end

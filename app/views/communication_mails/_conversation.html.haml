@@ -1,0 +1,28 @@
+.modal.fade{ :id => "showMail", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+        %h4.modal-title{ :id => "myModalLabel"} {{mail_details[0].subject}}
+      .modal-body
+        .panel-group
+          .panel-body{:ng_repeat => "mail in mail_details"}
+            %h4.panel-title
+              %a{ "data-toggle".to_sym =>"collapse", :href =>  "#collapse-{{$index}}", "aria-expanded".to_sym => "true",  "aria-controls".to_sym => "collapseOne", :ng_click => "markAsRead(mail)"}
+                = fa_icon "user 1x"
+                = "{{mail.from.name}}"
+            .panel-collapse.collapse.in{:id => "collapse-{{$index}}"}
+              = "{{mail.content}}"
+            %hr
+            //= fa_icon "reply 1x", :class => "pull-right", :ng_click => "reply(mail_detals.last)"
+          .panel-default{:ng_show => "replyMail"}
+            .panel-body
+              %form{:class => "form-horizantal", :ng_submit => "reply()"}
+                .form-group
+                  .col-md-12
+                    = text_field_tag "to", "{{replyMail.to.name}}", :readonly => true, :class => "form-control"
+                .form-group
+                  .col-md-12
+                    = text_area_tag :reply_content, " ", :ng_model => "replyMail.content" , :class => "form-control"
+                .col-md-offset-10
+                  = submit_tag "Reply", :class => "btn btn-primary"

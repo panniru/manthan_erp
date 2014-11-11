@@ -91,3 +91,4 @@ end
 # 
 gem 'composite_primary_keys'
 gem 'rails_12factor'
+gem 'autosize-rails', '~> 1.18.8'

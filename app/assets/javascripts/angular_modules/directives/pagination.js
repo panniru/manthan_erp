@@ -7,17 +7,18 @@
 		from: '=',
 		to: '=',
 		total: '=',
+                currentPage: '=',
 		action: '&'
 	    },
 	    controller: ["$scope", function($scope){
-		$scope.current_page = 1;
+		$scope.currentPage = 1;
 		$scope.previousPage = function(){
-		    $scope.current_page -= 1
-		    $scope.action({page: $scope.current_page})
+		    $scope.currentPage -= 1
+		    $scope.action({page: $scope.currentPage})
 		}
 		$scope.nextPage = function(){
-		    $scope.current_page += 1
-		    $scope.action({page: $scope.current_page})
+		    $scope.currentPage += 1
+		    $scope.action({page: $scope.currentPage})
 		}
 	    }],
 	    templateUrl: "paginationElements.html"

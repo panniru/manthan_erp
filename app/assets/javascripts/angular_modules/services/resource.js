@@ -140,6 +140,17 @@
                                       "update": { method: "PUT"}
                                     }  
                                    );
+        var CommunicationMail = $resource('/communication_mails/:id.json', {id: '@id'},
+                                          {
+                                              "query": { url: "/communication_mails.json", method:'GET', isArray: false},
+                                              "newMail": { url: "/communication_mails/new.json", method:'GET', isArray: false},
+                                              "sendMail": { url: "/communication_mails/send_mail.json", method:'POST'},
+                                              "mailDetail": { url: "/communication_mails/:id/mail_detail.json", method:'GET', isArray: false},
+                                              "reply": {url: "/communication_mails/:id/reply.json", method: "POST"},
+                                              "markAsRead": {url: "/communication_mails/:id/mark_as_read.json", method: "PUT"}
+                                          }  
+                                         );
+        
 
        
 
@@ -167,7 +178,8 @@
             RequestBook : RequestBook,
             DonateBook : DonateBook,
             SubjectMaster : SubjectMaster,
-            SectionMaster : SectionMaster
+            SectionMaster : SectionMaster,
+            CommunicationMail : CommunicationMail
         };
     }]);
 })(angular, myApp);

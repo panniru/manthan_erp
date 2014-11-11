@@ -11,13 +11,13 @@
 //= require jquery.ui.datepicker
 //= require jquery_ujs
 //= require jquery.ui.autocomplete
+//= require jquery.autosize
 //= require autocomplete-rails
 //= require bootstrap
 //= require underscore
 //= require gmaps/google
 //= require fullcalendar
 //= require jquery.timepicker.js
-//= require jquery.turbolinks
 //= require_tree ../../../vendor/assets/javascripts/flot
 
 //= require_tree .
