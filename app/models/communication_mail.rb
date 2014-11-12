@@ -14,7 +14,7 @@ class CommunicationMail < ActiveRecord::Base
   scope :unread, lambda{ where(:red => false)}
   # scope :red, lambda{|user| inbox(user).where(:red => true)}
 
-  INBOX_QUERY = lambda{|user| "(WITH RECURSIVE children AS( SELECT id, parent_mail_id FROM communication_mails c where (c.to = #{user.id}) UNION SELECT p.id, p.parent_mail_id FROM communication_mails p, children ch where p.id = ch.parent_mail_id ) SELECT id FROM children where parent_mail_id is null ORDER BY created_at)"}
+  INBOX_QUERY = lambda{|user| "(WITH RECURSIVE children AS( SELECT id, parent_mail_id FROM communication_mails c where (c.to = #{user.id}) UNION SELECT p.id, p.parent_mail_id FROM communication_mails p, children ch where p.id = ch.parent_mail_id ) SELECT id FROM children where parent_mail_id is null)"}
 
   SENT_MAIL_QUERY = lambda{|user| "(WITH RECURSIVE children AS( SELECT id, parent_mail_id FROM communication_mails c where (c.from = #{user.id}) UNION SELECT p.id, p.parent_mail_id FROM communication_mails p, children ch where p.id = ch.parent_mail_id ) SELECT id FROM children where parent_mail_id is null ORDER BY created_at)"}
 
@@ -32,11 +32,11 @@ class CommunicationMail < ActiveRecord::Base
     end
 
     def inbox(user, page)
-      self.where("id IN #{INBOX_QUERY.call(user)}").paginate(:page => page)
+      self.where("id IN #{INBOX_QUERY.call(user)}").paginate(:page => page).order("created_at DESC")
     end
 
     def sent(user, page)
-      self.where("id IN #{SENT_MAIL_QUERY.call(user)}").paginate(:page => page)
+      self.where("id IN #{SENT_MAIL_QUERY.call(user)}").paginate(:page => page).order("created_at DESC")
     end
     
     def user_mails(current_user, filter, page)
@@ -56,14 +56,21 @@ class CommunicationMail < ActiveRecord::Base
           message_details << mail
         end
       end
-      message_details = message_details.map{|mail| 
+      message_details = message_details.map do |mail| 
         conversation_details = mail.conversation_details
-        build_message_detail(mail, {child_msg_count_in_conversation: conversation_details[:msg_count_in_conversation], latest_mail_date: conversation_details[:latest_mail_date].try('strftime', '%d-%b-%y')})}
+        build_message_detail(mail) do |message_detail|
+          message_detail.red = conversation_details[:all_mails_red]
+          message_detail.msg_count_in_conversation = conversation_details[:msg_count_in_conversation]
+          message_detail.latest_mail_date = conversation_details[:latest_mail_date].try('strftime', '%d-%b-%y')
+        end
+      end
       JsonPagination.pagination_entries(mails).merge(mail_details: message_details)
     end
   
-    def build_message_detail(mail, params)
-      MessageDetail.new({:from => mail.from_user, :subject => mail.message.subject, :content => mail.message.content, :red => mail.red?, :id => mail.id, :msg_count_in_conversation => params[:child_msg_count_in_conversation], :latest_mail_date => params[:latest_mail_date]})
+    def build_message_detail(mail, params = {})
+      message_detail = MessageDetail::Message.new({:from => mail.from_user, :subject => mail.message.subject, :content => mail.message.content, :red => mail.red?, :id => mail.id})
+      yield message_detail if block_given?
+      message_detail
     end
     
   end
@@ -74,11 +81,11 @@ class CommunicationMail < ActiveRecord::Base
   
   def conversation_details
     children = cheldren_mails
-    {msg_count_in_conversation: children.count, latest_mail_date: children.last.created_at}
+    {msg_count_in_conversation: children.count, latest_mail_date: children.last.created_at, all_mails_red: children.map(&:red?).all?}
   end
   
   def cheldren_mails
-    ActiveRecord::Base.connection.execute(CHILDREN_MAIL_QUERY.call(id)).map{|r| self.class.new(r)}
+    @cheldren_mails ||= ActiveRecord::Base.connection.execute(CHILDREN_MAIL_QUERY.call(id)).map{|r| self.class.new(r)}
   end
 
   def parent_mails
@@ -86,14 +93,21 @@ class CommunicationMail < ActiveRecord::Base
   end
 
   def children_details
-    cheldren_mails.map do |mail|
-      self.class.build_message_detail(mail, {latest_mail_date: mail.created_at.strftime("%d-%b-%y")})
+    @children_details ||= cheldren_mails.map do |mail|
+      self.class.build_message_detail(mail) do |msg|
+        msg.latest_mail_date = mail.created_at.strftime("%d-%b-%y")
     end
+  end
+  end
+
+  def mail_to_reply(current_user)
+    to_user = cheldren_mails.last.from == current_user.id ? cheldren_mails.last.to_user : cheldren_mails.last.from_user
+    MessageDetail::ReplyMessage.new({to_user_id: to_user.id, :user_name => to_user.name, :content => nil, :parent_mail_id => cheldren_mails.last.id})
   end
 
   def reply(current_user, reply_params)
     content = reply_params[:content]
-    to = reply_params[:to][:user_id]
+    to = reply_params[:to_user_id]
     ActiveRecord::Base.transaction do
       begin
         message = Message.new({:content => content})

@@ -7,20 +7,24 @@
       .modal-body
         .panel-group
           .panel-body{:ng_repeat => "mail in mail_details"}
-            %h4.panel-title
+            %h4.panel-title{:ng_class => "{'bold-font': !mail.red}"}
               %a{ "data-toggle".to_sym =>"collapse", :href =>  "#collapse-{{$index}}", "aria-expanded".to_sym => "true",  "aria-controls".to_sym => "collapseOne", :ng_click => "markAsRead(mail)"}
                 = fa_icon "user 1x"
                 = "{{mail.from.name}}"
-            .panel-collapse.collapse.in{:id => "collapse-{{$index}}"}
-              = "{{mail.content}}"
+              .pull-right
+                {{mail.latest_mail_date}}
             %hr
+            .panel-collapse.collapse.in{:id => "collapse-{{$index}}", :ng_class => "{'in': ($index == mail_details.length-1)}"}
+              = "{{mail.content}}"
+              = "{{$index == mail_details.length-1}}"
+              -#
             //= fa_icon "reply 1x", :class => "pull-right", :ng_click => "reply(mail_detals.last)"
           .panel-default{:ng_show => "replyMail"}
             .panel-body
               %form{:class => "form-horizantal", :ng_submit => "reply()"}
                 .form-group
                   .col-md-12
-                    = text_field_tag "to", "{{replyMail.to.name}}", :readonly => true, :class => "form-control"
+                    = text_field_tag "to", "To: {{replyMail.user_name}}", :readonly => true, :class => "form-control"
                 .form-group
                   .col-md-12
                     = text_area_tag :reply_content, " ", :ng_model => "replyMail.content" , :class => "form-control"

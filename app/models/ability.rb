@@ -1,6 +1,5 @@
 class Ability
   include CanCan::Ability
-
   def initialize(user)
     return false if user == nil
     alias_action :month_wise_fee_of_student, :to => :read
@@ -20,9 +19,9 @@ class Ability
       can :read, [JobRun, FeeReports]
     elsif user.principal?
       can :read, :all
+      can :manage, [CommunicationMail]
     else
       can :manage, [CommunicationMail]
     end
   end
-  
 end

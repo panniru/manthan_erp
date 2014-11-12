@@ -8,7 +8,21 @@
         $scope.filter_by = $scope.FILTERS[0]
 
         $scope.newMail = function(){
-            $scope.cummunicationMail = resourceService.CommunicationMail.newMail();
+            if(typeof $scope.cummunicationMail == 'undefined'){
+                $scope.cummunicationMail = resourceService.CommunicationMail.newMail();
+            }else{
+                resetNewMail($scope.cummunicationMail)
+            }
+            $("#newMailModel").modal({backdrop: 'static'})
+        }
+
+        var resetNewMail = function(mail){
+            mail.subject = null;
+            mail.content = null;
+            mail.to = null;
+            angular.forEach(mail.roles, function(role){
+                role.selected = false;
+            })
         }
 
          $scope.reflectRoleChange = function(){
@@ -27,7 +41,15 @@
         $scope.sendMail = function(){
             $scope.cummunicationMail.to = $("#to_user").val()
             console.log($scope.cummunicationMail)
-            resourceService.CommunicationMail.sendMail({communication_mail_form_object: $scope.cummunicationMail});
+            resourceService.CommunicationMail.sendMail({communication_mail_form_object: $scope.cummunicationMail}, function(response){
+                if(response.status){
+                    alert("Mail Send Successfully")
+                    $("#newMailModel").modal("hide")
+                    $scope.fetchMails(1);
+                }else{
+                    $scope.status = "Some problem prevented the mail sending"
+                }
+            });
         }
 
         $scope.fetchMails = function(page){
@@ -44,27 +66,29 @@
             resourceService.CommunicationMail.mailDetail({id: mail.id}, function(response){
                 $scope.markAsRead(mail)
                 $scope.mail_details = response.message_details
-                $scope.replyMail = {from: $scope.mail_details[$scope.mail_details.length-1].to, to: $scope.mail_details[$scope.mail_details.length-1].from, content: null, parent_mail_id: $scope.mail_details[$scope.mail_details.length-1].id}
+                $scope.replyMail = response.mail_to_reply
                 $("#showMail").modal({backdrop: 'static'})
             });
         }
 
         $scope.reply = function(){
+            console.log($scope.replyMail)
             resourceService.CommunicationMail.reply({id: $scope.replyMail.parent_mail_id, reply_mail: $scope.replyMail}, function(data){
                 $("#showMail").modal('hide')
             })
         }
 
         $scope.markAsRead = function(mail){
-            $rootScope.$broadcast('fireUserUnreadMails', "getUnread")
-            if(!mail.red){
-                resourceService.CommunicationMail.markAsRead({id: mail.id}, function(data){
-                    mail.red = true
-                    
-                })
+            if(typeof $scope.filter_by != 'undefined' && $scope.filter_by.code == 'inbox'){
+                $rootScope.$broadcast('fireUserUnreadMails', "getUnread")
+                if(!mail.red){
+                    resourceService.CommunicationMail.markAsRead({id: mail.id}, function(data){
+                        mail.red = true
+                        
+                    })
+                }
             }
         }
-
         
     }]);
 })(angular, myApp);

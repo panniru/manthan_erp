@@ -13,10 +13,15 @@ class CommunicationMailsController < ApplicationController
   end
 
   def send_mail
-    mail_service = CommunicationMailService.new(current_user, params[:communication_mail_form_object])
-    mail_service.send_mail
+    respond_to do |format|
+      format.json do
+        mail_service = CommunicationMailService.new(current_user, params[:communication_mail_form_object])
+        status = mail_service.send_mail
+        render :json => {status: status}
+      end
+    end
   end
-  
+
   def index
     respond_to do |format|
       format.json do
@@ -30,7 +35,7 @@ class CommunicationMailsController < ApplicationController
   def mail_detail
     respond_to do |format|
       format.json do
-        render :json => {message_details: @communication_mail.children_details}
+        render :json => {message_details: @communication_mail.children_details, mail_to_reply: @communication_mail.mail_to_reply(current_user)}
       end
     end
   end

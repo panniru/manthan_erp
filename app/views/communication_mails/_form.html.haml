@@ -1,43 +1,43 @@
-.col-md-12{:ng_controller => "CommunicationMailsController", :ng_init => "newMail()"}
-  %form{:ng_submit => "sendMail()"}
-    .row
-      .col-md-4{:ng_repeat => "role in cummunicationMail.roles"}
-        %input{:type => "checkbox", :ng_model => "role.selected", :ng_change => "reflectRoleChange()"}
-        %label {{role.code}}
+%form{:ng_submit => "sendMail()"}
+  .col-md-12
+    .alert.alert-danger{:ng_show => "status"}
+      {{status}}
+  .col-md-2
+    %label{:class=> "form-label"} To:
+  .col-md-12
+    .col-md-4{:ng_repeat => "role in cummunicationMail.roles"}
+      %input{:type => "checkbox", :ng_model => "role.selected", :ng_change => "reflectRoleChange()"}
+      %label {{role.code}}
 
-    .row{:ng_show => "canShowGradeSection", }
-      %hr
-      .col-md-12{:ng_controller => "GradeSectionsController"}
-        .form-group.col-md-6
-          %label{:class=> "form-label col-md-4"} Grade
-          .col-md-6
-            %select{:ng_model => "grade", :ng_options => "gr.grade_name for gr in grades", :class=>"form-control", :ng_change => "fetchSections()"}
-        .form-group.col-md-6
-          %label{:class=> "form-label col-md-4"} Section
-          .col-md-6
-            %select{:ng_model => "section", :ng_options => "sc.section_name for sc in sections", :class=>"form-control", :ng_change => "emitState()"}
+  .col-md-12{:ng_show => "canShowGradeSection", }
     %hr
-    .row
-      .form-group
-        .col-md-12
-          = autocomplete_field_tag :to,
-          '',
-          '/auto_search/autocomplete_user_email',
-          :placeholder => "E Mail ", :class => 'form-control',
-          :required => false,
-          :id_element => "#to_user"
-          = hidden_field_tag :to_user, :id => "to_user"
-    .row
-      .form-group
-        -#%label{:class=> "form-label col-md-3"} Subject 
-        .col-md-12
-          %input{:type => "text", :ng_model => "cummunicationMail.subject", :class => "form-control", :placeholder => "Subject"}
-    .row
-      .form-group
-        -#%label{:class=> "form-label col-md-3"} Content
-        .col-md-12
-          %textarea{:ng_model => "cummunicationMail.content", :class => "form-control"}
-    %br
-    .row
-      .col-md-offset-10
-        = submit_tag :Send, :class => "btn btn-primary"
+    .col-md-12{:ng_controller => "GradeSectionsController"}
+      .form-group.col-md-6
+        %label{:class=> "form-label col-md-4"} Grade
+        .col-md-6
+          %select{:ng_model => "grade", :ng_options => "gr.grade_name for gr in grades", :class=>"form-control", :ng_change => "fetchSections()"}
+      .form-group.col-md-6
+        %label{:class=> "form-label col-md-4"} Section
+        .col-md-6
+          %select{:ng_model => "section", :ng_options => "sc.section_name for sc in sections", :class=>"form-control", :ng_change => "emitState()"}
+  %hr
+  .col-md-12
+    .form-group
+      = autocomplete_field_tag :to,
+      '',
+      '/auto_search/autocomplete_user_email',
+      :placeholder => "E Mail ", :class => 'form-control',
+      :required => false,
+      :id_element => "#to_user"
+      = hidden_field_tag :to_user, :id => "to_user", :value => ""
+  .col-md-12
+    .form-group
+      -#%label{:class=> "form-label col-md-3"} Subject 
+      %input{:type => "text", :ng_model => "cummunicationMail.subject", :class => "form-control", :placeholder => "Subject"}
+  .col-md-12
+    .form-group
+      -#%label{:class=> "form-label col-md-3"} Content
+      %textarea{:ng_model => "cummunicationMail.content", :class => "form-control"}
+  %br
+  .col-md-offset-10
+    = submit_tag :Send, :class => "btn btn-primary"
