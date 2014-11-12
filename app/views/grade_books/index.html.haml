@@ -1,0 +1,14 @@
+.row{"ng-controller" => "GradeBooksController"}
+  .row
+    .col-md-12
+      .col-md-7
+        %table#tblData.target.table.table-striped.table-condensed.table-bordered
+          %thead
+            %tr        
+              %th Grade Name
+              %th No.Of.Books
+          %tbody
+            %tr{"ng-repeat" => "grade in grades | orderBy:'id'"}
+              %td {{grade.grade_name}}         
+              %td{"ng-repeat" => "grade_book in grade_books | filter :{grade_master_id: grade.id}: true"}
+                {{grade_book.no_of_books}}

@@ -55,6 +55,7 @@ class ContextDetector
     "lib_reports" => "library",
     "request_books" => "library",
     "request_books_admin" => "library",
+    "grade_books" => "library",
     "default_masters" => "default_master_sub_menu",
     "student_masters" => "default_master_sub_menu",
     "parents" => "default_master_sub_menu",
