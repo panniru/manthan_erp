@@ -10,10 +10,16 @@
             var url = "/grade_books/get_grade_books_service.json"
             return $http.get(url);
         };
+
+        var saveGradeBooksService = function(save_grade_book){
+            var url = "/grade_books/save_grade_books_service.json"
+            return $http.post(url,{ save_grade_book: save_grade_book});
+        };
         
         return {
             getGradesService : getGradesService, 
-            getGradeBooksService : getGradeBooksService
+            getGradeBooksService : getGradeBooksService,
+            saveGradeBooksService : saveGradeBooksService
         };        
     }]);
 })(angular, myApp);

@@ -48,8 +48,13 @@ class BookIssuingFormObject
     return form_object
   end
 
-  def book_count(grade)
-    3
+  def book_count(grade_master_id)
+    @grade_book = GradeBook.where('grade_master_id = '+"#{grade_master_id}") 
+      @g_book = @grade_book.each do |g_b|
+      p  @no_of_books = g_b.no_of_books
+    end
+    return @no_of_books
+
   end
   
   def self.build_collection(students)

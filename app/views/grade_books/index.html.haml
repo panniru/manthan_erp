@@ -9,6 +9,24 @@
               %th No.Of.Books
           %tbody
             %tr{"ng-repeat" => "grade in grades | orderBy:'id'"}
-              %td {{grade.grade_name}}         
+              %td 
+                %a{href: "#", "ng-click" =>"editGradeBooks(grade)"}
+                  {{grade.grade_name}}         
               %td{"ng-repeat" => "grade_book in grade_books | filter :{grade_master_id: grade.id}: true"}
                 {{grade_book.no_of_books}}
+  .row
+    #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+            %h4.modal-title{ :id => "myModalLabel"} Add No Of Books
+          .modal-body
+            .form-group
+              %lablel{:class => "form-label col-md-3"} 
+                %b
+                  No.Of.Books
+              .col-md-4     
+                = text_field_tag  " ",nil, :class => "form-control", :ng_model => "myNoOfBooks", :placeholder => "No Of Books"
+              .col-md-offset-4            
+                %button{:class=> "btn btn-primary", "ng-click"=>"updateGradeBooks()"}=  "Update"

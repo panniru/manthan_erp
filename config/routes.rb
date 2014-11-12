@@ -798,6 +798,7 @@ ManthanErp::Application.routes.draw do
     collection do
       get "get_grades_service"
       get "get_grade_books_service"
+      post "save_grade_books_service"
     end
   end
 

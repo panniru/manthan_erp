@@ -1,8 +1,7 @@
 (function(angular, app) {
     "use strict";
     app.controller("IssuingsController",["$scope", "issuingService", function($scope,  issuingService) {
-      // $scope.myGrade = ""
-             
+        
         $scope.map_grades = []
         issuingService.getGradeServiceView()
             .then(function(result) {                
