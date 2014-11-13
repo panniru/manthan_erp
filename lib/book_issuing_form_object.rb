@@ -17,7 +17,7 @@ class BookIssuingFormObject
             issuing_obj.returned_date = DateTime.now
           end 
         else
-          issuing_obj = Issuing.new({student_master_id: param[:student_master_id], book: issuing[:book]})
+          issuing_obj = Issuing.new({student_master_id: param[:student_master_id], book: Book.new(issuing[:book])})
         end
         issuing_objs << issuing_obj
       end

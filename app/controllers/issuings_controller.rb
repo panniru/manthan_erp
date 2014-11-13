@@ -2,6 +2,8 @@ class IssuingsController < ApplicationController
   load_resource :only => [:show, :update, :edit, :destroy]
 
   def create
+    p params
+    p "================post method=================="
     @issuing = params[:book_issuing_objects]
     
     if BookIssuingFormObject.create_collection(params[:book_issuing_objects])
@@ -17,14 +19,14 @@ class IssuingsController < ApplicationController
   
   def index
     p params
-    p "=============================>"
+    p "========get method=====================>"
     #@students =  StudentMaster.all
 
      @students  = StudentMaster.where("grade_master_id = :grade_master_id AND section_master_id = :section_master_id", {grade_master_id: params[:grade_master_id], section_master_id: params[:section_master_id]})
-    @book_issuing_objects = BookIssuingFormObject.build_collection(@students)
-    
+    @book_issuing_objects = BookIssuingFormObject.build_collection(@students) 
+    p @book_issuing_objects
+    p "**************************====>"
   end
-   
   
   def gradeserviceview
     respond_to do |format|
@@ -37,6 +39,7 @@ class IssuingsController < ApplicationController
       end
     end  
   end
+
   def new
     @issuing = Issuing.new
   end
@@ -87,12 +90,11 @@ class IssuingsController < ApplicationController
       end
     end
   end
- 
+  
   private
 
   def issuing_params
     params.require(:issuing).permit(:name, :grade, :section, :student_master_id, :book, :deleted_at, :returned_date, :issuing_date, :book_id)
   end
   
- 
 end

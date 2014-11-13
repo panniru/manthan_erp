@@ -5,7 +5,6 @@
         $scope.showDonateBook = function(){
             $scope.donate_books = resourceService.DonateBook.query();  
         };
-
         
         $scope.editDonateBook = function(donate_book){
             //alert(JSON.stringify(donate_book));
