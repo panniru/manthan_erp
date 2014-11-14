@@ -745,6 +745,9 @@ ManthanErp::Application.routes.draw do
 
   resources :donate_books do
     collection do
+      get  'get_grades'
+      get 'get_grade_sections'
+      get 'get_students'
       post 'update_donate_book'
       post 'delete_donate_book'
     end

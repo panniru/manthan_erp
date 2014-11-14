@@ -1,9 +1,32 @@
 (function(angular, app) {
     "use strict";
-    app.controller("DonateBooksController",["$scope","resourceService", "donateBooksService", function($scope, resourceService, donateBooksService) {         
+    app.controller("DonateBooksController",["$scope","resourceService", "donateBooksService", function($scope, resourceService, donateBooksService) {     
+    
         $scope.donate_books = resourceService.DonateBook.query(); 
         $scope.showDonateBook = function(){
             $scope.donate_books = resourceService.DonateBook.query();  
+        };
+        
+        donateBooksService.getGradesService()
+            .then(function(result) {                
+                $scope.grades = result.data;                
+            });
+       
+        $scope.getGradeSections = function(){      
+            donateBooksService.getGradeSectionsService($scope.myGrade)
+                .then(function(result) {                
+                    $scope.sections = result.data;
+                    //alert(JSON.stringify($scope.sections));
+                });
+        };
+
+        $scope.getStudents = function(){     
+            alert();
+            donateBooksService.getStudentsService($scope.myGrade,$scope.mySection)
+                .then(function(result) {                
+                    $scope.students = result.data;
+                    alert(JSON.stringify($scope.students));
+                });
         };
         
         $scope.editDonateBook = function(donate_book){
@@ -26,8 +49,6 @@
                 });
             $scope.showDonateBook();
         }
-
-
 
     }]); 
 })(angular, myApp);
