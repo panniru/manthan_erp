@@ -2,21 +2,19 @@
     "use strict";
     app.controller("BlockbooksController",["$scope","resourceService", "blockBookService", function($scope, resourceService, blockBookService) {        
         $scope.blockBooks = resourceService.BlockBook.query()       
-
+        
         blockBookService.getbookServiceView()
             .then(function(result) {
                 $scope.block_books = result.data
             });
-
+        
         $scope.Go = function(){  
             blockBookService.getBooks($scope.myIsbn)
                 .then(function(result) {
                     $scope.books=result.data
-                    alert(JSON.stringify($scope.books));
                     $scope.bookName = result.data[0]['name']
                     $scope.authorName = result.data[0]['author']
                     $scope.bookId = result.data[0]['id']
-                    //alert($scope.book_id); 
                 });            
         };
         
@@ -38,19 +36,22 @@
                     $scope.books=result.data;
                 });
         };  
-
+        
         $scope.showBlockBooks = function(){
             
         };
-
+        
         $scope.destroy= function(blockBook){
-            blockBook.$delete()
-                .then(function(responce){
-                    $scope.blockBooks.splice($scope.blockBooks.indexOf(blockBook), 1)
-                })
+            if(confirm("Are you sure want to delete")){
+                $scope.blockBooks.splice($scope.blockBooks.indexOf(blockBook), 1)
+                blockBook.$delete()
+                    .then(function(responce){                       
+                    })            
+            }else{                
+            }
         };
-
-
-
+        
+        
+        
     }]);
 })(angular, myApp)

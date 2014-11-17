@@ -32,18 +32,33 @@
             var isbn = $("#isbn").val()
             blockBookService.damageBooks($scope.book_id,$scope.myIsbn,$scope.bookName,$scope.authorName,$scope.bookStage,$scope.damageType,$scope.damageDescription)
                 .then(function(result) {
-                    $scope.books=result.data
+                    $scope.books=result.data;
+                    $('#myModal').modal('hide');   
+                    $scope.showDamageBooks();
                 });
-            $('#myModal').modal('hide');   
-            $scope.showDamageBooks();
+           
         };      
 
         $scope.destroy = function(damage_book){
-            resourceService.DamageBook.delete({id: damage_book.id})
-            $scope.showDamageBooks();
-               
+            if(confirm("Are you sure want to delete")){
+                $scope.damage_books.splice($scope.damage_books.indexOf(damage_book), 1);
+                resourceService.DamageBook.delete({id: damage_book.id});
+                $scope.showDamageBooks();
+            }else{
+            }
         };  
-
+        
+        $scope.viewBookStage = function(){
+            if ($scope.bookStage == 'LOSS'){
+                $scope.viewDamageType = true;
+                $scope.viewDamageDesc = false;              
+            }
+            if ($scope.bookStage == 'DAMAGE'){
+                $scope.viewDamageType = false;
+                $scope.viewDamageDesc = true;
+            }
+        };
+            
        
        
     }]);

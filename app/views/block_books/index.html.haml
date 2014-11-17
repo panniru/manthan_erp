@@ -1,64 +1,21 @@
 .col-md-12{"ng-controller" => "BlockbooksController"}
-  .panel.panel-default
-    .test
-      .col-sm-3
-        .pull-left
-          .input-group
-            %span.input-group-addon
-              = fa_icon "search lg"
-            %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
-            %br
-      .col-sm-4
-        %center
-          %h3
-            BlockedBooks
-      .col-sm-5     
-        .pull-right
-          %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Block Book"
-          #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-            .modal-dialog
-              .modal-content
-                .modal-header
-                  %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-                  %h4#myModalLabel.modal-title Block Book
-                  .modal-body
-                    .row
-                      .col-sm-2
-                        = label_tag "ISBN:"
-                      .col-sm-3
-                        = autocomplete_field_tag :isbn_name, 
-                        '',
-                        "/auto_search/autocomplete_book_isbn",
-                        :placeholder => "ISBN", :class => 'form-control',
-                        :required => true,
-                        :id_element => "#isbn", :ng_model => "myIsbn" 
-                      .col-md-7
-                        = hidden_field_tag :isbn, :id => "isbn"
-                        %br
-                        = link_to "GO", "#", class: "btn btn-primary",   :ng_click => "Go()"  
-                        .row
-                          .col-sm-4
-                            = label_tag "NAME:"
-                            %input{:name => "name", :ng_model => "bookName"}
-                          .col-sm-2
-                          .col-sm-3
-                            = label_tag "AUTHOR:"
-                            %input{:name => "author", :ng_model => "authorName"}
-                    .row
-                      .col-sm-3
-                        = label_tag "Blocked By:"
-                      .col-sm-5
-                        = select_tag :blocked_by, options_for_select([['Student'],['Faculty']]) ,  :ng_model => "myBlock" 
-                        %br
-                     
-                      
-                  .modal-footer
-                    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-                    = link_to "save", "#", class: "btn btn-primary",   :ng_click => "save()"
-                    %br
-                    %br
-  %br
-  %br  
+  .col-md-1
+  .col-md-10
+    .col-sm-3
+      .pull-left
+        .input-group
+          %span.input-group-addon
+            = fa_icon "search lg"
+          %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+    %br
+    .col-sm-3
+      %center
+        %h3
+          BlockedBook
+    .col-sm-4
+      .pull-right
+        %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Block Book"   
+
   .row
     %table#tblData.table.table.striped.table-bordered.table-condensed.table-hover
       %thead
@@ -76,9 +33,53 @@
           %td {{blockBook.blocked_by}}
           %td
             = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "destroy(blockBook)"
-          
-           
-    
+
+
+  .row
+    #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+            %h4#myModalLabel.modal-title Block Book
+          .modal-body
+            .row
+              .col-sm-3
+                = label_tag "Isbn"
+              .col-sm-5
+                = autocomplete_field_tag :isbn_name, 
+                '',
+                "/auto_search/autocomplete_book_isbn",
+                :placeholder => "ISBN", :class => 'form-control',
+                :required => true,
+                :id_element => "#isbn", :ng_model => "myIsbn"
+                = hidden_field_tag :isbn, :id => "isbn"
+              .col-md-4
+                = link_to "GO", "#", class: "btn btn-primary",   :ng_click => "Go()"  
+            %br
+            .row
+              .col-sm-3
+                = label_tag "Name"
+              .col-sm-5
+                %input{:name => "name", :ng_model => "bookName", :class => 'form-control'}
+            %br
+            .row
+              .col-sm-3
+                = label_tag "Author"
+              .col-sm-5               
+                %input{:name => "author", :ng_model => "authorName", :class => 'form-control'}
+            %br
+            .row
+              .col-sm-3
+                = label_tag("blocked_by", "Blocked By")
+              .col-sm-5
+                = select_tag :blocked_by, options_for_select([['Student'],['Faculty']]) , :ng_model => "myBlock",  :class => 'form-control' 
+            %br
+            .row
+              .col-md-5.col-md-offset-3
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                = link_to "save", "#", class: "btn btn-primary",   :ng_click => "save()"
+                %br      
           
 
        
