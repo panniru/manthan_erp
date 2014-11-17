@@ -58,16 +58,19 @@
                 = hidden_field_tag :isbn, :id => "isbn"
               .col-sm-5              
                 = link_to "GO", "#", class: "btn btn-primary",   :ng_click => "Go()"  
+            %br
             .row
               .col-sm-2
                 = label_tag(:name, "Name") 
               .col-sm-5
                 %input{:name => "name", :ng_model => "bookName", :class => 'form-control'}
+            %br
             .row
               .col-sm-2
                 = label_tag(:author, "Author") 
               .col-sm-5
                 %input{:name => "author", :ng_model => "authorName", :class => 'form-control'}
+            %br
             .row 
               .col-sm-2
                 = label_tag "BookStage"
@@ -85,7 +88,7 @@
                 = label_tag "Description:"
               .col-sm-7
                 = text_area_tag :damage_description , "", :ng_model => "damageDescription"
-                    
+          %br         
           .row
             .col-md-5.col-md-offset-3
               %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
