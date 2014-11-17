@@ -5,7 +5,7 @@
         $scope.request_books = resourceService.RequestBook.query();       
         $scope.request_books_status = [];
         $scope.book_status = "";
-
+        
         $scope.sendBooksForApproval = function(book_status,request_book){
             alert(JSON.stringify(book_status));
             alert(JSON.stringify(request_book));
@@ -75,9 +75,7 @@
         $scope.newBook = function(){           
             $scope.newBooks = [];           
             $('#createModal').modal('show');
-            alert(JSON.stringify($scope.pending_requests[0]['id']));
-            alert($scope.pending_requests.length);
-            alert($scope.request_books_status.length);
+           
             $scope.moreBooks = true;            
 
             for(var i=0; i<$scope.pending_requests.length; i++){              

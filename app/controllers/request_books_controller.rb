@@ -3,7 +3,9 @@ class RequestBooksController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        @request_books = RequestBook.get_request_books_by_role(current_user)     
+        @request_books = RequestBook.get_request_books_by_role(current_user)    
+        p @request_books 
+        p "======================>"
         render :json => @request_books
       end
       format.html do
