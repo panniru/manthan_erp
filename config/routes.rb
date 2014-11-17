@@ -131,6 +131,8 @@ ManthanErp::Application.routes.draw do
   end 
 
   resources :books do 
+    member do 
+    end
     collection do       
       post 'create_bulk'
       post 'add_bulk'

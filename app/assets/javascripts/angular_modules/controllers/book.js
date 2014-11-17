@@ -64,13 +64,16 @@
             $scope.book = book;                     
             $('#editBookModal').modal('show')
         };  
-     
+        
         $scope.destroy = function(book){
-            book.$delete()
-                .then(function(responce){
-                    $scope.books.splice($scope.books.indexOf(book), 1)
-                    $scope.showBooks();
-                })
+            if(confirm("Are you sure want to delete")){
+                $scope.books.splice($scope.books.indexOf(book), 1);
+                book.$delete()
+                    .then(function(responce){                     
+                        $scope.showBooks();
+                    })                
+            }else{
+            }
         };  
         
         $scope.update = function(){
@@ -87,10 +90,10 @@
                 $scope.newBooks.push({"name": "", "isbn": "", "author": "", "year_of_publishing": "", "book_type": "", "purchased_date": $scope.dateFormat});
             };
         };
-	$scope.showBooks = function(){           
-            $scope.books = resourceService.Book.query(); 
-        }
-
         
+	$scope.showBooks = function(){    
+            alert();
+            $scope.books = resourceService.Book.query(); 
+        }       
     }]);    
 })(angular, myApp);

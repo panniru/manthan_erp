@@ -44,10 +44,13 @@
         };
         
         $scope.deleteDonateBook = function(donate_book){
-            donateBooksService.deleteDonateBook(donate_book)
-                .then(function(result){
-                });
-            $scope.showDonateBook();
+            if(confirm("Are you sure want to delete")){
+                donateBooksService.deleteDonateBook(donate_book)
+                    .then(function(result){
+                        $scope.showDonateBook();
+                    });                
+            }else{
+            }
         }
 
     }]); 
