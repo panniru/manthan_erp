@@ -16,21 +16,17 @@
             donateBooksService.getGradeSectionsService($scope.myGrade)
                 .then(function(result) {                
                     $scope.sections = result.data;
-                    //alert(JSON.stringify($scope.sections));
                 });
         };
 
-        $scope.getStudents = function(){     
-            alert();
+        $scope.getStudents = function(){
             donateBooksService.getStudentsService($scope.myGrade,$scope.mySection)
                 .then(function(result) {                
                     $scope.students = result.data;
-                    alert(JSON.stringify($scope.students));
                 });
         };
         
         $scope.editDonateBook = function(donate_book){
-            //alert(JSON.stringify(donate_book));
             $scope.donate_book = donate_book;
             $('#myEditModal').modal('show');            
         };
@@ -52,6 +48,8 @@
             }else{
             }
         }
+
+
 
     }]); 
 })(angular, myApp);
