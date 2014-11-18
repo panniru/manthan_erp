@@ -13,7 +13,6 @@
             issuingService.getGradeSectionServiceView($scope.myGrade)
                 .then(function(result) {                
                     $scope.sections = result.data;
-                    //alert(JSON.stringify($scope.sections));
                 });
         };
 

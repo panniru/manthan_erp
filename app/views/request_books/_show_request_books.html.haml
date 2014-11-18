@@ -22,8 +22,7 @@
           %td {{request_book.status}}
           - if current_user.librarian? or current_user.principal? or current_user.admin?
             %td
-              %input{"ng-model" => "book_status", type: "checkbox", "ng-change" => "sendBooksForApproval(book_status,request_book)", "ng-checked" => "book_status"}    
-              {{book_status}}
+              %input{"ng-model" => "book_status", type: "checkbox", "ng-change" => "sendBooksForApproval(book_status,request_book)", "ng-checked" => "book_status"}
               
          
            

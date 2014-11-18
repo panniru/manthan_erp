@@ -7,8 +7,6 @@
         $scope.book_status = "";
         
         $scope.sendBooksForApproval = function(book_status,request_book){
-            alert(JSON.stringify(book_status));
-            alert(JSON.stringify(request_book));
             if(book_status){               
                 $scope.request_books_status.push({
                     id: request_book.id,
@@ -87,7 +85,6 @@
                 }             
             }                        
         };
-        $scope.msfFun = function(){  alert("dynamic");       };
 
         $scope.submitBooks = function(){           
             for(var i=0; i< $scope.newBooks.length; i++){

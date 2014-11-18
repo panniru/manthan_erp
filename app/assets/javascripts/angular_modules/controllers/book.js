@@ -9,15 +9,11 @@
         initiateForm();
                
         $scope.getPurchaseDate = function(){ 
-            alert();
             $scope.dateFormat = $scope.purchasedDate.getFullYear()+"-"+($scope.purchasedDate.getMonth()+1)+"-"+$scope.purchasedDate.getDate();             
         }     
    
-        $scope.getEditPurchaseDate = function(){ 
-            alert();
-            $scope.dateFormat = $scope.book.purchased_date.getFullYear()+"-"+($scope.book.purchased_date.getMonth()+1)+"-"+$scope.book.purchased_date.getDate();  
-            //alert($scope.dateFormat);
-            
+        $scope.getEditPurchaseDate = function(){
+            $scope.dateFormat = $scope.book.purchased_date.getFullYear()+"-"+($scope.book.purchased_date.getMonth()+1)+"-"+$scope.book.purchased_date.getDate();             
         }
        
         $scope.newBook = function(){             
@@ -91,8 +87,7 @@
             };
         };
         
-	$scope.showBooks = function(){    
-            alert();
+	$scope.showBooks = function(){
             $scope.books = resourceService.Book.query(); 
         }       
     }]);    

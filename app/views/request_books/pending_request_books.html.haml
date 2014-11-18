@@ -1,5 +1,13 @@
 .row{"ng-controller" => "RequestBooksController","ng-init" => "pendingRequests()"}
   .row
+    %center
+      %h3
+        Pending Request Books
+  .row
+    %center
+      %h4
+        Delivered Books
+  .row
     .col-md-1
     .col-md-10
       %table#tblData.target.table.table-striped.table-condensed.table-bordered
@@ -16,7 +24,12 @@
             %td {{pending_request.author_name}}            
             %td {{pending_request.status}} 
             %td      
-              %input{"ng-model" => "book_status", type: "checkbox", "ng-change" => "sendBooksForApproval(book_status,pending_request)", "ng-checked" => "book_status"}              
+              %input{"ng-model" => "book_status", type: "checkbox", "ng-change" => "sendBooksForApproval(book_status,pending_request)", "ng-checked" => "book_status"}   
+  %br
+  .row
+    %center
+      %h4
+        Accespt Delivery           
   .row
     .col-md-1
     .col-md-10
@@ -36,6 +49,11 @@
             %td      
               %input{"ng-model" => "book_status", type: "checkbox", "ng-change" => "sendBooksForApproval(book_status,pending_request)", "ng-checked" => "book_status"} 
               {{book_status}}
+  %br
+  .row
+    %center
+      %h4
+        Pending Books
 
   .row
     .col-md-1
