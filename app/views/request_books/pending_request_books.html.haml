@@ -29,7 +29,7 @@
   .row
     %center
       %h4
-        Accespt Delivery           
+        Ordered Books      
   .row
     .col-md-1
     .col-md-10
@@ -47,8 +47,7 @@
             %td {{pending_request.author_name}}  
             %td {{pending_request.status}}
             %td      
-              %input{"ng-model" => "book_status", type: "checkbox", "ng-change" => "sendBooksForApproval(book_status,pending_request)", "ng-checked" => "book_status"} 
-              {{book_status}}
+              %input{"ng-model" => "book_status", type: "checkbox", "ng-change" => "sendBooksForApproval(book_status,pending_request)", "ng-checked" => "book_status"}
   %br
   .row
     %center

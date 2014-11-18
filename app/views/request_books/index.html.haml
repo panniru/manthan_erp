@@ -14,8 +14,8 @@
                 .col-md-2
                   = label_tag "SUBJECT", nil, :class => "form-label"
                 .col-md-10
-                  = text_field_tag "",nil, :class => "form-control", :ng_model => "myMailSubject", :disabled => "disabled"             
-              .col-md-2
+                  = text_field_tag "",nil, :class => "form-control", :ng_model => "myMailSubject", :disabled => "disabled"
+            %br
             .row
               .col-md-10
                 .col-md-2
@@ -23,4 +23,20 @@
                 .col-md-10
                   = text_area_tag "",nil, :class => "form-control", :ng_model => "myMailMessage"                                   
               .col-md-2{"ng-controller" => "MailingController"}
-                %button{:type => "button", :class=> "btn btn-primary", :ng_click => "requestBooksMail(myMailSubject,myMailMessage,myRequestBooks)"}=  "SEND"
+                %button{:type => "button", :class=> "btn btn-primary", :ng_click => "requestBooksMail(myMailSubject,myMailMessage,myRequestBooks); $parent.updateBooksStatus('Ordered')"}=  "SEND"
+            %br
+            .row
+              %center
+                %h4
+                  Books Order Details
+            .row
+              %table#tblData.target.table.table-striped.table-condensed.table-bordered
+                %thead      
+                  %th Book Name
+                  %th Author Name
+                %tbody
+                  %tr{"ng-repeat"=>"req in myRequestBooks"}
+                    %td {{req.book_name}}
+                    %td {{req.author_name}}
+                
+              

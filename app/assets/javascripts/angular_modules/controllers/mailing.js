@@ -37,6 +37,7 @@
                 $("#appAlert").html(alert_msg)
             });  
             $('#mailSubjectModal').modal('hide'); 
+            alert("Mail Sent To Books Vendor Successful");
         };
         
     }]);

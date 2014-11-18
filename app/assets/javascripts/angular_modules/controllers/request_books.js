@@ -24,16 +24,16 @@
             }           
         };
 
-        $scope.updateBooksStatus =  function(book_status){             
+        $scope.updateBooksStatus =  function(book_status){  
+            alert();
             for (var i=0; i<$scope.request_books_status.length; i++){ 
                 $scope.request_books_status[i]['status'] = book_status;
             }
             
             requestBooksService.updateBooksStatus($scope.request_books_status)      
                 .then(function(result) {
-                    
-                });           
-            $scope.showRequestBooks();
+                    $scope.showRequestBooks();
+                });              
         };
 
         $scope.showRequestBooks = function(){
@@ -43,24 +43,30 @@
         };
 
         $scope.initiateMail = function(term_name){
-            $scope.myRequestBooks = [];
-            $scope.myMailSubject = "Regarding Books Order";            
-            $('#mailSubjectModal').modal('show');             
-          
-            for(var i=0; i<$scope.request_books_status.length; i++){
-              for(var j=0; j<$scope.request_books.length; j++){
-                    if($scope.request_books_status[i]['id'] == $scope.request_books[j]['id']){                        
-                        $scope.myRequestBooks.push({
-                            id: $scope.request_books[j]['id'],
-                            book_name: $scope.request_books[j]['book_name'],
-                            author_name: $scope.request_books[j]['author_name'],
-                        });
+            if($scope.request_books_status.length>0){
+                $scope.myRequestBooks = [];
+                $scope.myMailSubject = "Regarding Books Order";            
+                $('#mailSubjectModal').modal('show');             
+                
+                for(var i=0; i<$scope.request_books_status.length; i++){
+                    for(var j=0; j<$scope.request_books.length; j++){
+                        if($scope.request_books_status[i]['id'] == $scope.request_books[j]['id']){                        
+                            $scope.myRequestBooks.push({
+                                id: $scope.request_books[j]['id'],
+                                book_name: $scope.request_books[j]['book_name'],
+                                author_name: $scope.request_books[j]['author_name'],
+                            });
+                        }
                     }
+                }   
+            } 
+            else
+                {
+                    alert("Select Books To give Order");
                 }
-            }            
-            $scope.updateBooksStatus('Ordered');
+            // $scope.updateBooksStatus('Ordered');
         };
-
+        
         $scope.pendingRequests = function(){           
             $scope.pending_requests = resourceService.RequestBook.pending_requests();           
         };
