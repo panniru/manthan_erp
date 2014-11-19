@@ -27,9 +27,9 @@
             $('#mailSubjectModal').modal('hide'); 
         };
 
-         $scope.requestBooksMail = function(myMailSubject,myMailMessage,myRequestBooks){           
+         $scope.requestBooksMail = function(myMailSubject,myMailMessage,myRequestBooks,myVendor){           
             $scope.isMailActionFired = true            
-            mailService.requestBooksMail(myMailSubject,myMailMessage,myRequestBooks)
+            mailService.requestBooksMail(myMailSubject,myMailMessage,myRequestBooks,myVendor)
             .then(function(responce){
                 var alert_msg = '<div class="alert alert-success alert-dismissable">'+
                     '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+

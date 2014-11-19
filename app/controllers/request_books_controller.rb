@@ -1,5 +1,5 @@
 class RequestBooksController < ApplicationController
-
+  
   def index
     respond_to do |format|
       format.json do
@@ -69,8 +69,21 @@ class RequestBooksController < ApplicationController
   def request_books_mail_to_vendors
     respond_to do |format|
       format.json do          
-        RequestBooksMailer.request_book_mail(params[:myMailSubject], params[:myMailMessage],params[:myRequestBooks], ["muralee@ostryalabs.com"]).deliver
+        RequestBooksMailer.request_book_mail(params[:myMailSubject], params[:myMailMessage],params[:myRequestBooks], params[:myVendor]).deliver
         render :json=>true
+      end
+    end
+  end
+
+  def get_books_vendors
+    respond_to do |format|
+      format.json do      
+        books_vendors = VendorCategory.find_by_vendor_category('books').vendor_managements.map do |book_vendor|
+          {id: book_vendor.id, contact_name: book_vendor.contact_name, vendor_email: book_vendor.vendor_email}
+        end
+        p books_vendors
+        p "888888888888888"
+        render :json => books_vendors
       end
     end
   end

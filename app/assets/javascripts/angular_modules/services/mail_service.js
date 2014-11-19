@@ -11,9 +11,9 @@
             return $http.get(url,{params : {myMailSubject: myMailSubject, myMailMessage: myMailMessage}});
         };   
 
-        var requestBooksMail = function(myMailSubject,myMailMessage,myRequestBooks){
+        var requestBooksMail = function(myMailSubject,myMailMessage,myRequestBooks,myVendor){
             var url = "/request_books/request_books_mail_to_vendors.json"
-            return $http.post(url, {myMailSubject: myMailSubject, myMailMessage: myMailMessage, myRequestBooks: myRequestBooks});
+            return $http.post(url, {myMailSubject: myMailSubject, myMailMessage: myMailMessage, myRequestBooks: myRequestBooks, myVendor: myVendor});
         };      
         
         return {

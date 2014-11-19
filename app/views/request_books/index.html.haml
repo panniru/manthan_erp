@@ -10,6 +10,12 @@
             %h4.modal-title{ :id => "myModalLabel"} MAIL TO BOOKS VENDOR
           .modal-body
             .row
+              .col-md-2
+                = label_tag "Vendor", nil, :class => "form_label"
+              .col-md-8
+                %select{"ng-model" => "myVendor", "ng-options" => "vendor as vendor.contact_name+' - '+vendor.vendor_email for vendor in books_vendors",:class => "form-control","ng-change" => "gddetSectionsGrades()"}
+            %br
+            .row
               .col-md-10
                 .col-md-2
                   = label_tag "SUBJECT", nil, :class => "form-label"
@@ -23,7 +29,7 @@
                 .col-md-10
                   = text_area_tag "",nil, :class => "form-control", :ng_model => "myMailMessage"                                   
               .col-md-2{"ng-controller" => "MailingController"}
-                %button{:type => "button", :class=> "btn btn-primary", :ng_click => "requestBooksMail(myMailSubject,myMailMessage,myRequestBooks); $parent.updateBooksStatus('Ordered')"}=  "SEND"
+                %button{:type => "button", :class=> "btn btn-primary", :ng_click => "requestBooksMail(myMailSubject,myMailMessage,myRequestBooks,myVendor); $parent.updateBooksStatus('Ordered')"}=  "SEND"
             %br
             .row
               %center

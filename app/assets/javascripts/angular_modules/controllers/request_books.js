@@ -23,9 +23,8 @@
                 }
             }           
         };
-
+        
         $scope.updateBooksStatus =  function(book_status){  
-            alert();
             for (var i=0; i<$scope.request_books_status.length; i++){ 
                 $scope.request_books_status[i]['status'] = book_status;
             }
@@ -35,13 +34,13 @@
                     $scope.showRequestBooks();
                 });              
         };
-
+        
         $scope.showRequestBooks = function(){
             $scope.request_books = resourceService.RequestBook.query();
             $scope.request_books_status = [];
             $scope.book_status = "";
         };
-
+        
         $scope.initiateMail = function(term_name){
             if($scope.request_books_status.length>0){
                 $scope.myRequestBooks = [];
@@ -58,30 +57,35 @@
                             });
                         }
                     }
-                }   
+                } 
+
+                requestBooksService.getBooksVendorsService()      
+                    .then(function(result) {
+                        $scope.books_vendors = result.data;
+                        alert(JSON.stringify(books_vendors));
+                    });        
             } 
             else
-                {
-                    alert("Select Books To give Order");
-                }
-            // $scope.updateBooksStatus('Ordered');
+            {
+                    alert("Select Books To Place Order");
+            }
         };
         
         $scope.pendingRequests = function(){           
             $scope.pending_requests = resourceService.RequestBook.pending_requests();           
         };
-
+        
         $scope.acceptBooksDeliver = function(book_status){
             $scope.updateBooksStatus(book_status);           
             $scope.pending_requests = resourceService.RequestBook.pending_requests();           
         };   
-
+        
         $scope.newBook = function(){           
             $scope.newBooks = [];           
             $('#createModal').modal('show');
-           
+            
             $scope.moreBooks = true;            
-
+            
             for(var i=0; i<$scope.pending_requests.length; i++){              
                 for(var j=0; j<$scope.request_books_status.length; j++){                   
                     if($scope.pending_requests[i]['id'] == $scope.request_books_status[j]['id']){
@@ -91,7 +95,7 @@
                 }             
             }                        
         };
-
+        
         $scope.submitBooks = function(){           
             for(var i=0; i< $scope.newBooks.length; i++){
                 $scope.newBooks[i]['purchased_date'] =  $scope.dateFormat;
@@ -106,5 +110,8 @@
         $scope.getPurchaseDate = function(){           
             $scope.dateFormat = $scope.purchasedDate.getFullYear()+"-"+($scope.purchasedDate.getMonth()+1)+"-"+$scope.purchasedDate.getDate();             
         } 
+
+
+
     }]);
 })(angular, myApp)

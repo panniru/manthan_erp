@@ -728,6 +728,7 @@ ManthanErp::Application.routes.draw do
       get 'request_books_mail_to_vendors'
       post 'request_books_mail_to_vendors'
       get 'delivered_request_books'
+      get 'get_books_vendors'
     end  
   end
 
