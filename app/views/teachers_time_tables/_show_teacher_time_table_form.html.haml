@@ -1,7 +1,7 @@
 .row
   .col-md-1
   .col-md-8{"ng-show" => "myShowValue"} 
-    %table{:class => "table"}
+    %table.target.table.table-striped.table-condensed.table-bordered
       %tr
         %th PERIOD
         %th MON
@@ -20,16 +20,4 @@
         %td {{timeperiod['sat_grade_section']}}
   .col-md-2{"ng-show" => "myShowValue"}
     - if current_user.admin?
-      = submit_tag("EDIT",{class: "btn btn-primary", :ng_click => "editPeriods()"})    
-
-.row
-  :css
-    table, th, td
-    {
-    border-collapse:collapse;
-    border:5px solid #6aa6d6;
-    }
-    th, td
-    {
-    padding:5px;
-    } 
+      = submit_tag("EDIT",{class: "btn btn-primary", :ng_click => "editPeriods()"})
