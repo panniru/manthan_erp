@@ -620,6 +620,7 @@ ManthanErp::Application.routes.draw do
       post "mail_to_vendors"
       post "update_inventory_status"
       post 'create_bulk'
+      get 'get_canteen_vendors'
     end
   end
 

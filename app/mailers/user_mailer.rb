@@ -8,11 +8,13 @@ class UserMailer < ActionMailer::Base
   def special(mails)
     mail(to: mails , subject: "New Routes" )
   end
-  def vendor(request_books,emails)
-    @inventories = request_books
-    p "@@@@@@@@@@@@@@@@@@@@"
-    p @inventories
-    mail(to: emails.join(",") , subject: "Deliveries" )
+  def vendor(mail_subject, mail_message, my_vendor,inventories)
+    @mail_message = mail_message  
+    @inventories = inventories
+    @my_vendor = my_vendor 
+    emails = my_vendor["vendor_email"]
+
+    mail(to: emails , subject: mail_subject )
   end
 end
 

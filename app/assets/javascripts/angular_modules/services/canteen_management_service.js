@@ -27,15 +27,21 @@
             return $http.post(url, {status: status});
 	};
 
-	var requestInventoryMail =  function(inventories){
+	var requestInventoryMail =  function(myMailSubject,myMailMessage,myVendor,inventories){
 	    var url = "/inventories/mail_to_vendors.json"
-            return $http.post(url, { inventories: inventories});
-	    
+            return $http.post(url, { myMailSubject: myMailSubject, myMailMessage:myMailMessage, myVendor:myVendor, inventories: inventories});	    
 	};
 	
 	var getmealnameView =  function(){
 	    var url = "/mealnames/get_meal_names.json"
             return $http.get(url);
+	};
+
+        
+	var getCanteenVendors =  function(){
+	    var url = "/inventories/get_canteen_vendors.json"
+            return $http.get(url);
+	    
 	};
 	
 	return {
@@ -44,8 +50,9 @@
 	    getinventoryView : getinventoryView,
 	    updateStatus : updateStatus,
 	    requestInventoryMail : requestInventoryMail,
-	    getmealnameView : getmealnameView
-          //  Mealname:  Mealname
+	    getmealnameView : getmealnameView,
+            getCanteenVendors : getCanteenVendors
+            //  Mealname:  Mealname
         };
         
     }]); 

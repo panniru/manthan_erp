@@ -1,10 +1,46 @@
-%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "ordered inv"
-#myModal.modal.fade{:id => "MailModal" ,"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-        %h4#myModalLabel.modal-title Ordered Inventories
-      .modal-body
-        %table#tblData.target.table.table-striped.table-condensed.table-bordered
-          %h4 ;gsdfg
+.row
+  .modal.fade{ :id => "mailSubjectModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} MAIL TO CANTTEN VENDOR
+        .modal-body
+          .row
+            .col-md-2
+              = label_tag "Vendor", nil, :class => "form_label"
+            .col-md-8
+              %select{"ng-model" => "myVendor", "ng-options" => "vendor as vendor.contact_name+' - '+vendor.vendor_email for vendor in canteen_vendors",:class => "form-control"}
+          %br
+          .row
+            .col-md-10
+              .col-md-2
+                = label_tag "SUBJECT", nil, :class => "form-label"
+              .col-md-10
+                = text_field_tag "",nil, :class => "form-control", :ng_model => "myMailSubject", :disabled => "disabled"
+          %br
+          .row
+            .col-md-2
+              = label_tag "MESSAGE", nil, :class => "form-label"
+            .col-md-8
+              = text_area_tag "",nil, :class => "form-control", :ng_model => "myMailMessage"                                   
+            .col-md-2
+              %button{:type => "button", :class=> "btn btn-primary", :ng_click => "requestBooksMail(myMailSubject,myMailMessage,myVendor)"}=  "SEND"
+          %br
+          .row
+            %center
+              %h4
+                Inventories Order Details
+          .row
+            %table#tblData.target.table.table-striped.table-condensed.table-bordered
+              %thead      
+                %th Name
+                %th Type
+                %th Quantity
+              %tbody
+                %tr{"ng-repeat"=>"req in myStatus"}
+                  %td {{req.name}}
+                  %td {{req.inventory_type}}
+                  %td {{req.quantity}}
+                  
+                

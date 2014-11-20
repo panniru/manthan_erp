@@ -48,3 +48,7 @@
     %center
       - if current_user.canteenmanager?
         %button.btn.btn-primary{"ng-click" => "newInventory()"}= "Send For Approval"
+
+  .row
+    = render 'modal'
+        

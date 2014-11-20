@@ -13,7 +13,7 @@
               .col-md-2
                 = label_tag "Vendor", nil, :class => "form_label"
               .col-md-8
-                %select{"ng-model" => "myVendor", "ng-options" => "vendor as vendor.contact_name+' - '+vendor.vendor_email for vendor in books_vendors",:class => "form-control","ng-change" => "gddetSectionsGrades()"}
+                %select{"ng-model" => "myVendor", "ng-options" => "vendor as vendor.contact_name+' - '+vendor.vendor_email for vendor in books_vendors",:class => "form-control"}
             %br
             .row
               .col-md-10

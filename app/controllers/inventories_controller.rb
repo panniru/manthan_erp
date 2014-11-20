@@ -70,7 +70,7 @@ class InventoriesController < ApplicationController
   def mail_to_vendors
     respond_to do |format|
       format.json do  
-        UserMailer.vendor(params[:inventories],["navya@ostryalabs.com"]).deliver
+        UserMailer.vendor(params[:myMailSubject], params[:myMailMessage], params[:myVendor], params[:inventories]).deliver
         render :json=>true
       end
     end
@@ -89,4 +89,16 @@ class InventoriesController < ApplicationController
       end
     end
   end
+
+  def get_canteen_vendors
+    respond_to do |format|
+      format.json do      
+        canteen_vendors = VendorCategory.find_by_vendor_category('canteen').vendor_managements.map do |canteen_vendor|
+          {id: canteen_vendor.id, contact_name: canteen_vendor.contact_name, vendor_email: canteen_vendor.vendor_email}
+        end
+        render :json => canteen_vendors
+      end
+    end
+  end
+
 end 

@@ -1,8 +1,8 @@
-Dear vendor,
+Dear vendor #{@my_vendor["contact_name"]},
 .row  
   %p
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-    %h4 Inventories to be delivered
+    = @mail_message
 .row  
   %table{:border => "1"}
     %thead

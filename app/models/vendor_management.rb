@@ -1,5 +1,5 @@
 class VendorManagement < ActiveRecord::Base
-  #belongs_to :vendor_category
+  belongs_to :vendor_category
   # validates :vendor_name , :presence => true
   # validates_format_of :vendor_email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
   # validates :vendor_address, :presence => true

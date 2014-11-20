@@ -61,29 +61,40 @@
 	};
 	
 	$scope.initiateMail = function(){
+            $('#mailSubjectModal').modal('show'); 
+            $scope.myMailSubject = "Inventories to be delivered";
+            
+            canteenManagementService.getCanteenVendors()
+	    	.then(function(responce){
+                    $scope.canteen_vendors = responce.data;
+	        });  
+            
 	    $scope.isMailActionFired = true            
 	    $scope.myStatus = [];
             for(var i=0; i<$scope.request_status.length; i++){
-		for(var j=0; j<$scope.inventories.length; j++){
+	        for(var j=0; j<$scope.inventories.length; j++){
                     if($scope.request_status[i]['id'] == $scope.inventories[j]['id']){                        
                         $scope.myStatus.push({
                             id: $scope.inventories[j]['id'],
                             inventory_type: $scope.inventories[j]['inventory_type'],
                             name: $scope.inventories[j]['name'],
-			    quantity: $scope.inventories[j]['quantity'],
+	        	    quantity: $scope.inventories[j]['quantity'],
                         });
-		    }
+	            }
                 }
-            }
-	   
-	    canteenManagementService.requestInventoryMail($scope.myStatus)
+            }           
+        };
+
+        $scope.requestBooksMail = function(myMailSubject,myMailMessage,myVendor){            
+            canteenManagementService.requestInventoryMail(myMailSubject,myMailMessage,myVendor,$scope.myStatus)
 	    	.then(function(responce){
                     var alert_msg = '<div class="alert alert-success alert-dismissable">'+
-			'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
-			responce.data+'</div>'
+	        	'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
+	        	responce.data+'</div>'
                     $("#appAlert").html(alert_msg)
-		});  
-            $scope.updateStatus('Ordered');
+	        });  
+            $scope.updateStatus('Ordered');   
+            $('#mailSubjectModal').modal('hide'); 
         };
 	
 	
