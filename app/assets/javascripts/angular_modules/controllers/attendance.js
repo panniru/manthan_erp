@@ -2,7 +2,9 @@
     "use strict";
     app.controller("AttendanceController",["$scope", "attendanceService", "resourceService", function($scope, attendanceService, resourceService) {
         $scope.assesses = resourceService.Assess.query();        
-       
+
+
+        
         $scope.myShowFormValue = true;
         $scope.myEditFormValue = false;
         
@@ -107,6 +109,16 @@
             $scope.attendances = students;
             $scope.$apply();
         }
+        
+        $scope.attendance = function(selected_value){
+	    $scope.isPresent = function(value) {
+		if (selected_value == 'P' || selected_value == 'A' || selected_value == 'L')
+		    return true;
+		else 
+		    return false;
+	    };
+	}
+
         
 
     }]);

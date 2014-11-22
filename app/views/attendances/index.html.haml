@@ -11,6 +11,17 @@
           %th Attendance
       %tbody
         %tr{"ng-repeat" => "attendance in attendances"}
-          %td {{attendance.date}}
-          %td {{attendance.student_name}}
-          %td {{attendance.attendance}}
+          %div{"ng-show" => "isPresent(myNumber)"}
+            %td {{attendance.date}}
+            %td {{attendance.student_name}}
+            %td {{attendance.attendance}}
+            %td
+              %input{:ng_model =>"attendance.attendance", type: "radio", value: "P"} 
+              %input{:ng_model =>"attendance.attendance", type: "radio", value: "A"} 
+              %input{:ng_model =>"attendance.attendance", type: "radio", value: "L"} 
+              
+              = hidden_field_tag :attendance_date, :value => "{{attendance.date}}"
+              = hidden_field_tag :attendance, :value => "{{attendance.attendance}}"
+              {{attendance.attendance}}
+            %center 
+              %input{:type => 'button' , :class => 'btn btn-primary', :ng_click => "saveStudentAttendance()", :value => 'Submit'}
