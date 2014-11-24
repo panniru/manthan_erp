@@ -17,7 +17,7 @@ class AttendancesController < ApplicationController
     end
   end
     
-   def save_student_attendance
+   def save_today_student_attendance
      params[:attendence_details].each do |t|
        @temp = Attendance.new(add_attendance_params(t))
        @temp.student_master_id = t[:student_master_id]
@@ -70,7 +70,15 @@ class AttendancesController < ApplicationController
   end
 
   def index
-   
+    respond_to do |format|
+      format.json do
+        render :json => StudentReport::Attendence.students_attendance_on_date(params[:date], current_user.faculty_master)
+        p params[:date]
+      end
+      format.html do
+        render "index"
+      end
+    end
   end
   
     def get_students

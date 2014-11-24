@@ -1,12 +1,14 @@
 .pull-right
   %a{href: "#", :class => "btn btn-primary", :title => "", "ng-click" => "goToEdit()"} EDIT
 .row
-  %table.table-condensed.table-striped.table-hovered.table-bordered
+  %table.table.table-condensed.table-striped.table-hovered.table-bordered
     %thead
       %tr
+        %th Date
         %th Name
         %th Attendance
     %tbody
       %tr{"ng-repeat" => "attendance in attendances"}
-        %td {{attendance.name}}
+        %td {{attendance.date}}
+        %td {{attendance.student_name}}
         %td {{attendance.attendance}}

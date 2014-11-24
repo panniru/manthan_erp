@@ -1,3 +1,8 @@
+function myFunction(date){
+    
+    angular.element($('.myFunction')).scope().todayAttendence(date)
+}
+
 $(document).ready(function() { 
     var today = new Date();
     var monthNames = [ "January", "February", "March", "April", "May", "June",
@@ -18,7 +23,7 @@ $(document).ready(function() {
                        date: (date.getFullYear() + "-" + (date.getMonth()+1)+"-"+date.getDate())
                       },
                 success: function(data) {
-                    angular.element($('#attendance_calendar')).scope().reflectStudents(data);
+                   angular.element($('#attendance_calendar')).scope().reflectStudents(data);
                 }     
             });
         }

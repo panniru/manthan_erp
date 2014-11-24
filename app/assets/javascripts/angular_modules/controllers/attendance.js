@@ -2,6 +2,7 @@
     "use strict";
     app.controller("AttendanceController",["$scope", "attendanceService", "resourceService", function($scope, attendanceService, resourceService) {
         $scope.assesses = resourceService.Assess.query();        
+        $scope.attendaces = resourceService.Attendace.query();        
 
 
         
@@ -52,11 +53,11 @@
                 
             });
         
-        $scope.saveStudentAttendance = function(){
-            
+        $scope.saveStudentAttendance = function(date){
+            $scope.myDate = date;
             for(var i=0; i<$scope.save_attendence_details.length; i++){
-                $scope.save_attendence_details[i]['student_master_id'] = $scope.students[i]['id'];
-                $scope.save_attendence_details[i]['attendance'] = $scope.students[i]['attendance'];
+                $scope.save_attendence_details[i]['student_master_id'] = $scope.attendances[i]['id'];
+                $scope.save_attendence_details[i]['attendance'] = $scope.attendances[i]['attendance'];
                 $scope.save_attendence_details[i]['attendance_date'] = $scope.myDate; 
                 
             }
@@ -64,10 +65,15 @@
             attendanceService.saveStudentAttendance($scope.save_attendence_details)
                 .then(function(result) {
                     for(var i=0; i<$scope.save_attendence_details.length; i++){
-                        $scope.students[i]['attendance'] = '';
+                        $scope.attendances[i]['attendance'] = '';
                         $("#myModal").modal('hide');
                     }
                 });
+        }
+
+        $scope.goToEdit = function(){
+            $scope.myShowFormValue = false;
+            $scope.myEditFormValue = true;
         }
         attendanceService.getStudentAssessment()
             .then(function(result) {
@@ -105,24 +111,13 @@
 		//});
         }
 
-        $scope.goToEdit = function(){
-            $scope.myShowFormValue = false;
-            $scope.myEditFormValue = true;
-        };
+ 
         $scope.reflectStudents = function(students){
             $scope.attendances = students;
             $scope.$apply();
         }
         
-        $scope.attendance = function(selected_value){
-	    $scope.isPresent = function(value) {
-		if (selected_value == 'P' || selected_value == 'A' || selected_value == 'L')
-		    return true;
-		else 
-		    return false;
-	    };
-	}
-
+   
         
 
     }]);

@@ -740,6 +740,7 @@ ManthanErp::Application.routes.draw do
       get 'holiday_date'
       post 'save_student_attendance'
       get 'getStudentAndAttendanceView'
+      post 'save_today_student_attendance'
       get 'attendance_date'
       get 'week'
       get 'attendance_on_date'

@@ -1,7 +1,35 @@
-.row{:ng_controller => "AttendanceController"}
+.row{:ng_controller => "DateAttendanceController"}
   .col-sm-4
     #attendance_calendar
-  .col-sm-6{"ng-show" => "myShowFormValue"}
-    = render 'show_form'
-  .col-sm-6{"ng-show" => "myEditFormValue"}
-    = render 'edit_form'
+    
+  .col-sm-8{:ng_show => 'myEditFormValue'}
+    = render "form"
+  .col-sm-8{:ng_show => 'myShowFormValue'}
+    %body{:onload => "myFunction()"}
+      %table.table.table-bordered.table-condensed.table-striped
+        %thead
+          %tr
+            %th Student's Name
+            %th 
+              %label{for: "P", :id => "P"} P
+            %th
+              %label{for: "A", :id => "A"} A
+            %th
+              %label{for: "L", :id => "L"} L
+        %tbody
+          %tr{"ng-repeat" => "attendance in attendances"}
+            %td
+              {{attendance.name}}
+            %td
+              %input{:ng_model =>"attendance['attendance']", type: "radio", value: "P"} 
+            %td
+              %input{:ng_model =>"attendance['attendance']", type: "radio", value: "A"} 
+            %td
+              %input{:ng_model =>"attendance['attendance']", type: "radio", value: "L"} 
+              = hidden_field_tag :attendance, :value => "{{attendance['attendance']}}"
+            
+      %center
+        %input{:type => "button", :class => "myFunction btn btn-primary", "ng-click" => "saveTodayStudentAttendance()", :value => "Submit", "ng-model" => "date"}
+            
+  
+
