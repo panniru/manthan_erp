@@ -1,13 +1,5 @@
 $(document).ready(function() { 
-
-
-    if($(".fc-event").length > 0){
-        $('.fc-event-inner').addClass("fc-state-disabled");
-        alert("Image loaded.");
-    }
-
     var today = new Date();
-
     var monthNames = [ "January", "February", "March", "April", "May", "June",
                        "July", "August", "September", "October", "November", "December" ]
     $('#attendance_calendar').html("");

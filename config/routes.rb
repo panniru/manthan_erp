@@ -1,5 +1,6 @@
 ManthanErp::Application.routes.draw do
 
+  get 'locations/index'
 
   resources :grade_lab_mappings do
     collection do
@@ -742,6 +743,7 @@ ManthanErp::Application.routes.draw do
       get 'attendance_date'
       get 'week'
       get 'attendance_on_date'
+      get 'get_week'
     end
   end
 

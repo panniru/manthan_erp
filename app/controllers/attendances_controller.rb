@@ -1,5 +1,13 @@
 class AttendancesController < ApplicationController
- 
+  def get_week
+    respond_to do |format|
+      format.json do
+        render :json => StudentReport::Attendence.this_week
+        p params
+      end
+    end
+  end
+   
   def attendance_on_date
     respond_to do |format|
       format.json do
@@ -71,7 +79,8 @@ class AttendancesController < ApplicationController
         if(ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
           pa="#{current_user.faculty_master.id}"
           a = ClassTeacherMapping.where(:faculty_master_id => pa).map{|student| student.grade_master_id}
-          students = StudentMaster.where(:grade_master_id => a).each.map do |mapping|
+          b = ClassTeacherMapping.where(:faculty_master_id => pa).map{|student| student.section_master_id}
+          students = StudentMaster.where(:grade_master_id => a, :section_master_id => b).each.map do |mapping|
             {id: mapping.id,  grade_master_id: mapping.grade_master_id, section_master_id: mapping.section_master_id, name: mapping.name}
           end     
           render :json => students

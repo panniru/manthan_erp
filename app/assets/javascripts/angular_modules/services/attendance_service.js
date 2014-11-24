@@ -5,6 +5,11 @@
             var url = "/admissions/get_assessment_students.json"
             return $http.get(url);
         };
+        var getWeek = function(){
+            var url = "/attendances/get_week.json"
+            return $http.get(url);
+        };
+        
         
         var getAttendanceOnDate = function(date){
             var url = "/attendances/attendance_on_date.json?date="+date
@@ -35,6 +40,7 @@
             saveStudentAttendance : saveStudentAttendance,
             getStudentAndAttendanceView : getStudentAndAttendanceView,
             getStudentAssessment : getStudentAssessment,
+            getWeek : getWeek
         //    getModalServiceView : getModalServiceView
 
         };

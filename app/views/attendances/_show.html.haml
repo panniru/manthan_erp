@@ -1,0 +1,20 @@
+.row
+  .col-sm-4
+    
+  .col-sm-6
+    %b 
+    %table.table.table-condensed.table-striped.table-bordered
+      %thead
+        %tr
+          %th Date
+          %th Name
+          %th Attendance
+      %tbody
+        %tr{"ng-repeat" => "attendance in attendances"}
+          %div
+            %td {{attendance.date}}
+            %td {{attendance.student_name}}
+            %td {{attendance.attendance}}
+              
+      %center
+        %input{:type => 'button' , :class => 'btn btn-primary', :ng_click => "goToEdit()", :value => 'Edit'}

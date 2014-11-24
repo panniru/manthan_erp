@@ -57,7 +57,7 @@
             for(var i=0; i<$scope.save_attendence_details.length; i++){
                 $scope.save_attendence_details[i]['student_master_id'] = $scope.students[i]['id'];
                 $scope.save_attendence_details[i]['attendance'] = $scope.students[i]['attendance'];
-                $scope.save_attendence_details[i]['attendance_date'] = $scope.date; 
+                $scope.save_attendence_details[i]['attendance_date'] = $scope.myDate; 
                 
             }
             
@@ -73,7 +73,11 @@
             .then(function(result) {
                 $scope.ass = result.data;
             });
-      
+        attendanceService.getWeek()
+            .then(function(result) {
+                $scope.weeks = result.data;
+            });
+        
         $scope.getModal = function(assess){
             $scope.assess = assess;
             $('#getModal').modal('show');

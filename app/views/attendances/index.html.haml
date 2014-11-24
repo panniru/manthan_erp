@@ -1,27 +1,7 @@
 .row{:ng_controller => "AttendanceController"}
   .col-sm-4
     #attendance_calendar
-  .col-sm-6
-    %b 
-    %table.table.table-condensed.table-striped.table-bordered
-      %thead
-        %tr
-          %th Date
-          %th Name
-          %th Attendance
-      %tbody
-        %tr{"ng-repeat" => "attendance in attendances"}
-          %div{"ng-show" => "isPresent(myNumber)"}
-            %td {{attendance.date}}
-            %td {{attendance.student_name}}
-            %td {{attendance.attendance}}
-            %td
-              %input{:ng_model =>"attendance.attendance", type: "radio", value: "P"} 
-              %input{:ng_model =>"attendance.attendance", type: "radio", value: "A"} 
-              %input{:ng_model =>"attendance.attendance", type: "radio", value: "L"} 
-              
-              = hidden_field_tag :attendance_date, :value => "{{attendance.date}}"
-              = hidden_field_tag :attendance, :value => "{{attendance.attendance}}"
-              {{attendance.attendance}}
-            %center 
-              %input{:type => 'button' , :class => 'btn btn-primary', :ng_click => "saveStudentAttendance()", :value => 'Submit'}
+  .col-sm-6{"ng-show" => "myShowFormValue"}
+    = render 'show_form'
+  .col-sm-6{"ng-show" => "myEditFormValue"}
+    = render 'edit_form'

@@ -4,7 +4,11 @@ class Attendance < ActiveRecord::Base
   scope :belongs_to_month, lambda{|month| where("to_char(attendance_date, 'FMMM') = ?", month.to_s)}
   scope :on_date, lambda { |date| where("attendance_date = ? ", date)}
   scope :taken_by_faculty, lambda { |faculty_master_id| where("faculty_master_id = ? ", faculty_master_id)}
-
+  def self.thisweek
+    week = (Date.today.at_beginning_of_week..Date.today.at_end_of_week)
+    return week
+    p week
+  end
   def self.student_summarized_monthly_report(student_id)
     present_query = "SELECT to_char(attendance_date, 'month') gmonth, count(*) present, 0 absent, 0 leave  from attendances where attendance = 'P' and student_master_id = "+student_id.to_s+"group by gmonth"
     absent_query = "SELECT to_char(attendance_date, 'month') gmonth, 0 present, count(*)  absent, 0 leave  from attendances where attendance = 'A' and student_master_id = "+student_id.to_s+"group by gmonth"
