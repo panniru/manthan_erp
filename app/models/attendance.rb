@@ -1,14 +1,40 @@
 class Attendance < ActiveRecord::Base
   belongs_to :student_master
+  belongs_to :faculty_master
+
+
+  def self.this_week(date, current_user)
+    if(ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.id}").length != 0)
+      pa="#{current_user.id}"
+      show_attendance_date = []
+      show_attendance_date  = Attendance.where(:faculty_master_id => pa).this_weekend
+    end
+    data = []
+    data = show_attendance_date.group_by(&:student_master_id)
+    data.map do |key, val|
+      inner_data = {}
+      inner_data[:name] = StudentMaster.find(key).name
+      val.each do |val|
+        inner_data[val.attendance_date] = val.attendance
+      end
+      inner_data.to_h
+    end
+  end
+
+
+
+  scope :this_weekend, lambda { where(:attendance_date => (Date.today.at_beginning_of_week..Date.today.at_end_of_week))}
   scope :active_at_date, lambda { where("attendance_date < :date and attendance_date > :date", date: Date.today )}
   scope :belongs_to_month, lambda{|month| where("to_char(attendance_date, 'FMMM') = ?", month.to_s)}
   scope :on_date, lambda { |date| where("attendance_date = ? ", date)}
   scope :taken_by_faculty, lambda { |faculty_master_id| where("faculty_master_id = ? ", faculty_master_id)}
+
   def self.thisweek
     week = (Date.today.at_beginning_of_week..Date.today.at_end_of_week)
     return week
     p week
   end
+
   def self.student_summarized_monthly_report(student_id)
     present_query = "SELECT to_char(attendance_date, 'month') gmonth, count(*) present, 0 absent, 0 leave  from attendances where attendance = 'P' and student_master_id = "+student_id.to_s+"group by gmonth"
     absent_query = "SELECT to_char(attendance_date, 'month') gmonth, 0 present, count(*)  absent, 0 leave  from attendances where attendance = 'A' and student_master_id = "+student_id.to_s+"group by gmonth"

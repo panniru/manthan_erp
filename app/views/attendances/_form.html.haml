@@ -13,7 +13,7 @@
         %tr{"ng-repeat" => "attendance in attendances"}
           %div
             %td {{attendance.date}}
-            %td {{attendance.student_name}}
+            %td {{attendance.name}}
             %td {{attendance.attendance}}
               
       %center
@@ -44,7 +44,7 @@
             %tbody
               %tr{"ng-repeat" => "attendance in attendances"}
                 %td
-                  {{attendance.name}}
+                  {{attendance.student_name}}
                 %td
                   %input{:ng_model =>"attendance['attendance']", type: "radio", value: "P"} 
                 %td

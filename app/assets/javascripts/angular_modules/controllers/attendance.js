@@ -4,8 +4,7 @@
         $scope.assesses = resourceService.Assess.query();        
         $scope.attendaces = resourceService.Attendace.query();        
 
-
-        
+    
         $scope.myShowFormValue = true;
         $scope.myEditFormValue = false;
         

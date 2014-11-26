@@ -29,6 +29,11 @@
             return $http.post(url,{attendence_details: save_today_attendence_details});
         };
 
+        var getShowAttendance = function(){
+            var url = "/attendances/show_attendance.json"
+            return $http.get(url);
+        };
+        
         var getUpdate = function(save_details){
             var url = "/admissions/get_update.json"
             return $http.post(url, {comment: save_details});
@@ -46,7 +51,8 @@
             getStudentAndAttendanceView : getStudentAndAttendanceView,
             getStudentAssessment : getStudentAssessment,
             getWeek : getWeek,
-            saveTodayStudentAttendance : saveTodayStudentAttendance
+            saveTodayStudentAttendance : saveTodayStudentAttendance,
+            getShowAttendance : getShowAttendance
         //    getModalServiceView : getModalServiceView
 
         };

@@ -22,11 +22,18 @@ module StudentReport
       Attendance.student_summarized_monthly_report(@student.id)
     end
     
-    def self.this_week
-      a = (Date.today.at_beginning_of_week..Date.today.at_end_of_week).to_a
-      b = a.each do |c|
-        puts c
+    def self.this_week(date, current_user)
+      if(ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.id}").length != 0)
+        pa="#{current_user.id}"
+        
+        show_attendance_date = []
+
+        show_attendance_date  = Attendance.where(:faculty_master_id => pa).this_weekend.group_by(&:student_master_id).each.map do |show_attendance|
+          {id: show_attendance.id, attendance: show_attendance.attendance, date: show_attendance.attendance_date, student_name: show_attendance.student_master.name}
+          
+        end
       end
+      show_attendance_date
     end
 
     def self.students_attendance_on_date(date, faculty)
@@ -35,14 +42,14 @@ module StudentReport
       
       if attendances.count > 0
         data = attendances.map do |attendance|
-          {date: date, attendance: attendance.attendance, student_name: attendance.student_master.name}
+          {date: date, attendance: attendance.attendance, name: attendance.student_master.name}
         end
       else
         section_master = ClassTeacherMapping.show_all_students(faculty.id).first.try(:grade_master)
         date = Date.today
         if section_master.present?
           data = section_master.students.map do |student|
-            {date: date, attendance: "", student_name: student.name, student_id: student.id}
+            {date: date, attendance: "", name: student.name, student_id: student.id, faculty_id: faculty.id}
           end
         end
       end

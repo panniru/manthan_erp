@@ -4,6 +4,7 @@ class ClassTeacherMapping < ActiveRecord::Base
   belongs_to :grade_master
   belongs_to  :section_master  
   belongs_to  :faculty_master
+  belongs_to  :attendance
 
   validates :faculty_master_id, presence: true
   validates :grade_master_id, presence: true
@@ -16,5 +17,5 @@ class ClassTeacherMapping < ActiveRecord::Base
   end
 
   scope :show_all_students, lambda{|faculty_master_id| where(:faculty_master_id => faculty_master_id ).select(:grade_master_id,:section_master_id)}
-  
+
 end

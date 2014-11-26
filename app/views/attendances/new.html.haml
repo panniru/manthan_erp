@@ -1,5 +1,9 @@
-.row
-  .col-sm-8{:ng_controller => "AttendanceController"}
+.row{:ng_controller => "DateAttendanceController"}
+  .pull-right
+    = link_to "Mark", new_attendance_path, :class => 'btn btn-primary'
+  .col-sm-4
+    #attendance_calendar
+  .col-sm-8
     %body{:onload => "myFunction()"}
       %table.table.table-bordered.table-condensed.table-striped
         %thead
@@ -12,23 +16,20 @@
             %th
               %label{for: "L", :id => "L"} L
         %tbody
-          %tr{"ng-repeat" => "student in students"}
+          %tr{"ng-repeat" => "attendance in attendances"}
             %td
-              {{student.name}}
+              {{attendance.student_name}}
             %td
-              %input{:ng_model =>"student['attendance']", type: "radio", value: "P"} 
+              %input{:ng_model =>"attendance['attendance']", type: "radio", value: "P"} 
             %td
-              %input{:ng_model =>"student['attendance']", type: "radio", value: "A"} 
+              %input{:ng_model =>"attendance['attendance']", type: "radio", value: "A"} 
             %td
-              %input{:ng_model =>"student['attendance']", type: "radio", value: "L"} 
-              = hidden_field_tag :attendance, :value => "{{student['attendance']}}"
-            
+              %input{:ng_model =>"attendance['attendance']", type: "radio", value: "L"} 
+              = hidden_field_tag :attendance, :value => "{{attendance['attendance']}}"
+              = hidden_field_tag :faculty_master_id, :value => "{{attendance.faculty_id}}"
+              {{attendance.faculty_id}}
+              
       %center
-        %input{:type => "button", :class => "myFunction btn btn-primary", "ng-click" => "saveStudentAttendance()", :value => "Submit", "ng-model" => "date"}
+        %input{:type => "button", :class => "myFunction btn btn-primary", "ng-click" => "saveTodayStudentAttendance()", :value => "Submit", "ng-model" => "date"}
             
   
-
-  .col-sm-4{:ng_controller => "AttendanceController"}
-    #attendance_calendar
-
-

@@ -16,13 +16,29 @@ class AttendancesController < ApplicationController
       end
     end
   end
+
+  def show_attendance
+    hash = Attendance.this_week(params[:date], current_user.faculty_master)
+  
+    respond_to do |format|
+      format.json do 
+        render :json => hash
+      end
+      format.html do 
+        render "show_week"
+      end
+    end
+  end
     
    def save_today_student_attendance
+     p params[:attendance_details]
      params[:attendence_details].each do |t|
        @temp = Attendance.new(add_attendance_params(t))
        @temp.student_master_id = t[:student_master_id]
        @temp.attendance = t[:attendance]
        @temp.attendance_date = t[:attendance_date]
+       @temp.faculty_master_id = t[:faculty_master_id]
+       @temp.name = t[:name]
        @temp.save
      end
      render :json => true
@@ -55,6 +71,7 @@ class AttendancesController < ApplicationController
   end
 
   def create
+    
     @attendance = Attendance.new(attendance_params)
     if @attendance.save
       p "Ruby Controller"
@@ -70,6 +87,7 @@ class AttendancesController < ApplicationController
   end
 
   def index
+    
     respond_to do |format|
       format.json do
         render :json => StudentReport::Attendence.students_attendance_on_date(params[:date], current_user.faculty_master)
@@ -134,7 +152,7 @@ class AttendancesController < ApplicationController
     params.require(:attendance).permit(:name,:attendance,:student_attendance)
   end
   def add_attendance_params(params)
-    params.permit(:attendance , :attendance_date)
+    params.permit(:attendance , :attendance_date, :faculty_master_id, :student_master_id, :name)
   end
 
 end

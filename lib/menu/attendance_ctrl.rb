@@ -30,7 +30,7 @@ class AttendanceCtrl
     MenuItem.new(:label => "Daily Attendance", :klass => "", :icon => "building", :href => "/attendances" )
   end
   def week
-    MenuItem.new(:label => "Weekly Attendance", :klass => "", :icon => "building", :href => "/attendances/week" )
+    MenuItem.new(:label => "Weekly Attendance", :klass => "", :icon => "building", :href => "/attendances/show_week" )
   end
   def holiday_calendar
     MenuItem.new(:label => "Holiday Calendar", :klass => "", :icon => "calendar", :href => "/holidaycalendars" )

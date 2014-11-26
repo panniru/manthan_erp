@@ -1,19 +1,18 @@
-.row{:ng_controller => "AttendanceController"}
-  %table#myTable.table.table-striped.table-condensed.table-bordered
+.row{:ng_controller => "DateAttendanceController"}
+  %table.table.table-striped.table-condensed.table-bordered
     %thead
-      %tr
+      %tr{"ng-repeat" => "attendance in attendances"}
         %th Date
-        %th{"ng-repeat" => "week in weeks"}
-          {{week}}
+        %th 
+          {{attendance.date}}
           
              
     %tbody
-      %tr{"ng-repeat" => "student in students"}
+      %tr
         %td
-          {{student.name}}
+          {{attendance.student_name}}
         %td
-          {{student.attendance}}
+          {{attendance.attendance}}
           
-          = hidden_field_tag :attendance, :value => "{{student['attendance']}}"
-  %center
-    %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveStudentAttendance()", :value => "Submit"}
+          
+  
