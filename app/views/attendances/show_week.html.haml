@@ -1,13 +1,13 @@
 .row{"ng-controller" => "DateAttendanceController"}
   %div
     %b
-    %table.table.table-condensed.table-hovered.table-striped.table-bordered
+    %table.table.table-condensed.table-hovered.table-striped.table-bordered{:style => "width:100%"}
       %thead
         %tr
           %th{"ng-repeat" => "key in keys"}
             {{key}}
       %tbody
         %tr{"ng-repeat" => "week in weeks"}
-          %td{"ng-repeat" => "key in keys"} 
+          %td{"ng-repeat" => "key in keys",:style => "width:20%"} 
             {{week[key]}}
  

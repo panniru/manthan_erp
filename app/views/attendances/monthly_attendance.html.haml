@@ -1,0 +1,22 @@
+.row
+  .col-sm-12
+    .pull-right
+      %b
+        No of Working Days:
+        = label_tag(:student_attendance, Attendance::get_working_days(params[:date], current_user.faculty_master))
+.row{"ng-controller" => "DateAttendanceController"}
+  %table.table.table-condensed.table-striped.table-bordered
+    %thead
+      %tr
+        %th Name
+        %th Present(in days)
+        %th Absent(in days)
+        %th Leave(in days)
+    %tbody
+      %tr{"ng-repeat" => "month in months"}
+        %div
+          %td {{month.name}}
+          %td {{month.present}}
+          %td {{month.absent}}
+          %td {{month.leave}}
+        

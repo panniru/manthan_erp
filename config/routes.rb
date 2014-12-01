@@ -747,6 +747,7 @@ ManthanErp::Application.routes.draw do
       get 'get_week'
       get 'show_week'
       get 'show_attendance'
+      get 'monthly_attendance'
     end
   end
 

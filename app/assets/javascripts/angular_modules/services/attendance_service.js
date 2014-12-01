@@ -26,7 +26,7 @@
          };
         var saveTodayStudentAttendance = function(save_today_attendence_details){
             var url = "/attendances/save_today_student_attendance.json"
-            return $http.post(url,{attendence_details: save_today_attendence_details});
+            return $http.post(url,{save_today_attendence_details: save_today_attendence_details});
         };
 
         var getShowAttendance = function(){
@@ -34,6 +34,10 @@
             return $http.get(url);
         };
         
+        var getMonthlyAttendance = function(){
+            var url = "/attendances/monthly_attendance.json"
+            return $http.get(url);
+        };
         var getUpdate = function(save_details){
             var url = "/admissions/get_update.json"
             return $http.post(url, {comment: save_details});
@@ -52,8 +56,9 @@
             getStudentAssessment : getStudentAssessment,
             getWeek : getWeek,
             saveTodayStudentAttendance : saveTodayStudentAttendance,
-            getShowAttendance : getShowAttendance
-        //    getModalServiceView : getModalServiceView
+            getShowAttendance : getShowAttendance,
+            getMonthlyAttendance : getMonthlyAttendance
+            //getModalServiceView : getModalServiceView
 
         };
     }]);

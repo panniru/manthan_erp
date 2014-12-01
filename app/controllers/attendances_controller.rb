@@ -1,4 +1,6 @@
 class AttendancesController < ApplicationController
+
+
   def get_week
     respond_to do |format|
       format.json do
@@ -19,7 +21,6 @@ class AttendancesController < ApplicationController
 
   def show_attendance
     hash = Attendance.this_week(params[:date], current_user.faculty_master)
-  
     respond_to do |format|
       format.json do 
         render :json => hash
@@ -29,32 +30,62 @@ class AttendancesController < ApplicationController
       end
     end
   end
+  
+  def monthly_attendance
     
-   def save_today_student_attendance
-     p params[:attendance_details]
-     params[:attendence_details].each do |t|
-       @temp = Attendance.new(add_attendance_params(t))
-       @temp.student_master_id = t[:student_master_id]
-       @temp.attendance = t[:attendance]
-       @temp.attendance_date = t[:attendance_date]
-       @temp.faculty_master_id = t[:faculty_master_id]
-       @temp.name = t[:name]
-       @temp.save
-     end
-     render :json => true
-   end
-
-  def holidaycalendardata
+    @month = Attendance.attendance_details(params[:date], current_user.faculty_master)
     respond_to do |format|
-      format.json do
-        holiday_calendar = Holidaycalendar.select(:holiday_date).distinct   
-        holiday_calendar = holiday_calendar.map do |calendar|
-          {start: calendar.holiday_date, end: calendar.holiday_date,title: "holiday", description: "holiday", url: "#", holiday_date: calendar.holiday_date}
-        end
-        render :json => holiday_calendar
+      format.json do 
+        render :json => @month
+      end
+      format.html do 
+        render "monthly_attendance"
       end
     end
   end
+  def show
+  end
+  
+   def save_today_student_attendance
+     p params[:save_today_attendence_details]
+     respond_to do |format|
+       format.json do 
+         attendence_details = params[:save_today_attendence_details]
+         attendence_details.each do |i|
+           if i[:id].present?
+             @temp = Attendance.find(i[:id])
+             @temp.student_master_id = i["student_master_id"]
+             @temp.attendance = i["attendance"]
+             @temp.attendance_date = i["attendance_date"]
+             @temp.faculty_master_id = i["faculty_master_id"]
+             @temp.name = i["name"]
+             @temp.save
+           else
+             @temp = Attendance.new(add_attendance_params(i))
+             @temp.student_master_id = i[:student_master_id]
+             @temp.attendance = i[:attendance]
+             @temp.attendance_date = i[:attendance_date]
+             @temp.faculty_master_id = i[:faculty_master_id]
+             @temp.name = i[:name]
+             @temp.save
+           end
+         end
+           redirect_to attendances_path
+       end
+     end
+   end
+
+     def holidaycalendardata
+       respond_to do |format|
+         format.json do
+           holiday_calendar = Holidaycalendar.select(:holiday_date).distinct   
+           holiday_calendar = holiday_calendar.map do |calendar|
+             {start: calendar.holiday_date, end: calendar.holiday_date,title: "holiday", description: "holiday", url: "#", holiday_date: calendar.holiday_date}
+           end
+           render :json => holiday_calendar
+         end
+       end
+     end
   def holiday_date
     respond_to do |format|
       format.json do
@@ -128,12 +159,11 @@ class AttendancesController < ApplicationController
 
   def update
     @attendance = Attendance.find(params[:id])
-    if @attendance.update(attendance_params)
-      flash[:success] = I18n.t :success, :scope => [:attendance, :update]
-      redirect_to attendances_path
-    else
-      flash.now[:fail] = I18n.t :fail, :scope => [:attendance, :update]
-      render "edit"
+    respond_to do |format|
+      if @attendance.update(add_attendance_params)
+        format.html { redirect_to attendances_path }
+        format.json { render action: 'index'}
+      end
     end
   end
 
@@ -152,7 +182,7 @@ class AttendancesController < ApplicationController
     params.require(:attendance).permit(:name,:attendance,:student_attendance)
   end
   def add_attendance_params(params)
-    params.permit(:attendance , :attendance_date, :faculty_master_id, :student_master_id, :name)
+    params.permit(:attendance , :attendance_date, :faculty_master_id, :student_master_id, :name, :student_attendance)
   end
 
 end

@@ -42,7 +42,7 @@ module StudentReport
       
       if attendances.count > 0
         data = attendances.map do |attendance|
-          {date: date, attendance: attendance.attendance, name: attendance.student_master.name}
+          {date: date, attendance: attendance.attendance, name: attendance.student_master.name, student_id: attendance.student_master.id, faculty_id: faculty.id, id: attendance.id}
         end
       else
         section_master = ClassTeacherMapping.show_all_students(faculty.id).first.try(:grade_master)

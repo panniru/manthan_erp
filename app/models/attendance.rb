@@ -1,19 +1,37 @@
 class Attendance < ActiveRecord::Base
   belongs_to :student_master
   belongs_to :faculty_master
+    
+  scope :this_weekend, lambda { where(:attendance_date => (Date.today.at_beginning_of_week..Date.today.at_end_of_week))}
+  scope :active_at_date, lambda { where("attendance_date < :date and attendance_date > :date", date: Date.today )}
+  scope :belongs_to_month, lambda{|month| where("to_char(attendance_date, 'FMMM') = ?", month.to_s)}
+  scope :on_date, lambda { |date| where("attendance_date = ? ", date)}
+  scope :taken_by_faculty, lambda { |faculty_master_id| where("faculty_master_id = ? ", faculty_master_id)}
 
 
+  #----------To get No of Working Days for current Month
+  def self.get_working_days(date, current_user)
+    if(ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.id}").length != 0)
+      current_user_id="#{current_user.id}"
+      show_attendance_date  = Attendance.where(:faculty_master_id => current_user_id)
+      a = show_attendance_date.distinct.count('attendance_date')
+      return a 
+    end
+  end
+
+
+  #------------------Weekly Attendance
   def self.this_week(date, current_user)
     if(ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.id}").length != 0)
-      pa="#{current_user.id}"
+      current_user_id="#{current_user.id}"
       show_attendance_date = []
-      show_attendance_date  = Attendance.where(:faculty_master_id => pa).this_weekend
+      show_attendance_date  = Attendance.where(:faculty_master_id => current_user_id).this_weekend
     end
     data = []
     data = show_attendance_date.group_by(&:student_master_id)
     data.map do |key, val|
       inner_data = {}
-      inner_data[:name] = StudentMaster.find(key).name
+      inner_data[:Name] = StudentMaster.find(key).name
       val.each do |val|
         inner_data[val.attendance_date] = val.attendance
       end
@@ -22,13 +40,18 @@ class Attendance < ActiveRecord::Base
   end
 
 
-
-  scope :this_weekend, lambda { where(:attendance_date => (Date.today.at_beginning_of_week..Date.today.at_end_of_week))}
-  scope :active_at_date, lambda { where("attendance_date < :date and attendance_date > :date", date: Date.today )}
-  scope :belongs_to_month, lambda{|month| where("to_char(attendance_date, 'FMMM') = ?", month.to_s)}
-  scope :on_date, lambda { |date| where("attendance_date = ? ", date)}
-  scope :taken_by_faculty, lambda { |faculty_master_id| where("faculty_master_id = ? ", faculty_master_id)}
-
+  #------------------------------Monthly Attendance
+  def self.attendance_details(date, current_user)
+    if(ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.id}").length != 0)
+      current_user_id="#{current_user.id}"
+      show_attendance_date = []
+      show_attendance_date  = Attendance.where(:faculty_master_id => current_user_id)
+      present = Attendance.find_by_sql "SELECT name , student_master_id, sum(case when attendance = 'P' then 1 else 0 end) as Present, sum(case when attendance = 'A' then 1 else 0 end) as Absent, sum(case when attendance = 'L' then 1 else 0 end) as Leave from attendances where attendance_date >= (now() - interval '1 month') group by  student_master_id, name;"
+    end
+  end
+  
+  
+  #-----------------------------To get dates of current Week
   def self.thisweek
     week = (Date.today.at_beginning_of_week..Date.today.at_end_of_week)
     return week
