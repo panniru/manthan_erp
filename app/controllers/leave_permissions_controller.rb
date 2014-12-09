@@ -1,0 +1,2 @@
+class LeavePermissionsController < ApplicationController
+end

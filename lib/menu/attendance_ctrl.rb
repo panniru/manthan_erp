@@ -6,8 +6,9 @@ class AttendanceCtrl
   
   def admin_sub_menu
     sub_menu = []
-    sub_menu << daily
-    
+    sub_menu << daily_faculty
+    sub_menu << setup_master
+    sub_menu << leave_permission
   end
 
   def principal_sub_menu
@@ -31,12 +32,25 @@ class AttendanceCtrl
     MenuItem.new(:label => "Daily Attendance", :klass => "", :icon => "building", :href => "/attendances" )
   end
 
+  def daily_faculty
+    MenuItem.new(:label => "Daily Attendance", :klass => "", :icon => "building", :href => "/faculty_attendances" )
+  end
+
+  def setup_master
+    MenuItem.new(:label => "Master Setup", :klass => "", :icon => "building", :href => "/setup_masters" )
+  end
+
+  def leave_permission
+    MenuItem.new(:label => "Leave Approval", :klass => "", :icon => "building", :href => "/leave_permissions" )
+  end
+
+
   def week
     MenuItem.new(:label => "Weekly Attendance", :klass => "", :icon => "building", :href => "/attendances/show_week" )
   end
 
   def month
-    MenuItem.new(:label => "Monthly Attendance", :klass => "", :icon => "building", :href => "/attendances/monthly_attendance" )
+    MenuItem.new(:label => "Monthly Attendance", :klass => "", :icon => "building", :href => "/attendances/week" )
   end
   
 

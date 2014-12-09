@@ -1,0 +1,2 @@
+module SetupMastersHelper
+end

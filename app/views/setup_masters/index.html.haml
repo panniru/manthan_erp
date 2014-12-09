@@ -1,0 +1,46 @@
+.row{"ng-controller" => "SetupMasterController"}
+  .col-sm-10
+    .pull-right
+      %button.btn.btn-primary.btn-large{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"} Add New
+    #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "leaveLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+            %h4#leaveLabel.modal-title Assign Max Leave
+          
+          .modal-body
+            = form_for SetupMaster.new, :html => {:class => "form-horizontal"} do |f|          
+              = render "shared/error_messages", :object => f.object
+              .col-sm-12
+                .col-sm-4
+                  = f.label :designation
+                .col-sm-6
+                  %select{"ng-model" => "myDesignation", "ng-options" => "designation.designation for designation in designations", :class => "form-control"}
+                    %option{style: "display:none", value: ""}Select Designation
+                    = f.hidden_field :designation, :value => "{{myDesignation.designation}}"
+              %br
+              .col-sm-12
+                .col-sm-4
+                  = f.label :Casual_leave
+                .col-sm-6
+                  = f.text_field :casual_leave, :class => 'form-control'
+              %br
+              .col-sm-12
+                .col-sm-4
+                  = f.label :sick_leave
+                .col-sm-6
+                  = f.text_field :sick_leave, :class => 'form-control'
+              %center
+                = f.submit "Submit", :class => 'btn btn-primary'
+
+  .col-sm-12
+    = render 'show'
+  .modal.fade{:id => "edit", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true", "data-backdrop" => "static","data-keyboard" => "false"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{:class => "close", "data-dismiss" => "modal", "aria-hidden" => "true"} &times;
+          %h4.modal-title{:id => "myModalLabel"} Edit
+        .modal-body
+          = render 'edit'

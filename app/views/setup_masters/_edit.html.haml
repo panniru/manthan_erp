@@ -1,0 +1,26 @@
+%form{:class => "form-horizontal", :ng_submit => "setupupdate()"}
+  .row
+    .col-sm-4
+      = label_tag "Designation"
+    .col-sm-6
+      %select{"ng-model" => "myDesignation", "ng-options" => "designation.designation for designation in designations", :class => "form-control"}
+        %option{style: "display:none", value: ""} Select Designation
+        = hidden_field_tag :designation, :value => "{{myDesignation.designation}}"
+      
+  .row
+    .col-sm-4
+      = label_tag "Casual Leave"
+    .col-sm-6
+      %input{:ng_model => "master.casual_leave", :type => 'text', :class => 'form-control'} 
+      = hidden_field_tag :casual_leave, :value => '{{master.casual_leave}}'
+  .row
+    .col-sm-4
+      = label_tag "Sick Leave"
+    .col-sm-6
+      %input{"ng-model" => "master.sick_leave", :type => 'text', :class => 'form-control'}
+      = hidden_field_tag :sick_leave, :value => '{{master.sick_leave}}'
+    
+  .row
+    .pull-right
+      = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+                

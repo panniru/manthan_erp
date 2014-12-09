@@ -39,23 +39,22 @@ module StudentReport
     def self.students_attendance_on_date(date, faculty)
       attendances = Attendance.on_date(date).taken_by_faculty(faculty.id)
       data = []
-      
       if attendances.count > 0
         data = attendances.map do |attendance|
-          {date: date, attendance: attendance.attendance, name: attendance.student_master.name, student_id: attendance.student_master.id, faculty_id: faculty.id, id: attendance.id}
+          {attendance_date: date, attendance: attendance.attendance, name: attendance.student_master.name, student_id: attendance.student_master.id, faculty_id: faculty.id, id: attendance.id}
         end
       else
         section_master = ClassTeacherMapping.show_all_students(faculty.id).first.try(:grade_master)
-        date = Date.today
         if section_master.present?
           data = section_master.students.map do |student|
-            {date: date, attendance: "", name: student.name, student_id: student.id, faculty_id: faculty.id}
+            { attendance_date: date, attendance: "", name: student.name, student_id: student.id, faculty_id: faculty.id}
           end
         end
       end
       data
     end
     
+
     private
     
     def fetch_month_data(month)

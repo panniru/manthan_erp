@@ -8,10 +8,10 @@
           %th Name
           %th Attendance
       %tbody
-        %tr{"ng-repeat" => "attendance in attendances"}
+        %tr{"ng-repeat" => "faculty in faculty_masters"}
           %div
-            %td {{attendance.attendance_date}}
-            %td {{attendance.name}}
-            %td {{attendance.attendance}}
+            %td {{faculty.attendance_date}}
+            %td {{faculty.name}}
+            %td {{faculty.forenoon}}
     %center
       %input{:type => 'button' , :class => 'btn btn-primary', :ng_click => "goToEdit()", :value => 'Edit'}

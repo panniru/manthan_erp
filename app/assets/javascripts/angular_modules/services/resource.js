@@ -58,6 +58,12 @@
                                    "update": {method: "PUT"}
                                }
                               );
+        var SetupMaster = $resource('/setup_masters/:id.json', {id: '@id'},
+                               {
+                                   "update": {method: "PUT"}
+                               }
+                              );
+
 
         var Recruitment = $resource('/staffrecruits/:id.json', {id: '@id'},
                                    {
@@ -187,6 +193,8 @@
             SectionMaster : SectionMaster,
             CommunicationMail : CommunicationMail,
             ActivityMaster : ActivityMaster
+            SetupMaster : SetupMaster
+
         };
     }]);
 })(angular, myApp);

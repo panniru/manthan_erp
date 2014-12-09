@@ -1,18 +1,22 @@
-.row{:ng_controller => "DateAttendanceController"}
-  %table.table.table-striped.table-condensed.table-bordered
-    %thead
-      %tr{"ng-repeat" => "attendance in attendances"}
-        %th Date
-        %th 
-          {{attendance.date}}
+.row{"ng-controller" => "DateAttendanceController"}
+  .col-sm-3
+    %select{"ng-change" => "getUpdate(myGroup)", "ng-model" => "myGroup", "ng-options" => "key as key for (key,val) in groups", :class => "form-control"}
           
-             
-    %tbody
-      %tr
-        %td
-          {{attendance.student_name}}
-        %td
-          {{attendance.attendance}}
+  .col-sm-9
+    %table.table.table-condensed.table-condensed.table-hovered.table-striped
+      %thead
+        %tr
+          %th Name
+          %th Present
+          %th Absent
+          %th Leave
+            
+      %tbody
+        %tr{"ng-repeat" => "group in group_months"}
+          %td {{group.name}}
+          %td {{group.present}}
+          %td {{group.absent}}
+          %td {{group.leave}}
+            
+            
           
-          
-  

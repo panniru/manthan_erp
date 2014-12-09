@@ -1,0 +1,28 @@
+.row
+  .col-sm-3
+  .col-sm-4
+    %center
+      %h3
+        Master Setup
+%br
+%br
+
+%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:95%"}
+  %thead
+    %tr
+      %th Designation
+      %th Casual Leave
+      %th Sick Leave
+      
+        
+  %tbody
+    %tr{"ng-repeat" => "master in masters"}
+      %td{:style => "width:20%"}
+        %a{href: '#', "ng-click" => "edit(master)"}
+          {{master.designation}}
+      %td{:style => "width:20%"}
+        {{master.casual_leave}}
+      %td{:style => "width:20%"}
+        {{master.sick_leave}}
+     
+        

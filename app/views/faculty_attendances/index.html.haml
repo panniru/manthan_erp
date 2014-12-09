@@ -1,0 +1,40 @@
+.row{"ng-controller" => "SetupMasterController"}
+  .col-sm-3
+    #faculty_attendance_calendar
+  .col-sm-3
+    %select{"ng-change" => "getUpdate(myGroup)", "ng-model" => "myGroup", "ng-options" => "key as key for (key,val) in faculties", :class => "form-control"}
+          
+  .col-sm-6{:ng_show => 'myEditFormValue'}
+    %body
+      -# {:onload => "myStaffFunction()"}
+      %table.table.table-condensed.table-condensed.table-hovered.table-striped
+        %thead
+          %tr
+            %th Name
+            %th Present
+            %th Absent
+            %th Leave
+            
+        %tbody
+          %tr{"ng-repeat" => "faculty in faculty_masters"}
+            %td            
+              {{faculty.name}}
+            %td
+              %input{:ng_model =>"faculty.forenoon", type: "radio", value: "P"} 
+            %td
+              %input{:ng_model =>"faculty.forenoon", type: "radio", value: "A"} 
+            %td
+              %input{:ng_model =>"faculty.forenoon", type: "radio", value: "L"} 
+              = hidden_field_tag :forenoon, :value => "{{faculty.forenoon}}"
+              = hidden_field_tag :attendance_date, :value => "{{faculty.attendance_date}}"
+              = hidden_field_tag :name, :value => "{{faculty.name}}"
+              = hidden_field_tag :id, :value => "{{faculty.id}}"
+
+
+      %center
+        %input{:type => "button",:class => "myStaffFunction btn btn-primary", :ng_click => "saveTodayAttendance()", :value => "Save", "ng-model" => "date"}
+            
+  .col-sm-6{:ng_show => 'myShowFormValue'}
+    = render "form"
+                
+          

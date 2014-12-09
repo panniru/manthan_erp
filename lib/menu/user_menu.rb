@@ -44,7 +44,7 @@ class UserMenu
   def admin_main_menu
     main_menu = []
     main_menu << MenuItem.new(:label => "Fee Management", :klass => ContextDetector.mapped_module_name(@controller_name) == "fee_management"? "active" :"", :icon => "bank", :href => "/")
-    main_menu << MenuItem.new(:label => "Attendance", :klass => ContextDetector.mapped_module_name(@controller_name) == "attendance_ctrl"? "active" :"", :icon => "building", :href => "/attendances")
+    main_menu << MenuItem.new(:label => "Attendance", :klass => ContextDetector.mapped_module_name(@controller_name) == "attendance_ctrl"? "active" :"", :icon => "building", :href => "/faculty_attendances")
     main_menu << MenuItem.new(:label => "Admissions", :klass => ContextDetector.mapped_module_name(@controller_name) == "enquiry_admission"? "active" :"", :icon => "book", :href => "/admissions/admission_home")
     main_menu << MenuItem.new(:label => "Academics", :klass => ContextDetector.mapped_module_name(@controller_name) == "academic"? "active" :"", :icon => "graduation-cap", :href => "/academics")
     main_menu << MenuItem.new(:label => "Results", :klass => ContextDetector.mapped_module_name(@controller_name) == "result"? "active" :"", :icon => "bullhorn", :href => "#")

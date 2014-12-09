@@ -1,5 +1,24 @@
 class AttendancesController < ApplicationController
+  
+  def group_month
+    groups = Attendance.grouping_month(params[:date], current_user.faculty_master)
+    respond_to do |format|
+      format.json do
+        render :json => groups
+      end
+    end
+  end
 
+  def get_month
+    groups = Attendance.get_month(params[:month], current_user.faculty_master)
+    respond_to do |format|
+      format.json do
+        render :json => groups
+      end
+    end
+  end
+  
+  
 
   def get_week
     respond_to do |format|

@@ -1,0 +1,22 @@
+= form_for SetupMaster.new, :html => {:class => "form-horizontal"} do |f|
+  = render "shared/error_messages", :object => f.object
+  .col-sm-12
+    .form-group{"ng-controller" => "SetupMasterController"}
+      .col-sm-4
+        = f.label :designation
+      .col-sm-6
+        %select{"ng-model" => "myDesignation", "ng-options" => "designation.designation for designation in designations", :class => "form-control"}
+          %option{style: "display:none", value: ""}Select Designation
+          = f.hidden_field :designation, :value => "{{myDesignation.designation}}"
+    .form-group
+      .col-sm-4
+        = f.label :Casual_leave
+      .col-sm-6
+        = f.text_field :casual_leave, :class => 'form-control'
+    .form-group
+      .col-sm-4
+        = f.label :sick_leave
+      .col-sm-6
+        = f.text_field :sick_leave, :class => 'form-control'
+    %center
+      = f.submit "Save", :class => 'btn btn-primary'

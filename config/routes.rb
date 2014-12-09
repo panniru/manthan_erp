@@ -748,6 +748,8 @@ ManthanErp::Application.routes.draw do
       get 'show_week'
       get 'show_attendance'
       get 'monthly_attendance'
+      get 'group_month'
+      get 'get_month'
     end
   end
 
@@ -815,6 +817,7 @@ ManthanErp::Application.routes.draw do
     end
   end
   
+
   resources :lab_criterias do
     collection do
       get :get_lab_masters
@@ -862,5 +865,26 @@ ManthanErp::Application.routes.draw do
       post "deletemappings" 
     end  
   end 
+
+
+  resources :faculty_attendances do
+    collection do
+      get 'get_faculty'
+      get 'attendance_on_date'
+      get 'get_faculty_designation'
+      get 'get_faculties'
+      get 'holidaycalendardata'
+      get 'holiday_date'
+      get 'getStudentAndAttendanceView'
+      post 'save_today_attendance'
+      
+    end
+  end
+  resources :setup_masters do 
+    collection do
+      get 'get_designations'
+    end
+  end
+  resources :leave_permissions
 
 end

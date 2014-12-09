@@ -9,6 +9,14 @@
             var url = "/attendances/get_week.json"
             return $http.get(url);
         };
+        var getGroupMonth = function(){
+            var url = "/attendances/group_month.json"
+            return $http.get(url);
+        };
+        var getMonth = function(month){
+            var url = "/attendances/get_month.json?month="+month
+            return $http.get(url);
+        };
         
         
         var getAttendanceOnDate = function(date){
@@ -57,7 +65,9 @@
             getWeek : getWeek,
             saveTodayStudentAttendance : saveTodayStudentAttendance,
             getShowAttendance : getShowAttendance,
-            getMonthlyAttendance : getMonthlyAttendance
+            getMonthlyAttendance : getMonthlyAttendance,
+            getGroupMonth : getGroupMonth,
+            getMonth : getMonth
             //getModalServiceView : getModalServiceView
 
         };
