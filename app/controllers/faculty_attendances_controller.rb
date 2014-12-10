@@ -3,7 +3,7 @@ class FacultyAttendancesController < ApplicationController
     respond_to do |format|
       format.json do
         facultys = FacultyMaster.all.each.map do  |mapping|
-          {id: mapping.id, name: mapping.faculty_name, designation: mapping.designation}
+          {faculty_master_id: mapping.id, name: mapping.faculty_name, designation: mapping.designation}
         end
         render :json => facultys
       end
@@ -48,6 +48,7 @@ class FacultyAttendancesController < ApplicationController
 
 
   def save_today_attendance
+    p "111111111122222222222"
     p params[:save_today_attendence]
     respond_to do |format|
          format.json do 
@@ -59,7 +60,7 @@ class FacultyAttendancesController < ApplicationController
             @temp.attendance_date = i["attendance_date"]
             @temp.name = i["name"]
             @temp.designation = i["designation"]
-            @temp.id = i["id"]
+            @temp.faculty_master_id = i["faculty_master_id"]
             @temp.save
            else
             @temp = FacultyAttendance.new(add_attendance_params(i))
@@ -67,7 +68,7 @@ class FacultyAttendancesController < ApplicationController
             @temp.attendance_date = i[:attendance_date]
             @temp.name = i[:name]
             @temp.designation = i[:designation]
-            @temp.id = i[:id]
+            @temp.faculty_master_id = i[:faculty_master_id]
             @temp.save
           end
          end
@@ -102,7 +103,7 @@ class FacultyAttendancesController < ApplicationController
     params.require(:holidaycalendar).permit(:holiday_date, :description) 
   end
   def add_attendance_params(params)
-    params.permit(:forenoon , :attendance_date, :name, :id, :designation)
+    params.permit(:forenoon , :attendance_date, :name, :faculty_master_id, :designation)
   end
 
 end

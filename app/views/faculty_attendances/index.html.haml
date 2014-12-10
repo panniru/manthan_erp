@@ -5,11 +5,12 @@
     %select{"ng-change" => "getUpdate(myGroup)", "ng-model" => "myGroup", "ng-options" => "key as key for (key,val) in faculties", :class => "form-control"}
           
   .col-sm-6{:ng_show => 'myEditFormValue'}
-    %body
-      -# {:onload => "myStaffFunction()"}
+    %body{:onload => "myStaffFunction()"}
+      
       %table.table.table-condensed.table-condensed.table-hovered.table-striped
         %thead
           %tr
+            %th Date
             %th Name
             %th Present
             %th Absent
@@ -17,6 +18,8 @@
             
         %tbody
           %tr{"ng-repeat" => "faculty in faculty_masters"}
+            %td
+              {{faculty.attendance_date}}
             %td            
               {{faculty.name}}
             %td
@@ -28,9 +31,9 @@
               = hidden_field_tag :forenoon, :value => "{{faculty.forenoon}}"
               = hidden_field_tag :attendance_date, :value => "{{faculty.attendance_date}}"
               = hidden_field_tag :name, :value => "{{faculty.name}}"
-              = hidden_field_tag :id, :value => "{{faculty.id}}"
-
-
+              = hidden_field_tag :faculty_master_id, :value => "{{faculty.faculty_master_id}}"
+          
+      
       %center
         %input{:type => "button",:class => "myStaffFunction btn btn-primary", :ng_click => "saveTodayAttendance()", :value => "Save", "ng-model" => "date"}
             

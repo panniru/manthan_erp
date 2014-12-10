@@ -7,11 +7,11 @@ module StaffAttendance
 
     def self.attendance_on_date(date, designation)
       p designation
-      results = FacultyAttendance.on_designation(designation)
+      results = FacultyAttendance.on_designation(designation).on_date(date)
       data = []
       if results.count > 0
         data = results.map do |result|
-          {name: result.name, designation: designation,id: result.id, forenoon: result.attendance, attendance_date: result.attendance_date}
+          {name: result.name, designation: designation,faculty_master_id: result.faculty_master_id, forenoon: result.forenoon, attendance_date: date}
         end
       else
         res = FacultyMaster.on_designation(designation)
@@ -19,7 +19,7 @@ module StaffAttendance
         p designation
         if res.present?
           data = res.map do |res|
-            {designation: designation, id: res.id, forenoon: "", name: res.faculty_name, attendance_date: date}
+            {designation: designation, faculty_master_id: res.id, forenoon: "", name: res.faculty_name, attendance_date: date}
           end
         end
       end
