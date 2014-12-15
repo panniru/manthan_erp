@@ -76,7 +76,6 @@
 	    $scope.newRoute.$update()
 	   	.then(function(responce){
 		    $scope.routes = resourceService.Route.query()
-		    alert($scope.routes)
 		    $('#createModal').modal('hide')
 	    	    window.location.reload();
 		})
@@ -102,7 +101,7 @@
 	    routesService.getRouteLocation(route.id)
 		.then(function(response){
 		    $scope.newRoute.locations = response.data
-		    alert(JSON.stringify($scope.newRoute))
+		   
 		    $('#createModal').modal('show')
 		});
 	}

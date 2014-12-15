@@ -28,7 +28,6 @@ ManthanErp::Application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
-
   # Generate digests for assets URLs.
   config.assets.digest = true
 
@@ -86,10 +85,7 @@ ManthanErp::Application.configure do
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
   
 
-  config.action_mailer.delivery_method = :smtp
-  
-  config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
+  :address              => "smtp.gmail.com",
     :port                 => 587,
     :domain               => "gmail.com",
     :user_name            => "noreply.olexam@gmail.com",

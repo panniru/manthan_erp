@@ -11,7 +11,15 @@ class LocationMaster < ActiveRecord::Base
   scope :less, -> { where("id.count < ?", "7") }
   scope :odd, -> { where("id % 2 = ?", "0") }
   scope :even, -> { where("id % 2 = ?", "1") }
-  
+  after_create :validate_location
+
+  def validate_location
+    if self.latitude.present?
+      p "hyiho"
+    else
+      p "2222222"
+    end
+  end
   
 
   def cleanup
