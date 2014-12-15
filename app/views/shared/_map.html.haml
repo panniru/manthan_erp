@@ -1,0 +1,16 @@
+= javascript_include_tag "//maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places"
+= javascript_include_tag "//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"
+= javascript_include_tag "location" 
+
+-#= javascript_include_tag "//google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/src/richmarker-compiled.js"
+-#= javascript_include_tag "//google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js"
+
+
+  -# handler = Gmaps.build('Google')
+  -# handler.buildMap({ provider: {}, internal: {id: 'map'} }, function(){
+  -# markers = handler.addMarkers(jQuery.parseJSON(gon.gmap_data))
+  -# handler.bounds.extendWith(markers)
+    -# handler.fitMapToBounds()
+  -#})
+
+

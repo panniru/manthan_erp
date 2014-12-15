@@ -1,19 +1,26 @@
-%button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New Location"
-#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-        %h4#myModalLabel.modal-title New Location
-      = form_for LocationMaster.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
+%script{:src => "https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places", :type => "text/javascript"}
+.row
+  %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal"}= "Add New Location"
+  #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4#myModalLabel.modal-title New Location
         .modal-body
-          .row
-            .col-sm-3
-              = f.label "location", :class => "form-label"
-            .col-sm-4
-              = f.text_field "location_name", :class => "form-control"
-            .col-sm-2
-              %button{:type=>"submit", :class=> "btn btn-primary"}= "Save"
+          = form_for LocationMaster.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
+            .row
+              .col-sm-12
+                = f.label "location", :class => "form-label"
+              .col-sm-12
+                = f.text_field :location_name, :id => "autocomplete"
+                // %input#autocomplete{:type => "text" , :name => "location_name"}
+            .row
+              .col-sm-2
+                %button{:type=>"submit", :class=> "btn btn-primary"}= "Save"
+    
+
+
 -# %html
 -#   %head
 -#     %script{:src => "https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places", :type => "text/javascript"}
