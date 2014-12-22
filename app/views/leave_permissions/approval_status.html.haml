@@ -1,0 +1,50 @@
+.row
+  .col-sm-3
+    .pull-left
+      .input-group
+        %span.input-group-addon
+          = fa_icon "search lg"
+        %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+        %br
+
+%br
+%br
+%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:100%"}
+  %thead
+    %tr
+      %th{style: "width:20%"}
+        %center
+          Name
+      %th{style: "width:20%"}
+        %center
+          Type of Leave
+      %th{style: "width:20%"}
+        %center
+          From - To
+      %th{style: "width:20%"}
+        %center
+          Reason
+      %th{style: "width:20%"}
+        %center
+          Status
+        
+  %tbody{"ng-controller" => "SetupMasterController"}
+    %tr{"ng-repeat" => "detail in details"}
+      %td
+        %center
+          {{detail.name}}
+      %td 
+        %center
+          {{detail.type_of_leave}}
+      %td 
+        %center
+          {{detail.from_date}} - {{detail.to_date}}
+      %td 
+        %center
+          {{detail.reason}}
+      %td 
+        %center
+          {{detail.status}}
+        
+
+                      

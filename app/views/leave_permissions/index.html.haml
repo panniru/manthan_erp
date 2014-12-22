@@ -1,0 +1,55 @@
+.row
+  = form_for @leave_permission, :html => { :class => "form-horizontal", :role => "form" } do |f|
+    = render "shared/error_messages", :object => f.object
+    .col-sm-12
+      .form-group{"ng-controller" => "SetupMasterController"}
+        .col-sm-2
+          .pull-left
+            = f.label "Type of Leave:", :class => 'control-label'
+        .col-sm-2
+          %select{"ng-change" => "leave_update(myLeave)", "ng-model" => "myLeave","ng-options" => "value as key for (key, value) in leave_options", :class => "form-control"}
+           
+         
+       
+        .col-sm-2
+          = f.label "Leave Balance:", :class => 'control-label'
+        .col-sm-2{"ng-repeat" => "leave in leaves", "ng-model" => "myLeaveOptions"}
+          %input{:ng_show => "showCasualLeave",:type => "text", :readonly => true, :class => "form-control", :value => "{{leave.pending_casual_leave}}"}
+          %input{:ng_show => "showSickLeave", :type => "text", :readonly => true, :class => "form-control", :value => "{{leave.pending_sick_leave}}"}
+         
+       
+     
+     
+    .col-sm-12
+      .form-group
+        .col-sm-2
+          = f.label "From Date", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :from_date, :class => 'datepicker form-control' 
+        .col-sm-2
+          = f.label "Day", :class => 'control-label'
+        .col-sm-2
+          = f.select :from_day, options_for_select([['half day','0.5'],['full day','1']]),{},{:class => 'admission form-control'}
+    .col-sm-12
+      .form-group
+        .col-sm-2
+          = f.label "To Date", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :to_date, :class => 'datepicker form-control' 
+        .col-sm-2
+          = f.label "Day", :class => 'control-label'
+        .col-sm-2
+          = f.select :to_day, options_for_select([['half day','0.5'],['full day','1']]),{},{:class => 'admission form-control'}
+
+
+    .col-sm-12
+      .form-group
+        .col-sm-2
+          = f.label "Reason", :class => 'control-label'
+        .col-sm-2
+          = f.text_area :reason, :class => 'form-control'
+         
+    .col-sm-8
+      %center
+        = f.hidden_field :status, :value => 'Pending'
+        = f.submit "Submit", :class => 'btn btn-primary'         

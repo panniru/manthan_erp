@@ -877,7 +877,7 @@ ManthanErp::Application.routes.draw do
       get 'holiday_date'
       get 'getStudentAndAttendanceView'
       post 'save_today_attendance'
-      
+     
     end
   end
   resources :setup_masters do 
@@ -885,6 +885,17 @@ ManthanErp::Application.routes.draw do
       get 'get_designations'
     end
   end
-  resources :leave_permissions
+
+  resources :leave_permissions do
+    collection do
+      get 'count_no'      
+      get 'approval'
+      get 'approval_status'
+      get 'get_holidays'
+    end
+  end
+
+  
+
 
 end

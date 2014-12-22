@@ -8,7 +8,8 @@ class AttendanceCtrl
     sub_menu = []
     sub_menu << daily_faculty
     sub_menu << setup_master
-    sub_menu << leave_permission
+    sub_menu << leave_approval
+    
   end
 
   def principal_sub_menu
@@ -25,6 +26,9 @@ class AttendanceCtrl
     sub_menu << daily
     sub_menu << week
     sub_menu << month
+    sub_menu << leave_permission
+    sub_menu << leave_approval_status
+    
   end
 
   private
@@ -41,7 +45,15 @@ class AttendanceCtrl
   end
 
   def leave_permission
-    MenuItem.new(:label => "Leave Approval", :klass => "", :icon => "building", :href => "/leave_permissions" )
+    MenuItem.new(:label => "Leave Permission", :klass => "", :icon => "building", :href => "/leave_permissions" )
+  end
+
+  def leave_approval_status
+    MenuItem.new(:label => "Approval Status", :klass => "", :icon => "building", :href => "/leave_permissions/approval_status" )
+  end
+
+  def leave_approval
+    MenuItem.new(:label => "Leave Approval", :klass => "", :icon => "building", :href => "/leave_permissions/approval" )
   end
 
 

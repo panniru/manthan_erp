@@ -32,6 +32,9 @@
               = hidden_field_tag :attendance_date, :value => "{{faculty.attendance_date}}"
               = hidden_field_tag :name, :value => "{{faculty.name}}"
               = hidden_field_tag :faculty_master_id, :value => "{{faculty.faculty_master_id}}"
+              = hidden_field_tag :id, :value => "{{faculty.faculty_master_id}}"
+              = hidden_field_tag :max_casual_leave, :value => "{{faculty.max_casual_leave}}"
+              = hidden_field_tag :max_sick_leave, :value => "{{faculty.max_sick_leave}}"
           
       
       %center
@@ -39,5 +42,45 @@
             
   .col-sm-6{:ng_show => 'myShowFormValue'}
     = render "form"
+
+  .col-sm-6{:ng_show => 'myEditFormValue1'}
+    %body{:onload => "myStaffFunction()"}
+      
+      %table.table.table-condensed.table-condensed.table-hovered.table-striped
+        %thead
+          %tr
+            %th Date
+            %th Name
+            %th Forenoon
+            %th Present
+            %th Absent
+            %th Leave
+            
+        %tbody
+          %tr{"ng-repeat" => "faculty in faculty_masters"}
+            %td
+              {{faculty.attendance_date}}
+            %td            
+              {{faculty.name}}
+            %td
+              {{faculty.forenoon}}
+            %td
+              %input{:ng_model =>"faculty.afternoon", type: "radio", value: "P"} 
+            %td
+              %input{:ng_model =>"faculty.afternoon", type: "radio", value: "A"} 
+            %td
+              %input{:ng_model =>"faculty.afternoon", type: "radio", value: "L"} 
+              = hidden_field_tag :afternoon, :value => "{{faculty.afternoon}}"
+              = hidden_field_tag :attendance_date, :value => "{{faculty.attendance_date}}"
+              = hidden_field_tag :name, :value => "{{faculty.name}}"
+              = hidden_field_tag :faculty_master_id, :value => "{{faculty.faculty_master_id}}"
+              = hidden_field_tag :max_casual_leave, :value => "{{faculty.max_casual_leave}}"
+              = hidden_field_tag :max_sick_leave, :value => "{{faculty.max_sick_leave}}"
+              
+      %center
+        %input{:type => "button",:class => "myStaffFunction btn btn-primary", :ng_click => "saveTodayAttendance()", :value => "Save", "ng-model" => "date"}
+            
+  .col-sm-6{:ng_show => 'myShowFormValue1'}
+    = render "form1"
                 
           

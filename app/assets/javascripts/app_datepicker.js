@@ -4,7 +4,7 @@ $(document ).ready(function() {
             changeMonth: true,
             changeYear: true,
             yearRange: "-100:+0",
-            dateFormat: 'dd/mm/yy'
+            dateFormat: 'yy-mm-dd'
         });
     });
     $('body').on('focus',".academicDatepicker", function(){
