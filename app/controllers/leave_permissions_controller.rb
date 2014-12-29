@@ -1,4 +1,16 @@
 class LeavePermissionsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+  
+  def get_date
+    p "11111111"
+    p (params[:dates] - LeavePermission.get_leaves)
+    @jsondata = params[:dates]
+    respond_to do |format|
+      format.json do
+        render :json => @jsondata
+      end
+    end
+  end
 
   def index
     @leave_permission = LeavePermission.new
@@ -58,7 +70,7 @@ class LeavePermissionsController < ApplicationController
 
 
   def permission_params
-    params.require(:leave_permission).permit(:from_day, :to_day, :from_date, :to_date, :reason, :type_of_leave, :status, :bal_leave, :casual_leave_count, :sick_leave_count, :faculty_attendance_id)
+    params.require(:leave_permission).permit(:from_day, :to_day, :from_date, :to_date, :reason, :type_of_leave, :status, :bal_leave, :casual_leave_count, :sick_leave_count, :faculty_attendance_id, :dates)
     
   end
 

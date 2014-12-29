@@ -1,4 +1,42 @@
+
+
 $(document ).ready(function() {
+    function getDates(start, end) {
+        
+        var datesArray = [];
+        var startDate = new Date(start);
+      
+        while (startDate <= end) {
+            
+            datesArray.push(new Date(startDate).getFullYear() + "-"+(new Date(startDate).getMonth()+1)+ "-"+new Date(startDate).getDate());
+            startDate.setDate(startDate.getDate()+1);
+           
+            
+        }
+  
+       
+        $.ajax({
+            url: "/leave_permissions/get_date.json",
+            type: "POST",
+            data: {dates:datesArray},
+            dataType: "json",
+            async: false,
+            success: function(data){
+          //      alert(data);
+            }
+        });
+        return datesArray;
+        
+    }
+    $("#from_date").datepicker({ dateFormat: "yy-mm-dd" });
+    $("#to_date").datepicker({ dateFormat: "yy-mm-dd" });
+    $('.date').on("change", function () {
+        var start = $("#from_date").datepicker("getDate",{ dateFormat: "yy-mm-dd" }),
+        end = $("#to_date").datepicker("getDate",{ dateFormat: "yy-mm-dd" });
+        var between = getDates(start, end);
+        $('#results').html(between.join('<br> '));
+    });
+
     $('textarea').autosize();
 
     $('#change2').click(function() {
