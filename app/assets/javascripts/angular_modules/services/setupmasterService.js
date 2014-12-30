@@ -16,6 +16,11 @@
             return $http.get(url);
         };
 
+        // var getAllDates = function(){
+        //     var url = "/leave_permissions/get_date.json"
+        //     return $http.get(url);
+        // };
+
         var getCountno = function(type_of_leave){
             var url = "/leave_permissions/count_no.json?type_of_leave="+type_of_leave
             return $http.get(url);
@@ -43,7 +48,8 @@
             getAttendanceServiceView : getAttendanceServiceView,
             saveTodayAttendance : saveTodayAttendance,
             getCountno : getCountno,
-            getDetails : getDetails
+            getDetails : getDetails,
+            // getAllDates : getAllDates
         };
     }]);
 })(angular, myApp);

@@ -59,6 +59,13 @@
             });
 
 
+        // setupmasterService.getAllDates()
+        //     .then(function(result) {
+        //         alert(JSON.stringify($scope.all_details))
+        //         $scope.all_details = result.data;
+        //     });
+
+
         $scope.goToEdit = function(){
             $scope.myShowFormValue = false;
             $scope.myEditFormValue = true;

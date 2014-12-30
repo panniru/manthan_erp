@@ -2,21 +2,15 @@ class LeavePermissionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   
   def get_date
-    a = params[:dates].first 
-    b = params[:dates].last
-    c = Date.parse(a).strftime("%Y-%m-%d")
-    d = Date.parse(b).strftime("%Y-%m-%d")
-    e = c, d
-    final_date = ((c..d).to_a) - (e.to_a)
-    p e
-    @jsondata = final_date - LeavePermission.get_leaves
+    @jsondata = LeavePermission.get_leaves(current_user, params[:dates])
     respond_to do |format|
       format.json do
-        render :json => @jsondata.count
+        render :json => @jsondata
       end
     end
   end
-
+  
+  
   def index
     @leave_permission = LeavePermission.new
   end
@@ -38,8 +32,6 @@ class LeavePermissionsController < ApplicationController
   end
   def count_no
     hash = FacultyAttendance.get_faculty_details(current_user.faculty_master, params[:type_of_leave])
-    p '$$$$$$$$$$$$$$$'
-    p params[:type_of_leave]
     respond_to do |format|
       format.json do
         render :json => hash
@@ -54,6 +46,8 @@ class LeavePermissionsController < ApplicationController
     @leave_permission.casual_leave_count = LeavePermission.get_casual_leave_count(current_user)
     @leave_permission.sick_leave_count = LeavePermission.get_sick_leave_count(current_user)
     @leave_permission.faculty_master_id = LeavePermission.get_faculty_attendance_id(current_user)
+    #@leave_permission.bal_leave = LeavePermission.get_leaves(current_user, params[:dates])
+
     respond_to do |format|
       if @leave_permission.save 
         format.html { redirect_to approval_status_leave_permissions_path, notice: 'Leave Form was successfully created.' }
