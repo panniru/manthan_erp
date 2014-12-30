@@ -8,7 +8,8 @@ class LeavePermission < ActiveRecord::Base
   def self.get_leaves
     holidays = Holidaycalendar.uniq.pluck(:holiday_date)
     values = (Date.today..Date.today + 1.year).to_a.select {|k| [6,0].include?(k.wday)} + holidays
-
+    d =values.map{|x| x.strftime("%Y-%m-%d")}
+    return d
   end
 
   

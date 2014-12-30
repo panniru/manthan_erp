@@ -2,12 +2,10 @@ class LeavePermissionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   
   def get_date
-    p "11111111"
-    p (params[:dates] - LeavePermission.get_leaves)
-    @jsondata = params[:dates]
+    @jsondata = params[:dates] - LeavePermission.get_leaves
     respond_to do |format|
       format.json do
-        render :json => @jsondata
+        render :json => @jsondata.count
       end
     end
   end
