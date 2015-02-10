@@ -76,7 +76,10 @@ class ContextDetector
     "vendor_categories" => "default_master_sub_menu",
     "vendor_managements" => "hrm_sub_menu",
     "food_wastages" => "canteen",
-    "activity_masters" => "non_academic"
+    "non_academics" => "non_academic",
+    "activity_masters" => "non_academic",
+    "grades_activities_mappings" => "non_academic"
+
   }
   
   def self.get_context(args)

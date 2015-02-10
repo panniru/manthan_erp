@@ -816,4 +816,12 @@ ManthanErp::Application.routes.draw do
     end      
   end
 
+   resources :grades_activities_mappings do
+    collection do
+      get "get_grade_activities"
+      post "save_grade_activities_mappings"
+      get  "get_activities"   
+    end  
+  end 
+
 end

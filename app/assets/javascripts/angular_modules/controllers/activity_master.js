@@ -1,7 +1,6 @@
 (function(angular, app) {
     "use strict";
     app.controller("ActivityMasterController",["$scope","resourceService", "activityMasterService", function($scope, resourceService, activityMasterService) { 
-        //activityMasterService   activity_masters activity Activity  Activities ActivityMaster
         $scope.activities = resourceService.ActivityMaster.query();  
         $scope.activity_masters = [];      
 

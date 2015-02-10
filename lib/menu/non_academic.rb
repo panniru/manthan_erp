@@ -6,6 +6,7 @@ class NonAcademic
   def admin_sub_menu
     sub_menu = []  
     sub_menu << activity_masters 
+    sub_menu << grades_activities_mappings
     sub_menu
   end
 
@@ -13,6 +14,10 @@ class NonAcademic
 
   def activity_masters
     MenuItem.new(:label => "Activity Masters", :klass => "", :icon => "tasks", :href => "/activity_masters" )
+  end
+
+  def grades_activities_mappings
+    MenuItem.new(:label => "Grade Activities", :klass => "", :icon => "tasks", :href => "/grades_activities_mappings" )
   end
 
 end
