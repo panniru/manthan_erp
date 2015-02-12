@@ -77,6 +77,7 @@ class ContextDetector
     "vendor_managements" => "hrm_sub_menu",
     "food_wastages" => "canteen",
     "activity_masters" => "non_academic"
+    "lab_masters" => "lab"
   }
   
   def self.get_context(args)

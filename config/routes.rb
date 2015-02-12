@@ -1,7 +1,5 @@
 ManthanErp::Application.routes.draw do
-  get 'locations/index'
 
-  get 'locations/create'
   
   resources :vendor_managements do
     collection do
@@ -800,6 +798,8 @@ ManthanErp::Application.routes.draw do
       put "mark_as_read"
     end
   end
+
+  resources :lab_masters 
 
   resources :grade_books do 
     collection do
