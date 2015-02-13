@@ -79,7 +79,7 @@ class ContextDetector
     "non_academics" => "non_academic",
     "activity_masters" => "non_academic",
     "grades_activities_mappings" => "non_academic",
-    "activity_teachers_mappings" => "non_academic"
+    "activity_teachers_mappings" => "non_academic",
     "lab_masters" => "lab"
   }
   
