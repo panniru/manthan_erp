@@ -81,7 +81,12 @@
 	    $scope.student_id = student_id
 	    $('#createModal').modal('show');
 	};
-
+	
+	$scope.searchStudents = function(student_id)
+	{
+	    $scope.student_id = student_id
+	    
+	};
 	
     }]);
     
