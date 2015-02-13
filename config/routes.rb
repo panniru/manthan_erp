@@ -824,4 +824,13 @@ ManthanErp::Application.routes.draw do
     end  
   end 
 
+  resources :activity_teachers_mappings do
+    collection do
+      post "getmappings"   
+      post "savemappings"   
+      post "deletemapping"
+      get "check_activity_teachers_mapping"
+    end  
+  end 
+
 end
