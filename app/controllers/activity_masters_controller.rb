@@ -2,7 +2,7 @@ class ActivityMastersController < ApplicationController
   def index
     respond_to do |format|
       format.json do         
-        @activity_masters = ActivityMaster.all        
+        @activity_masters = SubjectMaster.where(subject_type: "non_academic")
         render :json => @activity_masters
       end
       format.html do        
@@ -10,7 +10,7 @@ class ActivityMastersController < ApplicationController
     end
   end
 
-  def create_bulk   
+  def create_bulk
     respond_to do |format|    
       format.json do 
         @activity_bulk = build_activity_from_bulk
@@ -25,7 +25,7 @@ class ActivityMastersController < ApplicationController
               @error_messages= @error_messages.each.map do |t1|
                 {error: t1} 
               end
-              {activity_name: t.activity_name,error: @error_messages}
+              {subject_name: t.subject_name,error: @error_messages}
             end
           end   
           render :json => @emessages
@@ -35,18 +35,18 @@ class ActivityMastersController < ApplicationController
   end
   
   def destroy
-    @activity = ActivityMaster.find(params[:id])  
+    @activity = SubjectMaster.find(params[:id])  
     if @activity.destroy
-      flash[:success] = I18n.t :success, :scope => [:activity_master, :destroy]
+      flash[:success] = I18n.t :success, :scope => [:subject_master, :destroy]
       render :json => true
     else
-      flash.now[:fail] = I18n.t :fail, :scope => [:activity_master, :destroy]
+      flash.now[:fail] = I18n.t :fail, :scope => [:subject_master, :destroy]
     end    
   end
   
   def build_activity_from_bulk
-    params.require(:bulk_activity).select{|activity| activity["activity_name"].present?}.map do |act| 
-      ActivityMaster.new(act.permit(:activity_name))
+    params.require(:bulk_activity).select{|activity| activity["subject_name"].present?}.map do |act| 
+      SubjectMaster.new(act.permit(:subject_name,:subject_type))
     end
   end
   
