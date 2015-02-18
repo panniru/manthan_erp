@@ -16,7 +16,7 @@
         %tr{"ng-repeat" => "subject in subjects | orderBy:'subject_name'"}
           %td {{subject.subject_name}} 
           %td
-            .col-md-2{"ng-repeat" => "grade in show_grades |filter : {subject_master_id: subject.subject_master_id} : true  | orderBy:'grade_name'"}        
+            .col-md-2{"ng-repeat" => "grade in show_grades |filter : {subject_master_id: subject.id} : true  | orderBy:'grade_name'"}        
               {{grade.grade_name}}         
     .col-md-2  
    

@@ -307,7 +307,13 @@ ManthanErp::Application.routes.draw do
   
   resources :default_masters
   
-  resources :academics
+  resources :academics do
+    collection do
+      get "get_grades"
+      get "get_academics_subjects"
+    end
+  end
+
 
   resources :teachers_time_tables do
     collection do
