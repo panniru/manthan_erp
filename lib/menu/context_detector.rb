@@ -80,7 +80,9 @@ class ContextDetector
     "activity_masters" => "non_academic",
     "grades_activities_mappings" => "non_academic",
     "activity_teachers_mappings" => "non_academic",
-    "lab_masters" => "lab"
+    "lab_masters" => "lab",
+    "lab_criterias" => "lab",
+    "grade_lab_mappings" => "lab"
   }
   
   def self.get_context(args)

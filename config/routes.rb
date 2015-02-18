@@ -1,6 +1,12 @@
 ManthanErp::Application.routes.draw do
 
-  
+
+  resources :grade_lab_mappings do
+    collection do
+      get :all_subjects
+    end
+  end
+
   resources :vendor_managements do
     collection do
       get "get_vendor_view"
@@ -270,11 +276,11 @@ ManthanErp::Application.routes.draw do
       get "submitted_pdcs"
       get "print"
     end
-    resources :parent_payment_transactions do
-      member do
-        get "print"
-        get "in_detail"
-      end
+  end
+  resources :parent_payment_transactions do
+    member do
+      get "print"
+      get "in_detail"
     end
   end
   
@@ -808,7 +814,17 @@ ManthanErp::Application.routes.draw do
       post "save_grade_books_service"
     end
   end
-
+  
+  resources :lab_criterias do
+    collection do
+      get :get_lab_masters
+      get :all_grades
+      post :save_assessment_criterias
+      get :get_assessment_criteria
+      post :deletemappings
+    end
+  end
+  
   resources :non_academics
   resources :activity_masters do
     collection do

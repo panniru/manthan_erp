@@ -48,7 +48,7 @@
 	canteenManagementService.getinventoryView()
 	    .then(function(response){
 		$scope.inventories = response.data
-	    });
+	    }); 
 	
 	$scope.updateStatus = function(status){
 	    for (var i=0; i<$scope.request_status.length; i++){ 
