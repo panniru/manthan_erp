@@ -2,7 +2,7 @@ class ActivityMastersController < ApplicationController
   def index
     respond_to do |format|
       format.json do         
-        @activity_masters = SubjectMaster.where(subject_type: "non_academic")
+        @activity_masters = SubjectMaster.where(subject_type: "non_academics")
         render :json => @activity_masters
       end
       format.html do        

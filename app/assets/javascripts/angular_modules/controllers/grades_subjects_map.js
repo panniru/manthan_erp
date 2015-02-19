@@ -3,8 +3,8 @@
     app.controller('GradesSubjectsMappingController',["$scope", "timeTableService", "gradesSubjectsMapService", "academicsService", function($scope, timeTableService, gradesSubjectsMapService, academicsService) {         
 
         var initiateForm = function(){
-            $scope.showFormValue = "true";
-            $scope.formValue = "false";
+            $scope.showFormValue = true;
+            $scope.formValue = false;
         };
         initiateForm();
 
@@ -15,8 +15,7 @@
 
         academicsService.getAcademicSubjects()
             .then(function(result) {
-                $scope.subjects=result.data;  
-                alert(JSON.stringify($scope.subjects));
+                $scope.subjects=result.data;
             });  
         
         
@@ -80,8 +79,8 @@
 
         $scope.editGradesMappings = function() {            
             $scope.defaultSubjectsGradesAll();
-            $scope.showFormValue = "false";
-            $scope.formValue = "true";
+            $scope.showFormValue = false;
+            $scope.formValue = true;
             
             for ( var i = 0; i < $scope.subjects.length; i++ ){         
                 for ( var j = 0; j < $scope.show_grades.length; j++ ) {                   
@@ -126,8 +125,8 @@
         };
 
         $scope.showGradesMappings = function(){            
-            $scope.formValue = "false";
-            $scope.showFormValue = "true";
+            $scope.formValue = false;
+            $scope.showFormValue = true;
             
             gradesSubjectsMapService.getGradesSubjectsServiceView()
                 .then(function(result) { 

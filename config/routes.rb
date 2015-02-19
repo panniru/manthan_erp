@@ -831,7 +831,13 @@ ManthanErp::Application.routes.draw do
     end
   end
   
-  resources :non_academics
+  resources :non_academics do
+    collection do
+      post 'create_bulk'    
+      get 'get_non_academics_subjects' 
+    end      
+  end
+
   resources :activity_masters do
     collection do
       post 'create_bulk'     

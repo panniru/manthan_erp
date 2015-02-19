@@ -12,7 +12,7 @@
         $scope.addActivity = function(){
             $scope.activity_masters.push({
                 subject_name: "",
-                subject_type: "non_academic"
+                subject_type: "non_academics"
             });
         };
 

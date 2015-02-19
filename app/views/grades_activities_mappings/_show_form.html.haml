@@ -16,7 +16,10 @@
         %tr{"ng-repeat" => "activity in activities | orderBy:'activity_name'"}
           %td {{activity.activity_name}} 
           %td
-            .col-md-2{"ng-repeat" => "grade in show_grades |filter : {activity_master_id: activity.activity_master_id} : true  | orderBy:'grade_name'"}        
+            .col-md-2{"ng-repeat" => "grade in show_grades |filter : {activity_master_id: activity.id} : true  | orderBy:'grade_name'"}        
               {{grade.grade_name}}         
-    .col-md-2  
+    .col-md-2
+          
+      
+
    
