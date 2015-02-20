@@ -3,7 +3,7 @@ class SubjectMastersController < ApplicationController
   def index
     respond_to do |format|
       format.json do         
-        @subject_masters = SubjectMaster.where(subject_type: "academic")      
+        @subject_masters = SubjectMaster.where(subject_type: "academics")      
         render :json => @subject_masters
       end
       format.html do     
