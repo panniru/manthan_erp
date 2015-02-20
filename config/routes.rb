@@ -861,4 +861,9 @@ ManthanErp::Application.routes.draw do
     end  
   end 
 
+  resources :na_assessment_criterias do
+    collection do
+    end  
+  end 
+
 end

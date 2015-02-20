@@ -1,0 +1,2 @@
+class NaAssessmentCriteriasController < ApplicationController
+end

@@ -8,6 +8,7 @@ class NonAcademic
     sub_menu << activity_masters 
     sub_menu << grades_activities_mappings
     sub_menu << activity_teachers_mappings
+    sub_menu << na_assessment_criterias
     sub_menu
   end
 
@@ -23,6 +24,10 @@ class NonAcademic
 
   def activity_teachers_mappings
     MenuItem.new(:label => "Activity Teachers", :klass => "", :icon => "tasks", :href => "/activity_teachers_mappings" )
+  end
+
+  def na_assessment_criterias
+    MenuItem.new(:label => "Assessment Criteria", :klass => "", :icon => "tasks", :href => "/na_assessment_criterias" )
   end
 
 end
