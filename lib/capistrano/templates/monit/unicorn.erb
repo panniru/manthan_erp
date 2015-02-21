@@ -1,5 +1,5 @@
-<% application= 'scholl_erp'%>
-<% unicorn_pid = "/home/deployer/apps/scholl_erp/current/tmp/pids/unicorn.pid"%>
+<% application= 'school_erp'%>
+<% unicorn_pid = "/home/deployer/apps/school_erp/current/tmp/pids/unicorn.pid"%>
 check process unicorn_<%= application %> with pidfile <%= unicorn_pid %>
   start program = "/etc/init.d/unicorn_<%= application %> start"
   stop program = "/etc/init.d/unicorn_<%= application %> stop"

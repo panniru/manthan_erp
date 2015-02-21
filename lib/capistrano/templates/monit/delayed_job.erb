@@ -1,5 +1,5 @@
-<%APP_ROOT=  "/home/deployer/apps/scholl_erp/current"%>
-<%SHARED_PATH=  "/home/deployer/apps/scholl_erp/shared"%>
-check process delayed_job with pidfile /home/deployer/apps/scholl_erp/current/tmp/pids/delayed_job.0.pid
+<%APP_ROOT=  "/home/deployer/apps/school_erp/current"%>
+<%SHARED_PATH=  "/home/deployer/apps/school_erp/shared"%>
+check process delayed_job with pidfile /home/deployer/apps/school_erp/current/tmp/pids/delayed_job.0.pid
   start program = "<%= SHARED_PATH%>/config/delayed_job_start.sh"
   stop program = "<%= SHARED_PATH%>/config/delayed_job_stop.sh"
