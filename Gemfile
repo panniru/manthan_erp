@@ -49,6 +49,7 @@ gem 'bootstrap-will_paginate'
 
 gem 'cancancan', '~> 1.9'
 gem 'devise'  
+gem 'daemons', '~> 1.1.9'    
 gem 'delayed_job_active_record'
 gem 'factory_girl_rails'
 gem 'jquery-turbolinks', '~> 0.2.1'
