@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140929141109) do
-
+ActiveRecord::Schema.define(version: 20150213072018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +20,19 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.string   "term_name"
     t.date     "from_date"
     t.date     "to_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "activity_masters", force: true do |t|
+    t.string   "activity_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "activity_teachers_mappings", force: true do |t|
+    t.integer  "activity_master_id"
+    t.integer  "faculty_master_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -97,11 +109,11 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.string   "mother_employer"
     t.string   "father_email"
     t.string   "mother_email"
-    t.string   "sib_name"
-    t.string   "sib_age"
-    t.string   "sib_sex"
-    t.string   "sib_grade"
-    t.string   "sib_school"
+    t.string   "sib_name1"
+    t.string   "sib_age1"
+    t.string   "sib_sex1"
+    t.string   "sib_grade1"
+    t.string   "sib_school1"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_no"
@@ -119,6 +131,18 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.integer  "teacher_leader_id"
     t.string   "teachercomment"
     t.string   "finalresult"
+    t.string   "sib_name2"
+    t.string   "sib_age2"
+    t.string   "sib_sex2"
+    t.string   "sib_grade2"
+    t.string   "sib_school2"
+    t.string   "address_line1"
+    t.string   "address_line2"
+    t.string   "previous_city"
+    t.string   "pin"
+    t.integer  "section_master_id"
+    t.string   "father_nationality"
+    t.string   "mother_nationality"
   end
 
   create_table "approval_items", force: true do |t|
@@ -244,6 +268,16 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.datetime "updated_at"
   end
 
+  create_table "communication_mails", force: true do |t|
+    t.integer  "from"
+    t.integer  "to"
+    t.integer  "message_id"
+    t.boolean  "red"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "parent_mail_id"
+  end
+
   create_table "damagebooks", force: true do |t|
     t.string   "isbn"
     t.string   "book_stage"
@@ -338,40 +372,20 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "form_no"
     t.string   "faculty_name"
     t.string   "dob"
-    t.string   "status"
-    t.string   "description"
-    t.string   "staffhead"
-    t.string   "end_time"
-    t.string   "start_time"
-    t.string   "educational_certificates"
-    t.string   "previous_employment_proof"
-    t.string   "title"
-    t.string   "salary_slips_for_previous_months"
-    t.integer  "subject_master_id"
-    t.integer  "staff_leader_id"
-    t.string   "closestatus"
-    t.string   "comments"
-    t.string   "final_result"
-    t.string   "management_result"
-    t.string   "assessment_result"
     t.string   "gender"
     t.string   "email"
     t.string   "mobile_no"
     t.string   "address"
     t.string   "nationality"
-    t.string   "klass"
     t.string   "language"
-    t.string   "subject"
-    t.string   "experience"
-    t.string   "expected_salary"
-    t.string   "post"
-    t.integer  "staff_admission_id"
+    t.string   "primary_subject"
+    t.string   "past_experience"
     t.string   "education_qualification"
-    t.integer  "faculty_master_id"
     t.string   "dept"
+    t.string   "post"
+    t.integer  "role_id"
   end
 
   create_table "fee_alert_failures", force: true do |t|
@@ -384,10 +398,10 @@ ActiveRecord::Schema.define(version: 20140929141109) do
   end
 
   create_table "fee_grade_buckets", force: true do |t|
-    t.string   "grade_from"
+    t.integer  "grade_from"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "grade_to"
+    t.integer  "grade_to"
   end
 
   create_table "fee_types", force: true do |t|
@@ -422,6 +436,20 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.datetime "updated_at"
     t.string   "enquiry_no"
     t.string   "status"
+  end
+
+  create_table "grade_activity_mappings", force: true do |t|
+    t.integer  "activity_master_id"
+    t.integer  "grade_master_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "grade_books", force: true do |t|
+    t.integer  "grade_master_id"
+    t.integer  "no_of_books"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "grade_bucket_mappings", force: true do |t|
@@ -546,6 +574,21 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.datetime "updated_at"
   end
 
+  create_table "lab_criteria", force: true do |t|
+    t.integer  "lab_master_id"
+    t.string   "lab_criteria"
+    t.integer  "grade_master_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lab_masters", force: true do |t|
+    t.string   "lab_name"
+    t.integer  "faculty_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "location_masters", force: true do |t|
     t.string   "location_name"
     t.datetime "created_at"
@@ -554,6 +597,7 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.float    "longitude"
     t.integer  "route_id"
     t.boolean  "gmaps"
+    t.integer  "index"
   end
 
   create_table "locations", force: true do |t|
@@ -568,6 +612,12 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.boolean  "gmaps"
   end
 
+  create_table "main_menus", force: true do |t|
+    t.string "main_menu_name"
+    t.string "icon_class"
+    t.string "url"
+  end
+
   create_table "mealnames", force: true do |t|
     t.integer  "meal_type_id"
     t.string   "meal_detail_name"
@@ -580,6 +630,13 @@ ActiveRecord::Schema.define(version: 20140929141109) do
   create_table "mealtypes", force: true do |t|
     t.string   "meal_type"
     t.string   "time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", force: true do |t|
+    t.string   "subject"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -646,10 +703,22 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.datetime "updated_at"
     t.string   "father_education"
     t.string   "mother_education"
+    t.string   "address_line1"
+    t.string   "address_line2"
+    t.string   "city"
+    t.string   "pin"
+    t.integer  "user_id"
+    t.string   "father_nationality"
+    t.string   "mother_nationality"
+    t.string   "state"
+    t.string   "guardian_name"
+    t.string   "guardian_email"
+    t.string   "guardian_mobile"
+    t.string   "guardian_occupation"
   end
 
   create_table "parent_payment_masters", force: true do |t|
-    t.integer  "parent_id"
+    t.integer  "parent_master_id"
     t.integer  "student_id"
     t.integer  "payment_type_id"
     t.date     "next_payment_date"
@@ -668,25 +737,6 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.datetime "updated_at"
     t.integer  "term_definition_id"
     t.string   "status"
-  end
-
-  create_table "parents", force: true do |t|
-    t.string   "father_name"
-    t.string   "mother_name"
-    t.string   "guardian_name"
-    t.string   "father_occupation"
-    t.string   "mother_occupation"
-    t.string   "guardian_occupation"
-    t.string   "father_phone"
-    t.string   "mother_phone"
-    t.string   "guardian_phone"
-    t.string   "father_email"
-    t.string   "mother_email"
-    t.string   "guardian_email"
-    t.string   "address"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
   end
 
   create_table "payment_receipts", force: true do |t|
@@ -768,6 +818,14 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.datetime "updated_at"
   end
 
+  create_table "role_menu_priorities", force: true do |t|
+    t.integer  "role_id"
+    t.integer  "main_menu_id"
+    t.integer  "priority"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "roles", force: true do |t|
     t.string   "role"
     t.string   "code"
@@ -794,6 +852,7 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.string   "start_point"
     t.string   "end_point"
     t.string   "route_type"
+    t.integer  "new_vehicle_id"
   end
 
   add_index "routes", ["deleted_at"], name: "index_routes_on_deleted_at", using: :btree
@@ -861,6 +920,9 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.string   "title"
     t.integer  "add_id"
     t.string   "post_role"
+    t.integer  "faculty_master_id"
+    t.integer  "role_id"
+    t.integer  "staffrecruit_id"
   end
 
   create_table "staffrecruits", force: true do |t|
@@ -916,6 +978,12 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.datetime "updated_at"
   end
 
+  create_table "statuses", force: true do |t|
+    t.string   "reason"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "student_attendances", force: true do |t|
     t.integer  "grade_master_id"
     t.integer  "section_master_id"
@@ -930,22 +998,10 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.string   "name"
     t.date     "dob"
     t.date     "joining_date"
-    t.string   "academic_year"
-    t.integer  "parent_id"
-    t.string   "finalresult"
-    t.string   "closestatus"
-    t.string   "description"
-    t.string   "start_time"
-    t.string   "end_time"
+    t.integer  "parent_master_id"
     t.string   "branch"
     t.string   "surname"
     t.string   "second_lang"
-    t.string   "board"
-    t.string   "medium"
-    t.string   "year"
-    t.string   "written"
-    t.string   "reading"
-    t.string   "spoken"
     t.string   "blood_group"
     t.string   "gender"
     t.string   "language"
@@ -956,60 +1012,15 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.string   "guardian_mobile"
     t.string   "guardian_name"
     t.string   "guardian_relationship"
-    t.string   "from"
-    t.string   "to"
     t.string   "middle_name"
-    t.string   "klass"
-    t.string   "father_name"
-    t.string   "mother_name"
     t.string   "nationality"
-    t.string   "income"
-    t.text     "address"
-    t.string   "landline"
-    t.string   "mobile"
-    t.string   "email"
-    t.string   "transport"
-    t.string   "busstop"
-    t.string   "city"
-    t.string   "state"
-    t.string   "pin"
-    t.string   "changing_reason"
-    t.string   "know_school"
-    t.string   "last_school"
-    t.string   "person"
-    t.string   "pp"
-    t.string   "status"
-    t.string   "sib_name"
-    t.string   "sib_age"
-    t.string   "sib_sex"
-    t.string   "sib_grade"
-    t.string   "sib_school"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "grade_master_id"
     t.integer  "section_master_id"
     t.boolean  "bus_facility"
-    t.string   "form_no"
-    t.string   "changing_reason"
-    t.string   "know_school"
-    t.string   "last_school"
-    t.string   "person"
-    t.string   "pp"
-    t.string   "status"
-    t.string   "sib_name"
-    t.string   "sib_age"
-    t.string   "sib_sex"
-    t.string   "sib_grade"
-    t.string   "sib_school"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "grade_master_id"
-    t.integer  "section_master_id"
-    t.boolean  "bus_facility"
-    t.string   "form_no"
     t.integer  "location_id"
     t.integer  "location_master_id"
-
   end
 
   create_table "student_route_mappings", force: true do |t|
@@ -1021,12 +1032,29 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.string   "pick_up_point"
     t.string   "drop_point"
     t.integer  "location_master_id"
+    t.string   "lpp"
+  end
+
+  create_table "sub_menu_role_mappings", force: true do |t|
+    t.integer "sub_menu_id"
+    t.integer "main_menu_id"
+    t.integer "role_id"
+  end
+
+  create_table "sub_menus", force: true do |t|
+    t.string   "sub_menu_name"
+    t.string   "icon_class"
+    t.string   "url"
+    t.integer  "main_menu_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "subject_masters", force: true do |t|
     t.string   "subject_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "subject_type"
   end
 
   create_table "teacher_grade_mappings", force: true do |t|
@@ -1046,6 +1074,9 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.string   "faculty_leader"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "faculty_master_id"
+    t.integer  "grade_master_id"
+    t.integer  "section_master_id"
   end
 
   create_table "teachers_time_tables", force: true do |t|
@@ -1172,6 +1203,7 @@ ActiveRecord::Schema.define(version: 20140929141109) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "vendor_category_id"
+    t.string   "contact_name"
   end
 
 end

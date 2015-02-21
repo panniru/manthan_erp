@@ -6,7 +6,7 @@
 
 set :stage, "production"
 
-server 'a.b.c.d', user: 'deployer', roles: %w{web app db}, primary: true, password: 'welcome'
+server '192.168.1.39', user: 'deployer', roles: %w{web app db}, primary: true
 
 
 # Extended Server Syntax

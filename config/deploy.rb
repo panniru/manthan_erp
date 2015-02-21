@@ -3,19 +3,19 @@ lock '3.3.5'
 
 set :application, 'school_erp'
 set :scm, :git
-set :repo_url, 'git@bitbucket.org:sri-sankl/manthan_erp.git'
+set :repo_url, 'git@github.com:sri-sankl/manthan_erp.git'
 set :user, "deployer"
 set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :deploy_via, :remote_cache
 set :branch, 'master'
 
 set :rbenv_type, :user # or :system, depends on your rbenv setup
-set :rbenv_ruby, '2.1.5'
+set :rbenv_ruby, '2.1.2'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all # default value
 set :use_sudo, true
-
+set :ssh_options, { :forward_agent => true }
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call

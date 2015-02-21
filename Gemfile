@@ -69,7 +69,7 @@ gem 'pg'
 
 gem 'roadie', "~> 2.4"
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
