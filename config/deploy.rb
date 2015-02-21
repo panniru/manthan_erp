@@ -6,6 +6,8 @@ set :scm, :git
 set :repo_url, 'git@github.com:sri-sankl/manthan_erp.git'
 set :user, "deployer"
 set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :current_path, "#{fetch(:deploy_to)}/current"
+set :shared_path, "#{fetch(:deploy_to)}/shared"
 set :deploy_via, :remote_cache
 set :branch, 'master'
 
