@@ -60,15 +60,16 @@ namespace :deploy do
     #end
   #end
 
-  %w[start stop restart].each do |command|
-    desc "#{command} unicorn server"
-    task command do
-      on roles(:app) do
-        puts "#{fetch(:application)}"
-        execute "/etc/init.d/unicorn #{command}" #_#{fetch(:application)
-      end
+  desc "Link Nginx and unicorn services"
+  task :link_services do
+    on roles(:app) do
+      execute :sudo ,"ln -nfs #{fetch(:current_path)}/config/nginx.conf /etc/nginx/sites-enabled/#{fetch(:application)}"
+      execute :sudo, "ln -nfs #{fetch(:current_path)}/config/unicorn_init.sh /etc/init.d/unicorn_#{fetch(:application)}"
     end
   end
+
+  before :publishing, "deploy:link_services"
+
 
   desc "Make sure local git is in sync with remote."
   task :check_revision do
