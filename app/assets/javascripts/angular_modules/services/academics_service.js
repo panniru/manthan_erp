@@ -7,13 +7,13 @@
             return $http.get(url);
         };
 
-        var getAcademicSubjects = function(){
+        var getAcademicsSubjects = function(){
             var url = "/academics/get_academics_subjects.json"
             return $http.get(url);
         };
 
         return {
-            getAcademicSubjects : getAcademicSubjects,
+            getAcademicsSubjects : getAcademicsSubjects,
             getGrades : getGrades
         };    
         

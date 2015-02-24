@@ -1,12 +1,13 @@
 (function(angular, app) {
     "use strict";
-    app.controller('AssessmentCriteriaController',["$scope", "assessmentCriteriaService", 'timeTableService', function($scope, assessmentCriteriaService, timeTableService) {
+    app.controller('AssessmentCriteriaController',["$scope", "assessmentCriteriaService", 'academicsService', function($scope, assessmentCriteriaService, academicsService) {
         $scope.myShowIndexValue= true;       
 
-        timeTableService.getGradeServiceView()
+        academicsService.getGrades()
             .then(function(result) {
-                $scope.grades=result.data
+                $scope.grades = result.data;
             });
+	
 	
         $scope.initialize = function(){                       
             $scope.criterias = [];
@@ -20,6 +21,7 @@
                     myCriteria : "",
                 });           
         };
+
         $scope.destroyCriteria = function($index){            
             $scope.criterias.splice($index, 1);            
         };
@@ -57,9 +59,9 @@
             $scope.checked_value = false;
             $scope.grades_all = $scope.grades;
             $scope.assessment_grades=[];
-            timeTableService.getSubjectServiceView()
+            academicsService.getAcademicsSubjects()
                 .then(function(result) {
-                    $scope.subjects=result.data;                     
+                    $scope.subject_masters=result.data;                     
                 }); 
             
             $scope.myShowIndexValue= false;
@@ -103,7 +105,7 @@
                     });                        
                 }       
             }
-
+            
             assessmentCriteriaService.saveAssessmentCriteriaMappings($scope.save_assessment_criterias)
                 .then(function(result) {
                                        
@@ -115,10 +117,12 @@
 
         $scope.deleteAssessmentCriteriaMappings = function (assessment_id){
             $scope.delete_mappping_id = assessment_id
-            assessmentCriteriaService.deleteAssessmentCriteriaMappings($scope.delete_mappping_id)
-                .then(function(result) {
-                    $scope.showAssessmentsCriteriaMappings();                                                
-                }); 
+            if(confirm("Are you sure want to delete")){
+                assessmentCriteriaService.deleteAssessmentCriteriaMappings($scope.delete_mappping_id)
+                    .then(function(result) {
+                        $scope.showAssessmentsCriteriaMappings();                                                
+                    }); 
+            }
         }; 
     }]);    
     

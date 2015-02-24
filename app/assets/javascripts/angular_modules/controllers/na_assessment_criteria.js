@@ -1,6 +1,6 @@
 (function(angular, app) {
     "use strict";
-    app.controller('NaAssessmentCriteriaController',["$scope", "na_assessmentCriteriaService", 'timeTableService', "academicsService","nonAcademicsService", function($scope, na_assessmentCriteriaService, timeTableService, academicsService, nonAcademicsService)  {
+    app.controller('NaAssessmentCriteriaController',["$scope", "na_assessmentCriteriaService", "academicsService","nonAcademicsService", function($scope, na_assessmentCriteriaService, academicsService, nonAcademicsService)  {
         $scope.myShowIndexValue= true;    
 
         academicsService.getGrades()
@@ -115,10 +115,12 @@
 
         $scope.deleteAssessmentCriteriaMappings = function (assessment_id){
             $scope.delete_mappping_id = assessment_id
-            na_assessmentCriteriaService.deleteAssessmentCriteriaMappings($scope.delete_mappping_id)
-                .then(function(result) {
-                    $scope.showAssessmentsCriteriaMappings();                                                
-                }); 
+            if(confirm("Are you sure want to delete")){
+                na_assessmentCriteriaService.deleteAssessmentCriteriaMappings($scope.delete_mappping_id)
+                    .then(function(result) {
+                        $scope.showAssessmentsCriteriaMappings();                                                
+                });
+            } 
         }; 
     }]);    
     

@@ -13,7 +13,7 @@
                 $scope.grades = result.data;
             });
 
-        academicsService.getAcademicSubjects()
+        academicsService.getAcademicsSubjects()
             .then(function(result) {
                 $scope.subjects=result.data;
             });  
