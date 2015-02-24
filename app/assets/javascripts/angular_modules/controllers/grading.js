@@ -47,10 +47,9 @@
             });            
             
             gradingService.saveGradingMappings($scope.save_gradings)
-                .then(function(result) {                    
-                });
-
-            $scope.showGradingMappings();           
+                .then(function(result) {  
+                    $scope.showGradingMappings();                          
+                });   
         };
 
         $scope.showGradingMappings = function(){
@@ -77,12 +76,13 @@
 
         $scope.deleteGradingMappings = function(grading){           
             $scope.delete_mappping_id = grading.id;
-           
-            gradingService.deleteGradingMappings($scope.delete_mappping_id)
+            if(confirm("Are you sure want to delete")){
+                gradingService.deleteGradingMappings($scope.delete_mappping_id)
                     .then(function(result) {
                         
                     });             
-            $scope.showGradingMappings();            
+            }     
+            $scope.showGradingMappings();       
         };
 
     }]);    

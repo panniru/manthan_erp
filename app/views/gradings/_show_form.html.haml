@@ -8,7 +8,7 @@
   .row
     .col-md-1
     .col-md-9
-      %table{:class => "table"}
+      %table.table-striped.table-condensed.table-bordered
         %tr
           %th GRADE         
           %th GRADE DESCRIPTION 
@@ -18,7 +18,7 @@
             EDIT / SAVE
           %th{"ng-show" => "myShowFormValue"} 
             DELETE
-        %tr{"ng-repeat" => "grading in show_gradings"}
+        %tr{"ng-repeat" => "grading in show_gradings | orderBy:'grading_name'"}
           %td{"ng-show" => "grading.grading_show_value"} 
             {{grading.grading_name}}            
           %td{"ng-show" => "grading.grading_edit_value"}          
