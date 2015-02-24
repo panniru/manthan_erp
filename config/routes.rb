@@ -311,6 +311,8 @@ ManthanErp::Application.routes.draw do
     collection do
       get "get_grades"
       get "get_academics_subjects"
+      get "get_sections_for_grade"
+      get "get_academics_subjects_for_grade"
     end
   end
 
@@ -454,6 +456,8 @@ ManthanErp::Application.routes.draw do
       get "get_assessment_criteria_service"       
       post "save_assessment_criterias"
       post "deletemappings"
+      get "get_grade_subject_service"
+      get "get_assessment_criteria"
     end
   end
 

@@ -35,24 +35,11 @@ class TeacherGradeMappingsController < ApplicationController
       format.json do
         teachersgrademappings = TeacherGradeMapping.where('faculty_master_id = '+"'#{params[:my_Teacher]}'")   
         teachersgrademappings = teachersgrademappings.all.map do |mapping|
-          if  (mapping.subject_master_id.present?)
-            sub_name = mapping.subject_master.subject_name
-          else
-            sub_name = nil
+          if mapping.subject_master.subject_type == "academics"
+            {id: mapping.id,  grade_master_id: mapping.grade_master_id, grade_name: mapping.grade_master.grade_name, section_master_id: mapping.section_master_id, section_name: mapping.section_master.section_name, subject_master_id: mapping.subject_master_id ,subject_name: mapping.subject_master.subject_name }
           end
-          if  (mapping.grade_master_id.present?)
-            grad_name = mapping.grade_master.grade_name
-          else
-            grad_name = nil
-          end
-          if  (mapping.section_master_id.present?)
-            sec_name = mapping.section_master.section_name
-          else
-            sec_name = nil
-          end
-          {id: mapping.id,  grade_master_id: mapping.grade_master_id.to_i, grade_name: mapping.grade_master.grade_name, section_master_id: mapping.section_master_id.to_i, section_name: sec_name, subject_master_id: mapping.subject_master_id.to_i ,subject_name: sub_name }
         end    
-        render :json => teachersgrademappings   
+        render :json => teachersgrademappings.compact   
       end
     end
   end

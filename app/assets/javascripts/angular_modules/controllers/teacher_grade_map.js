@@ -1,6 +1,6 @@
 (function(angular, app) {
     "use strict";
-    app.controller('TeacherGradeMapController', ["$scope", "teachersGradesService", "teachersService", "timeTableService", function($scope, teachersGradesService, teachersService, timeTableService) {
+    app.controller('TeacherGradeMapController', ["$scope", "teachersGradesService", "teachersService", "timeTableService","academicsService", function($scope, teachersGradesService, teachersService, timeTableService, academicsService) {
         
         var initiateForm = function(){
             $scope.myShowFormValue = false;
@@ -26,11 +26,11 @@
         };
 
         $scope.getSectionsSubjects = function (){    
-            timeTableService.getSectionsForGradeService($scope.mapping['grade_master_id'])
+            academicsService.getSectionsForGradeService($scope.mapping['grade_master_id'])
                 .then(function(result) {
                     $scope.sections=result.data;
                 });
-            timeTableService.getSubjectsForGradeService($scope.mapping['grade_master_id'])
+            academicsService.getAcademicsSubjectsForGradeService($scope.mapping['grade_master_id'])
                 .then(function(result) {
                     $scope.subjects=result.data;
                 });
