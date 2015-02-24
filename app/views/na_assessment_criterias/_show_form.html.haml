@@ -1,0 +1,44 @@
+.row
+  .row{"ng-show" => "myShowIndexValue"}
+    .col-md-1 
+    .col-md-8
+      .col-md-4         
+        .form-group.col-md-12
+          %select{"ng-model" => "myGrade", "ng-options" => "grade.grade_master_id as grade.grade_name for grade in grades",:class => "form-control", "ng-change" => "getAssessmentsCriteriaMappings(myGrade)"}
+            %option{style: "display:none", value: ""} Select Grade   
+      -# .col-md-4
+      -#   = submit_tag("SHOW ASSESSMENT",{class: "btn btn-primary", :ng_click => "getAssessmentsCriteriaMappings(myGrade)"})
+      .col-md-4
+        %input{:type => "button", :class => "btn btn-primary", "ng-click" => "editAssessmentCriteriaMappings()", :value => "ADD ASSESSMENT CRITERIA"}
+  .row{"ng-show" => "myShowFormValue"}
+    .col-md-1
+    .col-md-4
+      %h4{style: "font-weight: bold"} ASSESSMENT CRITERIA
+
+  .row{"ng-show" => "myShowFormValue"}
+    .col-md-1
+    .col-md-9
+      %table{:class => "table"}
+        %tr
+          %th SUBJECT         
+          %th ASSESSMENTS 
+          %th DELETE
+        %tr{"ng-repeat" => "assessment  in assessments"}
+          %td {{assessment.subject_name}}         
+          %td {{assessment.subject_criteria}}  
+          %td          
+            = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteAssessmentCriteriaMappings(assessment.id)"
+    .col-md-2
+  .row
+    :css
+      table, th, td
+      {
+      border-collapse:collapse;
+      border:5px solid #6aa6d6;
+      }
+      th, td
+      {
+      padding:5px;
+      } 
+   
+      

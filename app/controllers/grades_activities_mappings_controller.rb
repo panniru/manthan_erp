@@ -41,17 +41,6 @@ class GradesActivitiesMappingsController < ApplicationController
     end
   end  
 
-  # def get_activities
-  #   respond_to do |format|
-  #     format.json do
-  #       get_activities = ActivityMaster.all.map do |activity|
-  #         {activity_name: activity.activity_name, activity_master_id: activity.id}
-  #       end
-  #       render :json => get_activities
-  #     end
-  #   end  
-  # end   
-
   private
   
   def add_params(params)
