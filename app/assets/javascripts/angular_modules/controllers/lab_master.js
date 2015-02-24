@@ -95,7 +95,7 @@
 	    for (var i = 0; i < $scope.lab_grades.length; i++){
                 for (var j = 0; j < $scope.criterias.length; j++){
                     $scope.save_assessment_criterias.push({
-                        lab_master_id : $scope.labName,
+                        subject_master_id : $scope.labName,
                         grade_master_id : $scope.lab_grades[i]['grade_master_id'],
                         lab_criteria : $scope.criterias[j]['myCriteria'],                        
                     });                        
