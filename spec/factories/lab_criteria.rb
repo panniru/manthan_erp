@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :lab_criterium, :class => 'LabCriteria' do
-    lab_master_id 1
+    subject_master_id 1
     lab_criteria "MyString"
     grade_master_id 1
   end

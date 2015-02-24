@@ -12,8 +12,8 @@ class LabCriteriasController < ApplicationController
   end
   
   def get_lab_masters
-    lab_masters = LabMaster.all.map do |lab_master|
-      {lab_name: lab_master.lab_name , id: lab_master.id }
+    lab_masters = SubjectMaster.get_sub_type.map do |lab_master|
+      {lab_name: lab_master.subject_name , id: lab_master.id }
     end
     render :json => lab_masters
   end
@@ -46,22 +46,19 @@ class LabCriteriasController < ApplicationController
   end
   
   def get_assessment_criteria
-    p "1111111111111111111111111"
-    p params[:lab_name]
-    
     respond_to do |format|
       format.json do       
-        lab_assessments = LabCriteria.where('grade_master_id = '+"#{params[:lab_name]}")         
-        p "1111111111111111111111111"
+        lab_assessments = LabCriteria.where('grade_master_id = '+"#{params[:lab_name]}")      
+        p "1111111111111111111111"
         p lab_assessments
-    
         lab_assessments = lab_assessments.each.map do |lab_assessment|
-          {id: lab_assessment.id,  grade_master_id: lab_assessment.grade_master_id, lab_name: lab_assessment.lab_master.lab_name, lab_criteria: lab_assessment.lab_criteria} 
+          {id: lab_assessment.id,  grade_master_id: lab_assessment.grade_master_id, lab_name: lab_assessment.subject_master.subject_name, lab_criteria: lab_assessment.lab_criteria} 
         end
         render :json => lab_assessments       
       end
     end
   end
+
   def deletemappings
     respond_to do |format|
       format.json do       
@@ -75,7 +72,7 @@ class LabCriteriasController < ApplicationController
 
 
   def lab_params(params)
-    params.permit(:grade_master_id , :lab_master_id ,  :lab_criteria)
+    params.permit(:grade_master_id , :subject_master_id ,  :lab_criteria)
   end
 
 end

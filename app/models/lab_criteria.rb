@@ -1,3 +1,3 @@
 class LabCriteria < ActiveRecord::Base
-  belongs_to :lab_master
+  belongs_to :subject_master
 end

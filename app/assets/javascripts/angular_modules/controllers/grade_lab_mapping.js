@@ -1,15 +1,16 @@
 (function(angular, app) {
     "use strict";
-    app.controller("gradeLabMappingController", ["$scope" , "gradeLabMappingService", "timeTableService" , function($scope , gradeLabMappingService , timeTableService){
+    app.controller("gradeLabMappingController", ["$scope" , "gradeLabMappingService", "gradesSubjectsMapService" , function($scope , gradeLabMappingService , gradesSubjectsMapService){
 	
 	gradeLabMappingService.getLabNames()
 	    .then(function(response){
 		$scope.subjects = response.data
 	    });
 	
-        timeTableService.getGradeServiceView()
+	
+	gradesSubjectsMapService.getGradesSubjectsServiceView()
             .then(function(result) {
-                $scope.grades=result.data;                 
+                $scope.show_grades=result.data; 
             });
 	
     }]);
