@@ -1,14 +1,25 @@
+//%script{:src => "http://maps.googleapis.com/maps/api/js?v=3&key=....&sensor=false&callback=initializeMap&libraries=places", :type => "text/javascript"}
+%script{:src => "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"}
+//%script{:src => "https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places", :type => "text/javascript"}
 .row
-  .col-sm-3
-    = render "search"
-  .col-sm-4
-  - if current_user.transport_head?
-    %br
-    .col-sm-3
-    .col-sm-3
-      = render 'form'
-    %br
-    %br
+  .pull-right
+    - if current_user.transport_head?
+      = form_for LocationMaster.new , :html => { :class => "form-horizontal", :role => "form"} do |f|
+        .row
+          .col-sm-12
+            = f.label "Add Location", :class => "control-label"
+        .row
+          .col-sm-10
+            = f.text_field :location_name, :id => "autocomplete", :class => "form-control"          
+            // %input#autocomplete{:type => "text" , :name => "location_name"}
+          .col-sm-2
+            %button{:type=>"submit", :class=> "btn btn-primary"}= "Add"
+
+  .pull-left
+    .col-sm-12
+      = render "search"
+%br
+%br
 .row
   .col-sm-5
    

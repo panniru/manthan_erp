@@ -1,0 +1,6 @@
+#!/bin/sh
+<%APP_ROOT=  "/home/deployer/apps/school_erp/current"%>
+CMD="cd <%= APP_ROOT%>; RAILS_ENV=production ~/.rbenv/bin/rbenv exec bundle exec bin/delayed_job -n4 start"
+AS_USER=deployer
+set -u
+sudo su -c "$CMD" - $AS_USER

@@ -10,7 +10,6 @@ class Academic
     sub_menu << grades_sections_mappings
     sub_menu << subject_masters
     sub_menu << grades_subjects_mappings
-    sub_menu << time_tables
     sub_menu << teacher_grade_mappings
     sub_menu << teacher_timetables
     sub_menu << class_teacher_mappings

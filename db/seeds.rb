@@ -18,7 +18,7 @@ def seed_role
   @librarian = Role.find_by_code("librarian") 
   @transport_head = Role.find_by_code("transport_head")
   @canteenmanager = Role.find_by_code("canteenmanager")
-
+   
   unless @admin.present?
     Role.create(:role => "admin", :code => "admin", :description => "admin")
   end

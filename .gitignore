@@ -47,3 +47,8 @@ lib/tasks/data_migration/input_data
 lib/tasks/data_migration/analysis
 .ruby-gemset
 *.pdf
+
+/config/database.yml
+.DS_Store
+/log/*
+/tmp/*

@@ -18,7 +18,6 @@ class ContextDetector
     "events" => "enquiry_admission",
     "staffs" => "enquiry_admission",
     "academics" => "academic",
-    "time_tables" => "academic",
     "teachers_time_tables" => "academic",
     "teaching_plans" => "academic",
     "teacher_grade_mappings" => "academic",
@@ -58,6 +57,7 @@ class ContextDetector
     "grade_books" => "library",
     "default_masters" => "default_master_sub_menu",
     "student_masters" => "default_master_sub_menu",
+    "time_tables" => "default_master_sub_menu",
     "parents" => "default_master_sub_menu",
     "holidaycalendars" => "default_master_sub_menu",
     "location_masters" => "transport",
@@ -75,7 +75,15 @@ class ContextDetector
     "guest_managements" => "hrm_sub_menu",
     "vendor_categories" => "default_master_sub_menu",
     "vendor_managements" => "hrm_sub_menu",
-    "food_wastages" => "canteen"
+    "food_wastages" => "canteen",
+    "non_academics" => "non_academic",
+    "activity_masters" => "non_academic",
+    "grades_activities_mappings" => "non_academic",
+    "activity_teachers_mappings" => "non_academic",
+    "na_assessment_criterias" => "non_academic",
+    "lab_masters" => "lab",
+    "lab_criterias" => "lab",
+    "grade_lab_mappings" => "lab"
   }
   
   def self.get_context(args)

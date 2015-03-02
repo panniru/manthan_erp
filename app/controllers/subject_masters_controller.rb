@@ -3,7 +3,7 @@ class SubjectMastersController < ApplicationController
   def index
     respond_to do |format|
       format.json do         
-        @subject_masters = SubjectMaster.all        
+        @subject_masters = SubjectMaster.where(subject_type: "academics")      
         render :json => @subject_masters
       end
       format.html do     
@@ -48,7 +48,7 @@ class SubjectMastersController < ApplicationController
   
   def build_subject_from_bulk
     params.require(:bulk_subject).select{|subject| subject["subject_name"].present?}.map do |inventory| 
-      SubjectMaster.new(inventory.permit(:subject_name))
+      SubjectMaster.new(inventory.permit(:subject_name, :subject_type))
     end
   end
 

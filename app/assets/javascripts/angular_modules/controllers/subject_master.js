@@ -11,7 +11,8 @@
 
         $scope.addSubject = function(){
             $scope.subject_masters.push({
-                subject_name: ""
+                subject_name: "",
+                subject_type: "academics"
             });
         };
 

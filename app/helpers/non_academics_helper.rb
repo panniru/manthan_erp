@@ -1,0 +1,2 @@
+module NonAcademicsHelper
+end

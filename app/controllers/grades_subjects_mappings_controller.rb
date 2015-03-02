@@ -22,7 +22,7 @@ class GradesSubjectsMappingsController < ApplicationController
               @value = "true"
             end
           end
-          if @value == "false"          
+          if @value == "false" && temp.subject_master.subject_type == "academics"            
             GradeSubjectMapping.find(temp.id).destroy          
           end
         end

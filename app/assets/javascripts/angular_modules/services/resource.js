@@ -150,6 +150,12 @@
                                               "markAsRead": {url: "/communication_mails/:id/mark_as_read.json", method: "PUT"}
                                           }  
                                          );
+
+        var ActivityMaster = $resource('/activity_masters/:id.json', {id: '@id'},
+                                       { "bulk": { url: "/activity_masters/create_bulk.json", method:'POST', isArray: true},
+                                        "update": { method: "PUT"}
+                                      }  
+                                     );
         
 
        
@@ -179,7 +185,8 @@
             DonateBook : DonateBook,
             SubjectMaster : SubjectMaster,
             SectionMaster : SectionMaster,
-            CommunicationMail : CommunicationMail
+            CommunicationMail : CommunicationMail,
+            ActivityMaster : ActivityMaster
         };
     }]);
 })(angular, myApp);

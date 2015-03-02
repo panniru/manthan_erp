@@ -1,0 +1,24 @@
+.row
+  .row
+    .col-md-1
+    .col-md-4
+      %h4{style: "font-weight: bold"} SELECT GRADES FOR ACTIVITIES
+    .col-md-4
+      = link_to 'CANCEL', grades_activities_mappings_path,:class => 'btn btn-primary'
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveGradeActivitiesMappings()", :value => "DONE"}
+    .col-md-3
+     
+  .row{"ng-repeat" => "activity in activities_grades_all | orderBy:'activity_name'"}
+    .col-md-1
+    .col-md-9
+      .row
+        .col-md-2
+          %h4{style: "font-weight: bold"} {{activity.activity_name}}
+          %input{"ng-model" => "checked_all", type: "checkbox", "ng-change" => "addAllGrades({{!checked_all}},{{activity.activity_master_id}},{{activity.grades}},activity)", "ng-checked" => "checked_all"}
+          All
+      .col-md-2{"ng-repeat" => "grade in activity.grades  | orderBy:'text'"}
+        %input{"ng-model" => "grade.checked_value", type: "checkbox", "ng-change" => "addGrades({{!grade.checked_value}},{{activity.activity_master_id}},{{grade}})", "ng-checked" => "grade.checked_value"}      
+        {{grade.text}}        
+      .col-md-2
+
+  

@@ -1,0 +1,2 @@
+module GradesActivitiesMappingsHelper
+end

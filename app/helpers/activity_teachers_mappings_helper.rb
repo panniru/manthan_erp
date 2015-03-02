@@ -1,0 +1,2 @@
+module ActivityTeachersMappingsHelper
+end

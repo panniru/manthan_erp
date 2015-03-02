@@ -1,0 +1,17 @@
+.row{"ng-controller" => "AssessmentCriteriaTeacherController"}
+  .row
+    .col-md-1
+    .col-md-2
+      %h5{style: "font-weight: bold"} SELECT GRADE SUBJECT
+      .col-md-12
+        %select{"ng-model" => "myGradeSubject", "ng-options" => "mapping as mapping.teacher_grade_subject for mapping in teacher_grade_subjects",:class => "form-control","ng-change"=>"getAssessmentCriteria()"}
+  %br
+  .row
+    .col-md-1
+    .col-md-9
+      %table.table-striped.table-condensed.table-bordered
+        %tr
+          %th ASSESSMENT CRITERIA       
+        %tr{"ng-repeat" => "assessment_criteria  in assessment_criterias"}       
+          %td {{assessment_criteria.subject_criteria}}
+    .col-md-2

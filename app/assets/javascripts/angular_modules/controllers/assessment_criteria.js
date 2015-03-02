@@ -1,13 +1,14 @@
 (function(angular, app) {
     "use strict";
-    app.controller('AssessmentCriteriaController',["$scope", "assessmentCriteriaService", 'timeTableService', function($scope, assessmentCriteriaService, timeTableService) {
+    app.controller('AssessmentCriteriaController',["$scope", "assessmentCriteriaService", 'academicsService', function($scope, assessmentCriteriaService, academicsService) {
         $scope.myShowIndexValue= true;       
 
-        timeTableService.getGradeServiceView()
+        academicsService.getGrades()
             .then(function(result) {
-                $scope.grades=result.data
+                $scope.grades = result.data;
             });
-
+	
+	
         $scope.initialize = function(){                       
             $scope.criterias = [];
             $scope.criterias.push({
@@ -58,9 +59,9 @@
             $scope.checked_value = false;
             $scope.grades_all = $scope.grades;
             $scope.assessment_grades=[];
-            timeTableService.getSubjectServiceView()
+            academicsService.getAcademicsSubjects()
                 .then(function(result) {
-                    $scope.subjects=result.data;                     
+                    $scope.subject_masters=result.data;                     
                 }); 
             
             $scope.myShowIndexValue= false;
@@ -90,13 +91,13 @@
  
         $scope.saveAssessmentCriteriaMappings = function()
         {            
-            $scope.myShowIndexValue = true;
+	    $scope.myShowIndexValue = true;
             $scope.myShowFormValue = false;
             $scope.myFormValue = "false";
             $scope.save_assessment_criterias = [];
 
             for (var i = 0; i < $scope.assessment_grades.length; i++){
-                for (var j = 0; j < $scope.criterias.length; j++){
+		for (var j = 0; j < $scope.criterias.length; j++){
                     $scope.save_assessment_criterias.push({
                         subject_master_id : $scope.mySubject,
                         grade_master_id : $scope.assessment_grades[i]['grade_master_id'],
@@ -104,7 +105,7 @@
                     });                        
                 }       
             }
-
+            
             assessmentCriteriaService.saveAssessmentCriteriaMappings($scope.save_assessment_criterias)
                 .then(function(result) {
                                        
@@ -116,10 +117,12 @@
 
         $scope.deleteAssessmentCriteriaMappings = function (assessment_id){
             $scope.delete_mappping_id = assessment_id
-            assessmentCriteriaService.deleteAssessmentCriteriaMappings($scope.delete_mappping_id)
-                .then(function(result) {
-                    $scope.showAssessmentsCriteriaMappings();                                                
-                }); 
+            if(confirm("Are you sure want to delete")){
+                assessmentCriteriaService.deleteAssessmentCriteriaMappings($scope.delete_mappping_id)
+                    .then(function(result) {
+                        $scope.showAssessmentsCriteriaMappings();                                                
+                    }); 
+            }
         }; 
     }]);    
     

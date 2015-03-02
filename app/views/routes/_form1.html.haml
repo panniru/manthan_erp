@@ -17,7 +17,9 @@
           = hidden_field_tag :busno_down, :value => ""
           %br
           %br
-      
+    {{up.id}}
+    {{newRoute.busno_down}}
+    {{newRoute.busno_up }}
   .form-group{"ng-repeat" => "location in newRoute.locations"}
     .row
       = label_tag "stop  {{$index+1}}", nil, :class => "form-label col-md-2"

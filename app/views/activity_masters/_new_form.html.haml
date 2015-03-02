@@ -1,0 +1,14 @@
+%form{:id => "myForma", :class=>"form-horizontal", :ng_submit => "submitActivities()"}  
+  .form-group{"ng-repeat" => "activity_master in activity_masters"}
+    %lablel{:class => "form-label col-md-3"} 
+      %b
+        Activity Name
+    .col-md-4     
+      = text_field_tag  "bulk_activity[][activity_name]",nil, :class => "form-control", :ng_model => "activity_master.subject_name", :placeholder => "Activity Name" 
+    .col-md-4{"ng-show"=>"showErrorMessage"}
+      error
+  .row
+    .col-md-5.col-md-offset-3      
+      %button{:ng_disabled => "moreActivities", :type => "button", :class=> "btn btn-primary", :ng_click => "addMoreActivities()"}=  "More Activities"
+      %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"
+  

@@ -49,6 +49,7 @@ gem 'bootstrap-will_paginate'
 
 gem 'cancancan', '~> 1.9'
 gem 'devise'  
+gem 'daemons', '~> 1.1.9'    
 gem 'delayed_job_active_record'
 gem 'factory_girl_rails'
 gem 'jquery-turbolinks', '~> 0.2.1'
@@ -69,7 +70,7 @@ gem 'pg'
 
 gem 'roadie', "~> 2.4"
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
@@ -92,3 +93,14 @@ end
 gem 'composite_primary_keys'
 gem 'rails_12factor'
 gem 'autosize-rails', '~> 1.18.8'
+
+group :development do
+  gem 'capistrano', '~> 3.3.5'    
+  gem 'capistrano-unicorn-nginx', '~> 3.1.0'
+  gem 'capistrano-rbenv', '~> 2.0' # require      d
+  gem 'capistrano-rbenv-install', '~> 1.2.0'
+  gem 'capistrano-faster-assets', '~> 1.0'
+  gem 'capistrano3-delayed-job', '~> 1.0' 
+  gem 'capistrano-rails', '~> 1.1.2'
+  gem 'capistrano-bundler', '~> 1.1.2'
+end

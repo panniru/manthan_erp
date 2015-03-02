@@ -1,22 +1,23 @@
 (function(angular, app) {
     "use strict";
-    app.controller('GradesSubjectsMappingController',["$scope", "timeTableService", "gradesSubjectsMapService", function($scope, timeTableService, gradesSubjectsMapService) {         
+    app.controller('GradesSubjectsMappingController',["$scope", "timeTableService", "gradesSubjectsMapService", "academicsService", function($scope, timeTableService, gradesSubjectsMapService, academicsService) {         
 
         var initiateForm = function(){
-            $scope.myShowFormValue = "true";
-            $scope.FormValue = "false";
+            $scope.showFormValue = true;
+            $scope.formValue = false;
         };
         initiateForm();
 
-        timeTableService.getGradeServiceView()
+        academicsService.getGrades()
             .then(function(result) {
-                $scope.grades=result.data;                 
+                $scope.grades = result.data;
             });
-        
-        timeTableService.getSubjectServiceView()
+
+        academicsService.getAcademicsSubjects()
             .then(function(result) {
-                $scope.subjects=result.data;  
-            });        
+                $scope.subjects=result.data;
+            });  
+        
         
         gradesSubjectsMapService.getGradesSubjectsServiceView()
             .then(function(result) {
@@ -29,7 +30,7 @@
             for(var i = 0; i < $scope.subjects.length; i++)
             {
                 $scope.subjects_grades_all.push({
-                    subject_master_id: $scope.subjects[i]['subject_master_id'],
+                    subject_master_id: $scope.subjects[i]['id'],
                     subject_name: $scope.subjects[i]['subject_name'],
                     grades: [],
                 });
@@ -52,7 +53,7 @@
             for(var i = 0; i < $scope.subjects.length; i++)
             {
                 $scope.subjects_grades.push({
-                    subject_master_id: $scope.subjects[i]['subject_master_id'],
+                    subject_master_id: $scope.subjects[i]['id'],
                     grade_masters: [],
                     
                 });
@@ -64,7 +65,7 @@
             
             for ( var i = 0; i < $scope.subjects.length; i++ ){         
                 for ( var j = 0; j < $scope.show_grades.length; j++ ) {                   
-                    if  ($scope.subjects[i]['subject_master_id'] == $scope.show_grades[j]['subject_master_id'] )
+                    if  ($scope.subjects[i]['id'] == $scope.show_grades[j]['subject_master_id'] )
                     {                             
                         $scope.subjects_grades[i]['grade_masters'].push({  
                             
@@ -78,12 +79,12 @@
 
         $scope.editGradesMappings = function() {            
             $scope.defaultSubjectsGradesAll();
-            $scope.myShowFormValue = "false";
-            $scope.myFormValue = "true";
+            $scope.showFormValue = false;
+            $scope.formValue = true;
             
             for ( var i = 0; i < $scope.subjects.length; i++ ){         
                 for ( var j = 0; j < $scope.show_grades.length; j++ ) {                   
-                    if  ($scope.subjects[i]['subject_master_id'] == $scope.show_grades[j]['subject_master_id'] )
+                    if  ($scope.subjects[i]['id'] == $scope.show_grades[j]['subject_master_id'] )
                     {
                         for ( var k = 0; k < $scope.subjects_grades_all[i]['grades'].length; k++ ) {
                             
@@ -124,8 +125,8 @@
         };
 
         $scope.showGradesMappings = function(){            
-            $scope.myFormValue = "false";
-            $scope.myShowFormValue = "true";
+            $scope.formValue = false;
+            $scope.showFormValue = true;
             
             gradesSubjectsMapService.getGradesSubjectsServiceView()
                 .then(function(result) { 
@@ -136,7 +137,7 @@
         $scope.addGrades = function(value,subject_master_id,grade){
             for(var i = 0; i < $scope.subjects.length; i++)
             {                
-                if ($scope.subjects[i]['subject_master_id'] == subject_master_id)
+                if ($scope.subjects[i]['id'] == subject_master_id)
                 {                    
                     if (!value)
                     {                        
@@ -157,10 +158,10 @@
             }            
         };
 
-        $scope.addAllGrades = function(value,subject_master_id,grades,subject){   
+        $scope.addAllGrades = function(value,subject_master_id,grades,subject){
             $scope.subject= subject;    
             for(var i = 0; i < $scope.subjects.length; i++){                
-                if ($scope.subjects[i]['subject_master_id'] == subject_master_id)
+                if ($scope.subjects[i]['id'] == subject_master_id)
                 {                    
                     if (!value)
                     {       

@@ -1,8 +1,12 @@
 ManthanErp::Application.routes.draw do
-  get 'locations/index'
 
-  get 'locations/create'
-  
+
+  resources :grade_lab_mappings do
+    collection do
+      get :all_subjects
+    end
+  end
+
   resources :vendor_managements do
     collection do
       get "get_vendor_view"
@@ -272,11 +276,11 @@ ManthanErp::Application.routes.draw do
       get "submitted_pdcs"
       get "print"
     end
-    resources :parent_payment_transactions do
-      member do
-        get "print"
-        get "in_detail"
-      end
+  end
+  resources :parent_payment_transactions do
+    member do
+      get "print"
+      get "in_detail"
     end
   end
   
@@ -303,7 +307,15 @@ ManthanErp::Application.routes.draw do
   
   resources :default_masters
   
-  resources :academics
+  resources :academics do
+    collection do
+      get "get_grades"
+      get "get_academics_subjects"
+      get "get_sections_for_grade"
+      get "get_academics_subjects_for_grade"
+    end
+  end
+
 
   resources :teachers_time_tables do
     collection do
@@ -369,14 +381,6 @@ ManthanErp::Application.routes.draw do
       post "save_grades_mappings"    
     end  
   end 
-  
-  resources :assessment_criterias do
-    collection do
-    get "get_assessment_criteria_service"  
-    get "get_grade_subject_service" 
-    get "get_assessment_criteria" 
-    end
-  end
 
   resources :gradings do
     collection do
@@ -452,6 +456,8 @@ ManthanErp::Application.routes.draw do
       get "get_assessment_criteria_service"       
       post "save_assessment_criterias"
       post "deletemappings"
+      get "get_grade_subject_service"
+      get "get_assessment_criteria"
     end
   end
 
@@ -461,15 +467,7 @@ ManthanErp::Application.routes.draw do
     post "save_gradings_mappings"
     post "delete_grading_mappings"
     end
-  end    
-
-  
-  resources :assessment_criterias do
-    collection do
-      get "get_assessment_criteria_service"  
-    end  
-  end
-  
+  end      
   
   resources :staff_admissions do
     resources :recruitments
@@ -801,6 +799,8 @@ ManthanErp::Application.routes.draw do
     end
   end
 
+  resources :lab_masters 
+
   resources :grade_books do 
     collection do
       get "get_grades_service"
@@ -808,5 +808,53 @@ ManthanErp::Application.routes.draw do
       post "save_grade_books_service"
     end
   end
+  
+  resources :lab_criterias do
+    collection do
+      get :get_lab_masters
+      get :all_grades
+      post :save_assessment_criterias
+      get :get_assessment_criteria
+      post :deletemappings
+    end
+  end
+  
+  resources :non_academics do
+    collection do
+      post 'create_bulk'    
+      get 'get_non_academics_subjects' 
+    end      
+  end
+
+  resources :activity_masters do
+    collection do
+      post 'create_bulk'     
+    end      
+  end
+
+   resources :grades_activities_mappings do
+    collection do
+      get "get_grade_activities"
+      post "save_grade_activities_mappings"
+      get  "get_activities"   
+    end  
+  end 
+
+  resources :activity_teachers_mappings do
+    collection do
+      post "getmappings"   
+      post "savemappings"   
+      post "deletemapping"
+      get "check_activity_teachers_mapping"
+    end  
+  end 
+
+  resources :na_assessment_criterias do
+    collection do
+      get "get_assessment_criteria_service"  
+      post "save_assessment_criterias" 
+      post "deletemappings" 
+    end  
+  end 
 
 end

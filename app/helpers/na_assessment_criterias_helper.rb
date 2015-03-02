@@ -1,0 +1,2 @@
+module NaAssessmentCriteriasHelper
+end
