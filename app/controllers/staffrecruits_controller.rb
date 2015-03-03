@@ -197,39 +197,25 @@ class StaffrecruitsController < ApplicationController
 
 
   def index
-    @staffrecruits = Staffrecruit.management_review
-    respond_to do |format|
-      format.json do
-        @staffrecruits = Staffrecruit.management_review
-        render :json => @staffrecruits
-      end
-      format.html do 
-        render "index"
-      end
-    end
-  
-      
     if current_user.admin?
-      if params[:staff_admission_id].present?
-        @staffrecruits = Staffrecruit.where(:staff_admission_id => params[:staff_admission_id])
-      else
-        @staffrecruits = Staffrecruit.application_forms
+      respond_to do |format|
+        format.json do
+          b = "Management Reviewed"
+          ass = Staffrecruit.where( :status => b).each.map do |mapping|
+            {id: mapping.id, faculty_name: mapping.faculty_name, form_no: mapping.form_no, status: mapping.status, assessment_result: mapping.assessment_result, comments: mapping.comments, post: mapping.post,final_result: mapping.final_result}
+          end
+          render :json => ass
+          p ass
+        end
+        format.html
+        {}
       end
+    else
+      @staffrecruits = Staffrecruit.management_review
     end
-      # @staffrecruits = Staffrecruit.application_forms
-    #   respond_to do |format|
-    #     format.json do
-    #       @staffrecruits = Staffrecruit.management_review
-    #       render :json => @staffrecruits
-    #     end
-    #     format.html do 
-    #       render "index"
-    #     end
-    #   end
-    # end
     
     if current_user.teacher?
-      @staffrecruits = Staffrecruit.assessment_planned
+      # @staffrecruits = Staffrecruit.assessment_planned
       respond_to do |format|
         format.json do
           if(Staffadmin.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
