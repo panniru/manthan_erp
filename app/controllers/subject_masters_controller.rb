@@ -51,5 +51,22 @@ class SubjectMastersController < ApplicationController
       SubjectMaster.new(inventory.permit(:subject_name, :subject_type))
     end
   end
-
+ 
+  def new
+    p "=====================+++++++++++++++"
+    @subject_master= SubjectMaster.new
+  end
+  def create
+    p params
+    p "111====================="
+    @subject_master = SubjectMaster.new(subject_master_params)
+    if @subject_master.save
+      redirect_to subject_masters_path
+    else
+      render 'new'
+    end
+  end
+  def subject_master_params
+    params.require(:subject_master).permit(:subject_name , :subject_type)
+  end
 end

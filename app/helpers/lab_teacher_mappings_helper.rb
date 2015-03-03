@@ -1,0 +1,2 @@
+module LabTeacherMappingsHelper
+end

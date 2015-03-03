@@ -1,0 +1,11 @@
+ =form_for(@subject_master)do|f|
+  .col-sm-3
+    =f.label :subject_name
+  .col-sm-3
+    =f.text_field :subject_name, :class =>"form-control"
+  .col-sm-3
+    =f.hidden_field :subject_type, :value => 'labs',:class =>"form-control"
+    
+    =f.submit 'save', :class => 'btn btn-primary'
+      
+
