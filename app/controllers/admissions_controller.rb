@@ -1,6 +1,22 @@
 class AdmissionsController < ApplicationController
   def admin_management_index
-    @admissions = Admission.management_review
+    if current_user.admin?
+      respond_to do |format|
+        format.json do
+          b = "Management Reviewed"
+            ass = Admission.where( :status => b).each.map do |mapping|
+            {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment, finalresult: mapping.finalresult}
+            end
+          render :json => ass
+          p ass
+        end
+        format.html
+        {}
+      end
+    else
+      @admissions = Admission.management_review
+    end
+    
   end
   def assess_completed_index
     @admissions = Admission.assessment_completed
@@ -12,8 +28,10 @@ class AdmissionsController < ApplicationController
     if current_user.teacher?
     respond_to do |format|
       format.json do
+          p current_user.faculty_master.id
         if(TeacherLeader.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
           pa = "#{current_user.faculty_master.id}"
+          p pa
           a = TeacherLeader.where(:faculty_master_id => pa).map{|student| student.grade_master_id}
           b = "Assessment Planned"
           ass = Admission.where(:grade_master_id => a, :status => b).each.map do |mapping|
@@ -66,12 +84,28 @@ class AdmissionsController < ApplicationController
   
   def index
     if current_user.admin?
-      if params[:teacher_leader_id].present?
-        @admissions = Admission.where(:teacher_leader_id => params[:teacher_leader_id])
-      else
-        @admissions = Admission.enquiry_forms_or_application_forms  
+      respond_to do |format|
+        format.json do
+          b = "Management Reviewed"
+          ass = Admission.where( :status => b).each.map do |mapping|
+            {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment, finalresult: mapping.finalresult}
+          end
+          render :json => ass
+          p ass
+        end
+        format.html
+        {}
       end
+    else
+      @admissions = Admission.management_review
     end
+    # if current_user.admin?
+    #   if params[:teacher_leader_id].present?
+    #     @admissions = Admission.where(:teacher_leader_id => params[:teacher_leader_id])
+    #   else
+    #     @admissions = Admission.enquiry_forms_or_application_forms  
+    #   end
+    # end
       # @admissions = Admission.enquiry_forms_or_application_forms
     #   if Admission.where(:status => "Assessment Planned")
     #     @admissions = Admission.assessment_planned
@@ -322,7 +356,7 @@ class AdmissionsController < ApplicationController
  def update_admission
    @admission = Admission.find(params[:id])
    respond_to do |format|
-     if  @admission.update(:status => "Form_Closed")
+     if  @admission.update(:status => "Form Closed")
        format.json { render action: 'index', :status => "success" }
      else
        format.json { render json: @admission.errors, :status => "failure" }

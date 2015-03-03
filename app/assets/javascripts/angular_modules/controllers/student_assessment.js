@@ -44,6 +44,25 @@
             window.location.reload();
         };  
 
+
+        $scope.editPlanmms = function(assessment){
+	    $scope.assessment = assessment
+            alert()
+	    $('#editplanmm').modal('show');
+	}
+
+        $scope.planupdatemm = function(){
+            $scope.assessment.status = 'Completed';
+            //  alert($scope.assessment.status)
+            $scope.assessment.$update()
+                .then(function(response){                  
+                })
+            $('#editplanmm').modal('hide');
+            $scope.assessments = resourceService.Assess.query();
+            window.location.reload();
+        };  
+
+        
         $scope.editResults = function(assessment){
 	    $scope.assessment = assessment
 	    $('#editresult').modal('show');

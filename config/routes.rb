@@ -893,8 +893,6 @@ ManthanErp::Application.routes.draw do
       get 'approval_status'
       get 'get_holidays'
       post 'get_date'
-     
-
     end
   end
   #get '/get_date/:data' => 'leave_permissions#get_date'

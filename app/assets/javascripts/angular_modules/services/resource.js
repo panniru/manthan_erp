@@ -192,7 +192,7 @@
             SubjectMaster : SubjectMaster,
             SectionMaster : SectionMaster,
             CommunicationMail : CommunicationMail,
-            ActivityMaster : ActivityMaster
+            ActivityMaster : ActivityMaster,
             SetupMaster : SetupMaster
 
         };

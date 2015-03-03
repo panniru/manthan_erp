@@ -372,7 +372,7 @@ def seed_teacher_leader
   unless TeacherLeader.first.present?
     TeacherLeader.create(:klass => 'PP1',:faculty_leader => 'SRIKANTH')
     TeacherLeader.create(:klass => 'PP2',:faculty_leader => 'MURALEE')
-    TeacherLeader.create(:klass => '1',:faculty_leader => 'SWAMY', :faculty_master_id => '7', :grade_master_id => '1')
+    TeacherLeader.create(:klass => '1',:faculty_leader => 'SWAMY', :faculty_master_id => '7', :grade_master_id => '3')
     TeacherLeader.create(:klass => '2',:faculty_leader => 'PRIYA')
     TeacherLeader.create(:klass => '3',:faculty_leader => 'NAVYA')
     TeacherLeader.create(:klass => '4',:faculty_leader => 'UMA')
