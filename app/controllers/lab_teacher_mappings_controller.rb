@@ -44,6 +44,16 @@ class LabTeacherMappingsController < ApplicationController
       end
     end
   end
+  def deletemappings
+    respond_to do |format|
+      format.json do       
+        if params[:_delete_mapping_id].present?
+          LabTeacherMapping.find(params[:_delete_mapping_id]).destroy      
+        end
+        render :json => true
+      end
+    end
+  end
 
  
 
@@ -62,18 +72,20 @@ class LabTeacherMappingsController < ApplicationController
   end
 
   def savemappings
+    alert('')
     respond_to do |format|
       format.json do       
         params[:mappings].each do |t| 
           if t["id"].present?
             p t["id"]
+           p params[:mappings]
             temp = LabTeacherMapping.find(t["id"])
             temp.faculty_master_id = t["faculty_master_id"]  
             temp.subject_master_id = t["subject_master_id"]
             temp.save
           else
-            @lab_teacher_mapping = LabTeacherMapping.new(lab_teacher_mapping(t))
-            @lab_teacher_mapping.save
+            @labteachermapping = LabTeacherMapping.new(lab_teacher_mapping(t))
+            @labteachermapping.save
           end
         end
         render :json => true

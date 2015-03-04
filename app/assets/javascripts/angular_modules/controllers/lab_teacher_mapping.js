@@ -22,7 +22,7 @@
             $scope.save_mappings = [];
             for( var j = 0; j <  $scope.mapping['faculty_master_id'].length; j++ ){
                 $scope.save_mappings.push({
-                    id:$scope.mapping.id,
+                    id: $scope.mapping.id,
                     subject_master_id: $scope.mySubject,
                     faculty_master_id: $scope.mapping.faculty_master_id[j],
                     
@@ -35,6 +35,35 @@
                     window.location.reload();
                 });
         };
+        $scope.saveEdit = function(){  
+        
+            $scope.save_mappings = [];          
+            $scope.save_mappings.push({
+                id: $scope.mapping.id, 
+                subject_master_id: $scope.mySubject,
+                faculty_master_id: $scope.mapping.faculty_master_id[j],
+            });
+            labMappingService.saveMappings($scope.save_mappings)
+                .then(function(result) {
+                    $('#myEditModal').modal('hide');
+                    $scope.showMappings();
+                    window.location.reload();
+                });  
+        };
+        
+        $scope.deleteMappings =  function($index){  
+            if(confirm("Are you sure want to delete")){
+                $scope.delete_Mapping_id = $scope.mappings[$index]['id']
+                labMappingService.deleteMappings($scope.delete_Mapping_id)
+                    .then(function(result) {   
+                        $scope.showMappings();
+                        window.location.reload();
+                    });                 
+            }else{
+            }
+        };
+
+
         $scope.showMappings = function(){ 
             // alert(' ') 
             $scope.myShowFormValue = true;
@@ -60,6 +89,11 @@
             $scope.faculty_names = [];
             $('#myModal').modal('show');
             $scope.mapping = mapping;  
+        };
+        $scope.editMapping = function (mapping){
+            $scope.faculty_names = [];
+            $scope.mapping = mapping; 
+            $('#myEditModal').modal('show');                       
         };
 
 

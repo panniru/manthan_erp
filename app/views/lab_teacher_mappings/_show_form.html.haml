@@ -1,29 +1,29 @@
 .row
-  .col-md-1
-  .col-md-8
-    %table.table-striped.table-condensed.table-bordered
-      %tr       
-        %th FACULTY
-        %th EDIT
-        %th DELETE          
-      %tr{"ng-repeat" => "mapping in mappings| orderBy:'id'"}        
-        %td {{mapping['faculty_name']}}  
-        %td
-          = link_to raw("<span class='glyphicon glyphicon-pencil'></span>"),"#", :class => "btn btn-warning btn-sm", :title => "EDIT", :ng_click => "editMapping(mapping)"
-        %td          
-          = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteMappings($index)"
-  -# .col-md-12
-  -#   #myEditModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  -#     .modal-dialog
-  -#       .modal-content
-  -#         .modal-header
-  -#           %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
-  -#           %h4.modal-title{ :id => "myModalLabel"} Edit Mapping
-  -#           .modal-body
-  -#             .row{"ng-controller" => "LabTeacherMappingController" , "ng-init" => "saveLabMappings()" , "ng-submit" => "saveMappings()" }
-  -#               %form{:id => "myForma", :class=>"form-horizontal", :ng_submit => "saveMappings()"}
-  -#                 .col-md-6
-  -#                   = label_tag(:grade, "Select Teacher") 
-  -#                   %select{:multiple => "multiple","ng-model" => "mapping.faculty_master_id", "ng-options" => "faculty.faculty_master_id as faculty.faculty_name for faculty  in faculty_names ", :class => "form-control"}       
-  -#                 .col-md-3
-  -#                   %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"
+  %table.table-striped.table-condensed.table-bordered
+    %tr    
+      %br   
+      %th FACULTY
+      %th EDIT
+      %th DELETE          
+    %tr{"ng-repeat" => "mapping in mappings| orderBy:'id'"}        
+      %td {{mapping['faculty_name']}}  
+      %td
+        = link_to raw("<span class='glyphicon glyphicon-pencil'></span>"),"#", :class => "btn btn-warning btn-sm", :title => "EDIT", :ng_click => "editMapping(mapping)"
+      %td                    
+        = link_to raw("<span class='glyphicon glyphicon-trash'></span>"),"#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteMappings($index)"
+  .row
+    #myEditModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+            %h4.modal-title{ :id => "myModalLabel"} Add Mapping
+            .modal-body         
+              .row{"ng-controller" => "LabTeacherMappingController" , "ng-init" => "saveLabMappings()",}
+               
+                .col-md-6
+                  = label_tag(:grade, "Select Teacher") 
+                  %select{:multiple => "multiple","ng-model" => "mapping.faculty_master_id", "ng-options" => "faculty.faculty_master_id as faculty.faculty_name for faculty  in faculty_names ", :class => "form-control"}       
+                  .col-md-3
+                    %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveEdit()"}=  "SAVE"
+     

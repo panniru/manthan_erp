@@ -10,10 +10,12 @@ class LabMastersController < ApplicationController
     @subject_masters= SubjectMaster.all
     @subject_master= SubjectMaster.new
   end
+
   def new
     p "=====================+++++++++++++++"
     @subject_master= SubjectMaster.new
   end
+
   def create
    p params
     p "111====================="
@@ -24,19 +26,10 @@ class LabMastersController < ApplicationController
       render 'new'
     end
   end
+
   def show
     @subject_master=SubjectMaster.find(params[:id])  end
-  # def edit
-  #   @lab_master=LabMaster.find(params[:id])
-  # end
-  # def update
-  #   @subject_master=SubjectMaster.find(params[:id])
-  #   if @lab_master.update(lab_master_params)
-  #     redirect_to lab_masters_path
-  #   else
-  #     render "edit"
-  #   end
-  # end
+ 
   def destroy
     @lab_master = SubjectMaster.find(params[:id])
     @lab_master.destroy
@@ -51,4 +44,5 @@ class LabMastersController < ApplicationController
   def lab_master_params
     params.require(:lab_master).permit(:lab_name,:faculty_id)
   end
+
 end

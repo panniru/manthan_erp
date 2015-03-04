@@ -22,16 +22,16 @@
                     %br
               .modal-footer
                 =f.submit 'save', :class => 'btn btn-primary'
-                -# %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
-                -# %button.btn.btn-primary Save changes
+                
 .row
-  %table.table.table-condensed.table-hovered.table-striped.table-bordered
-    %thead
-      %tr
-        %th subject name
-    %tbody
-      - @subject_masters.each do|subject_master|
+  .col-sm-6
+    %table.table.table-condensed.table-hovered.table-striped.table-bordered
+      %thead
         %tr
-          %td= subject_master.subject_type
+          %th subject name
+      %tbody
+        - @subject_masters.each do|subject_master|
+          %tr
+            %td= subject_master.subject_type
                     
                     

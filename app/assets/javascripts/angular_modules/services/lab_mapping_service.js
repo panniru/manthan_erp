@@ -10,7 +10,7 @@
             return $http.get(url);
         };
         var saveMappings = function(mappings){
-           
+        
             var url = "/lab_teacher_mappings/savemappings.json"
             return $http.post(url, {mappings: mappings});            
         };
@@ -25,6 +25,11 @@
             return $http.post(url, {my_Subject: mySubject}); 
         }; 
 
+        var deleteMappings = function(delete_mapping_id){
+            var url = "/lab_teacher_mappings/deletemappings.json"
+            return $http.post(url, {_delete_mapping_id: delete_mapping_id}); 
+        };
+
         
         
         return {
@@ -32,6 +37,7 @@
             labMappings : labMappings,
             saveMappings : saveMappings,
             checkSubjectsTeachersMapping : checkSubjectsTeachersMapping,
+            deleteMappings :deleteMappings,
             getMappings : getMappings
         };
     }]);
