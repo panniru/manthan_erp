@@ -1,4 +1,36 @@
 class AdmissionsController < ApplicationController
+
+  #---------------------------Merging Holiday Calendar Details
+  def holidaycalendardata
+    respond_to do |format|
+      format.json do
+        holiday_calendar = Holidaycalendar.select(:holiday_date).distinct   
+        holiday_calendar = holiday_calendar.map do |calendar|
+          {start: calendar.holiday_date, end: calendar.holiday_date,title: "holiday", description: "holiday", url: "#", holiday_date: calendar.holiday_date}
+        end
+        render :json => holiday_calendar
+      end
+    end
+  end
+
+  def holiday_date
+    respond_to do |format|
+      format.json do
+        holiday_date = Holidaycalendar.where("holiday_date = '#{params[:date]}'")
+        holiday_date = holiday_date.map do |holiday|
+          {id: holiday.holiday_date, description: holiday.description}
+        end
+        render :json => holiday_date
+      end
+    end
+  end
+  
+  def holidaycalendar_params
+    params.require(:holidaycalendar).permit(:holiday_date, :description) 
+  end
+
+  #--------------------------
+
   def admin_management_index
     if current_user.admin?
       respond_to do |format|

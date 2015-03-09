@@ -536,6 +536,8 @@ ManthanErp::Application.routes.draw do
     end
     
     collection do
+      get 'holidaycalendardata'
+      get 'holiday_date'
       get 'admin_management_index'
       get 'assess_completed_index'
       get 'assess_index'
@@ -668,6 +670,8 @@ ManthanErp::Application.routes.draw do
       get 'update_admission'
     end
     collection do
+      get 'holidaycalendardata'
+      get 'holiday_date'
       get 'recruitment_home'
       get 'admin_management_index'
       get 'assess_completed_index'

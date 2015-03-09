@@ -1,6 +1,7 @@
 
 
 $(document ).ready(function() {
+
     function getDates(start, end) {
         
         var datesArray = [];
@@ -45,7 +46,7 @@ $(document ).ready(function() {
     
     
     $('.textbox1').show();
-    
+    $('.fc-day').hide();
     $('#admission_bus').change(function() {
         if ($(this).val() == 't')
         {
@@ -142,34 +143,72 @@ function drawStudentAttendance(studentId){
 }
 
  function createAssessment(teacher_leader_id) {
+     var today = new Date();
+     var monthNames = [ "January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December" ]
+     
+     $('.calendar2').html("");
+     $('.calendar2').fullCalendar({
+         events: '/admissions/holidaycalendardata.json?teacher_leader_id='+teacher_leader_id,
+         selectable: true,
+         firstDay: 1,
+         weekends: false,
+         weekMode: 'variable',
+         select: function(date, calEvent, jsEvent, view) {
+             var dateFormat = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()       
+             var checkUrl = "/admissions/holidaycalendardata.json?teacher_leader_id="+teacher_leader_id+"&date="+dateFormat
+             $.get(checkUrl, function(data){
+                 $('#selectdate').val(date)
+                 $('#myModal').modal('show');      
+             })
+             
+         },
+         eventRender: function (event, element, monthView){
+             var date = (event.start.getFullYear()+ "-" + (("0" + (event.start.getMonth()+1)).slice(-2)) + "-" + (("0" + event.start.getDate()).slice(-2)))
+             var dayClass = $("td[data-date= '"+date+"']")
+             if(event.title === 'holiday'){
+                 dayClass.addClass('disable-class')
+             }else{
+                 dayClass.addClass('default-class')
+             } 
+         },
+     });
+ }
 
+
+function createStaffAssessment(staffadmin_id) {
+    var today = new Date();
+    var monthNames = [ "January", "February", "March", "April", "May", "June",
+                       "July", "August", "September", "October", "November", "December" ]
+    
     $('.calendar2').html("");
     $('.calendar2').fullCalendar({
-        events: '/admissions.json?teacher_leader_id='+teacher_leader_id,
+        events: '/staffrecruits/holidaycalendardata.json?staffadmin_id='+staffadmin_id,
         
         selectable: true,
-        select: function(date) {
-        
-            $('#selectdate').val(date)
-            $('#myModal').modal('show');                
-        }
+        firstDay: 1,
+        weekends: false,
+        weekMode: 'variable',
+        select: function(date, calEvent, jsEvent, view) {
+            var dateFormat = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()       
+            var checkUrl = "/staffrecruits/holidaycalendardata.json?staffadmin_id="+staffadmin_id+"&date="+dateFormat
+            $.get(checkUrl, function(data){
+                $('#selectdate').val(date)
+                $('#myModal').modal('show');      
+            })
+            
+        },
+        eventRender: function (event, element, monthView){
+            var date = (event.start.getFullYear()+ "-" + (("0" + (event.start.getMonth()+1)).slice(-2)) + "-" + (("0" + event.start.getDate()).slice(-2)))
+            var dayClass = $("td[data-date= '"+date+"']")
+            if(event.title === 'holiday'){
+                dayClass.addClass('disable-class')
+            }else{
+                dayClass.addClass('default-class')
+            } 
+        },
     });
 }
-
-
-function createStaffAssessment(staff_admission_id) {
-    $('.calendar2').html("");
-    $('.calendar2').fullCalendar({
-        events: '/staffrecruits.json?staff_admission_id='+staff_admission_id,
-        
-        selectable: true,
-        select: function(date) {
-            $('#selectdate').val(date)
-            $('#myModal').modal('show');                
-        }
-    });
-}
-
 
 $(document ).ready(function() {
      var modal = function(){

@@ -1,5 +1,34 @@
 class StaffrecruitsController < ApplicationController
+  #---------------------------Merging Holiday Calendar Details
+  def holidaycalendardata
+    respond_to do |format|
+      format.json do
+        holiday_calendar = Holidaycalendar.select(:holiday_date).distinct   
+        holiday_calendar = holiday_calendar.map do |calendar|
+          {start: calendar.holiday_date, end: calendar.holiday_date,title: "holiday", description: "holiday", url: "#", holiday_date: calendar.holiday_date}
+        end
+        render :json => holiday_calendar
+      end
+    end
+  end
+
+  def holiday_date
+    respond_to do |format|
+      format.json do
+        holiday_date = Holidaycalendar.where("holiday_date = '#{params[:date]}'")
+        holiday_date = holiday_date.map do |holiday|
+          {id: holiday.holiday_date, description: holiday.description}
+        end
+        render :json => holiday_date
+      end
+    end
+  end
   
+  def holidaycalendar_params
+    params.require(:holidaycalendar).permit(:holiday_date, :description) 
+  end
+
+  #--------------------------
   def recruitment_home
     if current_user.admin?
       if params[:search].present?
@@ -263,6 +292,7 @@ class StaffrecruitsController < ApplicationController
   def create
     @staffrecruit = Staffrecruit.new(staffrecruit_params)
     @staffrecruit.form_no = Staffrecruit.getno
+    @staffrecruit.staffadmin = Staffadmin.where(:dept => staffrecruit_params[:dept]).first
     respond_to do |format|
       if @staffrecruit.save 
         format.html { redirect_to recruitment_home_staffrecruits_path, notice: 'Form was successfully created.' }
@@ -312,7 +342,7 @@ class StaffrecruitsController < ApplicationController
  end
  
  def staffrecruit_params
-   params.require(:staffrecruit).permit(:post,:description,:start_time,:end_time,:education_qualification,:educational_certificates,:previous_employment_proof,:salary_slips_for_previous_months, :title,:status,:staff_admission_id,:id,:comments,:staffhead, :final_result,:form_no,:assessment_result,:closestatus,:management_result,:faculty_name,:dob,:subject_master_id,:address,:gender,:email,:mobile_no,:nationality,:klass,:language,:subject,:experience,:expected_salary,:staff_leader_id,:user_id,:dept,:role_id)
+   params.require(:staffrecruit).permit(:post,:description,:start_time,:end_time,:education_qualification,:educational_certificates,:previous_employment_proof,:salary_slips_for_previous_months, :title,:status,:staff_admission_id,:id,:comments,:staffhead, :final_result,:form_no,:assessment_result,:closestatus,:management_result,:faculty_name,:dob,:subject_master_id,:address,:gender,:email,:mobile_no,:nationality,:klass,:language,:subject,:experience,:expected_salary,:staff_leader_id,:user_id,:dept,:role_id, :staffadmin_id)
  end
  def get_faculty_master(staff_obj)
    FacultyMaster.new do |fm|

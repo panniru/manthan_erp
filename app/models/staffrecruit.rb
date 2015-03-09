@@ -22,7 +22,7 @@ class Staffrecruit < ActiveRecord::Base
   validates :address, presence: true
   validates :gender, presence: true
   validates :education_qualification, presence: true
-  
+  belongs_to :staffadmin,:foreign_key => 'staffadmin_id'
   belongs_to :staff_admission, :foreign_key => 'staff_admission_id'
   belongs_to :faculty_master
   scope :search, lambda {|id| where(:id => id)}
