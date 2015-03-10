@@ -10,6 +10,7 @@ class Lab
     sub_menu << lab_masters
     sub_menu << lab_criterias
     sub_menu << grade_lab_mappings
+    sub_menu << lab_teacher_mappings
   end
 
 
@@ -26,6 +27,9 @@ class Lab
   
   def grade_lab_mappings
     MenuItem.new(:label => "Grade Lab Mapping", :klass => "", :icon => "arrow right ", :href => "/grade_lab_mappings")
+
+  def lab_teacher_mappings
+    MenuItem.new(:label => "Lab Teacher Mapping", :klass => "", :icon => "arrow right ", :href => "/lab_teacher_mappings")
   end
   
 end

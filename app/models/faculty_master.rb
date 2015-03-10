@@ -9,7 +9,17 @@ class FacultyMaster < ActiveRecord::Base
   mount_uploader :previous_employment_proof,PreviousEmploymentProofUploader
   mount_uploader :salary_slips_for_previous_months, SalarySlipsForPreviousMonthsUploader
   scope :show_all_faculties, lambda{|designation| where(:designation => designation).select(:id,:faculty_name, :designation)}
+  # before_save :handle_faculty_id
+
+  # def handle_faculty_id
+ #   self.faculty_id = self.faculty_id.select(&:present?).join(';') 
+  #   # .select(&:present?) is necessary to avoid empty objects to be stored
+  # end
   
+  # def faculty
+  #   self.class.find(self.faculty_id.split(';'))
+  # end
+
   def self.get_faculty_names_by_role(current_user)
     if current_user.admin?
       faulty_names = FacultyMaster.all.map do |faculty|
@@ -22,6 +32,7 @@ class FacultyMaster < ActiveRecord::Base
       end
     end
   end
+
   
   def get_casual_leave(designation)
     a = designation
@@ -45,6 +56,5 @@ class FacultyMaster < ActiveRecord::Base
     return count_no
   end
 
-
-     
 end
+

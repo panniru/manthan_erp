@@ -811,8 +811,22 @@ ManthanErp::Application.routes.draw do
     end
   end
 
-  resources :lab_masters 
-
+  resources :lab_teacher_mappings do
+    collection do
+      get "get_all_subjects"
+      get "save_lab_mappings"
+      post "savemappings"
+      post "deletemappings"  
+      get "check_subjects_teachers_mapping"
+      post "getmappings"      
+    end
+  end
+  
+  resources :lab_masters do
+    collection do
+      get 'get_faculty_id_view'
+    end
+  end
   resources :grade_books do 
     collection do
       get "get_grades_service"
