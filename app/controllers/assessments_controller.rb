@@ -199,5 +199,100 @@ class AssessmentsController < ApplicationController
     end
   end
 
+  def get_assessment_grade_mappings
+    respond_to do |format|
+      format.json do 
+        assessment_grade_mappings = AssessmentGradeMapping.all.map do |mapping|
+          {id: mapping.id, grade_master_id: mapping.grade_master_id, grade_name: mapping.grade_master.grade_name, assessment_type_id: mapping.assessment_type_id, assessment_type: mapping.assessment_type.assessment_type}
+        end
+        render :json => assessment_grade_mappings      
+      end
+    end
+  end
+
+  def save_assessments
+    respond_to do |format|
+      format.json do 
+        p params
+        p "===================="
+        assessments = params[:assessments]        
+        assessments.each do |t|
+          if t["id"].present? 
+            @mapping = Assessment.find(t["id"])   
+            @mapping.assessment_name = t['assessment_name']
+            @mapping.assessment_grade_mapping_id = t['assessment_grade_mapping_id']
+            @mapping.subject_master_id = t['subject_master_id']
+            @mapping.save
+          else              
+            @mapping = Assessment.new(add_assessments_params(t))
+            @mapping.save
+          end
+        end
+        render :json => true
+      end
+    end 
+  end
+
+  def add_assessments_params(params)   
+    params.permit(:assessment_name, :assessment_grade_mapping_id, :subject_master_id)
+  end
+
+  def get_assessments
+    respond_to do |format|
+      format.json do 
+        assessments = Assessment.all.map do |mapping|
+          agm = AssessmentGradeMapping.find(mapping.assessment_grade_mapping_id)
+          {id: mapping.id, assessment_name: mapping.assessment_name, subject_master_id: mapping.subject_master_id, subject_name: mapping.subject_master.subject_name, grade_master_id: agm.grade_master_id, grade_name: agm.grade_master.grade_name, assessment_type_id: agm.assessment_type_id, assessment_type: agm.assessment_type.assessment_type}
+        end
+        p assessments
+        p "======================>"
+        render :json => assessments      
+      end
+    end    
+  end
+
+  def save_assessment_criteria
+    respond_to do |format|
+      format.json do 
+        p params
+        p "==================>"
+        assessment_criteria = params[:criteria]        
+        assessment_criteria.each do |t|
+          @mapping = AssessmentCriteria.new(add_assessment_criteria(t))
+          p @mapping
+          p "================>"
+          @mapping.assessment_id = t["assessment_id"]
+          @mapping.assessment_criteria = t["assessment_criteria"]
+
+          p @mapping
+          p "================>"
+          @mapping.save
+        end
+
+        render :json => true
+      end
+    end
+  end
+
+  def add_assessment_criteria(params)  
+    p params
+    p "++++++++++++++++++++"
+    params.permit(:assessment_id, :assessment_criteria)
+  end
+
+  def get_assessment_criteria
+    respond_to do |format|
+      format.json do 
+        p params
+        p "===============>"
+        assessment_criteria = AssessmentCriteria.where(assessment_id: "#{params[:assessment_id]}").all.map do |mapping|
+          {id: mapping.id, assessment_id: mapping.assessment_id, assessment_criteria: mapping.assessment_criteria}
+        end
+        p assessment_criteria
+        p "===============>"
+        render :json => assessment_criteria
+      end
+    end
+  end
   
 end

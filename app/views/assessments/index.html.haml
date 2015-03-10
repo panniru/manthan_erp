@@ -1,12 +1,10 @@
 .row{"ng-controller" => "AssessmentsController"} 
   .row 
     .col-md-1
-    .col-md-3     
-      %a{href: "#add_form", :class => "btn btn-primary", :title => "ADD ASESSMENT TYPE", "ng-click" => "editAssessmentTypeMappings({})"} ADD ASSESSMENT TYPE
     .col-md-3 
-      %a{href: "#mapping_index", :class => "btn btn-primary", :title => "ADD ASESSMENT MAPPING", "ng-click" => ""} ASSESSMENT MAPPING
-    .col-md-3 
-      %a{href: "#show_assessments", :class => "btn btn-primary", :title => "ADD ASESSMENT MAPPING", "ng-click" => ""} SHOW ASSESSMENTS
+      %a{href: "#add_assessment", :class => "btn btn-primary", :title => "ADD ASESSMENT MAPPING", "ng-click" => "addAssessments()"} ADD ASSESSMENT
+    .col-md-2 
+      %a{href: "#show_assessments", :class => "btn btn-primary", :title => "ADD ASESSMENT MAPPING", "ng-click" => "showAssessments()"} SHOW ASSESSMENTS
   %br
   .row 
     %div{"ng-view" => ""}

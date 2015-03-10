@@ -1,0 +1,23 @@
+.row{"ng-controller" => "AssessmentsController"} 
+  .row 
+    .col-md-1
+    .col-md-3     
+      %a{href: "#add_form", :class => "btn btn-primary", :title => "ADD ASESSMENT TYPE", "ng-click" => "editAssessmentTypeMappings({})"} ADD ASSESSMENT TYPE
+    .col-md-3 
+      %a{href: "#mapping_index", :class => "btn btn-primary", :title => "ADD ASESSMENT MAPPING", "ng-click" => ""} ASSESSMENT TYPE MAPPING
+    .col-md-3 
+      %a{href: "#show_assessments", :class => "btn btn-primary", :title => "ADD ASESSMENT MAPPING", "ng-click" => ""} SHOW ASSESSMENTS
+  %br
+  .row 
+    %div{"ng-view" => ""}
+  .row
+    :css
+      table, th, td
+      {     
+      border-collapse:collapse;
+      border:5px solid #6aa6d6;
+      }
+      th, td
+      {
+      padding:5px;
+      } 

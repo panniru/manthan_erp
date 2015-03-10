@@ -61,6 +61,9 @@
             . when('/show_assessments', {
                 templateUrl: 'academics/assessments/show_assessments.html'               
             })
+            . when('/add_assessment', {
+                templateUrl: 'academics/assessments/add_assessment.html'               
+            })
             . when('/assessment_results/show_form', {
                 templateUrl: 'academics/assessment_results/show_form.html'               
             })
@@ -75,7 +78,10 @@
             }) 
              . when('/assessment_results/students_show_form', {
                 templateUrl: 'academics/assessment_results/students_show_form.html'               
-            })         
+            })   
+            . when('/save_assessment', {
+                templateUrl: 'academics/assessments/show_assessments.html'               
+            })      
            
     }]);
 })(angular, myApp);

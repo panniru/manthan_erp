@@ -14,9 +14,10 @@ class Academic
     sub_menu << teacher_timetables
     sub_menu << class_teacher_mappings
     sub_menu << teaching_plans
+    sub_menu << assessment_types
+    sub_menu << assessments
     sub_menu << assessment_criteria
     sub_menu << grading
-    sub_menu << assessments
     sub_menu << assessment_results
     sub_menu << academic_terms
     sub_menu << term_results
@@ -108,6 +109,10 @@ class Academic
 
   def section_masters
     MenuItem.new(:label => "Section Masters", :klass => "", :icon => "thumbs-up", :href => "/section_masters")
+  end
+
+  def assessment_types
+    MenuItem.new(:label => "Assessments Types", :klass => "", :icon => "list-ol", :href => "/assessment_types")
   end
 
 end

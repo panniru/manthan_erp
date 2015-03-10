@@ -24,6 +24,7 @@ class ContextDetector
     "class_teacher_mappings" => "academic",
     "grades_sections_mappings" => "academic", 
     "grades_subjects_mappings" => "academic", 
+    "assessment_types" => "academic",
     "assessment_criterias" => "academic",    
     "gradings" => "academic", 
     "assessments" => "academic",
