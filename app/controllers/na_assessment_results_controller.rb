@@ -1,0 +1,2 @@
+class NaAssessmentResultsController < ApplicationController
+end

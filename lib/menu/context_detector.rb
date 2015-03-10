@@ -24,6 +24,7 @@ class ContextDetector
     "class_teacher_mappings" => "academic",
     "grades_sections_mappings" => "academic", 
     "grades_subjects_mappings" => "academic", 
+    "assessment_types" => "academic",
     "assessment_criterias" => "academic",    
     "gradings" => "academic", 
     "assessments" => "academic",
@@ -84,6 +85,8 @@ class ContextDetector
     "activity_teachers_mappings" => "non_academic",
 <<<<<<< HEAD
     "na_assessment_criterias" => "non_academic",
+    "na_assessments" => "non_academic",
+    "na_assessment_results" => "non_academic",
     "lab_masters" => "lab",
     "lab_criterias" => "lab",
     "grade_lab_mappings" => "lab"

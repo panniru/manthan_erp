@@ -1,6 +1,6 @@
 (function(angular, app) {
     "use strict";
-    app.controller('AssessmentsController', ["$scope", "assessmentsService", "timeTableService", function($scope, assessmentsService, timeTableService) {        
+    app.controller('AssessmentsController', ["$scope", "assessmentsService", "timeTableService", "academicsService", function($scope, assessmentsService, timeTableService, academicsService) {        
         assessmentsService.getAssessmentTypesService()
             .then(function(result) {                 
                 $scope.assessment_types = result.data;                
@@ -46,7 +46,6 @@
             
             $scope.showAssessmentTypeMappings();            
         };
-
 
         //ASSESSMENT-GRADE-MAPPING        
         assessmentsService.getAssessmentGrageMappingsService()
@@ -118,6 +117,7 @@
                     $scope.showAssessmentGradeMappings(); 
                 });           
         };
+        
         //ADMIN VIEW OF ASSESSMNETS
         $scope.getSections = function (myGrade){
             timeTableService.getSectionsForGradeService(myGrade)
@@ -126,16 +126,87 @@
                 });
         };  
 
-        $scope.showAssessmentMappings = function(myGrade,mySection){          
-            assessmentsService.getAssessmentMappingsService(myGrade,mySection)
+        // $scope.showAssessmentMappings = function(myGrade,mySection){          
+        //     assessmentsService.getAssessmentMappingsService(myGrade,mySection)
+        //         .then(function(result) {  
+        //             $scope.assessments = result.data;                   
+        //         }); 
+        // };
+
+        //ASSESSMENTS
+        $scope.addAssessments = function(){
+            $scope.add_assessments = [];
+            academicsService.getAcademicsSubjects()
+                .then(function(result) {
+                    $scope.subject_masters=result.data;
+                });
+
+            assessmentsService.getAssessmentGradeMappings()
+                .then(function(result) {
+                    $scope.assessment_types=result.data;
+                });  
+            
+            $scope.add_assessments.push({
+                assessment_name : "",
+                assessment_grade_mapping_id : "",
+                subject_master_id : ""
+            });                      
+        };
+
+        $scope.saveAssessments = function(){
+            assessmentsService.saveAssessments($scope.add_assessments)
+                .then(function(result) {
+                    $scope.showAssessments();                    
+                });
+        };
+
+        
+        $scope.showAssessments = function(myGrade,mySection){          
+            assessmentsService.getAssessments()
                 .then(function(result) {  
-                    $scope.assessments = result.data;                   
+                    $scope.assessments = result.data;
                 }); 
         };
 
-       
+        //ASSESSMENT CRITERIA
+        $scope.addAssessmentCriteria = function(assessment_id)
+        {
+            $scope.getAssessmentCriteria(assessment_id);
+            $scope.selected_assessment_id = assessment_id;
+            $scope.criteria = [];
+            $scope.criteria.push({
+                assessment_id : $scope.selected_assessment_id, 
+                assessment_criteria : "",
+            });            
+            $('#assessmentCriteriaModal').modal('show');             
+        };
 
+        $scope.addCriteria = function(){	   
+            $scope.criteria.push({
+                assessment_id : $scope.selected_assessment_id, 
+                assessment_criteria : "",
+            });           
+        };
 
+        $scope.destroyCriteria = function($index){
+            $scope.criteria.splice($index, 1);            
+        };
+
+        $scope.saveAssessmentCriteria = function(){
+             assessmentsService.saveAssessmentCriteria($scope.criteria)
+                .then(function(result) {
+                    $scope.showAssessments();       
+                    $('#assessmentCriteriaModal').modal('hide');            
+                });
+        };
+        
+        $scope.getAssessmentCriteria = function(assessment_id){
+            assessmentsService.getAssessmentCriteria(assessment_id)
+            .then(function(result){
+                $scope.assessment_criteria = result.data;
+            });                 
+        };     
+        
         
     }]);    
 })(angular, myApp);

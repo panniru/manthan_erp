@@ -506,11 +506,16 @@ ManthanErp::Application.routes.draw do
       post "save_assessment_type_mappings"
       get "get_assessment_grade_mappings_service"
       post "save_assessment_grade_mappings"
-      get"get_teacher_assessments_service"
+      get "get_teacher_assessments_service"
       get "get_teacher_grade_mappings"
       post "save_teacher_assessments"
       post "delete_teacher_assessment_mappings"
       get "get_assessment_mappings_service"
+      get "get_assessment_grade_mappings"
+      post "save_assessments"
+      get "get_assessments"
+      post "save_assessment_criteria"
+      get "get_assessment_criteria"
     end  
   end
   
@@ -884,7 +889,6 @@ ManthanErp::Application.routes.draw do
     end  
   end 
 
-
   resources :faculty_attendances do
     collection do
       get 'get_faculty'
@@ -915,6 +919,20 @@ ManthanErp::Application.routes.draw do
   end
   #get '/get_date/:data' => 'leave_permissions#get_date'
   
+  resources :na_assessments do
+    collection do
 
+    end
+  end
+
+  resources :na_assessment_results do
+    collection do      
+    end
+  end
+
+  resources :assessment_types do
+    collection do      
+    end
+  end
 
 end

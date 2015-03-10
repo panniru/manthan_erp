@@ -1,0 +1,28 @@
+.row
+  .col-md-1
+  .col-md-9
+    %table{:class => "table"}
+      %tr
+        %th ASSESSMENT NAME   
+        %th ASSESSMENT TYPE     
+        %th SUBJECT       
+        %th SAVE        
+      %tr{"ng-repeat" => "assessment  in add_assessments"}
+        %td
+          %input{type: "text", "ng-model" => "assessment.assessment_name",:class => "form-control" }
+        %td
+          %select{"ng-model" => "assessment.assessment_grade_mapping_id", "ng-options" => "assessment_type.id as assessment_type.assessment_type+' - '+assessment_type.grade_name for assessment_type in assessment_types | orderBy: 'assessment_type'",:class => "form-control","ng-change" => ""}
+            %option{style: "display:none", value: ""} Select Mapping
+        %td
+          %select{"ng-model" => "assessment.subject_master_id", "ng-options" => "subject.id as subject.subject_name for subject in subject_masters",:class => "form-control","ng-change" => ""}
+            %option{style: "display:none", value: ""} Select Subject
+        %td
+          %a{href: "#save_assessment", :class => "btn btn btn-primary btn-sm", :title => "SAVE", "ng-click" => "saveAssessments()"}       
+            %span{class: "glyphicon glyphicon-save"}
+
+.row
+  .col-md-1
+  .col-md-9
+    {{assessment}}
+    {{add_assessments}}
+    {{assessment_types}}

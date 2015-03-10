@@ -1,0 +1,2 @@
+module NaAssessmentResultsHelper
+end

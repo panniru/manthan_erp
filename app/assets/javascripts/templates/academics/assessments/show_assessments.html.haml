@@ -14,17 +14,52 @@
   .col-md-10
     %table{:class => "table"}
       %tr
+        %th ASSESSMENT NAME
+        %th GRADE
+        %th ASSESSMENT TYPE
         %th SUBJECT
-        %th ASSESSMENT  
-        %th ASSESSMENT DESCRIPTION
-        %th ASSESSMENT DATE
-        %th TEACHER NAME
       %tr{"ng-repeat" => "assessment in assessments"}
-        %td {{assessment.subject_name}} 
-        %td {{assessment.assessment_type}} 
-        %td {{assessment.assessment_desc}} 
-        %td {{assessment.assessment_date}}
-        %td {{assessment.faculty_name}}
+        %td 
+          %a{href: "assessments#/show_assessments", "ng-click" => "addAssessmentCriteria(assessment.id)"} 
+            {{assessment.assessment_name}} 
+        %td {{assessment.grade_name}}
+        %td {{assessment.assessment_type}}
+        %td {{assessment.subject_name}}
+
+.row   
+  #assessmentCriteriaModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4#myModalLabel.modal-title ADD ASSESSMENT CRITERIA            
+          .modal-body
+            .row
+              .col-md-1
+              .col-md-11
+                %table{:class => "table"}
+                  %tr
+                    %th CRITERIA
+                  %tr{"ng-repeat" =>"a_c in assessment_criteria"}
+                    %td {{a_c.assessment_criteria}}
+            .row
+              .col-md-1
+              .col-md-11{"ng-repeat" =>"criteria in criteria", :placeholder => "Criteria {{$index+1}}"}
+                .form-group
+                  .col-md-3       
+                    %label{for: "criteria_name"} Criteria Name
+                  .col-md-7
+                    %input{type: "text", "ng-model" => "criteria.assessment_criteria",:class => "form-control" }
+                  .col-md-1
+                    %button{:type => "button", :class=> "btn btn-danger", :ng_click => "destroyCriteria($index)"}=  "-"
+          .row
+            %br
+            .col-md-5.col-md-offset-3
+              %button{:type => "button", :class=> "btn btn-primary", :ng_click => "addCriteria()"}=  "Add  Criteria"
+                
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+            %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveAssessmentCriteria()", :value => "SAVE"}
          
  
    

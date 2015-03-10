@@ -81,8 +81,6 @@ class RequestBooksController < ApplicationController
         books_vendors = VendorCategory.find_by_vendor_category('books').vendor_managements.map do |book_vendor|
           {id: book_vendor.id, contact_name: book_vendor.contact_name, vendor_email: book_vendor.vendor_email}
         end
-        p books_vendors
-        p "888888888888888"
         render :json => books_vendors
       end
     end
