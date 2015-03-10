@@ -83,13 +83,12 @@ class ContextDetector
     "non_academics" => "non_academic",
     "grades_activities_mappings" => "non_academic",
     "activity_teachers_mappings" => "non_academic",
-<<<<<<< HEAD
     "na_assessment_criterias" => "non_academic",
     "na_assessments" => "non_academic",
     "na_assessment_results" => "non_academic",
     "lab_masters" => "lab",
     "lab_criterias" => "lab",
-    "grade_lab_mappings" => "lab"
+    "grade_lab_mappings" => "lab",
     "activity_masters" => "non_academic",
     "lab_masters" => "lab",
     "lab_teacher_mapping" => "lab"
