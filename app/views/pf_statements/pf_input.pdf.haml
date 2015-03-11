@@ -1,0 +1,38 @@
+= wicked_pdf_stylesheet_link_tag "pdf_reports"
+.col-xs-12
+  .pull-left
+    %h2 
+      = "PF Input For The Month #{@month} #{@year}"
+.col-xs-12
+  %label= "Employee Type: #{@employee_type.try(:titleize)}"
+  %table.table.table-bordered
+    %tr
+      %th Employee's Share
+      %th A/c.No.1  
+      %th= @pf_input.employee_share_ac_01
+    %tr
+      %th Employer's Share
+      %th A/c.No.1  
+      %th= @pf_input.employer_share_ac_01
+    %tr
+      %th Employer's Share
+      %th A/c.No.10  
+      %th= @pf_input.employer_share_ac_10
+
+    %tr
+      %th Administration Charges
+      %th A/c.No.2
+      %th= @pf_input.administration_charges_ac_2
+    %tr
+      %th EDLI Charges
+      %th A/c.No.21
+      %th= @pf_input.edli_charges_ac_21
+    %tr
+      %th EDLI Admin.Charges
+      %th A/c.No.21
+      %th= @pf_input.edli_admin_charges_ac_22
+    %tr
+      %th{:colspan => 2} Total
+      %th= @pf_input.total
+
+      

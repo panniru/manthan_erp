@@ -1,0 +1,83 @@
+.col-md-6
+  .form-group
+    = f.label "Basic Pay", :class => 'col-md-7 control-label'
+    .col-md-5
+      = f.text_field :basic, :class => "form-control", :rel => "earningInputField"
+  .form-group
+    %label.col-md-7.control-label HRA
+    .col-md-5
+      = f.text_field :hra, :class => "form-control", :rel => "earningInputField"
+  .form-group
+    = f.label :conveyance_allowance, :class => 'col-md-7 control-label'
+    .col-md-5
+      = f.text_field :conveyance_allowance, :class => "form-control", :rel => "earningInputField"
+  .form-group
+    = f.label :city_compensatory_allowance, :class => 'col-md-7 control-label'
+    .col-md-5
+      = f.text_field :city_compensatory_allowance, :class => "form-control", :rel => "earningInputField"
+  .form-group
+    = f.label :special_allowance, :class => 'col-md-7 control-label'
+    .col-md-5
+      = f.text_field :special_allowance, :class => "form-control", :rel => "earningInputField"
+  - if @payslip.faculty_master.eligible_for_loyality_allowance?(@payslip.generated_date)
+    .form-group
+      = f.label :loyalty_allowance, :class => 'col-md-7 control-label'
+      .col-md-5
+        = f.text_field :loyalty_allowance, :class => "form-control", :rel => "earningInputField"
+  .form-group
+    = f.label :medical_allowance, :class => 'col-md-7 control-label'
+    .col-md-5
+      = f.text_field :medical_allowance, :class => "form-control", :rel => "earningInputField"
+
+  .form-group
+    = f.label :incentive, :class => 'col-md-7 control-label'
+    .col-md-5
+      = f.text_field :incentive_payment, :class => "form-control", :rel => "earningInputField"
+.col-md-6
+  .form-group
+    = f.label :loyalty_deposit, :class => 'col-md-7 control-label'
+    .col-md-5
+      = f.text_field :loyalty_deposit, :class => "form-control", :rel => "earningInputField"
+  .form-group
+    = f.label :arrears_of_salary, :class => 'col-md-7 control-label'
+    .col-md-5
+      = f.text_field :arrears_of_salary, :class => "form-control", :rel => "earningInputField"
+  .form-group
+    = f.label :grade_allowance, :class => 'col-md-7 control-label'
+    .col-md-5
+      = f.text_field :grade_allowance, :class => "form-control", :rel => "earningInputField"
+  - if @payslip.faculty_master.eligible_for_leave_settlement?(@payslip.generated_date)
+    .form-group
+      = f.label :leave_settlement, :class => 'col-md-7 control-label'
+      .col-md-5
+        = f.text_field :leave_settlement, :class => "form-control", :rel => "earningInputField", :readonly => true
+  - if @payslip.faculty_master.eligible_for_annual_bonus_payment?(@payslip.generated_date)
+    .form-group
+      = f.label :annual_bonus, :class => 'col-md-7 control-label'
+      .col-md-5
+        = f.text_field :annual_bonus, :class => "form-control", :rel => "earningInputField", :readonly => true
+  .form-group
+    = f.label :performance_bonus, :class => 'col-md-7 control-label'
+    .col-md-5
+      = f.text_field :performance_bonus, :class => "form-control", :rel => "earningInputField"
+  .form-group
+    = f.label :additional_allowance_1, :class => 'col-md-7 control-label'
+    .col-md-5
+      .row
+        = f.text_field :additional_allowance_1_label, :class => "form-control", :placeholder => "Label"
+      .row
+        = f.text_field :additional_allowance_1, :class => "form-control", :rel => "earningInputField"
+  .form-group
+    = f.label :additional_allowance_2, :class => 'col-md-7 control-label'
+    .col-md-5
+      .row
+        = f.text_field :additional_allowance_2_label, :class => "form-control", :placeholder => "Label"
+      .row
+        = f.text_field :additional_allowance_2, :class => "form-control", :rel => "earningInputField"
+  .form-group
+    = f.label :additional_allowance_3, :class => 'col-md-7 control-label'
+    .col-md-5
+      .row
+        = f.text_field :additional_allowance_3_label, :class => "form-control", :placeholder => "Label"
+      .row
+        = f.text_field :additional_allowance_3, :class => "form-control", :rel => "earningInputField"

@@ -1,0 +1,29 @@
+%table.table.table-condensed
+  %thead
+    %th Code
+    %th Name
+    %th Month
+    %th Year
+    %th Days Worked
+    %th Working Days
+    %th SL
+    %th PL
+    %th CL
+    %th LOP
+    %th
+  %tbody
+    - @faculty_leaves.each do |faculty|
+      %tr
+        %td= faculty.code
+        %td= faculty.employee_master.name
+        %td= faculty.month
+        %td= faculty.year
+        %td= faculty.days_worked
+        %td= faculty.working_days
+        %td= faculty.sl
+        %td= faculty.pl
+        %td= faculty.cl
+        %td= faculty.lop
+        %td
+          = edit_button(edit_faculty_leafe_path(faculty))
+= will_paginate @faculty_leaves, param_name: 'page', previous_label: h("<"), next_label: h(">")

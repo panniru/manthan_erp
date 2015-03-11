@@ -1,0 +1,21 @@
+%table
+  %tr
+    %td Upto
+    %td= tax_limits["bucket_1"]["to"] 
+    %td= "#{tax_limits['bucket_1']['tax']}%"
+    %td= "= #{bucket_wise_tax['bucket_1']}"
+  %tr
+    %td Next
+    %td= tax_limits["bucket_2"]["to"] 
+    %td= "#{tax_limits['bucket_2']['tax']}%"
+    %td= "= #{bucket_wise_tax['bucket_2']}"
+  %tr
+    %td Next
+    %td= tax_limits["bucket_3"]["to"] 
+    %td= "#{tax_limits['bucket_3']['tax']}%"
+    %td= "= #{bucket_wise_tax['bucket_3']}"
+  %tr
+    %td Balance
+    %td
+    %td= "#{tax_limits['bucket_4']['tax']}%"
+    %td= "= #{bucket_wise_tax['bucket_4']}"

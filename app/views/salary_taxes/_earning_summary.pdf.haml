@@ -1,0 +1,77 @@
+%table.table.table-bordered
+  %tr
+    %td
+      %label Basic
+    %td
+      %label= @salary_tax.basic
+  %tr
+    %td
+      %label HRA
+    %td
+      %label= @salary_tax.hra
+  %tr
+    %td
+      %label Conveyance Allowance
+    %td
+      %label= @salary_tax.conveyance_allowance
+  %tr
+    %td
+      %label City Compensatory Allowance 
+    %td
+      %label= @salary_tax.city_compensatory_allowance
+  %tr
+    %td
+      %label Special Allowance
+    %td
+      %label= @salary_tax.special_allowance
+  %tr
+    %td
+      %label Loyalty Allowance
+    %td
+      %label= @salary_tax.loyalty_allowance
+  %tr
+    %td
+      %label Medical Allowance
+    %td
+      %label= @salary_tax.medical_allowance
+  %tr
+    %td
+      %label Leave Settlement
+    %td
+      %label= @salary_tax.leave_settlement
+  %tr
+    %td
+      %label Other Payment
+    %td
+      %label= @salary_tax.other_payment
+  %tr
+    %td
+      %label Total
+    %td
+      %label= @salary_tax.total_earnings
+  %tr
+    %td
+      %label Conveyance Allowance(-)
+    %td
+      %label= @salary_tax.conveyance_allowance
+  %tr
+    %th Medical Allowance(-)
+    %th= @salary_tax.claimed_medical_bill
+  %tr
+    %th Standurd Deduction(-)
+    %th= @salary_tax.standard_deduction
+  %tr
+    %th Professional Tax(-)
+    %th= @salary_tax.professional_tax
+  %tr
+    %td
+      %label Mediclaim U/s80D(-)
+      = "Faculty limit #{@salary_tax.tax_limits[:mediclaim_employee_limit]}"
+      %br
+      = "Parent limit #{@salary_tax.tax_limits[:mediclaim_parent_limit]}"
+      %br
+      = "Parent senior citizen limit #{@salary_tax.tax_limits[:mediclaim_parent_limit] + @salary_tax.tax_limits[:mediclaim_parent_senior_citizen_limit]}"
+    %th= @salary_tax.medical_insurances_total
+  %tr
+    %th Savings upto 1.50 lakh(-)
+    %th= @salary_tax.savings_total

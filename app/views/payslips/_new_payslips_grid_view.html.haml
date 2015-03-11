@@ -1,0 +1,119 @@
+.row
+  %table.table.table-bordered
+    %tr
+      %th.align-center-from-top{:rowspan => 2} 
+        %h4 Code
+      %th.align-center-from-top{:rowspan => 2} 
+        %h4 Name
+      %th.align-center-from-top{:rowspan => 2} 
+        %h4 Basic
+      %th{:colspan => 8, :align => "center", :ng_show => "isEarningsEdit"}
+        %h4
+          %span.center-header-content Earnings (in Rupees) 
+          = render "toggle_component"
+      %th{:colspan => 9, :align => "center", :ng_hide => "isEarningsEdit"} 
+        %h4 
+          %span.center-header-content Deductions (in Rupees) 
+          = render "toggle_component"
+      %th.align-center-from-top{:rowspan => 2} 
+        %h4 Earnings Total
+      %th.align-center-from-top{:rowspan => 2} 
+        %h4 Deductions Total
+      %th.align-center-from-top{:rowspan => 2} 
+        %h4 Net Total
+    %tr
+      %th{:ng_show => "isEarningsEdit"}  Incentive
+      %th{:ng_show => "isEarningsEdit"} Loyalty Deposit
+      %th{:ng_show => "isEarningsEdit"} Arrears Of Salary
+      %th{:ng_show => "isEarningsEdit"} Grade Allowance
+      -#%th{:ng_show => "isEarningsEdit"} Leave Settlement
+      %th{:ng_show => "isEarningsEdit"} Performance Bonus
+      %th{:ng_show => "isEarningsEdit"} 
+        %span{:ng_hide => "additional_allowance_1_label_edit", :ng_click => "additional_allowance_1_label_edit = true"}Additional Allowance 1
+        %input{:type => "text", :ng_show => "additional_allowance_1_label_edit", :ng_model => "additional_allowance_1_label", :style => "width: 100px;"}
+      %th{:ng_show => "isEarningsEdit"} 
+        %span{:ng_hide => "additional_allowance_2_label_edit", :ng_click => "additional_allowance_2_label_edit = true"}Additional Allowance 2
+        %input{:type => "text", :ng_show => "additional_allowance_2_label_edit", :ng_model => "additional_allowance_2_label", :style => "width: 100px;"}
+      %th{:ng_show => "isEarningsEdit"}
+        %span{:ng_hide => "additional_allowance_3_label_edit", :ng_click => "additional_allowance_3_label_edit = true"}Additional Allowance 3
+        %input{:type => "text", :ng_show => "additional_allowance_3_label_edit", :ng_model => "additional_allowance_3_label", :style => "width: 100px;"}
+      %th{:ng_hide => "isEarningsEdit"}  Club Contribution
+      %th{:ng_hide => "isEarningsEdit"} Proffesional Tax
+      %th{:ng_hide => "isEarningsEdit"} TDS(Income Tax)
+      %th{:ng_hide => "isEarningsEdit"} Training Cost
+      %th{:ng_hide => "isEarningsEdit"} Notice Period Amount
+      %th{:ng_hide => "isEarningsEdit"} Voluntary PF
+      %th{:ng_hide => "isEarningsEdit"} 
+        %span{:ng_hide => "additional_deduction_1_label_edit", :ng_click => "additional_deduction_1_label_edit = true"}Additional Deduction 1
+        %input{:type => "text", :ng_show => "additional_deduction_1_label_edit", :ng_model => "additional_deduction_1_label", :style => "width: 100px;"}
+      %th{:ng_hide => "isEarningsEdit"}
+        %span{:ng_hide => "additional_deduction_2_label_edit", :ng_click => "additional_deduction_2_label_edit = true"}Additional Deduction 2
+        %input{:type => "text", :ng_show => "additional_deduction_2_label_edit", :ng_model => "additional_deduction_2_label", :style => "width: 100px;"}
+      %th{:ng_hide => "isEarningsEdit"}
+        %span{:ng_hide => "additional_deduction_3_label_edit", :ng_click => "additional_deduction_3_label_edit = true"}Additional Deduction 3
+        %input{:type => "text", :ng_show => "additional_deduction_3_label_edit", :ng_model => "additional_deduction_3_label", :style => "width: 100px;"}
+    %tbody
+      %tr{:ng_repeat => "payslip in payslips"}
+        %td
+          = link_to "{{payslip.faculty_master_code}}", "/faculty_masters/{{payslip.faculty_master_id}}/payslips/new"
+        %td {{payslip.faculty_master_name}}
+        %td {{payslip.basic}}
+        %td{:ng_show => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.incentive_payment", :name => "incentivePayment{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.incentivePayment{{$index}}.$error.number"} Invalid
+        %td{:ng_show => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.loyalty_deposit", :name => "loyalty_deposit{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.loyalty_deposit{{$index}}.$error.number"} Invalid
+        %td{:ng_show => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.arrears_of_salary", :name => "arrears_of_salary{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.arrears_of_salary{{$index}}.$error.number"} Invalid
+        %td{:ng_show => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.grade_allowance", :name => "grade_allowance{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.grade_allowance{{$index}}.$error.number"} Invalid
+        -# %td{:ng_show => "isEarningsEdit"} 
+        -#   %input{:type => "number", :class => "form-control", :ng_model => "payslip.leave_settlement", :name => "leave_settlement{{$index}}"}
+        -#   %span.error{:ng_show => "payslipsForm.leave_settlement{{$index}}.$error.number"} Invalid
+        %td{:ng_show => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.performance_bonus", :name => "performance_bonus{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.performance_bonus{{$index}}.$error.number"} Invalid
+        %td{:ng_show => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.additional_allowance_1", :name => "additional_allowance_1{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.additional_allowance_1{{$index}}.$error.number"} Invalid
+        %td{:ng_show => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.additional_allowance_2", :name => "additional_allowance_2{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.additional_allowance_2{{$index}}.$error.number"} Invalid
+        %td{:ng_show => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.additional_allowance_3", :name => "additional_allowance_2{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.additional_allowance_3{{$index}}.$error.number"} Invalid
+
+        %td{:ng_hide => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.club_contribution", :name => "club_contribution{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.club_contribution{{$index}}.$error.number"} Invalid
+        %td{:ng_hide => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.professional_tax", :name => "professional_tax{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.professional_tax{{$index}}.$error.number"} Invalid
+        %td{:ng_hide => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.tds_pm", :name => "tds_pm{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.tds_pm{{$index}}.$error.number"} Invalid
+        %td{:ng_hide => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.training_cost", :name => "training_cost{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.training_cost{{$index}}.$error.number"} Invalid
+        %td{:ng_hide => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.notice_period_amount", :name => "notice_period_amount{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.notice_period_amount{{$index}}.$error.number"} Invalid
+        %td{:ng_hide => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.voluntary_pf_contribution", :name => "voluntary_pf_contribution{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.voluntary_pf_contribution{{$index}}.$error.number"} Invalid
+
+        %td{:ng_hide => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.additional_deduction_1", :name => "additional_deduction_1{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.additional_deduction_1{{$index}}.$error.number"} Invalid
+        %td{:ng_hide => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.additional_deduction_2", :name => "additional_deduction_2{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.additional_deduction_2{{$index}}.$error.number"} Invalid
+        %td{:ng_hide => "isEarningsEdit"} 
+          %input{:type => "number", :class => "form-control", :ng_model => "payslip.additional_deduction_3", :name => "additional_deduction_3{{$index}}"}
+          %span.error{:ng_show => "payslipsForm.additional_deduction_3{{$index}}.$error.number"} Invalid
+        %td {{totalEarnings(payslip)}}
+        %td {{totalDeductions(payslip)}}
+        %td {{netTotal(payslip)}}

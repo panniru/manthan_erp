@@ -1,0 +1,14 @@
+= title("Payroll- Leaves")
+
+.page-header
+  %h1
+    = link_to "Leaves" , faculty_leaves_path
+    = link_to_upload(upload_faculty_leaves_path)
+.col-md-3
+  %h3
+    - @faculty_leaves.each do |faculty|
+      = link_to faculty.month , corresponding_month_faculty_leaves_path(:month => faculty.month , :year => faculty.year)
+      = faculty.year
+      %br
+      %br
+

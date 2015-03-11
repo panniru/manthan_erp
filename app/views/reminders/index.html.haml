@@ -1,0 +1,22 @@
+%h1 
+  = raw "#{fa_icon "bell lg", :class => "reminder-bell"} Reminders"
+.row
+  .pull-right
+    = link_to_new(new_reminder_path, {'label' =>  'Reminder'})
+
+%table.table.table-condenced
+  %tr
+    %th Description
+    %th Created date
+    %th Occurrence
+    %th
+  - @reminders.each do |reminder|
+    %tr
+      %td= reminder.description
+      %td= reminder.created_date
+      %td= reminder.occurrence.titleize
+      %td
+        = edit_button(edit_reminder_path(reminder), :class => 'btn-warning btn-sm')
+        = delete_button(reminder, :class => 'btn-danger btn-sm')
+
+

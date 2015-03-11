@@ -1,0 +1,27 @@
+= wicked_pdf_stylesheet_link_tag 'bootstrap'
+.col-md-12
+  %h5 Employee Leaves
+.col-md-12
+  %table.target.table.table-striped.table-condensed.table-bordered
+    %thead
+      %th Code
+      %th Name
+      %th Date
+      %th Days Worked
+      %th Working Days
+      %th SL
+      %th PL
+      %th CL
+      %th LOP
+    %tbody
+      - @employee_leaves.each do |employee|
+        %tr
+          %td= employee.code
+          %td= employee.employee_master.name
+          %td= employee.entered_date
+          %td= employee.days_worked
+          %td= employee.working_days
+          %td= employee.sl
+          %td= employee.pl
+          %td= employee.cl
+          %td= employee.lop

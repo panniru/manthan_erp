@@ -1,0 +1,16 @@
+= form_for @employee_advance_payment, :url => url, :html => {:class => "form-horizontal", :role=>"form"} do |f|
+  - if f.object.errors.present?
+    = render "shared/error_messages", :object => f.object
+  .row
+    .form-group
+      = f.label :date, :class => 'col-md-3 control-label'
+      .col-md-9
+        = f.text_field :payment_date, :class => "form-control", :readonly => true
+    .form-group
+      = f.label :amount, :class => 'col-md-3 control-label'
+      .col-md-9
+        = f.text_field :amount_in_rupees, :class => "form-control"
+        = f.hidden_field :faculty_master_id
+    .col-md-offset-6
+      = save_button
+

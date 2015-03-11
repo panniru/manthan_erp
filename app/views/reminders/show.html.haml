@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Description:
+  = @reminder.description
+%p
+  %b Created date:
+  = @reminder.created_date
+%p
+  %b Occurrence:
+  = @reminder.occurrence
+
+= link_to 'Edit', edit_reminder_path(@reminder)
+\|
+= link_to 'Back', reminders_path

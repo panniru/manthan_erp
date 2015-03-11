@@ -1,0 +1,34 @@
+= form_for @payslip, :url => url, :html => {:class => "form-horizontal", :role=>"form"} do |f|
+  - if f.object.errors.present?
+    = render "shared/error_messages", :object => f.object
+  = f.hidden_field :generated_date
+  .col-md-7.col-right-border
+    .col-md-offset-3 
+      %h4 EARNINGS (in Rupees)
+    .col-md-12
+      = render :partial => "earnings_form", :locals => {:f => f}
+  .col-md-5
+    .col-md-offset-1 
+      %h4 DEDUCTIONS (in Rupees)
+    .row
+      = render :partial => "deductions_form", :locals => {:f => f}
+  .row
+    .col-md-7
+      .form-group
+        = f.label :total_earnings, :class => 'col-md-7 control-label'
+        .col-md-5
+          = text_field_tag "Total","", :id => "totalEarningsField",:class => "form-control", :readonly => true, :value => "#{f.object.total_earnings}"
+    .col-md-5
+      .form-group
+        = f.label :total_deductions, :class => 'col-md-5 control-label'
+        .col-md-7
+          = text_field_tag "Total","", :id => "totalDeductionField",:class => "form-control", :readonly => true, :value => "#{f.object.total_deductions}"
+      .form-group
+        = f.label "Net Amount", :class => 'col-md-5 control-label'
+        .col-md-7
+          = text_field_tag "Net Total", f.object.net_total, :id => "netAmountField",:class => "form-control", :readonly => true
+
+  .row
+    = f.hidden_field :faculty_master_id
+    .col-md-offset-5
+      = save_button

@@ -1,0 +1,28 @@
+.col-md-12
+  .col-md-8
+    %h2 
+      = link_to "Default Allowances & Deductions ", default_allowance_deductions_path
+  .col-md-offset-8
+    = link_to_upload(default_allowance_deductions_new_upload_path)
+    = delete_button(default_allowance_deductions_delete_all_path, params={'label'=> "Delete All"})
+%br
+- if @default_allowance_deductions.present?
+  %table.table.table-condensed
+    %thead
+      %th Code
+      %th Name
+      - DefaultAllowanceDeduction.valid_attributes.each do |key|
+        %th= key.titleize
+
+    %tbody
+      - @default_allowance_deductions.each do |dad|
+        %tr
+          %td= link_to dad.faculty_master.code, dad.faculty_master
+          %td= dad.faculty_master.faculty_name
+          - DefaultAllowanceDeduction.valid_attributes.each do |key|
+            %td= dad.send(key)
+
+
+
+  = will_paginate @default_allowance_deductions, param_name: 'page', previous_label: h("<"), next_label: h(">")
+

@@ -1,0 +1,33 @@
+%table.table.table-bordered
+
+  %tr
+    %td 
+      %label Final HRA Component(-)
+      = render :partial => "salary_taxes/rent_paid_in_detail", :formats => [:html, :haml]
+    %th= @salary_tax.final_hra_component
+  %tr
+    %th 80G(-)
+    %th= @salary_tax.atg
+  %tr
+    %th Total Amount For Tax
+    %th= @salary_tax.total_amount_to_tax
+  %tr
+    %td
+      %label Tax Projected:
+      = render :partial => "salary_taxes/tax_calculation_details", :formats => [:html, :haml], :locals => {:tax_limits => @salary_tax.tax_limits[:income_tax], :bucket_wise_tax => @salary_tax.bucket_wise_tax}
+    %th= @salary_tax.tax_projected
+  %tr
+    %th Surcharge(10%)(+)
+    %th= @salary_tax.surcharge
+  %tr
+    %th Educational Cess 3%(+)
+    %th= @salary_tax.educational_cess
+  %tr
+    %th Total Tax
+    %th= @salary_tax.net_tax
+  %tr
+    %th Total Deducted
+    %th= @salary_tax.tax_paid
+  %tr
+    %th Balance Tax
+    %th= @salary_tax.balance_tax

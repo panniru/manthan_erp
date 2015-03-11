@@ -1,0 +1,19 @@
+.row
+  .pull-left
+    %h1 
+      = raw "Form24Q #{link_to 'Annexure 1', form24_index_path}" 
+  .pull-right
+    = link_to "Generate24Q" , new_form24_path , :class => 'btn btn-primary'
+%hr
+%h3
+  .row
+    %table.table.table-condensed
+      %thead
+        %th
+              
+      %tbody
+        - @forms.each do |form24|
+          %tr
+            %td
+              %h3
+                = link_to  "#{form24.financial_year}(Q#{form24.quarter})", quarter_details_form24_index_path(:quarter => form24.quarter , :financial_year => form24.financial_year)

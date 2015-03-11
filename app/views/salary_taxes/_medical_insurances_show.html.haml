@@ -1,0 +1,20 @@
+%table.table.table-bordered
+  %thead
+    %th Bill No
+    %th Bill Date
+    %th Parent
+    %th Amount
+  %tbody
+    - @salary_tax.medical_insurances.each do |insurance|
+      %tr
+        %td= insurance.bill_no
+        %td= insurance.bill_date
+        %td
+          = "Included: #{insurance.parent_included ? 'Yes' : 'No'}"
+          = "Senior citizen: #{insurance.parent_senior_citizen ? 'Yes' : 'No'}"
+          %td= insurance.amount
+    %tr
+      %th Final Amount
+      %td
+      %td
+      %th= @salary_tax.medical_insurances_total

@@ -1,5 +1,5 @@
 class DefaultMastersController < ApplicationController
-    load_resource :only => [:show, :update, :edit, :destroy]
+    load_resource :only => [:show, :update, :edit, :destroy , :day_ends]
   
   def index
     respond_to do |format|
@@ -10,6 +10,31 @@ class DefaultMastersController < ApplicationController
       format.html do
         render "index"
       end
+    end
+  end
+
+  def day_ends
+    @day_ends = DayEnd.all
+    respond_to do |format|
+      format.json do
+        render :json => @day_ends
+      end	
+      format.html do
+      end
+    end
+  end
+
+  def days
+    respond_to do |format|
+      format.json do
+        day_end_params = params[:day_ends]
+        day_end = DayEnd.find(day_end_params["id"])
+        day_end.transaction_date = day_end_params["transaction_date"]
+        day_end.save
+      end
+      format.html do
+      end
+      render nothing: true
     end
   end
 

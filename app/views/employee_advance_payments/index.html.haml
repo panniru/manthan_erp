@@ -1,0 +1,25 @@
+= title(@faculty_master.faculty_name)
+%h2
+  = "Advance Payments"
+  = link_to @faculty_master.faculty_name, @faculty_master
+  %hr
+.col-md-12
+  .pull-right
+    = render "search"
+%br
+- if @employee_advance_payments.present?
+  .col-md-12
+    %table.table.table-condensed
+      %thead
+        %th Date
+        %th Amount
+        %th Actions
+      %tbody
+        - @employee_advance_payments.each do |adv_payment|
+          %tr
+            %td= adv_payment.payment_date
+            %td= adv_payment.amount_in_rupees
+            %td
+              - if adv_payment.can_edit?
+                = edit_button(edit_faculty_master_employee_advance_payment_path(@faculty_master, adv_payment), :class => "btn-primary btn-sm")
+                = delete_button(faculty_master_employee_advance_payment_path(@faculty_master, adv_payment), :class => "btn-danger btn-sm")

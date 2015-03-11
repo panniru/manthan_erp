@@ -1,0 +1,48 @@
+.col-md-4.col-right-border  
+  .col-md-offset-3
+    %h4 PF Details
+  .row
+    .col-md-6
+      %label Joining Date
+    .col-md-6
+      %label= @faculty_master.date_of_joining
+    .col-md-6
+      %label PF Number
+    .col-md-6
+      %label= @faculty_master.p_f_no
+    .col-md-6
+      %label Faculty Code no
+    .col-md-6
+      %label= @faculty_master.code
+.col-md-4.col-right-border  
+  .col-md-offset-3
+    %h4 Bank Details
+  .row
+    .col-md-6
+      %label Pay Mode
+    .col-md-6
+      %label= "Transfer to Bank"
+    .col-md-6
+      %label Bank Name
+    .col-md-6
+      %label= @faculty_master.bank_name
+    .col-md-6
+      %label SB A/c No
+    .col-md-6
+      %label= @faculty_master.account_number
+.col-md-4
+  .col-md-offset-2 
+    %h4 Leave Balance details (days)
+  .row
+    .col-md-6
+      %label Sick Leave
+    .col-md-6
+      %label= "--"
+    .col-md-6
+      %label Casual leave
+    .col-md-6
+      %label= "--"
+    .col-md-6
+      %label Total leave
+    .col-md-6
+      %label= "--"

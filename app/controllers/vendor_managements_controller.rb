@@ -16,7 +16,8 @@ class VendorManagementsController < ApplicationController
     end
     render :json => vendor
   end
-
+  
+  
   def show
   end
   def create 

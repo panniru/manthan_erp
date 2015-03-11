@@ -1,0 +1,5 @@
+.btn-group.btn-group-sm{:style => "float: right"}
+  %button{:ng_class => "{'btn btn-success' : isEarningsEdit, 'btn btn-default' : !isEarningsEdit}", :ng_click => "toggleComponents()", :type => "button"}
+    %span Earnings
+  %button{:ng_class => "{'btn btn-danger' : !isEarningsEdit, 'btn btn-default' : isEarningsEdit}", :ng_click => "toggleComponents()", :type => "button"}
+    %span Deductions

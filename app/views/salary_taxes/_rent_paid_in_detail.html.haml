@@ -1,0 +1,47 @@
+%table
+  %tr
+    %td Occupancy Type
+    %td= ": #{@salary_tax.occupancy_type.try(:titleize)}"
+  - if @salary_tax.occupancy_type == 'own'
+    %tr
+      %td Home Loan Interest
+      %td= ": #{@salary_tax.employee_home_loan_interest}"
+    %tr
+      %td Final HRA component
+      %td= ": #{@salary_tax.final_hra_component}"
+  - if @salary_tax.occupancy_type == 'rent' or @salary_tax.occupancy_type == 'let_out'
+    %tr
+      %td HRA Exception
+      %td= ": #{@salary_tax.total_earnings}"
+    %tr
+      %td Rent Paid
+      %td= ": #{@salary_tax.rent_per_month}/Month #{@salary_tax.rent_per_year}/Year"
+    %tr
+      %td HRA Received
+      %td= ": #{@salary_tax.total_earnings}"
+    %tr
+      %td Rent paid in excess of 10% of salary
+      %td= ": #{@salary_tax.rent_paid_in_excess_of_salary}"
+    %tr 
+      %td MIN(HRA, Rent paid in excess of 10% of salary)
+      %td= ": #{@salary_tax.rent_paid_in_excess_of_salary}"
+  - if @salary_tax.occupancy_type == 'let_out'
+    %tr
+      %td Rent Recieved/ Month
+      %td
+        = ": #{@salary_tax.rent_received_per_month}"
+        %br
+        %span= ": #{@salary_tax.rent_received_per_year}/ Year(RRA)"
+    %tr
+      %td P.T and W.T
+      %td= ": #{@salary_tax.pt_and_wt}/Month (RRB)"
+    %tr
+      %td Rent Received((RRA+RRB) - 30%of(RRA+RRB))
+      %td= ": #{@salary_tax.rent_received}"
+    %tr
+      %td Home Loan Interest
+      %td= ": #{@salary_tax.employee_home_loan_interest}"
+    %tr
+      %td Final HRA component
+      %td= ": #{@salary_tax.final_hra_component}"
+    

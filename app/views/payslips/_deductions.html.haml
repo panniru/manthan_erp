@@ -1,0 +1,78 @@
+%table.table.table-condenced
+  %tr
+    %td
+      %label Provident Fund
+    %td
+      %label= payslip.pf
+  - if  payslip.club_contribution.present?
+    %tr
+      %td
+        %label Club Contribution
+      %td
+        %label= payslip.club_contribution
+  - if  payslip.professional_tax.present?
+    %tr
+      %td
+        %label Proffesional Tax
+      %td
+        %label= payslip.professional_tax
+  - if  payslip.salary_advance.present?
+    %tr
+      %td
+        %label Salary Advance
+      %td
+        %label= payslip.salary_advance
+  - if  payslip.tds_pm.present?
+    %tr
+      %td
+        %label TDS
+      %td
+        %label= payslip.tds_pm
+  - if  payslip.training_cost.present?
+    %tr
+      %td
+        %label Training Cost
+      %td
+        %label= payslip.training_cost
+  - if  payslip.notice_period_amount.present?
+    %tr
+      %td
+        %label Notice Period Amount
+      %td
+        %label= payslip.notice_period_amount
+  - if  payslip.voluntary_pf_contribution.present?
+    %tr
+      %td
+        %label Voluntary PF Contribution
+      %td
+        %label= payslip.voluntary_pf_contribution
+  - if  payslip.labour_welfare_fund.present?
+    %tr
+      %td
+        %label Labour Welfare Fund
+      %td
+        %label= payslip.labour_welfare_fund
+  - if  payslip.additional_deduction_1.present?
+    %tr
+      %td
+        %label= payslip.additional_deduction_1_label
+      %td
+        %label= payslip.additional_deduction_1
+  - if  payslip.additional_deduction_2.present?
+    %tr
+      %td
+        %label= payslip.additional_deduction_2_label
+      %td
+        %label= payslip.additional_deduction_2
+  - if  payslip.additional_deduction_3.present?
+    %tr
+      %td
+        %label= payslip.additional_deduction_3_label
+      %td
+        %label= payslip.additional_deduction_3
+  %tr
+    %td
+      %label Total
+    %td
+      %label= payslip.total_deductions
+            

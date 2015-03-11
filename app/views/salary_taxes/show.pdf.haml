@@ -1,0 +1,30 @@
+= wicked_pdf_stylesheet_link_tag "pdf_reports"
+.col-xs-12
+  %h3
+    = "Salary Tax"
+    .pull-right
+      = wicked_pdf_image_tag "logo.png",width: "100", height: "40"
+.row
+  = render :partial => "salary_taxes/employee_header", :locals => {:faculty => @faculty_master}, :formats => [:pdf, :haml]
+
+.row
+  .col-xs-6-no-padding
+    = render :partial => "salary_taxes/earning_summary", :formats => [:pdf, :haml]
+  .col-xs-6-no-padding-left
+    = render :partial => "salary_taxes/deductions_and_total", :formats => [:pdf, :haml]
+.page-break
+.row
+  .col-xs-12
+    = render :partial => "salary_taxes/earning_details", :formats => [:pdf, :haml]    
+
+.row
+  .col-xs-6
+    %label Medical Bills:
+    = render :partial => "salary_taxes/medical_bills_show", :formats => [:html, :haml]
+  .col-xs-6
+    %label Savings:
+    = render :partial => "salary_taxes/savings_show", :formats => [:html, :haml]
+.row
+  .col-xs-10
+    %label Medical Insurances:
+    = render :partial => "salary_taxes/medical_insurances_show", :formats => [:html, :haml]

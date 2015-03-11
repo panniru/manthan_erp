@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Component:
+  = @salary_break_up.component
+%p
+  %b Criteria:
+  = @salary_break_up.criteria
+
+= link_to 'Edit', edit_salary_break_up_path(@salary_break_up)
+
+= link_to 'Back', salary_break_ups_path

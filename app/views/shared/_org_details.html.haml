@@ -1,0 +1,8 @@
+%span.org-name
+  = I18n.t(:name, :scope => :organization)
+%h5
+  = I18n.t(:address_line1, :scope => :organization)
+  %br
+  = "#{I18n.t(:address_line2, :scope => :organization)} #{I18n.t(:city, :scope => :organization)}"
+  %br
+  = "#{I18n.t(:state, :scope => :organization)} - #{I18n.t(:pin, :scope => :organization)}"

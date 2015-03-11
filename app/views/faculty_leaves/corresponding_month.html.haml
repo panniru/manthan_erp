@@ -1,0 +1,34 @@
+.col-md-12
+  .col-md-12
+    .pull-right
+      = will_paginate @faculty_leaves, param_name: 'page', previous_label: h("<"), next_label: h(">")
+    .pull-left
+      %h1
+        = link_to "Leaves" , faculty_leaves_path
+        %br
+.row
+  %table.table.table-condensed
+    %thead
+      %th Code
+      %th Name
+      %th Days Worked
+      %th Working Days
+      %th SL
+      %th PL
+      %th CL
+      %th LOP
+      %th
+    %tbody
+      - @faculty_leaves.each do |faculty|
+        %tr
+          %td= faculty.faculty_master.code
+          %td= faculty.faculty_master.faculty_name
+          %td= faculty.days_worked
+          %td= faculty.working_days
+          %td= faculty.sl
+          %td= faculty.pl
+          %td= faculty.cl
+          %td= faculty.lop
+          %td
+            = edit_button(edit_faculty_leafe_path(faculty))
+  = will_paginate @faculty_leaves, param_name: 'page', previous_label: h("<"), next_label: h(">")

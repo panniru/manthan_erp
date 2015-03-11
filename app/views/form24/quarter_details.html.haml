@@ -1,0 +1,51 @@
+%h2
+  - label = "Annexure-1 (Q#{params[:quarter]})"
+  = raw "Form24Q #{link_to label, form24_index_path}" 
+  .pull-right
+    = print_button(print_annexure1_form24_index_path(:quarter => params[:quarter] , :financial_year => params[:financial_year], :format => :pdf))
+%h4
+  .row
+    %table.table.table-bordered
+      %thead
+        %th Month
+        %th TDS
+        %th Surcharge
+        %th Education Cess
+        %th Interest
+        %th Others
+        %th Total Tax Deposited 
+        %th Cheque/DD No
+        %th BSR Code
+        %th Date On Which Tax Deposited
+        %th Transfer Voucher/Challan Serial NO
+        %th Whether TDS Deposited by book entry?
+      %thead
+        %th (301)
+        %th (302)
+        %th (303)
+        %th (304)
+        %th (305)
+        %th (306)
+        %th (307)
+        %th (308)
+        %th (309)
+        %th (310)
+        %th (311)
+        %th (312)
+      %tbody
+        - @forms.each do |form24| 
+          %tr
+            %td
+              = link_to "#{form24.month}-#{form24.year}" ,  payslips_form24_path(:month => form24.month , :year => form24.year , id: form24.id)
+            %td= form24.tds
+            %td= form24.surcharge
+            %td= form24.educational_cess
+            %td= form24.interest
+            %td= form24.others
+            %td= form24.total_tax_deposited
+            %td= form24.bsr_code
+            %td= form24.cheque_no
+            %td= form24.deposited_date  
+            %td= form24.challan_serial_no
+            %td= form24.payment_type
+         

@@ -1,0 +1,93 @@
+= wicked_pdf_stylesheet_link_tag "pdf_reports"
+.row
+  .pull-right
+    = wicked_pdf_image_tag "logo.png",width: "100", height: "40"
+  .col-xs-offset-5
+    %h3= "Form24Q Annexure1 #{params[:financial_year]} (Q#{params[:quarter]})"
+
+%table.table.table-bordered
+  %thead
+    %th PAN of the Faculty
+    %th Name of the Faculty
+    %th Date of Payment/credit
+    %th Taxable amount on which tax deducted( Monthly Gross salary)Rs.
+    %th TDS Rs.
+    %th Surcharge Rs.
+    %th Educational Cess Rs.
+    %th Total tax deducted   (319+320+321)
+    %th Total tax deposited      Rs.
+    %th Interest
+    %th Others
+    %th Total     (322+Interest+ Others)
+    %th BSR Code
+    %th Challan Serial No.
+    %th Date on which tax Deposited
+    %th Date of deduction
+    %th Date of Deposit
+    %th Reason for non-deduction/lower deduction*
+  %thead
+    %th (315)
+    %th (316)
+    %th (317)
+    %th (318)
+    %th (319)
+    %th (320)
+    %th (321)
+    %th (322)
+    %th (323)
+    %th (323A)
+    %th (323B)
+    %th (323C)
+    %th (323D)
+    %th (323E)
+    %th (323F)
+    %th (324)
+    %th (325)
+    %th (326)
+  %tbody
+    - @form_24_months.each do |detail|
+      %tr
+        %th{:colspan => "17"}
+          = "SALARY FOR THE MONTH OF #{detail[:month].strftime('%b')} #{detail[:month].year}"
+      - detail[:payslips].each do |payslip|
+        %tr
+          %td= payslip.faculty_master.pan
+          %td= payslip.faculty_master.faculty_name
+          %td= payslip.generated_date
+          %td= payslip.total_earnings
+          %td= payslip.tds_without_educational_cess
+          %td= payslip.surcharge
+          %td= payslip.educational_cess
+          %td= payslip.total_tax_calculated
+          %td= payslip.tds_pm
+          %td= payslip.interest
+          %td= payslip.others
+          %td= (payslip.tds_pm + payslip.interest + payslip.others)
+          %td= detail[:form24].bsr_code
+          %td= detail[:form24].challan_serial_no
+          %td= detail[:form24].deposited_date
+          %td= payslip.generated_date
+          %td= detail[:form24].deposited_date
+          %td= detail[:form24].payment_type
+      %tr
+        %th Total
+        %th
+        %th
+        %th= detail[:payslips].inject(0){|sum, payslip| sum + payslip.total_earnings}
+        %th= detail[:payslips].inject(0){|sum, payslip| sum + payslip.tds_without_educational_cess}
+        %th= detail[:payslips].inject(0){|sum, payslip| sum + payslip.surcharge}
+        %th= detail[:payslips].inject(0){|sum, payslip| sum + payslip.educational_cess}
+        %th= detail[:payslips].inject(0){|sum, payslip| sum + payslip.total_tax_calculated}
+        - tds_pm = detail[:payslips].inject(0){|sum, payslip| sum + payslip.tds_pm}
+        %th= tds_pm
+        - interest = detail[:payslips].inject(0){|sum, payslip| sum + payslip.interest}
+        %th= interest
+        - others = detail[:payslips].inject(0){|sum, payslip| sum + payslip.others}
+        %th= others
+        %th= (tds_pm + interest + others)
+        %th
+        %th
+        %th
+        %th
+        %th
+        %th

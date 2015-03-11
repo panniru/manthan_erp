@@ -21,6 +21,15 @@
 
 en:
   hello: "Hello world"
+  organization:
+    code: "Fountainhead Global School"
+    name: "Fountainhead Global School"
+    address_line1: "Dreamview, HMWS&SB Road"
+    address_line2: "Hydernagar, Miyapur"
+    city: "Hyderabad"
+    state: "Andhra Pradesh"
+    pin: "500049"
+   
   fee_type:
     create_bulk:
       success: "Feetypes has been saved"
@@ -77,6 +86,13 @@ en:
     destroy:
       success: "Location has been deleted"
       fail: "Location has not been deleted"
+  tax_bucket:
+    create:
+      success: "Tax been saved"
+      fail: "Tax not been saved"
+    update:
+      success: "Tax has been updated"
+      fail: "Tax not been updated"
   vendor_category:
     create:
       success: "New Vendor Category Created"
@@ -312,3 +328,9 @@ en:
       cheque_exists: "Cheque Number %{cheque_number} having bank  %{bank_name} already exists"
 
   
+  job:
+    schedule:
+      success: "%{job} has been scheduled. You can view the results %{job_link}."
+      fail: "%{job} has not been scheduled."
+      already_scheduled: "%{job} has already been scheduled. You can view the job details %{job_link}."
+      already_finished: "%{job} has already been run. You can view the job details %{job_link}."

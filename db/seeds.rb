@@ -124,6 +124,10 @@ def seed_jobs
   Job.where(code: job_attributes[:code]).create(job_attributes.delete_if { |k,v| k == :code })
   job_attributes = FactoryGirl.attributes_for(:special_route_mailing)
   Job.where(code: job_attributes[:code]).create(job_attributes.delete_if { |k,v| k == :code })
+  job_attributes = FactoryGirl.attributes_for(:pf_statement_mailing)
+  Job.where(code: job_attributes[:code]).create(job_attributes.delete_if { |k,v| k == :code })
+  job_attributes = FactoryGirl.attributes_for(:payslip_mailing)
+  Job.where(code: job_attributes[:code]).create(job_attributes.delete_if { |k,v| k == :code })
   
 end
 
@@ -276,18 +280,7 @@ def seed_default_form_no
     DefaultMaster.create(:default_name => 'form_no',:default_value => '1001')
   end
 end
-def seed_faculty
-  unless FacultyMaster.first.present?
-    FacultyMaster.create(:faculty_name => 'SRIKANTH')
-    FacultyMaster.create(:faculty_name => 'MURALEE')
-    FacultyMaster.create(:faculty_name => 'SWAMY', :user_id => User.find_by_user_id('teacher1').id)
-    FacultyMaster.create(:faculty_name => 'PRIYA')
-    FacultyMaster.create(:faculty_name => 'NAVYA')
-    FacultyMaster.create(:faculty_name => 'UMA')
-    FacultyMaster.create(:user_id => 6, :faculty_name => 'teacher')
 
-  end
-end 
 
 def seed_tecaher_grade_mapping
   unless TeacherGradeMapping.first.present?
@@ -418,6 +411,40 @@ def seed_close_status
   end
 end
 
+def seed_salary_break_ups
+  Payroll::SalaryBreakUpCreator::BREAK_UPS.each do |break_up|
+    SalaryBreakUp.where(:component_code => break_up).first_or_create(:component_code => break_up, :component => break_up.titleize.gsub("Hra", "HRA").gsub("Pf", "PF"), :criteria => 0, :break_up_type => "salary")
+  end
+  SalaryBreakUp.where(:component_code => "employee_labour_welfare_fund").first_or_create(:component_code => "employee_labour_welfare_fund", :component => "employee_labour_welfare_fund".titleize, :criteria => 7, :break_up_type => "salary")
+  SalaryBreakUp.where(:component_code => "employer_labour_welfare_fund").first_or_create(:component_code => "employer_labour_welfare_fund", :component => "employer_labour_welfare_fund".titleize, :criteria => 14, :break_up_type => "salary")
+  SalaryBreakUp.where(:component_code => "loyalty_allowance").first_or_create(:component_code => "loyalty_allowance", :component => "loyalty_allowance".titleize, :criteria => 0, :break_up_type => "salary")
+  SalaryBreakUp.where(:component_code => "epf_ee_share").first_or_create(:component_code => "epf_ee_share", :component => "EPF EE share", :criteria => 12, :break_up_type => "pf")
+  SalaryBreakUp.where(:component_code => "eps_upper_limit").first_or_create(:component_code => "eps_upper_limit", :component => "EPS Upper Limit", :criteria => 15000, :break_up_type => "pf")
+  SalaryBreakUp.where(:component_code => "eps_share").first_or_create(:component_code => "eps_share", :component => "EPS share", :criteria => 8.33, :break_up_type => "pf")
+  SalaryBreakUp.where(:component_code => "leave_settlement_month").first_or_create(:component_code => "leave_settlement_month", :component => "Leave Settlement Month", :criteria => 1, :break_up_type => "default")
+  SalaryBreakUp.where(:component_code => "bonus_payment_month").first_or_create(:component_code => "bonus_payment_month", :component => "Bonus Payment Month", :criteria => 10, :break_up_type => "default")
+  SalaryBreakUp.where(:component_code => "labour_welfare_fund_month").first_or_create(:component_code => "labour_welfare_fund_month", :component => "Labour Welfare Fund Month", :criteria => 12, :break_up_type => "default")
+  SalaryBreakUp.where(:component_code => "professional_tax").first_or_create(:component_code => "professional_tax", :component => "Professional Tax", :criteria => 183, :break_up_type => "default")
+  SalaryBreakUp.where(:component_code => "mediclaim_employee_limit").first_or_create(:component_code => "mediclaim_employee_limit", :component => "Mediclaim Employee Limit", :criteria => 15000, :break_up_type => "default")
+  SalaryBreakUp.where(:component_code => "mediclaim_parent_limit").first_or_create(:component_code => "mediclaim_parent_limit", :component => "Mediclaim Parent Limit", :criteria => 15000, :break_up_type => "default")
+  SalaryBreakUp.where(:component_code => "mediclaim_parent_senior_citizen_limit").first_or_create(:component_code => "mediclaim_parent_senior_citizen_limit", :component => "Mediclaim Parent Senior Citizen Limit", :criteria => 5000, :break_up_type => "default")
+  SalaryBreakUp.where(:component_code => "savings_up_to").first_or_create(:component_code => "savings_up_to", :component => "Savings Up To", :criteria => 150000, :break_up_type => "default")
+  SalaryBreakUp.where(:component_code => "home_loan_interest_limit").first_or_create(:component_code => "home_loan_interest_limit", :component => "Home Loan Interest Limit", :criteria => 200000, :break_up_type => "default")
+  SalaryBreakUp.where(:component_code => "educational_cess").first_or_create(:component_code => "educational_cess", :component => "Educational Cess", :criteria => 3, :break_up_type => "default")
+  SalaryBreakUp.where(:component_code => "surcharge").first_or_create(:component_code => "surcharge", :component => "Surcharge", :criteria => 10, :break_up_type => "default")
+  SalaryBreakUp.where(:component_code => "surcharge_limit").first_or_create(:component_code => "surcharge_limit", :component => "Surcharge Limit", :criteria => 10000000, :break_up_type => "default")
+  SalaryBreakUp.where(:component_code => "maintanance_on_rent_received").first_or_create(:component_code => "maintanance_on_rent_received", :component => "Maintananace on Rent Received", :criteria => 30, :break_up_type => "default")
+ 
+  
+end
+
+def seed_remainders
+  Reminder.where(:description => "Employee Leaves").first_or_create(:description => "Employee Leaves", :created_date => Date.today.prev_month.end_of_month, :occurrence => "monthly")
+  Reminder.where(:description => "PF Generation").first_or_create(:description => "PF Generation", :created_date => Date.new(Date.today.prev_month.year, Date.today.prev_month.month, 15), :occurrence => "monthly")
+  Reminder.where(:description => "Leave Encashment").first_or_create(:description => "Leave Encashment", :created_date => Date.new(Date.today.year-1, 12, 31), :occurrence => "yearly")
+end
+
+
 
 def seed_all
   seed_role
@@ -432,7 +459,6 @@ def seed_all
   seed_defaults
   seed_default_discount
   seed_default_form_no
-  seed_faculty
   seed_location_masters
   seed_routes
   seed_locations
@@ -448,6 +474,8 @@ def seed_all
   seed_staffrecruits
   seed_staffadmin
   seed_close_status
+  seed_salary_break_ups
+  seed_remainders
 end
 
 seed_all

@@ -1,0 +1,38 @@
+%table.table.table-bordered
+  %thead
+    %th SALARY COMPONENTS 
+    %th CRITERIA FOR BREAK UP
+    %th AMOUNT / Month 
+    %th AMOUNT / Year
+  %tbody
+    %tr{:ng_repeat => "earning in components.earnings"}
+      %td {{earning.component}}
+      %td {{earning.criteria}}
+      %td {{earning.amount_per_month}}
+      %td {{earning.amount_per_year}}
+    %tr
+      %th Total
+      %th
+      %th {{earningPerMonth}}
+      %th {{(earningPerMonth*12)}}
+    %tr{:ng_repeat => "deduction in components.deductions"}
+      %td {{deduction.component}}
+      %td {{deduction.criteria}}
+      %td {{deduction.amount_per_month}}
+      %td {{deduction.amount_per_year}}
+    -# %tr
+    -#   %td {{components.loyalty_allowance.component}}
+    -#   %td {{components.loyalty_allowance.criteria}}
+    -#   %td {{components.loyalty_allowance.amount_per_month}}
+    -#   %td {{components.loyalty_allowance.amount_per_year}}
+
+    %tr
+      %th COST TO THE COMPANY
+      %th
+      %th {{(deductionPerMonth + earningPerMonth)}}
+      %th {{((deductionPerMonth + earningPerMonth)*12)}}
+    -# %tr
+    -#   %th Total
+    -#   %th
+    -#   %th {{(deductionPerMonth + earningPerMonth + components.loyalty_allowance.amount_per_month)}}
+    -#   %th {{((deductionPerMonth + earningPerMonth + components.loyalty_allowance.amount_per_month)*12)}}

@@ -1,0 +1,97 @@
+= title(@faculty_master.faculty_name)
+%h1 
+  = link_to "Employees", faculty_masters_path
+  
+.col-md-12
+  .col-md-6
+    %h2= @faculty_master.faculty_name
+  .col-md-6
+    .pull-right
+      = link_to raw("<i class='fa fa-money fa-lg'></i> Adv Payment"), faculty_master_employee_advance_payments_path(@faculty_master), :class => "btn btn-primary"
+      = link_to raw("<i class='fa fa-file-text-o fa-lg'></i> Payslips"), faculty_master_payslips_path(@faculty_master, :origin => "employee"), :class => "btn btn-primary"
+      .btn-group
+        = link_to raw("<i class='fa fa-ellipsis-v fa-lg'></i> More"), "#", :class => "btn btn-primary"
+        %a.btn.btn-primary.dropdown-toggle{:data => {:toggle => "dropdown"}, :href=> "#"}
+          %span.fa.fa-caret-down
+        %ul.dropdown-menu.dropdown-menu-right
+          - if @faculty_master.eligible_for_payslip?(session[:transaction_date])
+            %li
+              = link_to raw("<i class='fa fa-plus fa-lg'></i> New Payslip"), new_faculty_master_payslip_path(@faculty_master)
+          %li
+            = link_to raw("<i class='fa fa-calculator fa-lg'></i> Salary Taxes"), faculty_master_salary_taxes_path(@faculty_master)
+            
+            
+.col-md-12
+  .col-md-6
+    %label Code:
+    %label.label.label-info.employee_code= @faculty_master.code
+    %br
+    - if @faculty_master.relation == 'M'
+      %label Husband Name:
+    - else
+      %label Father Name:
+    %label= @faculty_master.father_or_husband_name
+    %br
+    %label Gender: 
+    %label= @faculty_master.gender
+    %br
+    %label Date Of Birth:
+    %label= @faculty_master.dob
+    %br
+    %label Designation:
+    %label= @faculty_master.designation_master.name 
+    %br
+    %label Department:
+    %label= @faculty_master.department_master.name
+    %br
+    %label Status:
+    %label= @faculty_master.status
+
+.col-md-12
+  %hr
+.col-md-12
+  %table.table.table-bordered
+    %thead
+      %th Name
+      %th Date of joining
+      %th Probation date
+      %th Confirmation date
+      %th Resignation Date
+      %th Reason For Resignation
+    %tbody
+      %td= @faculty_master.faculty_name
+      %td= @faculty_master.date_of_joining
+      %td= @faculty_master.probation_date
+      %td= @faculty_master.confirmation_date
+      %td= @faculty_master.resignation_date
+      %td= @faculty_master.reason_for_resignation
+.col-md-12
+  .col-md-6
+    %table.table.table-bordered
+      %tr
+        %th P F No
+        %td= @faculty_master.p_f_no
+      %tr
+        %th PAN
+        %td= @faculty_master.pan
+
+  .col-md-6
+    %table.table.table-bordered
+      %tr
+        %th Bank name
+        %td= @faculty_master.bank_name
+      %tr
+        %th Account number
+        %td= @faculty_master.account_number
+      %tr
+        %th CTC
+        %td= @faculty_master.ctc
+      %tr
+        %th Basic
+        %td= @faculty_master.basic
+
+  .pull-right{:ng_controller => "SalaryBreakUpInitializeController"}
+    = link_to "Salary BreakUp >>", "#", :ng_click => "generate_salary_break_up(#{@faculty_master.ctc}, '#{@faculty_master.basic}', '#{@faculty_master.probation_date}', '\"#{@faculty_master.designation_master.name}\"')", :ng_disabled => "isClicked"
+.col-md-12
+  #salaryBreakUpShowDiv
+  -#%salary_break_up{:ctc => @faculty_master.ctc} 

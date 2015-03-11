@@ -1,0 +1,69 @@
+= wicked_pdf_stylesheet_link_tag "pdf_reports"
+.row
+  .col-xs-7
+    = render :partial => "shared/org_details", :formats => [:pdf, :html]
+  .pull-right
+    = wicked_pdf_image_tag "logo.png",width: "100", height: "30"
+.col-xs-offset-3
+  %h4= "BOOKING VOUCHER FOR THE MONTH OF #{@month.try(:upcase)} #{@year}"
+%table.table.table-bordered
+  %tr
+    %th Salary 
+    %th= @voucher.salary
+    %th
+  %tr
+    %th Incentive
+    %th= @voucher.incentive
+    %th
+  %tr
+    %th Grade Allowance
+    %th= @voucher.grade_allowance
+    %th
+  %tr
+    %th Leave Encashment
+    %th= @voucher.leave_encashment
+    %th
+  %tr
+    %th Bonus
+    %th= @voucher.bonus
+    %th
+  %tr 
+    %th Shortfall In Notice
+    %th
+    %th
+  %tr
+    %th Provident Fund
+    %th
+    %th= @voucher.provident_fund
+  %tr
+    %th Club Contribution
+    %th
+    %th= @voucher.club_contribution
+  %tr
+    %th Professional Tax
+    %th
+    %th= @voucher.professional_tax
+  %tr
+    %th Salary Incometax
+    %th
+    %th= @voucher.salary_incometax
+  %tr
+    %th Salary Advance
+    %th
+    %th= @voucher.salary_advance
+  %tr
+    %th Labour Welfare
+    %th
+    %th= @voucher.labour_welfare
+  %tr
+    %th Shortfall in Notice
+    %th
+    %th= @voucher.shortfall_in_notice
+  %tr
+    %th NET PAY ACCOUNT
+    %th
+    %th= @voucher.net_pay_account
+  %tr
+    %th Total
+    %th= @voucher.total_lhs
+    %th= @voucher.total_rhs

@@ -1,0 +1,22 @@
+= title("Salary Tax - #{@faculty_master.faculty_name}")
+.page-header
+  %h1 
+    = raw "#{link_to @faculty_master.faculty_name, @faculty_master} Salary Taxes"
+    .pull-right
+      = link_to_new(new_faculty_master_salary_tax_path(@faculty_master), {"label" => "Salary Tax"})
+%table.table.table-condenced
+  %thead
+    %th Title
+    %th Tax Projected
+    %th Tax Paid
+    %th Balance Tax
+    %th Form16
+  %tbody
+    - @salary_taxes.each do |salary_tax|
+      %tr
+        %td= link_to salary_tax.title, faculty_master_salary_tax_path(@faculty_master, salary_tax)
+        %td= salary_tax.net_tax
+        %td= salary_tax.tax_paid
+        %td= salary_tax.balance_tax
+        %td= link_to raw("<i class='fa fa-file-o fa-lg'></i> Form16"), "/faculty_masters/#{@faculty_master.id}/salary_taxes/#{salary_tax.id}/form16"
+

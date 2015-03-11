@@ -1,0 +1,27 @@
+.page-header
+  %h1 
+    = link_to "PF Statements", pf_statements_list_jobs_path
+    .pull-right
+      = link_to "Generate PF Statement", pf_statements_schedule_path, :class => "btn btn-primary"
+%br
+%table.table.table-condensed
+  %thead
+    %tr
+      -#%th Job Run Id
+      %th Schedule Date
+      %th Job
+      %th Started On
+      %th Finished On
+      %th Status
+
+  %tbody
+    - @job_runs.each do |job_run|
+      %tr
+        -#%td= link_to job_run.id, "/job_runs/#{job_run.id}/pf_statements"
+        %td= link_to job_run.job_date, "/job_runs/#{job_run.id}/pf_statements"
+        %td= job_run.job.description
+        %td= job_run.started_on.to_s
+        %td= job_run.finished_on.to_s
+        %td= job_run.status
+
+= will_paginate @job_runs, previous_label: h("<"), next_label: h(">")    

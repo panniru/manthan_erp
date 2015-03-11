@@ -1,0 +1,25 @@
+.page-header
+  %h2
+    = link_to "Upload Leaves", "#"
+%p
+  A CSV or Excel can be uploaded. First row should have the column names
+%br
+= form_for @faculty_leave_uploader ,:url => upload_faculty_leaves_path , :multipart => true, :html => { :class => "form"} do |f|
+  - if f.object.errors.present?
+    = render "shared/error_messages", :object => f.object
+  .form-group
+    .row
+      .col-md-2
+        = f.select(:month, options_for_select(Date::MONTHNAMES, session[:transaction_date].strftime("%B")), :class => "form-control")
+      .col-md-2
+        = f.select(:year, options_for_select(((session[:transaction_date].year..session[:transaction_date].year+1).to_a << "").reverse, session[:transaction_date].strftime("%Y")), :class => "form-control")
+      
+      .col-md-3
+        = f.file_field :file
+      .col-md-2
+        = f.submit "Upload", :class => "btn btn-primary"
+      .col-md-2
+        - if session[:transaction_date].strftime("%m") == '12'
+          = link_to "Download Sample",  export_faculty_leaves_path
+        - else 
+          = link_to "Download sample", new_upload_faculty_leaves_path(:format => :xlsx)

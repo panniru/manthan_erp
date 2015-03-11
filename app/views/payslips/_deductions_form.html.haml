@@ -1,0 +1,62 @@
+.col-md-6
+  .form-group
+    %label.col-md-5.control-label PF
+    .col-md-7
+      = f.text_field :pf, :class => "form-control", :rel => "deductionInputField"
+  .form-group
+    = f.label :club_contribution, :class => 'col-md-5 control-label'
+    .col-md-7
+      = f.text_field :club_contribution, :class => "form-control", :rel => "deductionInputField"
+  .form-group
+    = f.label :professional_tax, :class => 'col-md-5 control-label'
+    .col-md-7
+      = f.text_field :professional_tax, :class => "form-control", :rel => "deductionInputField"
+  .form-group
+    = f.label "TDS", :class => 'col-md-5 control-label'
+    .col-md-7
+      = f.text_field :tds_pm, :class => "form-control", :rel => "deductionInputField"
+  .form-group
+    = f.label "Advance", :class => 'col-md-5 control-label'
+    .col-md-7
+      = f.text_field :salary_advance, :class => "form-control", :rel => "deductionInputField"
+  .form-group
+    = f.label :notice_period_amount, :class => 'col-md-5 control-label'
+    .col-md-7
+      = f.text_field :notice_period_amount, :class => "form-control", :rel => "deductionInputField"
+.col-md-6
+  .form-group
+    = f.label :training_cost, :class => 'col-md-5 control-label'
+    .col-md-7
+      = f.text_field :training_cost, :class => "form-control", :rel => "deductionInputField"
+  .form-group
+    = f.label :voluntary_pf_contribution, :class => 'col-md-5 control-label'
+    .col-md-7
+      = f.text_field :voluntary_pf_contribution, :class => "form-control", :rel => "deductionInputField"
+  - if @payslip.faculty_master.eligible_for_labour_welfare_fund?(@payslip.generated_date)
+    .form-group
+      = f.label :labour_welfare_fund, :class => 'col-md-5 control-label'
+      .col-md-7
+        = f.text_field :labour_welfare_fund, :class => "form-control", :rel => "deductionInputField"
+
+
+  .form-group
+    = f.label :additional_deduction_1, :class => 'col-md-5 control-label'
+    .col-md-7
+      .row
+        = f.text_field :additional_deduction_1_label, :class => "form-control", :placeholder => "Label"
+      .row
+        = f.text_field :additional_deduction_1, :class => "form-control", :rel => "deductionInputField"
+  .form-group
+    = f.label :additional_deduction_2, :class => 'col-md-5 control-label'
+    .col-md-7
+      .row
+        = f.text_field :additional_deduction_2_label, :class => "form-control", :placeholder => "Label"
+      .row
+        = f.text_field :additional_deduction_2, :class => "form-control", :rel => "deductionInputField"
+  .form-group
+    = f.label :additional_deduction_3, :class => 'col-md-5 control-label'
+    .col-md-7
+      .row
+        = f.text_field :additional_deduction_3_label, :class => "form-control", :placeholder => "Label"
+      .row
+        = f.text_field :additional_deduction_3, :class => "form-control", :rel => "deductionInputField"

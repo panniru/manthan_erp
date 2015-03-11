@@ -1,0 +1,49 @@
+= title("PF-#{@job_run.job_date.strftime('%b')}-#{@job_run.job_date.strftime('%Y')}")
+.col-md-12
+  %h2
+    = raw "#{link_to "PF Statements", pf_statements_list_jobs_path} for the month #{@month} #{@year}" 
+    .pull-right
+      = link_to raw("<i class='fa fa-download fa-lg'></i> PF Input Statement"), pf_statements_pf_input_path(month: @month, year: @year, employee_type: 'regular', job_run_id: @job_run.id ), :class => "btn btn-primary"
+      .btn-group
+        = link_to raw("<i class='fa fa-downoad fa-lg'></i> Downloads"), "#", :class => "btn btn-primary", :target => "_blank"
+        %a.btn.btn-primary.dropdown-toggle{:data => {:toggle => "dropdown"}, :href=> "#"}
+          %span.fa.fa-caret-down
+        %ul.dropdown-menu.dropdown-menu-right
+          %li
+            = link_to "As PDF", "/job_runs/#{@job_run.id}/pf_statements.pdf", :target => "_blank"
+          %li
+            = link_to "As #~# separated Value", "/job_runs/#{@job_run.id}/pf_statements.csv", :target => "_blank"
+          %li
+            = link_to "As Excel", "/job_runs/#{@job_run.id}/pf_statements.xlsx", :target => "_blank"
+.row
+  %table.table.table-condensed.table-bordered.table-responsive
+    %thead
+      %th Member Id
+      %th Member Name
+      %th EPF Wages
+      %th EPS Wages
+      %th EPF EE share
+      %th EPF EE remitted
+      %th EPS due
+      %th EPS remitted
+      %th Diff EPF and EPS
+      %th Diff remitted
+      %th N
+      %th Refund Adv
+      %th Arrear EPF	
+      %th Arrear EPF EE	
+      %th Arrear EPF Er	
+      %th Arrear EPS
+      %th Fathers / Husbands name	
+      %th R	
+      %th Date of Birth	
+      %th G	
+      %th DOJ EPF	
+      %th DOJ EPS	
+      %th DOE EPF	
+      %th DOE EPS	
+      %th R
+    %tbody
+      = render @pf_statements
+
+= will_paginate @pf_statements, param_name: 'page', previous_label: h("<"), next_label: h(">")

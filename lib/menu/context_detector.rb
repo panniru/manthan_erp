@@ -91,7 +91,22 @@ class ContextDetector
     "grade_lab_mappings" => "lab",
     "activity_masters" => "non_academic",
     "lab_masters" => "lab",
-    "lab_teacher_mapping" => "lab"
+    "lab_teacher_mapping" => "lab",
+    "faculty_masters" => "payroll_menu",
+    "payslips" => "payroll_menu",
+    "print_payslips" => "payroll_menu",
+    "default_allowance_deductions" => "payroll_menu",
+    "faculty_leaves" => "payroll_menu",
+    "salary_break_ups" => "payroll_menu",
+    "employer_pf_contributions" => "payroll_menu",
+    "default_values" => "payroll_menu",
+    "tax_buckets" => "payroll_menu",
+    "designation_masters" => "payroll_menu",
+    "pf_statements" => "payroll_menu",
+    "form24" => "payroll_menu",
+    "form24" => "payroll_menu",
+    "salary_taxes" => "payroll_menu",
+    "day_ends" => "default_master_sub_menu"
   }
   
   def self.get_context(args)

@@ -1,0 +1,32 @@
+%h2
+  - if @type.present? and @type.to_sym == :pf
+    = link_to "PF BreakUp Details", salary_break_ups_path(:type => :pf)
+  - elsif @type.to_sym == :salary
+    = link_to "Salary BreakUp Details", salary_break_ups_path(:type => :salary)
+  - elsif @type.to_sym == :default
+    = link_to "Defaults", salary_break_ups_path(:type => :default)
+
+.col-md-12{:ng_controller => "SalaryBreakUpsController", :ng_init => "initialize('#{@type}')"}
+  .pull-right
+    = link_to raw("<i class='fa fa-edit fa-lg'></i> Edit"), "#", :class => "btn btn-primary", :ng_click => "editable = true", :ng_hide => "editable"
+    = link_to raw("<i class='fa fa-save fa-lg'></i> Update"), "#", :class => "btn btn-primary", :ng_click => "update()", :ng_show => "editable"
+    = link_to raw("<i class='fa fa-undo fa-lg'></i> Cancel"), "#", :class => "btn btn-primary", :ng_click => "initialize('#{@type}')", :ng_show => "editable"
+  %table.table.table-condensed
+    %thead
+      %th Component
+      %th Value
+    %tbody
+      %tr{:ng_repeat => "salary_break_up in salary_break_ups"}
+        %td 
+          {{salary_break_up.component}}
+        %td
+          .form-group
+            %label{:ng_hide => "editable"} {{salary_break_up.component_value}}
+            %div{:ng_show => "editable && myMatch(salary_break_up.component_code)" }
+              %select{:ng_model => "salary_break_up.criteria", :ng_options => "m.value as m.name for m in months", :class => "form-control"}
+            %div{:ng_show => "editable && !myMatch(salary_break_up.component_code)"}
+              %input{:ng_model => "salary_break_up.criteria", :class => "form-control", :style => "width: 50%"}
+            %label.control-label {{salary_break_up.component_description}}
+            
+              
+              

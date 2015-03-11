@@ -1,0 +1,16 @@
+%table.table.table-bordered
+  %thead
+    %th Bill No
+    %th Bill Date
+    %th Amount
+  %tbody
+    - @salary_tax.medical_bills.each do |bill|
+      %tr
+        %td= bill.bill_no
+        %td= bill.bill_date
+        %td= bill.amount
+    %tr
+      %th Final Amount
+      %td
+      %th= @salary_tax.claimed_medical_bill
+  

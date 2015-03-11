@@ -1,0 +1,48 @@
+.row
+  %h2
+    = link_to "Form24Q" , form24_index_path
+.row
+  %form{"ng-controller" => "FormTaxController" , "ng-init" => 'get_tds()' , "ng-submit" => "saveForm()"}
+    %table.table.table-condensed
+      %thead
+        %th Month
+        %th Year
+        %th TDS
+        %th Surcharge
+        %th Education Cess
+        %th Interest
+        %th Other
+        %th Total Tax Deposited
+        %th Cheque NO
+        %th BSR Code
+        %th Date On Wich Tax Deposited
+        %th Challan Serial NO
+        %th Deposited by Book entry?
+      %tbody
+        %tr{"ng-repeat" => "form in forms"} 
+          %td {{form.month}}
+          %td {{form.year}}
+          %td {{form.tds}}
+          %td {{form.surcharge}}
+          %td {{form.educational_cess}}
+          %td {{form.interest}}
+          %td {{form.others}}
+          %td {{form.total_tax_deposited}}
+          %td
+            %input{:type => "text" , :ng_model => 'form.cheque_no' , :class => 'form-control ' , :ng_init => "form.cheque_no='E-Pymt'"}
+          %td
+            %input{:type => "text"  , :class => 'form-control' , :ng_model => 'form.bsr_code'}
+            
+          %td 
+            %input{:type => "text" , :ng_model => 'form.deposited_date' , :class => 'form-control ' , :my_datepicker => true}
+
+          %td 
+            %input{:type => "text"  , :class => 'form-control' , :ng_model => 'form.challan_serial_no' }
+          %td 
+            = select_tag "payment_type" , options_for_select([['NO'],['YES ']]) ,"ng-model" => "form.payment_type",:class =>  "form-control", "ng-init" => "form.payment_type='NO'"
+            
+    .row
+      .pull-right
+        = save_button
+
+            
