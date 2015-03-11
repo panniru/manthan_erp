@@ -6,6 +6,7 @@ class DefaultMasterSubMenu < Struct.new(:controller)
       sub_menu << vendors
       sub_menu << calendar
       sub_menu << time_tables
+      sub_menu << designations
     end
     
     def parent_sub_menu
@@ -32,5 +33,8 @@ class DefaultMasterSubMenu < Struct.new(:controller)
     end
     def time_tables
     MenuItem.new(:label => "Academic Time Table", :klass => "", :icon => "tasks", :href => "/time_tables" )
+    end
+    def designations
+      MenuItem.new(:label => "Designation", :klass => "", :icon => "tasks", :href => "/designations" )
     end
 end

@@ -1,0 +1,14 @@
+%form{:id => "myForma", :class=>"form-horizontal", :ng_submit => "submitDesignations()"}  
+  .form-group{"ng-repeat" => "designation in designs"}
+    %lablel{:class => "form-label col-md-3"} 
+      %b
+        Subject Name
+    .col-md-4     
+      = text_field_tag  "bulk_designation[][designation]",nil, :class => "form-control", :ng_model => "designation.designation", :placeholder => "Designation Name" 
+    .col-md-4{"ng-show"=>"showErrorMessage"}
+      error
+  .row
+    .col-md-5.col-md-offset-3      
+      %button{:ng_disabled => "moreDesignations", :type => "button", :class=> "btn btn-primary", :ng_click => "addMoreDesignations()"}=  "More Designations"
+      %button{:type=>"submit", :class=> "btn btn-primary"}=  "Save"
+  

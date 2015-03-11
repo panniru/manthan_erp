@@ -92,6 +92,8 @@ class ContextDetector
     "activity_masters" => "non_academic",
     "lab_masters" => "lab",
     "lab_teacher_mapping" => "lab"
+    "designations" => "default_master_sub_menu",
+
   }
   
   def self.get_context(args)

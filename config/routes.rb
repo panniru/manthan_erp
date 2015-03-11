@@ -917,6 +917,12 @@ ManthanErp::Application.routes.draw do
       post 'get_date'
     end
   end
+
+  resources :designations do
+    collection do
+      post 'create_bulk'
+    end
+  end
   #get '/get_date/:data' => 'leave_permissions#get_date'
   
   resources :na_assessments do

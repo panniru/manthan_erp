@@ -163,7 +163,12 @@
                                       }  
                                      );
         
-
+        var Designation = $resource('/designations/:id.json', {id: '@id'},
+                                      { "bulk": { url: "/designations/create_bulk.json", method:'POST', isArray: true},
+                                        "update": { method: "PUT"}
+                                      }  
+                                     );
+        
        
 
         return {
@@ -193,7 +198,8 @@
             SectionMaster : SectionMaster,
             CommunicationMail : CommunicationMail,
             ActivityMaster : ActivityMaster,
-            SetupMaster : SetupMaster
+            SetupMaster : SetupMaster,
+            Designation : Designation
 
         };
     }]);
