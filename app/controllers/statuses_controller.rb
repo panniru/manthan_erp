@@ -16,7 +16,7 @@ class StatusesController < ApplicationController
   end 
   
   def create
-    @status = Status.new(status_params)
+    @status = Statuses.new(status_params)
     if @status.save
       redirect_to statuses_path
     else

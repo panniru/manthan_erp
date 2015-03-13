@@ -1,23 +1,6 @@
 .row{"ng-controller" => "gradeLabMappingController"}
-  .row
-    .col-md-1
-    .col-md-4
-      %h4{style: "font-weight: bold"} GRADES FOR SUBJECTS
-    .col-md-4
-      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "editGradesMappings()", :value => "EDIT"}
-    .col-md-3 
-  .row
-    .col-md-1
-    .col-md-9
-      %table.target.table.table-striped.table-condensed.table-bordered
-        %tr
-          %th SUBJECT
-          %th GRADES         
-        %tr{"ng-repeat" => "subject in subjects | orderBy:'lab_name'"}
-          %td {{subject.lab_name}} 
-          %td
-            .col-md-2{"ng-repeat" => "grade in show_grades |filter : {subject_master_id: subject.subject_master_id} : true  | orderBy:'grade_name'"}        
-              {{grade.grade_name}}         
-    .col-md-2  
-   
-
+  .row{"ng-show" => "myShowFormValue"}
+    = render 'show_form'
+  .row{"ng-show" => "myFormValue"}
+    = render 'form'
+    

@@ -21,6 +21,7 @@ class LabMastersController < ApplicationController
     p "111====================="
     @subject_master = SubjectMaster.new(subject_master_params)
     if @subject_master.save
+      p @subject_master
       redirect_to lab_masters_path
     else
       render 'new'
@@ -28,13 +29,16 @@ class LabMastersController < ApplicationController
   end
 
   def show
-    @subject_master=SubjectMaster.find(params[:id])  end
- 
-  def destroy
-    @lab_master = SubjectMaster.find(params[:id])
-    @lab_master.destroy
-    redirect_to lab_masters_path
+    @subject_master=SubjectMaster.find(params[:id]) 
   end
+ 
+
+  # def destroy
+  #   @subject_master = SubjectMaster.find(params[:id])
+  #   @subject_master.destroy
+
+  #   redirect_to lab_masters_path
+  # end
 
   private
   def subject_master_params

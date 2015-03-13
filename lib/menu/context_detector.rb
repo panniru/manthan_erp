@@ -107,7 +107,9 @@ class ContextDetector
     "form24" => "payroll_menu",
     "form24" => "payroll_menu",
     "salary_taxes" => "payroll_menu",
-    "day_ends" => "default_master_sub_menu"
+    "day_ends" => "default_master_sub_menu",
+    "lab_teacher_mappings" => "lab"
+
   }
   
   def self.get_context(args)

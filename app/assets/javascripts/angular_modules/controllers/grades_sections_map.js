@@ -9,22 +9,26 @@
        
         timeTableService.getSectionServiceView()
             .then(function(result) {
-                $scope.sections=result.data;                
+                $scope.sections=result.data; 
+                 alert(JSON.stringify($scope.sections))               
             });      
        
         
         timeTableService.getGradeServiceView()
             .then(function(result) {
-                $scope.grades=result.data;               
+                $scope.grades=result.data;             
+                alert(JSON.stringify($scope.grades))  
             });
 
         gradesSectionsMapService.getGradesSectionsServiceView()
             .then(function(result) {
-                $scope.show_grades=result.data;               
+                alert(' ')
+                $scope.show_grades=result.data;
+                alert(JSON.stringify($scope.show_grades))                
             }); 
 
         $scope.defaultSectionsGradesAll= function(){            
-            $scope.sections_grades_all = [];         
+            $scope.sections_grades_all = []; 
             
             for(var i = 0; i < $scope.sections.length; i++)
             {
@@ -48,6 +52,8 @@
 
         $scope.defaultSectionsGrades = function(){     
             $scope.sections_grades = [];
+            alert(' ')
+            
             
             for(var i = 0; i < $scope.sections.length; i++)
             {
@@ -76,7 +82,8 @@
             }            
         };   
 
-        $scope.editGradesMappings = function() {            
+        $scope.editGradesMappings = function() {   
+           
             $scope.defaultSectionsGradesAll();
             $scope.myShowFormValue = "false";
             $scope.myFormValue = "true";
@@ -159,7 +166,7 @@
 
          $scope.addAllGrades = function(value,section_master_id,grades,section){ 
              $scope.section = section; 
-            for(var i = 0; i < $scope.sections.length; i++)
+            for(var i = 0; i < $scope.sectio2ns.length; i++)
             {                
                 if ($scope.sections[i]['section_master_id'] == section_master_id)
                 {                    

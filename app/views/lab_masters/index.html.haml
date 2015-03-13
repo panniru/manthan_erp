@@ -29,9 +29,15 @@
       %thead
         %tr
           %th subject name
+          %th Delete
       %tbody
         - @subject_masters.each do|subject_master|
           %tr
-            %td= subject_master.subject_type
-                    
+            %td= subject_master.subject_name
+            -# %td           
+            -#   = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteSubject(subject)"
+ 
+            %td
+              = link_to "Destroy", subject_master_path(subject_master),  :class => "btn btn-danger", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+        
                     

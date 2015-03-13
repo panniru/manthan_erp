@@ -117,6 +117,7 @@
 		    $scope.showAssessmentsCriteriaMappings();                                                
                 }); 
         }; 
+      
 	
 	
    }]);

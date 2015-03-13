@@ -3,6 +3,7 @@
     app.service("gradesSectionsMapService",["$http", function($http) {
 
         var getGradesSectionsServiceView = function(){
+         
             var url = "/grades_sections_mappings/get_grades_sections_service_view.json"
             return $http.get(url);
         }; 
