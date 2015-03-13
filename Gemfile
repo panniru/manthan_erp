@@ -15,11 +15,12 @@ gem 'rails3-jquery-autocomplete'
 gem 'pg_search'
 gem 'jquery-ui-rails', '4.1.0'
 gem "paranoia", "~> 2.0"
+gem 'prawn', '~> 1.3.0'
+gem 'prawn-table', '~> 0.2.1'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 gem 'bootstrap-sass', '~> 3.0.3.0'
-
 gem 'coffee-rails', '~> 4.0.0'
 gem 'angularjs-rails', '1.2.18'
 gem 'angular-rails-templates'

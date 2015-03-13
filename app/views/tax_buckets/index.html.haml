@@ -1,0 +1,22 @@
+.row
+  .col-md-8
+    %h3
+      Tax Buckets
+  .col-md-4
+    = link_to "New" , new_tax_bucket_path , :class => 'btn btn-primary'
+.row
+  .col-md-1
+  .col-md-8
+    %table.table.table-striped
+      %thead
+        %th From 
+        %th To
+        %th Tax
+        %th
+      %tbody
+        - @tax_buckets.each do |tax|
+          %tr
+            %td= tax.from
+            %td= tax.to
+            %td= tax.tax
+            %td= edit_button(edit_tax_bucket_path(tax))

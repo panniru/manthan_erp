@@ -1,0 +1,7 @@
+= title("#{@faculty_master.faculty_name}- Edit New-Pay")
+%h2 
+  = raw "New #{link_to 'Advance Payments', faculty_master_employee_advance_payments_path(@faculty_master)} :"
+  = link_to @faculty_master.faculty_name, @faculty_master
+  %hr
+= render :partial => "form", :locals => {:url => faculty_master_employee_advance_payments_path(@faculty_master)}
+

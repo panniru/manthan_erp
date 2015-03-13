@@ -1,0 +1,42 @@
+- unless (defined? editable)
+  - editable = false
+.row{:ng_show => "payslips.length"}
+  .pull-right
+    %my-pagination{:from => "from_index", :to => "to_index", :current_page => "current_page", :total=> "total_entries", :action => "getPayslips(page)"}
+    - if editable
+      .btn-group.btn-group-sm
+        %button.btn.btn-danger.dropdown-toggle{"data-toggle" => "dropdown"}
+          %span.fa.fa-cog
+          Actions
+          %span.caret
+        %ul.dropdown-menu{:role => "menu"}
+          %li
+            = link_to raw("<i class='fa fa-check fa-lg'></i> Approve"), "#", :ng_click => "approve('approved')"
+          %li
+            = link_to raw("<i class='fa fa-close fa-lg'></i> Reject"), "#", :ng_click => "approve('rejected')"
+  %table.table.table-condensed
+    %thead
+      %th Code
+      %th Name
+      %th Designation
+      %th CTC
+      %th Net Amount
+      %th Status
+      - if editable
+        %th 
+          %lable.checkbox
+            %input{:type => "checkbox", :ng_model => "allChecked", :ng_change => "checkAll()"} All
+    %tbody
+      %tr{:ng_repeat => "payslip in payslips"}
+        %td= link_to "{{payslip.employee_code}}", "/faculty_masters/{{payslip.faculty_master_id}}/payslips/{{payslip.id}}"
+        %td {{payslip.faculty_name}}
+        %td {{payslip.designation}}
+        %td {{payslip.ctc}}
+        %td {{payslip.net_total}}
+        %td {{payslip.status}}
+        - if editable
+          %td.width-10 
+            %input{:type => "checkbox", :ng_model => "payslip.isChecked", :class=> "form-control", :ng_show => "payslip.status == 'pending'"}
+.row{:ng_hide => "payslips.length"}
+  .col-md-offset-4
+    %h3 No Data Available

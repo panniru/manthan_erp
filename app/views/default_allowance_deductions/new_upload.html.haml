@@ -1,0 +1,15 @@
+.page-header
+  %h2
+    = link_to "Default Allowances & Deductions ", default_allowance_deductions_path
+    = ": Upload"
+%p
+  A Csv or Exel can be uploaded. First row should have the column names
+= form_for @default_allowance_deduction_uploader, :url => default_allowance_deductions_upload_path, :multipart => true, :html => { :class => "form"} do |f|
+  - if f.object.errors.present?
+    = render "shared/error_messages", :object => f.object
+  .form-group
+    .col-md-6
+      = f.file_field :file
+    .col-md-6
+      = f.submit "Upload", :class => "btn btn-primary pull-right"
+      = link_to "Download sample", default_allowance_deductions_new_upload_path(:format => :xlsx)

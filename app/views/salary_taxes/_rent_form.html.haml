@@ -1,0 +1,33 @@
+.panel.panel-default
+  .panel-heading
+    HRA Exemption
+  .panel-body
+    .form-group-less-margin
+      %label.col-md-6.control-label.font-9 HRA Exemption - 50% of Basic
+      .col-md-6
+        = f.text_field :hra, :class => "form-control-medium", :readonly => true
+    .form-group-less-margin
+      %label.col-md-6.control-label.font-9 Rent/ Month
+      .col-md-6
+        = text_field_tag :rent_per_month, "", :ng_model => "rentPerMonth", :plceholder => "Per Month", :class => "form-control-medium", :ng_blur => "broadCastRent()"
+    .form-group-less-margin
+      %label.col-md-6.control-label.font-9 Rent/ Year
+      .col-md-6
+        = text_field_tag :rent_per_year, "", :plceholder => "Per Year", :ng_model => "rentPerYear", :class => "form-control-medium", :readonly => "true"
+    .form-group-less-margin
+      %label.col-md-6.control-label.font-9 HRA Recieved
+      .col-md-6
+        = f.text_field :hra, :class => "form-control-medium", :readonly => true
+    .form-group-less-margin
+      %label.col-md-6.control-label.font-9 Rent paid in excess of 10% of salary
+      .col-md-6
+        = text_field_tag :rent_excess_salary, "",:class => "form-control-medium", :readonly => true, :ng_model => "rent_excess_salary"
+    .form-group-less-margin
+      %label.col-md-6.control-label.font-9 Rent Reciept
+      .col-md-6
+        = f.file_field :rent_receipt, :title => ""
+
+    .form-group-less-margin
+      %label.col-md-6.control-label Total
+      .col-md-6
+        = text_field_tag :total, "", :class => "form-control-medium", :readonly => true, :ng_model => "hra_to_consider"

@@ -1,0 +1,33 @@
+%table.table.table-bordered
+  %thead
+    %th Component
+    %th Amount
+  %tbody
+    %tr
+      %th Medical Allowance (-)
+      %td= @salary_tax.claimed_medical_bill
+    %tr
+      %th Conveyance Allowance (-)
+      %td= @salary_tax.conveyance_allowance
+    %tr
+      %th Professional Tax (-)
+      %td= @salary_tax.professional_tax
+    %tr
+      %th Mediclaim U/s80D
+      %td= @salary_tax.medical_insurances_total
+    %tr
+      %td 
+        %label Final HRA Component(-)
+        %br
+        %span= "Occupancy Type: #{@salary_tax.occupancy_type.try(:titleize)}"
+      %td= @salary_tax.final_hra_component
+    %tr
+      %th Savings (-)
+      %td= @salary_tax.savings_total
+    %tr
+      %th 80G(-)
+      %td= @salary_tax.atg
+    %tr
+      %th Total
+      %td= @salary_tax.total_deductions
+        

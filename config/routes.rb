@@ -8,18 +8,14 @@ ManthanErp::Application.routes.draw do
     end
   end
 
-  resources :vendor_managements do
-    collection do
-      get "get_vendor_view"
-    end
-  end
+ 
 
   resources :guest_managements do
     collection do
       get "get_role_view"
     end
   end
-
+ 
 
   resources :food_wastages do
     collection do
@@ -55,7 +51,7 @@ ManthanErp::Application.routes.draw do
     end
   end
   
-  resources :interviewschedulers do
+  resources :interviewschedulrs do
     member do
       get 'home_index'
     end
@@ -306,7 +302,12 @@ ManthanErp::Application.routes.draw do
     end
   end
   
-  resources :default_masters
+  resources :default_masters do 
+    collection do
+      get "day_ends"
+      put "days"
+    end
+  end
   
   resources :academics do
     collection do
@@ -783,15 +784,10 @@ ManthanErp::Application.routes.draw do
       post 'create_bulk'     
     end    
   end
-  resources :vendor_categories
- 
-  resources :faculty_masters do
-    member do
-      get "dashboard"
-    end
-  end
+  
+  
   resources :statuses
-
+  
   resources :vendor_categories
   
   resources :student_route_mappings do
@@ -889,6 +885,7 @@ ManthanErp::Application.routes.draw do
     end  
   end 
 
+
   resources :faculty_attendances do
     collection do
       get 'get_faculty'
@@ -940,5 +937,117 @@ ManthanErp::Application.routes.draw do
     collection do      
     end
   end
+
+
+  resources :tax_buckets
+  resources :faculty_masters do
+    collection do
+      get :faculty_upload
+      get :autocomplete_department_master_name
+      get :autocomplete_designation_master_name
+      get :autocomplete_employee
+      get :new_upload
+      post :upload
+      get :search
+      get :reports
+      get :get_reports
+      get :ctc_reports
+      get :get_ctc_reports
+    end
+    
+    member do
+      get "dashboard"
+    end
+    resources :employee_advance_payments do
+      collection do
+        get :search_by_month
+      end
+    end
+    resources :payslips do
+      member do
+        get "mail"
+        get "form24"
+      end
+    end
+    resources :salary_taxes do
+      member do
+        get :form16
+        get :email
+      end
+      collection do
+        get "component_monthly_report"
+      end
+    end
+  end
+  resources :form24 do
+    collection do
+      get 'get_tds'
+      get 'quarter_details'
+      post 'save_form'
+      get 'annexure'
+      get 'get_annexure_report'
+      get 'print_annexure1'
+    end
+    member do
+      get 'payslips'
+    end
+  end
+
+  resources :vendor_managements do
+    collection do
+      get "get_vendor_view"
+    end
+  end
+  resources :reminders, :except => [:index, :show, :update, :delete, :edit, :new, :destroy]do
+    member do
+      put "mark_as_done"
+    end
+  end
+  resources :designation_masters do
+    collection do
+      get "map"
+      get "ind"
+      post 'save_designation'
+    end
+  end
+
+
+  
+  resources :salary_break_ups do
+    collection do
+      put :update_all
+      get :break_up_report
+    end
+  end
+  get "default_allowance_deductions" => "default_allowance_deductions#index"
+  get "default_allowance_deductions/new_upload"
+  post "default_allowance_deductions/upload"
+  delete "default_allowance_deductions/delete_all"
+
+  get "/payslips/new_payslips"
+  get "/payslips" => "payslips#index"
+  post "/payslips/create_payslips"
+  post "/payslips/approve_payslips"
+  get "/payslips/new_email_payslips"
+  get "/payslips/email_payslips"
+  get "/payslips/bank_advice"
+  get "/payslips/voucher"
+  get "/salary_taxes/tax_limits"
+  get "/pf_statements/pf_input"
+  
+  resources :faculty_leaves do
+    collection do
+      post "upload"
+      get "new_upload"
+      get "corresponding_month"
+      get "get_leaves"
+      get "export"
+    end
+  end
+  get "/job_runs/:job_run_id/pf_statements" => "pf_statements#index"
+  get "/pf_statements/schedule"
+  get "/pf_statements/list_jobs"
+  
+  resources :certificates
 
 end

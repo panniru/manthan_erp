@@ -1,0 +1,62 @@
+%table.table-bordered-no-outer-lines
+  %thead
+    %tr
+      %th S No
+      %th Month
+      %th Basic
+      %th HRA
+      %th Conveyance Allowance
+      %th City Compensatory Allowance
+      %th Special Allowance 
+      %th Loyalty Allowance 
+      %th Medical Allowance 
+  - @salary_tax.payslips.each_with_index do |payslip, index|
+    %tr
+      %td= index+1
+      %td= payslip.generated_month
+      %td= payslip.basic
+      %td= payslip.hra
+      %td= payslip.conveyance_allowance
+      %td= payslip.city_compensatory_allowance
+      %td= payslip.special_allowance
+      %td= payslip.loyalty_allowance
+      %td= payslip.medical_allowance
+  %tr
+    %th
+    %th Total
+    %th= @salary_tax.basic
+    %th= @salary_tax.hra
+    %th= @salary_tax.conveyance_allowance
+    %th= @salary_tax.city_compensatory_allowance
+    %th= @salary_tax.special_allowance
+    %th= @salary_tax.loyalty_allowance
+    %th= @salary_tax.medical_allowance
+%br
+%table.table-bordered-no-outer-lines
+  %thead
+    %tr
+      %th S No
+      %th Month
+      %th Leave Settlement 
+      %th Other Payment 
+      %th P.F. Deducted
+      %th Incometax Deducted
+      %th Professional tax Deducted
+        
+  - @salary_tax.payslips.each_with_index do |payslip, index|
+    %tr
+      %td= index+1
+      %td= payslip.generated_month
+      %td= payslip.leave_settlement
+      %td= payslip.annual_bonus
+      %td= payslip.pf
+      %td= payslip.tds_pm
+      %td= payslip.professional_tax
+  %tr
+    %th
+    %th Total
+    %th= @salary_tax.leave_settlement
+    %th= @salary_tax.other_payment
+    %th= @salary_tax.pf
+    %th= @salary_tax.tds_pm
+    %th= @salary_tax.professional_tax

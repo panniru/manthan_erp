@@ -1,0 +1,48 @@
+.row
+  %h3
+    = raw "#{link_to @faculty_master.faculty_name, @faculty_master} #{link_to  'Salary Taxes', faculty_master_salary_taxes_path(@faculty_master)}"
+  %hr
+.row
+  = render :partial => "employee_header", :locals => {:faculty => @faculty_master}
+.row
+  %hr
+.row
+  .col-md-4
+    = render "earning_terms"
+  .col-md-5
+    = render "deduction_terms"
+  .col-md-3
+    %table.table.table-bordered
+      %thead
+        %th Component
+        %th Amount
+      %tbody
+        %tr
+          %th Tax Projected
+          %td= @salary_tax.tax_projected
+        %tr
+
+        %tr
+          %th Surcharge(+)
+          %td= @salary_tax.surcharge
+        %tr
+          %th Educational Cess(+)
+          %td= @salary_tax.educational_cess
+        %tr
+          %th Net Tax
+          %td= @salary_tax.net_tax
+        %tr
+          %th Tax Deducted(-)
+          %td= @salary_tax.tax_paid
+        %tr
+          %th Balance Tax
+          %td= @salary_tax.balance_tax
+        %tr
+          %th= "Balance Tax/Month(next #{@salary_tax.count_of_payslips_to_create_in_the_year} months)"
+          %td= @salary_tax.balance_tax_per_remaining_months_each
+
+.row
+  .col-md-offset-6
+    = edit_button(edit_faculty_master_salary_tax_path(@faculty_master, @salary_tax))
+    = print_button(faculty_master_salary_tax_path(@faculty_master, @salary_tax, :format => :pdf))
+    = link_to raw("<i class='fa fa-file-o fa-lg'></i> Form16"), "/faculty_masters/#{@faculty_master.id}/salary_taxes/#{@salary_tax.id}/form16", :class => "btn btn-primary"

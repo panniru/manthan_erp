@@ -1,0 +1,22 @@
+%h1 
+  = link_to "Admin Mapping"
+.pull-right
+  = edit_button(new_designation_master_path)
+%h4
+  %form{:ng_controller => "DesignationMasterController" , :ng_init => "getDesignation(1)" }
+    .col-md-3.col-md-offset-6
+      %my-pagination{:from => "from_index", :to => "to_index", :total=> "total_entries", :current_page => "current_page",:action => "getDesignation(page)"}
+    .col-md-10
+      %table.table.table-condensed
+        %thead
+          %th Designation
+          %th Managed By
+        %tbody
+          %tr{"ng-repeat" => "designation in designations.designations"}
+            %td {{designation.name}}
+            %td {{designation.role}}
+            
+              
+   
+      
+        

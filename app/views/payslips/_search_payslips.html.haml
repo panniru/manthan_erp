@@ -1,0 +1,21 @@
+%form.form-inline{:ng_submit => "getPayslips(1)"}
+  - unless @faculty_master.present?
+    .form-group
+      = autocomplete_field_tag :search_term,
+      params[:search_term],
+      autocomplete_employee_faculty_masters_path,
+      :placeholder => "Faculty code/name", :class => 'form-control',
+      :id_element => "#faculty_master_id"
+  = hidden_field_tag :faculty_master_id, params[:faculty_master_id], :id => "faculty_master_id" #, :ng_model => "employee_master_id"
+  .form-group
+    = select_tag "month", options_for_select(Date::MONTHNAMES, params[:month]), :class => "form-control", :placeholder => "Month", :ng_model => "month"
+  .form-group
+    = select_tag "year", options_for_select(((session[:transaction_date].year-10..session[:transaction_date].year).to_a << "").reverse, params[:year]), :class => "form-control", :placeholder => "Year", :ng_model => "year"
+    = submit_search
+  - unless @faculty_master.present?
+    = link_to_new("/payslips/new_payslips", {'label' => 'Payslips'})
+  - else
+    - if @faculty_master.eligible_for_payslip? (session[:transaction_date])
+      = link_to_new( new_faculty_master_payslip_path(@faculty_master), {'label' => 'Payslip'})
+  -#= link_to_new(new_employee_master_employee_advance_payment_path(@employee_master))
+  

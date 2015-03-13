@@ -1,0 +1,149 @@
+.col-md-4.col-right-border
+  .form-group
+    %label.col-md-6.control-label Basic
+    .col-md-5
+      %input{ :type => "number", :class => "form-control ", :ng_model => "salaryTax.basic", :salary_tax_component => "true"}
+    .col-md-1-no-padding
+      %button.input-icon{:type => "button", :pop_up_payslip_component => true, :action => "component_monthly_report(#{@faculty_master.id}, 'basic')"}
+        = fa_icon "list-alt lg"
+  .form-group
+    %label.col-md-6.control-label HRA
+    .col-md-5
+      %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.hra", :salary_tax_component => "true"}
+    .col-md-1-no-padding
+      %button.input-icon{:type => "button", :pop_up_payslip_component => true, :action => "component_monthly_report(#{@faculty_master.id}, 'hra')"}
+        = fa_icon "list-alt lg"
+  .form-group
+    %label.col-md-6.control-label Conveyance Allowance
+    .col-md-5
+      %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.conveyance_allowance", :salary_tax_component => "true"}
+    .col-md-1-no-padding
+      %button.input-icon{:type => "button", :pop_up_payslip_component => true, :action => "component_monthly_report(#{@faculty_master.id}, 'conveyance_allowance')"}
+        = fa_icon "list-alt lg"
+  .form-group
+    %label.col-md-6.control-label City Compensatory Allowance
+    .col-md-5
+      %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.city_compensatory_allowance", :salary_tax_component => "true"}
+    .col-md-1-no-padding
+      %button.input-icon{:type => "button", :pop_up_payslip_component => true, :action => "component_monthly_report(#{@faculty_master.id}, 'city_compensatory_allowance')"}
+        = fa_icon "list-alt lg"
+  .form-group
+    %label.col-md-6.control-label Special Allowance
+    .col-md-5
+      %input{ :type => "number" , :class => "form-control", :ng_model => "salaryTax.special_allowance", :salary_tax_component => "true"}
+    .col-md-1-no-padding
+      %button.input-icon{:type => "button", :pop_up_payslip_component => true, :action => "component_monthly_report(#{@faculty_master.id}, 'special_allowance')"}
+        = fa_icon "list-alt lg"
+  .form-group
+    %label.col-md-6.control-label Loyalty Allowance
+    .col-md-5
+      %input{ :type => "number" , :class => "form-control", :ng_model => "salaryTax.loyalty_allowance", :salary_tax_component => "true"}
+    .col-md-1-no-padding
+      %button.input-icon{:type => "button", :pop_up_payslip_component => true, :action => "component_monthly_report(#{@faculty_master.id}, 'loyalty_allowance')"}
+        = fa_icon "list-alt lg"
+  .form-group
+    %label.col-md-6.control-label Leave Settlement 
+    .col-md-5
+      %input{ :type => "number" , :class => "form-control", :ng_model => "salaryTax.leave_settlement", :salary_tax_component => "true"}
+    .col-md-1-no-padding
+      %button.input-icon{:type => "button", :pop_up_payslip_component => true, :action => "component_monthly_report(#{@faculty_master.id}, 'leave_settlement')"}
+        = fa_icon "list-alt lg"
+  .form-group
+    %label.col-md-6.control-label Medical Allowance
+    .col-md-5
+      %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.medical_allowance", :salary_tax_component => "true"}
+    .col-md-1-no-padding
+      %button.input-icon{:type => "button", :pop_up_payslip_component => true, :action => "component_monthly_report(#{@faculty_master.id}, 'medical_allowance')"}
+        = fa_icon "list-alt lg"
+  .form-group
+    %label.col-md-6.control-label Other Payment
+    .col-md-5
+      %input{ :type => "number" , :class => "form-control", :ng_model => "salaryTax.other_payment", :salary_tax_component => "true"}
+    .col-md-1-no-padding
+      %button.input-icon{:type => "button", :pop_up_payslip_component => "true"}
+        = fa_icon "list-alt lg", :pop_up_payslip_component => true, :action => "component_monthly_report(#{@faculty_master.id}, 'annual_bonus')"
+  .form-group
+    %label.col-md-6.control-label Total Earning
+    .col-md-5
+      %input{ :type => "number" , :class => "form-control", :readonly => "true", :ng_model => "total_earnings"}
+.col-md-5.col-right-border
+  .form-group
+    %label.col-md-6.control-label Medical Allowance (-)
+    .col-md-3
+      = text_field_tag :medical_allowance, "",:class => "form-control", :readonly => "true", :ng_model => "salaryTax.claimed_medical_bill", :salary_tax_component => "true"
+  .form-group
+    %label.col-md-6.control-label Conveyance Allowance (-)
+    .col-md-3
+      %input{ :type => "number", :class => "form-control", :readonly => "true", :ng_model => "salaryTax.conveyance_allowance", :salary_tax_component => "true"}
+
+  .form-group
+    %label.col-md-6.control-label Standard Deduction (-)
+    .col-md-3
+      = text_field_tag :standard_deduction, "",:class => "form-control", :ng_model => "salaryTax.standard_deduction", :salary_tax_component => "true"
+  .form-group
+    %label.col-md-6.control-label Professional Tax (-)
+    .col-md-3
+      %input{ :type => "number" , :class => "form-control", :ng_model => "salaryTax.professional_tax", :salary_tax_component => "true"}
+    .col-md-1-no-padding
+      %button.input-icon{:type => "button", :pop_up_payslip_component => "true", :pop_up_payslip_component => true, :action => "component_monthly_report(#{@faculty_master.id}, 'professional_tax')"}
+        = fa_icon "list-alt lg"
+  .form-group
+    %label.col-md-6.control-label Mediclaim U/s80D
+    .col-md-3
+      %input{ :type => "number" , :class => "form-control", :ng_model => "salaryTax.medical_insurances_total", :salary_tax_component => "true"}
+
+  .form-group
+    %label.col-md-6.control-label Final HRA Component(-)
+    .col-md-3
+      %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.final_hra_component", :salary_tax_component => "true", :readonly => true}
+  .form-group
+    %label.col-md-6.control-label Savings (-)
+    .col-md-3
+      = text_field_tag :savings, "",:class => "form-control", :readonly => "true", :ng_model => "salaryTax.savings_total", :salary_tax_component => "true"
+  .form-group
+    %label.col-md-6.control-label 80G(-)
+    .col-md-3
+      %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.atg", :salary_tax_component => "true"}
+
+  .form-group
+    %label.col-md-6.control-label Total Deduction
+    .col-md-4
+      %input{ :type => "number", :class => "form-control", :ng_model => "total_deductions", :readonly => true}
+
+.col-md-3
+  .form-group
+    %label.col-md-6.control-label Total Amount
+    .col-md-6
+      %input{ :type => "number", :class => "form-control", :ng_model => "total_amount"}
+
+  .form-group
+    %label.col-md-6.control-label Total Tax Projected
+    .col-md-6
+      %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.total_tax_projection"}
+
+  .form-group
+    %label.col-md-6.control-label Surcharge(+)
+    .col-md-6
+      %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.surcharge"}
+  .form-group
+    %label.col-md-6.control-label Educational Cess(+)
+    .col-md-6
+      %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.educational_cess"}
+  .form-group
+    %label.col-md-6.control-label Net Tax
+    .col-md-6
+      %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.net_tax"}
+  .form-group
+    %label.col-md-6.control-label Tax Deducted
+    .col-md-6
+      %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.tax_paid"}
+      %button.input-icon1{:type => "button", :pop_up_payslip_component => true, :action => "component_monthly_report(#{@faculty_master.id}, 'tds_pm')", :placement => "left"}
+        = fa_icon "list-alt lg"
+  .form-group
+    %label.col-md-6.control-label Balance Tax
+    .col-md-6
+      %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.balance_tax"}
+  .form-group
+    %label.col-md-6.control-label Balance Tax/Month(next {{salaryTax.count_of_payslips_to_create_in_the_year}} months)
+    .col-md-6
+      %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.balance_tax_per_remaining_months_each", :readonly => true}

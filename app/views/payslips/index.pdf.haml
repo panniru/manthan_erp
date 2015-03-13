@@ -1,0 +1,64 @@
+= wicked_pdf_stylesheet_link_tag "pdf_reports"
+.row
+  -# .pull-right
+  -#   = wicked_pdf_image_tag "logo.png",width: "100", height: "40"
+.col-xs-offset-5
+  %h3= "PAY SLIP FOR THE MONTH OF #{@month.try(:upcase)} #{@year}"
+
+
+%table.table.table-bordered
+  %thead
+    %th Code
+    %th Name
+    %th Designation
+    %th Account #
+    %th PF #
+    %th Dept
+    %th DOJ
+    - Payslip::EARNINGS.each do |earning|
+      %th= earning.to_s.titleize.split(" ").length > 1 ? earning.to_s.titleize.split(" ").inject(""){|sum, v| sum+v[0]} : earning.to_s.titleize.gsub("Hra", "HRA").gsub("Pf", "PF")
+    %th Total
+    - Payslip::DEDUCTIONS.each do |deduction|
+      %th= deduction.to_s.titleize.split(" ").length > 1 ? deduction.to_s.titleize.split(" ").inject(""){|sum, v| sum+v[0]} : deduction.to_s.titleize.gsub("Hra", "HRA").gsub("Pf", "PF")
+    %th Total
+    %th Net Pay
+    %th Status
+  %tbody
+    - @payslips.each do |payslip|
+      %tr
+        %td= payslip.faculty_master.code
+        %td= payslip.faculty_master.faculty_name
+        %td= payslip.faculty_master.designation_master.name
+        %td= payslip.faculty_master.account_number
+        %td= payslip.faculty_master.p_f_no
+        %td= payslip.faculty_master.department_master.name
+        %td= payslip.faculty_master.date_of_joining
+        - Payslip::EARNINGS.each do |earning|
+          %td= payslip.send(earning)
+        %th= payslip.total_earnings
+        - Payslip::DEDUCTIONS.each do |deduction|
+          %td= payslip.send(deduction)
+        %th= payslip.total_deductions
+        %th= payslip.net_total
+        %td
+    %tr
+      %th Total
+      %td
+      %td
+      %td
+      %td
+      %td
+      %td
+      - Payslip::EARNINGS.each do |earning|
+        %th= @payslips_aggregation.get_total_of(earning)
+      %th= @payslips_aggregation.get_total_of("total_earnings")
+      - Payslip::DEDUCTIONS.each do |deduction|
+        %th= @payslips_aggregation.get_total_of(deduction)
+      %th= @payslips_aggregation.get_total_of("total_deductions")
+      %th= @payslips_aggregation.get_total_of("net_total")
+      %td
+
+.row
+  - (Payslip::EARNINGS + Payslip::DEDUCTIONS).each do |componet|
+    .col-xs-3
+      %label= "#{componet.to_s.titleize.split(' ').length > 1 ? componet.to_s.titleize.split(' ').inject(''){|sum, v| sum+v[0]} : componet.to_s.titleize} : #{componet}"

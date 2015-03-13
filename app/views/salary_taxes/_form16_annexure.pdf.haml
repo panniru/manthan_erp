@@ -1,0 +1,37 @@
+.col-md-12
+  %table.table.table-bordered
+    %tr
+      %td
+        %table
+          %tr
+            %table.table.table-bordered{:style => 'width: 100%'}
+              %tr
+                %td{:colspan => "5"} 
+                  .certificate-css
+                    ANNEXURE-B
+              %tr
+                %td{:colspan => "5"} 
+                  .certificate-css
+                    DETAILS OF TAX DEDUCTED AND DEPOSITED IN THE CENTRAL GOVERNMENT ACCOUNT THROUGH CHALLAN
+              %tr
+                %td{:colspan => "5"} 
+                  .certificate-css
+                    (The Employer to provide payment wisse details of tax deducted and deposited with respect to the employee)
+              %tr{:colspan => "5", :rowspan => 2} 
+                %td{:rowspan => "2"}
+                  S.no
+                %td{:rowspan => "2"} Tax Deposited in respect of the employee (Rs.)
+                %td{:colspan => "3"}
+                  %center
+                    Challan Identification Number (CIN)
+              %tr
+                %td{:style => 'width: 20%'} BSR Code of the Bank Branch
+                %td{:style => 'width: 20%'} Date on which tax deposited
+                %td{:style => 'width: 20%'} Challan Serial Number
+              - @form16.salary_tax.payslips.each_with_index do |payslip, index|
+                %tr
+                  %td= index+1
+                  %td= payslip.tds_pm
+                  %td 271852
+                  %td 05/06/2010
+                  %td 5133

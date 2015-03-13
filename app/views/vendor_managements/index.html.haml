@@ -25,7 +25,7 @@
             %td= vendor.vendor_email
             %td
               = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), vendor_management_path(vendor), :class => "form btn-sm btn-danger ",:data => {:method => 'delete' ,:confirm => "Are You Sure to Delete " }
-              = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_vendor_management_path(vendor), :class => "form btn-sm btn-warning "
+              = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_vendor_management_path(vendor, :category => vendor.vendor_category.vendor_category), :class => "form btn-sm btn-warning "
 
 
 

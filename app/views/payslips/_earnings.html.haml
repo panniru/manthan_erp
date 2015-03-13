@@ -1,0 +1,101 @@
+%table.table.table-condenced
+  %tr
+    %td
+      %label Basic
+    %td
+      %label= payslip.basic
+  - if  payslip.hra.present?
+    %tr
+      %td
+        %label HRA
+      %td
+        %label= payslip.hra
+  - if  payslip.conveyance_allowance.present?
+    %tr
+      %td
+        %label Conveyance Allowance
+      %td
+        %label= payslip.conveyance_allowance
+  - if  payslip.city_compensatory_allowance.present?
+    %tr
+      %td
+        %label City Compensatory Allowance
+      %td
+        %label= payslip.city_compensatory_allowance
+  - if  payslip.special_allowance.present?
+    %tr
+      %td
+        %label Special Allowance
+      %td
+        %label= payslip.special_allowance
+  - if  payslip.loyalty_allowance.present?
+    %tr
+      %td
+        %label Loyalty Allowance
+      %td
+        %label= payslip.loyalty_allowance
+  - if  payslip.medical_allowance.present?
+    %tr
+      %td
+        %label Medical Allowance
+      %td
+        %label= payslip.medical_allowance
+  - if  payslip.incentive_payment.present?
+    %tr
+      %td
+        %label Incentive
+      %td
+        %label= payslip.incentive_payment
+  - if  payslip.loyalty_deposit.present?
+    %tr
+      %td
+        %label Loyalty Deposit
+      %td
+        %label= payslip.loyalty_deposit
+  - if  payslip.arrears_of_salary.present?
+    %tr
+      %td
+        %label Arrears Of Salary
+      %td
+        %label= payslip.arrears_of_salary
+  - if  payslip.grade_allowance.present?
+    %tr
+      %td
+        %label Grade Allowance
+      %td
+        %label= payslip.grade_allowance
+  - if  payslip.leave_settlement.present?
+    %tr
+      %td
+        %label Leave Settlement
+      %td
+        %label= payslip.leave_settlement
+  - if  payslip.performance_bonus.present?
+    %tr
+      %td
+        %label Performance Bonus
+      %td
+        %label= payslip.performance_bonus
+  - if payslip.additional_allowance_1.present? 
+    %tr
+      %td
+        %label= payslip.additional_allowance_1_label
+      %td
+        %label= payslip.additional_allowance_1
+  - if payslip.additional_allowance_2.present?
+    %tr
+      %td
+        %label= payslip.additional_allowance_2_label
+      %td
+        %label= payslip.additional_allowance_2
+  - if payslip.additional_allowance_3.present? 
+    %tr
+      %td
+        %label= payslip.additional_allowance_3_label
+      %td
+        %label= payslip.additional_allowance_3
+  %tr
+    %td
+      %label Total
+    %td
+      %label= payslip.total_earnings

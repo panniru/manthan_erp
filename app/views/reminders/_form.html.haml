@@ -1,0 +1,20 @@
+= form_for @reminder, :class => "form-horizontal" do |f|
+  - if f.object.errors.present?
+    = render "shared/error_messages", :object => f.object
+  .row
+    .col-md-6
+      .form-group
+        = f.label :created_date, :class => 'col-md-3 control-label'
+        .col-md-9
+          = f.text_field :created_date, :class => "form-control datepicker"
+      .form-group
+        = f.label :description, :class => 'col-md-3 control-label'
+        .col-md-9
+          = f.text_field :description, :class => "form-control"
+      .form-group
+        = f.label :occurrence, :class => 'col-md-3 control-label'
+        .col-md-9
+          = f.select :occurrence, options_for_select([["", ""], ['Monthly', 'monthly'], ['Quarterly', 'quarterly'], ['Yearly', 'yearly']], f.object.occurrence), {}, {:class => "form-control"}
+      .form-group
+        .col-md-offset-5
+          = save_button

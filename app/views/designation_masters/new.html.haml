@@ -1,0 +1,25 @@
+%h1 
+  = link_to "Admin Mapping" , designation_masters_path
+ 
+%h4
+  %form{:ng_controller => "DesignationMasterController" , :ng_init => "getDesignation(1)", :ng_submit => "saveDesignation()"  }
+    .col-md-3.col-md-offset-6
+      %my-pagination{:from => "from_index", :to => "to_index", :total=> "total_entries", :current_page => "current_page",:action => "getDesignation(page)"}
+    .col-md-10
+      %table.table.table-condensed
+        %thead
+          %th Designation
+          %th Managed By
+        %tbody
+          %tr{"ng-repeat" => "designation in designations.designations"}
+            %td {{designation.name}}
+            %td
+              %input{:ng_model =>"designation['managed_by']",  :type => "radio", :value => accountant_role.id }
+              = accountant_role.description
+              %input{:ng_model =>"designation['managed_by']",  :type => "radio", :value => admin_role.id }
+              = admin_role.description
+              -# %input{:ng_model =>"designation['managed_by']",  :type => "radio", :value => manager_role.id }
+              -# = manager_role.description
+                
+        .pull-right
+          = save_button

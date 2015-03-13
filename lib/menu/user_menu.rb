@@ -56,6 +56,7 @@ class UserMenu
     main_menu << MenuItem.new(:label => "Canteen Facility", :klass => ContextDetector.mapped_module_name(@controller_name) == "canteen"? "active" :"", :icon => "cutlery", :href => "/mealtypes/home_index")
     main_menu << MenuItem.new(:label => "Non Academics", :klass => ContextDetector.mapped_module_name(@controller_name) == "non_academic"? "active" :"", :icon => "graduation-cap", :href => "/non_academics")
     main_menu << MenuItem.new(:label => "Lab", :klass => ContextDetector.mapped_module_name(@controller_name) == "lab"? "active" :"", :icon => "laptop", :href => "lab_masters")
+    main_menu << MenuItem.new(:label => "Payroll", :klass => ContextDetector.mapped_module_name(@controller_name) == "payroll"? "active" :"", :icon => "dollar", :href => "payslips#index")
     main_menu
   end
   

@@ -1,0 +1,63 @@
+.panel.panel-default
+  .panel-heading
+    House Rent
+    .pull-right
+      .radio-inline
+        %input{:type => 'radio', :ng_model => "salaryTax.occupancy_type", :value => "own"} Own
+      .radio-inline
+        %input{:type => 'radio', :ng_model => "salaryTax.occupancy_type", :value => "let_out"} Let out
+      .radio-inline
+        %input{:type => 'radio', :ng_model => "salaryTax.occupancy_type", :value => "rent"} Rent
+  .panel-body
+    .row{:ng_show => "salaryTax.occupancy_type == 'own'"}
+      .col-md-4
+        %label.col-md-6.control-label House Lone Interest
+      .col-md-3
+        %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.employee_home_loan_interest", :ng_blur => "calculateFinalHouseRent()"}
+        %span= "Upto {{taxLimits.home_loan_interest_limit}}"
+    .row{:ng_show => "salaryTax.occupancy_type == 'rent' || salaryTax.occupancy_type == 'let_out'"}
+      .col-md-4
+        %label.col-md-6.control-label Rent/Month 
+        .col-md-5
+          = text_field_tag :rent_per_month, "", :ng_model => "salaryTax.rent_per_month", :placeholder => "Per Month", :class => "form-control-medium", :ng_blur => "broadCastRent()"
+          %label
+            = "[{{salaryTax.rent_per_year}} / Year]"
+          %span (RA)
+      .col-md-4
+        %label.col-md-6.control-label Rent Paid in excess of 10% of salary
+        .col-md-5
+          = text_field_tag :rent_exess, "", :ng_model => "rent_excess_salary",:class => "form-control-medium", :readonly => true
+          %span (RB)
+      .col-md-4
+        %label.col-md-6.control-label Rent Paid(-) 
+        .col-md-5
+          = text_field_tag :rent_paid, "", :ng_model => "salaryTax.rent_paid",:class => "form-control-medium", :readonly => true
+          %span min(RA, RB)
+    .row{:ng_show => "salaryTax.occupancy_type == 'let_out'"}
+      .row
+        .col-md-4
+          %label.col-md-6.control-label Rent Recieved/Month
+          .col-md-5
+            = text_field_tag :rent_recieved_per_month, "", :ng_model => "salaryTax.rent_received_per_month", :placeholder => "Per Month", :class => "form-control-medium", :ng_blur => "broadCastRentRecieved()"
+            %label
+              = "[{{salaryTax.rent_received_per_year}} / Year]"
+            %span (RRA)
+        .col-md-4
+          %label.col-md-6.control-label P.T & W.T
+          .col-md-5
+            = text_field_tag :pt_and_wt, "", :ng_model => "salaryTax.pt_and_wt", :class => "form-control-medium", :ng_blur => "broadCastRentRecieved()"
+            %span (RRB)
+        .col-md-4
+          %label.col-md-6.control-label Rent Recieved(+)
+          .col-md-5
+            = text_field_tag :rent_recieved, "", :ng_model => "salaryTax.rent_received", :class => "form-control-medium", :readonly => true
+            ((RRA + RRB)- 30%of(RRA + RRB))
+      .row
+        .col-md-4
+          %label.col-md-6.control-label House Loan Interest(-)
+          .col-md-5
+            %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.employee_home_loan_interest", :ng_blur => "calculateFinalHouseRent()"}
+        .col-md-4      
+          %label.col-md-6.control-label Final Amount
+          .col-md-5
+            %input{ :type => "number", :class => "form-control", :ng_model => "salaryTax.final_hra_component", :readonly => true}

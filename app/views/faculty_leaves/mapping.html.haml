@@ -1,0 +1,21 @@
+%h1 
+  = link_to "Admin Mapping"
+%form{:action => "/employee_leaves", :method => "PUT" }
+  .col-md-10
+    %table.table.table-condensed
+      %thead
+        %th Designation
+        %th Mapping
+      %tbody
+        - DesignationMaster.has_no_admin.all.each do |emp|
+          %tr
+            %td= emp.name
+            %td
+              %input{:name => emp.id ,  :type => "radio", :value => "Accountant"}
+              Senior Accountant
+              %input{:name => emp.id,  :type => "radio", :value => "Manager"}
+              Commercial Manager
+              
+  
+      = link_to "new", :controller => "employee_leaves", :action => "mapping" 
+      //%button{:type=>"submit", :class=> "btn btn-primary" }= "Save"

@@ -1,0 +1,33 @@
+= wicked_pdf_stylesheet_link_tag "pdf_reports"
+.row
+  .col-xs-7
+    = render :partial => "shared/org_details", :formats => [:pdf, :html]
+  .pull-right
+    = wicked_pdf_image_tag "logo.png",width: "100", height: "40"
+.col-xs-offset-3
+  %h4= "SALARY PAYMENT FOR THE MONTH OF #{@month.try(:upcase)} #{@year}"
+
+%table.table.table-bordered
+  %thead
+    %th S.NO
+    %th Emp ID
+    %th Name
+    %th Account No
+    %th Amount
+    %th Remarks
+  %tbody
+    - @payslips.each_with_index do |payslip, index|
+      %tr
+        %td= index+1
+        %td= payslip.faculty_master.code
+        %td= payslip.faculty_master.faculty_name
+        %td= payslip.faculty_master.account_number
+        %td= payslip.net_total
+        %td= "Hochtief - Salary - #{@month.to_s[0..2]} #{@year.to_s[2..3]}"
+    %tr
+      %th
+      %th
+      %th Total
+      %th
+      %th= @payslips.inject(0){|sum, payslip| sum+payslip.net_total}
+      %th

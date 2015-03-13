@@ -1,0 +1,18 @@
+%table.table.table-bordered{:ng_show => "salaryTax.medical_bills"}
+  %thead
+    %th Bill No
+    %th Bill Date
+    %th Amount
+  %tbody
+    %tr{"ng-repeat" => "bill in salaryTax.medical_bills"}
+      %td
+        = text_field_tag  "salary_tax[medical_bills][][bill_no]",nil, :class => "form-control-medium", :ng_model => "bill.bill_no", :placeholder => "No"
+      %td
+        %input{:type => "text", :name => "salary_tax[medical_bills][][bill_date]", :ng_model => "bill.bill_date", :placeholder => "Date", :class => "form-control-medium", :my_datepicker => true}
+      %td
+        = text_field_tag  "salary_tax[medical_bills][][amount]",nil, :class => "form-control-medium", :ng_model => "bill.amount", :placeholder => "Amount", :ng_blur => "broadcastMedicalBillAmount()"
+    %tr
+      %th Final Amount
+      %td
+      %th {{salaryTax.claimed_medical_bill}}
+  

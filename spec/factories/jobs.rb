@@ -25,6 +25,17 @@ FactoryGirl.define do
     job_type "mailing"
   end
   
+  factory :pf_statement_mailing, :class => Job do |job|
+    code "pf_statement_mailing"
+    description "PF Statement Mailing"
+    job_type "mailing"
+  end
+
+  factory :payslip_mailing, :class => Job do |job|
+    code "payslip_mailing"
+    description "Payslip Mailing"
+    job_type "mailing"
+  end
 
   
 end

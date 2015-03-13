@@ -1,0 +1,38 @@
+= wicked_pdf_stylesheet_link_tag "pdf_reports"
+.row
+  .col-xs-7
+    = render :partial => "shared/org_details", :formats => [:pdf, :html]
+  .pull-right
+    = wicked_pdf_image_tag "logo.jpg",width: "100", height: "40"
+.col-xs-offset-3
+  %h4= "PF STATEMENT FOR THE MONTH OF #{@job_run.job_date.strftime('%b').upcase} #{@job_run.job_date.strftime('%Y')}"
+.row
+  %table.table.table-condensed.table-bordered.table-responsive
+    %thead
+      %th Member Id
+      %th Member Name
+      %th EPF Wages
+      %th EPS Wages
+      %th EPF EE share
+      %th EPF EE remitted
+      %th EPS due
+      %th EPS remitted
+      %th Diff EPF and EPS
+      %th Diff remitted
+      %th N
+      %th Refund Adv
+      %th Arrear EPF	
+      %th Arrear EPF EE	
+      %th Arrear EPF Er	
+      %th Arrear EPS
+      %th Fathers / Husbands name	
+      %th R	
+      %th Date of Birth	
+      %th G	
+      %th DOJ EPF	
+      %th DOJ EPS	
+      %th DOE EPF	
+      %th DOE EPS	
+      %th R
+    %tbody
+      = render :partial => "pf_statement", :handlers => [:pdf, :haml], :collection => @pf_statements, :as => :pf_statement

@@ -1,0 +1,597 @@
+.col-md-12
+  .pull-right
+    = back_button(faculty_master_salary_tax_path(@faculty_master, @salary_tax), {"label" => "Back"})
+    = print_button("/faculty_masters/#{@faculty_master.id}/salary_taxes/#{@salary_tax.id}/form16.pdf")
+  %table.table-with-no-padding.table-bordered{:style => "width:100%"}
+    %tr
+      %td{:colspan => "6",:style => "width:100%"}
+        %h5
+          .pull-right
+            Certificate no.
+            = @form16.certificate_no
+        %br
+        %h4
+          %center
+            %b
+              FORM No.16
+            %h5
+              %b
+                {See Rule 31(1)(a)}
+    %tr
+      %td{:colspan => "6"}
+        .certificate-css
+          PART A
+    %tr
+      %td{:colspan => "6"}
+        .certificate-css
+          Certificate under section 203 of the Incometax Act, 1961 for Tax deducted at source on Salary
+    %tr
+      %td{:colspan => "3",:style => "width:50%"}
+        .certificate-css
+          Name and Address of the Employer
+      %td{:colspan => "3",:style => "width:50%"}
+        .certificate-css
+          Name and Designation of the Faculty
+    %tr
+      %th{:colspan => "3",:rowspan => "2"}
+        %h5
+          = render "shared/org_details"
+      
+  
+      %th{:colspan => "3"}
+        %h5= @faculty_master.faculty_name
+    %tr
+     
+      %td{:colspan => "3"}
+        = @faculty_master.designation_master.name
+    %tr
+      %td{:colspan => "2",:style => "width:30%"}
+        %h5
+          PAN of the Deductor
+         
+      %td{:colspan => "2",:style => "width:30%"}
+        %h5
+          TAN of the Deductor
+      %td{:colspan => "2",:style => "width:30%"}
+        %h5
+          PAN of the Faculty
+    %tr
+      %td{:colspan => "2",:style => "width:30%"}
+        = I18n.t(:pan, :scope => :organization)
+      %td{:colspan => "2",:style => "width:30%"}
+        = I18n.t(:tan, :scope => :organization)
+      %td{:colspan => "2",:style => "width:30%"}
+        = @faculty_master.pan
+     
+    %tr
+      %th{:colspan => "2",:rowspan => "3"}
+        %h5
+          CIT (TDS)
+          %br
+          Nungambakkam High Road
+          %br
+          Chennai 600034
+  
+      %th{:colspan => "2"}
+        .certificate-css
+          Assessment year
+      %th{:colspan => "2"}
+        .certificate-css
+          Periods
+    
+  
+
+    %tr
+      %td{:colspan => "2", :rowspan => "2"}
+        .certificate-css
+          = @form16.assessment_year
+      %td{:colspan => "1"}
+        .certificate-css
+          From
+      %td{:colspan => "1"}
+        .certificate-css
+          To
+    %tr
+      %td{:colspan => "1"}
+        .certificate-css
+          = @form16.salary_tax.financial_year_from
+      %td{:colspan => "1"}
+        .certificate-css
+          = @form16.salary_tax.financial_year_to
+
+    %tr
+      %td{:colspan => "6"}
+        .certificate-css
+          Summary of tax deducted at source
+
+    %tr
+      %td{:colspan => "1"}
+        Quarter
+      %td{:colspan => "1"}
+        Receipt Number of original statements of TDS under sub-section (3) of Section 200
+      %td{:colspan => "2"}
+        Amount of tax deducted in respect of faculty
+      %td{:colspan => "2"}
+        Amount of tax deposited/remitted in respect of faculty
+    %tr
+      %td{:colspan => "1"} Q1
+      %td{:colspan => "1"} 030041900942185
+      %td{:colspan => "2"}= @form16.quarter_1_tax_paid 
+      %td{:colspan => "2"}= @form16.quarter_1_tax_paid 
+    %tr
+      %td{:colspan => "1"} Q2
+      %td{:colspan => "1"} CATXXFGB
+      %td{:colspan => "2"}= @form16.quarter_2_tax_paid 
+      %td{:colspan => "2"}= @form16.quarter_2_tax_paid 
+    %tr
+      %td{:colspan => "1"} Q3
+      %td{:colspan => "1"} XRVXCBLA
+      %td{:colspan => "2"}= @form16.quarter_3_tax_paid 
+      %td{:colspan => "2"}= @form16.quarter_3_tax_paid 
+    %tr
+      %td{:colspan => "1"} Q4
+      %td{:colspan => "1"} Not yet Filed
+      %td{:colspan => "2"}= @form16.quarter_4_tax_paid 
+      %td{:colspan => "2"}= @form16.quarter_4_tax_paid 
+    %tr
+      %td{:colspan => "6"}
+        .certificate-css
+          Summary of tax deducted at source
+    %tr
+      %td{:colspan => "6"}
+        .certificate-css
+          Details of Salary paid and any other income and tax deducted
+    %tr
+      %td{:colspan => "1"} 
+      %td{:colspan => "2"} 
+      %td{:colspan => "1"} Rs.
+      %td{:colspan => "1"} Rs.
+      %td{:colspan => "1"} Rs.
+    %tr
+      %td{:colspan => "1"}  1.
+      %td{:colspan => "2"}  Gross Salary
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"} 
+    %tr
+      %td{:colspan => "1"} 
+      %td{:colspan => "2"} 
+        a) Salary as per provisions contained in Sec.17(1) 
+              
+      %td{:colspan => "1"} 
+        %center
+          = @form16.salary_tax.total_earnings
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"} 
+    %tr
+      %td{:colspan => "1"} 
+      %td{:colspan => "2"}  b) Value of perquisites u/s 17(2) (as per Form No.12BA, wherever applicable)
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"} 
+    %tr
+      %td{:colspan => "1"} 
+      %td{:colspan => "2"}  c) Profits in lieu of salary u/s 17(3) (as per Form No.12BA, wherever applicable)
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"} 
+    %tr
+      %td{:colspan => "1"}  
+      %td{:colspan => "2"}  d) Total 
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"}  
+        %center
+          = @form16.salary_tax.total_earnings
+      %td{:colspan => "1"} 
+    %tr
+      %td{:colspan => "1"}  2.
+      %td{:colspan => "2"}  Less: Allowance to the extent exempt u/s 10
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"} 
+    %tr
+      %td{:colspan => "1"} 
+        %center
+          Allowance
+      %td{:colspan => "2"} 
+        %center
+          Rs.
+      %td{:colspan => "1"}
+      %td{:colspan => "1"}
+      %td{:colspan => "1"}
+    %tr
+      %td{:colspan => "1"} 
+        %center
+          HRA
+      %td{:colspan => "2"}= @form16.salary_tax.hra
+      %td{:colspan => "1"}
+      %td{:colspan => "1"}
+      %td{:colspan => "1"}
+    %tr
+      %td{:colspan => "1"}
+        %center
+          Conveyance & Medical
+      %td{:colspan => "2"}= @form16.salary_tax.claimed_medical_bill + @form16.salary_tax.conveyance_allowance
+      %td{:colspan => "1"}
+      %td{:colspan => "1"}
+      %td{:colspan => "1"}
+    %tr
+      %td{:colspan => "1"} 
+        %center
+          Total
+      %td{:colspan => "2"} 
+      %td{:colspan => "1"}
+      %td{:colspan => "1"}= @form16.hra_medical_bill_conveyance
+      %td{:colspan => "1"}
+    %tr
+      %td{:colspan => "1"}  3.
+      %td{:colspan => "2"}  BALANCE (1-2)
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"} 
+    %tr
+      %td{:colspan => "1"}  4.
+      %td{:colspan => "2"}  Deductions
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"} 
+    %tr
+      %td{:colspan => "1"} 
+      %td{:colspan => "2"} (a) Entertainment Allow
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"}
+    %tr
+      %td{:colspan => "1"} 
+      %td{:colspan => "2"} (b) Tax on Employment
+      %td{:colspan => "1"}= @form16.salary_tax.professional_tax
+      %td{:colspan => "1"}
+      %td{:colspan => "1"}
+    %tr
+      %td{:colspan => "1"} 5. 
+      %td{:colspan => "2"} Aggregate of 4 (a and b)
+      %td{:colspan => "1"} 
+      %td{:colspan => "1"}= @form16.professional_tax_others
+      %td{:colspan => "1"}
+    %tr
+      %td{:colspan => "1"} 6.
+      %td{:colspan => "2"} Income chargeable under the head Salaries (3-5)
+      %td{:colspan => "1"}
+      %td{:colspan => "1"}
+      %td{:colspan => "1"}= @form16.income_under_head_salaries
+
+    %tr
+      %td{:colspan => "1"} 7.
+      %td{:colspan => "2"} Add: Any other income reported by the Faculty
+      %td{:colspan => "1"}
+      %td{:colspan => "1"}
+      %td{:colspan => "1"}
+
+
+    %tr
+      %th{:style => 'width: 5%'}
+        %th{:style => 'width: 20%'}
+          %center
+            Income
+        %th{:style => 'width: 20%'}
+          %center
+            Rs.
+        %th{:style => 'width: 20%'}
+        %th{:style => 'width: 20%'}
+        %th
+
+      %tr
+        %td
+        %td
+          %center
+            House Property
+        %td
+        %td
+        %td
+        %td 
+      %tr
+        %td 
+        %td 
+        %td 
+        %td 
+        %td 
+        %td 0                
+      %tr
+        %td 8.
+        %td{:colspan => "2"} GROSS TOTAL INCOME (6+7)
+        %td
+        %td
+        %td= @form16.gross_total_income
+    %table.table-with-no-padding.table-bordered{:style => "width:100%"}
+      %tr
+        %td 9.
+        %td{:colspan => "2"} Deductions under Chapter VI-A
+        %td
+        %td
+        %td
+
+      %tr
+        %th
+        %th
+          (A)
+        %th
+          Sections 80C, 80CCC and 80CCD
+        %th
+        %th
+        %th
+      %tr
+        %th
+        %th (a)
+        %th Section 80C
+        %th
+        %th Gross Amount
+        %th Deductible Amount
+      %tr
+        %th
+        %th (i)
+        %th Provident Fund
+        %th
+        %th= @form16.salary_tax.pf
+        %th= @form16.deductible_pf_amount
+      %tr
+        %th
+        %th (ii)
+        %th Infrastructure Bond
+        %th
+        %th= @form16.infrastructure_bond
+        %th
+      %tr
+        %th
+        %th (iii)
+        %th LIC Premium and Others
+        %th
+        %th= @form16.lic_premium_and_others
+        %th= @form16.deductible_lic_premium_and_others
+      %tr
+        %th
+        %th (iv)
+        %th
+        %th
+        %th
+        %th
+      %tr
+        %th
+        %th (v)
+        %th
+        %th
+        %th
+        %th
+      %tr
+        %th
+        %th (vi)
+        %th
+        %th
+        %th
+        %th
+      %tr
+        %th
+        %th (vii)
+        %th
+        %th
+        %th
+        %th
+      %tr
+        %th
+        %th  (viii)
+        %th
+        %th
+        %th
+        %th
+      %tr
+        %th
+        %th (b)
+        %th Section 80CCC
+        %th
+        %th
+        %th
+      %tr
+        %th
+        %th (c)
+        %th Section 80CCD
+        %th
+        %th
+        %th
+      %tr
+        %th
+        %th Total
+        %th
+        %th
+        %th= @form16.total_deductions_under_VI_A
+        %th= @form16.deductible_amount_under_VI_A
+      %tr
+        %td{:style => 'width: 40%',:rowspan => "3",:colspan => "3"} Note:1 Aggregate amount deductible under section 80C shallnot exceed on lakh rupees. 
+        %td{:colspan => "1"}
+        %td
+        %td
+      %tr
+        %td
+        %td
+        %td
+      %tr
+        %td
+        %td
+        %td
+      %tr
+        %td{:style => 'width: 40%',:rowspan => "3",:colspan => "3"} 2. Aggregate amount deductible under the three sections i.e. 80C, 80CCC, 80CCD shall not exceed one lakh rupees.
+        %td
+        %td
+        %td
+      %tr
+        %td
+        %td
+        %td
+      %tr
+        %td
+        %td
+        %td
+      %tr
+        %td{:style => 'width: 5%'}
+        %td (B)
+        %td Other sections (e.g.80E,80G etc.) under Chapter VIA
+        %td Gross Amount
+        %td Qualifying Amount
+        %td Deductible Amount
+      %tr
+        %td
+        %td (i)
+        %td Section 80D
+        %td= @form16.section_80_d
+        %td= @form16.section_80_d
+        %td= @form16.section_80_d
+      %tr
+        %td
+        %td (ii)
+        %td Section 80E
+        %td= @form16.section_80_e
+        %td= @form16.section_80_e
+        %td= @form16.section_80_e
+      %tr
+        %td
+        %td (iii)
+        %td Section 80G
+        %td= @form16.section_80_g
+        %td= @form16.section_80_g
+        %td= @form16.section_80_g
+      %tr
+        %td
+        %td (iv)
+        %td Section
+        %td
+        %td
+        %td
+      %tr
+        %td
+        %td Total
+        %td
+        %td
+        %td
+        %td= @form16.deductible_amount_sections
+      %tr
+        %td 10.
+        %td{:colspan => "2"} Aggregate of deductible amount under Chapter VI-A 
+        %td
+        %td
+        %td= @form16.aggregatable_deductible_amount
+      %tr
+        %td 11.
+        %td{:colspan => "2"} TOTAL INCOME (8-10)
+        %td
+        %td
+        %td= @form16.total_income
+      %tr
+        %td 12.
+        %td{:colspan => "2"} TAX ON TOTAL INCOME 
+        %td
+        %td
+        %td= @form16.tax_on_total_income
+      %tr
+        %td 13.
+        %td{:colspan => "2"} Education Cess @ 3% (on tax computed at S.No.12)
+        %td
+        %td
+        %td= @form16.educational_cess
+      %tr
+        %td 14.
+        %td{:colspan => "2"} Tax Payable (12+13)
+        %td
+        %td
+        %td= @form16.tax_payble
+      %tr
+        %td 15.
+        %td{:colspan => "2"} Less: Relief under section 89 (attach details)
+        %td
+        %td
+        %td= @form16.relief_under_Section_89
+      %tr
+        %td 16.
+        %td{:colspan => "2"} Tax Payable (14-15)
+        %td
+        %td
+        %td
+      %tr
+        %td 17.
+        %td{:colspan => "2"} Less: (a) Tax deducted at Source U/s.192(1) 
+        %td
+        %td
+        %td= @form16.salary_tax.tax_paid
+      %tr
+        %td 
+        %td{:colspan => "2"} (b) Tax paid by the employer on behalf the   faculty U/s.192(1A) on prquisites U/s.17(2) 
+        %td
+        %td
+        %td
+      %tr
+        %td 
+        %td{:colspan => "2"} Total 
+        %td
+        %td
+        %td= @form16.salary_tax.tax_paid
+      %tr
+        %td 18.
+        %td{:colspan => "2"} Tax Payable / Refundable (16-17)
+
+        %td
+        %td
+        %td= @form16.salary_tax.net_tax
+      %tr
+        %td{:colspan => "6"} 
+          .certificate-css
+            Verification
+      %tr
+        %td{:colspan => "2"} Certified that a sum of Rs.
+        %td{:colspan => "2"}= @form16.salary_tax.tax_paid
+        %td{:colspan => "2"} Ninety two thousand five hundred ten only
+      %tr
+        %td{:colspan => "6"} has been deducted and deposited to the credit of the Central Government.  We further certify that the information given above is true, complete and corect and is based on the books of account, documents, TDS statements, TDS deposited and other available records.                  
+
+      %tr
+        %th{:style => 'width: 30%',:colspan => "2"} Place 
+        %th{:style => 'width: 30%',:colspan => "2"} Chennai
+        %th{:style => 'width: 40%',:colspan => "2"}
+
+      %tr
+        %td{:colspan => "2"} Date
+        %td{:colspan => "2"}= session[:transaction_date]
+        %td{:colspan => "2"} Signature of person responsible for deduction of tax
+      %tr
+        %td{:colspan => "2"} Designation
+        %td{:colspan => "2"} Authorised Signatory
+        %td{:colspan => "2"} Full Name
+      %tr
+        %td{:colspan => "6"} 
+          .certificate-css
+            ANNEXURE-B
+      %tr
+        %td{:colspan => "6"} 
+          .certificate-css
+            DETAILS OF TAX DEDUCTED AND DEPOSITED IN THE CENTRAL GOVERNMENT ACCOUNT THROUGH CHALLAN
+      %tr
+        %td{:colspan => "6"} 
+          .certificate-css
+            (The Employer to provide payment wise details of tax deducted and deposited with respect to the faculty)
+      %tr{:colspan => "6", :rowspan => "2"} 
+        %td{:rowspan => "2",:colspan => "1"}
+          S.no
+        %td{:colspan => "2",:rowspan => "2"} Tax Deposited in respect of the faculty (Rs.)
+        %td{:colspan => "3x"}
+          %center
+            Challan Identification Number (CIN)
+      %tr
+        %td{:style => 'width: 20%'} BSR Code of the Bank Branch
+        %td{:style => 'width: 20%'} Date on which tax deposited
+        %td{:style => 'width: 20%',:colspan => "4"} Challan Serial Number
+      - @form16.payslips.each_with_index do |payslip, index|
+        %tr
+          %td= index+1
+          %td{:colspan => "2"}= payslip.tds_pm
+          %td= payslip.bsr_code
+          %td{:colspan => "1"}= payslip.tax_deposited_date
+          %td= payslip.challan_serial_number
+
+
+

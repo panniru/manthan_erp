@@ -1,0 +1,14 @@
+= form_for @salary_break_up, :html => {:class => "form-horizontal", :role=>"form"} do |f|
+  - if f.object.errors.present?
+    = render "shared/error_messages", :object => f.object
+  .row
+    .form-group
+      = f.label :component, :class => 'col-md-3 control-label'
+      .col-md-9
+        = f.text_field :component, :class => "form-control", :readonly => true
+    .form-group
+      = f.label :criteria, :class => 'col-md-3 control-label'
+      .col-md-9
+        = f.text_field :criteria, :class => "form-control"
+    .form-group
+      = save_button

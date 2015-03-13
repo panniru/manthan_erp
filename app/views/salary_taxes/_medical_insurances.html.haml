@@ -1,0 +1,37 @@
+%table.table.table-bordered{:ng_show => "salaryTax.medical_insurances"}
+  %thead
+    %th Bill No
+    %th Bill Date
+    %th{:style => "width: 25%;"} Parent
+    %th Amount
+  %tbody
+    %tr{"ng-repeat" => "insurance in salaryTax.medical_insurances"}
+      %td
+        = text_field_tag  "salary_tax[medical_insurances][][bill_no]",nil, :class => "form-control-medium", :ng_model => "insurance.bill_no", :placeholder => "No"
+      %td{:style => "width: 30%;"}
+        %input.form-control-medium{:type => "text", :name => "salary_tax[medical_insurances][][bill_date]", :ng_model => "insurance.bill_date", :placeholder => "Date", :my_datepicker => true}
+      %td
+        .btn-group.btn-group-xs
+          %button{:type => "button", :ng_class => "{'btn btn-success btn-xs' : insurance.parent_included, 'btn btn-default btn-xs' : !insurance.parent_included}", :ng_click => "insurance.parent_included= true"}
+            %span.font-9 Included
+          %button{:type => "button", :ng_class => "{'btn btn-default btn-xs' : insurance.parent_included, 'btn btn-danger btn-xs' : !insurance.parent_included}", :ng_click => "insurance.parent_included= false"}
+            %span.font-9 Not
+        %br
+        .btn-group.btn-group-xs{:ng_show => "insurance.parent_included"}
+          %button{:type => "button", :ng_class => "{'btn btn-success btn-xs' : insurance.parent_senior_citizen, 'btn btn-default btn-xs' : !insurance.parent_senior_citizen}", :ng_click => "insurance.parent_senior_citizen= true"}
+            %span.font-9 S Citizen
+          %button{:type => "button", :ng_class => "{'btn btn-default btn-xs' : insurance.parent_senior_citizen, 'btn btn-danger btn-xs' : !insurance.parent_senior_citizen}", :ng_click => "insurance.parent_senior_citizen= false"}
+            %span.font-9 Not
+      %td{:style => "width: 25%;"}
+        = text_field_tag  "salary_tax[medical_insurances][][amount]",nil, :class => "form-control-medium", :ng_model => "insurance.amount", :placeholder => "Amount", :ng_blur => "broadcastInsuranceAmount()"
+    %tr
+      %th Final Amount
+      %td
+      %td
+      %th {{salaryTax.medical_insurances_total}}
+.col-md-4
+  %span Employee: Upto {{taxLimits.mediclaim_employee_limit}} 
+.col-md-4
+  %span Parent: Upto {{taxLimits.mediclaim_parent_limit}} 
+.col-md-4
+  %span Parent senior citizen: Upto {{(taxLimits.mediclaim_parent_limit + taxLimits.mediclaim_parent_senior_citizen_limit)}} 

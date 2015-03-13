@@ -1,0 +1,42 @@
+.col-md-12
+  .pull-right
+    = image_tag "logo.png", :align => 'left', :class => "img-rounded", :style => "margin-left:33px;" 
+.col-md-12
+  = render "payslip_header"
+.col-md-12
+  = render "payslip_header_2"
+.col-md-12
+  %hr
+  .col-md-6.col-right-border  
+    .col-md-offset-4
+      %h4 EARNINGS (in Rupees)
+    .col-md-12
+      = render :partial => "earnings", :locals => {:payslip => @payslip}
+     
+            
+  .col-md-6
+    .col-md-offset-4
+      %h4 DEDUCTIONS (in Rupees)
+    .col-md-12
+      = render :partial => "deductions", :locals => {:payslip => @payslip}
+      
+            
+.col-md-12
+  %hr
+  .col-md-4
+    %h4 FACULTY SIGNATURE 
+  .col-md-4
+    %h4 AUTHORISED SIGNATORY
+  .col-md-4
+    .pull-right
+      %label= "Net Amount : #{@payslip.net_total}"
+
+.col-md-12
+  .col-md-offset-5
+    %br
+    %br
+    %br
+    - unless @payslip.approved?
+      = edit_button(edit_faculty_master_payslip_path(@faculty_master, @payslip))
+    = print_button(faculty_master_payslip_path(@faculty_master, @payslip, {:format => :pdf}))
+    = email_button(mail_faculty_master_payslip_path(@faculty_master, @payslip))

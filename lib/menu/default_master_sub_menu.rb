@@ -7,6 +7,7 @@ class DefaultMasterSubMenu < Struct.new(:controller)
       sub_menu << calendar
       sub_menu << time_tables
       sub_menu << designations
+      sub_menu << day_ends
     end
     
     def parent_sub_menu
@@ -36,5 +37,8 @@ class DefaultMasterSubMenu < Struct.new(:controller)
     end
     def designations
       MenuItem.new(:label => "Designation", :klass => "", :icon => "tasks", :href => "/designations" )
+    end
+    def day_ends
+      MenuItem.new(:label => "Day Ends", :klass => "", :icon => "calendar-o", :href => "/default_masters/day_ends")
     end
 end

@@ -1,0 +1,16 @@
+.row
+  = render :partial => "employee_header", :locals => {:faculty => @faculty_master}
+.row
+  %hr
+  = link_to (fa_icon "angle-double-up 2x", :id => "collapse-icon"),"#" ,:class => "collapse-link pull-right", :data => {:toggle => "collapse", :target => "#collapse-div0"}
+.row{:ng_controller => "SalaryTaxController", :ng_init => "edit(#{@employee_master.id}, #{@salary_tax.id})"}
+  %form{:name=>"salaryTaxForm", :ng_submit => "updateSalaryTax()", :novalidate => "", :class => "form-horizontal", :role=>"form", :id => "salary_tax_form"}
+    .row
+      #collapse-div0.col-md-12.collapse.in
+        = render :partial => "tax_building_blocks"
+    .row
+      = render :partial => "form"
+    .row
+      .col-md-offset-6
+        = save_button
+    

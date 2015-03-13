@@ -1,0 +1,30 @@
+%h2
+  = link_to "Leaves" , faculty_leaves_path
+
+.col-md-2
+.col-md-4
+  %h4
+    =  "#{@faculty_leave.faculty_master.name}"
+
+  = form_for @faculty_leave, :html => {:class => "form-horizontal", :role=>"form", :id => "faculty_leave_form"} do |f|
+    - if f.object.errors.present?
+      = render "shared/error_messages", :object => f.object
+    .row
+      .form-group
+        = f.label :Days_worked, :class => 'col-md-3 control-label'
+        .col-md-9
+          = f.text_field :days_worked, :class => "form-control"
+
+      .form-group
+        = f.label :Working_Days, :class => 'col-md-3 control-label'
+        .col-md-9
+          = f.text_field :working_days, :class => "form-control"
+
+      .form-group
+        = f.label :LOP, :class => 'col-md-3 control-label'
+        .col-md-9
+          = f.text_field :lop, :class => "form-control"
+      .actions
+        %center
+          = save_button
+          

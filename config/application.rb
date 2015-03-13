@@ -1,5 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
+require 'rubygems'
+require 'roo'
 require 'csv'
 require 'rails/all'
 
@@ -25,6 +27,11 @@ module ManthanErp
     config.autoload_paths += %W(#{Rails.root}/lib/menu)
     config.autoload_paths += %W(#{Rails.root}/lib/reports)
     config.autoload_paths += %W(#{Rails.root}/app/models/uploaders)
+    config.autoload_paths += %W(#{Rails.root}/lib/payroll/)    
+    config.autoload_paths += %W(#{Rails.root}/lib/payroll/pdf)   
+    config.autoload_paths += %W(#{Rails.root}/lib/payroll/jobs)    
+    config.autoload_paths += %W(#{Rails.root}/lib/payroll/errors)    
+
     config.roadie.enabled = true
     config.assets.enabled = true
     config.angular_templates.module_name    = 'templates'

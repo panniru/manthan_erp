@@ -1,0 +1,94 @@
+= wicked_pdf_stylesheet_link_tag "pdf_reports"
+.col-md-12
+  .pull-left
+    %h1 
+      = raw "Form24Q Annexure 2 #{@showing_year}" 
+.row
+.col-md-12
+  %table.table.table-bordered{:style => "width:100%;"}
+    %thead
+      %th{:height => "100"} Faculty PAN
+      %th{:height => "100"} Name of Faculty
+      %th{:height => "100"} Write 'W' for Woman, 'S' for Senior Citizen and 'G' for others
+      %th{:height => "100"} Date from which employed with current employer
+      %th{:height => "100"} Total amount of salay (Includes wages, annuity, pension, gratuity, fees, commission, bonus, repayment of amount deposited etc.,)
+      %th Total Deduction under section 16(ii) and 16(iii) (Specify each deduction separtely)
+      %th Income Chargeable under the head "Salaries" (Column 332 minus 333)
+      %th Income (including loss from housing property) under  any head other than the head "Salaries" offered for TDS [section 192(2B)
+      %th Gross total income (Total of Columns 334 and 335)
+      %th Aggregate amount of deductions under sections 80C, 80CCC and 80CCD (Total to be limited to amount specified in section 80CCE)
+      %th Amount deductible under any other provision(s) of Chapter VI-A
+      %th Total Amount deductible under Chapter VI-A (Total of Columns 337 and 338)
+      %th Total taxable income(Columns 336 minus column 339)
+      %th Total tax - (I) income-tax on total income
+      %th (ii) Surcharge
+      %th (iii) Education Cess
+      %th Income tax Relief under section 89, when salary etc., is paid in arrear or in advance
+      %th Net tax payable (Columns 341+342+343-344)
+      %th Total amount of tax deducted at source for the whole year(aggregate of the amount in column 322 of Annexure I for all the four quarters in
+      %th Shortfall in tax deduction(+)/Excess tax deduction(-)[Column 345 minus column 346]
+    %thead{:style => "height:50px"}
+      %th{:valign => "bottom"} (328)
+      %th (329)
+      %th (330)
+      %th (331)
+      %th (332)
+      %th (333)
+      %th (334)
+      %th (335)
+      %th (336)
+      %th (337)
+      %th (338)
+      %th (339)
+      %th (340)
+      %th (341)
+      %th (342)
+      %th (343)
+      %th (344)
+      %th (345)
+      %th (346)
+      %th (347)
+    %tbody
+      - @form24_q_annexure2s.each do |annexure_2|
+        %tr
+          %td= annexure_2.employee_pan
+          %td= annexure_2.employee_name
+          %td= annexure_2.employee_gender_consideration
+          %td= annexure_2.employee_joining_date
+          %td= annexure_2.feild_332
+          %td= annexure_2.feild_333
+          %td= annexure_2.feild_334
+          %td= annexure_2.feild_335
+          %td= annexure_2.feild_336
+          %td= annexure_2.feild_337
+          %td= annexure_2.feild_338
+          %td= annexure_2.feild_339
+          %td= annexure_2.feild_340
+          %td= annexure_2.feild_341
+          %td= annexure_2.feild_342
+          %td= annexure_2.feild_343
+          %td= annexure_2.feild_344
+          %td= annexure_2.feild_345
+          %td= annexure_2.feild_346
+          %td= annexure_2.feild_347
+      %tr
+        %th Total
+        %th
+        %th
+        %th
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_332}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_333}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_334}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_335}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_336}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_337}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_338}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_339}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_340}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_341}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_342}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_343}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_344}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_345}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_346}
+        %th= @form24_q_annexure2s.inject(0){|sum, annexure_2| sum + annexure_2.feild_347}

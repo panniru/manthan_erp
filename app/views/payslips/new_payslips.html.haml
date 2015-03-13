@@ -1,0 +1,24 @@
+= title("New Payslips")
+.row{:ng_controller => "PayslipsController"}
+  .col-md-offset-3
+    %form{:class => "form-inline", :ng_submit => "newPayslips(1)"}
+      .form-group
+        %input.form-control{:type => "text", :readonly => true, :value => "#{session[:transaction_date].strftime('%b')}"} 
+      .form-group
+        %input.form-control{:type => "text", :readonly => true, :value => "#{session[:transaction_date].strftime('%Y')}"} 
+      .form-group
+        = select_tag "designation_name", options_for_select([['All', 'all']] + DesignationMaster.managed_by(current_user).map{|d| [d.name, d.id]}), :class => "form-control", :ng_model => "designationId"
+      .form-group
+        = submit_search
+
+  .row{:ng_show => "payslips.length"}
+    %form{:name=>"payslipsForm", :ng_submit => "savePayslips()", :novalidate => ""}
+      .pull-right
+        %my-pagination{:from => "from_index", :to => "to_index", :current_page => "current_page", :total=> "total_entries", :action => "newPayslips(page)", :need_confirmation => "needConfirmation"}
+        %button{:type => "submit", :class => "btn btn-primary", :ng_init => "label = 'Save'", :ng_disabled => "disableSaving"}
+          %i.fa.fa-save.fa-lg 
+          %span {{label}}
+      = render "new_payslips_grid_view"
+  .row{:ng_hide => "no_data"}
+    .col-md-offset-4
+      %h3 No Data Available

@@ -1,0 +1,19 @@
+%table.table.table-bordered{:ng_show => "salaryTax.savings"}
+  %thead
+    %th Type
+    %th Bill No
+    %th Bill Date
+    %th Amount
+  %tbody
+    - @salary_tax.savings.each do |saving|
+      %tr
+        %td= saving.saving_type
+        %td= saving.bill_no
+        %td= saving.bill_date
+        %td= saving.amount
+    %tr
+      %th Final Amount
+      %td
+      %td
+      %th= @salary_tax.savings_total
+  

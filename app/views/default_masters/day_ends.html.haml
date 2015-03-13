@@ -1,0 +1,23 @@
+.row{:ng_controller => "DesignationMasterController" , :ng_init => "getDayEnd()" }
+  .col-sm-6
+    .pull-right
+      = link_to raw("<i class='fa fa-save fa-lg'></i> Edit"), "#", :class => "btn btn-primary", :ng_click => "editable = true", :ng_hide => "editable" 
+    %br
+    %br
+    %h4
+      %table
+        %thead
+          %th Day ends
+        %tbody
+          %tr{:ng_repeat => "day_end in day_ends"}
+            %td
+              %br
+              .form-group
+                %label{:ng_hide => "editable" , :class => "form-control"} {{day_end.transaction_date}}
+                %div{:ng_show => "editable"}
+                  %input{:ng_model => "day_end.transaction_date" , :class => "form-control" , :my_datepicker => true } 
+                  %br
+                .pull-right
+                  = link_to raw("<i class='fa fa-save fa-lg'></i> Update"), "#", :class => "btn btn-primary",:ng_click => "saveDayEnds(day_end)" , :ng_show => "editable"
+                  
+            

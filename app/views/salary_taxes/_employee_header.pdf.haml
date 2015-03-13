@@ -1,0 +1,23 @@
+.row
+  .col-xs-6
+    .col-xs-4
+      %label Name:
+    .col-xs-8
+      %label= link_to faculty.faculty_name, faculty
+  .col-xs-6
+    .col-xs-4
+      %label Code:
+    .col-xs-8
+      %label= faculty.code
+.row
+  .col-xs-6
+    .col-xs-4
+      %label Designation:
+    .col-xs-8
+      %label= faculty.designation_master.name 
+  .col-xs-6
+    .col-xs-4
+      %label Department:
+    .col-xs-8
+      %label= faculty.department_master.name
+

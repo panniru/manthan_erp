@@ -1,0 +1,35 @@
+.row{:ng_controller => "PayslipsIndexController", :ng_init => "getLatestPayslips('#{session[:transaction_date].strftime("%B")}', #{session[:transaction_date].strftime("%Y")})"}
+  = form_tag payslips_email_payslips_path, :method => 'get' , :class => "form-inline", :id => "payslipsIndexForm" do
+    .form-group
+      = select_tag "month", options_for_select(Date::MONTHNAMES, params[:month]), :class => "form-control", :placeholder => "Month", :ng_model => "month"
+    .form-group
+      = select_tag "year", options_for_select(((session[:transaction_date].year-10..session[:transaction_date].year).to_a << "").reverse, params[:year]), :class => "form-control", :placeholder => "Year", :ng_model => "year"
+    = link_to raw("<i class='fa fa-search fa-lg'></i> Go"), "#", :class => "btn btn-primary", :ng_click => "getPayslips(1)"
+    = link_to raw("<i class='fa fa-at fa-lg'></i> Email Payslips"), "/payslips/email_payslips?month={{month}}&year={{year}}", :class => "btn btn-primary", :rel => "emailPayslip", :ng_disabled => "!payslips.length > 0", :data => {confirm: "Are you sure to email payslips?"}
+    = link_to raw("<i class='fa fa-download fa-lg'></i> Download"), "/payslips.pdf?month={{month}}&year={{year}}", :class => "btn btn-primary", :rel => "downloadPayslip", :ng_disabled => "!payslips.length > 0", :target => "_blank"
+
+    .btn-group
+      = link_to raw("<i class='fa fa-bank fa-lg'></i> Download Bank Advice"), "#", :class => "btn btn-primary", :ng_disabled => "!payslips.length > 0"
+      %a.btn.btn-primary.dropdown-toggle{:data => {:toggle => "dropdown"}, :href=> "#", :ng_disabled => "!payslips.length > 0"}
+        %span.fa.fa-caret-down
+      %ul.dropdown-menu.dropdown-menu-right
+        %li
+          = link_to raw("<i class='fa fa-file-pdf-o fa-lg'></i> As PDF"), "/payslips/bank_advice.pdf?month={{month}}&year={{year}}", :rel => "bankAdviceDownload", :ng_disabled => "!payslips.length > 0", :target => "_blank"
+        %li
+          = link_to raw("<i class='fa fa-file-excel-o fa-lg'></i> As Excel"), "/payslips/bank_advice.xls?month={{month}}&year={{year}}", :rel => "bankAdviceDownload", :ng_disabled => "!payslips.length > 0"
+
+    .btn-group
+      = link_to raw("<i class='fa fa-file-text-o fa-lg'></i> Download Voucher"), "#", :class => "btn btn-primary", :ng_disabled => "!payslips.length > 0"
+      %a.btn.btn-primary.dropdown-toggle{:data => {:toggle => "dropdown"}, :href=> "#", :ng_disabled => "!payslips.length > 0"}
+        %span.fa.fa-caret-down
+      %ul.dropdown-menu.dropdown-menu-right
+        %li
+          = link_to raw("<i class='fa fa-file-pdf-o fa-lg'></i> As PDF"), "/payslips/voucher.pdf?month={{month}}&year={{year}}", :rel => "voucherDownload", :ng_disabled => "!payslips.length > 0", :target => "_blank"
+        %li
+          = link_to raw("<i class='fa fa-file-excel-o fa-lg'></i> As Excel"), "/payslips/voucher.xls?month={{month}}&year={{year}}", :rel => "voucherDownload", :ng_disabled => "!payslips.length > 0"
+
+  .row
+    = render :partial => "payslips_layout", :locals => {:editable => false}
+    
+
+    

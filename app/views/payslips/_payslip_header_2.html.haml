@@ -1,0 +1,55 @@
+.row
+  .col-md-4.col-right-border  
+    %table.table.table-condensed
+      %thead
+        %th{:colspan => 2} 
+          %span.center-header-content PF Details
+      %tr
+        %th Date Of Joining
+        %td= @payslip.faculty_master.date_of_joining
+      %tr
+        %th PF Number
+        %td= @payslip.faculty_master.p_f_no
+      %tr
+        %th Faculty code
+        %td= @payslip.faculty_master.code
+      %tr
+        %th PAN
+        %td= @payslip.faculty_master.pan
+          
+  - faculty_leave_obj = @payslip.faculty_master.faculty_leaves.in_th_month_year(@payslip.generated_date).first
+  .col-md-4.col-right-border  
+    %table.table.table-condensed
+      %thead
+        %th.center-header-content{:colspan => 2}  
+          %span.center-header-content Bank Details
+      %tr
+        %th Pay Mode
+        %td Transfer to Bank
+      %tr
+        %th Bank Name
+        %td= @payslip.faculty_master.bank_name
+      %tr
+        %th SB A/c. No
+        %td= @payslip.faculty_master.account_number
+      %tr
+        %th Days Worked
+        %td= faculty_leave_obj.try(:days_worked).to_i
+
+  .col-md-4
+    %table.table.table-condensed
+      %thead
+        %th{:colspan => 2} 
+          %span.center-header-content Leave Balance details (days)
+      %tr
+        %th Sick Leave
+        %td= faculty_leave_obj.try(:sl).to_i 
+      %tr
+        %th Casual Leave
+        %td= faculty_leave_obj.try(:cl).to_i
+      %tr
+        %th Total Leave
+        %td= (faculty_leave_obj.try(:sl).to_i + faculty_leave_obj.try(:cl).to_i)
+      %tr
+        %th LOP
+        %td= faculty_leave_obj.try(:lop).to_i

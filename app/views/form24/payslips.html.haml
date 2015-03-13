@@ -1,0 +1,66 @@
+%h2
+  - label = "Annexure-1 #{@date.strftime('%b')}-#{@date.year} (Q#{@quarter_no})"
+  = raw "Form24Q #{link_to label, form24_index_path}" 
+
+%table.table.table-condensed
+  %thead
+    %th PAN of the Faculty
+    %th Name of the Faculty
+    %th Date of Payment/credit
+    %th Taxable amount on which tax deducted( Monthly Gross salary)Rs.
+    %th TDS Rs.
+    %th Surcharge Rs.
+    %th Educational Cess Rs.
+    %th Total tax deducted   (319+320+321)
+    %th Total tax deposited      Rs.
+    %th Interest
+    %th Others
+    %th Total     (322+Interest+ Others)
+    %th BSR Code
+    %th Challan Serial No.
+    %th Date on which tax Deposited
+    %th Date of deduction
+    %th Date of Deposit
+    %th Reason for non-deduction/lower deduction*
+  %thead
+    %th (315)
+    %th (316)
+    %th (317)
+    %th (318)
+    %th (319)
+    %th (320)
+    %th (321)
+    %th (322)
+    %th (323)
+    %th (323A)
+    %th (323B)
+    %th (323C)
+    %th (323D)
+    %th (323E)
+    %th (323F)
+    %th (324)
+    %th (325)
+    %th (326)
+  %tbody
+    - @payslips.each do |payslip|
+      %tr
+        %td= payslip.faculty_master.pan
+        %td= payslip.faculty_master.faculty_name
+        %td= payslip.generated_date
+        %td= payslip.total_earnings
+        %td= payslip.tds_without_educational_cess
+        %td= payslip.surcharge
+        %td= payslip.educational_cess
+        %td= payslip.total_tax_calculated
+        %td= payslip.tds_pm
+        %td= payslip.interest
+        %td= payslip.others
+        %td= (payslip.tds_pm + payslip.interest + payslip.others)
+        %td= @form24.bsr_code
+        %td= @form24.challan_serial_no
+        %td= @form24.deposited_date
+        %td= payslip.generated_date
+        %td= @form24.deposited_date
+        %td= @form24.payment_type
+-#= will_paginate @forms, :params => {:month => @date.month , :year => @date.year , id: @form24.id}, payslips_form24_path(), param_name: 'page', previous_label: h("<"), next_label: h(">")        
+        

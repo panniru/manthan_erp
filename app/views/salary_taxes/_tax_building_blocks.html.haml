@@ -1,0 +1,33 @@
+-# .col-md-6
+-#   = render :partial => "rent_form", :locals => {:f => f}
+
+.row
+  .col-md-4-no-padding
+    .panel.panel-default
+      .panel-heading
+        Medical Insurance
+        .pull-right
+          = link_to raw("<i class='fa fa-plus-circle'></i> More"), "#",:ng_click => "addMoreMedicalInsurance()", :class => "btn btn-default btn-xs"
+      .panel-body-no-padding
+        = render :partial => "medical_insurances"
+  .col-md-4-no-padding
+    .panel.panel-default
+      .panel-heading
+        Medical Bills
+        .pull-right
+          = link_to raw("<i class='fa fa-plus-circle'></i>More"), "#", :ng_click => "addMoreMedicalBill()", :class => "btn btn-default btn-xs"
+      .panel-body-no-padding
+        = render :partial => "medical_bills"
+  .col-md-4-no-padding
+    .panel.panel-default
+      .panel-heading
+        Savings
+        .pull-right
+          = link_to raw("<i class='fa fa-plus-circle'></i> More"), "#", :ng_click => "addMoreSaving()", :class => "btn btn-default btn-xs"
+      .panel-body-no-padding
+        = render :partial => "savings"
+.row
+  .col-md-12-no-padding
+    = render :partial => "house_rent"
+
+%hr

@@ -1,0 +1,10 @@
+= title("#{@faculty_master.present? ? @faculty_master.faculty_name : ""} Payslip")
+.col-md-12
+  .pull-right
+    = image_tag "logo.png", :align => 'left', :class => "img-rounded", :style => "margin-left:33px;" 
+.col-md-12
+  = render "payslip_header"
+.col-md-12
+  = render "payslip_header_2"
+.col-md-12
+  = render :partial => "form", :locals => {:url => faculty_master_payslip_path(@faculty_master, @payslip)}
