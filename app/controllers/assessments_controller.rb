@@ -139,7 +139,7 @@ class AssessmentsController < ApplicationController
       format.json do       
         teacher_assessments = AssessmentListing.where('grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'"+" AND "+'subject_master_id = '+"'#{params[:my_Subject]}'")       
         teacher_assessments = teacher_assessments.each.map do |mapping|
-          {id: mapping.id, faculty_master_id: mapping.faculty_master_id, faculty_name: mapping.faculty_master.faculty_name, grade_master_id: mapping.grade_master_id,  grade_name: mapping.grade_master.grade_name, section_master_id: mapping.section_master_id,  section_name: mapping.section_master.section_name, subject_master_id: mapping.subject_master_id,  subject_name: mapping.subject_master.subject_name, assessment_type_id: mapping.assessment_type_id, assessment_type: mapping.assessment_type.assessment_type, assessment_desc: mapping.assessment_desc, assessment_date: mapping.assessment_date} 
+          {id: mapping.id, faculty_master_id: mapping.faculty_master_id, faculty_name: mapping.faculty_master.faculty_name, grade_master_id: mapping.grade_master_id,  grade_name: mapping.grade_master.grade_name, section_master_id: mapping.section_master_id,  section_name: mapping.section_master.section_name, subject_master_id: mapping.subject_master_id,  subject_name: mapping.subject_master.subject_name, assessment_id: mapping.assessment_id, assessment_name: mapping.assessment.assessment_name, assessment_desc: mapping.assessment_desc, assessment_date: mapping.assessment_date} 
         end
         render :json => teacher_assessments
       end
@@ -157,7 +157,7 @@ class AssessmentsController < ApplicationController
             @mapping.grade_master_id = t['grade_master_id'] 
             @mapping.section_master_id = t['section_master_id']
             @mapping.subject_master_id = t['subject_master_id']  
-            @mapping.assessment_type_id = t['assessment_type_id']  
+            @mapping.assessment_id = t['assessment_id']  
             @mapping.assessment_desc = t['assessment_desc']  
             @mapping.assessment_date = t['assessment_date'].to_date  
             @mapping.save
@@ -172,6 +172,10 @@ class AssessmentsController < ApplicationController
     end     
   end
 
+  def add_teacher_assessments_params(params)   
+    params.permit(:faculty_master_id, :grade_master_id, :section_master_id, :subject_master_id, :assessment_id, :assessment_desc, :assessment_date)
+  end
+
   def delete_teacher_assessment_mappings
     respond_to do |format|
       format.json do       
@@ -181,10 +185,6 @@ class AssessmentsController < ApplicationController
         render :json => true
       end
     end
-  end
-
-  def add_teacher_assessments_params(params)   
-    params.permit(:faculty_master_id, :grade_master_id, :section_master_id, :subject_master_id, :assessment_type_id, :assessment_desc, :assessment_date)
   end
 
   def get_assessment_mappings_service
@@ -274,6 +274,24 @@ class AssessmentsController < ApplicationController
           {id: mapping.id, assessment_id: mapping.assessment_id, assessment_criteria: mapping.assessment_criteria}
         end
         render :json => assessment_criteria
+      end
+    end
+  end
+
+  def get_assessments_for_assessment_type
+    respond_to do |format|
+      format.json do 
+        p params 
+        p "===================>"
+        p AssessmentGradeMapping.ids
+        p "++++++++++++++++++++"
+        assessment_grade_mapping_id = AssessmentGradeMapping.where(assessment_type_id: "#{params[:assessment_type_id]}",grade_master_id: "#{params[:grade_master_id]}").pluck(:id)[0]
+        p assessment_grade_mapping_id
+        p "===================>"
+        assessments  = Assessment.where(assessment_grade_mapping_id: assessment_grade_mapping_id,subject_master_id: "#{params[:subject_master_id]}").select(:id,:assessment_grade_mapping_id,:assessment_name).map {|mapping| {id: mapping.id, assessment_name: mapping.assessment_name}}
+        p assessments 
+        p "====================>"
+        render :json => assessments
       end
     end
   end

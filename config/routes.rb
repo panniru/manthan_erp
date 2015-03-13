@@ -516,6 +516,7 @@ ManthanErp::Application.routes.draw do
       get "get_assessments"
       post "save_assessment_criteria"
       get "get_assessment_criteria"
+      get "get_assessments_for_assessment_type"
     end  
   end
   
