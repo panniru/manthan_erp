@@ -26,11 +26,15 @@
               .row
                 .col-md-1 
                 .col-md-10 
-                  .col-md-4
+                  .col-md-3
                     = label_tag(:grade, "SELECT ASSESSMENT TYPE")      
-                    %select{"ng-model" => "myAssessmentType", "ng-options" => "assessment_type.id as assessment_type.assessment_type for assessment_type  in assessment_types",:class => "form-control"}       
+                    %select{"ng-model" => "myAssessmentType", "ng-options" => "assessment_type.id as assessment_type.assessment_type for assessment_type  in assessment_types",:class => "form-control","ng-change" => "getAssessmentsForAssessmentType()"}       
                       %option{style: "display:none", value: ""} select assessment type 
-                  .col-md-4
+                  .col-md-3
+                    = label_tag(:grade, "SELECT ASSESSMENT")      
+                    %select{"ng-model" => "myAssessment", "ng-options" => "assessment.id as assessment.assessment_name for assessment  in assessments",:class => "form-control"}       
+                      %option{style: "display:none", value: ""} select assessment
+                  .col-md-3
                     = label_tag(:grade, "ASSESSMENT DESCRIPTION")  
                     %input{type: "text", "ng-model" => "myAssessmentDescription",:class => "form-control" }
                    

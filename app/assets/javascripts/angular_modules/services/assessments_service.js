@@ -61,6 +61,11 @@
             return $http.get(url,{params:{assessment_id: assessment_id}});
         };
 
+        var getAssessmentsForAssessmentType = function(assessment_type_id, grade_master_id, subject_master_id){
+            var url = "/assessments/get_assessments_for_assessment_type.json"
+            return $http.get(url,{params:{assessment_type_id: assessment_type_id, grade_master_id: grade_master_id,subject_master_id: subject_master_id }});
+        };
+
         
         return { 
             getAssessmentTypesService : getAssessmentTypesService,
@@ -73,7 +78,8 @@
             saveAssessments : saveAssessments,
             getAssessments : getAssessments,
             saveAssessmentCriteria : saveAssessmentCriteria,
-            getAssessmentCriteria : getAssessmentCriteria
+            getAssessmentCriteria : getAssessmentCriteria,
+            getAssessmentsForAssessmentType : getAssessmentsForAssessmentType
         }         
     }]);    
 })(angular, myApp);

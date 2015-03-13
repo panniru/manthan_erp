@@ -45,10 +45,9 @@
             $scope.myGrade = $scope.myGradeSection['grade_master_id'];
             $scope.mySection = $scope.myGradeSection['section_master_id'];  
             $scope.mySubject = $scope.myGradeSection['subject_master_id']; 
-            //alert($scope.myGradeSection['subject_master_id'])
             assessmentsTeacherService.getTeacherAssessmentsService($scope.myGrade, $scope.mySection, $scope.mySubject)
                 .then(function(result) {                 
-                    $scope.teacher_assessments = result.data;                     
+                    $scope.teacher_assessments = result.data;
                 });  
         };    
 
@@ -66,7 +65,7 @@
                 grade_master_id: $scope.myGrade,
                 section_master_id: $scope.mySection,
                 subject_master_id: $scope.mySubject,
-                assessment_type_id: $scope.myAssessmentType,
+                assessment_id: $scope.myAssessment,
                 assessment_desc: $scope.myAssessmentDescription,
                 assessment_date: $scope.dateFormat,
             });
@@ -94,7 +93,7 @@
                 grade_master_id: $scope.myGrade,
                 section_master_id: $scope.mySection,
                 subject_master_id: $scope.mySubject,
-                assessment_type_id: teacher_assessment.assessment_type_id,
+                assessment_id: teacher_assessment.assessment_id,
                 assessment_desc: teacher_assessment.assessment_desc,
                 assessment_date: teacher_assessment.assessment_date,
             });             
@@ -115,10 +114,15 @@
         };
     
         $scope.reflectContent = function(date_obj){          
-            $scope.edit_teacher_assessments['assessment_date'] = $.datepicker.formatDate('yy-mm-dd', date_obj)       
+            $scope.edit_teacher_assessments['assessment_date'] = $.datepicker.formatDate('yy-mm-dd', date_obj)     
         }
-
-
+        
+        $scope.getAssessmentsForAssessmentType = function(){
+            assessmentsService.getAssessmentsForAssessmentType($scope.myAssessmentType,  $scope.myGrade, $scope.mySubject)
+                .then(function(result){
+                    $scope.assessments = result.data;                    
+                });
+        };
 
     }]);
    
