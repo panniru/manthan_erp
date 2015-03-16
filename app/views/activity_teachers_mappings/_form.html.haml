@@ -1,18 +1,11 @@
 .row
-  -#{{activity_names}}
   .row
     .col-md-2 
     .col-md-8
       .col-md-4 
-        .col-md-12
-          -#= label_tag(:grade, "Select Activity") 
         .form-group.col-md-12
-          %select{"ng-model" => "myActivity", "ng-options" => "activity.activity_master_id as activity.activity_name for activity  in activity_names | orderBy:'activity_name'", :class => "form-control", "ng-change" => "showMappings()"}       
-            %option{style: "display:none", value: ""} Select Activity
-      .col-md-3
-        -#= link_to 'SHOW GRADE-WISE', show_grade_wise_teacher_grade_mappings_path,:class => 'btn btn-primary'        
-      .col-md-1
-               
+          %select{"ng-model" => "myActivity", "ng-options" => "activity.id as activity.activity_name for activity  in activity_names | orderBy:'subject_name'", :class => "form-control", "ng-change" => "showMappings()"}       
+            %option{style: "display:none", value: ""} Select Activit 
     .col-md-2  
   .col-md-12
     #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}

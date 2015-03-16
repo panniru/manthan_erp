@@ -16,7 +16,7 @@
                     });
                 }                             
             });
-
+        
         assessmentResultsService.getTeacherAssessmentsService()
             .then(function(result){               
                 $scope.teacher_assessments = result.data;
@@ -30,7 +30,7 @@
             assessmentResultsService.getStudentDetailsService(assessment.grade_master_id, assessment.section_master_id)
                 .then(function(result){                   
                     $scope.students = result.data;  
-                   
+                    
                     for (var i = 0; i < result.data.length; i++){
                         $scope.edit_Assessment_Results.push({
                             id: "",
@@ -50,14 +50,14 @@
                 });
         };
 
-        $scope.editAssessmentResults = function(){  
+        $scope.editAssessmentResults = function(){
             gradingService.getGradingServiceView()
                 .then(function(result) {                     
                     $scope.gradings = result.data;
                 });
             $scope.edit_Assessment_Results = $scope.show_Assessment_Results;           
         };      
-
+        
         $scope.showAssessmentResults = function(assessment){
             $scope.assessment_Listing = assessment;            
             $scope.show_Assessment_Results = []; 
@@ -88,20 +88,19 @@
             }
             
             assessmentResultsService.saveAssessmentResultsService($scope.save_Assessment_Results)
-               .then(function(result) {                    
-               });
-
+                .then(function(result) {                    
+                });
+            
             $scope.showAssessmentResults($scope.assessment_Listing);           
         };
-
-
-    $scope.showStudentsAssessmentResults = function(mapping){
-        $scope.student_mapping = mapping;            
+        
+        $scope.showStudentsAssessmentResults = function(mapping){
+            $scope.student_mapping = mapping;            
             assessmentResultsService.getAssessmentResultsService(mapping.id)
                 .then(function(result) {  
                     $scope.show_Assessment_Results = result.data;                                       
                 }); 
         };
-       
+        
     }]);    
 })(angular, myApp);

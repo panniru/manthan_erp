@@ -3,10 +3,13 @@
     .col-md-1
     .col-md-10
       .col-md-3
+        = label_tag(:grade, "SELECT TERM")      
+        %select{"ng-model" => "myTerm", "ng-options" => "academic_term as academic_term.term_name for academic_term  in academic_terms | orderBy:'term_name'", "ng-change" => "", :class => "form-control", :href => "#"}   
+          %option{style: "display:none", value: ""} select term
+      .col-md-3
         = label_tag(:grade, "SELECT GRADE-SECTION")      
         %select{"ng-model" => "studentGradeSection", "ng-options" => "mapping as mapping.student_grade_section for mapping  in grades_sections | orderBy:'grade_master_id'", "ng-change" => "getGradeSectionStudents()", :class => "form-control", :href => "#"}   
-          %option{style: "display:none", value: ""} select grade - section  
-        //{{studentGradeSection}}
+          %option{style: "display:none", value: ""} select grade - section
     .col-md-1
   %br
   %br
@@ -21,8 +24,8 @@
         %tbody
           %tr{"ng-repeat" => "student in students"}
             %td {{student.student_name}}        
-            %td{"ng-repeat" => "academic_term in academic_terms | orderBy: 'term_name'"}
-              %a{href: "#", "ng-click" =>"showStudentTermResults(academic_term,student)"} {{academic_term.term_name}}
+            %td{"ng-repeat" => "grade_subject in grade_subjects | orderBy: 'subject_name'"}
+              %a{href: "#", "ng-click" =>"shoddddddwStudentTermResults(academic_term,student)"} {{grade_subject.subject_name}}
     .col-md-1  
   %br
   %br

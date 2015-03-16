@@ -869,7 +869,7 @@ ManthanErp::Application.routes.draw do
 
   resources :activity_teachers_mappings do
     collection do
-      post "getmappings"   
+      get "getmappings"   
       post "savemappings"   
       post "deletemapping"
       get "check_activity_teachers_mapping"

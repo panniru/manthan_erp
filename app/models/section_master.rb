@@ -21,8 +21,8 @@ class SectionMaster < ActiveRecord::Base
         {section_master_id: section.id, section_name: section.section_name, grade_master_id: section.grade_master_id, grade_name: section.grade_master.grade_name}
     end 
   elsif current_user.role.role == "principal"      
-      sections = SectionMaster.all.map do |section|
-        {section_master_id: section.id, section_name: section.section_name, grade_master_id: section.grade_master_id, grade_name: section.grade_master.grade_name}
+      sections = GradeSection.all.map do |mapping|
+        {section_master_id: mapping.section_master_id, section_name: mapping.section_master.section_name, grade_master_id: mapping.grade_master_id, grade_name: mapping.grade_master.grade_name}
     end 
   end
   end 

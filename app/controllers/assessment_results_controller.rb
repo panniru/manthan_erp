@@ -16,7 +16,7 @@ class AssessmentResultsController < ApplicationController
       format.json do       
         assessments = AssessmentListing.where('faculty_master_id = '+"#{current_user.faculty_master.id}")
         assessments = assessments.each.map do |mapping|
-          {id: mapping.id, faculty_master_id: mapping.faculty_master_id, grade_master_id: mapping.grade_master_id, grade_name: mapping.grade_master.grade_name, section_master_id: mapping.section_master_id, section_name: mapping.section_master.section_name, subject_master_id: mapping.subject_master_id, subject_name: mapping.subject_master.subject_name, assessment_type_id: mapping.assessment_type_id, assessment_type: mapping.assessment_type.assessment_type, assessment_desc: mapping.assessment_desc, assessment_date: mapping.assessment_date}
+          {id: mapping.id, faculty_master_id: mapping.faculty_master_id, grade_master_id: mapping.grade_master_id, grade_name: mapping.grade_master.grade_name, section_master_id: mapping.section_master_id, section_name: mapping.section_master.section_name, subject_master_id: mapping.subject_master_id, subject_name: mapping.subject_master.subject_name, assessment_id: mapping.assessment_id, assessment_name: mapping.assessment.assessment_name, assessment_desc: mapping.assessment_desc, assessment_date: mapping.assessment_date}
         end         
         render :json => assessments
       end

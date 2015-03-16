@@ -1,7 +1,6 @@
 (function(angular, app) {
     "use strict";
     app.controller('TermResultsController', ["$scope", "$window", "termResultsService", "assessmentsTeacherService", "gradingService", "academicTermsService", function($scope, $window, termResultsService, assessmentsTeacherService, gradingService, academicTermsService) {  
-        //alert();
         $scope.showTriggerForm = false;
         $scope.showShowForm = true;
         $scope.student_Result = false;
@@ -133,13 +132,13 @@
             
             termResultsService.getStudentDetailsService($scope.studentGradeSection.grade_master_id, $scope.studentGradeSection.section_master_id)
                 .then(function(result){                   
-                    $scope.students = result.data;                   
+                    $scope.students = result.data; 
                 });
 
             termResultsService.getGradeSubjectsService($scope.studentGradeSection.grade_master_id)
                 .then(function(result){ 
                     $scope.grade_subjects = [];
-                    $scope.grade_subjects = result.data;                   
+                    $scope.grade_subjects = result.data;
                     $scope.subject_wise_criteria = [];
 
                     for(var i=0; i<$scope.grade_subjects.length;i++){
