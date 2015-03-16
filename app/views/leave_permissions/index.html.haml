@@ -7,16 +7,15 @@
           .pull-left
             = f.label "Type of Leave:", :class => 'control-label'
         .col-sm-2
-          %select{"ng-change" => "leave_update(myLeave)", "ng-model" => "myLeave","ng-options" => "value as key for (key, value) in leave_options", :class => "form-control"}
-           
-         
-       
+        -# %select{"ng-change" => "leave_update(myLeave)", "ng-model" => "myLeave","ng-options" => "value as key for (key, value) in leave_options", :class => "form-control"}
+        = f.select(:type_of_leave, options_for_select([['Casual Leave','casual leave'],['Sick Leave','sick leave'], ['Loss of Pay','loss of pay']]), :class => 'form-control')  
+                
         .col-sm-2
           = f.label "Leave Balance:", :class => 'control-label'
         .col-sm-2{"ng-repeat" => "leave in leaves", "ng-model" => "myLeaveOptions"}
           %input{:ng_show => "showCasualLeave",:type => "text", :readonly => true, :class => "form-control", :value => "{{leave.pending_casual_leave}}"}
           %input{:ng_show => "showSickLeave", :type => "text", :readonly => true, :class => "form-control", :value => "{{leave.pending_sick_leave}}"}
-         
+          
        
      
      
