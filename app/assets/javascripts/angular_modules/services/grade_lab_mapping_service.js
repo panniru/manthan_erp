@@ -6,9 +6,22 @@
 	    var url = "/grade_lab_mappings/all_subjects.json"
 	    return $http.get(url);
         };
+        var saveGradesMappings = function(grades_subjects){
+            
+            var url = "/grade_lab_mappings/save_grades_mappings.json"
+            return $http.post(url, {mappings: grades_subjects});    
+        };
+        var getSubjectsGradesServiceView = function(){
+            
+            var url = "/grade_lab_mappings/get_subjects_grades_service_view.json"
+            return $http.get(url);
+        }; 
+
 	
 	return {
-	    getLabNames : getLabNames
+	    getLabNames : getLabNames,
+            saveGradesMappings : saveGradesMappings,
+            getSubjectsGradesServiceView : getSubjectsGradesServiceView
 	};
     }]);
 })(angular , myApp);

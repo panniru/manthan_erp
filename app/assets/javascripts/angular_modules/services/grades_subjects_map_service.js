@@ -2,7 +2,7 @@
     "use strict";
     app.service("gradesSubjectsMapService",["$http", function($http) {
         var getGradesSubjectsServiceView = function(){
-            var url = "/grades_subjects_mappings/get_grades_subjects_service_view.json"
+            var url = "/grade_lab_mappings/get_grades_subjects_service_view.json"
             return $http.get(url);
         }; 
         

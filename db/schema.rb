@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213072018) do
+ActiveRecord::Schema.define(version: 20150312114314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,12 +20,6 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.string   "term_name"
     t.date     "from_date"
     t.date     "to_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "activity_masters", force: true do |t|
-    t.string   "activity_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -165,11 +159,10 @@ ActiveRecord::Schema.define(version: 20150213072018) do
   end
 
   create_table "assessment_criteria", force: true do |t|
-    t.integer  "subject_master_id"
-    t.integer  "grade_master_id"
-    t.string   "subject_criteria"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "assessment_id"
+    t.string   "assessment_criteria"
   end
 
   create_table "assessment_grade_mappings", force: true do |t|
@@ -185,11 +178,11 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.integer  "grade_master_id"
     t.integer  "section_master_id"
     t.integer  "subject_master_id"
-    t.integer  "assessment_type_id"
     t.string   "assessment_desc"
     t.date     "assessment_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "assessment_id"
   end
 
   create_table "assessment_results", force: true do |t|
@@ -205,6 +198,14 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.string   "assessment_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "assessments", force: true do |t|
+    t.integer  "assessment_grade_mapping_id"
+    t.integer  "subject_master_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "assessment_name"
   end
 
   create_table "attendances", force: true do |t|
@@ -288,6 +289,35 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.integer  "book_id"
   end
 
+  create_table "day_ends", force: true do |t|
+    t.date     "transaction_date"
+    t.integer  "scrolled_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "default_allowance_deductions", force: true do |t|
+    t.integer  "faculty_master_id"
+    t.integer  "arrears_of_salary"
+    t.integer  "incentive_payment"
+    t.integer  "loyalty_deposit"
+    t.integer  "grade_allowance"
+    t.integer  "performance_bonus"
+    t.integer  "additional_allowance_1"
+    t.integer  "additional_allowance_2"
+    t.integer  "additional_allowance_3"
+    t.integer  "club_contribution"
+    t.integer  "professional_tax"
+    t.integer  "tds_pm"
+    t.integer  "training_cost"
+    t.integer  "notice_period_amount"
+    t.integer  "additional_deduction_1"
+    t.integer  "additional_deduction_2"
+    t.integer  "additional_deduction_3"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "default_masters", force: true do |t|
     t.string   "default_name"
     t.string   "default_value"
@@ -311,6 +341,26 @@ ActiveRecord::Schema.define(version: 20150213072018) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "department_masters", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "designation_masters", force: true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.integer  "managed_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "designations", force: true do |t|
+    t.string   "designation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "discounts", force: true do |t|
     t.float    "discount_percent"
@@ -353,6 +403,25 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.datetime "updated_at"
   end
 
+  create_table "employee_advance_payments", force: true do |t|
+    t.integer  "faculty_master_id"
+    t.date     "payment_date"
+    t.integer  "amount_in_rupees"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "employer_contributions", force: true do |t|
+    t.integer  "payslip_id"
+    t.integer  "faculty_master_id"
+    t.integer  "pf"
+    t.integer  "bonus_payment"
+    t.date     "generated_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "events", force: true do |t|
     t.integer  "admission_id"
     t.string   "title"
@@ -366,6 +435,38 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.string   "staff_id"
     t.string   "status"
     t.integer  "teacher_leader_id"
+  end
+
+  create_table "faculty_attendances", force: true do |t|
+    t.integer  "faculty_master_id"
+    t.string   "designation"
+    t.string   "forenoon"
+    t.string   "afternoon"
+    t.string   "attendance_date"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "type_of_leave"
+    t.float    "pending_casual_leave"
+    t.float    "pending_sick_leave"
+    t.float    "max_casual_leave"
+    t.float    "max_sick_leave"
+  end
+
+  create_table "faculty_leaves", force: true do |t|
+    t.integer  "faculty_master_id"
+    t.string   "month"
+    t.integer  "lop"
+    t.float    "days_worked"
+    t.integer  "working_days"
+    t.integer  "sl"
+    t.integer  "pl"
+    t.integer  "cl"
+    t.string   "code"
+    t.date     "entered_date"
+    t.integer  "year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "faculty_masters", force: true do |t|
@@ -386,6 +487,25 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.string   "dept"
     t.string   "post"
     t.integer  "role_id"
+    t.string   "designation"
+    t.integer  "designation_master_id"
+    t.integer  "department_master_id"
+    t.integer  "ctc"
+    t.integer  "basic"
+    t.integer  "special_allowance"
+    t.date     "date_of_joining"
+    t.date     "probation_date"
+    t.date     "confirmation_date"
+    t.date     "resignation_date"
+    t.string   "status"
+    t.string   "reason_for_resignation"
+    t.string   "p_f_no"
+    t.string   "bank_name"
+    t.string   "account_number"
+    t.string   "pan"
+    t.string   "father_or_husband_name"
+    t.string   "relation"
+    t.string   "code"
   end
 
   create_table "fee_alert_failures", force: true do |t|
@@ -417,6 +537,22 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.datetime "updated_at"
   end
 
+  create_table "form24s", force: true do |t|
+    t.integer  "quarter"
+    t.string   "financial_year"
+    t.string   "cheque_no"
+    t.date     "created_date"
+    t.string   "emp_status"
+    t.integer  "month"
+    t.integer  "year"
+    t.date     "deposited_date"
+    t.string   "challan_serial_no"
+    t.string   "bsr_code"
+    t.string   "payment_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "forms", force: true do |t|
     t.string   "name"
     t.string   "dob"
@@ -436,13 +572,6 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.datetime "updated_at"
     t.string   "enquiry_no"
     t.string   "status"
-  end
-
-  create_table "grade_activity_mappings", force: true do |t|
-    t.integer  "activity_master_id"
-    t.integer  "grade_master_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "grade_books", force: true do |t|
@@ -575,18 +704,44 @@ ActiveRecord::Schema.define(version: 20150213072018) do
   end
 
   create_table "lab_criteria", force: true do |t|
-    t.integer  "lab_master_id"
+    t.integer  "subject_master_id"
     t.string   "lab_criteria"
     t.integer  "grade_master_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "lab_masters", force: true do |t|
-    t.string   "lab_name"
-    t.integer  "faculty_id"
+  create_table "lab_teacher_mappings", force: true do |t|
+    t.integer  "subject_master_id"
+    t.integer  "faculty_master_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "leave_encashments", force: true do |t|
+    t.integer  "faculty_master_id"
+    t.date     "date"
+    t.integer  "no_of_leaves_to_be_encashed"
+    t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "leave_permissions", force: true do |t|
+    t.integer  "faculty_master_id"
+    t.string   "type_of_leave"
+    t.string   "from_date"
+    t.string   "to_date"
+    t.string   "reason"
+    t.string   "status"
+    t.float    "bal_leave"
+    t.float    "casual_leave_count"
+    t.float    "sick_leave_count"
+    t.integer  "faculty_attendance_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "from_day"
+    t.float    "to_day"
   end
 
   create_table "location_masters", force: true do |t|
@@ -612,12 +767,6 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.boolean  "gmaps"
   end
 
-  create_table "main_menus", force: true do |t|
-    t.string "main_menu_name"
-    t.string "icon_class"
-    t.string "url"
-  end
-
   create_table "mealnames", force: true do |t|
     t.integer  "meal_type_id"
     t.string   "meal_detail_name"
@@ -632,6 +781,26 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.string   "time"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "medical_bills", force: true do |t|
+    t.integer "faculty_master_id"
+    t.integer "salary_tax_id"
+    t.integer "amount"
+    t.string  "bill_no"
+    t.date    "bill_date"
+    t.string  "attachment"
+  end
+
+  create_table "medical_insurances", force: true do |t|
+    t.integer "faculty_master_id"
+    t.integer "salary_tax_id"
+    t.integer "amount"
+    t.string  "bill_no"
+    t.date    "bill_date"
+    t.boolean "parent_included"
+    t.boolean "parent_senior_citizen"
+    t.string  "attachement"
   end
 
   create_table "messages", force: true do |t|
@@ -752,6 +921,75 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.datetime "updated_at"
   end
 
+  create_table "payslip_additional_fields_labels", force: true do |t|
+    t.integer "payslip_id"
+    t.string  "additional_allowance_1"
+    t.string  "additional_allowance_2"
+    t.string  "additional_allowance_3"
+    t.string  "additional_deduction_1"
+    t.string  "additional_deduction_2"
+    t.string  "additional_deduction_3"
+  end
+
+  create_table "payslips", force: true do |t|
+    t.integer  "faculty_master_id"
+    t.date     "generated_date"
+    t.integer  "basic"
+    t.integer  "hra"
+    t.integer  "conveyance_allowance"
+    t.integer  "city_compensatory_allowance"
+    t.integer  "special_allowance"
+    t.integer  "loyalty_allowance"
+    t.integer  "medical_allowance"
+    t.integer  "arrears_of_salary"
+    t.integer  "incentive_payment"
+    t.integer  "loyalty_deposit"
+    t.integer  "grade_allowance"
+    t.integer  "leave_settlement"
+    t.integer  "performance_bonus"
+    t.integer  "annual_bonus"
+    t.integer  "additional_allowance_1"
+    t.integer  "additional_allowance_2"
+    t.integer  "additional_allowance_3"
+    t.integer  "pf"
+    t.integer  "club_contribution"
+    t.integer  "professional_tax"
+    t.integer  "tds_pm"
+    t.integer  "training_cost"
+    t.integer  "salary_advance"
+    t.integer  "additional_deduction_1"
+    t.integer  "additional_deduction_2"
+    t.integer  "additional_deduction_3"
+    t.integer  "notice_period_amount"
+    t.integer  "labour_welfare_fund"
+    t.integer  "voluntary_pf_contribution"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pf_statements", force: true do |t|
+    t.integer  "faculty_master_id"
+    t.integer  "payslip_id"
+    t.integer  "epf_wages"
+    t.integer  "eps_wages"
+    t.integer  "epf_ee_share"
+    t.integer  "epf_ee_remitted"
+    t.integer  "eps_due"
+    t.integer  "eps_remitted"
+    t.integer  "diff_epf_and_eps"
+    t.integer  "diff_remitted"
+    t.integer  "n"
+    t.integer  "refund_adv",        default: 0
+    t.integer  "arrear_epf",        default: 0
+    t.integer  "arrear_epf_ee",     default: 0
+    t.integer  "arrear_epf_er",     default: 0
+    t.integer  "arrear_eps",        default: 0
+    t.integer  "job_run_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pg_search_documents", force: true do |t|
     t.text     "content"
     t.integer  "searchable_id"
@@ -802,6 +1040,13 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.string   "management_result"
   end
 
+  create_table "reminders", force: true do |t|
+    t.string "description"
+    t.date   "created_date"
+    t.string "occurrence"
+    t.date   "previous_resolution_date"
+  end
+
   create_table "request_books", force: true do |t|
     t.string   "book_name"
     t.string   "author_name"
@@ -814,14 +1059,6 @@ ActiveRecord::Schema.define(version: 20150213072018) do
   create_table "request_new_books", force: true do |t|
     t.string   "book_name"
     t.string   "author_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "role_menu_priorities", force: true do |t|
-    t.integer  "role_id"
-    t.integer  "main_menu_id"
-    t.integer  "priority"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -839,8 +1076,8 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.string   "no_of_stops"
     t.string   "lpp"
     t.string   "distance"
-    t.string   "busno_up"
-    t.string   "busno_down"
+    t.integer  "busno_up"
+    t.integer  "busno_down"
     t.integer  "no_of_children"
     t.integer  "sequence_no"
     t.datetime "created_at"
@@ -857,10 +1094,66 @@ ActiveRecord::Schema.define(version: 20150213072018) do
 
   add_index "routes", ["deleted_at"], name: "index_routes_on_deleted_at", using: :btree
 
+  create_table "salary_break_ups", force: true do |t|
+    t.string   "component"
+    t.string   "component_code"
+    t.float    "criteria"
+    t.string   "break_up_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "salary_taxes", force: true do |t|
+    t.integer  "faculty_master_id"
+    t.date     "financial_year_from"
+    t.date     "financial_year_to"
+    t.integer  "rent_per_month"
+    t.string   "rent_receipt"
+    t.integer  "standard_deduction"
+    t.integer  "home_loan_interest"
+    t.string   "home_loan_document"
+    t.integer  "rent_received_per_month"
+    t.integer  "other_tax"
+    t.integer  "atg"
+    t.string   "occupancy_type"
+    t.integer  "employee_home_loan_interest"
+    t.integer  "pt_and_wt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "savings", force: true do |t|
+    t.integer "faculty_master_id"
+    t.integer "salary_tax_id"
+    t.string  "saving_type"
+    t.integer "amount"
+    t.string  "bill_no"
+    t.date    "bill_date"
+    t.string  "attachement"
+  end
+
   create_table "section_masters", force: true do |t|
     t.string   "section_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "sessions", force: true do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+
+  create_table "setup_masters", force: true do |t|
+    t.float    "casual_leave"
+    t.float    "sick_leave"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "designation"
   end
 
   create_table "special_day_transports", force: true do |t|
@@ -964,6 +1257,7 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.integer  "user_id"
     t.string   "dept"
     t.integer  "role_id"
+    t.integer  "staffadmin_id"
   end
 
   create_table "staffs", force: true do |t|
@@ -1035,17 +1329,9 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.string   "lpp"
   end
 
-  create_table "sub_menu_role_mappings", force: true do |t|
-    t.integer "sub_menu_id"
-    t.integer "main_menu_id"
-    t.integer "role_id"
-  end
-
-  create_table "sub_menus", force: true do |t|
-    t.string   "sub_menu_name"
-    t.string   "icon_class"
-    t.string   "url"
-    t.integer  "main_menu_id"
+  create_table "subject_grades", force: true do |t|
+    t.string   "grade_master_id"
+    t.string   "subject_master_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -1055,6 +1341,14 @@ ActiveRecord::Schema.define(version: 20150213072018) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "subject_type"
+  end
+
+  create_table "tax_buckets", force: true do |t|
+    t.integer  "from"
+    t.integer  "to"
+    t.integer  "tax"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "teacher_grade_mappings", force: true do |t|

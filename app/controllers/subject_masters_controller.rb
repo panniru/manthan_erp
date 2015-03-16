@@ -53,12 +53,11 @@ class SubjectMastersController < ApplicationController
   end
  
   def new
-    p "=====================+++++++++++++++"
+   
     @subject_master= SubjectMaster.new
   end
   def create
-    p params
-    p "111====================="
+   
     @subject_master = SubjectMaster.new(subject_master_params)
     if @subject_master.save
       redirect_to subject_masters_path

@@ -1,0 +1,21 @@
+.row
+  .row
+    .col-md-1
+    .col-md-4
+      %h4{style: "font-weight: bold"} GRADES LAB MAPPING
+    .col-md-4
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "editGradesMappings()", :value => "EDIT"}
+    .col-md-3 
+  .row
+    .col-md-1
+    .col-md-9
+      %table.target.table.table-striped.table-condensed.table-bordered
+        %tr
+          %th GRADES
+          %th SUBJECT     
+        %tr{"ng-repeat" => "grade in show_grades"}
+          %td {{grade.grade_name}}
+          %td
+            .col-md-1{"ng-repeat" => "subject in show_subjects |filter :  {grade_master_id: grade.grade_master_id} : true| orderBy:'subject_name'"}        
+              {{subject.subject_name}}        
+    .col-md-2

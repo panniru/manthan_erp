@@ -23,6 +23,7 @@
         }; 
         
         var getSectionServiceView = function(){
+         
             var url = "/time_tables/sectionserviceview.json"
             return $http.get(url);
         };  

@@ -2,7 +2,7 @@ class ActivityTeachersMappingsController < ApplicationController
   def check_activity_teachers_mapping  
     respond_to do |format|
       format.json do
-        activity_teachers_mappings = ActivityTeachersMapping.where('activity_master_id = '+"#{params[:myActivity]}").count 
+        activity_teachers_mappings = ActivityTeachersMapping.where('subject_master_id = '+"#{params[:myActivity]}").count 
         render :json => activity_teachers_mappings
       end
     end  
@@ -14,7 +14,7 @@ class ActivityTeachersMappingsController < ApplicationController
         t = params[:mappings]
         if t["id"].present?
           temp = ActivityTeachersMapping.find(t["id"])
-          temp.activity_master_id = t["activity_master_id"]    
+          temp.subject_master_id = t["subject_master_id"]    
           temp.faculty_master_id = t["faculty_master_id"]     
           temp.save
         else
@@ -29,13 +29,8 @@ class ActivityTeachersMappingsController < ApplicationController
   def getmappings
     respond_to do |format|
       format.json do
-        activityteachersmappings = ActivityTeachersMapping.where(activity_master_id: params[:my_Activity]).each.map do |mapping|
-          if  (mapping.faculty_master_id.present?)
-            faculty_name = mapping.faculty_master.faculty_name
-          else
-            faculty_name = nil
-          end
-          {id: mapping.id,  activity_master_id: mapping.activity_master_id, activity_name: mapping.activity_master.activity_name, faculty_name: faculty_name}
+        activityteachersmappings = ActivityTeachersMapping.where(subject_master_id: params[:my_Activity]).each.map do |mapping|
+          {id: mapping.id,  subject_master_id: mapping.subject_master_id, subject_name: mapping.subject_master.subject_name, faculty_name: mapping.faculty_master.faculty_name}
         end    
         render :json => activityteachersmappings   
       end
@@ -53,9 +48,9 @@ class ActivityTeachersMappingsController < ApplicationController
     end
   end
   
-  private
-  
+  private  
   def add_params(params)
-    params.permit(:activity_master_id, :faculty_master_id) 
+    params.permit(:subject_master_id, :faculty_master_id) 
   end  
+  
 end

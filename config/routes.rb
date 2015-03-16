@@ -8,8 +8,6 @@ ManthanErp::Application.routes.draw do
     end
   end
 
- 
-
   resources :guest_managements do
     collection do
       get "get_role_view"
@@ -871,7 +869,7 @@ ManthanErp::Application.routes.draw do
 
   resources :activity_teachers_mappings do
     collection do
-      post "getmappings"   
+      get "getmappings"   
       post "savemappings"   
       post "deletemapping"
       get "check_activity_teachers_mapping"
@@ -885,6 +883,14 @@ ManthanErp::Application.routes.draw do
       post "deletemappings" 
     end  
   end 
+  resources :grade_lab_mappings do
+    collection do
+      get 'all_subjects'
+      get 'get_grades_subjects_service_view'
+      get 'get_subjects_grades_service_view'
+      post 'save_grades_mappings'
+    end
+  end
 
 
   resources :faculty_attendances do
@@ -1052,3 +1058,5 @@ ManthanErp::Application.routes.draw do
   resources :certificates
 
 end
+
+

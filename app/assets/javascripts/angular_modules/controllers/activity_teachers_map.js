@@ -1,17 +1,16 @@
 (function(angular, app) {
     "use strict";
-    app.controller('ActivityTeachersMapController', ["$scope", "nonAcademicService", "activityTeachersMapService", "teachersService", function($scope, nonAcademicService, activityTeachersMapService, teachersService) {
-
+    app.controller('ActivityTeachersMapController', ["$scope", "nonAcademicsService", "activityTeachersMapService", "teachersService", function($scope, nonAcademicsService, activityTeachersMapService, teachersService) {
+        
         var initiateForm = function(){
             $scope.showFormValue = false;
         };
         initiateForm();
 
-        nonAcademicService.getActivities()
+        nonAcademicsService.getNonAcademicsSubjects()
             .then(function(result) {
                 $scope.activity_names = result.data;
-            });
-        
+            });        
         
         teachersService.getFacultyNamesServiceView()
             .then(function(result) {
@@ -39,7 +38,7 @@
         };
         
         $scope.addMapping = function (mapping){
-            mapping['activity_master_id'] = $scope.myActivity;
+            mapping['subject_master_id'] = $scope.myActivity;
             $('#myModal').modal('show');
             $scope.mapping = mapping;  
         };
@@ -49,7 +48,7 @@
             $scope.mapping = mapping; 
             $('#myEditModal').modal('show');                       
         };
-
+        
         $scope.saveMappings = function(){ 
             $scope.save_mapping =  $scope.mapping;            
             activityTeachersMapService.saveMappings($scope.save_mapping)
