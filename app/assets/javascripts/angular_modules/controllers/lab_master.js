@@ -6,6 +6,8 @@
 	labService.getGradeNames()
 	    .then(function(response){
 		$scope.all_grades = response.data
+                alert(JSON.stringify($scope.all_grades))    
+            
 	    });
 	
 	$scope.initialize = function(){                       
@@ -108,7 +110,8 @@
                 });
 	    
             $scope.all_grades = []; 
-            $scope.showAssessmentsCriteriaMappings();                                                
+            $scope.showAssessmentsCriteriaMappings(); 
+  
         };
 	$scope.deleteAssessmentCriteriaMappings = function (assessment_id){
             $scope.delete_mappping_id = assessment_id
@@ -117,9 +120,164 @@
 		    $scope.showAssessmentsCriteriaMappings();                                                
                 }); 
         }; 
+
+        $scope.editAssessmentTypeMappings = function(assessment_type){        
+          
+            $scope.edit_assessment_types = [];
+        
+            $scope.edit_assessment_types.push({
+              
+                id: assessment_type.id,
+              
+                assessment_type : assessment_type.assessment_type,
+            });                       
+        };
+
+        labService.getAssessmentTypesService()
+            .then(function(result) {                 
+                $scope.assessment_types = result.data;  
+               
+                  
+            });      
+
+        $scope.showAssessmentTypeMappings = function(){
       
-	
-	
+            labService.getAssessmentTypesService()
+                .then(function(result) {                 
+                    $scope.assessment_types = result.data;   
+                                 
+                });
+        };
+ 
+        $scope.saveAssessmentTypeMappings = function(assessment_type){           
+            $scope.save_assessment_types = [];
+
+            $scope.save_assessment_types.push({
+                id: assessment_type.id,
+                assessment_type : assessment_type.assessment_type,
+
+            });
+
+            labService.saveAssessmentTypeMappings($scope.save_assessment_types)
+                .then(function(result) {  
+                    $scope.showAssessmentTypeMappings();
+                    
+                });          
+        };
+
+	$scope.deleteAssessmentTypeMappings = function(assessment_type){           
+            $scope.delete_mappping_id =assessment_type.id;
+            
+            labService.deleteAssessmentTypeMappings($scope.delete_mappping_id)
+                .then(function(result) {
+                    
+                });  
+            
+            $scope.showAssessmentTypeMappings();       
+            
+        };
+
+        // ASSESSMENT GRADE MAPPINGS
+        labService.getAssessmentGradeMappingsService()
+            .then(function(result) {                 
+                $scope.assessment_grade_mappings = result.data;        
+                alert(JSON.stringify($scope.assessment_grade_mappings))            
+            });
+       
+
+        $scope.showAssessmentGradeMappings = function(){
+            labService.getAssessmentGradeMappingsService()
+                .then(function(result) {                 
+                    $scope.assessment_grade_mappings = result.data;                      
+                    alert(JSON.stringify($scope.assessment_grade_mappings))            
+                       
+                      
+                });
+        };
+
+        $scope.editAssessmentGradeMappings = function(assessment_type){ 
+            alert('testing')
+            $scope.edit_assessment_types = [];
+            alert(JSON.stringify($scope.edit_assessment_types))
+          
+            $scope.edit_assessment_types.push({
+                id: assessment_type.id,
+                assessment_type : assessment_type.assessment_type,
+               
+            });           
+            $scope.edit_assessment_grade_mappings = [];
+            alert('testing2')
+            alert(JSON.stringify($scope.edit_assessment_grade_mappings))
+          
+
+            for (var i = 0; i < $scope.all_grades.length; i++){
+                 alert(JSON.stringify($scope.all_grades.length))         
+                
+                $scope.edit_assessment_grade_mappings.push({
+                    
+                    id: "",
+                    lab_assessment_id: assessment_type.id,
+                    grade_master_id: $scope.all_grades[i]['grade_master_id'],
+                 
+                    no_of_times:"", 
+                   
+                   
+                });  
+                // alert(JSON.stringify($scope.assessment_type.id))  
+                // alert(JSON.stringify($scope.all_grades[i]['grade_master_id']))
+                
+                
+            }
+            
+            for (var i = 0; i < $scope.assessment_grade_mappings.length; i++){
+                alert(JSON.stringify($scope.assessment_grade_mappings))
+
+                if($scope.assessment_grade_mappings[i]['lab_assessment_id'] == lab_assessment.id){
+                
+                    for (var j = 0; j < $scope.edit_assessment_grade_mappings.length; j++){
+                        alert(JSON.stringify($scope.edit_assessment_grade_mappings.length))
+                        if($scope.assessment_grade_mappings[i]['grade_master_id'] == $scope.edit_assessment_grade_mappings[j]['grade_master_id']){
+                            alert('456 ')
+                            $scope.edit_assessment_grade_mappings[j]['id'] = $scope.assessment_grade_mappings[i]['id'];
+                            $scope.edit_assessment_grade_mappings[j]['no_of_times'] = $scope.assessment_grade_mappings[i]['no_of_times'];                                $scope.edit_assessment_grade_mappings[j]['grade_master_id'] = $scope.assessment_grade_mappings[i]['grade_master_id'];                   
+                        }                 
+                    }
+                }
+            }
+        };
+
+        $scope.saveAssessmentGradeMappings = function(){            
+            $scope.save_assessment_grade_mappings = [];
+            alert(JSON.stringify($scope.edit_assessment_grade_mappings))
+            for (var i = 0; i < $scope.edit_assessment_grade_mappings.length; i++)
+            {
+                
+                if($scope.edit_assessment_grade_mappings[i]['no_of_times'] != ""){
+                    $scope.save_assessment_grade_mappings.push({
+                        id: $scope.edit_assessment_grade_mappings[i]['id'],
+                        lab_assessment_id: $scope.edit_assessment_grade_mappings[i]['lab_assessment_id'],
+                        grade_master_id: $scope.edit_assessment_grade_mappings[i]['grade_master_id'],
+                        no_of_times: $scope.edit_assessment_grade_mappings[i]['no_of_times'],
+                    });
+                }
+            }
+            
+            labService.saveAssessmentGradeMappings($scope.save_assessment_grade_mappings)
+                .then(function(result) {    
+                     $scope.showAssessmentGradeMappings(); 
+                });           
+        };
+
+        // show assessments
+        // $scope.getSections = function (myGrade){
+        //     labService.getSectionsForGradeService(myGrade)
+        //         .then(function(result) {
+        //             $scope.sections=result.data;
+        //         });
+        // };  
+
+
+
    }]);
     
 })(angular, myApp);

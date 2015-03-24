@@ -21,7 +21,7 @@ class Academic
     sub_menu << assessment_results
     sub_menu << academic_terms
     sub_menu << term_results
-    sub_menu
+    sub_menu 
   end
   def teacher_sub_menu
     sub_menu = []

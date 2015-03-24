@@ -17,6 +17,7 @@
         };
 
         //ASSESSMENT-GRADE-MAPPING
+
         var getAssessmentGrageMappingsService = function(){
             var url = "/assessments/get_assessment_grade_mappings_service.json"
             return $http.get(url);

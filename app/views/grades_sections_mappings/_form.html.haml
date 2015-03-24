@@ -15,9 +15,9 @@
         .col-md-2
           %h4{style: "font-weight: bold"} {{section.section_name}}
           %input{"ng-model" => "checked_all", type: "checkbox", "ng-change" => "addAllGrades({{!checked_all}},{{section.section_master_id}},{{section.grades}},section)", "ng-checked" => "checked_all"}      
-          ALL
+          ALL {{section.grades}}
       .col-md-2{"ng-repeat" => "grade in section.grades"}
-        %input{"ng-model" => "grade.checked_value", type: "checkbox", "ng-change" => "addGrades({{!grade.checked_value}},{{section.section_master_id}},{{grade}})", "ng-checked" => "grade.checked_value"}      
+        %input{"ng-model" => "grade.checked_value", type: "checkbox", "ng-change" => "addGrades({{!grade.checked_value}},{{section.section_master_id}},{{grade}})", "ng-checked" => "grade.checked_value"}      `
         {{grade.text}}        
       .col-md-2
   

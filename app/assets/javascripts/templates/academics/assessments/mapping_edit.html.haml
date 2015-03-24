@@ -10,7 +10,8 @@
         %th SAVE
       %tr{"ng-repeat" => "assessment_type  in edit_assessment_types"}        
         %th 
-          {{assessment_type.assessment_type}}     
+          {{assessment_type.assessment_type}}  
+          
         %td{"ng-repeat" => "mapping in edit_assessment_grade_mappings"}         
           %input{type: "text", "ng-model" => "mapping.no_of_times",:class => "form-control" }     
          
@@ -18,3 +19,4 @@
           %a{href: "#mapping_save", :class => "btn btn btn-primary btn-sm", :title => "SAVE", "ng-click" => "saveAssessmentGradeMappings()"}       
             %span{class: "glyphicon glyphicon-save"}
          
+

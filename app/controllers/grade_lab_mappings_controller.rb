@@ -3,7 +3,7 @@ class GradeLabMappingsController < ApplicationController
   end
   def get_grades_subjects_service_view
     a = GradeMaster.all.map do |b|
-      {grade_name: b.grade_name }
+      {grade_name: b.grade_name , grade_master_id: b.id }
     end
     render :json => a
   end
@@ -13,7 +13,7 @@ class GradeLabMappingsController < ApplicationController
     # end
     # render :json => subject_masters
     subject_names = SubjectMaster.where(subject_type: 'labs') .map do |subject_master|
-      {subject_name: subject_master.subject_name , id: subject_master.id }
+      {subject_name: subject_master.subject_name , subject_master_id: subject_master.id }
     end
     render :json => subject_names
   end
@@ -29,11 +29,12 @@ class GradeLabMappingsController < ApplicationController
     end
   end    
 
-  def save_grades_mappings
-   
+  def save_subjects_mappings
     respond_to do |format|
       format.json do        
-        mappings = params[:mappings]        
+        mappings = params[:mappings]    
+        p "1111111111111"
+        p mappings
         SubjectGrade.all.map do |temp| 
           @value = "false"
           mappings.each do |t|           
@@ -69,6 +70,7 @@ class GradeLabMappingsController < ApplicationController
   end
 
   def show
+
   end
 
   def edit

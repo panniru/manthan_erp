@@ -4,7 +4,11 @@ ManthanErp::Application.routes.draw do
 
   resources :grade_lab_mappings do
     collection do
-      get :all_subjects
+      get "get_grades_subjects_service_view"
+      get "all_subjects"
+      get "get_subjects_grades_service_view"
+      post "save_subjects_mappings"
+    
     end
   end
 
@@ -1018,7 +1022,21 @@ ManthanErp::Application.routes.draw do
     end
   end
 
+  resources :lab_assessments do
+    member do
+      get 'mapping_form'
+      get 'map_edit'
+    end
+    collection do
+      get "get_assessment_types_service"
+      post "save_assessment_type_mappings"
+      post "delete_assessment_type_mappings"
+      get "get_grade_mappings_service"
+      post "save_assessment_grade_mappings"
+      get "get_sections_for_grade"    
 
+    end
+  end
   
   resources :salary_break_ups do
     collection do

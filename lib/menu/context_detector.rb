@@ -108,7 +108,8 @@ class ContextDetector
     "form24" => "payroll_menu",
     "salary_taxes" => "payroll_menu",
     "day_ends" => "default_master_sub_menu",
-    "lab_teacher_mappings" => "lab"
+    "lab_teacher_mappings" => "lab",
+    "lab_assessments" => "lab"
 
   }
   

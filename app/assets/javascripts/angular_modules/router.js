@@ -81,8 +81,32 @@
             })   
             . when('/save_assessment', {
                 templateUrl: 'academics/assessments/show_assessments.html'               
-            })      
+            })  
            
+
+            . when('/edit_form', {
+                templateUrl: 'lab/lab_assessments/edit_form.html'               
+            })
+            . when('/s_form', {
+                templateUrl: 'lab/lab_assessments/show_form.html'               
+            })
+            . when('/e_form', {
+                templateUrl: 'lab/lab_assessments/edit_form.html'               
+            })
+            . when('/d_id', {
+                templateUrl: 'lab/lab_assessments/show_form.html'               
+            })
+            . when('/mapping_form', {
+                templateUrl: 'lab/lab_assessments/mapping_form.html'               
+            })
+            . when('/map_edit', {
+                templateUrl: 'lab/lab_assessments/map_edit.html'               
+            })
+            . when('/show_mapping', {
+                templateUrl: 'lab/lab_assessments/show_mapping.html'               
+            })
+        
+
     }]);
 })(angular, myApp);
 

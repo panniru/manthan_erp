@@ -13,7 +13,7 @@
                 });
         };
 
-        $scope.editAssessmentTypeMappings = function(assessment_type){           
+        $scope.editAssessmentTypeMappings = function(assessment_type){           alert(' ')
             $scope.edit_assessment_types = [];
             
             $scope.edit_assessment_types.push({
@@ -50,7 +50,8 @@
         //ASSESSMENT-GRADE-MAPPING        
         assessmentsService.getAssessmentGrageMappingsService()
             .then(function(result) {                 
-                $scope.assessment_grade_mappings = result.data;                
+                $scope.assessment_grade_mappings = result.data; 
+                alert(JSON.stringify($scope.assessment_grade_mappings))               
             });
         
         timeTableService.getGradeServiceView()
@@ -62,10 +63,12 @@
             assessmentsService.getAssessmentGrageMappingsService()
                 .then(function(result) {                 
                     $scope.assessment_grade_mappings = result.data;                    
+                    alert(JSON.stringify($scope.assessment_grade_mappings))               
                 });
         };
 
         $scope.editAssessmentGradeMappings = function(assessment_type){            
+            alert(' ')
             $scope.edit_assessment_types = [];
             
             $scope.edit_assessment_types.push({
@@ -74,7 +77,7 @@
             });           
 
             $scope.edit_assessment_grade_mappings = [];
-            
+          
             for (var i = 0; i < $scope.grades.length; i++){
                
                 $scope.edit_assessment_grade_mappings.push({
@@ -113,6 +116,7 @@
             }
             
             assessmentsService.saveAssessmentGradeMappings($scope.save_assessment_grade_mappings)
+            alert(JSON.stringify($scope.save_assessment_grade_mappings))               
                 .then(function(result) {    
                     $scope.showAssessmentGradeMappings(); 
                 });           

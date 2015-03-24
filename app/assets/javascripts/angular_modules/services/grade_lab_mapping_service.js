@@ -6,9 +6,9 @@
 	    var url = "/grade_lab_mappings/all_subjects.json"
 	    return $http.get(url);
         };
-        var saveGradesMappings = function(grades_subjects){
+        var saveSubjectsMappings = function(grades_subjects){
             
-            var url = "/grade_lab_mappings/save_grades_mappings.json"
+            var url = "/grade_lab_mappings/save_subjects_mappings.json"
             return $http.post(url, {mappings: grades_subjects});    
         };
         var getSubjectsGradesServiceView = function(){
@@ -20,7 +20,7 @@
 	
 	return {
 	    getLabNames : getLabNames,
-            saveGradesMappings : saveGradesMappings,
+            saveSubjectsMappings : saveSubjectsMappings,
             getSubjectsGradesServiceView : getSubjectsGradesServiceView
 	};
     }]);
