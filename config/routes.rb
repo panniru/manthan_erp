@@ -785,7 +785,11 @@ ManthanErp::Application.routes.draw do
   end
   
   
-  resources :statuses
+  resources :statuses do
+    collection do
+      post 'create_bulk'
+    end
+  end
   
   resources :vendor_categories
   
@@ -919,6 +923,8 @@ ManthanErp::Application.routes.draw do
       get 'approval_status'
       get 'get_holidays'
       post 'get_date'
+      get 'get_type_of_leaves_count'
+      get 'get_exact_json_count'
     end
   end
 

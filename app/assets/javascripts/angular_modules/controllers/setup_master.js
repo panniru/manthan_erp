@@ -1,6 +1,15 @@
 (function(angular, app) {
     "use strict";
     app.controller('SetupMasterController',["$scope","resourceService","setupmasterService", function($scope, resourceService, setupmasterService) {
+
+
+        setupmasterService.getExactJsonCount()
+            .then(function(result) {
+                $scope.exact_counts = result.data;
+                // alert(JSON.stringify($scope.exact_counts))
+            });
+
+
         
         var timeString = "12:00:00"; 
         var H = +timeString.substr(0, 2);
@@ -76,26 +85,30 @@
             $scope.myEditFormValue1 = true;
         }
 
-        $scope.leave_options ={"casual leave":"casual leave","sick leave":"sick leave"};
-        $scope.leave_update = function(type_of_leave) {
-            setupmasterService.getCountno(type_of_leave)
+        // $scope.leave_options ={"casual_leave":"Casual Leave","Sick Leave":"sick_leave", "Loss of Pay":"loss_of_pay"};
+        // $scope.leave_update = function(type_of_leave) {
+            setupmasterService.getCountno()
+            // alert(JSON.stringify(type_of_leave))
                 .then(function(result) {
-                    if (type_of_leave == "casual leave")
-                    {
-                        $scope.showCasualLeave = true;
-                        $scope.showSickLeave = false;
-                        $scope.leaves = result.data;
-                        alert(JSON.stringify($scope.leaves))
-                    }
-                    else 
-                    {
-                        $scope.showCasualLeave = false;
-                        $scope.showSickLeave = true;
-                        $scope.leaves = result.data;
-                        alert(JSON.stringify($scope.leaves))
-                    }
+                    $scope.leaves = result.data;
+                   
+                    // alert(JSON.stringify($scope.leaves))
+                    // if (type_of_leave == "casual_leave")
+                    // {
+                    //     $scope.showCasualLeave = true;
+                    //     $scope.showSickLeave = false;
+                    //     $scope.leaves = result.data;
+                    //     alert(JSON.stringify($scope.leaves))
+                    // }
+                    // else 
+                    // {
+                    //     $scope.showCasualLeave = false;
+                    //     $scope.showSickLeave = true;
+                    //     $scope.leaves = result.data;
+                    //     alert(JSON.stringify($scope.leaves))
+                    // }
                 });
-        }
+        // }
 
 
         $scope.getUpdate = function(designation){

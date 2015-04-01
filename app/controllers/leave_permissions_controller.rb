@@ -1,6 +1,60 @@
 class LeavePermissionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  
+
+
+
+  def get_exact_json_count
+    if LeavePermission.minimum(:max_casual_leave) == '0'
+      @get_count = LeavePermission.this_test(current_user.faculty_master)
+    else
+      @get_count = LeavePermission.initial_count(current_user.faculty_master)
+    end
+    
+      respond_to do |format|
+        format.html do
+        end
+        format.json do
+          render :json => @get_count[0]
+        end
+      end
+  end
+
+
+
+
+  def get_type_of_leaves_count
+    @get_count = LeavePermission.all.map do |x|
+      {casual_leave: x.get_casual_of_leaves_count(current_user), sick_leave: x.get_sick_of_leaves_count(current_user), loss_of_pay: x.get_loss_of_leaves_count(current_user)}
+    end
+    respond_to do |format|
+      format.html do
+      end
+      format.json do
+        render :json => [@get_count[0]]
+      end
+    end
+  end
+
+  def count_no
+    hash = LeavePermission.get_faculty_details(current_user.faculty_master, params[:type_of_leave])
+    respond_to do |format|
+      format.json do
+        render :json => hash 
+      end
+    end
+    # @get_count = LeavePermission.all.map do |x|
+    #   {casual_leave: x.get_casual_of_leaves_count(current_user), sick_leave: x.get_sick_of_leaves_count(current_user), loss_of_pay: x.get_loss_of_leaves_count(current_user)}
+    # end
+    # respond_to do |format|
+    #   format.html do
+    #   end
+    #   format.json do
+    #     render :json => @get_count[0]
+    #   end
+    # end
+  end
+
+
   def get_date
     
     @jsondata = LeavePermission.get_leaves(current_user, params[:dates])
@@ -34,15 +88,7 @@ class LeavePermissionsController < ApplicationController
     end
     p @leave_permissions
   end
-  def count_no
-    hash = FacultyAttendance.get_faculty_details(current_user.faculty_master, params[:type_of_leave])
-    respond_to do |format|
-      format.json do
-        render :json => hash
-      end
-    end
-  end
-
+  
   
   def create
     @leave_permission = LeavePermission.new(permission_params)
@@ -53,21 +99,21 @@ class LeavePermissionsController < ApplicationController
     @sick_leave_count = LeavePermission.get_sick_leave(current_user) - LeavePermission.get_leaves(current_user, @leave_permission.from_date, @leave_permission.to_date, @leave_permission.from_day, @leave_permission.to_day)
     @loss_of_pay_count = LeavePermission.get_leaves(current_user, @leave_permission.from_date, @leave_permission.to_date, @leave_permission.from_day, @leave_permission.to_day)
 
-    if (@leave_permission.type_of_leave == 'casual leave')
+    if (@leave_permission.type_of_leave == 'Casual Leave')
       if @leave_permission.max_casual_leave >= 0
         @leave_permission.casual_leave_count = @casual_leave_count
       else 
         @leave_permission.loss_of_pay_count = @loss_of_pay_count
       end
 
-    elsif (@leave_permission.type_of_leave == 'sick leave')
+    elsif (@leave_permission.type_of_leave == 'Sick Leave')
       if @leave_permission.max_sick_leave >= 0
         @leave_permission.sick_leave_count = @sick_leave_count
       else 
         @leave_permission.loss_of_pay_count = @loss_of_pay_count
       end
     else
-      if (@leave_permission.type_of_leave == 'loss of pay')
+      if (@leave_permission.type_of_leave == 'Loss of Pay')
         @leave_permission.loss_of_pay_count = @loss_of_pay_count
       end
     end

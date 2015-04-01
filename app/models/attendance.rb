@@ -8,9 +8,12 @@ class Attendance < ActiveRecord::Base
   scope :on_date, lambda { |date| where("attendance_date = ? ", date)}
   scope :taken_by_faculty, lambda { |faculty_master_id| where("faculty_master_id = ? ", faculty_master_id)}
   
+
+
   def self.this_month(month)
     grouping_month = Attendance.find_by_sql( " SELECT student_master_id,name ,sum(case when attendance = 'P' then 1 else 0 end) as Present, sum(case when attendance = 'A' then 1 else 0 end) as Absent, sum(case when attendance = 'L' then 1 else 0 end) as Leave from attendances where attendance_date >= (now() - interval '1 month') group by student_master_id,name;")
   end
+  
   def self.get_month(month, faculty)
    p month
     attendances = Attendance.this_month(month)

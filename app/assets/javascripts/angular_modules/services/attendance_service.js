@@ -1,6 +1,12 @@
 (function(angular, app) {
     "use strict";
     app.service("attendanceService",["$http", function($http) {
+        
+        var getTypeOfLeavesCount = function(){
+            var url = "/leave_permissions/get_type_of_leaves_count.json"
+            return $http.get(url);
+        };
+
         var getStudentAssessment = function(){
             var url = "/admissions/get_assessment_students.json"
             return $http.get(url);
@@ -67,7 +73,8 @@
             getShowAttendance : getShowAttendance,
             getMonthlyAttendance : getMonthlyAttendance,
             getGroupMonth : getGroupMonth,
-            getMonth : getMonth
+            getMonth : getMonth,
+            getTypeOfLeavesCount : getTypeOfLeavesCount
             //getModalServiceView : getModalServiceView
 
         };

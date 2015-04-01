@@ -444,6 +444,13 @@ def seed_remainders
   Reminder.where(:description => "Leave Encashment").first_or_create(:description => "Leave Encashment", :created_date => Date.new(Date.today.year-1, 12, 31), :occurrence => "yearly")
 end
 
+def seed_types_of_leaves
+  unless LeavePermission.first.present?
+    LeavePermission.create(:type_of_leave => 'Casual Leave')
+    LeavePermission.create(:type_of_leave => 'Sick Leave')
+    LeavePermission.create(:type_of_leave => 'Loss of Pay')
+  end
+end
 
 
 def seed_all
@@ -476,6 +483,7 @@ def seed_all
   seed_close_status
   seed_salary_break_ups
   seed_remainders
+  seed_types_of_leaves
 end
 
 seed_all

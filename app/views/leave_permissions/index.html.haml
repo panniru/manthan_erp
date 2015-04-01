@@ -7,14 +7,20 @@
           .pull-left
             = f.label "Type of Leave:", :class => 'control-label'
         .col-sm-2
-        -# %select{"ng-change" => "leave_update(myLeave)", "ng-model" => "myLeave","ng-options" => "value as key for (key, value) in leave_options", :class => "form-control"}
-        = f.select(:type_of_leave, options_for_select([['Casual Leave','casual leave'],['Sick Leave','sick leave'], ['Loss of Pay','loss of pay']]), :class => 'form-control')  
-                
+          %select{"ng-model" => "selectedItem", "ng-options" => "key as key for (key, value) in exact_counts"} 
+          {{selectedItem}}
+        
+          {{selectedItem.type_of_leave}}
+          {{selectedItem.sum}}
+          {{selectedItem.c_count}}
+          {{selectedItem.s_count}}
+          = f.hidden_field :type_of_leave, :value => '{{selectedItem.type_of_leave}}'
+          
         .col-sm-2
           = f.label "Leave Balance:", :class => 'control-label'
-        .col-sm-2{"ng-repeat" => "leave in leaves", "ng-model" => "myLeaveOptions"}
-          %input{:ng_show => "showCasualLeave",:type => "text", :readonly => true, :class => "form-control", :value => "{{leave.pending_casual_leave}}"}
-          %input{:ng_show => "showSickLeave", :type => "text", :readonly => true, :class => "form-control", :value => "{{leave.pending_sick_leave}}"}
+        .col-sm-2
+          %input{:ng_show => "showCasualLeave",:type => "text", :readonly => true, :class => "form-control", :value => "{{x[value]}}"}
+          %input{:ng_show => "showSickLeave", :type => "text", :readonly => true, :class => "form-control", :value => "{{x.sick_leave}}"}
           
        
      

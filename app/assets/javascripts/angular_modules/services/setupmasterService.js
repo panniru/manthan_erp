@@ -1,6 +1,11 @@
 (function(angular, app) {
     "use strict";
     app.service("setupmasterService",["$http", function($http) {
+        var getExactJsonCount = function(){
+            var url = "/leave_permissions/get_exact_json_count.json"
+            return $http.get(url);
+        };
+
         var getDesignation = function(){
             var url = "/setup_masters/get_designations.json"
             return $http.get(url);
@@ -49,6 +54,7 @@
             saveTodayAttendance : saveTodayAttendance,
             getCountno : getCountno,
             getDetails : getDetails,
+            getExactJsonCount : getExactJsonCount
             // getAllDates : getAllDates
         };
     }]);

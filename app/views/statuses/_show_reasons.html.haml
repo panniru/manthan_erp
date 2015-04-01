@@ -1,0 +1,12 @@
+.col-md-12
+  .col-md-7
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr        
+          %th Reasons
+          %th Delete
+        %tbody
+          %tr{"ng-repeat" => "reason in reasons"}
+            %td {{reason.reason}}         
+            %td           
+              = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "#", :class => "btn btn-danger btn-sm", :title => "Delete", :ng_click => "deleteReason(reason)"
