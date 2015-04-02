@@ -116,7 +116,7 @@
         setupmasterService.getTypeOfLeavesCount()
             .then(function(result) {
                 $scope.get_types_counts = result.data;
-                if ($scope.get_types_counts == "")
+                if ($scope.get_types_counts == "not")
                 {
                     $scope.showLeave = false;
                     $scope.showLossLeave = true;

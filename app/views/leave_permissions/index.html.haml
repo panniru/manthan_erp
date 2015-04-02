@@ -7,14 +7,6 @@
           .pull-left
             = f.label "Type of Leave:", :class => 'control-label'
         .col-sm-2
-          -# %select{"ng-model" => "selectedItem", "ng-options" => "key as key for (key, value) in exact_counts"} 
-          -# {{selectedItem}}
-        
-          -# {{selectedItem.type_of_leave}}
-          -# {{selectedItem.sum}}
-          -# {{selectedItem.c_count}}
-          -# {{selectedItem.s_count}}
-          -# = f.hidden_field :type_of_leave, :value => '{{selectedItem}}'
           %select{"ng-change" => "getLeaveMappings(selectedLeave)","ng-model" => "selectedLeave", "ng-show" => "showLeave"}
             %option Casual Leave
             %option Sick Leave
@@ -27,8 +19,8 @@
           = f.label "Leave Balance:", :class => 'control-label'
         .col-sm-2
           %input{:ng_show => "showLeave",:type => "text", :readonly => true, :class => "form-control", :ng_model => "exact_test_leaves"}
-          %input{:ng_show => "showLossLeave", :type => "text", :readonly => true, :class => "form-control", :ng_model => "exact_test_leaves"}
-          
+          %input{:ng_show => "showLossLeave", :type => "text", :class => "form-control", :ng_model => "loss_of_pay_value"}
+          {{loss_of_pay_value}}
        
      
      
