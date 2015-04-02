@@ -110,6 +110,33 @@
                 });
         // }
 
+        $scope.showLeave = true;
+        $scope.showLossLeave = false;
+
+        setupmasterService.getTypeOfLeavesCount()
+            .then(function(result) {
+                $scope.get_types_counts = result.data;
+                if ($scope.get_types_counts == "")
+                {
+                    $scope.showLeave = false;
+                    $scope.showLossLeave = true;
+
+                }
+                
+            });
+        
+
+        
+        
+        $scope.getLeaveMappings = function(type_of_leave){
+            setupmasterService.getTestExactLeave(type_of_leave)
+                .then(function(result){
+                    $scope.exact_test_leaves = result.data;
+                });
+        }
+
+
+
 
         $scope.getUpdate = function(designation){
             window.drawAttendance(designation)

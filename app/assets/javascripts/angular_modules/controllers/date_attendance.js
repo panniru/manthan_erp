@@ -21,21 +21,7 @@
         
         //-----------------------------
         
-            attendanceService.getTypeOfLeavesCount()
-                .then(function(result) {
-                    $scope.get_types_counts = result.data;
-                    alert(JSON.stringify($scope.get_types_counts))
-                    alert(myCount)
-                    // $scope.showCasualLeave = true;
-                    // // $scope.showSickLeave = false;
-                    // $scope.keys = Object.keys($scope.get_types_counts[0])
-                    // alert(JSON.stringify($scope.keys))
-                    //  console.log($scope.keys)
-                    
-                });
             
-
-        
 
         $scope.get_types ={"casual_leave":"casual_leave","sick_leave":"sick_leave", "loss_of_pay":"loss_of_pay"};
 

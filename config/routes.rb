@@ -925,6 +925,7 @@ ManthanErp::Application.routes.draw do
       post 'get_date'
       get 'get_type_of_leaves_count'
       get 'get_exact_json_count'
+      get 'get_exact_type_of_leave'
     end
   end
 

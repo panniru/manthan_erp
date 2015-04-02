@@ -1,6 +1,17 @@
 (function(angular, app) {
     "use strict";
     app.service("setupmasterService",["$http", function($http) {
+
+        var getTypeOfLeavesCount = function(){
+            var url = "/leave_permissions/get_type_of_leaves_count.json"
+            return $http.get(url);
+        };
+
+
+        var getTestExactLeave = function(type_of_leave){
+            var url = "/leave_permissions/get_exact_type_of_leave.json?type_of_leave="+type_of_leave
+            return $http.get(url);
+        };
         var getExactJsonCount = function(){
             var url = "/leave_permissions/get_exact_json_count.json"
             return $http.get(url);
@@ -54,7 +65,9 @@
             saveTodayAttendance : saveTodayAttendance,
             getCountno : getCountno,
             getDetails : getDetails,
-            getExactJsonCount : getExactJsonCount
+            getExactJsonCount : getExactJsonCount,
+            getTestExactLeave : getTestExactLeave,
+            getTypeOfLeavesCount : getTypeOfLeavesCount
             // getAllDates : getAllDates
         };
     }]);

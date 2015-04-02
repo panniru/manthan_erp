@@ -2,9 +2,56 @@ class LeavePermissionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
 
+  def get_exact_type_of_leave
+    get_c = LeavePermission.maximum(:max_casual_leave).to_f
+    get_cc = LeavePermission.minimum(:max_casual_leave).to_f
+    get_s = LeavePermission.maximum(:max_sick_leave).to_f
+    get_ss = LeavePermission.minimum(:max_sick_leave).to_f
+    a =  SetupMaster.maximum(:sick_leave).to_f 
+    
+    p "6555555555555555555555555"
+    p a
+    p get_s
+    
+    if params[:type_of_leave] == "Casual Leave"
+      if LeavePermission.first == nil
+        @get_count = SetupMaster.maximum(:casual_leave).to_f 
+      elsif
+        if LeavePermission.where(:type_of_leave => "Casual Leave")
+          @get_count = LeavePermission.minimum(:casual_leave_count)
+        else
+          @get_count = LeavePermission.maximum(:max_casual_leave)
+        end
+      else
+        @get_count = LeavePermission.maximum(:max_casual_leave)
+      end
+    elsif params[:type_of_leave] == "Sick Leave"
+      if LeavePermission.first == nil
+        @get_count = SetupMaster.maximum(:sick_leave).to_f 
+      elsif
+        if LeavePermission.where(:type_of_leave => "Sick Leave")
+          @get_count = LeavePermission.minimum(:sick_leave_count)
+        else
+          @get_count = LeavePermission.maximum(:max_sick_leave)
+        end
+      else
+        @get_count = LeavePermission.maximum(:max_sick_leave)
+      end
+    end
+   
+      respond_to do |format|
+      format.html do
+      end
+      format.json do
+        render :json => @get_count.to_f
+      end
+    end
+  end
+
+
 
   def get_exact_json_count
-    if LeavePermission.minimum(:max_casual_leave) == '0'
+    if LeavePermission.maximum(:max_casual_leave) > LeavePermission.minimum(:max_casual_leave)
       @get_count = LeavePermission.this_test(current_user.faculty_master)
     else
       @get_count = LeavePermission.initial_count(current_user.faculty_master)
@@ -23,14 +70,16 @@ class LeavePermissionsController < ApplicationController
 
 
   def get_type_of_leaves_count
-    @get_count = LeavePermission.all.map do |x|
-      {casual_leave: x.get_casual_of_leaves_count(current_user), sick_leave: x.get_sick_of_leaves_count(current_user), loss_of_pay: x.get_loss_of_leaves_count(current_user)}
+    if LeavePermission.minimum(:casual_leave_count) == "0.0" && LeavePermission.minimum(:sick_leave_count) == "0.0"
+      @get_count = ""
+    else
+      @get_count = "not"
     end
     respond_to do |format|
       format.html do
       end
       format.json do
-        render :json => [@get_count[0]]
+          render :json => @get_count
       end
     end
   end
@@ -119,7 +168,7 @@ class LeavePermissionsController < ApplicationController
     end
     respond_to do |format|
       if @leave_permission.save 
-        format.html { redirect_to approval_status_leave_permissions_path, notice: 'Leave Form was successfully created.' }
+        format.html { redirect_to leave_permissions_path, notice: 'Leave Form was successfully created.' }
       else
         format.html { render action: 'index' }
       end
