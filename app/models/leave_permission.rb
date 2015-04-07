@@ -1,6 +1,7 @@
 class LeavePermission < ActiveRecord::Base
 
   belongs_to :faculty_master
+  
   scope :get_typ_of_leave, lambda { |type_of_leave| where("type_of_leave = ? ", type_of_leave)}
   scope :not_null_method, -> { where.not(:max_casual_leave => nil) }
   scope :faculty_master_id_not_null, -> { where.not(:faculty_master_id => nil) }

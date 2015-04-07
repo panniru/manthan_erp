@@ -2,6 +2,12 @@
     "use strict";
     app.service("setupmasterService",["$http", function($http) {
 
+        var getAllDetails = function(){
+            var url = "/leave_permissions/get_all_details.json"
+            return $http.get(url);
+        };
+
+
         var getTypeOfLeavesCount = function(){
             var url = "/leave_permissions/get_type_of_leaves_count.json"
             return $http.get(url);
@@ -56,6 +62,10 @@
             var url = "/faculty_attendances/save_today_attendance.json"
             return $http.post(url,{save_today_attendence: save_today_attendence});
         };
+	var updateStatus = function(status){
+            var url = "/leave_permissions/update_leave_permission_status.json"
+            return $http.post(url, {status: status});
+	};
 
         return {
             getDesignation : getDesignation,
@@ -67,7 +77,9 @@
             getDetails : getDetails,
             getExactJsonCount : getExactJsonCount,
             getTestExactLeave : getTestExactLeave,
-            getTypeOfLeavesCount : getTypeOfLeavesCount
+            getTypeOfLeavesCount : getTypeOfLeavesCount,
+            getAllDetails : getAllDetails,
+            updateStatus : updateStatus
             // getAllDates : getAllDates
         };
     }]);

@@ -2,6 +2,22 @@ class LeavePermissionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
 
+  def get_all_details
+    respond_to do |format|
+      format.json do
+        a = LeavePermission.all.map do |map| 
+          {id: map.id,faculty_master_id: map.faculty_master_id, from_date: map.from_date, to_date: map.to_date, type_of_leave: map.type_of_leave,  status: map.status, reason: map.reason, name: map.faculty_master.faculty_name }
+        end
+        render :json => a
+      end
+    end
+  end
+
+
+  def approval
+    @leave_permissions = LeavePermission.all
+  end
+
   def get_exact_type_of_leave
     get_c = LeavePermission.maximum(:max_casual_leave).to_f
     get_cc = LeavePermission.minimum(:max_casual_leave).to_f
@@ -83,6 +99,28 @@ class LeavePermissionsController < ApplicationController
       end
     end
   end
+  def edit
+    
+  end
+
+  def update_leave_permission_status
+    respond_to do |format|
+      format.json do
+        status = params[:status]
+        p "1111111111"
+        p status
+        p params[:status]
+        status.each do |t|      
+          @status = LeavePermission.find(t['id'])    
+          @status.status = t['status']
+          @status.save
+        end
+        render :json => true    
+      end
+    end
+  end
+
+
 
   def count_no
     hash = LeavePermission.get_faculty_details(current_user.faculty_master, params[:type_of_leave])
@@ -185,7 +223,35 @@ class LeavePermissionsController < ApplicationController
     end
   end
 
+  # def update
+  #   @leave_permission = LeavePermission.find(params[:id])
+  #   respond_to do |format|
+  #     format.json do 
+  #       render :json => @leave_permission.update(permission_params)
+  #     end
+  #     format.html do
+  #       render "index"
+  #     end
+  #   end
+  # end
+  
 
+  def approval_item
+    @leave_permission = LeavePermission.find(params[:id])
+    respond_to do |format|
+      format.json do 
+        render :json => @leave_permission.update(permission_params)
+      end
+      format.html do
+        render "index"
+      end
+    end
+      
+  end
+
+
+
+  
   def permission_params
     params.require(:leave_permission).permit(:from_day, :to_day, :from_date, :to_date, :reason, :type_of_leave, :status, :bal_leave, :casual_leave_count, :sick_leave_count, :faculty_attendance_id, :dates, :max_casual_leave, :max_sick_leave, :loss_of_pay_count)
     

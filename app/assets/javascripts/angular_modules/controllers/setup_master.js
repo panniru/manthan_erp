@@ -1,6 +1,48 @@
 (function(angular, app) {
     "use strict";
     app.controller('SetupMasterController',["$scope","resourceService","setupmasterService", function($scope, resourceService, setupmasterService) {
+        $scope.request_status = [];
+        setupmasterService.getAllDetails()
+            .then(function(result) {
+                $scope.all_data = result.data;
+                
+            });
+        $scope.sendForApproval = function(status,leave_permission){
+            if(status){               
+                $scope.request_status.push({
+
+                    id: leave_permission.id,
+                    status: ""     
+                             
+                });
+                // alert(JSON.stringify($scope.request_status))  
+            }
+            else
+            {
+                for (var i=0; i<$scope.request_status.length; i++){ 
+                    if (leave_permission.id == $scope.request_status[i]['id']){                       
+                        $scope.request_status.splice(i, 1);
+                        break;
+                    }
+                }
+            }           
+        };
+	
+	
+
+	$scope.updateStatus = function(status){
+            // alert(JSON.stringify(status))
+	    for (var i=0; i<$scope.request_status.length; i++){ 
+                // alert(JSON.stringify($scope.request_status))
+                $scope.request_status[i]['status'] = status;
+	    }
+	    setupmasterService.updateStatus($scope.request_status)                      .then(function(result) {
+                
+		window.location.reload();
+            });           
+	};
+	
+
 
 
         setupmasterService.getExactJsonCount()

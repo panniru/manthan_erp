@@ -926,6 +926,11 @@ ManthanErp::Application.routes.draw do
       get 'get_type_of_leaves_count'
       get 'get_exact_json_count'
       get 'get_exact_type_of_leave'
+      get 'get_all_details'
+      post 'update_leave_permission_status'
+    end
+    member do
+      get 'approval_item'
     end
   end
 
