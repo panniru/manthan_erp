@@ -33,6 +33,7 @@
                   .col-md-3
                     = label_tag(:grade, "SELECT ASSESSMENT")      
                     %select{"ng-model" => "myAssessment", "ng-options" => "assessment.id as assessment.assessment_name for assessment  in assessments",:class => "form-control"}       
+                  
                       %option{style: "display:none", value: ""} select assessment
                   .col-md-3
                     = label_tag(:grade, "ASSESSMENT DESCRIPTION")  

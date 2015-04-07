@@ -1,6 +1,17 @@
 (function(angular, app) {
     "use strict";
     app.service("attendanceService",["$http", function($http) {
+
+        var getTeacherSubjectMapping = function(){
+            var url = "/lab_assessments/get_assessment_subjects.json"
+            return $http.get(url);
+        };
+
+        var getTestAssessmentSubjectService = function(){
+            var url = "/lab_assessments/get_test_assessment_subject_service.json"
+            return $http.get(url);
+        };
+
         var getStudentAssessment = function(){
             var url = "/admissions/get_assessment_students.json"
             return $http.get(url);
@@ -67,7 +78,9 @@
             getShowAttendance : getShowAttendance,
             getMonthlyAttendance : getMonthlyAttendance,
             getGroupMonth : getGroupMonth,
-            getMonth : getMonth
+            getMonth : getMonth,
+            getTeacherSubjectMapping : getTeacherSubjectMapping,
+            getTestAssessmentSubjectService : getTestAssessmentSubjectService
             //getModalServiceView : getModalServiceView
 
         };

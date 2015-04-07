@@ -8,3 +8,13 @@
       %select{"ng-model" => "mySection", "ng-options" => "section.section_master_id as section.section_name for section in sections | filter : {grade_master_id: myGrade}",:class => "form-control","ng-change" => "showAssessmentMappings(myGrade,mySection)"}
         %option{style: "display:none", value: ""} Select Section
     .col-md-2
+%br
+.row
+  .col-md-1
+  .col-md-10
+    %table{:class => "table"}
+      %tr
+        %th ASSESSMENT NAME
+        %th GRADE
+        %th ASSESSMENT TYPE
+        %th SUBJECT

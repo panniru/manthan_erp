@@ -16,12 +16,18 @@
             var url = "/grade_lab_mappings/get_subjects_grades_service_view.json"
             return $http.get(url);
         }; 
+        // var getSubjectsGradesMappings = function(){
+            
+        //     var url = "/grade_lab_mappings/get_subjects_grades_mappings.json"
+        //     return $http.get(url);
+        // }; 
 
 	
 	return {
 	    getLabNames : getLabNames,
             saveSubjectsMappings : saveSubjectsMappings,
             getSubjectsGradesServiceView : getSubjectsGradesServiceView
+            // getSubjectsGradesMappings : getSubjectsGradesMappings
 	};
     }]);
 })(angular , myApp);

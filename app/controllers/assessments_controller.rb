@@ -35,6 +35,8 @@ class AssessmentsController < ApplicationController
     end
   end
 
+ 
+
   def get_assessment_types_service
     respond_to do |format|
       format.json do        

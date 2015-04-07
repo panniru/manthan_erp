@@ -72,7 +72,7 @@ class LabTeacherMappingsController < ApplicationController
   end
 
   def savemappings
-    alert('')
+ 
     respond_to do |format|
       format.json do       
         params[:mappings].each do |t| 

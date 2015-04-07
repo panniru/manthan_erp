@@ -16,7 +16,8 @@
                         gradeLabMappingService.getSubjectsGradesServiceView()
                             .then(function(result) {
                                 $scope.show_subjects=result.data;
-                                alert(JSON.stringify($scope.show_subjects))                
+                                // alert(JSON.stringify($scope.show_subjects))     
+                                
                             }); 
                     });
             });
@@ -48,7 +49,7 @@
 
         $scope.defaultGradesSubjects = function(){     
             $scope.grades_subjects = [];
-            alert("show_grades"+$scope.show_grades)
+            // alert("show_grades"+$scope.show_grades)
             for(var i = 0; i < $scope.show_grades.length; i++)
             {
                 $scope.grades_subjects.push({
@@ -60,9 +61,10 @@
         };
 
         $scope.createSubjectsMappings = function() { 
-            alert("create subject mapping")
+            // alert("create subject mapping")
             $scope.defaultGradesSubjects();
-            alert(JSON.stringify($scope.grades_subjects))            
+            // alert(JSON.stringify($scope.grades_subjects))   
+            
             for ( var i = 0; i < $scope.show_grades.length; i++ ){         
                 for ( var j = 0; j < $scope.show_subjects.length; j++ ) {                   
                     if  ($scope.show_grades[i]['grade_master_id'] == $scope.show_subjects[j]['grade_master_id'] )
@@ -110,7 +112,7 @@
 
         $scope.saveSubjectsMappings = function() {
             // alert(JSON.stringify($scope.grades_subjects))
-            alert('')
+          
             $scope.save_grades_subjects = [];
             console.log("testing......")
             for(var i = 0; i < $scope.grades_subjects.length; i++){
@@ -124,7 +126,7 @@
                     });                      
                 }               
             }
-            alert($scope.save_grades_subjects.length)
+            // alert($scope.save_grades_subjects.length)
             console.log($scope.save_grades_subjects)
             gradeLabMappingService.saveSubjectsMappings($scope.save_grades_subjects)
                 .then(function(result) {
@@ -141,6 +143,7 @@
             gradeLabMappingService.getSubjectsGradesServiceView()
                 .then(function(result) { 
                     $scope.show_subjects=result.data; 
+                    // alert(JSON.stringify($scope.show_subjects))
                 }); 
         };
         $scope.addLabSubjects = function(value,grade_master_id,subject){  
@@ -169,13 +172,31 @@
             }            
         };
 
+        // gradeLabMappingService.getSubjectsGradesMappings()
+        //     .then(function(result) {         
+                  
+        //         $scope.mappings = result.data;   
+                
+        //         $scope.grade_subject_mappings = [];
+        //         for (var i=0; i< $scope.mappings.length; i++){
+        //             $scope._grade_subject_mappings.push({
+        //                 id: $scope.mappings[i]['id'],
+        //                 grade_master_id: $scope.mappings[i]['grade_master_id'],
+                    
+        //                 subject_master_id: $scope.mappings[i]['subject_master_id'],                       
+        //                 grade_subject: $scope.mappings[i]['grade_name']+" - "+$scope.mappings[i]['subject_name'],                        
+        //             });
+        //         }               
+        //     });
+        
+
         $scope.addAllSubjects = function(value,grade_master_id,subjects,grade){
-          alert(' ') 
+         
             $scope.grade = grade; 
 
             for(var i = 0; i < $scope.show_grades.length; i++)
             {        
-                 alert(JSON.stringify($scope.show_grades))       
+                
                 if ($scope.show_grades[i]['grade_master_id'] == grade_master_id)
                 {                    
                     if (!value)

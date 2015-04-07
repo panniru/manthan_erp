@@ -6,10 +6,10 @@
         %th ASSESSMENT DESCRIPTION          
         %th SAVE        
       %tr{"ng-repeat" => "assessment_type  in edit_assessment_types"}
-        {{edit_assessment_types}}
+      
         %td
           %input{type: "text", "ng-model" => "assessment_type.assessment_type",:class => "form-control" }/
-          {{assessment_type}}
+    
         %td
           %a{href: "#s_form", :class => "btn btn btn-primary btn-sm", :title => "SAVE", "ng-click" => "saveAssessmentTypeMappings(assessment_type)"}       
             %span{class: "glyphicon glyphicon-save"}

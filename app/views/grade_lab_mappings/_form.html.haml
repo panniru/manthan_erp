@@ -14,10 +14,11 @@
       .row
         .col-md-2
           %h4{style: "font-weight: bold"} {{grade.grade_name}}
-          %input{"ng-model" => "checked_all", type: "checkbox", "ng-change" => "addAllSubjects({{!checked_all}},{{grade.grade_master_id}},{{grade.subjects}}),grade)", "ng-checked" => "checked_all"} ALL {{grade}} 
+          -# %input{"ng-model" => "checked_all", type: "checkbox", "ng-change" => "addAllSubjects({{!checked_all}},{{grade.grade_master_id}},{{grade.subjects}}),grade)", "ng-checked" => "checked_all"} ALL {{grade}} 
       .col-md-2{"ng-repeat" => "subject in lab_subjects"}
         %input{"ng-model" => "subject.checked_value", type: "checkbox", "ng-change" => "addLabSubjects({{!subject.checked_value}},{{grade.grade_master_id}},{{subject}})", "ng-checked" => "subject.checked_value"}
-          {{subject.subject_name}}      
+          {{subject.subject_name}}    
+           
         .col-md-2
        
 

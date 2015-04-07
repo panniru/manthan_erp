@@ -1,0 +1,2 @@
+class LabSubjectAssessmentMappingsController < ApplicationController
+end

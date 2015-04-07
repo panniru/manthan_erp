@@ -1,0 +1,21 @@
+.row{"ng-controller" => "LabMasterController"} 
+  .row 
+    .col-md-1
+    .col-md-3 
+      %a{href: "#add_mapping", :class => "btn btn-primary", :title => "ADD ASESSMENT MAPPING", "ng-click" => "addAssessments()"} ADD ASSESSMENT
+    .col-md-2 
+      %a{href: "#show_mapping", :class => "btn btn-primary", :title => "ADD ASESSMENT MAPPING", "ng-click" => "showAssessments()"} SHOW ASSESSMENTS
+  %br
+  .row 
+    %div{"ng-view" => ""}
+  .row
+    :css
+      table, th, td
+      {     
+      border-collapse:collapse;
+      border:5px solid #6aa6d6;
+      }
+      th, td
+      {
+      padding:5px;
+      } 

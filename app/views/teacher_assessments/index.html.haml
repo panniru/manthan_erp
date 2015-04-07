@@ -1,0 +1,46 @@
+.row
+  .pull-left{"ng-controller" => "LabMasterController"}
+    = label_tag(:grade, "SELECT GRADE-SUBJECT")      
+    %select{ "ng-model" => "selectedUser", "ng-options" => "selectedUser as combined(selectedUser) for selectedUser in unAssignedUsers", :class => "form-control", :href => "#teacher_assessment"}}
+    %br
+.row 
+  %div{"ng-view" => ""}
+  .col-md-3
+    #lab_assessments_calendar 
+  .col-md-4          
+    #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header           
+            %h4#myModalLabel.modal-title Lab         
+            = form_for Listing.new, :html => {:class => "form-horizontal", :role => "form"} do |f|
+              .modal-body 
+                .row
+                  .col-md-4{"ng-controller" => "LabMasterController"}
+                    = f.label "SELECT ASSESSMENT TYPE"
+                    %select{"ng-model" => "myAssessmentType", "ng-options" => "assessment_type.id as assessment_type.assessment_type for assessment_type  in assessment_types",:class => "form-control"}    
+                      %option{style: "display:none", value: ""} select assessment type 
+                      = f.hidden_field :lab_assessment_id , :value => "{{myAssessmentType}}"
+
+                  .col-md-4{"ng-controller" => "DateAttendanceController"}
+                    = label_tag(:grade, "SELECT ASSESSMENT")  
+
+                    = f.select :grade, options_from_collection_for_select(LabSubjectAssessment.all, :assessment_name, :assessment_name) 
+                    {{add_assessments}}
+                    %option{style: "display:none", value: ""} select assessment
+                  .col-md-4
+                    = f.label "ASSESSMENT DESCRIPTION"
+                    = f.text_field :assessment_description
+              .modal-footer
+                .col-md-5.col-md-offset-3             
+                  = f.submit "Save", :class => 'btn btn-primary'
+
+
+
+
+
+
+
+
+
+

@@ -12,10 +12,25 @@ class Lab
     sub_menu << grade_lab_mappings
     sub_menu << lab_teacher_mappings
     sub_menu << lab_assessments
+    sub_menu << lab_subject_assessment_mappings
+    sub_menu << listings
   end
 
 
- 
+  def teacher_sub_menu
+    sub_menu = []
+    sub_menu << lab_masters
+    sub_menu << lab_criterias
+    sub_menu << grade_lab_mappings
+    sub_menu << lab_teacher_mappings
+    sub_menu << lab_assessments
+    sub_menu << lab_subject_assessment_mappings
+    sub_menu << listings
+   
+    
+    
+  end
+
   private
  
   def lab_masters
@@ -36,6 +51,14 @@ class Lab
 
   def lab_assessments
     MenuItem.new(:label => "Lab Assessments", :klass => "", :icon => "list-ol", :href => "/lab_assessments")
+  end
+
+  def lab_subject_assessment_mappings
+    MenuItem.new(:label => "Lab Subject Assessment Mapping", :klass => "", :icon => "list-ol", :href => "/lab_subject_assessment_mappings")
+  end
+
+  def listings
+    MenuItem.new(:label => "Listings ", :klass => "", :icon => "list-ol", :href => "/listings")
   end
   
 end

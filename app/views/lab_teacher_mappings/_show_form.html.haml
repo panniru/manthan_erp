@@ -19,7 +19,7 @@
             %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
             %h4.modal-title{ :id => "myModalLabel"} Add Mapping
             .modal-body         
-              .row{"ng-controller" => "LabTeacherMappingController" , "ng-init" => "saveLabMappings()",}
+              .row{"ng-controller" => "LabTeacherMappingController" , "ng-init" => "saveLabMappings()"}
                
                 .col-md-6
                   = label_tag(:grade, "Select Teacher") 
