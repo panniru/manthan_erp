@@ -28,7 +28,8 @@
           %option{style: "display:none", value: ""} Select Location
       .col-sm-3
         .input-group
-          = text_field_tag "bulk_location[][sequence_no]",nil, :class => "form-control" , :ng_model => "location.sequence_no" , :placeholder => "Sequence#"
+          %input{:class => "form-control" , :placeholder => "Sequence#", "ng-model" => "location.sequence_no", :type => "text", :options_manager => ""}
+          = hidden_field_tag "bulk_location[][sequence_no]","{{location.sequence_no}}"
           
   .row
     .col-md-5.col-md-offset-3

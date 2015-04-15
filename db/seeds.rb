@@ -248,7 +248,6 @@ def seed_routes
     Route.create(:id => '19' , :busno_up => '10' ,  :lpp => 'Up Route' , :gmaps => '' , :start_point => '30' , :end_point => '29' )
     Route.create(:id => '20' ,  :busno_down => '12' , :lpp => 'Down Route', :gmaps => '' , :start_point => '32' , :end_point => '35' )
     Route.create(:id => '21' ,  :busno_down => '14' , :lpp => 'Down Route',  :gmaps => '' , :start_point => '36' , :end_point => '37' )
-  
   end
 end
 
