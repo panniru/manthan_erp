@@ -4,7 +4,11 @@ ManthanErp::Application.routes.draw do
 
   resources :grade_lab_mappings do
     collection do
-      get :all_subjects
+      get "get_grades_subjects_service_view"
+      get "all_subjects"
+      get "get_subjects_grades_service_view"
+      post "save_subjects_mappings"
+      get "get_subjects_grades_mappings"    
     end
   end
 
@@ -759,6 +763,7 @@ ManthanErp::Application.routes.draw do
       get 'monthly_attendance'
       get 'group_month'
       get 'get_month'
+      get 'get_test_assessment_subject_service'
     end
   end
 
@@ -823,6 +828,7 @@ ManthanErp::Application.routes.draw do
       post "deletemappings"  
       get "check_subjects_teachers_mapping"
       post "getmappings"      
+    
     end
   end
   
@@ -956,7 +962,8 @@ ManthanErp::Application.routes.draw do
     collection do      
     end
   end
-
+  
+  
 
   resources :tax_buckets
   resources :faculty_masters do
@@ -1030,7 +1037,31 @@ ManthanErp::Application.routes.draw do
     end
   end
 
+  resources :lab_assessments do
+    member do
+      get 'mapping_form'
+      get 'map_edit'
+      get 'teachers_index'
+    end
+    collection do
+      get "get_assessment_types_service"
+      post "save_assessment_type_mappings"
+      post "delete_assessment_type_mappings"
+      get "get_grade_mappings_service"
+      post "save_assessment_grade_mappings"
+      get "get_sections_for_grade"  
+      get "get_subjects_service"  
+      post "save_assessments"
+      get "get_teacher_mappings"
+      get "get_assessment_subjects"
+      post "save_teacher_mappings"
+      get "get_teacher_service"
+    end
+  end
 
+  resources :teacher_assessments 
+  resources :lab_subject_assessment_mappings 
+    
   
   resources :salary_break_ups do
     collection do
@@ -1066,9 +1097,14 @@ ManthanErp::Application.routes.draw do
   get "/job_runs/:job_run_id/pf_statements" => "pf_statements#index"
   get "/pf_statements/schedule"
   get "/pf_statements/list_jobs"
-  
+ 
   resources :certificates
-
+  resources :listings do
+    collection do
+      get "get_values"
+    end
+  end
+ 
 end
 
 

@@ -1,4 +1,17 @@
 class AttendancesController < ApplicationController
+
+
+  def get_test_assessment_subject_service
+    groups = LabSubjectAssessment.all
+    respond_to do |format|
+      format.json do
+        render :json => groups
+      end
+      format.html do
+      end
+    end
+  end
+
   
   def group_month
     groups = Attendance.grouping_month(params[:date], current_user.faculty_master)

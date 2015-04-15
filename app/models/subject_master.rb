@@ -1,4 +1,5 @@
 class SubjectMaster < ActiveRecord::Base
+ 
   validates :subject_name, :uniqueness => {:case_sensitive => false}
   scope :get_sub_type, lambda {where(:subject_type => "labs")}
   

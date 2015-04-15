@@ -1,0 +1,64 @@
+.row{"ng-controller" => "LabMasterController"}
+  .col-md-12
+    .col-sm-2
+      = label_tag(:grade, "SELECT GRADE-SUBJECT")      
+      %select{ "ng-model" => "selectedUser", "ng-options" => "selectedUser as combined(selectedUser) for selectedUser in unAssignedUsers | orderBy:'id'", "ng-change" => "getTeacherMappings(selectedUser.union)", :class => "form-control", :href => "#teacher_assessment"}}
+           
+    .col-sm-3
+      #lab_assessments_calendar 
+    .col-sm-7
+      %table.table.table-condensed.table-condensed.table-hovered.table-striped
+        %thead
+          %tr
+            %th Grade
+            %th Subject
+            %th Date
+            %th Description
+            %th Assessment Name
+
+        %tbody
+          %tr{"ng-repeat" => "group in both_values"}
+            %td {{group.grade_master_id}}
+            %td {{group.subject_master_id}}
+            %td {{group.assessment_date}}
+            %td {{group.assessment_description}}
+            %td {{group.assessment_name}}
+
+    
+  #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header           
+          %h4#myModalLabel.modal-title Lab         
+          = form_for @listing, :html => {:class => "form-horizontal", :role => "form"} do |f|
+            .modal-body 
+              .row
+                .col-md-4
+                  Assessment Type
+                  %select{"ng-model" => "myAssessmentType", "ng-options" => "assessment_type.id as assessment_type.assessment_type for assessment_type  in assessment_types",:class => "form-control"}    
+                    %option{style: "display:none", value: ""} select lab assessment type
+                    = f.hidden_field :lab_assessment_id , :value => "{{myAssessmentType}}"
+
+                .col-md-4
+                   Assessment Name 
+
+                  = f.select :assessment_name, options_from_collection_for_select(LabSubjectAssessment.all, :assessment_name, :assessment_name),{ :include_blank => true, :class => 'form-control'}
+                  {{add_assessments}}
+                  %option{style: "display:none", value: ""} select assessment
+                .col-md-4
+                  Assessment Description
+                  = f.text_field :assessment_description
+
+            .modal-footer
+              .col-md-5.col-md-offset-3             
+                = f.hidden_field :grade_master_id, :value => "{{selectedUser.grade_master_id}}"
+                = f.hidden_field :subject_master_id, :value => "{{selectedUser.subject_master_id}}"
+                = f.hidden_field :assessment_date, :value => "{{dateFormat}}"
+                  
+                = f.submit "Save", :class => 'btn btn-primary'
+
+
+
+  .col-sm-12
+          
+

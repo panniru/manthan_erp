@@ -53,6 +53,13 @@ en:
     update:
       success: "Bucket has been updated"
       fail: "Bucket not been updated"
+  subject_master:
+    create:
+      success: "subject has been saved"
+      fail: "subject not been saved" 
+    destroy:
+      success: "subject has been deleted"
+      fail: "subject has not been deleted"
   term_definition:
     create:
       success: "Term has been saved"

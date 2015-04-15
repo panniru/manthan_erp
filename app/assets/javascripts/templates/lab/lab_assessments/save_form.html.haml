@@ -1,0 +1,21 @@
+.row
+  .col-md-1
+  .col-md-10
+    %table{:class => "table"}
+      %tr
+        %th ASSESSMENT NAME
+        %th ASSESSMENT TYPE
+        %th SUBJECT NAME
+      %tr{"ng-repeat" => "assessment in add_assessments"}
+        -# {{add_assessments}}
+        %td {{assessment.assessment_name}} 
+    
+        %td {{assessment.lab_assessment_id}}
+        %td {{assessment.subject_master_id}}
+      -# %tr{"ng-repeat" => "assessment in lab_subject_assessments"}
+      -#   {{lab_subject_assessments}}
+     
+      -#   %td {{assessment.assessment_name}} 
+      -#   %td {{assessment.lab_assessment_id}}
+      -#   %td {{assessment.subject_master_id}}
+

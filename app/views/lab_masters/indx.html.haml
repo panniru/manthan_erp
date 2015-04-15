@@ -1,0 +1,47 @@
+%h1
+  LabMasters
+.row
+.pull-right
+  .col-sm-6
+    %button.btn.btn-primary{"data-toggle" => "modal", :href => "#myModal", :role => "button"} Add New
+    / Modal
+    #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+            %h3#myModalLabel LabMasters
+            =form_for(@subject_master)do|f|            
+              .modal-body
+                .col-sm-12
+                  .col-sm-3
+                    =f.label :subject_name
+                  .col-sm-3
+                    =f.text_field :subject_name,:class =>"form-control"
+                    =f.hidden_field :subject_type,:value => 'labs',:class =>"form-control"
+                    %br
+              .modal-footer
+                =f.submit 'save', :class => 'btn btn-primary'
+                
+.row
+  .col-sm-6
+    %table.table.table-condensed.table-hovered.table-striped.table-bordered
+      %thead
+        %tr
+          %th subject name
+          %th Delete
+      %tbody
+        - @subject_masters.each do|subject_master|
+          %tr
+            %td= subject_master.subject_name
+             %td           
+               = link_to raw("<span class='glyphicon glyphicon-trash'></span>"), "subject_master_path(subject_master)", :class => "btn btn-danger btn-sm", :title => "Delete"
+ 
+            -# %td
+            -#   = link_to "Destroy", subject_master_path(subject_master),  :class => "btn btn-danger", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+        
+            -#          %td
+            -#   = link_to "Destroy", subject_master_path(subject_master),  :class => "btn btn-danger", :data=> {:confirm => "Are you sure?", method: :delete}, :title => "Delete"
+        
+                    
+

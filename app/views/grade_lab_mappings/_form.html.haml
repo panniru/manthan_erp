@@ -5,21 +5,24 @@
       %h4{style: "font-weight: bold"} SELECT subjects for  grades
     .col-md-4
       = link_to 'CANCEL', grade_lab_mappings_path,:class => 'btn btn-primary' 
-      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveGradesMappings()", :value => "DONE"}
+      %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveSubjectsMappings()", :value => "DONE"}
     .col-md-3
      
-  .row{"ng-repeat" => "grade in show_grades"}
+  .row{"ng-repeat" => "grade in grades_subjects_all"}
     .col-md-1
     .col-md-9
       .row
         .col-md-2
           %h4{style: "font-weight: bold"} {{grade.grade_name}}
-          %input{"ng-model" => "checked_all", type: "checkbox", "ng-change" => "addAllSubjects({{!checked_all}},{{grade.grade_master_id}},{{grade.subjects}},grade)", "ng-checked" => "checked_all"}      
-          ALL
+          -# %input{"ng-model" => "checked_all", type: "checkbox", "ng-change" => "addAllSubjects({{!checked_all}},{{grade.grade_master_id}},{{grade.subjects}}),grade)", "ng-checked" => "checked_all"} ALL {{grade}} 
       .col-md-2{"ng-repeat" => "subject in lab_subjects"}
-        %input{"ng-model" => "subject.checked_value", type: "checkbox", "ng-change" => "addLabSubjects({{!subject.checked_value}},{{grade.grade_master_id}},{{subject}})","ng-checked" => "subject.checked_value"}      
-        {{subject.subject_name}}        
-      .col-md-2
+        %input{"ng-model" => "subject.checked_value", type: "checkbox", "ng-change" => "addLabSubjects({{!subject.checked_value}},{{grade.grade_master_id}},{{subject}})", "ng-checked" => "subject.checked_value"}
+          {{subject.subject_name}}    
+           
+        .col-md-2
+       
 
  
  
+
+

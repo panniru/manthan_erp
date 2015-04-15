@@ -39,6 +39,7 @@
         }; 
  
         $scope.getTeacherAssessmentMappings = function(){ 
+            alert(' ')
             var path = "/";
             path = "/teacher_show";
             $location.path(path);            
@@ -123,7 +124,7 @@
                     $scope.assessments = result.data;                    
                 });
         };
-
+        
     }]);
-   
+    
 })(angular, myApp);

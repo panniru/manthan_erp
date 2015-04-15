@@ -1,0 +1,29 @@
+.row
+  .col-md-1
+  .col-md-9
+    %table{:class => "table"}
+      %tr
+        %th ASSESSMENT NAME   
+        %th ASSESSMENT TYPE     
+        %th SUBJECT       
+        %th SAVE 
+      %tr{"ng-repeat" => "assessment  in add_assessments"}
+        %td
+          %input{type: "text", "ng-model" => "assessment.assessment_name",:class => "form-control" }
+        %td
+          %select{"ng-model" => "assessment.lab_assessment_id", "ng-options" => "assessment.id as assessment.assessment_type for assessment in assessment_types",:class => "form-control"}
+            %option{style: "display:none", value: ""} Select Mapping 
+            {{assessment_types}}
+            {{assessment.lab_assessment_id}}
+        -# %td
+        -#   %select{"ng-model" => "assessment.lab_assessment_grade_mapping_id", "ng-options" => "assessment_type.id as assessment_type.assessment_type+' - '+assessment_type.grade_name for assessment_type in assessment_types | orderBy: 'assessment_type'",:class => "form-control","ng-change" => ""}
+        -#     %option{style: "display:none", value: ""} Select Mapping
+     
+        %td
+          %select{"ng-model" => "assessment.subject_master_id", "ng-options" => "subject.id as subject.subject_name for subject in subject_names",:class => "form-control","ng-change" => ""}
+            %option{style: "display:none", value: ""} Select Subject
+      
+        %td
+          %a{href: "#save_form", :class => "btn btn btn-primary btn-sm", :title => "SAVE","ng-click" => "saveAssessments()"}       
+            %span{class: "glyphicon glyphicon-save"}
+     

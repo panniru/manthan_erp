@@ -1,7 +1,10 @@
 class GradeMaster < ActiveRecord::Base
+  has_many :subject_grades 
   has_many :section_masters
   has_many :grade_sections
   has_many :students, :class_name => "StudentMaster"
+  belongs_to :lab_assessment_grade_mapping
+  belongs_to :listings
   def self.get_grades_by_role(current_user)    
 
     if current_user.role.role == "admin"

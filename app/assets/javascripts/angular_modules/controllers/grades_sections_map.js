@@ -10,14 +10,14 @@
         timeTableService.getSectionServiceView()
             .then(function(result) {
                 $scope.sections=result.data; 
-                 alert(JSON.stringify($scope.sections))               
+                          
             });      
        
         
         timeTableService.getGradeServiceView()
             .then(function(result) {
                 $scope.grades=result.data;             
-                alert(JSON.stringify($scope.grades))  
+         
             });
 
         gradesSectionsMapService.getGradesSectionsServiceView()
@@ -90,6 +90,7 @@
             
             for ( var i = 0; i < $scope.sections.length; i++ ){         
                 for ( var j = 0; j < $scope.show_grades.length; j++ ) {                   
+                    alert($scope.show_grades.length)  
                     if  ($scope.sections[i]['section_master_id'] == $scope.show_grades[j]['section_master_id'] )
                     {
                         for ( var k = 0; k < $scope.sections_grades_all[i]['grades'].length; k++ ) {
@@ -166,7 +167,7 @@
 
          $scope.addAllGrades = function(value,section_master_id,grades,section){ 
              $scope.section = section; 
-            for(var i = 0; i < $scope.sectio2ns.length; i++)
+            for(var i = 0; i < $scope.sections.length; i++)
             {                
                 if ($scope.sections[i]['section_master_id'] == section_master_id)
                 {                    

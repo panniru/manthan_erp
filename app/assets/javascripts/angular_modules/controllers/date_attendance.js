@@ -1,6 +1,46 @@
 (function(angular, app) {
     "use strict";
     app.controller("DateAttendanceController",["$scope", "resourceService", "attendanceService", function($scope, resourceService, attendanceService) {
+
+        attendanceService.getTestAssessmentSubjectService()
+            .then(function(result) {
+                $scope.assess_subjects = result.data;
+            });
+
+        
+
+
+        attendanceService.getTeacherSubjectMapping()
+            .then(function(result) {
+                $scope.unAssignedUsers = result.data;
+                $scope.selectedUser =  $scope.unAssignedUsers[0];
+                
+                $scope.combined = function(user){
+                    if(user.grade_name == undefined || user.grade_name == ''){
+                        return user.subject_name;
+                    }
+                    else {
+                        return user.grade_name + "-" + user.subject_name;
+                    }
+                }
+            });
+        
+
+        // "grade_name", "subject_name"
+
+        // $scope.unAssignedUsers = [{
+        //     "Displayname": "GeneralDisplayname",
+        //     "Username": "GeneralUsername"
+        // }, {
+        //     "Displayname": "SuperDisplayname",
+        //     "Username": "SuperName"
+        // }, {
+        //     "Displayname": "",
+        //     "Username": "UsernameTrial"
+        // }];
+
+       
+
       
         //$scope.attendances = resourceService.Attend.query();
         //---------------------------------

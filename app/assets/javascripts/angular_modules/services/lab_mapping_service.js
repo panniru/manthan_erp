@@ -15,9 +15,10 @@
             return $http.post(url, {mappings: mappings});            
         };
         
-        var checkSubjectsTeachersMapping = function(mySubject){                      // alert(JSON.stringify(mySubject))
-                                                                                     var url = "/lab_teacher_mappings/check_subjects_teachers_mapping.json"             
-                                                                                     return $http.get(url,{params:{my_Subject: mySubject}});  
+        var checkSubjectsTeachersMapping = function(mySubject){                    
+            // alert(JSON.stringify(mySubject))
+            var url = "/lab_teacher_mappings/check_subjects_teachers_mapping.json"             
+            return $http.get(url,{params:{my_Subject: mySubject}});  
                                                               }; 
         
         var getMappings = function(mySubject){

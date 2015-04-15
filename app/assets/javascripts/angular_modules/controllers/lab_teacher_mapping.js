@@ -16,6 +16,7 @@
             labMappingService.labMappings()
                 .then(function(result){
                     $scope.faculty_names = result.data
+     
                 });
         }
         $scope.saveMappings = function(){   
@@ -36,15 +37,20 @@
                 });
         };
         $scope.saveEdit = function(){  
-        
-            $scope.save_mappings = [];          
+            $scope.save_mappings = []; 
             $scope.save_mappings.push({
+             
                 id: $scope.mapping.id, 
                 subject_master_id: $scope.mySubject,
                 faculty_master_id: $scope.mapping.faculty_master_id[j],
+                
+             
             });
+            alert(JSON.stringify($scope.save_mappings))
+            
             labMappingService.saveMappings($scope.save_mappings)
                 .then(function(result) {
+            
                     $('#myEditModal').modal('hide');
                     $scope.showMappings();
                     window.location.reload();
@@ -71,6 +77,7 @@
             
                 .then(function(result) {
                     $scope.check_subjects_teachers_mapping = result.data                    
+                    
                     if ($scope.check_subjects_teachers_mapping == 0)
                     {
                         $scope.mappings = [];
@@ -78,9 +85,11 @@
                     }
                     else
                     {                          
-                        labMappingService.getMappings($scope.mySubject)
+                       labMappingService.getMappings($scope.mySubject)
                             .then(function(result) {  
+                                
                                 $scope.mappings = result.data;  
+                                alert(JSON.stringify($scope.mappings))
                             });
                     }
                 });

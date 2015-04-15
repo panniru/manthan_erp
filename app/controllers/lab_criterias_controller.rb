@@ -17,17 +17,16 @@ class LabCriteriasController < ApplicationController
     end
     render :json => lab_masters
   end
-
   def get_all_grades
     all_grades  = GradeMaster.all.map do |grade|
-      {grade_name: grade.grade_name , id: grade.id }
+      {grade_name: grade.grade_name , grade_master_id: grade.id }
     end
     render :json => all_grades
   end
   
   def show
     all_grades  = GradeMaster.all.map do |grade|
-      {grade_name: grade.grade_name , id: grade.id }
+      {grade_name: grade.grade_name , grade_master_id: grade.id }
     end
     render :json => all_grades
   end

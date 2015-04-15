@@ -35,6 +35,8 @@ class AssessmentsController < ApplicationController
     end
   end
 
+ 
+
   def get_assessment_types_service
     respond_to do |format|
       format.json do        
@@ -89,6 +91,7 @@ class AssessmentsController < ApplicationController
       format.json do        
         assessment_mappings = AssessmentGradeMapping.all
         assessment_mappings = assessment_mappings.each.map do |mapping|
+          
           {id: mapping.id, grade_master_id: mapping.grade_master_id, grade_name: mapping.grade_master.grade_name, assessment_type_id: mapping.assessment_type_id, assessment_type: mapping.assessment_type.assessment_type, no_of_times: mapping.no_of_times} 
         end
         render :json => assessment_mappings 

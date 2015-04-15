@@ -1,0 +1,62 @@
+-# .row{"ng-controller" => "AssessmentsTeacherController"}
+-# .row
+-#     .col-md-1 
+-#     .col-md-11 
+-#       .col-md-8 
+-#         .row
+-#           .col-md-9
+-#             = label_tag(:grade, "SELECT GRADE-SECTION-SUBJECT")      
+-#             %select{"ng-model" => "myGradeSection", "ng-options" => "mapping as mapping.teacher_grade_subject for mapping  in teacher_grade_subject_mappings | orderBy:'id'", "ng-change" => "getTeacherAssessmentMappings()", :class => "form-control", :href => "#teacher_show"}            
+-#               %option{style: "display:none", value: ""} select grade - section - subject                 
+-#         %br
+-#         %br
+-#         .row 
+-#           %div{"ng-view" => ""}
+-#       .col-md-3
+-#         #assessments_calendar 
+-#  .row
+-#     .col-md-4      
+-#       #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+-#         .modal-dialog
+-#         .modal-content
+-#           .modal-header           
+-#             %h4#myModalLabel.modal-title Teaching Plan          
+-#             .modal-body 
+-#               .row
+-#                 .col-md-1 
+-#                 .col-md-10 
+-#                   .col-md-3
+-#                     = label_tag(:grade, "SELECT ASSESSMENT TYPE")      
+-#                     %select{"ng-model" => "myAssessmentType", "ng-options" => "assessment_type.id as assessment_type.assessment_type for assessment_type  in assessment_types",:class => "form-control","ng-change" => "getAssessmentsForAssessmentType()"}       
+-#                       %option{style: "display:none", value: ""} select assessment type 
+-#                   .col-md-3
+-#                     = label_tag(:grade, "SELECT ASSESSMENT")      
+-#                     %select{"ng-model" => "myAssessment", "ng-options" => "assessment.id as assessment.assessment_name for assessment  in assessments",:class => "form-control"}       
+-#                       %option{style: "display:none", value: ""} select assessment
+-#                   .col-md-3
+-#                     = label_tag(:grade, "ASSESSMENT DESCRIPTION")  
+-#                     %input{type: "text", "ng-model" => "myAssessmentDescription",:class => "form-control" }
+                   
+          .modal-footer
+            .col-md-5.col-md-offset-3       
+             
+              %a{href: "#teacher_save_form", :class => "btn btn-primary", :title => "SAVE", "ng-click" => "saveTeacherAssessmentMappings()"} SAVE             
+              %a{:class => "btn btn-primary", :title => "CANCEl", "ng-click" => "cancelMyModal()"} CANCEL
+  .row
+    -# :css
+    -#   table_, th, td
+    -#   {     
+    -#   border-collapse:collapse;
+    -#   border:5px solid #6aa6d6;
+    -#   }
+    -#   th, td
+    -#   {
+    -#   padding:5px;
+    -#   } 
+
+
+
+ 
+                 
+
+
