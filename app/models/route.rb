@@ -6,7 +6,7 @@ class Route < ActiveRecord::Base
   accepts_nested_attributes_for :locations
   attr_accessor :text ,:subject
   scope :show_route_locations, lambda{|route_id| where(:route_id => route_id ).select(:id,:location_master_id, :sequence_no)}
-  
+  validates :sequence_no, numericality: { only_integer: true }
   
   def student_length
     route = self.id
@@ -18,11 +18,7 @@ class Route < ActiveRecord::Base
     route = self.id
     mapping = StudentRouteMapping.show_all_students(route).map {|student| student.student_master_id}
     capacity =  NewVehicle.capacity_bus(self.busno_up).map {|cap| cap.capacity}
-    p "1111111111111"
-    p capacity.first
     length = capacity.first - mapping.length
-    p "22222222222"
-    p length
     return length
   end
 
@@ -63,12 +59,6 @@ class Route < ActiveRecord::Base
   end
   
   def update_route(params)
-    p "params"
-    p params
-    # params[:route].each do |route_params| 
-    #   params[:lpp] = route_params[:lpp]
-    #   route.busno_up = route_params[:busno_up]
-    # end
     params[:locations].each do |location_params|
       if location_params["id"].present?
         location = self.locations.find(location_params[:id])
