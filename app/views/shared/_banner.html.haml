@@ -1,6 +1,8 @@
 .banner
   .logo
-    = image_tag "logo.jpg", :align => 'left', :class => "img-rounded", :style => "margin-left:33px;" 
+    .col-sm-2
+      %h4{:style => "color:white" , :paddding => "10px"} LOGO
+    //= image_tag "logo.png", :align => 'left', :class => "img-rounded", :style => "margin-left:33px;" 
   .pull-right
     - if current_user.present?
       %ul.nav.navbar-nav
