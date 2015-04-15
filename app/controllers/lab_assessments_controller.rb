@@ -1,12 +1,5 @@
 class LabAssessmentsController < ApplicationController
-  # def index
-  #   if current_user.admin?
-  #     render "index"
-  #   elsif current_user.teacher?
-  #     render "teachers_index"
-  #   end
-  # end
-
+ 
 # def get_teacher_mappings     
 #     respond_to do |format|
 #       format.json do
@@ -38,7 +31,7 @@ class LabAssessmentsController < ApplicationController
    respond_to do |format|
     format.json do       
       subjects_grades = SubjectGrade.all.map do |sg|
-        {id: sg.id, grade_master_id: sg.grade_master_id, grade_name: sg.grade_master.grade_name, subject_master_id: sg.subject_master_id, subject_name: sg.subject_master.subject_name, :union => sg.union} 
+        {id: sg.id, grade_master_id: sg.grade_master_id, grade_name: sg.grade_master.grade_name, subject_master_id: sg.subject_master_id, subject_name: sg.subject_master.subject_name, :union => sg.union } 
       end
       render :json => subjects_grades
     end

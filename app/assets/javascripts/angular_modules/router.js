@@ -120,9 +120,12 @@
             . when('/teacher_form', {
                 templateUrl: 'lab/lab_assessments/teacher_assessment.html'               
             })
-        
+            . when('/results_form', {
+                templateUrl: 'lab/lab_results/results_form.html'  
+            })
 
     }]);
 })(angular, myApp);
+  
 
-
+  

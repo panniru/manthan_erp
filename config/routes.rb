@@ -1104,6 +1104,12 @@ ManthanErp::Application.routes.draw do
       get "get_values"
     end
   end
+  resources :lab_results do
+    collection do
+      get "get_names"
+      post "save_all"
+    end
+  end
  
 end
 

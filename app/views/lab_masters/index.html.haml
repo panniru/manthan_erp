@@ -15,7 +15,7 @@
             .modal-body
               .col-sm-12
                 .col-sm-3
-                  =f.label :subject_name
+                  Subject Name
                 .col-sm-3
                   =f.text_field :subject_name,:class =>"form-control"
                   =f.hidden_field :subject_type,:value => 'labs',:class =>"form-control"
@@ -28,7 +28,7 @@
     %table.table.table-condensed.table-hovered.table-striped.table-bordered
       %thead
         %tr
-          %th subject name
+          %th Subject Name
           %th Delete
       %tbody
         - @subject_masters.each do|subject_master|
