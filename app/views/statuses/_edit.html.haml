@@ -4,7 +4,7 @@
       .col-sm-3
         = label_tag "Reason"
       .col-sm-4
-        %input{:ng_model => "reason.reason", :type => 'text'} 
+        %input{:ng_model => "reason.reason", :type => 'text', :class => 'form-control'} 
         = hidden_field_tag :reason, :value => '{{reason.reason}}'
   .row
     .pull-right

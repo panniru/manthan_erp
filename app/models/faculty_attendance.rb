@@ -10,7 +10,7 @@ class FacultyAttendance < ActiveRecord::Base
   def self.get_faculty_details(current_user, type_of_leave)
     if(FacultyMaster.where('id ='+"#{current_user.id}").length != 0)
       current_user_id = "#{current_user.id}"
-      get_faculty = FacultyAttendance.get_type_of_leave(type_of_leave).where(:faculty_master_id => current_user_id, :type_of_leave => type_of_leave).select(%q{faculty_master_id,max_casual_leave, max_sick_leave, pending_casual_leave, pending_sick_leave, type_of_leave}).group('type_of_leave','max_casual_leave', 'max_sick_leave', 'pending_casual_leave', 'pending_sick_leave','faculty_master_id')
+      get_faculty = LeavePermission.get_type_of_leave(type_of_leave).where(:faculty_master_id => current_user_id, :type_of_leave => type_of_leave).select(%q{faculty_master_id,max_casual_leave, max_sick_leave, casual_leave_count, sick_leave_count, type_of_leave}).group('type_of_leave','max_casual_leave', 'max_sick_leave', 'casual_leave_count', 'sick_leave_count','faculty_master_id')
     end
     get_faculty
   end

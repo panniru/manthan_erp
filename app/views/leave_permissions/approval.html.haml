@@ -1,0 +1,45 @@
+.row
+  .col-sm-3
+    .pull-left
+      .input-group
+        %span.input-group-addon
+          = fa_icon "search lg"
+        %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+        %br
+
+%br
+%br
+.row
+  %center
+    %h3 Approval of Leave
+.col-md-12{"ng-controller" => "SetupMasterController"}
+  .col-sm-12
+    //- if @inventories.length != 0
+          
+    %table#tblData.target.table.table-striped.table-condensed.table-bordered
+      %thead
+        %tr        
+          %th Name
+          %th Type of Leave
+          %th From - To 
+          %th Status
+          - if current_user.admin? 
+            %th 
+              - if current_user.admin?
+                %center
+                  %button.btn.btn-primary{"ng-click" => "updateStatus('Approved')"}= "Approve"
+                  %button.btn.btn-primary{"ng-click" => "updateStatus('Rejected')"}= "Reject"
+              
+      %tbody
+        %tr{"ng-repeat" => "leave_permission in all_data"}
+          %td {{leave_permission.name}}
+          %td {{leave_permission.type_of_leave}}
+          %td 
+            {{leave_permission.from_date}}
+            - 
+            {{leave_permission.to_date}}
+          %td {{leave_permission.status}}
+          - if  current_user.admin?
+            %td
+              %center
+                %input{"ng-model" => "status", type: "checkbox", "ng-change" => "sendForApproval(status,leave_permission)", "ng-checked" => "status"}

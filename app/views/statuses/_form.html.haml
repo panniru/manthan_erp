@@ -1,13 +1,22 @@
-%form{:class => "form-horizontal", :ng_submit => "save()"}
+-# %form{:class => "form-horizontal", :ng_submit => "save()"}
+-#   .row
+-#     .form-group
+-#       .col-sm-4
+-#         = label_tag "Reasons"
+-#       .col-sm-4
+-#         %input{:ng_model => "reason.reason", :type => 'text'}
+-#         = hidden_field_tag :reason, :value => '{{reason.reason}}'
+-#   .row
+-#     .pull-right
+-#       = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+                
+= form_for Status.new, :html => { :class => "form-horizontal" , :role => "form" } do |f|
+  = render "shared/error_messages", :object => f.object
   .row
     .form-group
-      .col-sm-4
-        = label_tag "Reasons"
-      .col-sm-4
-        %input{:ng_model => "reason.reason", :type => 'text'}
-        = hidden_field_tag :reason, :value => '{{reason.reason}}'
-  .row
-    .pull-right
-      = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
-                
-
+      .col-sm-6
+        = f.label "Reason"
+      .col-sm-6
+        = f.text_field :reason, :class => 'form-control'
+    %center
+      = f.submit "Create", :class => 'btn btn-primary'

@@ -4,7 +4,7 @@ class FacultyMaster < ActiveRecord::Base
   scope :on_designation, lambda { |designation| where("designation = ? ", designation)}
   belongs_to :user
   belongs_to :attendance
-  belongs_to :leave_permission
+  has_many :leave_permissions
   has_many :students, :class_name => "StudentMaster"
   mount_uploader :educational_certificates, EducationalCertificatesUploader
   mount_uploader :previous_employment_proof,PreviousEmploymentProofUploader

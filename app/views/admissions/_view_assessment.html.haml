@@ -2,8 +2,9 @@
   .col-sm-12
     - if current_user.admin? && ("#{@admission.status}" != 'Completed') && ("#{@admission.status}" != 'Management Reviewed') && ("#{@admission.status}" != 'Assessment Completed') 
       .pull-right
-        %button.btn.btn-warning.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"} 
-          %span.glyphicon.glyphicon-edit
+        - if("#{@admission.status}" == 'Assessment Planned')
+          %button.btn.btn-warning.btn-sm{"data-target" => ".bs-example-modal-sm", "data-toggle" => "modal"} 
+            %span.glyphicon.glyphicon-edit
         .modal.fade.bs-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", role: "dialog", tabindex: "-1"}
           .modal-dialog.modal-sm
             .modal-content

@@ -1,6 +1,57 @@
 (function(angular, app) {
     "use strict";
     app.controller('SetupMasterController',["$scope","resourceService","setupmasterService", function($scope, resourceService, setupmasterService) {
+        $scope.request_status = [];
+        setupmasterService.getAllDetails()
+            .then(function(result) {
+                $scope.all_data = result.data;
+                
+            });
+        $scope.sendForApproval = function(status,leave_permission){
+            if(status){               
+                $scope.request_status.push({
+
+                    id: leave_permission.id,
+                    status: ""     
+                             
+                });
+                // alert(JSON.stringify($scope.request_status))  
+            }
+            else
+            {
+                for (var i=0; i<$scope.request_status.length; i++){ 
+                    if (leave_permission.id == $scope.request_status[i]['id']){                       
+                        $scope.request_status.splice(i, 1);
+                        break;
+                    }
+                }
+            }           
+        };
+	
+	
+
+	$scope.updateStatus = function(status){
+            // alert(JSON.stringify(status))
+	    for (var i=0; i<$scope.request_status.length; i++){ 
+                // alert(JSON.stringify($scope.request_status))
+                $scope.request_status[i]['status'] = status;
+	    }
+	    setupmasterService.updateStatus($scope.request_status)                      .then(function(result) {
+                
+		window.location.reload();
+            });           
+	};
+	
+
+
+
+        setupmasterService.getExactJsonCount()
+            .then(function(result) {
+                $scope.exact_counts = result.data;
+                // alert(JSON.stringify($scope.exact_counts))
+            });
+
+
         
         var timeString = "12:00:00"; 
         var H = +timeString.substr(0, 2);
@@ -76,26 +127,57 @@
             $scope.myEditFormValue1 = true;
         }
 
-        $scope.leave_options ={"casual leave":"casual leave","sick leave":"sick leave"};
-        $scope.leave_update = function(type_of_leave) {
-            setupmasterService.getCountno(type_of_leave)
+        // $scope.leave_options ={"casual_leave":"Casual Leave","Sick Leave":"sick_leave", "Loss of Pay":"loss_of_pay"};
+        // $scope.leave_update = function(type_of_leave) {
+            setupmasterService.getCountno()
+            // alert(JSON.stringify(type_of_leave))
                 .then(function(result) {
-                    if (type_of_leave == "casual leave")
-                    {
-                        $scope.showCasualLeave = true;
-                        $scope.showSickLeave = false;
-                        $scope.leaves = result.data;
-                        alert(JSON.stringify($scope.leaves))
-                    }
-                    else 
-                    {
-                        $scope.showCasualLeave = false;
-                        $scope.showSickLeave = true;
-                        $scope.leaves = result.data;
-                        alert(JSON.stringify($scope.leaves))
-                    }
+                    $scope.leaves = result.data;
+                   
+                    // alert(JSON.stringify($scope.leaves))
+                    // if (type_of_leave == "casual_leave")
+                    // {
+                    //     $scope.showCasualLeave = true;
+                    //     $scope.showSickLeave = false;
+                    //     $scope.leaves = result.data;
+                    //     alert(JSON.stringify($scope.leaves))
+                    // }
+                    // else 
+                    // {
+                    //     $scope.showCasualLeave = false;
+                    //     $scope.showSickLeave = true;
+                    //     $scope.leaves = result.data;
+                    //     alert(JSON.stringify($scope.leaves))
+                    // }
+                });
+        // }
+
+        $scope.showLeave = true;
+        $scope.showLossLeave = false;
+
+        setupmasterService.getTypeOfLeavesCount()
+            .then(function(result) {
+                $scope.get_types_counts = result.data;
+                if ($scope.get_types_counts == "not")
+                {
+                    $scope.showLeave = false;
+                    $scope.showLossLeave = true;
+
+                }
+                
+            });
+        
+
+        
+        
+        $scope.getLeaveMappings = function(type_of_leave){
+            setupmasterService.getTestExactLeave(type_of_leave)
+                .then(function(result){
+                    $scope.exact_test_leaves = result.data;
                 });
         }
+
+
 
 
         $scope.getUpdate = function(designation){

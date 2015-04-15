@@ -1,6 +1,28 @@
 (function(angular, app) {
     "use strict";
     app.service("setupmasterService",["$http", function($http) {
+
+        var getAllDetails = function(){
+            var url = "/leave_permissions/get_all_details.json"
+            return $http.get(url);
+        };
+
+
+        var getTypeOfLeavesCount = function(){
+            var url = "/leave_permissions/get_type_of_leaves_count.json"
+            return $http.get(url);
+        };
+
+
+        var getTestExactLeave = function(type_of_leave){
+            var url = "/leave_permissions/get_exact_type_of_leave.json?type_of_leave="+type_of_leave
+            return $http.get(url);
+        };
+        var getExactJsonCount = function(){
+            var url = "/leave_permissions/get_exact_json_count.json"
+            return $http.get(url);
+        };
+
         var getDesignation = function(){
             var url = "/setup_masters/get_designations.json"
             return $http.get(url);
@@ -40,6 +62,10 @@
             var url = "/faculty_attendances/save_today_attendance.json"
             return $http.post(url,{save_today_attendence: save_today_attendence});
         };
+	var updateStatus = function(status){
+            var url = "/leave_permissions/update_leave_permission_status.json"
+            return $http.post(url, {status: status});
+	};
 
         return {
             getDesignation : getDesignation,
@@ -49,6 +75,11 @@
             saveTodayAttendance : saveTodayAttendance,
             getCountno : getCountno,
             getDetails : getDetails,
+            getExactJsonCount : getExactJsonCount,
+            getTestExactLeave : getTestExactLeave,
+            getTypeOfLeavesCount : getTypeOfLeavesCount,
+            getAllDetails : getAllDetails,
+            updateStatus : updateStatus
             // getAllDates : getAllDates
         };
     }]);

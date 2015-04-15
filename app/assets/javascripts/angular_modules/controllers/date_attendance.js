@@ -20,6 +20,10 @@
         // }
         
         //-----------------------------
+        
+            
+
+        $scope.get_types ={"casual_leave":"casual_leave","sick_leave":"sick_leave", "loss_of_pay":"loss_of_pay"};
 
         attendanceService.getGroupMonth()
             .then(function(result) {

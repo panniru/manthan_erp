@@ -1,0 +1,16 @@
+.col-md-12
+  .col-md-7
+    %h3
+      Reasons for Closing
+    .pull-right
+      %button.btn.btn-primary{"data-target" => "#myModal","data-toggle" => "modal","ng-click" => "addReason()"}= "Add Reasons"
+
+.col-md-12
+  #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} Add Reason
+        .modal-body
+          = render "new_form"

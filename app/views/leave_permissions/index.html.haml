@@ -1,22 +1,26 @@
-.row
+.row{"ng-controller" => "SetupMasterController"}
   = form_for @leave_permission, :html => { :class => "form-horizontal", :role => "form" } do |f|
     = render "shared/error_messages", :object => f.object
     .col-sm-12
-      .form-group{"ng-controller" => "SetupMasterController"}
+      .form-group
         .col-sm-2
           .pull-left
             = f.label "Type of Leave:", :class => 'control-label'
         .col-sm-2
-          %select{"ng-change" => "leave_update(myLeave)", "ng-model" => "myLeave","ng-options" => "value as key for (key, value) in leave_options", :class => "form-control"}
-           
-         
-       
+          %select{"ng-change" => "getLeaveMappings(selectedLeave)","ng-model" => "selectedLeave", "ng-show" => "showLeave"}
+            %option Casual Leave
+            %option Sick Leave
+      
+          %select{"ng-model" => "selectedLeave", "ng-show" => "showLossLeave"}
+            %option Loss of Pay
+          
+          = f.hidden_field :type_of_leave, :value => '{{selectedLeave}}'
         .col-sm-2
           = f.label "Leave Balance:", :class => 'control-label'
-        .col-sm-2{"ng-repeat" => "leave in leaves", "ng-model" => "myLeaveOptions"}
-          %input{:ng_show => "showCasualLeave",:type => "text", :readonly => true, :class => "form-control", :value => "{{leave.pending_casual_leave}}"}
-          %input{:ng_show => "showSickLeave", :type => "text", :readonly => true, :class => "form-control", :value => "{{leave.pending_sick_leave}}"}
-         
+        .col-sm-2
+          %input{:ng_show => "showLeave",:type => "text", :readonly => true, :class => "form-control", :ng_model => "exact_test_leaves"}
+          %input{:ng_show => "showLossLeave", :type => "text", :class => "form-control", :ng_model => "loss_of_pay_value"}
+          {{loss_of_pay_value}}
        
      
      
@@ -51,6 +55,7 @@
          
     .col-sm-8
       %center
+        
         = f.hidden_field :status, :value => 'Pending'
         = f.submit "Submit", :class => 'btn btn-primary'         
 

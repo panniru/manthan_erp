@@ -1,6 +1,8 @@
 (function(angular, app) {
     "use strict";
     app.service("attendanceService",["$http", function($http) {
+        
+        
         var getStudentAssessment = function(){
             var url = "/admissions/get_assessment_students.json"
             return $http.get(url);
@@ -67,7 +69,8 @@
             getShowAttendance : getShowAttendance,
             getMonthlyAttendance : getMonthlyAttendance,
             getGroupMonth : getGroupMonth,
-            getMonth : getMonth
+            getMonth : getMonth,
+        
             //getModalServiceView : getModalServiceView
 
         };
