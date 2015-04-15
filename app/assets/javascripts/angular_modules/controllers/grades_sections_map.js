@@ -10,7 +10,6 @@
         timeTableService.getSectionServiceView()
             .then(function(result) {
                 $scope.sections=result.data; 
-                          
             });      
        
         
@@ -22,9 +21,7 @@
 
         gradesSectionsMapService.getGradesSectionsServiceView()
             .then(function(result) {
-                alert(' ')
-                $scope.show_grades=result.data;
-                alert(JSON.stringify($scope.show_grades))                
+                $scope.show_grades=result.data;             
             }); 
 
         $scope.defaultSectionsGradesAll= function(){            
@@ -51,9 +48,7 @@
         };
 
         $scope.defaultSectionsGrades = function(){     
-            $scope.sections_grades = [];
-            alert(' ')
-            
+            $scope.sections_grades = [];            
             
             for(var i = 0; i < $scope.sections.length; i++)
             {

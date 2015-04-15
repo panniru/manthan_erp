@@ -40,7 +40,7 @@ class SubjectMastersController < ApplicationController
     @subject = SubjectMaster.find(params[:id])  
     if @subject.destroy
       flash[:success] = I18n.t :success, :scope => [:subject_master, :destroy]
-      redirect_to lab_masters_path
+      render :json => true
     else
       flash.now[:fail] = I18n.t :fail, :scope => [:subject_master, :destroy]
     end    
@@ -60,7 +60,7 @@ class SubjectMastersController < ApplicationController
    
     @subject_master = SubjectMaster.new(subject_master_params)
     if @subject_master.save
-      redirect_to lab_masters_path
+      redirect_to subject_masters_path
     else
       render 'new'
     end
