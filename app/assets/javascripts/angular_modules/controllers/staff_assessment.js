@@ -32,7 +32,6 @@
 
 
         $scope.planupdate = function(){
-            alert()
             $scope.assessment.status = 'Assessment Completed';
             //alert($scope.assessment.status)
             $scope.assessment.$update()
