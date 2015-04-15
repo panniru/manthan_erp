@@ -40,8 +40,14 @@ class StudentMaster < ActiveRecord::Base
   def section
     section_master.present? ? section_master.section_name : nil
   end
-
-  
+  def self.get_student_name(grade_master_id)
+    student = StudentMaster.all
+    name = []
+    name = student.map do |x|
+      {student_name: x.name, grade_master_id: x.grade_master_id}
+    end
+    return name
+  end
 
 
 end

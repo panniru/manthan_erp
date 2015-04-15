@@ -2,7 +2,7 @@
   .row
     .col-md-1
     .col-md-4
-      %h4{style: "font-weight: bold"} SELECT subjects for  grades
+      %h4{style: "font-weight: bold"} Select Subjects For  Grades
     .col-md-4
       = link_to 'CANCEL', grade_lab_mappings_path,:class => 'btn btn-primary' 
       %input{:type => "button", :class => "btn btn-primary", "ng-click" => "saveSubjectsMappings()", :value => "DONE"}
@@ -16,10 +16,11 @@
           %h4{style: "font-weight: bold"} {{grade.grade_name}}
           -# %input{"ng-model" => "checked_all", type: "checkbox", "ng-change" => "addAllSubjects({{!checked_all}},{{grade.grade_master_id}},{{grade.subjects}}),grade)", "ng-checked" => "checked_all"} ALL {{grade}} 
       .col-md-2{"ng-repeat" => "subject in lab_subjects"}
-        %input{"ng-model" => "subject.checked_value", type: "checkbox", "ng-change" => "addLabSubjects({{!subject.checked_value}},{{grade.grade_master_id}},{{subject}})", "ng-checked" => "subject.checked_value"}
-          {{subject.subject_name}}    
+        %input{"ng-model" => "checked_value", type: "checkbox", "ng-change" => "addLabSubjects({{!subject.checked_value}},{{grade.grade_master_id}},{{subject}})", "ng-checked" => "subject.checked_value"}
+        {{subject.subject_name}}  
+         
            
-        .col-md-2
+      .col-md-2
        
 
  

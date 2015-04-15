@@ -111,7 +111,8 @@ class ContextDetector
     "lab_teacher_mappings" => "lab",
     "lab_assessments" => "lab",
     "lab_subject_assessment_mappings" => "lab",
-    "listings" => "lab"    
+    "listings" => "lab",
+    "lab_results" => "lab"
   }
   
   def self.get_context(args)

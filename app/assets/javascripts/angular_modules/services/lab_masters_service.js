@@ -74,9 +74,17 @@
             var url = "/listings/get_values.json?selected_user="+selected_user
             return $http.get(url);
         };
+        var getStudent = function(grade_master_id,listing_id){
+            var url = "/lab_results/get_names.json?grade_master_id="+grade_master_id
+            return $http.get(url);
+        };
+        var save_all = function(listing_id,grading,student_id){
+            
+            var url = "/lab_results/save_all.json"
+            return $http.post(url, {student_master_id: student_id,grading_master_id : grading ,listing_id : listing_id});
+        };
         
-       
-        
+      
 	
 	return {
 	    getLabNames : getLabNames,
@@ -94,7 +102,9 @@
             getTeacherSubjectMapping :getTeacherSubjectMapping,
             saveTeacherMappings :saveTeacherMappings,
             getTeacherService :getTeacherService,
-            getBothValue : getBothValue
+            getBothValue : getBothValue,
+            getStudent :getStudent,
+            save_all :save_all
 
 
 	};

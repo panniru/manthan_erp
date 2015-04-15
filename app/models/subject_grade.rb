@@ -4,4 +4,5 @@ class SubjectGrade < ActiveRecord::Base
   def union
     "#{grade_master_id} - #{subject_master_id}"
   end
+ 
 end

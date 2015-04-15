@@ -74,13 +74,15 @@ class LabTeacherMappingsController < ApplicationController
   def savemappings
  
     respond_to do |format|
-      format.json do       
+      format.json do  
+        p "111111111111"
+        p params[:mappings]
         params[:mappings].each do |t| 
           if t["id"].present?
             p t["id"]
-           p params[:mappings]
+            p params[:mappings]
             temp = LabTeacherMapping.find(t["id"])
-            temp.faculty_master_id = t["faculty_master_id"]  
+            temp.faculty_master_id = t["faculty_master_id"][0]  
             temp.subject_master_id = t["subject_master_id"]
             temp.save
           else

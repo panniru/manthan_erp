@@ -14,6 +14,7 @@ class Lab
     sub_menu << lab_assessments
     sub_menu << lab_subject_assessment_mappings
     sub_menu << listings
+    sub_menu << lab_results
   end
 
 
@@ -26,6 +27,7 @@ class Lab
     sub_menu << lab_assessments
     sub_menu << lab_subject_assessment_mappings
     sub_menu << listings
+    sub_menu << lab_results
    
     
     
@@ -59,6 +61,9 @@ class Lab
 
   def listings
     MenuItem.new(:label => "Listings ", :klass => "", :icon => "list-ol", :href => "/listings")
+  end
+  def lab_results
+    MenuItem.new(:label => "Lab Results ", :klass => "", :icon => "list-ol", :href => "/lab_results")
   end
   
 end
