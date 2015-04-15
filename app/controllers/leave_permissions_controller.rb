@@ -206,7 +206,7 @@ class LeavePermissionsController < ApplicationController
     end
     respond_to do |format|
       if @leave_permission.save 
-        format.html { redirect_to leave_permissions_path, notice: 'Leave Form was successfully created.' }
+        format.html { redirect_to approval_status_leave_permissions_path, notice: 'Leave Form was successfully created.' }
       else
         format.html { render action: 'index' }
       end

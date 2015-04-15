@@ -209,7 +209,6 @@
                 
         $scope.reflectStaffs = function(facultys){
             $scope.faculty_masters = facultys;
-            alert(JSON.stringify(facultys))
             $scope.$apply();
             $scope.save_today_attendence = [];
                 for(var i=0; i<facultys.length; i++){
@@ -252,7 +251,7 @@
                 $scope.save_today_attendence[i]['faculty_master_id'] = $scope.faculty_masters[i]['faculty_master_id'];
                 $scope.save_today_attendence[i]['id'] = $scope.faculty_masters[i]['id'];
             }
-            alert(JSON.stringify($scope.save_today_attendence))
+
             
             setupmasterService.saveTodayAttendance($scope.save_today_attendence)
                 .then(function(result) {
