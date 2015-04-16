@@ -8,7 +8,7 @@ ManthanErp::Application.routes.draw do
       get "all_subjects"
       get "get_subjects_grades_service_view"
       post "save_subjects_mappings"
-      get "get_subjects_grades_mappings"    
+      get "get_grades_subjects_service_view"    
     end
   end
 

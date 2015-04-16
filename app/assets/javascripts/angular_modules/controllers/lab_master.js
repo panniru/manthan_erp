@@ -1,6 +1,6 @@
 (function(angular, app) {
     "use strict";
-    app.controller("LabMasterController", ["$scope" ,"$location","labService" , "gradingService",'$window' , function($scope ,$location, labService , labMappingService , $window){
+    app.controller("LabMasterController", ["$scope" ,"$location","labService" , "labMappingService","gradingService",'$window' , function($scope ,$location, labService , labMappingService , $window){
 	$scope.myShowIndexValue= true;       
 	
 	labService.getGradeNames()
@@ -36,8 +36,7 @@
         };
 	$scope.getAssessmentsCriteriaMappings = function(labName)        
         {
-            alert('')
-	    labService.getAssessmentCriteria(labName)
+            labService.getAssessmentCriteria(labName)
 		.then(function(result) {
 		    $scope.assessments = result.data;                   
 		    if (result.data.length != 0)
@@ -369,16 +368,15 @@
                 }
             });
        
-        $('#lab_assessments_calendar').fullCalendar({            
+        $('#lab_assessments_calendar').fullCalendar({  
+            
             selectable: true,
             select: function(date) {
                 $scope.dateFormat = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();        
-            
-                
                 $('#myModal').modal('show');                
             }            
         });      
-
+        
         $scope.cancelMyModal = function(){            
             $('#myModal').modal('hide');        
         };

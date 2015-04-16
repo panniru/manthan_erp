@@ -20,7 +20,6 @@
                 });
         }
         $scope.saveMappings = function(){  
-            alert(' ') 
             $scope.save_mappings = [];
             for( var j = 0; j <  $scope.mapping['faculty_master_id'].length; j++ ){
                 $scope.save_mappings.push({
@@ -46,8 +45,6 @@
                 
              
             });
-            alert(JSON.stringify($scope.save_mappings))
-            
             labMappingService.saveMappings($scope.save_mappings)
                 .then(function(result) {
             
@@ -89,7 +86,6 @@
                             .then(function(result) {  
                                 
                                 $scope.mappings = result.data;  
-                                alert(JSON.stringify($scope.mappings))
                             });
                     }
                 });

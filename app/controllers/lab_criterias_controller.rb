@@ -48,8 +48,6 @@ class LabCriteriasController < ApplicationController
     respond_to do |format|
       format.json do       
         lab_assessments = LabCriteria.where('grade_master_id = '+"#{params[:lab_name]}")      
-        p "1111111111111111111111"
-        p lab_assessments
         lab_assessments = lab_assessments.each.map do |lab_assessment|
           {id: lab_assessment.id,  grade_master_id: lab_assessment.grade_master_id, lab_name: lab_assessment.subject_master.subject_name, lab_criteria: lab_assessment.lab_criteria} 
         end

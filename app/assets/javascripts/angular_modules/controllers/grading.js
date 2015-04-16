@@ -19,7 +19,8 @@
 
         gradingService.getGradingServiceView()
             .then(function(result) {                
-                $scope.gradings = result.data;               
+                $scope.gradings = result.data;   
+                       
                 $scope.initialize();
             });
 

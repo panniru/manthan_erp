@@ -105,13 +105,9 @@ end
   def get_grade_mappings_service
     respond_to do |format|
       format.json do        
-       
-       
         assessment_mapping = LabAssessmentGradeMapping.all
-        p "111111111"
-        p assessment_mapping
         assessment_mappings = assessment_mapping.each.map do |mapping|
-        
+
           {id: mapping.id, grade_master_id: mapping.grade_master_id, lab_assessment_id: mapping.lab_assessment_id, assessment_type: mapping.lab_assessment.assessment_type, no_of_times: mapping.no_of_times} 
         end
         render :json => assessment_mappings
@@ -123,8 +119,6 @@ end
     respond_to do |format|
       format.json do            
         mappings = params[:mappings]
-        p "2322323232323"
-        p mappings
         LabAssessmentGradeMapping.where('lab_assessment_id = '+"'#{mappings[0][:lab_assessment_id]}'").map do |temp| 
           @value = "false"
           mappings.each do |t|           
@@ -170,8 +164,6 @@ end
   def save_assessments
     respond_to do |format|
       format.json do 
-        p "11111111"
-        p params[:assessments]
         assessments = params[:assessments]        
         assessments.each do |t|
           if t["id"].present? 

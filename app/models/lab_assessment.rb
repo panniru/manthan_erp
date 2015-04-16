@@ -1,7 +1,5 @@
 class LabAssessment < ActiveRecord::Base
-  belongs_to :lab_assessment_grade_mapping
-
   
-
+  has_many :lab_assessment_grade_mappings
 
 end

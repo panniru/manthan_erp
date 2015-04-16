@@ -18,8 +18,6 @@ class LabTeacherMappingsController < ApplicationController
   def check_subjects_teachers_mapping  
     respond_to do |format|
       format.json do
-       
-        p "1111111111"
         labteachermappings = LabTeacherMapping.where('subject_master_id = '+"#{params[:my_Subject]}").count 
 
         render :json => labteachermappings
@@ -75,12 +73,8 @@ class LabTeacherMappingsController < ApplicationController
  
     respond_to do |format|
       format.json do  
-        p "111111111111"
-        p params[:mappings]
         params[:mappings].each do |t| 
           if t["id"].present?
-            p t["id"]
-            p params[:mappings]
             temp = LabTeacherMapping.find(t["id"])
             temp.faculty_master_id = t["faculty_master_id"][0]  
             temp.subject_master_id = t["subject_master_id"]

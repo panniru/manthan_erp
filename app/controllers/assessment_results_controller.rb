@@ -3,7 +3,7 @@ class AssessmentResultsController < ApplicationController
     if current_user.admin?
       render "index"     
     elsif  current_user.teacher?      
-      if(ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.faculty_master.id}").length != 0)
+      if(ClassTeacherMapping.where('faculty_master_id = '+"#{current_user.id}").length != 0)
          render "class_teacher_index"
        else
          render "teacher_index"

@@ -3,9 +3,6 @@ class LabResultsController < ApplicationController
     respond_to do |format|
       format.json do       
         # students = StudentMaster.get_student_name(params[:grade_master_id])
-        p "111111111"
-        p params[:grade_master_id]
-       
         a = params[:grade_master_id]
         student = StudentMaster.where(:grade_master_id => a).map do|x|
           {student_id: x.id, student_name: x.name, grade_master_id: x.grade_master_id } 
@@ -44,9 +41,6 @@ class LabResultsController < ApplicationController
   end
 
   def save_all
-    p "111111111222222222222"
-    p params[:listing_id]
-    p params[:student_master_id]
     @new=LabResult.new
     @new.listing_id = params[:listing_id]
     @new.student_master_id = params[:student_master_id]
