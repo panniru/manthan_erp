@@ -6,12 +6,11 @@
         .col-md-5     
           %select{"ng-model" => "myTeacher", "ng-options" => "faculty.faculty_master_id as faculty.faculty_name for faculty in faculty_names | orderBy:'name'",:class => "form-control",:required => "required"}
             %option{style: "display:none", value: ""} Select Teacher
-          {{myTeacher}}
     - if current_user.parent?
       .form-group.col-md-4
         %label{:class=> "form-label col-md-4"} Student
         .col-md-5     
-          = select_tag "student_master_id", options_from_collection_for_select(current_user.parent.students, "id", "name"), :ng_model => "student_master_id", :class => "form-control"
+          = select_tag "student_master_id", options_from_collection_for_select(current_user.parent.students, "id", "name"), :ng_model => "student_master_id", :class => "form-qcontrol"
     - unless current_user.parent?
       .form-group.col-md-4
         %label{:class=> "form-label col-md-4"} Grade-Section-Subject
