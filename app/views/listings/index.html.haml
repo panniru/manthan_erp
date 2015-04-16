@@ -3,6 +3,7 @@
     .col-sm-2
       = label_tag(:grade, "SELECT GRADE-SUBJECT")      
       %select{ "ng-model" => "selectedUser", "ng-options" => "selectedUser as combined(selectedUser) for selectedUser in unAssignedUsers | orderBy:'id'", "ng-change" => "getTeacherMappings(selectedUser.union)", :class => "form-control", :href => "#teacher_assessment"}}
+      
            
     .col-sm-3
       #lab_assessments_calendar 
@@ -18,8 +19,8 @@
 
         %tbody
           %tr{"ng-repeat" => "group in both_values"}
-            %td {{group.grade_master_id}}
-            %td {{group.subject_master_id}}
+            %td {{group.grade_name}}
+            %td {{group.subject_name}}
             %td {{group.assessment_date}}
             %td {{group.assessment_description}}
             %td {{group.assessment_name}}
@@ -40,7 +41,7 @@
                     = f.hidden_field :lab_assessment_id , :value => "{{myAssessmentType}}"
 
                 .col-md-4
-                   Assessment Name 
+                  Assessment Name 
 
                   = f.select :assessment_name, options_from_collection_for_select(LabSubjectAssessment.all, :assessment_name, :assessment_name),{ :include_blank => true, :class => 'form-control'}
                   {{add_assessments}}
@@ -56,9 +57,6 @@
                 = f.hidden_field :assessment_date, :value => "{{dateFormat}}"
                   
                 = f.submit "Save", :class => 'btn btn-primary'
-
-
-
   .col-sm-12
           
 

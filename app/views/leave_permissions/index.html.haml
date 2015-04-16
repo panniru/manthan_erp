@@ -19,7 +19,7 @@
           = f.label "Leave Balance:", :class => 'control-label'
         .col-sm-2
           %input{:ng_show => "showLeave",:type => "text", :readonly => true, :class => "form-control", :ng_model => "exact_test_leaves"}
-          %input{:ng_show => "showLossLeave", :type => "text", :class => "form-control", :ng_model => "loss_of_pay_value"}
+          -# %input{:ng_show => "showLossLeave", :type => "text", :class => "form-control", :ng_model => "loss_of_pay_value"}
           {{loss_of_pay_value}}
        
      
@@ -44,7 +44,7 @@
           = f.label "Day", :class => 'control-label'
         .col-sm-2
           = f.select :to_day, options_for_select([['half day','0.5'],['full day','1']]),{},{:class => 'admission form-control'}
-          #results
+
 
     .col-sm-12
       .form-group

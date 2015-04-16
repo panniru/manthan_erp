@@ -84,8 +84,7 @@
             $scope.myFormValue = "true";
             
             for ( var i = 0; i < $scope.sections.length; i++ ){         
-                for ( var j = 0; j < $scope.show_grades.length; j++ ) {                   
-                    alert($scope.show_grades.length)  
+                for ( var j = 0; j < $scope.show_grades.length; j++ ) {  
                     if  ($scope.sections[i]['section_master_id'] == $scope.show_grades[j]['section_master_id'] )
                     {
                         for ( var k = 0; k < $scope.sections_grades_all[i]['grades'].length; k++ ) {

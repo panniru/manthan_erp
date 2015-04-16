@@ -1,0 +1,20 @@
+%br
+%br
+.row
+  .col-md-10
+  .col-md-1
+    %a{href: "#assessment_results/add_form", :class => "btn btn-primary", :title => "EDIT", "ng-click" => "editAssessmentResults()"} EDIT
+  .col-md-1
+.row 
+  .col-md-1
+  .col-md-10
+    %table{:class => "table"}
+      %tr
+        %th NAME         
+        %th GRADE 
+        %th DESC 
+      %tr{"ng-repeat" => "mapping  in show_Assessment_Results"}
+        %td {{mapping.student_name}}                                     
+        %td {{mapping.grading_name}}           
+        %td {{mapping.assessment_result_desc}}                 
+  .col-md-1

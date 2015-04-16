@@ -13,6 +13,13 @@
     .col-sm-6
       %input{:ng_model => "assessment.description", :type => 'text', :class => 'form-control'} 
       = hidden_field_tag :description, :value => '{{assessment.description}}'
+
+  .row
+    .col-sm-2
+      = label_tag "Designation"
+    .col-sm-6
+      %input{:ng_model => "assessment.designation", :type => 'text', :class => 'form-control'} 
+      = hidden_field_tag :description, :value => '{{assessment.designation}}'
   
   .row
     .pull-right
