@@ -16,7 +16,7 @@ class Academic
     sub_menu << teaching_plans
     sub_menu << assessment_types
     sub_menu << assessments
-    sub_menu << assessment_criteria
+    #sub_menu << assessment_criteria
     sub_menu << grading
     sub_menu << assessment_results
     sub_menu << academic_terms
@@ -25,18 +25,18 @@ class Academic
   end
   def teacher_sub_menu
     sub_menu = []
-    sub_menu << time_tables
+    #sub_menu << time_tables
     sub_menu << teacher_timetables 
     sub_menu << teaching_plans
-    sub_menu << assessment_criteria
+    #sub_menu << assessment_criteria
     sub_menu << assessments
     sub_menu << assessment_results
-    sub_menu << term_results
+    #sub_menu << term_results
     sub_menu
   end
   def parent_sub_menu
     sub_menu = [] 
-    sub_menu << time_tables
+    #sub_menu << time_tables
     sub_menu << teaching_plans
     sub_menu
   end
