@@ -18,7 +18,7 @@ class Academic
     sub_menu << assessments
     #sub_menu << assessment_criteria
     sub_menu << grading
-    sub_menu << assessment_results
+    #sub_menu << assessment_results
     sub_menu << academic_terms
     sub_menu << term_results
     sub_menu 

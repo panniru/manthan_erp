@@ -68,14 +68,14 @@
                     {                             
                         $scope.activities_grades[i]['grade_masters'].push({  
                             
-                            id : $scope.show_grades[j]['activity_master_id'],
+                            id : $scope.show_grades[j]['id'],
                             grade_master_id : $scope.show_grades[j]['grade_master_id'],                           
                         });                                         
                     }
                 }                
             }            
         };   
-
+        
         $scope.editGradesMappings = function() {            
             $scope.defaultActivitiesGradesAll();
             $scope.showFormValue = false;
@@ -94,7 +94,7 @@
                             }    
                             
                         }
-                        
+                           
                     }
                 }
             }            
@@ -109,12 +109,11 @@
                 {
                     $scope.save_activities_grades.push({
                         subject_master_id: $scope.activities_grades[i]['activity_master_id'],                        
-                        id:  $scope.activities_grades[i]['grade_masters'][j]['activity_master_id'], 
+                        id:  $scope.activities_grades[i]['grade_masters'][j]['id'], 
                         grade_master_id: $scope.activities_grades[i]['grade_masters'][j]['grade_master_id'], 
                     });                      
                 }               
             }
-
             gradeActivitiesMapService.saveGradeActivitiesMappings($scope.save_activities_grades)
                 .then(function(result) {
                     $scope.showGradesMappings();                    
