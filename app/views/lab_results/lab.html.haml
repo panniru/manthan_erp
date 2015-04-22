@@ -1,0 +1,27 @@
+.row
+  .col-md-offset-8
+    = link_to "Back",  lab_results_path, :class => "btn btn-primary"
+.row
+  .col-sm-6
+    %table.table.table-condensed.table-hovered.table-striped.table-bordered
+      %thead
+        %tr
+          %th Id
+          %th Student Name
+          %th Result
+      
+      %tbody
+        - @lab_results.each do|x|
+          - p "111111111111"
+          - p  x
+          %tr
+            %td= x.student_master_id   
+            %td= x.student_master.try(:name)   
+            %td= x.grading_master.try(:grading_name)
+  
+                                    
+                  
+      
+                   
+
+

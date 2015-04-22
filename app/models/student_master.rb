@@ -5,7 +5,7 @@ class StudentMaster < ActiveRecord::Base
   #validates :grade_master_id, :presence => true
   #validates :section_master_id, :presence => true
   #validates :joining_date, :presence => true
-
+  has_many :lab_results
   belongs_to :parent, :class_name => "ParentMaster" , :foreign_key => :parent_master_id
   belongs_to :student_route_mapping
   belongs_to :grade_master

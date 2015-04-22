@@ -18,9 +18,7 @@
       .col-md-2{"ng-repeat" => "subject in lab_subjects"}
         %input{"ng-model" => "checked_value", type: "checkbox", "ng-change" => "addLabSubjects({{!subject.checked_value}},{{grade.grade_master_id}},{{subject}})", "ng-checked" => "subject.checked_value"}
         {{subject.subject_name}}  
-         
-           
-      .col-md-2
+        .col-md-2
        
 
  

@@ -4,8 +4,19 @@ class Listing < ActiveRecord::Base
   belongs_to :grade_master
 
   def union
-    "#{grade_master_id} - #{subject_master_id}"
+    "#{grade_master.try(:grade_name)} - #{subject_master.try(:subject_name)} - #{assessment_date}"
+    
+    # grade = Listing.all
+    # grade = []
+    # grade = GradeMaster.all.map do|x| 
+      
+    #   "#{x.grade_name}"
+    # end
+    # return grade
+    
   end
+ 
+  
 
   # def self.this_grade(selected_user)
   #   a = Listing.find_by_sql("select grade_master_id::integer || '-' || subject_master_id::integer AS union,grade_master_id, subject_master_id, assessment_name, assessment_description, assessment_date from listings group by grade_master_id, subject_master_id, assessment_name, assessment_description, assessment_date;")

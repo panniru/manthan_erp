@@ -61,6 +61,13 @@
             var url = "/lab_assessments/get_assessment_subjects.json"
             return $http.get(url);
         };
+     
+
+        // var getMapping = function(){
+        //     var url = "/lab_assessments/get_subjects.json"
+        //     return $http.get(url);
+        // };
+        
         var saveTeacherMappings = function(save_teacher_assessments){            
             var url = "/assessments/save_teacher_mappings.json"
             return $http.post(url, {mappings: save_teacher_assessments});    
@@ -74,6 +81,10 @@
             var url = "/listings/get_values.json?selected_user="+selected_user
             return $http.get(url);
         };
+        // var getValue = function(date){
+        //     var url = "/lab_results/get_value.json?date="+date
+        //     return $http.get(url);
+        // };
         var getStudent = function(grade_master_id,listing_id){
             var url = "/lab_results/get_names.json?grade_master_id="+grade_master_id
             return $http.get(url);
@@ -105,6 +116,9 @@
             getBothValue : getBothValue,
             getStudent :getStudent,
             save_all :save_all
+            // get_value :get_value
+            // get_mapping :get_mapping 
+        
 
 
 	};

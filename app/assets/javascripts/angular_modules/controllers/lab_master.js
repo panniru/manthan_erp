@@ -307,7 +307,7 @@
                 .then(function(result) {
                     $scope.add_assessments();
                  
-                    // $scope.showAssessmentSubjectsMappings();
+            e        // $scope.showAssessmentSubjectsMappings();
                     // alert(JSON.stringify($scope.showAssessmentSubjectsMappings))
              
                             
@@ -343,9 +343,23 @@
             .then(function(result) {
                 // alert(JSON.stringify(selected_user))
                 $scope.both_values = result.data;
+                alert(JSON.stringify($scope.both_values))
                 
             });
         }
+
+        // $scope.getMappings = function(date) {
+        //     alert()
+        //     labService.getValue(date)
+        //         .then(function(result) {
+        //             // alert(JSON.stringify(selected_user))
+        //             $scope.lab_values = result.data;
+        //             alert(JSON.stringify($scope.lab_values))
+                    
+        //         });
+        // }
+
+        
 
         // $scope.showAssessments = function(myGrade,mySection){          
         //     assessmentsService.getAssessments()
@@ -356,6 +370,7 @@
         labService.getTeacherSubjectMapping()
             .then(function(result) {
                 $scope.unAssignedUsers = result.data;
+               
                 $scope.selectedUser =  $scope.unAssignedUsers[0];
                 
                 $scope.combined = function(user){
@@ -367,7 +382,27 @@
                     }
                 }
             });
-       
+
+        // labService.getMapping()
+        //     .then(function(result) {
+        //         $scope.labs = result.data;
+                
+        //         $scope.selected =  $scope.labs[0];
+                
+                // $scope.combined = function(user){
+                //     if(user.grade_name == undefined || user.grade_name == ''){
+                //         return user.subject_name;
+                //     }
+                //     else {
+                //         return user.grade_name + "-" + user.subject_name + "-" + user.assessment_date
+                //     }
+                // }
+            // });
+
+
+
+
+              
         $('#lab_assessments_calendar').fullCalendar({  
             
             selectable: true,
@@ -403,8 +438,11 @@
                 });      
         };
         
-     
-       
+        // $scope.showResults = function(){
+        //     $scope.activities = labService.save_all();  
+        //     $scope.lab_all = [];
+        // };
+      
 	$scope.saveAll = function(listing_id,grading ,student_id ){
             $scope.save_all  = [];
             $scope.save_all.push({ 
@@ -416,18 +454,25 @@
 	    
 	    labService.save_all(listing_id,grading,student_id)
 		.then(function(result) {
-		    $('createModal').modal('hide');
-                    window.location.reload();
-            	});
+                    // $scope.showResults(); 
+		    $('#createModal').modal('hide');
+                    // $location.path('/lab');
+                    window.location.href="/lab_results/lab" 
+                    // $scope.$apply();
+                    
+                });
 	};
         $scope.mapGrade = function(grade_master_id,listing_id){
             $scope.grade_master_id = grade_master_id
             $scope.listing_id = listing_id
             $('#createModal').modal('show');
+      
             labService.getStudent(grade_master_id,listing_id)
                 .then(function(result){
                     $('#createModal').modal('show');
+      
                     $scope.all_students = result.data;
+                    
                 });
         };
     }]);

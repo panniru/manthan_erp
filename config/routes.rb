@@ -1056,6 +1056,8 @@ ManthanErp::Application.routes.draw do
       get "get_assessment_subjects"
       post "save_teacher_mappings"
       get "get_teacher_service"
+      get "get_date_values"
+      get "get_subjects"
     end
   end
 
@@ -1108,6 +1110,8 @@ ManthanErp::Application.routes.draw do
     collection do
       get "get_names"
       post "save_all"
+      get "get_value"
+      get "lab"
     end
   end
  

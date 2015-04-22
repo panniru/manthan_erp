@@ -27,19 +27,27 @@ class LabAssessmentsController < ApplicationController
 #     end
 #   end
 
- def get_assessment_subjects
-   respond_to do |format|
-    format.json do       
-      subjects_grades = SubjectGrade.all.map do |sg|
-        {id: sg.id, grade_master_id: sg.grade_master_id, grade_name: sg.grade_master.grade_name, subject_master_id: sg.subject_master_id, subject_name: sg.subject_master.subject_name, :union => sg.union } 
+  def get_assessment_subjects
+    respond_to do |format|
+      format.json do       
+        subjects_grades = SubjectGrade.all.map do |sg|
+          {id: sg.id, grade_master_id: sg.grade_master_id, grade_name: sg.grade_master.grade_name, subject_master_id: sg.subject_master_id, subject_name: sg.subject_master.subject_name, :union => sg.union } 
+        end
+        render :json => subjects_grades
       end
-      render :json => subjects_grades
     end
-  end
-end    
-
-
-
+  end    
+  # def get_subjects
+  #   respond_to do |format|
+  #     format.json do       
+  #       subjects_grades = Listing.all.map do |sg|
+  #         {id: sg.id, grade_master_id: sg.grade_master_id, grade_name: sg.grade_master.grade_name, subject_master_id: sg.subject_master_id, subject_name: sg.subject_master.subject_name,assessment_date: sg.assessment_date :union => sg.union } 
+  #       end
+  #       render :json => subjects_grades
+  #     end
+  #   end
+  # end   
+  
   def get_assessment_types_service
     respond_to do |format|
       format.json do        
@@ -51,8 +59,8 @@ end
       end
     end
   end
-
-
+  
+  
   def get_subjects_service
     respond_to do |format|
       format.json do        
@@ -64,8 +72,8 @@ end
       end
     end
   end
-
-
+  
+  
   def save_assessment_type_mappings
     respond_to do |format|
       format.json do            
