@@ -12,6 +12,13 @@ class StaffadminsController < ApplicationController
     end
     render :json => faculty
   end
+
+  def get_designation
+    designation = Designation.all.map do |faculty|
+      {id: faculty.id, name: faculty.designation}
+    end
+    render :json => designation
+  end
   
  
   def create

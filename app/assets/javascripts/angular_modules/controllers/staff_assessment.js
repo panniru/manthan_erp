@@ -1,11 +1,11 @@
 (function(angular, app) {
     "use strict";
-    app.controller('StaffAssessmentController',["$scope","resourceService",function($scope, resourceService) {
+    app.controller('StaffAssessmentController',["$scope","resourceService","staffassessmentService",function($scope, resourceService, staffassessmentService) {
         
-        // staffassessmentService.getAssessmentStaff()
-        //     .then(function(result) {
-        //         $scope.assessments = result.data
-        //     });
+        staffassessmentService.getDesignations()
+            .then(function(result) {
+                $scope.teacher_designations = result.data
+            });
        
         $scope.assessments = resourceService.Recruitment.query(); 
 	$scope.editAssessments = function(assessment){
@@ -16,6 +16,8 @@
 
         $scope.update = function(){
             $scope.assessment.status = 'Management Reviewed';
+            // alert($scope.assessment.designation.name)
+            
           //  alert($scope.assessment.status)
             $scope.assessment.$update()
                 .then(function(response){                  
@@ -51,6 +53,10 @@
         $scope.updateresult = function(){
             $scope.assessment.status = 'Completed';
           //  alert($scope.assessment.status)
+            $scope.assessment.designation = $scope.assessment.designation.name;
+            $scope.assessment.ctc = $scope.assessment.ctc;
+
+
             $scope.assessment.$update()
                 .then(function(response){                  
                 })

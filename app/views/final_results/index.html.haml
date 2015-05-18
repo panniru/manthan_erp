@@ -1,0 +1,45 @@
+.row{"ng-controller" => "ResultsController"}
+  .col-md-12
+    .col-sm-2
+      = label_tag(:grade, "SELECT GRADE-ASSESSMENT TYPE")      
+      %select{ "ng-model" => "selectedUser", "ng-options" => "selectedUser as combined(selectedUser) for selectedUser in unAssignedUsers | orderBy:'id'", "ng-change" => "getTeacherMappings(selectedUser.union)", :class => "form-control"}
+
+      
+  .col-sm-12{:ng_show => 'myEditFormValue'}
+    %table.table.table-condensed.table-condensed.table-hovered.table-striped{:style => "width:100%;"}
+      %thead
+        %tr
+          %th{:style => "width:30%;"}
+            S.no
+            
+          %th{:style => "width:30%;"}
+            Student Name
+          %th{:style => "width:30%;"}
+            Marks Scored 
+          %th{:style => "width:30%;"}
+            Grading
+      %tbody
+        %tr{"ng-repeat" => "f in final_values"}
+          %td {{$index+1}}
+          %td {{f.student_name}}
+          %td
+            %input{:ng_model => "f.marks_scored", :type => "number" , :ng_blur => "employee_amount(f.marks_scored)", :class => "form-control"}
+            {{f.marks_scored}}
+            
+            
+            
+          %td
+            %select{ "ng-model" => "f.grading_name", "ng-options" => "var.grading_name for var in grading_defaults",  :class => "form-control"}
+            = hidden_field_tag :scored_marks, :value => "{{f.marks_scored}}"
+            = hidden_field_tag :student_master_id, :value => "{{f.student_master_id}}"     
+            = hidden_field_tag :grade_master_id, :value => "{{f.grade_master_id}}"     
+            = hidden_field_tag :assessment_type_id, :value => "{{f.assessment_type_id}}"                 
+            = hidden_field_tag :no_of_times, :value => "{{f.no_of_times}}"     
+            = hidden_field_tag :assessment_grade_mapping_id, :value => "{{f.assessment_grade_mapping_id}}"     
+            
+        %center
+          %input{:type => "button", :class => "btn btn-primary", :ng_click => "saveDetails()", :value => "Submit"}
+
+
+  .col-sm-12{:ng_show => 'myShowFormValue'}
+    = render 'form'

@@ -1,4 +1,5 @@
 class SectionMaster < ActiveRecord::Base
+  belongs_to :grade_section
   belongs_to :grade_master
   has_many :students, :class_name => "StudentMaster"
   validates :section_name, :uniqueness => {:case_sensitive => false}

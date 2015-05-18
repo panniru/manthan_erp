@@ -1,0 +1,34 @@
+.row{"ng-controller" => "FacultyMasterController"}
+  .col-sm-3
+    .pull-left
+      .input-group
+        %span.input-group-addon
+          = fa_icon "search lg"
+        %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+        %br
+  .col-sm-4
+    %center
+      %h3
+        List of Resigned Staffs
+  %br
+  %br
+
+  %table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:100%"}
+    %thead
+      %tr
+        %th{:style => "width:25%"} Faculty Name
+        %th{:style => "width:25%"} Gender
+        %th{:style => "width:25%"} Resignation Date
+        %th{:style => "width:25%"} Reason for Resignation
+
+    %tbody
+      %tr{"ng-repeat" => "assessment in resigned_staffs"}
+        %td
+          {{assessment.faculty_name}}
+        %td
+          {{assessment.gender}}
+        %td
+          {{assessment.resignation_date}}
+        %td
+          {{assessment.reason_for_resignation}}
+

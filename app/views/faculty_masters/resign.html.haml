@@ -1,0 +1,11 @@
+.row{"ng-controller" => "FacultyMasterController"}
+  .col-sm-12
+    = render 'showplan'
+  .modal.fade{:id => "editplan", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true", "data-backdrop" => "static","data-keyboard" => "false"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{:class => "close", "data-dismiss" => "modal", "aria-hidden" => "true"} &times;
+          %h4.modal-title{:id => "myModalLabel"} Resignation
+        .modal-body
+          = render 'editplan'

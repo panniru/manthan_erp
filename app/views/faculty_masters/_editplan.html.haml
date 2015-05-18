@@ -1,0 +1,24 @@
+%form{:class => "form-horizontal", :ng_submit => "planupdate()"}
+  .row
+    .col-sm-4
+      = label_tag "Resignation Date"
+    .col-sm-6
+      -# %input{:ng_model => "assessment.resignation_date", type: 'text', :class => 'form-control'} 
+      .input-group
+        %span.input-group-addon
+          %span.glyphicon.glyphicon-calendar{"ng-click" => "openCalendar('id')"}
+        %input#id.form-control{:calendar => "", "data-date-format" => "mm/dd/yyyy", :maxdate => "todays", :maxlength => "10", :name => "id", "ng-click" => "openCalendar('id')", "ng-model" => "date", :type => "date", :validatedateformat => "", :value => "{{date | date:MM/dd/yyyy}}"}
+          = hidden_field_tag :resignation_date, :value => "{{date}}"
+      
+  .row
+    .col-sm-4
+      = label_tag "Reason for Resignation"
+    .col-sm-6
+      %input{:ng_model => "assessment.reason_for_resignation", :type => 'text', :class => 'form-control'} 
+      = hidden_field_tag :reason_for_resignation, :value => '{{assessment.reason_for_resignation}}'
+  
+    
+  .row
+    .pull-right
+      = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+                

@@ -18,6 +18,7 @@ class HrmSubMenu
       sub_menu << vendor
       sub_menu << travelling
       sub_menu << guest
+      sub_menu << results 
       return sub_menu
     #end
     
@@ -48,7 +49,7 @@ class HrmSubMenu
   end
 
   def teachers
-    MenuItem.new(:label => "Teachers", :klass => "", :icon => "users ", :href => "#")
+    MenuItem.new(:label => "Faculty", :klass => "", :icon => "users ", :href => "/faculty_masters/staffs")
   end
   
   def accounting
@@ -65,4 +66,9 @@ class HrmSubMenu
   def guest
     MenuItem.new(:label => "Guest", :klass => "", :icon => "user-md", :href => "/guest_managements")
   end
+
+  def results
+    MenuItem.new(:label => "Academic History", :klass => "", :icon => "user-md", :href => "/results")
+  end
+  
 end

@@ -1,0 +1,17 @@
+.row{"ng-controller" => "ResultsController"}
+  .col-md-12
+    .col-sm-2
+      = label_tag(:grade, "SELECT GRADE-SUBJECT")      
+      %select{ "ng-model" => "selectedUser", "ng-options" => "klass.grade_name for klass in klasses", "ng-change" => "getDetails(selectedUser.id)", :class => "form-control"}
+      
+  .col-sm-12
+    %table.table.table-condensed.table-condensed.table-hovered.table-striped
+      %thead
+        %tr
+          %th Student Name
+         
+
+      %tbody
+        %tr{"ng-repeat" => "group in group_students"}
+          %td {{group.student_name}}
+

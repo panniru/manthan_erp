@@ -481,6 +481,7 @@ ManthanErp::Application.routes.draw do
     collection do
       get 'get_faculty_names'
       get 'get_role_and_head' 
+      get 'get_designation'
     end
   end
   resources :admission_reports do
@@ -979,10 +980,17 @@ ManthanErp::Application.routes.draw do
       get :get_reports
       get :ctc_reports
       get :get_ctc_reports
+      get :staffs
+      get :resign
+      get :resigned
+      get :get_resigned_staffs
+      get :get_filter_values
     end
     
     member do
       get "dashboard"
+      get "person_details"
+      get "edit_application"
     end
     resources :employee_advance_payments do
       collection do
@@ -1110,7 +1118,34 @@ ManthanErp::Application.routes.draw do
       post "save_all"
     end
   end
- 
+  
+  resources :results do
+    collection do 
+      get 'get_all_results'
+      get 'get_klasses'
+    end
+    member do
+    end
+  end
+  
+  resources :grading_defaults
+  resources :final_results do
+    collection do
+      get 'get_assessment_grade_mappings_service'
+      get 'get_values'
+      get 'grading_defaults'
+      post 'save_result_details'
+    end
+    member do
+    end
+  end
+  resources :school_houses do
+    collection do
+      post 'create_bulk'
+      get 'get_school_houses'
+    end
+  end
+
 end
 
 
