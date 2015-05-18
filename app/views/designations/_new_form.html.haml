@@ -2,7 +2,7 @@
   .form-group{"ng-repeat" => "designation in designs"}
     %lablel{:class => "form-label col-md-3"} 
       %b
-        Subject Name
+        Designation
     .col-md-4     
       = text_field_tag  "bulk_designation[][designation]",nil, :class => "form-control", :ng_model => "designation.designation", :placeholder => "Designation Name" 
     .col-md-4{"ng-show"=>"showErrorMessage"}

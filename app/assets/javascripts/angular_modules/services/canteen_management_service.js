@@ -16,6 +16,11 @@
             var url = "/food_wastages/get_food_wastage.json"
             return $http.get(url);
 	};
+	
+	var getInventoryType = function(){
+	    var url = "/mealtypes/home_index.json"
+	    return $http.get(url);
+	};
 
 	var getinventoryView = function(){
             var url = "/inventories/get_inventory_view.json"
@@ -51,7 +56,8 @@
 	    updateStatus : updateStatus,
 	    requestInventoryMail : requestInventoryMail,
 	    getmealnameView : getmealnameView,
-            getCanteenVendors : getCanteenVendors
+            getCanteenVendors : getCanteenVendors,
+	    getInventoryType : getInventoryType
             //  Mealname:  Mealname
         };
         

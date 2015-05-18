@@ -5,6 +5,10 @@
 	    var url = "/student_route_mappings/get_up_route_view.json?id="+location
             return $http.get(url);
         };
+	var getBusView = function(){
+	    var url = "/student_route_mappings/get_route_optimization"
+            return $http.get(url);
+        };
 	var getRouteServiceView = function(location){
 	    var url = "/student_route_mappings/get_down_route_view.json?id="+location
 	    return $http.get(url);
@@ -17,13 +21,18 @@
 	    var url = "/student_route_mappings/get_student_view.json?page="+page
             return $http.get(url);
 	};
-
+	var getLocationMap = function() {
+	    var url = "/student_route_mappings/location_bus_mapping.json"
+            return $http.get(url);  
+	};
 	
 	return {
             getMappingServiceView : getMappingServiceView,
 	    getRouteServiceView : getRouteServiceView,
 	    saveRoute : saveRoute,
-	    getStudentView : getStudentView
+	    getStudentView : getStudentView,
+	    getBusView : getBusView,
+	    getLocationMap : getLocationMap
 	 
         };
     }]);

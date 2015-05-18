@@ -8,6 +8,17 @@ class Inventory < ActiveRecord::Base
       @inventories = Inventory.where('status = '+"'Pending'"+" OR "+'status = '+"'Approved'"+" OR "+'status = '+"'Rejected'")           
     end		
   end
+  
+  def pending
+    if status == "Pending"
+      return "Principal"
+    elsif status == "Approved"
+      return "Admin"
+    elsif status == "Ordered"
+      return "Vendor"
+    end
+    
+  end
 
   validates_uniqueness_of :name, presence: true
   validates :quantity, :numericality => { :greater_than => 0 }

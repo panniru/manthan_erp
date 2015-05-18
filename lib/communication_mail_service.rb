@@ -17,6 +17,8 @@ class CommunicationMailService
     if to_users.length > 0
       ActiveRecord::Base.transaction do
         begin
+          p "navyanavyanacvya"
+          p @content
           message = Message.new({:subject => @subject, :content => @content})
           if message.save!
             to_users.each do |user_id|

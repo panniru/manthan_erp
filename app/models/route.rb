@@ -6,7 +6,14 @@ class Route < ActiveRecord::Base
   accepts_nested_attributes_for :locations
   attr_accessor :text ,:subject
   scope :show_route_locations, lambda{|route_id| where(:route_id => route_id ).select(:id,:location_master_id, :sequence_no)}
-  validates :sequence_no, numericality: { only_integer: true }
+  
+
+
+  def get_bus_no
+    bus = self.id
+    p "1221212121212"
+    p bus
+  end
   
   def student_length
     route = self.id

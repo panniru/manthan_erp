@@ -13,6 +13,20 @@ class StudentRouteMappingsController < ApplicationController
     render :json => route
   end
   
+  def get_route_optimization
+    utilization = StudentRouteMapping.all.map do |r|
+      [ r.route.busno_up , r.route.student_length  ]
+    end
+    render :json => [utilization]
+  end
+
+  def location_bus_mapping
+    location = StudentRouteMapping.all.map do |r|
+      [ r.location_master.location_name ,  r.route.busno_up ]
+    end
+    render :json => [location] 
+  end
+    
    
   def get_down_route_view
     routes = Location.equals_to_location_master(params[:id]).down_routes.map {|location| location.route}
@@ -32,6 +46,10 @@ class StudentRouteMappingsController < ApplicationController
   end
   
   def show
+    location = StudentRouteMapping.all.map do |r|
+      [ r.route.busno_up , r.location_master.location_name  ]
+    end
+    render :json => [location] 
   end
 
   def save_route

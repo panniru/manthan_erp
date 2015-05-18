@@ -1,33 +1,45 @@
 .col-md-10{:ng_controller => "CommunicationMailsController", :ng_init => "fetchMails(1)"}
-  .col-md-5.col-md-offset-7
-    .col-md-5
-      %my-pagination{:from => "from_index", :to => "to_index", :current_page => "current_page", :total=> "total_entries", :action => "fetchMails(page)"}
-    .col-md-4
-      %select{:ng_model => "filter_by", :ng_options => "f.name for f in FILTERS", :class=>"form-control", :ng_change => "fetchMails(1)"}
-    .col-md-2
-      = link_to "New Mail", "#", :class=> "btn btn-primary", :ng_click => "newMail()"
-  %table.table.table-hover
-    %thead
-      %th From
-      %th Description
-      %th Date
-    %tbody
-      %tr{:ng_repeat => "mail in mails", :class => "message-row", :ng_click => "showMail(mail)"}
-        %td{:ng_class => "{'bold-font': !mail.red}"}
-          %span= "{{mail.from.name}}"
-          %span{:ng_show => "mail.msg_count_in_conversation > 1"}= " ({{mail.msg_count_in_conversation}})"
-        %td 
-          %span{:ng_class => "{'bold-font': !mail.red}"}= "{{mail.subject | limitTo:50}}"
-          %span= "-{{mail.content | limitTo:25}}"
-        %td{:ng_class => "{'bold-font': !mail.red}"}= "{{mail.latest_mail_date}}"
-    
-  = render "conversation"
   .row
-    .modal.fade{:id => "newMailModel", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
-      .modal-dialog.modal-lg
-        .modal-content
-          .modal-header
-            %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
-            %h4.modal-title New Mail
-          .modal-body
-            = render "form"
+    .col-md-2
+      .pull-left
+        .input-group
+          %span.input-group-addon
+            = fa_icon "search lg"
+          %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+     
+  .row
+    .col-md-5.col-md-offset-7
+      .col-md-4
+        %my-pagination{:from => "from_index", :to => "to_index", :current_page => "current_page", :total=> "total_entries", :action => "fetchMails(page)"}
+      .col-md-4
+        %select{:ng_model => "filter_by", :ng_options => "f.name for f in FILTERS", :class=>"form-control", :ng_change => "fetchMails(1)"}
+      .col-md-2
+        = link_to "New Mail", "#", :class=> "btn btn-primary", :ng_click => "newMail()"
+      .col-md-2
+        = link_to "Recordings" , messages_path , :class => 'btn btn-primary'
+        %br
+    %table#tblData.table.table-hover
+      %thead
+        %th From
+        %th Description
+        %th Date
+      %tbody
+        %tr{:ng_repeat => "mail in mails", :class => "message-row", :ng_click => "showMail(mail)"}
+          %td{:ng_class => "{'bold-font': !mail.red}"}
+            %span= "{{mail.from.name}}"
+            %span{:ng_show => "mail.msg_count_in_conversation > 1"}= " ({{mail.msg_count_in_conversation}})"
+          %td 
+            %span{:ng_class => "{'bold-font': !mail.red}"}= "{{mail.subject | limitTo:50}}"
+            %span= "-{{mail.content | limitTo:25}}"
+          %td{:ng_class => "{'bold-font': !mail.red}"}= "{{mail.latest_mail_date}}"
+
+    = render "conversation"
+    .row
+      .modal.fade{:id => "newMailModel", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+        .modal-dialog.modal-lg
+          .modal-content
+            .modal-header
+              %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+              %h4.modal-title New Mail
+            .modal-body
+              = render "form"

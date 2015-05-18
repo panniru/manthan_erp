@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312114314) do
+ActiveRecord::Schema.define(version: 20150428101436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(version: 20150312114314) do
   end
 
   create_table "activity_teachers_mappings", force: true do |t|
-    t.integer  "activity_master_id"
     t.integer  "faculty_master_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "subject_master_id"
   end
 
   create_table "adds", force: true do |t|
@@ -703,10 +703,32 @@ ActiveRecord::Schema.define(version: 20150312114314) do
     t.datetime "updated_at"
   end
 
+  create_table "lab_assessment_grade_mappings", force: true do |t|
+    t.integer  "lab_assessment_id"
+    t.integer  "grade_master_id"
+    t.integer  "no_of_times"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lab_assessments", force: true do |t|
+    t.string   "assessment_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "lab_criteria", force: true do |t|
     t.integer  "subject_master_id"
     t.string   "lab_criteria"
     t.integer  "grade_master_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lab_subject_assessments", force: true do |t|
+    t.integer  "lab_assessment_id"
+    t.integer  "subject_master_id"
+    t.string   "assessment_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -742,6 +764,20 @@ ActiveRecord::Schema.define(version: 20150312114314) do
     t.datetime "updated_at"
     t.float    "from_day"
     t.float    "to_day"
+    t.string   "max_casual_leave"
+    t.string   "max_sick_leave"
+    t.float    "loss_of_pay_count"
+  end
+
+  create_table "listings", force: true do |t|
+    t.integer  "subject_master_id"
+    t.integer  "lab_assessment_id"
+    t.integer  "grade_master_id"
+    t.date     "assessment_date"
+    t.string   "assessment_description"
+    t.string   "assessment_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "location_masters", force: true do |t|
@@ -808,6 +844,7 @@ ActiveRecord::Schema.define(version: 20150312114314) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "message_type"
   end
 
   create_table "monthly_pdc_amounts", force: true do |t|

@@ -1,13 +1,13 @@
-= link_to_upload(new_upload_faculty_masters_path)
+//= link_to_upload(new_upload_faculty_masters_path)
 %table.table.table-condensed
   %thead
     %th Code
     %th Name
     %th Designation
   %tbody
-    - @employees.each do |employee_master|
+    - @faculty.each do |faculty_master|
       %tr
-        %td= link_to employee_master.code, employee_master
-        %td= employee_master.faculty_name
-        %td= employee_master.designation_master.name
+        %td= link_to faculty_master.code, faculty_master
+        %td= faculty_master.faculty_name
+        %td= faculty_master.designation_master.name
        

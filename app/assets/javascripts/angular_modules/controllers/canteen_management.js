@@ -25,7 +25,15 @@
                 });      
             $('#createModal').modal('show')
         };
-        $scope.submitMeals = function(){                       
+        
+	$scope.inventoryType = function(){
+	    canteenManagementService.getInventoryType()
+		.then(function(response){
+		    $scope.inventories = response.data
+		})
+        }
+
+	$scope.submitMeals = function(){                       
             resourceService.Mealtype.bulk({bulk_meal: $scope.newMeals})          
                 .$promise.then(function(responce){                                
                     $('#createModal').modal('hide')

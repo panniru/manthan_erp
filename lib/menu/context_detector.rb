@@ -57,6 +57,7 @@ class ContextDetector
     "request_books_admin" => "library",
     "grade_books" => "library",
     "default_masters" => "default_master_sub_menu",
+    "home" => "transport",
     "student_masters" => "default_master_sub_menu",
     "time_tables" => "default_master_sub_menu",
     "parents" => "default_master_sub_menu",

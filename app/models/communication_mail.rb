@@ -42,6 +42,8 @@ class CommunicationMail < ActiveRecord::Base
     def user_mails(current_user, filter, page)
       message_details = []
       mails = filtered_mails(current_user, filter, page)
+      p "11111111111111111111"
+      p mails
       mails.each do |mail|
         msg_count_in_conversation = 0
         if mail.parent_mail_id.present?

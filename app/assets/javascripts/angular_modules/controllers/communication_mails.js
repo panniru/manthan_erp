@@ -25,6 +25,18 @@
             })
         }
 
+	$scope.forwardMail = function(msg){
+	    alert(msg)
+            if(typeof $scope.cummunicationMail == 'undefined'){
+                $scope.cummunicationMail = resourceService.CommunicationMail.newMail();
+            }else{
+                resetNewMail($scope.cummunicationMail)
+            }
+            $("#newMailModel").modal({backdrop: 'static'})
+        }
+
+      
+
          $scope.reflectRoleChange = function(){
              $scope.canShowGradeSection = false;
             angular.forEach($scope.cummunicationMail.roles, function(data){
@@ -39,11 +51,12 @@
         $scope.$on('sectionMaster', function(event, data) { $scope.cummunicationMail.section_master_id = data;s});
 
         $scope.sendMail = function(){
+	    alert($scope.cummunicationMail.content)
             $scope.cummunicationMail.to = $("#to_user").val()
             console.log($scope.cummunicationMail)
-            resourceService.CommunicationMail.sendMail({communication_mail_form_object: $scope.cummunicationMail}, function(response){
+	    resourceService.CommunicationMail.sendMail({communication_mail_form_object: $scope.cummunicationMail}, function(response){
                 if(response.status){
-                    alert("Mail Send Successfully")
+                    alert("Mail Sent Successfully")
                     $("#newMailModel").modal("hide")
                     $scope.fetchMails(1);
                 }else{

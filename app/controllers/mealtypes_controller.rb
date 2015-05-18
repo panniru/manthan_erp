@@ -1,5 +1,5 @@
 class MealtypesController < ApplicationController
- def index   
+  def index   
     @mealtypes = Mealtype.all 
     respond_to do |format|
       format.json do
@@ -9,9 +9,30 @@ class MealtypesController < ApplicationController
       end
     end
   end
+
+  def home_index
+    @yesterday_wastage = FoodWastage.yesterday_wastage
+    @weekly_wastage = FoodWastage.avg_wastage
+    @high_day = FoodWastage.high_day
+    @mealnames = Mealname.today_date
+    @inventories = Inventory.all
+    respond_to do |format|
+      format.json do
+        inventories = @inventories.map do |r|
+          { id: r.id , name: r.name ,status: r.status , date_raised: r.created_at.to_date , type: r.inventory_type , pending: r.pending}
+        end
+        render :json => inventories
+      end
+      format.html do
+      end
+    end
+  end
+  
+  
   def new
     @mealtype = Mealtype.new
   end
+
   def create
     @mealtype = Mealtype.new(mealtype_params)
     if @mealtype.save
@@ -44,6 +65,7 @@ class MealtypesController < ApplicationController
     end
   end
  
+  
   def create_bulk 
     @canteen_bulk = build_canteen_from_bulk
     if !@canteen_bulk.empty? and @canteen_bulk.map(&:valid?).all?
@@ -67,7 +89,5 @@ class MealtypesController < ApplicationController
     end
   end
 
-  def home_index
-    @mealtypes = Mealtype.all
-  end
+ 
 end

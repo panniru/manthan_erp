@@ -36,6 +36,27 @@ class NewVehiclesController < ApplicationController
     end
   end
   
+  def home
+    @locations = Location.all
+    gmap_data = Gmaps4rails.build_markers(@locations) do |location, marker|
+      
+      marker.lat location.location_master.latitude
+      marker.lng location.location_master.longitude
+      marker.infowindow location.get_bus_no
+      
+      marker.title location.location_master.location_name
+      marker.picture({
+                       :url => "http://maps.google.com/mapfiles/ms/icons/red-dot.png" ,
+                       :width   => 40,
+                       :height  => 40,
+                       
+                     })
+    end
+    gon.gmap_data = gmap_data.to_json
+    gon.width = "600px"
+    gon.height = "400px"
+  end
+
   def edit
     @new_vehicle = NewVehicle.find(params[:id])
   end

@@ -16,6 +16,12 @@ class AutoSearchController < ApplicationController
     render :json => users.map { |user| {:id => user.id, :label => "#{user.name} - #{user.email}", :value => user.name} }
   end
 
+  def autocomplete_mail_search
+    term = params[:term]
+    message = Message.select(:content).where("lower(subject) ILIKE '%#{term}%' OR lower(content) ILIKE '%#{term}%'")
+    render :json => message
+  end
+
   def autocomplete_student_by_name
     term = params[:term]
     students = Student.where("lower(form_no) ILIKE '%#{term}%' OR lower(name) ILIKE '%#{term}%'").order(:name)

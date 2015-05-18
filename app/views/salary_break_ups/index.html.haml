@@ -26,7 +26,7 @@
               %select{:ng_model => "salary_break_up.criteria", :ng_options => "m.value as m.name for m in months", :class => "form-control"}
             %div{:ng_show => "editable && !myMatch(salary_break_up.component_code)"}
               %input{:ng_model => "salary_break_up.criteria", :class => "form-control", :style => "width: 50%"}
-            %label.control-label {{salary_break_up.component_description}}
+            %label.control-label {{salary_break_up.criteria}}
             
               
               

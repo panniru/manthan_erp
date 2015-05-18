@@ -1,0 +1,122 @@
+.row{:ng_controller => "SalaryBreakUpInitializeController"}
+  = form_for @faculty_master, :html => {:class => "form-horizontal", :role=>"form", :id => "faculty_master_form"} do |f|
+    - if f.object.errors.present?
+      = render "shared/error_messages", :object => f.object
+    .row
+      .col-md-6
+        .form-group
+          = f.label :code, :class => 'col-md-3 control-label'
+          .col-md-9
+            = f.text_field :code, :class => "form-control"
+        .form-group
+          = f.label :name, :class => 'col-md-3 control-label'
+          .col-md-9
+            = f.text_field :faculty_name, :class => "form-control"
+        .form-group
+          = f.label :gender, :class => 'col-md-3 control-label'
+          .col-md-9
+            = f.select :gender, options_for_select([["", ""], ['Male', 'M'], ['Female', 'F']], f.object.gender), {}, {:class => "form-control"}
+        .form-group{:ng_init => "date_of_birth = '#{f.object.date_of_birth}'"}
+          %label.col-md-3.control-label Date of Birth
+          .col-md-9
+            = f.text_field :dob, :class => "form-control datepicker", :ng_model => "date_of_birth"
+        .form-group
+          %label.col-md-3.control-label Father/Husaband name
+          .col-md-9
+            = f.text_field :father_or_husband_name, :class => "form-control"
+        .form-group
+          = f.label :relation, :class => 'col-md-3 control-label'
+          .col-md-9
+            = f.select :relation, options_for_select([["", ""], ['Father', 'F'], ['Husband', 'H']], f.object.relation), {}, {:class => "form-control"}
+        .form-group
+          = f.label :email, :class => 'col-md-3 control-label'
+          .col-md-9
+            = f.text_field :email, :class => "form-control"
+        .form-group{:ng_init => "designation = '#{f.object.designation_name}'"}
+
+          = f.label :designation_id, :class => 'col-md-3 control-label'
+          .col-md-9
+            = autocomplete_field_tag "employee_master[designation_name]", 
+            f.object.designation_name,
+            autocomplete_designation_master_name_employee_masters_path,
+            :id_element => "#designation_id",
+            :placeholder => "New designation/write to select existing",
+            :class => "form-control",
+            :id => "designation_name",
+            :ng_blur => "designation"
+            = f.hidden_field :designation_master_id, :class => "form-control", :id => "designation_id"
+        .form-group
+          = f.label :department_id, :class => 'col-md-3 control-label'
+          .col-md-9
+            = autocomplete_field_tag "employee_master[department_name]", 
+            f.object.department_name,
+            autocomplete_department_master_name_employee_masters_path,
+            :id_element => "#department_id",
+            :placeholder => " New department/ write to select existing",
+            :class => "form-control",
+            :id => "department_name"
+            = f.hidden_field :department_master_id, :class => "form-control", :id => "department_id"
+
+        .form-group
+          = f.label :initials, :class => 'col-md-3 control-label'
+          .col-md-9
+            = f.text_field :initials, :class => "form-control"
+        .form-group
+          = f.label :qualification, :class => 'col-md-3 control-label'
+          .col-md-9
+            = f.text_field :qualification, :class => "form-control"
+      .col-md-6
+        .form-group{:ng_init => "date_of_joining = '#{f.object.date_of_joining}'"}
+          %label.col-md-3.control-label Date of Joining
+          .col-md-9
+            = f.text_field :date_of_joining, :class => "form-control datepicker", :ng_model => "date_of_joining"
+        - if @faculty_master.id.present?
+          .form-group
+            %label.col-md-3.control-label Probation Date
+            .col-md-9{:ng_init => "probation_date = '#{f.object.probation_date}'"}
+              = f.text_field :probation_date, :class => "form-control", :ng_model => "probation_date", :my_datepicker => true
+          .form-group{:ng_init => "confirmation_date = '#{f.object.confirmation_date}'"}
+            %label.col-md-3.control-label Confirmation Date
+            .col-md-9
+              = f.text_field :confirmation_date, :class => "form-control datepicker", :ng_model => "confirmation_date"
+          .form-group{:ng_init => "resignation_date = '#{f.object.resignation_date}'"}
+            %label.col-md-3.control-label Resignation Date
+            .col-md-9
+              = f.text_field :resignation_date, :class => "form-control datepicker", :ng_model => "resignation_date"
+          .form-group
+            %label.col-md-3.control-label Reason for Resignation
+            .col-md-9
+              = f.text_field :reason_for_resignation, :class => "form-control"
+
+        .form-group
+          %label.col-md-3.control-label PF No
+          .col-md-9
+            = f.text_field :p_f_no, :class => "form-control"
+        .form-group
+          = f.label "status", :class => 'col-md-3 control-label'
+          .col-md-9
+            = f.select :status, options_for_select([['Regular', 'regular'], ['Foreign', 'foreign']], f.object.status), {}, {:class => "form-control"}
+        .form-group
+          %label.col-md-3.control-label Bank Name
+          .col-md-9
+            = f.text_field :bank_name, :class => "form-control"
+        .form-group
+          %label.col-md-3.control-label Account Number
+          .col-md-9
+            = f.text_field :account_number, :class => "form-control"
+        .form-group
+          %label.col-md-3.control-label PAN
+          .col-md-9
+            = f.text_field :pan, :class => "form-control"
+        .form-group{:ng_init => "ctc = '#{f.object.ctc}'"}
+          %label.col-md-3.control-label CTC/Month
+          .col-md-9
+            = f.text_field :ctc, :class => "form-control", :ng_model => "ctc"
+        .form-group{:ng_init => "basic = '#{f.object.basic}'"}
+          %label.col-md-3.control-label Basic/Month
+          .col-md-9
+            = f.text_field :basic, :class => "form-control", :ng_model => "basic"
+    .row
+      .form-group
+        .col-md-offset-5
+          = submit_link

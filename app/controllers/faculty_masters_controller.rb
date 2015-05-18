@@ -3,7 +3,7 @@ class FacultyMastersController < ApplicationController
   authorize_resource
   
   def index
-    @employees = FacultyMaster.all
+    @faculty = FacultyMaster.all
   end
 
   def dashboard
@@ -15,25 +15,9 @@ class FacultyMastersController < ApplicationController
     render :json => employees.map { |employee| {:id => employee.id, :label => "#{employee.code} #{employee.faculty_name}", :value => employee.faculty_name} }
   end
 
-  def upload
-    @faculty_master_uploader = FacultyMasterUploader.new(params[:faculty_master_uploader])
-    if @faculty_master_uploader.save
-      flash[:success] = "Employees Successfully uploaded"
-      redirect_to faculty_masters_path
-    else
-      flash[:error] = "Some problem occured while uploading.."
-      render "new_upload"
-    end
+  def update
+    @faculty_master = FacultyMaster.find(params[:id])
   end
-  
-  def new_upload
-    @faculty_master_uploader = FacultyMasterUploader.new
-    respond_to do |format|
-      format.html { render "new_upload"}
-      
-    end
-  end
-  
   
   def faculty_upload
   end
@@ -42,7 +26,7 @@ class FacultyMastersController < ApplicationController
     @faculty_master = FacultyMaster.new(faculty_master_params)
     respond_to do |format|
       if @faculty_master.save_employee
-        format.html { redirect_to @faculty_master, notice: 'Employee master was successfully created.' }
+        format.html { redirect_to @faculty_master, notice: 'Faculty was successfully created.' }
         format.json { render action: 'show', status: :created, location: @faculty_master }
       else
         format.html { render action: 'new' }

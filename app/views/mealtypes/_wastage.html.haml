@@ -1,0 +1,16 @@
+%h3 Food Wastage
+.container
+  - @yesterday_wastage.each do |r|
+    %h4 
+      = p "Yesterday Food Wastage = "
+      =  r.wastage
+  %br 
+  %h4 
+    = p "This Week AVG Wastage =" 
+    = @weekly_wastage
+  %br
+  %h4 
+    = p "High Day ="
+    = @high_day
+ 
+

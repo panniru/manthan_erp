@@ -51,7 +51,7 @@ class UserMenu
     main_menu << MenuItem.new(:label => "HRM", :klass => ContextDetector.mapped_module_name(@controller_name) == "hrm"? "active" :"", :icon => "group", :href => "/?context=HRM")
     main_menu << MenuItem.new(:label => "Recruitment", :klass => ContextDetector.mapped_module_name(@controller_name) == "recruitment_sub_menu"? "active" :"", :icon => "user", :href => "/staffrecruits/recruitment_home")
     main_menu << MenuItem.new(:label => "Defaults", :klass => ContextDetector.mapped_module_name(@controller_name) == "default_master_sub_menu"? "active" :"", :icon => " edit", :href => "/default_masters")
-    main_menu << MenuItem.new(:label => "Transport", :klass => ContextDetector.mapped_module_name(@controller_name) == "transport_sub_menu"? "active" :"", :icon => " truck", :href => "/new_vehicles")
+    main_menu << MenuItem.new(:label => "Transport", :klass => ContextDetector.mapped_module_name(@controller_name) == "transport_sub_menu"? "active" :"", :icon => " truck", :href => "/new_vehicles/home")
     main_menu << MenuItem.new(:label => "Library", :klass => ContextDetector.mapped_module_name(@controller_name) == "library"? "active" :"", :icon => " book", :href => "/libraries")
     main_menu << MenuItem.new(:label => "Canteen Facility", :klass => ContextDetector.mapped_module_name(@controller_name) == "canteen"? "active" :"", :icon => "cutlery", :href => "/mealtypes/home_index")
     main_menu << MenuItem.new(:label => "Non Academics", :klass => ContextDetector.mapped_module_name(@controller_name) == "non_academic"? "active" :"", :icon => "graduation-cap", :href => "/non_academics")

@@ -1,0 +1,21 @@
+.row{:ng_controller => "CommunicationMailsController", :ng_init => "fetchMails(1)"}
+     
+  .col-md-12.col-xs-12
+    %h3= @messages.try(:subject)
+    .col-md-12.col-xs-12
+      %hr
+    .row
+      .col-md-12.col-xs-12
+        %br
+        .container
+          %p= @messages.try(:content).try(:html_safe)
+        = link_to "Send Mail", "#", :class=> "btn btn-primary", :ng_click => "newMail()"
+    .row
+      .modal.fade{:id => "newMailModel", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+        .modal-dialog.modal-lg
+          .modal-content
+            .modal-header
+              %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+              %h4.modal-title New Mail
+            .modal-body
+              = render "form"

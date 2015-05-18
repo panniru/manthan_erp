@@ -16,7 +16,7 @@ class SalaryBreakUpsController < ApplicationController
         when @type.to_sym == :default
           @salary_break_ups = SalaryBreakUp.belongs_to_default.order("id")
         end
-        renderg json: @salary_break_ups, methods: [:component_description, :component_value]
+        render json: @salary_break_ups, methods: [:component_description, :component_value]
         
       end
     end

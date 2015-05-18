@@ -1,0 +1,9 @@
+.row{"ng-controller" => "Mapping1Controller",  "ng-init" => "getStudents(page)"}
+  %ul.nav
+    %li.alert.alert-danger{"ng-show" => "students.length > 0"}
+      %center
+        %h1 {{students.length}} 
+        %h4 Students need to be mapped
+    %li.alert.alert-success{"ng-hide" => "students.length > 0"}
+      %center
+        %h4.text-success There are no students to map 

@@ -48,7 +48,7 @@ class HrmSubMenu
   end
 
   def teachers
-    MenuItem.new(:label => "Teachers", :klass => "", :icon => "users ", :href => "#")
+    MenuItem.new(:label => "Teachers", :klass => "", :icon => "users ", :href => "/faculty_masters?context=HRM")
   end
   
   def accounting

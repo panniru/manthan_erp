@@ -6,7 +6,7 @@ $(document).ready(function() {
     //$('#holiday_calendar').html("");
     $('#holiday_calendar').fullCalendar({      
         events: '/holidaycalendars/holidaycalendardata.json?month='+monthNames[today.getMonth()],
-        height: '300px',
+        height: '150px',
 	selectable: true,
         eventMouseover: function(date, event, view) {            
             var url = "/holidaycalendars/holiday_date.json?date="+date.holiday_date

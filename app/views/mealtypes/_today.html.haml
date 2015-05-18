@@ -1,0 +1,19 @@
+%h3 Today Menu
+%h4
+  %table.container123.alert.alert-danger
+    %thead
+      %tr.alert.alert-success
+        %th Type
+        %th Name
+
+
+    %tbody
+      - @mealnames.each do |mealtype|
+        %tr
+          %td= mealtype.mealtype.meal_type
+          %td= mealtype.meal_detail_name
+
+
+
+
+

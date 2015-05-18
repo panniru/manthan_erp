@@ -7,6 +7,7 @@ class Transport
 
   def admin_sub_menu
     sub_menu = []
+    sub_menu << home
     sub_menu << newbus
     sub_menu << routes
     sub_menu << mappings
@@ -23,6 +24,7 @@ class Transport
 
   def transport_head_sub_menu
     sub_menu = []
+    sub_menu << home
     sub_menu << newbus
     sub_menu << routes
     sub_menu << mappings
@@ -31,6 +33,9 @@ class Transport
   end
   
   private 
+  def home
+    MenuItem.new(:label => "Home", :klass => "", :icon => "home", :href => "/new_vehicles/home")
+  end
   def newbus
     MenuItem.new(:label => "Buses", :klass => "", :icon => "tachometer ", :href => "/new_vehicles")
   end

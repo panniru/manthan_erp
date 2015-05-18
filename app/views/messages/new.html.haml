@@ -1,0 +1,26 @@
+.row
+  = form_for @messages , :html => { :class => "form-horizontal", :role => "form"} do |f| 
+    .row
+      .col-sm-2
+        = f.label "Subject"
+      .col-sm-3
+        = f.text_field "subject", :class => 'form-control'
+        %br
+    .row
+      .col-sm-2
+        = f.label "Content"
+      .col-sm-6
+        = f.text_area :content, :class => "tinymce", :rows => 10, :cols => 10
+        %br
+    .row
+      .col-sm-2
+        = f.label "Type" 
+      .col-sm-3
+        = f.select(:message_type, options_for_select([['Normal'],['PTM']]),{:include_blank => 'Select' } , :class => 'form-control')
+        %br
+        %br
+      = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
+
+
+  
+  = tinymce

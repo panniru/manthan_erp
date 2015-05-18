@@ -15,6 +15,8 @@ class CommunicationMailsController < ApplicationController
   def send_mail
     respond_to do |format|
       format.json do
+        p "1111111111111111111111111111111111111111111111111111111111111111"
+        p params[:communication_mail_form_object]
         mail_service = CommunicationMailService.new(current_user, params[:communication_mail_form_object])
         status = mail_service.send_mail
         render :json => {status: status}

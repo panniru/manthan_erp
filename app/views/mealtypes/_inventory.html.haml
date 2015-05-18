@@ -1,0 +1,15 @@
+%h3 Inventory
+.row{"ng-controller" => "CanteensController" , "ng-init" => "inventoryType()"}
+  %table#tblData.target.table.table-striped.table-condensed.table-bordered
+    %thead
+      %tr        
+        %th Name
+        %th Date Raised
+        %th Status
+        %th Pending
+    %tbody
+      %tr{"ng-repeat" => "inventory in inventories"}
+        %td {{inventory.name}}
+        %td {{inventory.date_raised}}
+        %td {{inventory.status}}
+        %td {{inventory.pending}}

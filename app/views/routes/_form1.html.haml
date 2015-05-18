@@ -17,9 +17,7 @@
           = hidden_field_tag :busno_down, :value => ""
           %br
           %br
-    {{up.id}}
-    {{newRoute.busno_down}}
-    {{newRoute.busno_up }}
+  
   .form-group{"ng-repeat" => "location in newRoute.locations"}
     .row
       = label_tag "stop  {{$index+1}}", nil, :class => "form-label col-md-2"
@@ -28,8 +26,7 @@
           %option{style: "display:none", value: ""} Select Location
       .col-sm-3
         .input-group
-          %input{:class => "form-control" , :placeholder => "Sequence#", "ng-model" => "location.sequence_no", :type => "text", :options_manager => ""}
-          = hidden_field_tag "bulk_location[][sequence_no]","{{location.sequence_no}}"
+          = text_field_tag "bulk_location[][sequence_no]",nil, :class => "form-control" , :ng_model => "location.sequence_no" , :placeholder => "Sequence#"
           
   .row
     .col-md-5.col-md-offset-3

@@ -44,7 +44,7 @@
                 %h4.modal-title{ :id => "myModalLabel"} Inventories
               .modal-body
                 = render "form"
-  .col-sm-2g
+  .col-sm-2
     %center
       - if current_user.canteenmanager?
         %button.btn.btn-primary{"ng-click" => "newInventory()"}= "Send For Approval"

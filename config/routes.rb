@@ -1,5 +1,7 @@
 ManthanErp::Application.routes.draw do
 
+  resources :messages
+
   get 'locations/index'
 
   resources :grade_lab_mappings do
@@ -45,6 +47,7 @@ ManthanErp::Application.routes.draw do
   
   resources :student_route_mappings do
     collection do
+      get 'get_route_optimization'
       get "get_search_students"
       get "get_up_route_view"
       get "get_down_route_view"
@@ -112,6 +115,7 @@ ManthanErp::Application.routes.draw do
   get 'auto_search/autocomplete_book_isbn'
   get 'auto_search/autocomplete_staff_grade'
   get 'auto_search/autocomplete_user_email'
+  get 'auto_search/autocomplete_mail_search'
   get "time_tables/gradeserviceview"
   get "time_tables/sectionserviceview"
   get "/time_tables/subjectserviceview"
@@ -167,6 +171,7 @@ ManthanErp::Application.routes.draw do
   
   resources :new_vehicles do
     collection do
+      get 'home'
       get 'get_vendor_name'
     end
   end
@@ -800,6 +805,7 @@ ManthanErp::Application.routes.draw do
   
   resources :student_route_mappings do
     collection do
+      get "location_bus_mapping"
       get "get_search_students"
       get "get_up_route_view"
       get "get_down_route_view"

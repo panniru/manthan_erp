@@ -17,7 +17,7 @@ gem 'jquery-ui-rails', '4.1.0'
 gem "paranoia", "~> 2.0"
 gem 'prawn', '~> 1.3.0'
 gem 'prawn-table', '~> 0.2.1'
-
+gem 'tinymce-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 gem 'bootstrap-sass', '~> 3.0.3.0'
@@ -25,7 +25,8 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'angularjs-rails', '1.2.18'
 gem 'angular-rails-templates'
 gem 'angular-ui-bootstrap-rails', '~> 0.11.0'
-
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 gem 'font-awesome-rails'                
 
 group :assets do

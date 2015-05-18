@@ -13,6 +13,7 @@
        gmap_data = Gmaps4rails.build_markers(locations) do |location, marker|
          marker.lat location.location_master.latitude
          marker.lng location.location_master.longitude
+         marker.infowindow location.location_master.location_name
          marker.picture({
                           :url => "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" ,
                           :width   => 40,

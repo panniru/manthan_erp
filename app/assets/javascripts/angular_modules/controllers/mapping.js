@@ -1,6 +1,6 @@
 (function(angular, app) {
     "use strict";
-    app.controller("Mapping1Controller", ["$scope","routesService","mapService", function($scope,routesService , mapService) {
+    app.controller("Mapping1Controller", ["$scope","routesService","mapService","barChart","scatterGraph", function($scope,routesService , mapService , barChart , scatterGraph) {
 
 
 	routesService.getLocationServiceView()
@@ -15,6 +15,7 @@
 		.then(function(response){
 		    $scope.routes = response.data
 		    
+		    
 		});
         }
 	
@@ -28,7 +29,22 @@
 		});
         }
 
-
+	$scope.getRouteOptimization = function(){
+	    mapService.getBusView()
+	    	.then(function(response){
+		    barChart.barChart("flot-placeholder", response.data);
+		    
+		});
+        }
+	    
+	$scope.locationMap = function(){
+	    mapService.getLocationMap()
+	    	.then(function(response){
+		    scatterGraph.scatterGraph("ind", response.data);
+		    
+		});
+        }
+	    
 	$scope.sendForApproval = function(status,student){
 	    if(status){
 		$scope.request_status.push({
