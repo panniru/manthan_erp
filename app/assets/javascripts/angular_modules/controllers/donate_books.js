@@ -35,6 +35,8 @@
             $('#myEditModal').modal('hide');
             donateBooksService.updateDonateBook($scope.donate_book)
                 .then(function(result){
+                  
+                    window.location.href="donate_books"
                 });
             $scope.showDonateBook();
         };

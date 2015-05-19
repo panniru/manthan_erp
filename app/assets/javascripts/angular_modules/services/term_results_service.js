@@ -37,6 +37,21 @@
             return $http.get(url,{params: {academic_Term_Id: academic_Term_Id, my_Student: myStudent, my_Grade: myGrade, my_Section: mySection}});
         };
         
+
+        var getResults = function(){
+            var url = "/student_results/get_results.json"
+            return $http.get(url);
+        };
+        var getUsers = function(selected_user){
+            alert(selected_user)
+            var url = "/student_results/get_users.json?selected_user="+selected_user
+            return $http.get(url);
+        };
+        var getStudent = function(student_master_id){
+            var url = "/student_results/get_names.json?grade_master_id="+grade_master_id
+            return $http.get(url);
+        };
+
         return {
             getTermResultsService : getTermResultsService,
             getStudentDetailsService : getStudentDetailsService,
@@ -45,6 +60,9 @@
             getGradesSectionsService : getGradesSectionsService,
             getGradeSubjectsService : getGradeSubjectsService,
             getStudentTermResultsService : getStudentTermResultsService,
+            getResults : getResults,
+            getUsers : getUsers,
+            getStudent : getStudent
         }
 
     }]);

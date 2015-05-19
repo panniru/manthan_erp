@@ -1,0 +1,16 @@
+.col-md-10{"ng-controller" => "RequestBooksController"}
+  .col-md-12
+    %table.table.table-condensed.table-striped.table-bordered
+      %thead
+        %tr
+          %th Book Name
+          %th Status
+          %th Pending
+          %th Date
+      %tbody
+        - @request_books.each do|book|
+          %tr
+            %td= book.book_name
+            %td= book.status
+            %td= book.pending_name
+            %td= book.date   

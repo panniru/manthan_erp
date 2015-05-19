@@ -1,0 +1,36 @@
+.col-md-10{"ng-controller" => "IssuingsController"}
+  .col-md-12
+    %table.table.table-condensed.table-striped.table-bordered
+      %thead
+        %tr
+          %th Student Name
+          %th Book Name
+          %th Issuing Date
+          %th Returning Date
+          %th outstanding days
+      %tbody
+        - @issuings.each do|issuing|
+          %tr
+            %td= issuing.student_master.name
+            %td= issuing.book.name
+            %td= issuing.book_issue_date
+            %td= issuing.book_return_date
+            %td= issuing.issue_count
+%br
+.col-md-10{"ng-controller" => "RequestBooksController"}
+  .col-md-12
+    %table.table.table-condensed.table-striped.table-bordered
+      %thead
+        %tr
+          %th Book Name
+          %th Status
+          %th Pending
+          %th Date
+      %tbody
+        - @request_books.each do|book|
+          %tr
+            %td= book.book_name
+            %td= book.status
+            %td= book.pending_name
+            %td= book.date   
+            

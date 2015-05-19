@@ -165,8 +165,44 @@
                 });         
         };
 
-
+        termResultsService.getResults()
+            .then(function(result) {
+                $scope.unAssignedUsers = result.data;
+                
+                $scope.selectedUser =  $scope.unAssignedUsers[0];
+                
+                $scope.combined = function(user){
+                    if(user.grade_name == undefined || user.grade_name == ''){
+                        return user.section_name;
+                    }
+                    else {
+                        return user.grade_name + "-" + user.section_name;
+                    }
+                }
+            });
+        $scope.getUsers = function(selected_user) {
+            alert(selected_user)
+            termResultsService.getUsers(selected_user)
+                .then(function(result) {
+                    // alert(JSON.stringify(selected_user))
+                    $scope.values = result.data;
+                    alert(JSON.stringify($scope.values))
+                });
+        }
         
+        $scope.mapStudent = function(student_master_id){
+            alert(student_master_id)
+            $scope.student_master_id = student_master_id
+            $('createModal').modal('show');
+            
+            termResultsService.getStudent(student_master_id)
+                .then(function(result){
+                    $('createModal').modal('show');
+                    $scope.all_students = result.data;
+                    
+                });
+        };
+
 
     }]);
 })(angular, myApp);

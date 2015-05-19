@@ -51,6 +51,7 @@
                 resourceService.Book.bulk({bulk_book: $scope.newBooks})
                     .$promise.then(function(responce){
                         $scope.books = resourceService.Book.query()
+                        alert(JSON.stringify($scope.books))
                         $('#createModal').modal('hide')
                     })
             }

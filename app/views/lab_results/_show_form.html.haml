@@ -1,0 +1,3386 @@
+.row{"ng-controller" => "LabMasterController"}
+  .col-md-12
+    .col-sm-2
+      = label_tag(:grade, "SELECT GRADE-SUBJECT")      
+      %select{"ng-model" => "selectedUser", "ng-options" => "selectedUser as combined(selectedUser) for selectedUser in unAssignedUsers | orderBy:'id'", "ng-change" => "getTeacherMappings(selectedUser.union)", :class => "form-control", :href => "#teacher_assessment"}
+     
+        %option{style: "display:none", value: ""} select 
+    -# .col-sm-2
+    -#   = label_tag(:date, "SELECT DATE")
+    -#   %select{"ng-model" => "date", "ng-options" => "union.id as union.union for union in both_values | orderBy:'id'",:class => "form-control"}
+      -# %select{"ng-model" => "date", "ng-options" => "date as combined(date)for date in both_values | orderBy:'id'",:class => "form-control"} 
+      -# %select{"ng-model" => "selected", "ng-options" => "selectedUser as combined(selected) for selected in labs | orderBy:'id'", :class => "form-control", :href => "#teacher_assessment"}
+     
+      {{date}}
+     
+      %option{style: "display:none", value: ""} select 
+      %br
+      %center
+        = render "show_form"
+   
+  .row
+    :css
+      table, th, td
+      {
+      border-collapse:collapse;
+      border:5px solid #6aa6d6;
+      }x
+      th, td
+      {
+      padding:5px;
+      } 
+  %br
+    .col-sm-7
+      %table.table.table-condensed.table-condensed.table-hovered.table-striped
+        %thead
+          %tr
+            %th Grade
+            %th Subject
+            %th Date
+            %th Description
+            %th Assessment Name
+          
+
+        %tbody
+          %tr{"ng-repeat" => "group in both_values"}
+            %td {{group.grade_name}}
+            %td {{group.subject_name}}
+            %td
+              = link_to "{{group.assessment_date}}", "#", "ng-click" => "mapGrade(group.grade_master_id,group.listing_id )"
+            %td {{group.assessment_description}}
+            %td {{group.assessment_name}}
+   
+   
+   
+  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4#createModal.modal-title STUDENTS
+          .modal-body
+            .row
+              %table#tblData.target.table.table-condensed.table-condensed.table-hovered.table-striped.table-bordered{:style => "width:100%"}
+                %thead
+                  %tr
+                    %th{style: "width:35%"} ID
+                    %th{style: "width:35%"} STUDENT NAME
+                    %th{style: "width:35%"} RESULT
+                    
+                %tbody
+                  %tr{"ng-repeat" => "student in all_students"}
+                    %td
+                      %input{type: "text", "ng-model" => "student.student_id",:class => "form-control", :readonly => "true"}
+                    %td   
+                      {{student.student_name}} 
+                    %td{"ng-controller" => "GradingController"}
+                      %select{"ng-model" => "grading","ng-options" => "var.id as var.grading_name for var in show_gradings",:class => "form-control",:required => "required",}
+                        %option{style: "display:none", value: ""} Select Grading
+                        = hidden_field_tag :grading_master_id, :value => "{{grading}}"
+                        %br          
+                        %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveAll(listing_id,grading, student.student_id)"}= "SAVE"
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             .row{"ng-controller" => "LabMasterController"}
+  .col-md-12
+    .col-sm-2
+      = label_tag(:grade, "SELECT GRADE-SUBJECT")      
+      %select{"ng-model" => "selectedUser", "ng-options" => "selectedUser as combined(selectedUser) for selectedUser in unAssignedUsers | orderBy:'id'", "ng-change" => "getTeacherMappings(selectedUser.union)", :class => "form-control", :href => "#teacher_assessment"}
+     
+        %option{style: "display:none", value: ""} select 
+    -# .col-sm-2
+    -#   = label_tag(:date, "SELECT DATE")
+    -#   %select{"ng-model" => "date", "ng-options" => "union.id as union.union for union in both_values | orderBy:'id'",:class => "form-control"}
+      -# %select{"ng-model" => "date", "ng-options" => "date as combined(date)for date in both_values | orderBy:'id'",:class => "form-control"} 
+      -# %select{"ng-model" => "selected", "ng-options" => "selectedUser as combined(selected) for selected in labs | orderBy:'id'", :class => "form-control", :href => "#teacher_assessment"}
+     
+      {{date}}
+     
+      %option{style: "display:none", value: ""} select 
+      %br
+      %center
+        = render "show_form"
+   
+  .row
+    :css
+      table, th, td
+      {
+      border-collapse:collapse;
+      border:5px solid #6aa6d6;
+      }x
+      th, td
+      {
+      padding:5px;
+      } 
+  %br
+    .col-sm-7
+      %table.table.table-condensed.table-condensed.table-hovered.table-striped
+        %thead
+          %tr
+            %th Grade
+            %th Subject
+            %th Date
+            %th Description
+            %th Assessment Name
+          
+
+        %tbody
+          %tr{"ng-repeat" => "group in both_values"}
+            %td {{group.grade_name}}
+            %td {{group.subject_name}}
+            %td
+              = link_to "{{group.assessment_date}}", "#", "ng-click" => "mapGrade(group.grade_master_id,group.listing_id )"
+            %td {{group.assessment_description}}
+            %td {{group.assessment_name}}
+   
+   
+   
+  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4#createModal.modal-title STUDENTS
+          .modal-body
+            .row
+              %table#tblData.target.table.table-condensed.table-condensed.table-hovered.table-striped.table-bordered{:style => "width:100%"}
+                %thead
+                  %tr
+                    %th{style: "width:35%"} ID
+                    %th{style: "width:35%"} STUDENT NAME
+                    %th{style: "width:35%"} RESULT
+                    
+                %tbody
+                  %tr{"ng-repeat" => "student in all_students"}
+                    %td
+                      %input{type: "text", "ng-model" => "student.student_id",:class => "form-control", :readonly => "true"}
+                    %td   
+                      {{student.student_name}} 
+                    %td{"ng-controller" => "GradingController"}
+                      %select{"ng-model" => "grading","ng-options" => "var.id as var.grading_name for var in show_gradings",:class => "form-control",:required => "required",}
+                        %option{style: "display:none", value: ""} Select Grading
+                        = hidden_field_tag :grading_master_id, :value => "{{grading}}"
+                        %br          
+                        %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveAll(listing_id,grading, student.student_id)"}= "SAVE"
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             .row{"ng-controller" => "LabMasterController"}
+  .col-md-12
+    .col-sm-2
+      = label_tag(:grade, "SELECT GRADE-SUBJECT")      
+      %select{"ng-model" => "selectedUser", "ng-options" => "selectedUser as combined(selectedUser) for selectedUser in unAssignedUsers | orderBy:'id'", "ng-change" => "getTeacherMappings(selectedUser.union)", :class => "form-control", :href => "#teacher_assessment"}
+     
+        %option{style: "display:none", value: ""} select 
+    -# .col-sm-2
+    -#   = label_tag(:date, "SELECT DATE")
+    -#   %select{"ng-model" => "date", "ng-options" => "union.id as union.union for union in both_values | orderBy:'id'",:class => "form-control"}
+      -# %select{"ng-model" => "date", "ng-options" => "date as combined(date)for date in both_values | orderBy:'id'",:class => "form-control"} 
+      -# %select{"ng-model" => "selected", "ng-options" => "selectedUser as combined(selected) for selected in labs | orderBy:'id'", :class => "form-control", :href => "#teacher_assessment"}
+     
+      {{date}}
+     
+      %option{style: "display:none", value: ""} select 
+      %br
+      %center
+        = render "show_form"
+   
+  .row
+    :css
+      table, th, td
+      {
+      border-collapse:collapse;
+      border:5px solid #6aa6d6;
+      }x
+      th, td
+      {
+      padding:5px;
+      } 
+  %br
+    .col-sm-7
+      %table.table.table-condensed.table-condensed.table-hovered.table-striped
+        %thead
+          %tr
+            %th Grade
+            %th Subject
+            %th Date
+            %th Description
+            %th Assessment Name
+          
+
+        %tbody
+          %tr{"ng-repeat" => "group in both_values"}
+            %td {{group.grade_name}}
+            %td {{group.subject_name}}
+            %td
+              = link_to "{{group.assessment_date}}", "#", "ng-click" => "mapGrade(group.grade_master_id,group.listing_id )"
+            %td {{group.assessment_description}}
+            %td {{group.assessment_name}}
+   
+   
+   
+  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4#createModal.modal-title STUDENTS
+          .modal-body
+            .row
+              %table#tblData.target.table.table-condensed.table-condensed.table-hovered.table-striped.table-bordered{:style => "width:100%"}
+                %thead
+                  %tr
+                    %th{style: "width:35%"} ID
+                    %th{style: "width:35%"} STUDENT NAME
+                    %th{style: "width:35%"} RESULT
+                    
+                %tbody
+                  %tr{"ng-repeat" => "student in all_students"}
+                    %td
+                      %input{type: "text", "ng-model" => "student.student_id",:class => "form-control", :readonly => "true"}
+                    %td   
+                      {{student.student_name}} 
+                    %td{"ng-controller" => "GradingController"}
+                      %select{"ng-model" => "grading","ng-options" => "var.id as var.grading_name for var in show_gradings",:class => "form-control",:required => "required",}
+                        %option{style: "display:none", value: ""} Select Grading
+                        = hidden_field_tag :grading_master_id, :value => "{{grading}}"
+                        %br          
+                        %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveAll(listing_id,grading, student.student_id)"}= "SAVE"
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             .row{"ng-controller" => "LabMasterController"}
+  .col-md-12
+    .col-sm-2
+      = label_tag(:grade, "SELECT GRADE-SUBJECT")      
+      %select{"ng-model" => "selectedUser", "ng-options" => "selectedUser as combined(selectedUser) for selectedUser in unAssignedUsers | orderBy:'id'", "ng-change" => "getTeacherMappings(selectedUser.union)", :class => "form-control", :href => "#teacher_assessment"}
+     
+        %option{style: "display:none", value: ""} select 
+    -# .col-sm-2
+    -#   = label_tag(:date, "SELECT DATE")
+    -#   %select{"ng-model" => "date", "ng-options" => "union.id as union.union for union in both_values | orderBy:'id'",:class => "form-control"}
+      -# %select{"ng-model" => "date", "ng-options" => "date as combined(date)for date in both_values | orderBy:'id'",:class => "form-control"} 
+      -# %select{"ng-model" => "selected", "ng-options" => "selectedUser as combined(selected) for selected in labs | orderBy:'id'", :class => "form-control", :href => "#teacher_assessment"}
+     
+      {{date}}
+     
+      %option{style: "display:none", value: ""} select 
+      %br
+      %center
+        = render "show_form"
+   
+  .row
+    :css
+      table, th, td
+      {
+      border-collapse:collapse;
+      border:5px solid #6aa6d6;
+      }x
+      th, td
+      {
+      padding:5px;
+      } 
+  %br
+    .col-sm-7
+      %table.table.table-condensed.table-condensed.table-hovered.table-striped
+        %thead
+          %tr
+            %th Grade
+            %th Subject
+            %th Date
+            %th Description
+            %th Assessment Name
+          
+
+        %tbody
+          %tr{"ng-repeat" => "group in both_values"}
+            %td {{group.grade_name}}
+            %td {{group.subject_name}}
+            %td
+              = link_to "{{group.assessment_date}}", "#", "ng-click" => "mapGrade(group.grade_master_id,group.listing_id )"
+            %td {{group.assessment_description}}
+            %td {{group.assessment_name}}
+   
+   
+   
+  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4#createModal.modal-title STUDENTS
+          .modal-body
+            .row
+              %table#tblData.target.table.table-condensed.table-condensed.table-hovered.table-striped.table-bordered{:style => "width:100%"}
+                %thead
+                  %tr
+                    %th{style: "width:35%"} ID
+                    %th{style: "width:35%"} STUDENT NAME
+                    %th{style: "width:35%"} RESULT
+                    
+                %tbody
+                  %tr{"ng-repeat" => "student in all_students"}
+                    %td
+                      %input{type: "text", "ng-model" => "student.student_id",:class => "form-control", :readonly => "true"}
+                    %td   
+                      {{student.student_name}} 
+                    %td{"ng-controller" => "GradingController"}
+                      %select{"ng-model" => "grading","ng-options" => "var.id as var.grading_name for var in show_gradings",:class => "form-control",:required => "required",}
+                        %option{style: "display:none", value: ""} Select Grading
+                        = hidden_field_tag :grading_master_id, :value => "{{grading}}"
+                        %br          
+                        %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveAll(listing_id,grading, student.student_id)"}= "SAVE"
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.row{"ng-controller" => "LabMasterController"}
+  .col-md-12
+    .col-sm-2
+      = label_tag(:grade, "SELECT GRADE-SUBJECT")      
+      %select{"ng-model" => "selectedUser", "ng-options" => "selectedUser as combined(selectedUser) for selectedUser in unAssignedUsers | orderBy:'id'", "ng-change" => "getTeacherMappings(selectedUser.union)", :class => "form-control", :href => "#teacher_assessment"}
+     
+        %option{style: "display:none", value: ""} select 
+    -# .col-sm-2
+    -#   = label_tag(:date, "SELECT DATE")
+    -#   %select{"ng-model" => "date", "ng-options" => "union.id as union.union for union in both_values | orderBy:'id'",:class => "form-control"}
+      -# %select{"ng-model" => "date", "ng-options" => "date as combined(date)for date in both_values | orderBy:'id'",:class => "form-control"} 
+      -# %select{"ng-model" => "selected", "ng-options" => "selectedUser as combined(selected) for selected in labs | orderBy:'id'", :class => "form-control", :href => "#teacher_assessment"}
+     
+      {{date}}
+     
+      %option{style: "display:none", value: ""} select 
+      %br
+      %center
+        = render "show_form"
+   
+  .row
+    :css
+      table, th, td
+      {
+      border-collapse:collapse;
+      border:5px solid #6aa6d6;
+      }x
+      th, td
+      {
+      padding:5px;
+      } 
+  %br
+    .col-sm-7
+      %table.table.table-condensed.table-condensed.table-hovered.table-striped
+        %thead
+          %tr
+            %th Grade
+            %th Subject
+            %th Date
+            %th Description
+            %th Assessment Name
+          
+
+        %tbody
+          %tr{"ng-repeat" => "group in both_values"}
+            %td {{group.grade_name}}
+            %td {{group.subject_name}}
+            %td
+              = link_to "{{group.assessment_date}}", "#", "ng-click" => "mapGrade(group.grade_master_id,group.listing_id )"
+            %td {{group.assessment_description}}
+            %td {{group.assessment_name}}
+   
+   
+   
+  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4#createModal.modal-title STUDENTS
+          .modal-body
+            .row
+              %table#tblData.target.table.table-condensed.table-condensed.table-hovered.table-striped.table-bordered{:style => "width:100%"}
+                %thead
+                  %tr
+                    %th{style: "width:35%"} ID
+                    %th{style: "width:35%"} STUDENT NAME
+                    %th{style: "width:35%"} RESULT
+                    
+                %tbody
+                  %tr{"ng-repeat" => "student in all_students"}
+                    %td
+                      %input{type: "text", "ng-model" => "student.student_id",:class => "form-control", :readonly => "true"}
+                    %td   
+                      {{student.student_name}} 
+                    %td{"ng-controller" => "GradingController"}
+                      %select{"ng-model" => "grading","ng-options" => "var.id as var.grading_name for var in show_gradings",:class => "form-control",:required => "required",}
+                        %option{style: "display:none", value: ""} Select Grading
+                        = hidden_field_tag :grading_master_id, :value => "{{grading}}"
+                        %br          
+                        %button{:type => "button", :class=> "btn btn-primary", :ng_click => "saveAll(listing_id,grading, student.student_id)"}= "SAVE"
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             

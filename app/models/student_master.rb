@@ -5,6 +5,7 @@ class StudentMaster < ActiveRecord::Base
   #validates :grade_master_id, :presence => true
   #validates :section_master_id, :presence => true
   #validates :joining_date, :presence => true
+  has_many :issuings
   has_many :lab_results
   belongs_to :parent, :class_name => "ParentMaster" , :foreign_key => :parent_master_id
   belongs_to :student_route_mapping
@@ -12,7 +13,7 @@ class StudentMaster < ActiveRecord::Base
   belongs_to :section_master
   belongs_to :location_master
   has_one :parent_payment_master, :foreign_key => :student_id
-  has_many :issuings
+ 
   has_many :donation_of_books
   has_one :admission
   has_many :attendances, :dependent => :destroy
@@ -48,6 +49,17 @@ class StudentMaster < ActiveRecord::Base
     end
     return name
   end
+
+  def self.get_both(selected_user)
+    
+    grade = StudentMaster.all
+    data = []
+    data = grade.map do |x|
+      {grade_master_id: x.grade_master_id, section_master_id: x.section_master_id}
+    end
+    return data
+  end
+
 
 
 end

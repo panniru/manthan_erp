@@ -1,0 +1,33 @@
+.row{"ng-controller" => "TermResultsController"}
+  .col-sm-2
+    = label_tag(:grade, "SELECT GRADE-SECTION")      
+    %select{"ng-model" => "selectedUser", "ng-options" => "selectedUser as combined(selectedUser) for selectedUser in unAssignedUsers | orderBy:'id'", "ng-change" => "getUsers(selectedUser.union)", :class => "form-control"}
+      %option{style: "display:none", value: ""} select 
+  .col-sm-12
+    %table.table.table-condensed.table-condensed.table-hovered.table-striped
+      %thead
+        %tr
+          %th STUDENT NAME
+        
+      %tbody
+        %tr{"ng-repeat" => "x in values"}
+          %td
+            = link_to "{{x.student_name}}", "#", "ng-click" => "mapStudent(x.student_master_id)"
+          
+      
+  .modal.fade{ :id => "createModal", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4#createModal.modal-title STUDENTS
+        .modal-body
+          .row
+            %table#tblData.target.table.table-condensed.table-condensed.table-hovered.table-striped.table-bordered{:style => "width:100%"}
+              %thead
+                %tr
+                  %th{style: "width:35%"} ID
+                  %th{style: "width:35%"} STUDENT NAME
+                  %th{style: "width:35%"} RESULT
+                    
+           

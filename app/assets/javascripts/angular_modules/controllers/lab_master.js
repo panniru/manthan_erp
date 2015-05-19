@@ -293,7 +293,7 @@
         $scope.saveAssessments = function(){
        
             $scope.save_assessments = [];
-            // alert(JSON.stringify($scope.save_assessments))
+        
             $scope.save_assessments.push({
                 id : " ",
                 assessment_name : " ",
@@ -343,8 +343,6 @@
             .then(function(result) {
                 // alert(JSON.stringify(selected_user))
                 $scope.both_values = result.data;
-                alert(JSON.stringify($scope.both_values))
-                
             });
         }
 
@@ -383,26 +381,6 @@
                 }
             });
 
-        // labService.getMapping()
-        //     .then(function(result) {
-        //         $scope.labs = result.data;
-                
-        //         $scope.selected =  $scope.labs[0];
-                
-                // $scope.combined = function(user){
-                //     if(user.grade_name == undefined || user.grade_name == ''){
-                //         return user.subject_name;
-                //     }
-                //     else {
-                //         return user.grade_name + "-" + user.subject_name + "-" + user.assessment_date
-                //     }
-                // }
-            // });
-
-
-
-
-              
         $('#lab_assessments_calendar').fullCalendar({  
             
             selectable: true,
@@ -438,11 +416,7 @@
                 });      
         };
         
-        // $scope.showResults = function(){
-        //     $scope.activities = labService.save_all();  
-        //     $scope.lab_all = [];
-        // };
-      
+       
 	$scope.saveAll = function(listing_id,grading ,student_id ){
             $scope.save_all  = [];
             $scope.save_all.push({ 
@@ -454,15 +428,12 @@
 	    
 	    labService.save_all(listing_id,grading,student_id)
 		.then(function(result) {
-                    // $scope.showResults(); 
-		    $('#createModal').modal('hide');
-                    // $location.path('/lab');
+                    $('#createModal').modal('hide');
                     window.location.href="/lab_results/lab" 
-                    // $scope.$apply();
-                    
                 });
 	};
         $scope.mapGrade = function(grade_master_id,listing_id){
+        
             $scope.grade_master_id = grade_master_id
             $scope.listing_id = listing_id
             $('#createModal').modal('show');
@@ -470,7 +441,6 @@
             labService.getStudent(grade_master_id,listing_id)
                 .then(function(result){
                     $('#createModal').modal('show');
-      
                     $scope.all_students = result.data;
                     
                 });

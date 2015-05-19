@@ -6,6 +6,7 @@ class GradeMaster < ActiveRecord::Base
   belongs_to :lab_assessment_grade_mapping
   belongs_to :listings
   has_many :subject_grades
+ 
   def self.get_grades_by_role(current_user)    
 
     if current_user.role.role == "admin"

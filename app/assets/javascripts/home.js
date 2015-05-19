@@ -210,6 +210,52 @@ function createStaffAssessment(staffadmin_id) {
     });
 }
 
+
+
+// function Foo() {
+    // alert('testing')
+    // document.getElementById("#a").onchange = function(){
+    
+    //     document.getElementById("#a").value = this.value;
+    
+    //     document.getElementById("#a").value = "Return";
+    // $("#a").prop('value', 'Save'); 
+    // $("#a").button('refresh');
+    
+    
+    // if ( a.text === "Issue" ){
+    
+    //     alert('if ');
+    //     a.text = "Close Curtain";}
+    // else{
+    //     alert('test');
+    //     a.text = "Issue";}
+    // :javascript
+    // function Foo() {
+    //     alert('testing')
+    //     var x = document.getElementById("myBtn");
+    //     x.disabled = true;
+    // }
+    
+// } 
+
+                           
+
+
+// function toggleText(button_id)
+// {
+//     if (document.getElementById('button_id').text == "UNLOCK")
+//     {
+//         document.getElementById('button_id').text = "Unlock";
+//     }
+//     else
+//     {
+//         document.getElementById('button_id').text = "UNLOCK";
+//     }
+// }
+
+
+
 $(document ).ready(function() {
      var modal = function(){
          $('body').on('click','.Modal', function(){
@@ -218,3 +264,5 @@ $(document ).ready(function() {
      }
      modal();
 });
+
+

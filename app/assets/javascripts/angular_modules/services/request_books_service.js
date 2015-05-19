@@ -10,11 +10,16 @@
             var url = "/request_books/get_books_vendors.json"
             return $http.get(url);
         };
-            
+        var get_pendings = function(){
+            var url = "/request_books/get_pendings.json"
+            return $http.get(url);
+        };
+   
 
         return {
             updateBooksStatus : updateBooksStatus,
-            getBooksVendorsService : getBooksVendorsService
+            getBooksVendorsService : getBooksVendorsService,
+            get_pendings   : get_pendings
         };
     }]);
 })(angular, myApp);

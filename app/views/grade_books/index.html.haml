@@ -27,6 +27,13 @@
                 %b
                   No.Of.Books
               .col-md-4     
-                = text_field_tag  " ",nil, :class => "form-control", :ng_model => "myNoOfBooks", :placeholder => "No Of Books"
+                -# = text_field_tag  " ",nil, :class => "form-control", :ng_model => "myNoOfBooks", :placeholder => "No Of Books"
+                %select{"ng-model" => "myNoOfBooks",:class => "form-control"}       
+                  %option{:value => "1"} 1
+                  %option{:value => "2"} 2
+                  %option{:value => "3"} 3
+
               .col-md-offset-4            
                 %button{:class=> "btn btn-primary", "ng-click"=>"updateGradeBooks()"}=  "Update"
+
+

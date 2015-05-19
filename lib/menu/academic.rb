@@ -21,6 +21,7 @@ class Academic
     #sub_menu << assessment_results
     sub_menu << academic_terms
     sub_menu << term_results
+    sub_menu << student_results
     sub_menu 
   end
   def teacher_sub_menu
@@ -113,6 +114,10 @@ class Academic
 
   def assessment_types
     MenuItem.new(:label => "Assessments Types", :klass => "", :icon => "list-ol", :href => "/assessment_types")
+  end
+
+  def student_results
+    MenuItem.new(:label => "Student Results", :klass => "", :icon => "thumbs-up", :href => "/student_results")
   end
 
 end

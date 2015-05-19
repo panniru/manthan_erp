@@ -41,5 +41,15 @@
           
               = yield
       
-    
+%html
+  %head
+    %script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"}
+    :javascript
+      $(document).ready(function(){
+          $("p").text("Hello World!");
+      });
+  %body
+    %p This is some text.
+
+
 

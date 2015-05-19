@@ -25,4 +25,62 @@ class RequestBook < ActiveRecord::Base
     end
   end
 
+  def date
+    a = status
+    if a == 'Requested'
+      y = updated_at
+    else 
+    end
+    p y
+    if a == 'Pending'
+      y = updated_at
+      p y
+    else 
+    end
+    p y
+    if a == 'Approved'
+      y = updated_at
+    else 
+    end
+    p y
+    if a == 'Ordered'
+      y = updated_at
+    else 
+    end
+    p y
+    if a == 'Delivered'
+      y = updated_at
+    else 
+    end
+    p y
+  end
+
+  def pending_name
+    a = status
+    if a == 'Requested'
+      y = 'librarian'
+    else
+    end
+    p y
+    if a == 'Pending'
+      y = 'Principal'
+    else
+    end
+    p y
+    if a == 'Approved'
+      y = 'Admin'
+    else
+    end
+    p y
+    if a == 'Ordered'
+      y = 'Vendor'
+    else
+    end
+    p y
+    if a == 'delivered'
+      y = 'librarian'
+    else
+    end
+    p y
+  end
 end

@@ -85,6 +85,19 @@ class RequestBooksController < ApplicationController
       end
     end
   end
+  def get_pendings
+    respond_to do |format|
+      format.json do       
+        @value =  RequestBook.all.map do |value|
+          {id: value.id,book_name: value.book_name, status: value.status,pending_name: value.pending_name,date: value.date}
+        end
+        render :json => @value
+      end
+      
+    end
+
+
+  end
 
   private 
   def request_book_params

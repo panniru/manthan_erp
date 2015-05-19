@@ -25,6 +25,7 @@
         };
         
         $scope.updateBooksStatus =  function(book_status){  
+            alert(book_status)
             for (var i=0; i<$scope.request_books_status.length; i++){ 
                 $scope.request_books_status[i]['status'] = book_status;
             }
@@ -110,6 +111,14 @@
         $scope.getPurchaseDate = function(){           
             $scope.dateFormat = $scope.purchasedDate.getFullYear()+"-"+($scope.purchasedDate.getMonth()+1)+"-"+$scope.purchasedDate.getDate();             
         } 
+
+        requestBooksService.get_pendings()
+            .then(function(result) {                
+                $scope.books_pending = result.data;
+            
+                
+            });
+        
 
 
 

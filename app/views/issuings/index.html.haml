@@ -1,52 +1,37 @@
-= form_tag("/issuings", :method => "get") do
-  .row{"ng-controller" => "IssuingsController"}
-    .form-group.col-md-3
-      %label{:class=> "form-label col-md-4"} Grade
-      .col-sm-6
-        %select{"ng-model" => "myGrade", :ng_options => "grade.id as grade.grade_name for grade in grades", :class => "form-control", :name => "grade_master_id", "ng-change" => "getGradeSections()"}
-        {{myGrade}}
-        
-    .form-group.col-md-3
-      %label{:class=> "form-label col-md-4"} Section
-      .col-sm-6
-        %select{"ng-model" => "mySection", :ng_options => "section.section_master_id  as section.section_name for section in sections | filter: {grade_master_id: myGrade}", :class=>"form-control", :name => "section_master_id"}
-        {{mySection}}
-        
-    .col-md-4
-      %input#grade_master_id{:name => "grade_master_id", :type => "hidden", :value => "{{myGrade}}"}
-      %input#section_master_id{:name => "section_master_id", :type => "hidden", :value => "{{mySection}}"}
+.row{"ng-controller" => "IssuingsController"}
+  .col-sm-2
+    = label_tag(:grade, "SELECT GRADE-SECTION")      
+    %select{"ng-model" => "selectedUser", "ng-options" => "selectedUser as combined(selectedUser) for selectedUser in unAssignedUsers | orderBy:'id'", "ng-change" => "getValues(selectedUser.union)", :class => "form-control"}
       
-      %button{:type=>"submit", :class=> "btn btn-primary" }=  "Go" 
-      %br
-      %br
-      -#  .pull-left
-        -#         .col-sm-10 
-          -#           %span.input-group-addon
-            -#             = fa_icon "search lg"
-              -#           %input#search{name: "search", placeholder: "Enter Search Term...", type: "text",:class => 'form-control'}
-                -# %br
-= form_tag("/issuings", :method => "POST") do
-  %table#tblData.target.table.table-striped.table-condensed.table-bordered{style: "width:80%"}
+    %option{style: "display:none", value: ""} select 
+    %table.table.table-condensed.table-condensed.table-hovered.table-striped
     %thead
       %tr
-        %th Name     
-        %th Allot Books    
+        %th STUDENT NAME
+        %th ALLOT BOOKS
     %tbody
-      - @book_issuing_objects.each do |bio|
-        %tr
-          %td
-            = bio.student.name
-            = hidden_field_tag "book_issuing_objects[][student_master_id]", "#{bio.student.id} "
-         
-          %td
-            - bio.issuings.each do |issuing|
-              = text_field_tag "book_issuing_objects[][issuings][][book]", "#{issuing.book} "    
-              Return
-              %input#book_issuing_objects__issuings__book{name: "book_issuing_objects[][issuings][][is_returned]", type: "checkbox", value: "true" }
-              = hidden_field_tag "book_issuing_objects[][issuings][][id]", "#{issuing.id}"
-         
-          
-          
-  .row
-    %center
-      %button{:type=>"submit", :class=> "btn btn-primary" }=  "save" 
+      %tr{"ng-repeat" => "x in values"}
+        %td {{x.student_name}}
+        %td{"ng-repeat" => "key in x.issuing"}  
+          .pull-left
+            %input{:ng_hide => "key.book_issue == 'Returned' or null", type: "text",:style => "width:150px;", "ng-model" => "key.book_name",:class => "form-control", :readonly => "true", :ng_show => "key.book_issue == 'Issued'"}
+          .pull-left
+            %button{:type => "button", :class => "btn btn-primary", :ng_show => "key.book_issue == 'Issued' ", :ng_click => "updateValues(key.issuing_id)",:ng_hide => "key.book_issue == 'Returned' or null"} Return
+          .pull-left
+            = autocomplete_field_tag :book_name,
+            '',
+            auto_search_autocomplete_available_book_name_path,
+            :placeholder => "Book Name", :class => 'form-control',
+            :required => true,
+            :id_element => "#id",
+            :style => "width:150px;",
+            :ng_hide => "key.book_issue == 'Issued'",
+            :ng_show => "key.book_issue == 'Returned'"
+            = hidden_field_tag :id, :id => "id"
+
+          .pull-left
+            %button{:type => "button", :class=> "btn btn-primary",:ng_click => "saveValues(x.student_id,id,x.grade_master_id,x.section_master_id,date)", :ng_hide => "key.book_issue == 'Issued'",:ng_show => "key.book_issue == 'Returned'" } Issue
+
+    
+
+

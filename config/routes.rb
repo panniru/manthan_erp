@@ -87,10 +87,17 @@ ManthanErp::Application.routes.draw do
   end
   end
   resources :issuings do
+    member do
+      put 'update_values'
+    end
     collection do
       get "student_book_issuings"
       get 'gradeserviceview'
       get 'grade_section_service'
+      get 'get_mappings'
+      get 'get_students'
+      post 'save_values'
+      get 'get_issuings'
     end
   end
   resources :damagebooks do
@@ -104,7 +111,7 @@ ManthanErp::Application.routes.draw do
   get "staffs/staffview"
 
   devise_for :users, :controllers => { :sessions => 'sessions'}
-  
+  get 'auto_search/autocomplete_available_book_name'
   get 'auto_search/autocomplete_location_master_location_name'
   get 'auto_search/autocomplete_student_master_name'
   get 'auto_search/autocomplete_faculty_master_faculty_name'
@@ -394,7 +401,7 @@ ManthanErp::Application.routes.draw do
     end
   end
   
-  resources :location_masters
+ 
 
   
   resources :recruitments do
@@ -742,6 +749,7 @@ ManthanErp::Application.routes.draw do
       post 'request_books_mail_to_vendors'
       get 'delivered_request_books'
       get 'get_books_vendors'
+      get 'get_pendings'
     end  
   end
 
@@ -1114,7 +1122,19 @@ ManthanErp::Application.routes.draw do
       get "lab"
     end
   end
- 
+  resources :out_standing_returns do
+    collection do
+      get 'get_cal'
+    end
+  end
+  resources :location_masters 
+  resources :status
+  resources :student_results do
+    collection do
+      get "get_results"
+      get "get_users"
+    end
+  end
 end
 
 

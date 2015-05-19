@@ -163,6 +163,8 @@
                                       }  
                                      );
         
+     
+
         var Designation = $resource('/designations/:id.json', {id: '@id'},
                                       { "bulk": { url: "/designations/create_bulk.json", method:'POST', isArray: true},
                                         "update": { method: "PUT"}
@@ -200,6 +202,7 @@
             ActivityMaster : ActivityMaster,
             SetupMaster : SetupMaster,
             Designation : Designation
+        
 
         };
     }]);

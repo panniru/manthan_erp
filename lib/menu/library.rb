@@ -14,6 +14,8 @@ end
   def librarian_sub_menu
     
     sub_menu = []    
+    sub_menu << out_standing_returns
+    sub_menu << status
     sub_menu << books
     sub_menu << issuing_books
     sub_menu << damage_books
@@ -38,7 +40,12 @@ end
   end
 
   private 
-
+  def out_standing_returns
+    MenuItem.new(:label => "OutStanding Returns", :klass => "", :icon => "cubes", :href => "/out_standing_returns")
+  end
+  def status
+    MenuItem.new(:label => "Status", :klass => "", :icon => "file-image-o  ", :href => "/status")
+  end
   def  books
     MenuItem.new(:label => "Books", :klass => "", :icon => "book ", :href => "/books")
   end
