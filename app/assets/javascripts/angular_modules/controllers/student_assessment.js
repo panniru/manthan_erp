@@ -2,14 +2,11 @@
     "use strict";
     app.controller('StudentAssessmentController',["$scope","resourceService","staffassessmentService", function($scope, resourceService, staffassessmentService) {
 
-        $scope.getSectionGrade = function(grade_master_id){
-            alert(JSON.stringify(grade_master_id))
-        }
-
         // staffassessmentService.getAssessmentStudent()
         //     .then(function(result) {
         //         $scope.assessments = result.data
         //     });
+        
         
         $scope.assessments = resourceService.Assess.query(); 
 	$scope.editAssessments = function(assessment){
@@ -36,7 +33,7 @@
 
 
         $scope.planupdate = function(){
-     
+            alert()
             $scope.assessment.status = 'Assessment Completed';
             //alert($scope.assessment.status)
             $scope.assessment.$update()
@@ -49,17 +46,15 @@
 
 
         $scope.editPlanmms = function(assessment){
-            
-	    
-            $scope.assessment = assessment
-            // alert()
+	    $scope.assessment = assessment
 	    $('#editplanmm').modal('show');
 	}
 
         $scope.planupdatemm = function(){
+            $scope.assessment.section_master_id = $scope.assessment.section_master_id.section_master_id;
+            $scope.assessment.school_house = $scope.assessment.school_house.house_name;
             $scope.assessment.status = 'Completed';
-            // alert(JSON.stringify($scope.assessment.section_master_id.section_master_id))
-            // $scope.assessment.status = $scope.assessment.section_master_id.section_name;
+            // alert(JSON.stringify($scope.assessment));
             $scope.assessment.$update()
                 .then(function(response){                  
                 })
@@ -77,7 +72,6 @@
 
         $scope.updateresult = function(){
             $scope.assessment.status = 'Completed';
-          //  alert($scope.assessment.status)
             $scope.assessment.$update()
                 .then(function(response){                  
                 })
