@@ -1123,6 +1123,8 @@ ManthanErp::Application.routes.draw do
     collection do 
       get 'get_all_results'
       get 'get_klasses'
+      get 'get_grades_and_sections'
+      get 'get_student_forms'
     end
     member do
     end
@@ -1146,6 +1148,15 @@ ManthanErp::Application.routes.draw do
     end
   end
 
+  resources :admin_dashboards do
+    collection do
+      get 'get_count_status'
+      get 'get_forms'
+      get 'get_staff_count_status'
+      get 'get_staff_forms'
+
+    end
+  end
 end
 
 

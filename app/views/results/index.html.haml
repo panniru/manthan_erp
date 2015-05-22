@@ -1,17 +1,34 @@
 .row{"ng-controller" => "ResultsController"}
   .col-md-12
     .col-sm-2
-      = label_tag(:grade, "SELECT GRADE-SUBJECT")      
-      %select{ "ng-model" => "selectedUser", "ng-options" => "klass.grade_name for klass in klasses", "ng-change" => "getDetails(selectedUser.id)", :class => "form-control"}
-      
+      = label_tag(:grade, "SELECT GRADE-SECTION")      
+      %select{ "ng-model" => "selectedUser", "ng-options" => "selectedUser as combined(selectedUser) for selectedUser in unAssignedUsers | orderBy:'id'","ng-change" => "getDetails(selectedUser.union)", :class => "form-control"}
+      {{selectedUser.union}}
+
   .col-sm-12
-    %table.table.table-condensed.table-condensed.table-hovered.table-striped
+    %table.table.table-condensed.table-condensed.table-hovered.table-striped{:style => "width:100%;"}
       %thead
         %tr
-          %th Student Name
-         
-
+          %th{:style => "width:30%;"}
+            Grade
+          %th{:style => "width:30%;"}
+            Section
+          %th{:style => "width:20%;"}
+            Student Name
+          %th
       %tbody
         %tr{"ng-repeat" => "group in group_students"}
+          %td {{group.grade}}
+          %td {{group.section}}
           %td {{group.student_name}}
-
+          %td
+            = link_to "See Result", "#", :ng_click => "showStudentResult(group.id)"
+    
+  #student_show_form.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", "data-backdrop" => "static","data-keyboard" => "false"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} List of Forms
+        .modal-body
+          = render "student_show_form"

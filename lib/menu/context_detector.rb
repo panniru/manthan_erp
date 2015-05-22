@@ -118,6 +118,7 @@ class ContextDetector
     "final_results" => "academic",
     "faculty_masters" => "HrmSubMenu",
     "school_houses" => "default_master_sub_menu", 
+    "admin_dashboards" => "enquiry_admission",
   }
   
   def self.get_context(args)

@@ -1,4 +1,4 @@
-class AdmissionDashboardDecorator < ApplicationDecorator
+class AdminDashboardDecorator < ApplicationDecorator
   delegate_all
 
   # Define presentation-specific methods here. Helpers are accessed through

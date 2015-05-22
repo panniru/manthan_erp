@@ -1,2 +1,0 @@
-class AdmissionDashboardsController < ApplicationController
-end

@@ -2,6 +2,40 @@
     "use strict";
     app.controller('ResultsController',["$scope", "resultsService",function($scope,resultsService) {
 
+
+        $scope.showStudentResult = function(id){
+	    resultsService.getStudentForms(id)
+                .then(function(result){
+                    $('#student_show_form').modal('show');
+                    $scope.student_filter_values = result.data;
+                    //alert(JSON.stringify($scope.student_filter_values.keys))
+                    // alert(JSON.stringify($scope.keys))
+                    // $('#student_show_form').modal('hide');
+                     // console.log($scope.keys)
+
+                });
+	}
+
+
+
+        resultsService.getGradesAndSections()
+            .then(function(result) {
+                $scope.unAssignedUsers = result.data;
+                $scope.selectedUser =  $scope.unAssignedUsers[0];
+                
+                $scope.combined = function(user){
+                    if(user.grade_name == undefined || user.grade_name == ''){
+                        return user.section_name;
+                    }
+                    else {
+                        return user.grade_name + "-" + user.section_name;
+                    }
+                }
+
+            });
+
+
+
         $scope.goToEdit = function(){
             //$scope.attendances = attendances
             $scope.myShowFormValue = false;
@@ -64,13 +98,6 @@
 
 
 
-
-
-
-
-
-
-
         $scope.employee_amount = function(f){
             resultsService.getGradingDefaults(f)
                 .then(function(result) {
@@ -98,20 +125,20 @@
         }
 
 
-        resultsService.getGradeAssessmentMapping()
-            .then(function(result) {
-                $scope.unAssignedUsers = result.data;
-                $scope.selectedUser =  $scope.unAssignedUsers[0];
+        // resultsService.getGradeAssessmentMapping()
+        //     .then(function(result) {
+        //         $scope.unAssignedUsers = result.data;
+        //         $scope.selectedUser =  $scope.unAssignedUsers[0];
                 
-                $scope.combined = function(user){
-                    if(user.grade_name == undefined || user.grade_name == ''){
-                        return user.assessment_type;
-                    }
-                    else {
-                        return user.grade_name + "-" + user.assessment_type;
-                    }
-                }
-            });
+        //         $scope.combined = function(user){
+        //             if(user.grade_name == undefined || user.grade_name == ''){
+        //                 return user.assessment_type;
+        //             }
+        //             else {
+        //                 return user.grade_name + "-" + user.assessment_type;
+        //             }
+        //         }
+        //     });
 
        
 

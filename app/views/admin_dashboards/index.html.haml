@@ -1,0 +1,66 @@
+.row{"ng-controller" => "AdmissionDashboardController"}
+  .col-sm-4
+    %center
+      %h4
+        Admission 
+    .col-md-12
+      %table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:100%;"}
+        %thead
+          %tr        
+            %th{:style => "width:50%;"}
+              %center
+                Status
+            %th{:style => "width:50%;"}
+              %center
+                Count
+          %tbody
+            %tr{"ng-repeat" => "reason in reasons"}
+              %td {{reason.status}}         
+              %td 
+                %center
+                  = link_to "{{reason.count}}", "#", :ng_click => "showForms(reason.status)"
+ 
+  #show_form.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} List of Forms
+        .modal-body
+          = render "show_form"
+
+
+  .col-sm-4
+    %center
+      %h4
+        Recruitment
+    .col-md-12
+      %table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:100%;"}
+        %thead
+          %tr        
+            %th{:style => "width:50%;"}
+              %center
+                Status
+            %th{:style => "width:50%;"}
+              %center
+                Count
+          %tbody
+            %tr{"ng-repeat" => "staff_reason in staff_reasons"}
+              %td {{staff_reason.status}}         
+              %td 
+                %center
+                  = link_to "{{staff_reason.count}}", "#", :ng_click => "showStaffForms(staff_reason.status)"
+ 
+  #staff_show_form.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{ :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true" } &times;
+          %h4.modal-title{ :id => "myModalLabel"} List of Forms
+        .modal-body
+          = render "staff_show_form"
+
+                
+    
+
+  .col-sm-4

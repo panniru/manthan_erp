@@ -1,6 +1,20 @@
 (function(angular, app) {
     "use strict";
     app.service("resultsService",["$http", function($http) {
+
+        var getStudentForms = function(id){
+            var url = "/results/get_student_forms.json?id="+id
+            return $http.get(url);
+        };
+
+
+
+        var getGradesAndSections = function(){
+            var url = "/results/get_grades_and_sections.json"
+            return $http.get(url);
+        };
+
+
         var getAllResults = function(klass){
             var url = "/results/get_all_results.json?klass="+klass
             return $http.get(url);
@@ -35,7 +49,9 @@
             getGradeAssessmentMapping : getGradeAssessmentMapping,
             getBothValue : getBothValue,
             getGradingDefaults : getGradingDefaults,
-            saveTodayResult : saveTodayResult
+            saveTodayResult : saveTodayResult,
+            getGradesAndSections : getGradesAndSections,
+            getStudentForms : getStudentForms
            
         };
     }]);
