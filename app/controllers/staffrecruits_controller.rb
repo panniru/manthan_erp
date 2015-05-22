@@ -342,7 +342,7 @@ class StaffrecruitsController < ApplicationController
  end
  
  def staffrecruit_params
-   params.require(:staffrecruit).permit(:post,:description,:start_time,:end_time,:education_qualification,:educational_certificates,:previous_employment_proof,:salary_slips_for_previous_months, :title,:status,:staff_admission_id,:id,:comments,:staffhead, :final_result,:form_no,:assessment_result,:closestatus,:management_result,:faculty_name,:dob,:subject_master_id,:address,:gender,:email,:mobile_no,:nationality,:klass,:language,:subject,:experience,:expected_salary,:staff_leader_id,:user_id,:dept,:role_id, :staffadmin_id)
+   params.require(:staffrecruit).permit(:post,:description,:start_time,:end_time,:education_qualification,:educational_certificates,:previous_employment_proof,:salary_slips_for_previous_months, :title,:status,:staff_admission_id,:id,:comments,:staffhead, :final_result,:form_no,:assessment_result,:closestatus,:management_result,:faculty_name,:dob,:subject_master_id,:address,:gender,:email,:mobile_no,:nationality,:klass,:language,:subject,:experience,:expected_salary,:staff_leader_id,:user_id,:dept,:role_id, :staffadmin_id, :designation)
  end
  def get_faculty_master(staff_obj)
    FacultyMaster.new do |fm|
@@ -361,6 +361,7 @@ class StaffrecruitsController < ApplicationController
      fm.primary_subject = staff_obj.subject
      fm.past_experience = staff_obj.experience
      fm.user_id = staff_obj.user_id
+     fm.designation = staff_obj.designation
    end 
  end
 end

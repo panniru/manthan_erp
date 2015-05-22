@@ -61,8 +61,6 @@ class GradeLabMappingsController < ApplicationController
     respond_to do |format|
       format.json do        
         mappings = params[:mappings]    
-        p "1111111111111"
-        p mappings
         SubjectGrade.all.map do |temp| 
           @value = "false"
           mappings.each do |t|           

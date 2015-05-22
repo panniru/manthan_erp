@@ -123,30 +123,33 @@
         };
         
         //ADMIN VIEW OF ASSESSMNETS
-        $scope.getSections = function (myGrade){
-            timeTableService.getSectionsForGradeService(myGrade)
-                .then(function(result) {
-                    $scope.sections=result.data;
-                });
-        };  
-
-        // $scope.showAssessmentMappings = function(myGrade,mySection){          
-        //     assessmentsService.getAssessmentMappingsService(myGrade,mySection)
-        //         .then(function(result) {  
-        //             $scope.assessments = result.data;                   
-        //         }); 
+        // $scope.getSections = function (myGrade){
+        //     timeTableService.getSectionsForGradeService(myGrade)
+        //         .then(function(result) {
+        //             $scope.sections=result.data;
+        //         });
         // };
+        $scope.getSubjects = function (myGrade){
+            //alert(myGrade);
+            academicsService.getAcademicsSubjectsForGradeService(myGrade)
+                .then(function(result) {
+                    $scope.subjects=result.data;
+                });
+        };
+
+        $scope.showAssessmentMappings = function(myGrade,mySubject){
+            assessmentsService.getAssessmentMappingsService(myGrade,mySubject)
+                .then(function(result){
+                    $scope.assessments = result.data;
+                });
+        };
 
         //ASSESSMENTS
         $scope.addAssessments = function(){
-   
             $scope.add_assessments = [];
             academicsService.getAcademicsSubjects()
                 .then(function(result) {
                     $scope.subject_masters=result.data;
-
-              
-                  
                 });
 
             assessmentsService.getAssessmentGradeMappings()
@@ -170,7 +173,7 @@
         };
 
         
-        $scope.showAssessments = function(myGrade,mySection){          
+        $scope.showAssessments = function(myGrade,mySection){
             assessmentsService.getAssessments()
                 .then(function(result) {  
                     $scope.assessments = result.data;

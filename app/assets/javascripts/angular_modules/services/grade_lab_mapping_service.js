@@ -1,6 +1,11 @@
 (function(angular, app) {
     "use strict";
     app.service("gradeLabMappingService" , ["$http", function($http) {
+
+        var getGradesSubjectsServiceView = function(){
+            var url = "/grade_lab_mappings/get_grades_subjects_service_view.json"
+            return $http.get(url);
+        }; 
 	
 	var getLabNames = function(){
 	    var url = "/grade_lab_mappings/all_subjects.json"
@@ -26,8 +31,10 @@
 	return {
 	    getLabNames : getLabNames,
             saveSubjectsMappings : saveSubjectsMappings,
-            getSubjectsGradesServiceView : getSubjectsGradesServiceView
-            // getSubjectsGradesMappings : getSubjectsGradesMappings
+            getSubjectsGradesServiceView : getSubjectsGradesServiceView,
+            getGradesSubjectsServiceView : getGradesSubjectsServiceView
+
+
 	};
     }]);
 })(angular , myApp);

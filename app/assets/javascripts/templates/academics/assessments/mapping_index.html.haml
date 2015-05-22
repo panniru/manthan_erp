@@ -4,7 +4,7 @@
     .col-md-9
       %table{:class => "table"}
         %tr
-          %th ASSESSMENT DESCRIPTION 
+          %th ASSESSMENT TYPE 
           %th{"ng-repeat" => "grade  in grades"}    
             {{grade.grade_name}}
           %th EDIT
@@ -17,4 +17,3 @@
           %td
             %a{href: "#mapping_edit", :class => "btn btn-warning btn-sm",:title => "EDIT","ng-click" => "editAssessmentGradeMappings(assessment_type)"}       
               %span{class: "glyphicon glyphicon-pencil"}
-  

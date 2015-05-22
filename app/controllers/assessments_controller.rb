@@ -193,11 +193,13 @@ class AssessmentsController < ApplicationController
   def get_assessment_mappings_service
     respond_to do |format|
       format.json do       
-        assessments = AssessmentListing.where('grade_master_id = '+"'#{params[:my_Grade]}'"+" AND "+'section_master_id = '+"'#{params[:my_Section]}'")       
-        assessments = assessments.each.map do |mapping|
-          {id: mapping.id, faculty_master_id: mapping.faculty_master_id, faculty_name: mapping.faculty_master.faculty_name, grade_master_id: mapping.grade_master_id,  grade_name: mapping.grade_master.grade_name, section_master_id: mapping.section_master_id,  section_name: mapping.section_master.section_name, subject_master_id: mapping.subject_master_id,  subject_name: mapping.subject_master.subject_name, assessment_type_id: mapping.assessment_type_id, assessment_type: mapping.assessment_type.assessment_type, assessment_desc: mapping.assessment_desc, assessment_date: mapping.assessment_date} 
+        assessments = Assessment.where(subject_master_id: params[:my_Subject]).all.map do |mapping|
+          agm = AssessmentGradeMapping.find(mapping.assessment_grade_mapping_id)
+          if agm.grade_master_id == params[:my_Grade].to_i
+            {id: mapping.id, assessment_name: mapping.assessment_name, subject_master_id: mapping.subject_master_id, subject_name: mapping.subject_master.subject_name, grade_master_id: agm.grade_master_id, grade_name: agm.grade_master.grade_name, assessment_type_id: agm.assessment_type_id, assessment_type: agm.assessment_type.assessment_type}
+          end
         end
-        render :json => assessments       
+        render :json => assessments
       end
     end
   end
@@ -283,17 +285,9 @@ class AssessmentsController < ApplicationController
 
   def get_assessments_for_assessment_type
     respond_to do |format|
-      format.json do 
-        p params 
-        p "===================>"
-        p AssessmentGradeMapping.ids
-        p "++++++++++++++++++++"
+      format.json do
         assessment_grade_mapping_id = AssessmentGradeMapping.where(assessment_type_id: "#{params[:assessment_type_id]}",grade_master_id: "#{params[:grade_master_id]}").pluck(:id)[0]
-        p assessment_grade_mapping_id
-        p "===================>"
         assessments  = Assessment.where(assessment_grade_mapping_id: assessment_grade_mapping_id,subject_master_id: "#{params[:subject_master_id]}").select(:id,:assessment_grade_mapping_id,:assessment_name).map {|mapping| {id: mapping.id, assessment_name: mapping.assessment_name}}
-        p assessments 
-        p "====================>"
         render :json => assessments
       end
     end

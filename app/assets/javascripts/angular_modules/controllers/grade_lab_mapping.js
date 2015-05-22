@@ -10,7 +10,7 @@
         gradeLabMappingService.getLabNames()
 	    .then(function(response){
 		$scope.lab_subjects = response.data
-                gradesSubjectsMapService.getGradesSubjectsServiceView()
+                gradeLabMappingService.getGradesSubjectsServiceView()
                     .then(function(result) {
                         $scope.show_grades=result.data; 
                         gradeLabMappingService.getSubjectsGradesServiceView()

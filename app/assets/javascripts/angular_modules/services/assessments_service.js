@@ -28,12 +28,11 @@
             return $http.post(url, {mappings: save_assessment_grade_mappings});    
         }; 
 
-        // var getAssessmentMappingsService = function(myGrade,mySection){
-        //     var url = "/assessments/get_assessment_mappings_service.json"
-        //     return $http.get(url, {params: {my_Grade: myGrade, my_Section: mySection}});
-        // };   
-        
-       
+        var getAssessmentMappingsService = function(myGrade,mySubject){
+            var url = "/assessments/get_assessment_mappings_service.json"
+            return $http.get(url, {params: {my_Grade: myGrade, my_Subject: mySubject}});
+        };
+
         //ADMIN VIEW OF ASSESSMENTS
 
         //ASSESSMENT SUBJECT MAPPING
@@ -74,7 +73,7 @@
             saveAssessmentTypeMappings : saveAssessmentTypeMappings,
             getAssessmentGrageMappingsService : getAssessmentGrageMappingsService,  
             saveAssessmentGradeMappings : saveAssessmentGradeMappings,
-            // getAssessmentMappingsService : getAssessmentMappingsService,
+            getAssessmentMappingsService : getAssessmentMappingsService,
             getAssessmentGradeMappings : getAssessmentGradeMappings,
             saveAssessments : saveAssessments,
             getAssessments : getAssessments,

@@ -1,0 +1,15 @@
+.row
+  .col-md-1
+    STUDENTS   
+  .row 
+    .col-md-1
+      %table{:class => "table"}
+        %tr
+          %th NAME    
+          %th RESULT
+        
+          %tr
+            %td {{mapping.student_name}}                                     
+            %td 
+              %input{type: "text", "ng-model" => " ",:class => "form-control" }                
+            .col-md-1

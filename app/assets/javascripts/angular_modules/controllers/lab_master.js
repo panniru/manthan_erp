@@ -1,12 +1,16 @@
 (function(angular, app) {
     "use strict";
-    app.controller("LabMasterController", ["$scope" ,"$location","labService" , "labMappingService", '$window' , function($scope ,$location, labService , labMappingService , $window){
+    app.controller("LabMasterController", ["$scope" ,"$location","labService" , "labMappingService","gradingService",'$window' , function($scope ,$location, labService , labMappingService , $window){
 	$scope.myShowIndexValue= true;       
 	
 	labService.getGradeNames()
 	    .then(function(response){
 		$scope.all_grades = response.data
             });
+	// gradingService.getGradingServiceView()
+	//     .then(function(response){
+	// 	$scope.show_gradings = response.data
+        //     });
 	
 	$scope.initialize = function(){                       
             $scope.criterias = [];
@@ -32,7 +36,7 @@
         };
 	$scope.getAssessmentsCriteriaMappings = function(labName)        
         {
-	    labService.getAssessmentCriteria(labName)
+            labService.getAssessmentCriteria(labName)
 		.then(function(result) {
 		    $scope.assessments = result.data;                   
 		    if (result.data.length != 0)
@@ -258,7 +262,7 @@
             labService.getAssessmentSubjectsService()
                 .then(function(result) {                 
                     $scope.add_assessments = result.data;   
-                    alert(JSON.stringify($scope.add_assessments))                            });
+                });
         };
 
         // labService.getAssessmentSubjectsService()
@@ -309,6 +313,15 @@
                             
                 });
         };
+
+
+
+       
+        // labService.get_student_names()
+        //     .then(function(result){
+        //         $scope.results = result.data
+        //     });
+	      
         // $scope.getTeacherMappings = function(){ 
         //     alert(' ')
         //     var path = "/";
@@ -355,16 +368,15 @@
                 }
             });
        
-        $('#lab_assessments_calendar').fullCalendar({            
+        $('#lab_assessments_calendar').fullCalendar({  
+            
             selectable: true,
             select: function(date) {
                 $scope.dateFormat = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();        
-                // alert(JSON.stringify($scope.dateFormat)) 
-                
                 $('#myModal').modal('show');                
             }            
         });      
-
+        
         $scope.cancelMyModal = function(){            
             $('#myModal').modal('hide');        
         };
@@ -391,10 +403,35 @@
                 });      
         };
         
-        
-
+     
+       
+	$scope.saveAll = function(listing_id,grading ,student_id ){
+            $scope.save_all  = [];
+            $scope.save_all.push({ 
+                id: "",
+                listing_id: listing_id.listing_id,
+                grading_master_id: $scope.grading,
+                student_master_id: student_id,
+	    });
+	    
+	    labService.save_all(listing_id,grading,student_id)
+		.then(function(result) {
+		    $('createModal').modal('hide');
+                    window.location.reload();
+            	});
+	};
+        $scope.mapGrade = function(grade_master_id,listing_id){
+            $scope.grade_master_id = grade_master_id
+            $scope.listing_id = listing_id
+            $('#createModal').modal('show');
+            labService.getStudent(grade_master_id,listing_id)
+                .then(function(result){
+                    $('#createModal').modal('show');
+                    $scope.all_students = result.data;
+                });
+        };
     }]);
-    
 })(angular, myApp);
+
 
 

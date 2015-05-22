@@ -1,12 +1,5 @@
 class LabAssessmentsController < ApplicationController
-  # def index
-  #   if current_user.admin?
-  #     render "index"
-  #   elsif current_user.teacher?
-  #     render "teachers_index"
-  #   end
-  # end
-
+ 
 # def get_teacher_mappings     
 #     respond_to do |format|
 #       format.json do
@@ -38,7 +31,7 @@ class LabAssessmentsController < ApplicationController
    respond_to do |format|
     format.json do       
       subjects_grades = SubjectGrade.all.map do |sg|
-        {id: sg.id, grade_master_id: sg.grade_master_id, grade_name: sg.grade_master.grade_name, subject_master_id: sg.subject_master_id, subject_name: sg.subject_master.subject_name, :union => sg.union} 
+        {id: sg.id, grade_master_id: sg.grade_master_id, grade_name: sg.grade_master.grade_name, subject_master_id: sg.subject_master_id, subject_name: sg.subject_master.subject_name, :union => sg.union } 
       end
       render :json => subjects_grades
     end
@@ -112,13 +105,9 @@ end
   def get_grade_mappings_service
     respond_to do |format|
       format.json do        
-       
-       
         assessment_mapping = LabAssessmentGradeMapping.all
-        p "111111111"
-        p assessment_mapping
         assessment_mappings = assessment_mapping.each.map do |mapping|
-        
+
           {id: mapping.id, grade_master_id: mapping.grade_master_id, lab_assessment_id: mapping.lab_assessment_id, assessment_type: mapping.lab_assessment.assessment_type, no_of_times: mapping.no_of_times} 
         end
         render :json => assessment_mappings
@@ -130,8 +119,6 @@ end
     respond_to do |format|
       format.json do            
         mappings = params[:mappings]
-        p "2322323232323"
-        p mappings
         LabAssessmentGradeMapping.where('lab_assessment_id = '+"'#{mappings[0][:lab_assessment_id]}'").map do |temp| 
           @value = "false"
           mappings.each do |t|           
@@ -177,8 +164,6 @@ end
   def save_assessments
     respond_to do |format|
       format.json do 
-        p "11111111"
-        p params[:assessments]
         assessments = params[:assessments]        
         assessments.each do |t|
           if t["id"].present? 

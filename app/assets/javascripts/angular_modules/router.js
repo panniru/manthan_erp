@@ -110,9 +110,9 @@
                 templateUrl: 'lab/lab_assessments/add_mapping.html'               
             })
 
-            . when('/save_form', {
-                templateUrl: 'lab/lab_assessments/save_form.html'               
-            })  
+            //. when('/save_form', {
+              //  templateUrl: 'lab/lab_assessments/save_form.html'               
+            //})  
 
             . when('/teacher_assessment', {
                 templateUrl: 'lab/lab_assessments/teacher_assessment.html'               
@@ -120,9 +120,12 @@
             . when('/teacher_form', {
                 templateUrl: 'lab/lab_assessments/teacher_assessment.html'               
             })
-        
+            . when('/results_form', {
+                templateUrl: 'lab/lab_results/results_form.html'  
+            })
 
     }]);
 })(angular, myApp);
+  
 
-
+  

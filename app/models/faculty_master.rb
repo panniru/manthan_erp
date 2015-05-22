@@ -6,6 +6,7 @@ class FacultyMaster < ActiveRecord::Base
   belongs_to :attendance
   has_many :leave_permissions
   has_many :students, :class_name => "StudentMaster"
+  has_many :lab_teacher_mappings
   mount_uploader :educational_certificates, EducationalCertificatesUploader
   mount_uploader :previous_employment_proof,PreviousEmploymentProofUploader
   mount_uploader :salary_slips_for_previous_months, SalarySlipsForPreviousMonthsUploader
