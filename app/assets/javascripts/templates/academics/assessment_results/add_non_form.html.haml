@@ -1,0 +1,22 @@
+%br
+%br
+.row
+  .col-md-10
+  .col-md-1
+    %a{href: "#assessment_results/results_non_show_form", :class => "btn btn-primary", :title => "SAVE", "ng-click" => "saveAssessmentResults()"} SAVE    
+  .col-md-1
+.row
+  .col-md-1
+  .col-md-10
+    %table{:class => "table"}
+      %tr
+        %th NAME         
+        %th GRADE 
+        %th DESC 
+      %tr{"ng-repeat" => "mapping in edit_Assessment_Results"}
+        %td {{mapping.student_name}}                                     
+        %td 
+          %select{"ng-model" => "mapping['grading_master_id']", "ng-options" => "grading.id as grading.grading_name for grading  in gradings", :class => "form-control"}         
+        %td 
+          %input{type: "text", "ng-model" => "mapping.assessment_result_desc", :class => "form-control" , :placeholder => "Description"}         
+  .col-md-1

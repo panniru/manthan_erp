@@ -950,12 +950,27 @@ ManthanErp::Application.routes.draw do
   
   resources :na_assessments do
     collection do
-
+      get 'get_na_assessment_grade_mappings'
+      get 'get_na_assessments'
+      post 'save_assessments'
+      get 'get_non_academics_subjects'
+      get 'get_non_assessment_mappings_service'
+      post 'save_na_assessment_criteria'
+      get 'get_na_assessment_criteria'
+      get 'get_non_academics_subjects_for_grade'
+      get 'get_teacher_grade_mappings'
     end
   end
 
   resources :na_assessment_results do
     collection do      
+      get 'get_non_teacher_assessments_service'
+      get 'get_non_student_details_service'
+      post 'save_non_assessment_results_service'
+      get 'get_non_assessment_results_service'
+      get 'get_non_assessments_service'
+      get 'get_non_teacher_grade_mappings'
+      get 'get_non_assessments_service'
     end
   end
 

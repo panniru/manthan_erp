@@ -1,0 +1,21 @@
+.row
+  %br
+  %br
+  .row{"ng-repeat" => "mapping in teacher_non_grade_subject_mappings"}
+    .col-md-1
+    .col-md-10
+      %h3 {{mapping.teacher_grade_subjects}}
+      .row 
+        %table{:class => "table"}
+          %tr
+            %th DATE         
+            %th ASSESSMENT 
+            %th DESC          
+          %tr{"ng-repeat" => "assessment  in teacher_assessments | filter: { grade_master_id : mapping.grade_master_id, section_master_id : mapping.section_master_id, subject_master_id : mapping.subject_master_id}"}
+            %td 
+              %a{href: "#assessment_results/results_non_show_form", "ng-click" =>"showAssessmentResults(assessment)"} {{assessment.assessment_date}}                                
+            %td {{assessment.assessment_name}}  
+            %td {{assessment.assessment_desc}}         
+    %br
+    %br        
+  .col-md-1

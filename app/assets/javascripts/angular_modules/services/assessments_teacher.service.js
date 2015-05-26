@@ -16,6 +16,11 @@
             return $http.get(url);            
         }; 
 
+        var getNonTeacherGradeMappings = function(){
+            var url = "/na_assessment_results/get_non_teacher_grade_mappings.json"
+            return $http.get(url);            
+        }; 
+
         var saveTeacherAssessmentMappings = function(save_teacher_assessments){            
             var url = "/assessments/save_teacher_assessments.json"
             return $http.post(url, {mappings: save_teacher_assessments});    
@@ -32,6 +37,7 @@
             getTeacherGradeMappings : getTeacherGradeMappings,
             saveTeacherAssessmentMappings : saveTeacherAssessmentMappings,
             deleteTeacherAssessmentMappings : deleteTeacherAssessmentMappings,
+            getNonTeacherGradeMappings : getNonTeacherGradeMappings,
         }        
     }]);    
 })(angular, myApp);

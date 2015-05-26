@@ -46,9 +46,11 @@ class AssessmentResultsController < ApplicationController
             @assessment_result.student_master_id = t['student_master_id']   
             @assessment_result.grading_master_id = t['grading_master_id']   
             @assessment_result.assessment_result_desc = t['assessment_result_desc']   
+            @assessment_result.result_type = 'academics'
             @assessment_result.save
           else
             @assessment_result = AssessmentResult.new(add_assessment_result_params(t))
+            @assessment_result.result_type = 'academics'
             @assessment_result.save
           end
         end         
@@ -60,7 +62,7 @@ class AssessmentResultsController < ApplicationController
   def get_assessment_results_service
     respond_to do |format|
       format.json do       
-        assessment_results = AssessmentResult.where('assessment_listing_id = '+"'#{params[:assessment_Listing_Id]}'")
+        assessment_results = AssessmentResult.where('assessment_listing_id = '+"'#{params[:assessment_Listing_Id]}'").where(:result_type => 'academics')
         assessment_results = assessment_results.each.map do |mapping|      
           {id: mapping.id, assessment_listing_id: mapping.assessment_listing_id , grade_master_id: mapping.assessment_listing.grade_master_id, section_master_id: mapping.assessment_listing.section_master_id, student_master_id: mapping.student_master_id, student_name: mapping.student_master.name, grading_master_id: mapping.grading_master_id, grading_name: mapping.grading_master.grading_name, assessment_result_desc: mapping.assessment_result_desc}
         end
@@ -70,7 +72,7 @@ class AssessmentResultsController < ApplicationController
   end
   
   def add_assessment_result_params(params)   
-    params.permit(:assessment_listing_id, :student_master_id, :grading_master_id, :assessment_result_desc)
+    params.permit(:assessment_listing_id, :student_master_id, :grading_master_id, :assessment_result_desc, :result_type)
   end
  
   def get_assessments_service
@@ -91,7 +93,7 @@ class AssessmentResultsController < ApplicationController
             assessment_result_status = "in progress"
           end         
           
-          {id: mapping.id, faculty_master_id: mapping.faculty_master_id, grade_master_id: mapping.grade_master_id, grade_name: mapping.grade_master.grade_name, section_master_id: mapping.section_master_id, section_name: mapping.section_master.section_name, subject_master_id: mapping.subject_master_id, subject_name: mapping.subject_master.subject_name, assessment_type_id: mapping.assessment_type_id, assessment_type: mapping.assessment_type.assessment_type, assessment_desc: mapping.assessment_desc, assessment_date: mapping.assessment_date, assessment_result_status: assessment_result_status}
+          {id: mapping.id, faculty_master_id: mapping.faculty_master_id, grade_master_id: mapping.grade_master_id, grade_name: mapping.grade_master.grade_name, section_master_id: mapping.section_master_id, section_name: mapping.section_master.section_name, subject_master_id: mapping.subject_master_id, subject_name: mapping.subject_master.subject_name, assessment_type_id: mapping.assessment.assessment_grade_mapping.assessment_type_id, assessment_type: mapping.assessment.assessment_grade_mapping.assessment_type.assessment_type, assessment_desc: mapping.assessment_desc, assessment_date: mapping.assessment_date, assessment_result_status: assessment_result_status}
         end         
         render :json => assessments
       end

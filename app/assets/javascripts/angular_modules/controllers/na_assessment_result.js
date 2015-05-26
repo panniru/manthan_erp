@@ -1,23 +1,32 @@
 (function(angular, app) {
     "use strict";
-    app.controller('AssessmentResultsController', ["$scope", "$location", "assessmentsTeacherService", "assessmentResultsService", "gradingService", function($scope, $location, assessmentsTeacherService, assessmentResultsService, gradingService) {        
-        assessmentsTeacherService.getTeacherGradeMappings()
+    app.controller('NonAssessmentResultsController', ["$scope", "$location", "assessmentsTeacherService", "na_assessmentResultsService", "gradingService", function($scope, $location, assessmentsTeacherService, na_assessmentResultsService, gradingService) {        
+
+        // na_assessmentResultsService.getNonAssessmentsService()
+        //     .then(function(result){               
+                
+        //         $scope.teacher_assessments = result.data;                 
+        //     });
+        
+
+        assessmentsTeacherService.getNonTeacherGradeMappings()
             .then(function(result) {               
                 $scope.mappings = result.data;  
-                $scope.teacher_grade_subject_mappings = [];
+                $scope.teacher_non_grade_subject_mappings = [];
                 
                 for (var i=0; i< $scope.mappings.length; i++){
-                    $scope.teacher_grade_subject_mappings.push({
+                    $scope.teacher_non_grade_subject_mappings.push({
                         id: $scope.mappings[i]['id'],
                         grade_master_id: $scope.mappings[i]['grade_master_id'],
                         section_master_id: $scope.mappings[i]['section_master_id'],
                         subject_master_id: $scope.mappings[i]['subject_master_id'],                       
                         teacher_grade_subject: $scope.mappings[i]['grade_name']+" - "+$scope.mappings[i]['section_name']+" - "+$scope.mappings[i]['subject_name'],                        
                     });
-                }                             
+                }                     
+
             });
-        
-        assessmentResultsService.getTeacherAssessmentsService()
+
+        na_assessmentResultsService.getTeacherAssessmentsService()
             .then(function(result){               
                 $scope.teacher_assessments = result.data;
             });
@@ -27,7 +36,7 @@
             $scope.students = [];
             
             //getStudentsForGradeAndSectionService
-            assessmentResultsService.getStudentDetailsService(assessment.grade_master_id, assessment.section_master_id)
+            na_assessmentResultsService.getStudentDetailsService(assessment.grade_master_id, assessment.section_master_id)
                 .then(function(result){                   
                     $scope.students = result.data;  
                     
@@ -56,22 +65,24 @@
                 .then(function(result) {                     
                     $scope.gradings = result.data;
                 });
-            $scope.edit_Assessment_Results = $scope.show_Assessment_Results;           
+            $scope.edit_Assessment_Results = $scope.show_Assessment_Resultss;           
         };      
         
         $scope.showAssessmentResults = function(assessment){
             $scope.assessment_Listing = assessment;            
-            $scope.show_Assessment_Results = []; 
+            $scope.show_Assessment_Resultss = []; 
 
-            assessmentResultsService.getAssessmentResultsService(assessment.id)
+            na_assessmentResultsService.getAssessmentResultsService(assessment.id)
                 .then(function(result) {  
-                    $scope.show_Assessment_Results = result.data;                   
+                    $scope.show_Assessment_Resultss = result.data;                   
                     if(result.data.length == 0){                       
                         var path = "/";
-                        path = "/assessment_results/add_form";
+                        path = "/assessment_results/add_non_form";
                         $location.path(path); 
-                        $scope.buildEeditAssessmentResults(assessment);                      
+                        $scope.buildEeditAssessmentResults(assessment);                  
+                        
                     }
+                    
                 }); 
         };
 
@@ -85,26 +96,32 @@
                     student_master_id: $scope.edit_Assessment_Results[i]['student_master_id'],
                     grading_master_id: $scope.edit_Assessment_Results[i]['grading_master_id'],
                     assessment_result_desc: $scope.edit_Assessment_Results[i]['assessment_result_desc'],
-                    result_type: 'academics'
+                    result_type: 'non_academics'
                     
                 });
                 
             }
             
-            assessmentResultsService.saveAssessmentResultsService($scope.save_Assessment_Results)
+            na_assessmentResultsService.saveAssessmentResultsService($scope.save_Assessment_Results)
                 .then(function(result) {                    
                 });
             
             $scope.showAssessmentResults($scope.assessment_Listing);           
         };
         
-        $scope.showStudentsAssessmentResults = function(mapping){
-            $scope.student_mapping = mapping;            
-            assessmentResultsService.getAssessmentResultsService(mapping.id)
+        $scope.showStudentsAssessmentResults = function(mappingg){
+            $scope.studentt_mappingg = mappingg;            
+            na_assessmentResultsService.getAssessmentResultsService(mappingg.id)
                 .then(function(result) {  
-                    $scope.show_Assessment_Results = result.data;                                       
+                    $scope.show_Assessment_Resultss = result.data;    
                 }); 
         };
         
+
+
+
+
+
+
     }]);    
 })(angular, myApp);

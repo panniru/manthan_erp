@@ -1,10 +1,10 @@
 (function(angular, app) {
     "use strict";
     app.controller('AssessmentsController', ["$scope", "assessmentsService", "timeTableService", "academicsService", function($scope, assessmentsService, timeTableService, academicsService) {        
-        assessmentsService.getAssessmentTypesService()
-            .then(function(result) {                 
-                $scope.assessment_types = result.data;                
-            });       
+        // assessmentsService.getAssessmentTypesService()
+        //     .then(function(result) {                 
+        //         $scope.assessment_types = result.data;                
+        //     });       
 
         $scope.showAssessmentTypeMappings = function(){
             assessmentsService.getAssessmentTypesService()
