@@ -27,7 +27,7 @@ class ResultsController < ApplicationController
         academics << {assessment_type: x.assessment_listing.assessment.assessment_grade_mapping.assessment_type.assessment_type, subject: x.assessment_listing.subject_master.subject_name,grading: x.grading_master.grading_name}
         aca_results << {academics: academics}
     end
-    @non_results = AssessmentResult.all.where(:student_master_id => params[:id]).where(:result_type => 'non-academics').each do |x|
+    @non_results = AssessmentResult.all.where(:student_master_id => params[:id]).where(:result_type => 'non_academics').each do |x|
       
       non_academics << {assessment_type: x.assessment_listing.assessment.assessment_grade_mapping.assessment_type.assessment_type, subject: x.assessment_listing.subject_master.subject_name,grading: x.grading_master.grading_name}
 

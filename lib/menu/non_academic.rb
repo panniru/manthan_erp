@@ -10,7 +10,6 @@ class NonAcademic
     sub_menu << activity_teachers_mappings
     sub_menu << na_assessment_criterias
     sub_menu << na_assessments
-    sub_menu << na_assessment_results
     sub_menu
   end
 
