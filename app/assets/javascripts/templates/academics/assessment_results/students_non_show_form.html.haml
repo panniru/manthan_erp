@@ -1,0 +1,19 @@
+%br
+%br
+.row
+  .row
+    .col-md-1
+    .col-md-10
+      %h3
+        {{studentt_mappingg.subject_name}} - {{studentt_mappingg.assessment_type}}({{studentt_mappingg.assessment_desc}})
+      %table{:class => "table"}
+        %tr       
+          %th NAME
+          %th GRADE
+          %th DESCRIPTION
+        %tr{"ng-repeat" => "mapping  in $parent.show_Assessment_Resultss"}         
+          %td {{mapping.student_name}}           
+          %td {{mapping.grading_name}}
+          %td {{mapping.assessment_result_desc}}
+    .col-md-1
+

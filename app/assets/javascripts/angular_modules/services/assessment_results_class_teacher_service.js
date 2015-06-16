@@ -5,9 +5,10 @@
             var url = "/assessment_results/get_assessments_service.json"
             return $http.get(url);
         }; 
-        
+
         return {
-            getAssessmentsService :  getAssessmentsService
+            getAssessmentsService :  getAssessmentsService,
+
         }        
     }]);    
 })(angular, myApp);

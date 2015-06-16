@@ -37,7 +37,7 @@ class AdmissionsController < ApplicationController
         format.json do
           b = "Management Reviewed"
             ass = Admission.where( :status => b).each.map do |mapping|
-            {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment, finalresult: mapping.finalresult}
+            {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment, finalresult: mapping.finalresult, school_house: mapping.school_house, all_sections: mapping.get_section_master}
             end
           render :json => ass
           p ass
@@ -120,7 +120,8 @@ class AdmissionsController < ApplicationController
         format.json do
           b = "Management Reviewed"
           ass = Admission.where( :status => b).each.map do |mapping|
-            {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment, finalresult: mapping.finalresult}
+            {id: mapping.id, name: mapping.name,form_no: mapping.form_no, grade: mapping.grade_master.grade_name, status: mapping.status, comment: mapping.comment, teachercomment: mapping.teachercomment, finalresult: mapping.finalresult, school_house: mapping.school_house,all_sections: mapping.get_section_master, section_master_id: mapping.section_master_id}
+           
           end
           render :json => ass
           p ass
@@ -417,7 +418,7 @@ class AdmissionsController < ApplicationController
  end
  
  def admission_params
-   params.require(:admission).permit(:admission_no,:branch,:surname,:second_lang,:board,:grade,:medium,:year,:written,:spoken,:reading,:blood_group,:allergy,:doctor_name,:doctor_mobile,:guardian_name,:guardian_mobile,:guardian_relationship,:from,:to,:avatar,:father_office_address,:mother_office_address,:father_office_telephone,:mother_office_telephone,:father_mobile,:mother_mobile,:father_religion,:mother_religion,:father_employer,:mother_employer,:father_email,:mother_email,:sib_name1,:sib_age1,:sib_sex1,:sib_grade1,:sib_school1,:sib_name2,:sib_age2,:sib_sex2,:sib_grade2,:sib_school2,:bus,:form_no, :middle_name,:name,:klass, :dob,:gender,:nationality,:language,:father_name,:mother_name,:father_occupation,:mother_occupation,:father_company,:mother_company,:father_education, :mother_education,:income,:address_line1, :address_line2, :previous_city, :pin, :landline,:mobile,:email,:transport, :busstop,:last_school, :city, :changing_reason, :know_school,:person, :pp,:status,:closestatus,:title, :description, :staff, :grade, :start_time, :end_time, :grade_master_id,:teacher_leader_id,:faculty,:comment, :result,:teachercomment,:finalresult, :father_nationality, :mother_nationality)
+   params.require(:admission).permit(:admission_no,:branch,:surname,:second_lang,:board,:grade,:medium,:year,:written,:spoken,:reading,:blood_group,:allergy,:doctor_name,:doctor_mobile,:guardian_name,:guardian_mobile,:guardian_relationship,:from,:to,:avatar,:father_office_address,:mother_office_address,:father_office_telephone,:mother_office_telephone,:father_mobile,:mother_mobile,:father_religion,:mother_religion,:father_employer,:mother_employer,:father_email,:mother_email,:sib_name1,:sib_age1,:sib_sex1,:sib_grade1,:sib_school1,:sib_name2,:sib_age2,:sib_sex2,:sib_grade2,:sib_school2,:bus,:form_no, :middle_name,:name,:klass, :dob,:gender,:nationality,:language,:father_name,:mother_name,:father_occupation,:mother_occupation,:father_company,:mother_company,:father_education, :mother_education,:income,:address_line1, :address_line2, :previous_city, :pin, :landline,:mobile,:email,:transport, :busstop,:last_school, :city, :changing_reason, :know_school,:person, :pp,:status,:closestatus,:title, :description, :staff, :grade, :start_time, :end_time, :grade_master_id,:teacher_leader_id,:faculty,:comment, :result,:teachercomment,:finalresult, :father_nationality, :mother_nationality,:section_master_id, :school_house)
  end
  def get_student_master(student_obj)
      StudentMaster.new do |sm|
@@ -438,7 +439,9 @@ class AdmissionsController < ApplicationController
      sm.doctor_mobile = student_obj.doctor_mobile
      sm.bus_facility = student_obj.bus
      sm.grade_master_id = student_obj.grade_master_id
-     end 
+     sm.section_master_id = student_obj.section_master_id
+     sm.school_house = student_obj.school_house
+   end 
  end
 
  def get_parent_master(student_obj)

@@ -13,4 +13,9 @@ class TeacherGradeMapping < ActiveRecord::Base
   scope :belongs_to_grade_master, lambda{|grade_master| where("grade_master_id = ?",  grade_master)}
   scope :belongs_to_section_master, lambda{|section_master| where("section_master_id = ?",  section_master)}
 
+  # def union
+  #   "#{grade_master.grade_name} - #{section_master.section_name} - #{subject_master.subject_name}"
+  # end
+  
+
 end

@@ -1,11 +1,84 @@
 %form{:class => "form-horizontal", :ng_submit => "updateresult()"}
   .row
-    .col-sm-2
+    .col-sm-3
       = label_tag "Result"
     .col-sm-6
       %input{:ng_model => "assessment.final_result", type: 'radio', :value => 'Selected'} Selected
       %input{:ng_model => "assessment.final_result", type: 'radio', :value => 'Rejected'} Rejected
       = hidden_field_tag :assessment_result, :value => "{{assessment.final_result}}"
+  .row
+    .col-sm-3
+      = label_tag "Designation"
+    .col-sm-6
+      %select{"ng-model" => "assessment.designation", "ng-options" => "designation.name for designation in teacher_designations",:class => "form-control",:required => "required"}          
+
+      = hidden_field_tag :designation, :value => '{{assessment.designation.name}}'
+  .row
+    .col-sm-3
+      = label_tag "CTC"
+    .col-sm-6
+      %input{:ng_model => "assessment.ctc", type: 'text', :class => 'form-control'} 
+      = hidden_field_tag :ctc, :value => "{{assessment.ctc}}"
+  .row
+    .col-sm-3
+      = label_tag "Basic Pay"
+    .col-sm-6
+      %input{:ng_model => "assessment.basic", type: 'text', :class => 'form-control'} 
+      = hidden_field_tag :basic, :value => "{{assessment.basic}}"
+  .row
+    .col-sm-3
+      = label_tag "Special Allowance"
+    .col-sm-6
+      %input{:ng_model => "assessment.special_allowance", type: 'text', :class => 'form-control'} 
+      = hidden_field_tag :special_allowance, :value => "{{assessment.special_allowance}}"
+  .row
+    .col-sm-3
+      = label_tag "Date of Joining"
+    .col-sm-6
+      %input{:ng_model => "assessment.date_of_joining", type: 'text', :class => 'form-control'} 
+      = hidden_field_tag :date_of_joining, :value => "{{assessment.date_of_joining}}"
+  .row
+    .col-sm-3
+      = label_tag "Probation Date"
+    .col-sm-6
+      %input{:ng_model => "assessment.probation_date", type: 'text', :class => 'form-control'} 
+      = hidden_field_tag :probation_date, :value => "{{assessment.probation_date}}"
+  .row
+    .col-sm-3
+      = label_tag "PF no"
+    .col-sm-6
+      %input{:ng_model => "assessment.p_f_no", type: 'text', :class => 'form-control'} 
+      = hidden_field_tag :p_f_no, :value => "{{assessment.p_f_no}}"
+  .row
+    .col-sm-3
+      = label_tag "Bank Name"
+    .col-sm-6
+      %input{:ng_model => "assessment.bank_name", type: 'text', :class => 'form-control'} 
+      = hidden_field_tag :bank_name, :value => "{{assessment.bank_name}}"
+  .row
+    .col-sm-3
+      = label_tag "Account Number"
+    .col-sm-6
+      %input{:ng_model => "assessment.account_number", type: 'text', :class => 'form-control'} 
+      = hidden_field_tag :account_number, :value => "{{assessment.account_number}}"
+  .row
+    .col-sm-3
+      = label_tag "PAN"
+    .col-sm-6
+      %input{:ng_model => "assessment.pan", type: 'text', :class => 'form-control'} 
+      = hidden_field_tag :pan, :value => "{{assessment.pan}}"
+  .row
+    .col-sm-3
+      = label_tag "Father or Husband Name"
+    .col-sm-6
+      %input{:ng_model => "assessment.father_or_husband_name", type: 'text', :class => 'form-control'} 
+      = hidden_field_tag :father_or_husband_name, :value => "{{assessment.father_or_husband_name}}"
+  .row
+    .col-sm-3
+      = label_tag "Relation"
+    .col-sm-6
+      %input{:ng_model => "assessment.relation", type: 'text', :class => 'form-control'} 
+      = hidden_field_tag :relation, :value => "{{assessment.relation}}"
       
   .row
     .pull-right

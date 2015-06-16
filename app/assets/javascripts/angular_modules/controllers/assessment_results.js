@@ -40,6 +40,7 @@
                             grading_master_id: "",
                             grading_name: "",
                             assessment_result_desc: "", 
+                            result_type: "",
                         });                
                     }                    
                 });
@@ -84,7 +85,10 @@
                     student_master_id: $scope.edit_Assessment_Results[i]['student_master_id'],
                     grading_master_id: $scope.edit_Assessment_Results[i]['grading_master_id'],
                     assessment_result_desc: $scope.edit_Assessment_Results[i]['assessment_result_desc'],
+                    result_type: 'academics'
+                    
                 });
+                
             }
             
             assessmentResultsService.saveAssessmentResultsService($scope.save_Assessment_Results)

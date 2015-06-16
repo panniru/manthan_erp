@@ -1,0 +1,52 @@
+= form_for @grading_default, :html => { :multipart => true, :class => "form-horizontal", :role => "form" } do |f|
+  = render "shared/error_messages", :object => f.object
+  .row
+    .col-md-4.col-xs-4
+      .form-group
+        .col-md-6
+          .input-group
+            = f.text_field :pass_criteria_1, :class => 'form-control', :placeholder => "Numeric"
+            %span.input-group-addon %
+        .col-md-6
+          .input-group
+            = f.text_field :pass_criteria_2, :class => 'form-control', :placeholder => "Numeric"
+            %span.input-group-addon %
+      .form-group
+        .col-md-6
+          = f.text_field :pass_text_1, :class => 'form-control', :value => (f.object.pass_text_1 || GradingDefaultsHelper::CRITERIAS[0])
+        .col-md-6
+          = f.text_field :pass_text_2, :class => 'form-control', :value => (f.object.pass_text_2 || GradingDefaultsHelper::CRITERIAS[1])
+    .col-md-4.col-xs-4
+      .form-group
+        .col-md-6
+          .input-group
+            = f.text_field :pass_criteria_3, :class => 'form-control', :placeholder => "Numeric"
+            %span.input-group-addon %
+        .col-md-6
+          .input-group
+            = f.text_field :pass_criteria_4, :class => 'form-control', :placeholder => "Numeric"
+            %span.input-group-addon% 
+      .form-group
+        .col-md-6
+          = f.text_field :pass_text_3, :class => 'form-control', :value => (f.object.pass_text_3 || GradingDefaultsHelper::CRITERIAS[2])
+        .col-md-6
+          = f.text_field :pass_text_4, :class => 'form-control', :value => (f.object.pass_text_4 || GradingDefaultsHelper::CRITERIAS[3])
+    .col-md-4.col-xs-4
+      .form-group
+        .col-md-6
+          .input-group
+            = f.text_field :pass_criteria_5, :class => 'form-control', :placeholder => "Numeric"
+            %span.input-group-addon %
+        .col-md-6
+          .input-group
+            = f.text_field :pass_criteria_6, :class => 'form-control', :placeholder => "Numeric"
+            %span.input-group-addon %
+
+      .form-group
+        .col-md-6
+          = f.text_field :pass_text_5, :class => 'form-control', :value => (f.object.pass_text_5 || GradingDefaultsHelper::CRITERIAS[4])
+        .col-md-6
+          = f.text_field :pass_text_6, :class => 'form-control', :value => (f.object.pass_text_6 || GradingDefaultsHelper::CRITERIAS[5])
+  .row
+    .col-md-6.col-sm-6.pull-right
+      = f.submit "Create", :class => 'btn btn-primary'

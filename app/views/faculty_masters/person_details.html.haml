@@ -1,0 +1,155 @@
+.row
+  %center
+    %h3
+      Staff Information
+.pull-right
+  - if("#{@staffrecruit.status}" != 'Resigned')
+    = link_to raw("<span class='glyphicon glyphicon-edit'></span>"), edit_application_faculty_master_path, :class => "btn btn-warning btn-sm", :title => "Edit"
+  = link_to "Back", staffs_faculty_masters_path, :class => 'btn btn-primary'
+
+.row
+  .col-sm-12
+    .row
+      .col-sm-12
+        %table.table-striped.table-condensed{:style => "width:90%"}
+          - if("#{@staffrecruit.status}" == 'Resigned')
+            %tr
+              %td
+                %span.label.label-success Resignation Date
+              %td
+                = @staffrecruit.resignation_date
+              %td
+                %span.label.label-success Reason for Resignation
+              %td
+                = @staffrecruit.reason_for_resignation
+          %tr
+            %td{style: "width:25%"}
+              %b
+                %span.label.label-danger Details
+            %td{style: "width:25%"}
+            %td{style: "width:25%"}
+            %td{style: "width:25%"}
+
+          %tr
+            %td
+              %label Faculty Name
+            %td
+              = @staffrecruit.faculty_name
+            %td
+              %label DOB
+            %td
+              = @staffrecruit.dob
+          %tr
+            %td
+              %label Gender
+            %td
+              = @staffrecruit.gender
+            %td
+              %label Email
+            %td
+              = @staffrecruit.email
+
+          %tr
+            %td
+              %label Mobile No
+            %td
+              = @staffrecruit.mobile_no
+            %td
+              %label Address
+            %td
+              = @staffrecruit.address
+          %tr
+            %td
+              %label Nationality
+            %td
+              = @staffrecruit.nationality
+            %td
+              %label{for: "experience"} Experience
+            %td
+              = @staffrecruit.past_experience
+          %tr
+            %td
+              %label Language
+            %td
+              = @staffrecruit.language
+            %td
+              %label Primary Subject
+            %td
+              = @staffrecruit.primary_subject
+          %tr
+            %td
+              %label Educational Qualification
+            %td
+              = @staffrecruit.education_qualification
+            %td
+              %label Designation
+            %td
+              = @staffrecruit.designation
+          %tr
+            %td{style: "width:25%"}
+              %b
+                %span.label.label-danger Payroll Details
+            %td{style: "width:25%"}
+            %td{style: "width:25%"}
+            %td{style: "width:25%"}
+          %tr
+            %td
+              %label CTC
+            %td
+              = @staffrecruit.ctc
+            %td
+              %label Basic Pay
+            %td
+              = @staffrecruit.basic
+          %tr
+            %td
+              %label Special Allowance
+            %td
+              = @staffrecruit.special_allowance
+            %td
+              %label Date of Joining
+            %td
+              = @staffrecruit.date_of_joining
+          %tr
+            %td
+              %label Probation Date
+            %td
+              = @staffrecruit.probation_date
+            %td
+              %label Confirmation Date
+            %td
+              = @staffrecruit.confirmation_date
+          %tr
+            %td
+              %label Confirmation Date
+            %td
+              = @staffrecruit.confirmation_date
+            %td
+              %label PF no
+            %td
+              = @staffrecruit.p_f_no
+          %tr
+            %td
+              %label Bank Name
+            %td
+              = @staffrecruit.bank_name
+            %td
+              %label Account No
+            %td
+              = @staffrecruit.account_number
+          %tr
+            %td
+              %label PAN
+            %td
+              = @staffrecruit.pan
+            %td
+              %label Father or Husband Name
+            %td
+              = @staffrecruit.father_or_husband_name
+          %tr
+            %td
+              %label Relation
+            %td
+              = @staffrecruit.relation
+            %td
+            %td

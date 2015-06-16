@@ -1,0 +1,8 @@
+.row
+  - if @approvals.present?
+    .col-md-4
+      %ul.nav
+        %li.alert.alert-danger
+          %center
+            %h4 Pending Approval of #{@approvals.item_type}
+  

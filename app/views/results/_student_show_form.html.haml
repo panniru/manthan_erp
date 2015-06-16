@@ -1,0 +1,24 @@
+.row
+  .col-sm-12
+    .col-md-12
+      %div
+        %b
+        %table.table.table-condensed.table-hovered.table-striped.table-bordered{:style => "width:100%"}
+          %tbody
+            %div{"ng-repeat" => "(subject, grading) in student_filter_values"}
+              %u
+                {{subject | uppercase}} 
+              %div{"ng-repeat" => "x in grading"}
+                .col-sm-12
+                  .col-sm-1
+                  .col-sm-11
+                    %b
+                      {{x.assessment_type}}
+                      
+                .col-sm-12
+                  .col-sm-4
+                  .col-sm-3
+                    {{x.subject}} :
+                  .col-sm-4
+                    {{x.grading}}
+              

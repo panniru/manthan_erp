@@ -169,6 +169,17 @@
                                       }  
                                      );
         
+        var FacultyMaster = $resource('/faculty_masters/:id.json', {id: '@id'},
+                                    {
+                                        "update": {method: "PUT"}
+
+                                    }
+                                   );
+        var House = $resource('/school_houses/:id.json', {id: '@id'},
+                                    { "bulk": { url: "/school_houses/create_bulk.json", method:'POST', isArray: true},
+                                      "update": { method: "PUT"}
+                                    }  
+                                   );
        
 
         return {
@@ -199,7 +210,9 @@
             CommunicationMail : CommunicationMail,
             ActivityMaster : ActivityMaster,
             SetupMaster : SetupMaster,
-            Designation : Designation
+            Designation : Designation,
+            FacultyMaster : FacultyMaster,
+            House : House
 
         };
     }]);

@@ -47,13 +47,14 @@
 
         $scope.editPlanmms = function(assessment){
 	    $scope.assessment = assessment
-            alert()
 	    $('#editplanmm').modal('show');
 	}
 
         $scope.planupdatemm = function(){
+            $scope.assessment.section_master_id = $scope.assessment.section_master_id.section_master_id;
+            $scope.assessment.school_house = $scope.assessment.school_house.house_name;
             $scope.assessment.status = 'Completed';
-            //  alert($scope.assessment.status)
+            // alert(JSON.stringify($scope.assessment));
             $scope.assessment.$update()
                 .then(function(response){                  
                 })
@@ -71,7 +72,6 @@
 
         $scope.updateresult = function(){
             $scope.assessment.status = 'Completed';
-          //  alert($scope.assessment.status)
             $scope.assessment.$update()
                 .then(function(response){                  
                 })

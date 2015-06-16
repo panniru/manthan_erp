@@ -1,0 +1,36 @@
+%br
+%br
+.row{"ng-controller" => "NonAssessmentResultsClassTeacherController"}
+  -# .row
+  -#   .col-md-1
+  -#     .col-md-10
+  -#       .col-md-1
+  -#         %a{href: "#/class_show_form", :class => "btn btn btn-primary btn-sm", :title => "PREV", "ng-click" => "showMappings(1)"}      
+  -#           %span{class: "glyphicon glyphicon-chevron-left"}
+  -#       .col-md-1
+  -#         %input{:type => "button", :class => "btn btn-primary", "ng-click" => "showMappings(1)", :value => "AUG"}
+  -#       .col-md-1
+  -#         %a{href: "#/class_show_form", :class => "btn btn btn-primary btn-sm", :title => "NEXT", "ng-click" => "showMappings(1)"}      
+  -#           %span{class: "glyphicon glyphicon-chevron-right"}
+  -#     .col-md-1
+
+    %br
+    %br
+  .row
+    .col-md-1
+    .col-md-10
+      %table{:class => "table"}
+        %tr
+          %th DATE         
+          %th SUBJECT
+          %th ASSESSMENT
+          %th DESCRIPTION
+          %th STATUS
+        %tr{"ng-repeat" => "mapping  in non_teacher_assessments"}
+          %td 
+            %a{href: "#assessment_results/students_non_show_form", "ng-click" =>"showStudentsAssessmentResults(mapping)"} {{mapping.assessment_date}}                                        
+          %td {{mapping.subject_name}}           
+          %td {{mapping.assessment_type}}
+          %td {{mapping.assessment_desc}}
+          %td {{mapping.assessment_result_status}}
+    .col-md-1

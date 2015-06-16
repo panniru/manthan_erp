@@ -31,8 +31,6 @@
             var url = "/staffrecruits/get_klass_view.json"
             return $http.get(url);
         };
-
-
         return {
             getCloseStatus : getCloseStatus,
             getStaffadminServiceView : getStaffadminServiceView,
@@ -40,8 +38,8 @@
             getPostServiceView : getPostServiceView,
             getSubjects : getSubjects,
             getHeadServiceView : getHeadServiceView,
-            getKlassServiceView : getKlassServiceView
-            
+            getKlassServiceView : getKlassServiceView,
+        
         };
     }]);
 })(angular, myApp);

@@ -10,6 +10,12 @@ class NonAcademic
     sub_menu << activity_teachers_mappings
     sub_menu << na_assessment_criterias
     sub_menu << na_assessments
+    sub_menu
+  end
+
+  def teacher_sub_menu
+    sub_menu = []  
+    sub_menu << na_assessments
     sub_menu << na_assessment_results
     sub_menu
   end

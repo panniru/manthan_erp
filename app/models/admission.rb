@@ -17,6 +17,18 @@ class Admission < ActiveRecord::Base
   validates :bus, presence: true
   validates :know_school, presence: true
   
+
+  def get_section_master
+    p "jujjjjjjjjjjjjjjjjjjjjjjjjjj"
+    p grade_master_id
+    get = GradeSection.where(:grade_master_id => grade_master_id)
+    get_section = get.all.map do |x|
+      {section_name: x.section_master.section_name, section_master_id: x.section_master_id}
+    end
+    return get_section
+  end
+
+
   def self.get_date
     a = (Date.today.year..Date.today.year+1).map{|year| "#{year} - #{year+1}"}
     @test = a

@@ -1,0 +1,180 @@
+.row{"ng-controller" => "StaffAssessmentController"}
+  .pull-left
+    %h3
+      Edit Staff Details
+  .pull-right
+    -# = link_to "Apply for Resignation", "#", :onclick =>  "resignfunction()", :class => 'btn btn-primary'
+    = link_to "Apply for Resignation", "#my-modal", :class => "btn btn-primary", "data-toggle" => "modal", :data => {:id => "#{@staffrecruit.id}"}
+    #my-modal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} &times;
+              %span.sr-only Close
+            %center
+              %h4#myModalLabel.modal-title Resignation
+              = form_for @staffrecruit do |f|
+                .modal-body
+                  .col-sm-12
+                    .form-group
+                      .col-sm-6
+                        = f.label "Resignation Date:", :class => 'control-label'
+                      .col-sm-6
+                        = f.text_field :resignation_date, :class => 'datepicker form-control'
+                  .col-sm-12
+                    .form-group
+                      .col-sm-6
+                        = f.label "Reason for Resignation", :class => 'control-label'
+                      .col-sm-6
+                        = f.text_field :reason_for_resignation, :class => 'form-control'
+                  %br
+                  %center
+                    %br
+                    = f.hidden_field :status, :value => 'Resigned'
+                    = f.submit "Update", :class => 'btn btn-primary'
+
+
+  = form_for @staffrecruit, :html => { :class => "form-horizontal", :role => "form" }, :url => {:action => 'update'} do |f|
+    = render "shared/error_messages", :object => f.object
+    .col-sm-12
+          
+      .form-group
+        .col-sm-2
+          .pull-left
+            = f.label "Faculty Name:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :faculty_name, :class => 'form-control'
+        .col-sm-2
+          .pull-left
+            = f.label "Date of Birth:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :dob, :class => 'datepicker form-control'
+
+      .form-group
+        .col-sm-2
+          .pull-left
+            = f.label "Gender:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :gender, :class => 'form-control'
+        .col-sm-2
+          .pull-left
+            = f.label "E-mail:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :email, :class => 'form-control'
+      .form-group
+        .col-sm-2
+          .pull-left
+            = f.label "Mobile no:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :mobile_no, :class => 'form-control'
+        .col-sm-2
+          .pull-left
+            = f.label "Address:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :address, :class => 'form-control'
+      .form-group
+        .col-sm-2
+          .pull-left
+            = f.label "Nationality:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :nationality, :class => 'form-control'
+        .col-sm-2
+          .pull-left
+            = f.label "Language:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :language, :class => 'form-control'
+      .form-group
+        .col-sm-2
+          .pull-left
+            = f.label "Primary Subject:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :primary_subject, :class => 'form-control'
+        .col-sm-2
+          .pull-left
+            = f.label "Past Experience", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :past_experience, :class => 'form-control'
+      .form-group
+        .col-sm-2
+          .pull-left
+            = f.label "Educational Qualification:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :education_qualification, :class => 'form-control'
+        .col-sm-2
+          .pull-left
+            = f.label "Designation:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :designation, :class => 'form-control'
+            
+      .form-group
+        .col-sm-2
+          .pull-left
+            = f.label "CTC:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :ctc, :class => 'form-control'
+        .col-sm-2
+          .pull-left
+            = f.label "Basic:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :basic, :class => 'form-control'
+      .form-group
+        .col-sm-2
+          .pull-left
+            = f.label "Special Allowance:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :special_allowance, :class => 'form-control'
+        .col-sm-2
+          .pull-left
+            = f.label "Date of Joining:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :date_of_joining, :class => 'datepicker form-control'
+      .form-group
+        .col-sm-2
+          .pull-left
+            = f.label "Probation Date:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :probation_date, :class => 'datepicker form-control'
+        .col-sm-2
+          .pull-left
+            = f.label "Confirmation Date:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :confirmation_date, :class => 'datepicker form-control'
+      .form-group
+        .col-sm-2
+          .pull-left
+            = f.label "PF no:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :p_f_no, :class => 'form-control'
+        .col-sm-2
+          .pull-left
+            = f.label "Bank Name:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :bank_name, :class => 'form-control'
+      .form-group
+        .col-sm-2
+          .pull-left
+            = f.label "Account no:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :account_number, :class => 'form-control'
+        .col-sm-2
+          .pull-left
+            = f.label "PAN:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :pan, :class => 'form-control'
+      .form-group
+        .col-sm-2
+          .pull-left
+            = f.label "Father or Husband Name:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :father_or_husband_name, :class => 'form-control'
+        .col-sm-2
+          .pull-left
+            = f.label "Relation:", :class => 'control-label'
+        .col-sm-2
+          = f.text_field :relation, :class => 'form-control'
+    %center
+      
+      = f.submit "Update", :class => 'btn btn-primary'
+      = link_to "Back", staffs_faculty_masters_path, :class => 'btn btn-primary'
+      

@@ -1,0 +1,41 @@
+.col-sm-12
+
+  .row
+    %table.table
+      - @grading_defaults.each do |x|
+        %tr
+          %th
+            #{x.pass_criteria_1}
+            %span %
+          %th
+            = x.pass_criteria_2
+            %span %
+          %th
+            = x.pass_criteria_3 
+            %span %
+          %th
+            = x.pass_criteria_4 
+            %span %
+          %th
+            = x.pass_criteria_5 
+            %span %
+          %th
+            = x.pass_criteria_6 
+            %span %
+          %th
+            = link_to "Edit", edit_grading_default_path(x), :class => 'btn btn-primary'
+        %tr
+          %td
+            = x.pass_text_1 
+          %td
+            = x.pass_text_2
+          %td
+            = x.pass_text_3 
+          %td
+            = x.pass_text_4 
+          %td
+            = x.pass_text_5 
+          %td
+            = x.pass_text_6 
+          %td
+

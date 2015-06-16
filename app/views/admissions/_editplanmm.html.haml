@@ -6,8 +6,22 @@
       %input{:ng_model => "assessment.finalresult", type: 'radio', :value => 'Selected'} Selected
       %input{:ng_model => "assessment.finalresult", type: 'radio', :value => 'Rejected'} Rejected
       = hidden_field_tag :finalresult, :value => "{{assessment.finalresult}}"
+  .row{:ng_controller => "SchoolHousesController"}
+    .col-sm-2
+      = label_tag "School House"
+    .col-sm-6
+      %select{"ng-model" => "assessment.school_house", "ng-options" => "house.house_name for house in school_houses",:class => "form-control",:required => "required"}          
+      = hidden_field_tag :school_house, :value => '{{assessment.school_house.house_name}}'
+  
+  .row
+    .col-sm-2
+      = label_tag "Section"
+    .col-sm-6
+      %select{"ng-model" => "assessment.section_master_id", "ng-options" => "assessment.section_name for assessment in assessment.all_sections", :class => 'form-control'}
+      = hidden_field_tag :section_master_id, :value => '{{assessment.section_master_id.section_master_id}}'
       
   .row
     .pull-right
       = button_tag "Save", :type => "submit", :class => 'btn btn-primary'
                 
+      

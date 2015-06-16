@@ -64,6 +64,13 @@
             . when('/add_assessment', {
                 templateUrl: 'academics/assessments/add_assessment.html'               
             })
+            . when('/show_na_assessments', {
+                templateUrl: 'academics/assessments/show_na_assessments.html'               
+            })
+            . when('/add_na_assessment', {
+                templateUrl: 'academics/assessments/add_na_assessment.html'               
+            })
+
             . when('/assessment_results/show_form', {
                 templateUrl: 'academics/assessment_results/show_form.html'               
             })
@@ -79,6 +86,22 @@
              . when('/assessment_results/students_show_form', {
                 templateUrl: 'academics/assessment_results/students_show_form.html'               
             })   
+            . when('/assessment_results/non_show_form', {
+                templateUrl: 'academics/assessment_results/non_show_form.html'               
+            })
+            . when('/class_non_show_form', {
+                templateUrl: 'academics/assessment_results/class_non_show_form.html'               
+            })
+            . when('/assessment_results/add_non_form', {
+                templateUrl: 'academics/assessment_results/add_non_form.html'               
+            })  
+            . when('/assessment_results/results_non_show_form', {
+                templateUrl: 'academics/assessment_results/results_non_show_form.html'               
+            }) 
+            . when('/assessment_results/students_non_show_form', {
+                templateUrl: 'academics/assessment_results/students_non_show_form.html'               
+            })
+
             . when('/save_assessment', {
                 templateUrl: 'academics/assessments/show_assessments.html'               
             })  

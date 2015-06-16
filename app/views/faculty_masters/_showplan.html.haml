@@ -1,0 +1,38 @@
+.row
+  .col-sm-3
+    .pull-left
+      .input-group
+        %span.input-group-addon
+          = fa_icon "search lg"
+        %input#search{name: "search", placeholder: "Enter Search Term", type: "text",:class => 'form-control'}/
+        %br
+  .col-sm-4
+    %center
+      %h3
+        List of Staffs
+%br
+%br
+
+%table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:100%"}
+  %thead
+    %tr
+      %th{:style => "width:20%"} Faculty Name
+      %th{:style => "width:20%"} Gender
+      %th{:style => "width:20%"} Email
+      %th{:style => "width:20%"} Date of Joining
+      %th{:style => "width:20%"} Designation
+        
+  %tbody
+    %tr{"ng-repeat" => "assessment in assessments"}
+      %td{:style => "width:20%"}
+        %a{href: '#', "ng-click" => "editAssessments(assessment)"}
+          {{assessment.faculty_name}}
+      %td{:style => "width:20%"}
+        {{assessment.gender}}
+      %td{:style => "width:20%"}
+        {{assessment.email}}
+      %td{:style => "width:20%"}
+        {{assessment.date_of_joining}}
+      %td{:style => "width:20%"}
+        {{assessment.designation}}
+        

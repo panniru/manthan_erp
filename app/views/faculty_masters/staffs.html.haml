@@ -1,0 +1,25 @@
+.row{"ng-controller" => "FacultyMasterController"}
+  .col-sm-12
+    .col-sm-2
+      %select{"ng-model" => "selectedOption","ng-change" => "getFilterValues(selectedOption)", :class => "form-control"}
+        %option All
+        %option Active
+        %option Resigned
+    .col-sm-10
+      %table.table.table-condensed.table-condensed.table-hovered.table-striped
+        %thead
+          %tr
+            %th Faculty Name
+            %th Designation
+            %th Date of Resignation  
+            %th Reason for Resignation
+
+
+        %tbody
+          %tr{"ng-repeat" => "group in filter_values"}
+            %td
+              %a{href: '/faculty_masters/{{group.id}}/person_details'} {{group.faculty_name}}
+            %td {{group.designation}}
+            %td {{group.resignation_date}}
+            %td {{group.reason_for_resignation}}
+

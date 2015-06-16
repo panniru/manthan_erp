@@ -5,7 +5,7 @@ class LeavePermissionsController < ApplicationController
   def get_all_details
     respond_to do |format|
       format.json do
-        a = LeavePermission.all.map do |map| 
+        a = LeavePermission.all.where("faculty_master_id IS NOT NULL").map do |map| 
           {id: map.id,faculty_master_id: map.faculty_master_id, from_date: map.from_date, to_date: map.to_date, type_of_leave: map.type_of_leave,  status: map.status, reason: map.reason, name: map.faculty_master.faculty_name }
         end
         render :json => a

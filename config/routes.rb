@@ -486,6 +486,7 @@ ManthanErp::Application.routes.draw do
     collection do
       get 'get_faculty_names'
       get 'get_role_and_head' 
+      get 'get_designation'
     end
   end
   resources :admission_reports do
@@ -955,12 +956,27 @@ ManthanErp::Application.routes.draw do
   
   resources :na_assessments do
     collection do
-
+      get 'get_na_assessment_grade_mappings'
+      get 'get_na_assessments'
+      post 'save_assessments'
+      get 'get_non_academics_subjects'
+      get 'get_non_assessment_mappings_service'
+      post 'save_na_assessment_criteria'
+      get 'get_na_assessment_criteria'
+      get 'get_non_academics_subjects_for_grade'
+      get 'get_teacher_grade_mappings'
     end
   end
 
   resources :na_assessment_results do
     collection do      
+      get 'get_non_teacher_assessments_service'
+      get 'get_non_student_details_service'
+      post 'save_non_assessment_results_service'
+      get 'get_non_assessment_results_service'
+      get 'get_non_assessments_service'
+      get 'get_non_teacher_grade_mappings'
+      get 'get_non_assessments_service'
     end
   end
 
@@ -985,10 +1001,17 @@ ManthanErp::Application.routes.draw do
       get :get_reports
       get :ctc_reports
       get :get_ctc_reports
+      get :staffs
+      get :resign
+      get :resigned
+      get :get_resigned_staffs
+      get :get_filter_values
     end
     
     member do
       get "dashboard"
+      get "person_details"
+      get "edit_application"
     end
     resources :employee_advance_payments do
       collection do
@@ -1116,7 +1139,45 @@ ManthanErp::Application.routes.draw do
       post "save_all"
     end
   end
- 
+  
+  resources :results do
+    collection do 
+      get 'get_all_results'
+      get 'get_klasses'
+      get 'get_grades_and_sections'
+      get 'get_student_forms'
+    end
+    member do
+    end
+  end
+  
+  resources :grading_defaults
+  resources :final_results do
+    collection do
+      get 'get_assessment_grade_mappings_service'
+      get 'get_values'
+      get 'grading_defaults'
+      post 'save_result_details'
+    end
+    member do
+    end
+  end
+  resources :school_houses do
+    collection do
+      post 'create_bulk'
+      get 'get_school_houses'
+    end
+  end
+
+  resources :admin_dashboards do
+    collection do
+      get 'get_count_status'
+      get 'get_forms'
+      get 'get_staff_count_status'
+      get 'get_staff_forms'
+
+    end
+  end
 end
 
 

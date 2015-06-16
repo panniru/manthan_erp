@@ -10,9 +10,17 @@
             var url = "/admissions/get_assessment_students.json"
             return $http.get(url);
         };
+
+        var getDesignations = function(){
+            var url = "/staffadmins/get_designation.json"
+            return $http.get(url);
+        };
+
+
         return {
             getAssessmentStaff : getAssessmentStaff,
-            getAssessmentStudent : getAssessmentStudent
+            getAssessmentStudent : getAssessmentStudent,
+            getDesignations : getDesignations
         };
         
     }]);

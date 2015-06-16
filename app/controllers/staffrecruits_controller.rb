@@ -262,17 +262,6 @@ class StaffrecruitsController < ApplicationController
         format.html{}
       end
     end
-     #  @staffrecruits = Staffrecruit.assessment_planned
-    #   respond_to do |format|
-    #     format.json do
-    #       @staffrecruits = Staffrecruit.assessment_planned
-    #       render :json => @staffrecruits
-    #     end
-    #     format.html do 
-    #       render "index"
-    #     end
-    #   end
-    # end
 
     if current_user.principal?
       @staffrecruits = Staffrecruit.assessment_completed
@@ -342,9 +331,11 @@ class StaffrecruitsController < ApplicationController
  end
  
  def staffrecruit_params
-   params.require(:staffrecruit).permit(:post,:description,:start_time,:end_time,:education_qualification,:educational_certificates,:previous_employment_proof,:salary_slips_for_previous_months, :title,:status,:staff_admission_id,:id,:comments,:staffhead, :final_result,:form_no,:assessment_result,:closestatus,:management_result,:faculty_name,:dob,:subject_master_id,:address,:gender,:email,:mobile_no,:nationality,:klass,:language,:subject,:experience,:expected_salary,:staff_leader_id,:user_id,:dept,:role_id, :staffadmin_id, :designation)
+   params.require(:staffrecruit).permit(:post,:description,:start_time,:end_time,:education_qualification,:educational_certificates,:previous_employment_proof,:salary_slips_for_previous_months, :title,:status,:staff_admission_id,:id,:comments,:staffhead, :final_result,:form_no,:assessment_result,:closestatus,:management_result,:faculty_name,:dob,:subject_master_id,:address,:gender,:email,:mobile_no,:nationality,:klass,:language,:subject,:experience,:expected_salary,:staff_leader_id,:user_id,:dept,:role_id, :staffadmin_id, :designation, :ctc, :basic, :special_allowance, :date_of_joining, :probation_date, :confirmation_date, :p_f_no, :bank_name, :account_number, :pan, :father_or_husband_name, :relation)
  end
  def get_faculty_master(staff_obj)
+   p "111111111111111111111111"
+   p staff_obj
    FacultyMaster.new do |fm|
      #fm.id = staff_obj.id
      fm.role_id = staff_obj.role_id
@@ -362,6 +353,18 @@ class StaffrecruitsController < ApplicationController
      fm.past_experience = staff_obj.experience
      fm.user_id = staff_obj.user_id
      fm.designation = staff_obj.designation
+     fm.ctc = staff_obj.ctc
+     fm.basic = staff_obj.basic
+     fm.special_allowance = staff_obj.special_allowance
+     fm.date_of_joining = staff_obj.date_of_joining
+     fm.probation_date = staff_obj.probation_date
+     fm.confirmation_date = staff_obj.confirmation_date
+     fm.p_f_no = staff_obj.p_f_no
+     fm.bank_name = staff_obj.bank_name
+     fm.account_number = staff_obj.account_number
+     fm.pan = staff_obj.pan
+     fm.father_or_husband_name = staff_obj.father_or_husband_name
+     fm.relation = staff_obj.relation
    end 
  end
 end

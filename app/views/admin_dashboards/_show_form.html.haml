@@ -1,0 +1,18 @@
+.row
+  .col-sm-12
+    .col-md-12
+      %table#tblData.target.table.table-striped.table-condensed.table-bordered{:style => "width:100%;"}
+        %thead
+          %tr        
+            %th{:style => "width:30%;"}
+              Form no
+            %th{:style => "width:30%;"}
+              Name
+            %th{:style => "width:30%;"}
+              Grade
+          %tbody
+            %tr{"ng-repeat" => "f in filter_values"}
+              %td 
+                %a{href: '/admissions/{{f.id}}/home_index',:target => "_blank"}{{f.form_no}}
+              %td {{f.name}}
+              %td {{f.grade}}

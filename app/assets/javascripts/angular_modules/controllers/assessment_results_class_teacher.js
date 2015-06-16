@@ -10,8 +10,6 @@
         //         $scope.grades=result.data;               
         //     });
         
-       
-
 
 
         

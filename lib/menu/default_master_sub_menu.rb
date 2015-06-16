@@ -8,6 +8,8 @@ class DefaultMasterSubMenu < Struct.new(:controller)
       sub_menu << time_tables
       sub_menu << designations
       sub_menu << day_ends
+      sub_menu << grading_defaults
+      sub_menu << school_houses
     end
     
     def parent_sub_menu
@@ -41,4 +43,11 @@ class DefaultMasterSubMenu < Struct.new(:controller)
     def day_ends
       MenuItem.new(:label => "Day Ends", :klass => "", :icon => "calendar-o", :href => "/default_masters/day_ends")
     end
+    def grading_defaults
+      MenuItem.new(:label => "Grading Defaults", :klass => "", :icon => "calendar-o", :href => "/grading_defaults")
+    end
+    def school_houses
+      MenuItem.new(:label => "School House", :klass => "", :icon => "calendar-o", :href => "/school_houses")
+    end
+
 end
