@@ -262,17 +262,6 @@ class StaffrecruitsController < ApplicationController
         format.html{}
       end
     end
-     #  @staffrecruits = Staffrecruit.assessment_planned
-    #   respond_to do |format|
-    #     format.json do
-    #       @staffrecruits = Staffrecruit.assessment_planned
-    #       render :json => @staffrecruits
-    #     end
-    #     format.html do 
-    #       render "index"
-    #     end
-    #   end
-    # end
 
     if current_user.principal?
       @staffrecruits = Staffrecruit.assessment_completed
